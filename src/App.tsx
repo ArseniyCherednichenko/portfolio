@@ -1,5 +1,7 @@
 import { motion } from 'framer-motion'
+import { useState } from 'react'
 import { Aurora } from './components/Aurora'
+import { Modal } from './components/Modal'
 import { Nav } from './components/Nav'
 import { Reveal } from './components/Reveal'
 import { GradientText } from './components/GradientText'
@@ -17,6 +19,7 @@ function Eyebrow({ children }: { children: string }) {
 }
 
 export default function App() {
+  const [active, setActive] = useState<Project | null>(null)
   return (
     <div id="top" className="relative min-h-screen bg-[#0A0A0A] text-white">
       <Aurora />
@@ -97,28 +100,43 @@ export default function App() {
         <Reveal>
           <Eyebrow>Selected work</Eyebrow>
         </Reveal>
-        <div className="mt-10 grid gap-6">
-          {PROJECTS.map((p, idx) => (
-            <Reveal key={p.title} delay={idx * 0.05}>
-              <SpotlightCard className="p-8">
-                <div className="flex items-baseline justify-between gap-4">
-                  <h3 className="text-3xl font-bold">{p.title}</h3>
-                  <span className="text-sm text-white/40">{p.year}</span>
+        <div className="mt-10 grid gap-6 sm:grid-cols-2">
+          {PROJECTS.map((p, idx) =>
+            p.soon ? (
+              <Reveal key={p.title} delay={idx * 0.05}>
+                <div className="flex h-full min-h-[210px] flex-col justify-between rounded-3xl border border-dashed border-white/15 p-8 text-white/40">
+                  <span className="text-xs font-semibold uppercase tracking-[0.2em]">In progress</span>
+                  <div>
+                    <h3 className="text-2xl font-bold text-white/55">{p.title}</h3>
+                    <p className="mt-2 text-sm">{p.blurb}</p>
+                  </div>
                 </div>
-                <p className="mt-4 max-w-2xl leading-relaxed text-white/60">{p.blurb}</p>
-                <div className="mt-6 flex flex-wrap gap-2">
-                  {p.stack.map((s) => (
-                    <span key={s} className="rounded-full border border-white/10 px-3 py-1 text-xs text-white/55">
-                      {s}
-                    </span>
-                  ))}
-                </div>
-                <a href={p.href} className="mt-6 inline-flex items-center gap-1 text-sm font-semibold text-[#DCF87C]">
-                  Visit {p.title}
-                </a>
-              </SpotlightCard>
-            </Reveal>
-          ))}
+              </Reveal>
+            ) : (
+              <Reveal key={p.title} delay={idx * 0.05}>
+                <SpotlightCard className="h-full">
+                  <button
+                    onClick={() => setActive(p)}
+                    className="flex h-full w-full flex-col justify-between p-8 text-left"
+                  >
+                    <div className="flex items-baseline justify-between gap-4">
+                      <h3 className="text-2xl font-bold">{p.title}</h3>
+                      <span className="text-sm text-white/40">{p.year}</span>
+                    </div>
+                    <p className="mt-4 leading-relaxed text-white/60">{p.blurb}</p>
+                    <div className="mt-6 flex flex-wrap gap-2">
+                      {p.stack.map((s) => (
+                        <span key={s} className="rounded-full border border-white/10 px-3 py-1 text-xs text-white/55">
+                          {s}
+                        </span>
+                      ))}
+                    </div>
+                    <span className="mt-6 inline-flex items-center gap-1 text-sm font-semibold text-[#DCF87C]">Read more</span>
+                  </button>
+                </SpotlightCard>
+              </Reveal>
+            ),
+          )}
         </div>
       </section>
 
@@ -162,6 +180,47 @@ export default function App() {
       <footer className="mx-auto w-full max-w-4xl px-6 py-12 text-sm text-white/35">
         <p>Built by Arseniy Cherednichenko in Berlin.</p>
       </footer>
+
+      <Modal open={active !== null} onClose={() => setActive(null)}>
+        {active && (
+          <div>
+            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[#DCF87C]">
+              {active.year || 'Project'}
+            </span>
+            <h3 className="mt-2 text-3xl font-bold">{active.title}</h3>
+            <p className="mt-4 leading-relaxed text-white/65">{active.detail}</p>
+            <div className="mt-6 flex flex-wrap gap-2">
+              {active.stack.map((s) => (
+                <span key={s} className="rounded-full border border-white/10 px-3 py-1 text-xs text-white/55">
+                  {s}
+                </span>
+              ))}
+            </div>
+            <div className="mt-8 flex flex-wrap gap-3">
+              {active.href && (
+                <a
+                  href={active.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="rounded-full bg-[#DCF87C] px-5 py-2.5 text-sm font-semibold text-black"
+                >
+                  Visit
+                </a>
+              )}
+              {active.repo && (
+                <a
+                  href={active.repo}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="rounded-full border border-white/15 px-5 py-2.5 text-sm font-semibold text-white"
+                >
+                  Source
+                </a>
+              )}
+            </div>
+          </div>
+        )}
+      </Modal>
     </div>
   )
 }
@@ -169,9 +228,12 @@ export default function App() {
 interface Project {
   title: string
   year: string
-  href: string
   blurb: string
+  detail: string
   stack: string[]
+  href?: string
+  repo?: string
+  soon?: boolean
 }
 
 const PROJECTS: Project[] = [
@@ -179,9 +241,27 @@ const PROJECTS: Project[] = [
     title: 'Guided',
     year: '2026',
     href: 'https://askguided.com',
-    blurb:
-      'A Socratic AI tutor for students aged 8 to 18. It asks the questions that build real understanding instead of giving away answers. Web app plus native iOS, on a shared Supabase backend.',
+    blurb: 'A Socratic AI tutor for students aged 8 to 18.',
+    detail:
+      'A Socratic AI tutor that asks the questions that build real understanding instead of giving away answers. Curriculum-aware for the German Abitur, IB, and GCSE. Web app plus a native iOS app on a shared Supabase backend. I co-founded it and build across the whole stack.',
     stack: ['React', 'TypeScript', 'SwiftUI', 'Supabase'],
+  },
+  {
+    title: 'This site',
+    year: '2026',
+    repo: 'https://github.com/ArseniyCherednichenko/portfolio',
+    blurb: 'An open-source, motion-led portfolio.',
+    detail:
+      'This portfolio. React, Vite, Tailwind v4, and Framer Motion. Every animation is a hand-built component: an aurora background, spotlight cards, magnetic buttons, an orbiting hero, a marquee, and more. Open source on GitHub.',
+    stack: ['React', 'Tailwind', 'Framer Motion', 'Vite'],
+  },
+  {
+    title: 'More soon',
+    year: '',
+    blurb: 'New projects in progress. Real work lands here.',
+    detail: '',
+    stack: [],
+    soon: true,
   },
 ]
 
