@@ -31,10 +31,16 @@ React 18 + Vite + TypeScript (strict) + **Tailwind v4** (via `@tailwindcss/vite`
 - Deploy notes (Vercel / GitHub Pages) in README.
 - 404 page, smooth anchor scrolling, a contact form (mailto or a no-backend service).
 
-## The daily routine's job (per run) — BRANCH + PR (this is his public showcase)
-1. Read this file + `git log --oneline -20` + `gh pr list --state all --limit 20` so you don't repeat work.
+## Existing components (`src/components/`) — extend these, don't reinvent
+Aurora (ambient bg), GradientText (shine), RotatingWord, SpotlightCard (cursor glow), Marquee, MagneticButton, Nav, Reveal. Homepage composed in `src/App.tsx` (hero, about, work, toolkit, contact). Keyframes (`shine`, `marquee`) + reduced-motion guard live in `src/index.css`.
+
+## Design bar
+Make it look VERY good: crazy-good motion design, professional, cool. Build original animated components in the spirit of **React Bits** and **21st.dev** (animated/gradient text, aurora/particle/mesh backgrounds, spotlight & tilt cards, magnetic buttons, marquees, scroll-linked & scroll-velocity motion, staggered reveals, section/page transitions, animated counters). Use Framer Motion well; always respect `prefers-reduced-motion`. Never templated, never "AI-generated".
+
+## The daily routine's job (per run) — DIRECT TO MAIN
+1. Read this file + `git log --oneline -30` + `ls src/components` so you don't repeat work.
 2. `git config user.email "ars7ars3@gmail.com"` / `user.name "Arseniy Cherednichenko"`. No Co-Authored-By.
-3. `git fetch origin`, branch off origin/main: `auto/<slug>`.
-4. Build ONE coherent improvement from the roadmap (or an obvious polish/a11y/responsive win). Commit granularly.
-5. VERIFY: `npm install` if needed, then `npm run typecheck` AND `npm run build` — both must pass. If not fixable cleanly, ABANDON without pushing.
-6. Push the branch, open a PR with a clear title, what/why, a "How to test" note (run `npm run dev`, what to look at), and the Claude Code footer. Do NOT merge, do NOT push to main.
+3. `git fetch origin && git rebase origin/main` (work on main directly).
+4. Build ONE substantial, coherent improvement (a new section/component, a real polish/a11y/responsive pass). Make it genuinely more impressive each run. Commit GRANULARLY.
+5. VERIFY: `npm install` if needed, then `npm run typecheck` AND `npm run build` — both must pass. If not fixable cleanly, STOP without pushing.
+6. `git push origin main` (rebase + retry if rejected). No PRs.
