@@ -1,145 +1,161 @@
 import { motion } from 'framer-motion'
-import { type ReactNode } from 'react'
+import { Aurora } from './components/Aurora'
+import { Nav } from './components/Nav'
+import { Reveal } from './components/Reveal'
+import { GradientText } from './components/GradientText'
+import { RotatingWord } from './components/RotatingWord'
+import { SpotlightCard } from './components/SpotlightCard'
+import { Marquee } from './components/Marquee'
+import { MagneticButton } from './components/MagneticButton'
 
 const EASE = [0.16, 1, 0.3, 1] as const
 
-function Section({ children, className = '' }: { children: ReactNode; className?: string }) {
-  return (
-    <motion.section
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-80px' }}
-      transition={{ duration: 0.6, ease: EASE }}
-      className={`mx-auto w-full max-w-3xl px-6 ${className}`}
-    >
-      {children}
-    </motion.section>
-  )
-}
-
-function Eyebrow({ children }: { children: ReactNode }) {
-  return <h2 className="text-sm font-semibold uppercase tracking-[0.25em] text-[#DCF87C]">{children}</h2>
+function Eyebrow({ children }: { children: string }) {
+  return <p className="text-sm font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">{children}</p>
 }
 
 export default function App() {
   return (
-    <div className="relative min-h-screen overflow-hidden bg-[#0A0A0A] text-white">
-      {/* Ambient animated background */}
-      <motion.div
-        aria-hidden
-        className="pointer-events-none absolute -left-40 -top-40 h-[520px] w-[520px] rounded-full bg-[#DCF87C]/20 blur-[130px]"
-        animate={{ x: [0, 60, 0], y: [0, 40, 0] }}
-        transition={{ duration: 15, repeat: Infinity, ease: 'easeInOut' }}
-      />
-      <motion.div
-        aria-hidden
-        className="pointer-events-none absolute -right-40 top-1/2 h-[440px] w-[440px] rounded-full bg-emerald-500/10 blur-[130px]"
-        animate={{ x: [0, -50, 0], y: [0, -30, 0] }}
-        transition={{ duration: 19, repeat: Infinity, ease: 'easeInOut' }}
-      />
+    <div id="top" className="relative min-h-screen bg-[#0A0A0A] text-white">
+      <Aurora />
+      <Nav />
 
-      {/* Hero */}
-      <header className="relative mx-auto flex min-h-screen w-full max-w-3xl flex-col justify-center px-6">
+      {/* HERO */}
+      <header className="relative mx-auto flex min-h-screen w-full max-w-4xl flex-col justify-center px-6">
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: EASE }}
-          className="mb-5 text-sm font-semibold uppercase tracking-[0.25em] text-[#DCF87C]"
+          className="mb-6 text-sm font-semibold uppercase tracking-[0.3em] text-white/50"
         >
-          Berlin · builder
+          Berlin · builder · founder
         </motion.p>
         <motion.h1
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.05, ease: EASE }}
-          className="text-5xl font-bold leading-[1.04] tracking-tight sm:text-7xl"
+          className="text-6xl font-bold leading-[1.02] tracking-tight sm:text-8xl"
         >
-          Arseniy
+          <GradientText>Arseniy</GradientText>
           <br />
           Cherednichenko
         </motion.h1>
-        <motion.p
+        <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.15, ease: EASE }}
-          className="mt-6 max-w-xl text-lg leading-relaxed text-white/60 sm:text-xl"
+          className="mt-7 flex flex-wrap items-center gap-2 text-2xl text-white/70 sm:text-3xl"
         >
-          Co-founder of Guided, a Socratic AI tutor. I build calm, fast, beautiful products, mostly with React,
-          TypeScript, SwiftUI, and a lot of AI.
+          <span>I build</span>
+          <RotatingWord words={['beautiful products.', 'Socratic AI.', 'calm interfaces.', 'things with craft.']} />
+        </motion.div>
+        <motion.p
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.25, ease: EASE }}
+          className="mt-6 max-w-xl text-lg leading-relaxed text-white/55"
+        >
+          Co-founder of Guided, a Socratic AI tutor. I work mostly in React, TypeScript, and SwiftUI, with a lot of AI.
         </motion.p>
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.25, ease: EASE }}
-          className="mt-9 flex flex-wrap gap-3"
+          transition={{ duration: 0.7, delay: 0.35, ease: EASE }}
+          className="mt-10 flex flex-wrap gap-3"
         >
-          <a
+          <MagneticButton href="#work" className="rounded-full bg-[#DCF87C] px-7 py-3.5 font-semibold text-black">
+            See my work
+          </MagneticButton>
+          <MagneticButton
             href="https://github.com/ArseniyCherednichenko"
-            className="rounded-full bg-[#DCF87C] px-6 py-3 font-semibold text-black transition hover:brightness-105"
+            className="rounded-full border border-white/15 px-7 py-3.5 font-semibold text-white"
           >
             GitHub
-          </a>
-          <a
-            href="mailto:ars7ars3@gmail.com"
-            className="rounded-full border border-white/15 px-6 py-3 font-semibold text-white transition hover:border-white/40"
-          >
-            Email
-          </a>
+          </MagneticButton>
         </motion.div>
       </header>
 
-      {/* About */}
-      <Section className="py-20">
-        <Eyebrow>About</Eyebrow>
-        <p className="mt-6 text-2xl leading-relaxed text-white/80">
-          I&apos;m a student and founder in Berlin. I care about products that feel effortless: real craft in the
-          motion, the typography, and the small moments. Right now I&apos;m building Guided, a tutor that teaches by
-          asking the right questions instead of handing over answers.
-        </p>
-      </Section>
+      {/* ABOUT */}
+      <section id="about" className="mx-auto w-full max-w-4xl px-6 py-24">
+        <Reveal>
+          <Eyebrow>About</Eyebrow>
+        </Reveal>
+        <Reveal delay={0.05}>
+          <p className="mt-6 text-3xl font-medium leading-snug text-white/85 sm:text-4xl">
+            I care about products that feel effortless. Real craft in the motion, the typography, and the small
+            moments, the things people feel but cannot name.
+          </p>
+        </Reveal>
+      </section>
 
-      {/* Work */}
-      <Section className="py-20">
-        <Eyebrow>Selected work</Eyebrow>
-        <div className="mt-8 grid gap-5">
-          {PROJECTS.map((p) => (
-            <motion.a
-              key={p.title}
-              href={p.href}
-              whileHover={{ y: -4 }}
-              transition={{ duration: 0.25, ease: EASE }}
-              className="group block rounded-3xl border border-white/10 bg-white/[0.03] p-7 transition-colors hover:border-[#DCF87C]/40"
-            >
-              <div className="flex items-baseline justify-between gap-4">
-                <h3 className="text-2xl font-bold">{p.title}</h3>
-                <span className="text-sm text-white/40">{p.year}</span>
-              </div>
-              <p className="mt-3 leading-relaxed text-white/60">{p.blurb}</p>
-              <div className="mt-5 flex flex-wrap gap-2">
-                {p.stack.map((s) => (
-                  <span key={s} className="rounded-full border border-white/10 px-3 py-1 text-xs text-white/55">
-                    {s}
-                  </span>
-                ))}
-              </div>
-            </motion.a>
+      {/* WORK */}
+      <section id="work" className="mx-auto w-full max-w-4xl px-6 py-24">
+        <Reveal>
+          <Eyebrow>Selected work</Eyebrow>
+        </Reveal>
+        <div className="mt-10 grid gap-6">
+          {PROJECTS.map((p, idx) => (
+            <Reveal key={p.title} delay={idx * 0.05}>
+              <SpotlightCard className="p-8">
+                <div className="flex items-baseline justify-between gap-4">
+                  <h3 className="text-3xl font-bold">{p.title}</h3>
+                  <span className="text-sm text-white/40">{p.year}</span>
+                </div>
+                <p className="mt-4 max-w-2xl leading-relaxed text-white/60">{p.blurb}</p>
+                <div className="mt-6 flex flex-wrap gap-2">
+                  {p.stack.map((s) => (
+                    <span key={s} className="rounded-full border border-white/10 px-3 py-1 text-xs text-white/55">
+                      {s}
+                    </span>
+                  ))}
+                </div>
+                <a href={p.href} className="mt-6 inline-flex items-center gap-1 text-sm font-semibold text-[#DCF87C]">
+                  Visit {p.title}
+                </a>
+              </SpotlightCard>
+            </Reveal>
           ))}
         </div>
-      </Section>
+      </section>
 
-      {/* Toolkit */}
-      <Section className="py-20">
-        <Eyebrow>Toolkit</Eyebrow>
-        <div className="mt-6 flex flex-wrap gap-2.5">
+      {/* TOOLKIT */}
+      <section id="toolkit" className="py-24">
+        <div className="mx-auto mb-9 w-full max-w-4xl px-6">
+          <Reveal>
+            <Eyebrow>Toolkit</Eyebrow>
+          </Reveal>
+        </div>
+        <Marquee>
           {SKILLS.map((s) => (
-            <span key={s} className="rounded-full border border-white/10 bg-white/[0.03] px-4 py-2 text-sm text-white/75">
+            <span key={s} className="rounded-2xl border border-white/10 bg-white/[0.03] px-6 py-3 text-lg text-white/75">
               {s}
             </span>
           ))}
-        </div>
-      </Section>
+        </Marquee>
+      </section>
 
-      <footer className="mx-auto w-full max-w-3xl px-6 py-16 text-white/40">
+      {/* CONTACT */}
+      <section id="contact" className="mx-auto w-full max-w-4xl px-6 py-28 text-center">
+        <Reveal>
+          <h2 className="text-5xl font-bold tracking-tight sm:text-7xl">
+            Let us build
+            <br />
+            something good.
+          </h2>
+        </Reveal>
+        <Reveal delay={0.1}>
+          <div className="mt-10 flex justify-center">
+            <MagneticButton
+              href="mailto:ars7ars3@gmail.com"
+              className="rounded-full bg-[#DCF87C] px-8 py-4 text-lg font-semibold text-black"
+            >
+              ars7ars3@gmail.com
+            </MagneticButton>
+          </div>
+        </Reveal>
+      </section>
+
+      <footer className="mx-auto w-full max-w-4xl px-6 py-12 text-sm text-white/35">
         <p>Built by Arseniy Cherednichenko in Berlin.</p>
       </footer>
     </div>
@@ -165,4 +181,4 @@ const PROJECTS: Project[] = [
   },
 ]
 
-const SKILLS = ['React', 'TypeScript', 'SwiftUI', 'Tailwind', 'Framer Motion', 'Supabase', 'Vite', 'Node']
+const SKILLS = ['React', 'TypeScript', 'SwiftUI', 'Tailwind', 'Framer Motion', 'Supabase', 'Vite', 'Node', 'Figma', 'GSAP']
