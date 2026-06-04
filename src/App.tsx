@@ -7,6 +7,8 @@ import { RotatingWord } from './components/RotatingWord'
 import { SpotlightCard } from './components/SpotlightCard'
 import { Marquee } from './components/Marquee'
 import { MagneticButton } from './components/MagneticButton'
+import { HeroOrbit } from './components/HeroOrbit'
+import { ScrollCue } from './components/ScrollCue'
 
 const EASE = [0.16, 1, 0.3, 1] as const
 
@@ -22,6 +24,7 @@ export default function App() {
 
       {/* HERO */}
       <header className="relative mx-auto flex min-h-screen w-full max-w-4xl flex-col justify-center px-6">
+        <HeroOrbit />
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -73,6 +76,7 @@ export default function App() {
             GitHub
           </MagneticButton>
         </motion.div>
+        <ScrollCue />
       </header>
 
       {/* ABOUT */}
