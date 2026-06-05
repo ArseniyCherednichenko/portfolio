@@ -3,6 +3,7 @@ const LINKS: ReadonlyArray<readonly [string, string]> = [
   ['Work', '#work'],
   ['About', '#about'],
   ['Toolkit', '#toolkit'],
+  ['Playground', '#playground'],
   ['Contact', '#contact'],
 ]
 
