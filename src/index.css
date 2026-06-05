@@ -44,3 +44,14 @@ body {
     scroll-behavior: auto !important;
   }
 }
+
+::selection {
+  background: #dcf87c;
+  color: #0a0a0a;
+}
+
+:focus-visible {
+  outline: 2px solid #dcf87c;
+  outline-offset: 3px;
+  border-radius: 6px;
+}
