@@ -24,21 +24,21 @@ export function HeroOrbit() {
           WebkitMask: 'radial-gradient(farthest-side, transparent calc(100% - 2px), #000 calc(100% - 2px))',
           mask: 'radial-gradient(farthest-side, transparent calc(100% - 2px), #000 calc(100% - 2px))',
         }}
-        animate={spin(22)}
+        animate={spin()}
         transition={spinT(22)}
       />
 
       {/* inner ring with a lime dot */}
       <motion.div
         className="absolute inset-[20%] rounded-full border border-white/10"
-        animate={spin(38, -1)}
+        animate={spin(-1)}
         transition={spinT(38)}
       >
         <span className="absolute left-1/2 top-0 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#DCF87C]" />
       </motion.div>
 
       {/* outer orbiting dot */}
-      <motion.div className="absolute inset-0" animate={spin(16)} transition={spinT(16)}>
+      <motion.div className="absolute inset-0" animate={spin()} transition={spinT(16)}>
         <span className="absolute left-1/2 top-0 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/60" />
       </motion.div>
     </div>
