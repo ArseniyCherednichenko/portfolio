@@ -11,6 +11,8 @@ import { Marquee } from './components/Marquee'
 import { MagneticButton } from './components/MagneticButton'
 import { HeroOrbit } from './components/HeroOrbit'
 import { ScrollCue } from './components/ScrollCue'
+import { ScrollProgress } from './components/ScrollProgress'
+import { TiltCard } from './components/TiltCard'
 
 const EASE = [0.16, 1, 0.3, 1] as const
 
@@ -23,6 +25,7 @@ export default function App() {
   return (
     <div id="top" className="relative min-h-screen bg-[#0A0A0A] text-white">
       <Aurora />
+      <ScrollProgress />
       <Nav />
 
       {/* HERO */}
@@ -156,6 +159,48 @@ export default function App() {
         </Marquee>
       </section>
 
+      {/* PLAYGROUND */}
+      <section id="playground" className="mx-auto w-full max-w-4xl px-6 py-24">
+        <Reveal>
+          <Eyebrow>Playground</Eyebrow>
+        </Reveal>
+        <Reveal delay={0.05}>
+          <p className="mt-6 max-w-2xl text-2xl font-medium leading-snug text-white/80">
+            This whole site is hand-built motion. A few of the interactions I make, hover the cards.
+          </p>
+        </Reveal>
+        <div className="mt-10 grid gap-6 sm:grid-cols-2">
+          <Reveal>
+            <TiltCard className="flex h-44 flex-col justify-between p-7">
+              <span className="text-xs font-semibold uppercase tracking-[0.2em] text-white/40">Shine text</span>
+              <GradientText className="text-4xl font-bold">handcrafted</GradientText>
+            </TiltCard>
+          </Reveal>
+          <Reveal delay={0.05}>
+            <TiltCard className="flex h-44 flex-col justify-between p-7">
+              <span className="text-xs font-semibold uppercase tracking-[0.2em] text-white/40">Rotating words</span>
+              <div className="flex items-center gap-2 text-2xl text-white/80">
+                <span>I build</span>
+                <RotatingWord words={['motion.', 'interfaces.', 'delight.']} />
+              </div>
+            </TiltCard>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <TiltCard className="flex h-44 flex-col justify-between p-7">
+              <span className="text-xs font-semibold uppercase tracking-[0.2em] text-white/40">3D tilt</span>
+              <span className="text-white/60">Cards that lean toward your cursor, like this one.</span>
+            </TiltCard>
+          </Reveal>
+          <Reveal delay={0.15}>
+            <TiltCard className="flex h-44 items-center justify-center p-7">
+              <MagneticButton href="#contact" className="rounded-full bg-[#DCF87C] px-6 py-3 font-semibold text-black">
+                Magnetic button
+              </MagneticButton>
+            </TiltCard>
+          </Reveal>
+        </div>
+      </section>
+
       {/* CONTACT */}
       <section id="contact" className="mx-auto w-full max-w-4xl px-6 py-28 text-center">
         <Reveal>
@@ -177,8 +222,21 @@ export default function App() {
         </Reveal>
       </section>
 
-      <footer className="mx-auto w-full max-w-4xl px-6 py-12 text-sm text-white/35">
-        <p>Built by Arseniy Cherednichenko in Berlin.</p>
+      <footer className="mx-auto w-full max-w-4xl border-t border-white/10 px-6 py-12">
+        <div className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-center">
+          <p className="text-sm text-white/35">Built by Arseniy Cherednichenko in Berlin. React + Framer Motion.</p>
+          <div className="flex gap-5 text-sm text-white/55">
+            <a href="https://github.com/ArseniyCherednichenko" className="transition-colors hover:text-white">
+              GitHub
+            </a>
+            <a href="mailto:ars7ars3@gmail.com" className="transition-colors hover:text-white">
+              Email
+            </a>
+            <a href="https://askguided.com" className="transition-colors hover:text-white">
+              Guided
+            </a>
+          </div>
+        </div>
       </footer>
 
       <Modal open={active !== null} onClose={() => setActive(null)}>
