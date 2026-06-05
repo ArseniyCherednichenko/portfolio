@@ -13,6 +13,9 @@ import { HeroOrbit } from './components/HeroOrbit'
 import { ScrollCue } from './components/ScrollCue'
 import { ScrollProgress } from './components/ScrollProgress'
 import { TiltCard } from './components/TiltCard'
+import { CommandPalette } from './components/CommandPalette'
+import { BackToTop } from './components/BackToTop'
+import { Grain } from './components/Grain'
 
 const EASE = [0.16, 1, 0.3, 1] as const
 
@@ -25,7 +28,10 @@ export default function App() {
   return (
     <div id="top" className="relative min-h-screen bg-[#0A0A0A] text-white">
       <Aurora />
+      <Grain />
       <ScrollProgress />
+      <CommandPalette />
+      <BackToTop />
       <Nav />
 
       {/* HERO */}
@@ -95,6 +101,16 @@ export default function App() {
             I care about products that feel effortless. Real craft in the motion, the typography, and the small
             moments, the things people feel but cannot name.
           </p>
+        </Reveal>
+        <Reveal delay={0.1}>
+          <div className="mt-12 grid gap-4 sm:grid-cols-3">
+            {NOW.map(([label, value]) => (
+              <div key={label} className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
+                <div className="text-xs font-semibold uppercase tracking-[0.2em] text-white/40">{label}</div>
+                <div className="mt-2 text-white/80">{value}</div>
+              </div>
+            ))}
+          </div>
         </Reveal>
       </section>
 
@@ -324,3 +340,9 @@ const PROJECTS: Project[] = [
 ]
 
 const SKILLS = ['React', 'TypeScript', 'SwiftUI', 'Tailwind', 'Framer Motion', 'Supabase', 'Vite', 'Node', 'Figma', 'GSAP']
+
+const NOW: ReadonlyArray<readonly [string, string]> = [
+  ['Now', 'Building Guided'],
+  ['Based in', 'Berlin'],
+  ['Into', 'Motion design, AI, calm software'],
+]
