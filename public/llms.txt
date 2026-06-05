@@ -1,0 +1,14 @@
+# Arseniy Cherednichenko
+
+> Builder and co-founder of Guided, a Socratic AI tutor. Based in Berlin. Works mostly in React, TypeScript, SwiftUI, and motion design.
+
+## About
+Arseniy is a student and founder in Berlin who builds calm, fast, beautiful products, with real attention to motion, typography, and craft. Co-founder of Guided (askguided.com), a Socratic AI tutor for students aged 8 to 18.
+
+## Selected work
+- Guided — a Socratic AI tutor for students aged 8 to 18. Web app plus native iOS on a shared Supabase backend. React, TypeScript, SwiftUI.
+- This portfolio — open source, motion-led, hand-built animated components (React, Tailwind, Framer Motion).
+
+## Contact
+- GitHub: https://github.com/ArseniyCherednichenko
+- Email: ars7ars3@gmail.com
