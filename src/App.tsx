@@ -16,6 +16,10 @@ import { TiltCard } from './components/TiltCard'
 import { CommandPalette } from './components/CommandPalette'
 import { BackToTop } from './components/BackToTop'
 import { Grain } from './components/Grain'
+import { CursorDot } from './components/CursorDot'
+import { TextReveal } from './components/TextReveal'
+import { Divider } from './components/Divider'
+import { Accordion, type QA } from './components/Accordion'
 
 const EASE = [0.16, 1, 0.3, 1] as const
 
@@ -32,6 +36,7 @@ export default function App() {
       <ScrollProgress />
       <CommandPalette />
       <BackToTop />
+      <CursorDot />
       <Nav />
 
       {/* HERO */}
@@ -217,13 +222,36 @@ export default function App() {
         </div>
       </section>
 
+      {/* APPROACH */}
+      <Divider />
+      <section id="approach" className="mx-auto w-full max-w-4xl px-6 py-24">
+        <Reveal>
+          <Eyebrow>How I work</Eyebrow>
+        </Reveal>
+        <Reveal delay={0.05}>
+          <h2 className="mt-6 text-4xl font-bold leading-tight sm:text-5xl">
+            <TextReveal text="A few things I believe about building." />
+          </h2>
+        </Reveal>
+        <div className="mt-10 grid gap-6 sm:grid-cols-3">
+          {PRINCIPLES.map((p, i) => (
+            <Reveal key={p.title} delay={i * 0.05}>
+              <div className="h-full rounded-3xl border border-white/10 bg-white/[0.03] p-7">
+                <div className="text-3xl font-bold text-[#DCF87C]">{String(i + 1).padStart(2, '0')}</div>
+                <h3 className="mt-4 text-xl font-semibold">{p.title}</h3>
+                <p className="mt-2 leading-relaxed text-white/55">{p.body}</p>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
       {/* CONTACT */}
+      <Divider />
       <section id="contact" className="mx-auto w-full max-w-4xl px-6 py-28 text-center">
         <Reveal>
           <h2 className="text-5xl font-bold tracking-tight sm:text-7xl">
-            Let us build
-            <br />
-            something good.
+            <TextReveal text="Let us build something good." />
           </h2>
         </Reveal>
         <Reveal delay={0.1}>
@@ -236,6 +264,17 @@ export default function App() {
             </MagneticButton>
           </div>
         </Reveal>
+      </section>
+
+      {/* GOOD TO KNOW */}
+      <Divider />
+      <section id="faq" className="mx-auto w-full max-w-4xl px-6 py-24">
+        <Reveal>
+          <Eyebrow>Good to know</Eyebrow>
+        </Reveal>
+        <div className="mt-8">
+          <Accordion items={FAQ} />
+        </div>
       </section>
 
       <footer className="mx-auto w-full max-w-4xl border-t border-white/10 px-6 py-12">
@@ -345,4 +384,17 @@ const NOW: ReadonlyArray<readonly [string, string]> = [
   ['Now', 'Building Guided'],
   ['Based in', 'Berlin'],
   ['Into', 'Motion design, AI, calm software'],
+]
+
+const PRINCIPLES: ReadonlyArray<{ title: string; body: string }> = [
+  { title: 'Calm over flashy', body: 'Motion should guide attention, not fight for it. Every animation has to earn its place.' },
+  { title: 'Details are the product', body: 'Type, spacing, timing, the small things people feel but cannot name. That is where quality lives.' },
+  { title: 'Ship, then sharpen', body: 'Get it real and in front of people fast, then refine with taste and honest feedback.' },
+]
+
+const FAQ: QA[] = [
+  { q: 'What do you build with?', a: 'Mostly React, TypeScript, and SwiftUI, with Tailwind and Framer Motion on the front end, and a lot of AI in the loop.' },
+  { q: 'Where are you based?', a: 'Berlin.' },
+  { q: 'What are you working on now?', a: 'Guided, a Socratic AI tutor for students. I co-founded it and build across web and iOS.' },
+  { q: 'Open to collaborating?', a: 'Always happy to talk about good product and design. The fastest way to reach me is email.' },
 ]
