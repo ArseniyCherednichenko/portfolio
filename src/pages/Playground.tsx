@@ -11,6 +11,7 @@ import { CountUp } from '../components/CountUp'
 import { Marquee } from '../components/Marquee'
 import { MagneticButton } from '../components/MagneticButton'
 import { Tooltip } from '../components/Tooltip'
+import { useDocumentTitle } from '../hooks/useDocumentTitle'
 
 const EASE = [0.16, 1, 0.3, 1] as const
 
@@ -19,6 +20,7 @@ function Label({ children }: { children: string }) {
 }
 
 export default function Playground() {
+  useDocumentTitle('Playground — Arseniy Cherednichenko')
   return (
     <article id="main" tabIndex={-1} className="outline-none">
       <header className="mx-auto w-full max-w-5xl px-6 pb-12 pt-36 sm:pt-44">

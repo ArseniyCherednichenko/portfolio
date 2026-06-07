@@ -15,6 +15,7 @@ import { Accordion, type QA } from '../components/Accordion'
 import { Tooltip } from '../components/Tooltip'
 import { SocialLinks } from '../components/SocialLinks'
 import { CopyButton } from '../components/CopyButton'
+import { useDocumentTitle } from '../hooks/useDocumentTitle'
 import { PROJECTS } from '../data/projects'
 
 const EASE = [0.16, 1, 0.3, 1] as const
@@ -24,6 +25,7 @@ function Eyebrow({ children }: { children: string }) {
 }
 
 export default function Home() {
+  useDocumentTitle('Arseniy Cherednichenko — Builder and Founder')
   return (
     <>
       {/* HERO */}

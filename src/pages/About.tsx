@@ -8,10 +8,12 @@ import { Timeline, type TimelineItem } from '../components/Timeline'
 import { CountUp } from '../components/CountUp'
 import { SocialLinks } from '../components/SocialLinks'
 import { MagneticButton } from '../components/MagneticButton'
+import { useDocumentTitle } from '../hooks/useDocumentTitle'
 
 const EASE = [0.16, 1, 0.3, 1] as const
 
 export default function About() {
+  useDocumentTitle('About — Arseniy Cherednichenko')
   return (
     <article id="main" tabIndex={-1} className="outline-none">
       <header className="mx-auto w-full max-w-4xl px-6 pb-10 pt-36 sm:pt-44">

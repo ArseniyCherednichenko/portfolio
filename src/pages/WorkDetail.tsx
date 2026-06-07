@@ -4,6 +4,7 @@ import { Reveal } from '../components/Reveal'
 import { GradientText } from '../components/GradientText'
 import { Divider } from '../components/Divider'
 import { CASE_STUDIES, getProject } from '../data/projects'
+import { useDocumentTitle } from '../hooks/useDocumentTitle'
 import NotFound from './NotFound'
 
 const EASE = [0.16, 1, 0.3, 1] as const
@@ -20,6 +21,9 @@ function Meta({ label, value }: { label: string; value: string }) {
 export default function WorkDetail() {
   const { slug } = useParams()
   const project = getProject(slug)
+  useDocumentTitle(
+    project && !project.soon ? `${project.title} — Arseniy Cherednichenko` : 'Not found — Arseniy Cherednichenko',
+  )
   if (!project || project.soon) return <NotFound />
 
   // Wrap-around prev/next through the real case studies.
