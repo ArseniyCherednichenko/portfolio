@@ -36,12 +36,12 @@ export const PROJECTS: Project[] = [
     timeframe: '2025 — present',
     blurb: 'A Socratic AI tutor for students aged 8 to 18.',
     detail:
-      'A Socratic AI tutor that asks the questions that build real understanding instead of giving away answers. Curriculum-aware for the German Abitur, IB, and GCSE, on the web and on native iOS.',
+      'A Socratic AI tutor that asks the questions that build real understanding instead of giving away answers. Curriculum-aware for the German Abitur, on the web and on native iOS.',
     stack: ['React', 'TypeScript', 'SwiftUI', 'Supabase'],
     sections: [
       {
         heading: 'The idea',
-        body: 'Most tutoring tools hand over the answer. Guided does the opposite. It is built on the Socratic method: instead of solving the problem for you, it asks the one question that moves you a single step forward, so the understanding ends up being yours. It is curriculum-aware for the German Abitur, the IB, and GCSE, so the questions stay anchored to what a student is actually being taught.',
+        body: 'Most tutoring tools hand over the answer. Guided does the opposite. It is built on the Socratic method: instead of solving the problem for you, it asks the one question that moves you a single step forward, so the understanding ends up being yours. It is curriculum-aware for the German Abitur, so the questions stay anchored to what a student is actually being taught.',
       },
       {
         heading: 'What I build',
