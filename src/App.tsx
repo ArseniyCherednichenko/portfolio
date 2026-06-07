@@ -20,6 +20,9 @@ import { CursorDot } from './components/CursorDot'
 import { TextReveal } from './components/TextReveal'
 import { Divider } from './components/Divider'
 import { Accordion, type QA } from './components/Accordion'
+import { SkipLink } from './components/SkipLink'
+import { SectionDots } from './components/SectionDots'
+import { Tooltip } from './components/Tooltip'
 
 const EASE = [0.16, 1, 0.3, 1] as const
 
@@ -31,6 +34,7 @@ export default function App() {
   const [active, setActive] = useState<Project | null>(null)
   return (
     <div id="top" className="relative min-h-screen bg-[#0A0A0A] text-white">
+      <SkipLink />
       <Aurora />
       <Grain />
       <ScrollProgress />
@@ -38,9 +42,10 @@ export default function App() {
       <BackToTop />
       <CursorDot />
       <Nav />
+      <SectionDots />
 
       {/* HERO */}
-      <header className="relative mx-auto flex min-h-screen w-full max-w-4xl flex-col justify-center px-6">
+      <header id="main" tabIndex={-1} className="relative mx-auto flex min-h-screen w-full max-w-4xl flex-col justify-center px-6 outline-none">
         <HeroOrbit />
         <motion.p
           initial={{ opacity: 0, y: 20 }}
@@ -172,10 +177,12 @@ export default function App() {
           </Reveal>
         </div>
         <Marquee>
-          {SKILLS.map((s) => (
-            <span key={s} className="rounded-2xl border border-white/10 bg-white/[0.03] px-6 py-3 text-lg text-white/75">
-              {s}
-            </span>
+          {SKILLS.map(([name, note]) => (
+            <Tooltip key={name} label={note}>
+              <span className="rounded-2xl border border-white/10 bg-white/[0.03] px-6 py-3 text-lg text-white/75">
+                {name}
+              </span>
+            </Tooltip>
           ))}
         </Marquee>
       </section>
@@ -378,7 +385,18 @@ const PROJECTS: Project[] = [
   },
 ]
 
-const SKILLS = ['React', 'TypeScript', 'SwiftUI', 'Tailwind', 'Framer Motion', 'Supabase', 'Vite', 'Node', 'Figma', 'GSAP']
+const SKILLS: ReadonlyArray<readonly [string, string]> = [
+  ['React', 'UI library I build most things in'],
+  ['TypeScript', 'typed JavaScript, my default'],
+  ['SwiftUI', 'native iOS'],
+  ['Tailwind', 'utility-first styling'],
+  ['Framer Motion', 'the animations on this site'],
+  ['Supabase', 'auth and Postgres backend'],
+  ['Vite', 'fast dev and build'],
+  ['Node', 'tooling and scripts'],
+  ['Figma', 'design'],
+  ['GSAP', 'advanced motion'],
+]
 
 const NOW: ReadonlyArray<readonly [string, string]> = [
   ['Now', 'Building Guided'],
