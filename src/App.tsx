@@ -98,6 +98,17 @@ export default function App() {
             GitHub
           </MagneticButton>
         </motion.div>
+        <motion.button
+          type="button"
+          onClick={() => window.dispatchEvent(new Event('open-command-palette'))}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5, duration: 0.8 }}
+          className="mt-8 inline-flex w-fit items-center gap-2 rounded-full border border-white/10 px-3 py-1.5 text-xs text-white/40 transition-colors hover:text-white/70"
+        >
+          <kbd className="rounded bg-white/10 px-1.5 py-0.5 font-sans">⌘ K</kbd>
+          <span>jump anywhere</span>
+        </motion.button>
         <ScrollCue />
       </header>
 
@@ -286,7 +297,9 @@ export default function App() {
 
       <footer className="mx-auto w-full max-w-4xl border-t border-white/10 px-6 py-12">
         <div className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-center">
-          <p className="text-sm text-white/35">Built by Arseniy Cherednichenko in Berlin. React + Framer Motion.</p>
+          <p className="text-sm text-white/35">
+            &copy; {new Date().getFullYear()} Arseniy Cherednichenko. Built in Berlin with React and Framer Motion.
+          </p>
           <div className="flex gap-5 text-sm text-white/55">
             <a href="https://github.com/ArseniyCherednichenko" className="transition-colors hover:text-white">
               GitHub
@@ -296,6 +309,9 @@ export default function App() {
             </a>
             <a href="https://askguided.com" className="transition-colors hover:text-white">
               Guided
+            </a>
+            <a href="#top" className="transition-colors hover:text-white">
+              Back to top
             </a>
           </div>
         </div>
