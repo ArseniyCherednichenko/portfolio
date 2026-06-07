@@ -1,7 +1,9 @@
-import { motion } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
 
 // Reveals a heading word-by-word, each word sliding up from a clipped line.
 export function TextReveal({ text, className = '' }: { text: string; className?: string }) {
+  const reduce = useReducedMotion()
+  if (reduce) return <span className={className}>{text}</span>
   const words = text.split(' ')
   return (
     <span className={className}>
