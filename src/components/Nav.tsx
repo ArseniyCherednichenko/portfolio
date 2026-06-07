@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
+import { useActiveSection } from '../hooks/useActiveSection'
 
 // Floating translucent nav with smooth-scroll anchors + a mobile dropdown menu.
 const LINKS: ReadonlyArray<readonly [string, string]> = [
@@ -13,6 +14,7 @@ const LINKS: ReadonlyArray<readonly [string, string]> = [
 
 export function Nav() {
   const [open, setOpen] = useState(false)
+  const active = useActiveSection(LINKS.map(([, href]) => href.slice(1)))
 
   return (
     <nav className="fixed inset-x-0 top-4 z-50 mx-auto w-[min(92%,760px)]">
@@ -21,11 +23,19 @@ export function Nav() {
           AC
         </a>
         <div className="hidden gap-7 sm:flex">
-          {LINKS.map(([label, href]) => (
-            <a key={href} href={href} className="text-sm text-white/60 transition-colors hover:text-white">
-              {label}
-            </a>
-          ))}
+          {LINKS.map(([label, href]) => {
+            const isActive = href.slice(1) === active
+            return (
+              <a
+                key={href}
+                href={href}
+                aria-current={isActive ? 'true' : undefined}
+                className={`text-sm transition-colors ${isActive ? 'text-[#DCF87C]' : 'text-white/60 hover:text-white'}`}
+              >
+                {label}
+              </a>
+            )
+          })}
         </div>
         <div className="flex items-center gap-2">
           <a
