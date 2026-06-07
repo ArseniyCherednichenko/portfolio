@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useActiveSection } from '../hooks/useActiveSection'
 
@@ -15,6 +15,15 @@ const LINKS: ReadonlyArray<readonly [string, string]> = [
 export function Nav() {
   const [open, setOpen] = useState(false)
   const active = useActiveSection(LINKS.map(([, href]) => href.slice(1)))
+
+  useEffect(() => {
+    if (!open) return
+    function onKey(e: KeyboardEvent) {
+      if (e.key === 'Escape') setOpen(false)
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [open])
 
   return (
     <nav className="fixed inset-x-0 top-4 z-50 mx-auto w-[min(92%,760px)]">
@@ -66,16 +75,20 @@ export function Nav() {
             transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
           >
             <div className="flex flex-col p-2">
-              {LINKS.map(([label, href]) => (
-                <a
-                  key={href}
-                  href={href}
-                  onClick={() => setOpen(false)}
-                  className="rounded-2xl px-4 py-3 text-white/75 transition-colors hover:bg-white/5"
-                >
-                  {label}
-                </a>
-              ))}
+              {LINKS.map(([label, href]) => {
+                const isActive = href.slice(1) === active
+                return (
+                  <a
+                    key={href}
+                    href={href}
+                    onClick={() => setOpen(false)}
+                    aria-current={isActive ? 'true' : undefined}
+                    className={`rounded-2xl px-4 py-3 transition-colors ${isActive ? 'text-[#DCF87C]' : 'text-white/75 hover:bg-white/5'}`}
+                  >
+                    {label}
+                  </a>
+                )
+              })}
               <a
                 href="mailto:ars7ars3@gmail.com"
                 onClick={() => setOpen(false)}
