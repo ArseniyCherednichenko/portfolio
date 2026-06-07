@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { motion, useMotionValue, useSpring } from 'framer-motion'
+import { motion, useMotionValue, useSpring, useReducedMotion } from 'framer-motion'
 
 // A small lime dot that trails the cursor (desktop only). mix-blend-difference
 // keeps it visible over any background.
@@ -8,15 +8,19 @@ export function CursorDot() {
   const y = useMotionValue(-100)
   const sx = useSpring(x, { stiffness: 500, damping: 40, mass: 0.3 })
   const sy = useSpring(y, { stiffness: 500, damping: 40, mass: 0.3 })
+  const reduce = useReducedMotion()
 
   useEffect(() => {
+    if (reduce) return
     function move(e: PointerEvent) {
       x.set(e.clientX)
       y.set(e.clientY)
     }
     window.addEventListener('pointermove', move)
     return () => window.removeEventListener('pointermove', move)
-  }, [x, y])
+  }, [x, y, reduce])
+
+  if (reduce) return null
 
   return (
     <motion.div
