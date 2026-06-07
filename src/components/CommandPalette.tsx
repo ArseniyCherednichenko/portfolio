@@ -1,13 +1,19 @@
 import { useEffect, useState, type KeyboardEvent as ReactKeyboardEvent } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
+import { useNavigate } from 'react-router-dom'
+import { CASE_STUDIES } from '../data/projects'
 
+// Targets starting with "/" are in-app routes (incl. /#section hashes); the
+// rest (http, mailto) are external. Case studies are pulled in from the shared
+// data so the palette stays in sync with the work the site actually has.
 const ITEMS: ReadonlyArray<readonly [string, string]> = [
-  ['Work', '#work'],
-  ['About', '#about'],
-  ['Toolkit', '#toolkit'],
-  ['Playground', '#playground'],
-  ['Approach', '#approach'],
-  ['Contact', '#contact'],
+  ['Work', '/#work'],
+  ['About', '/#about'],
+  ['Toolkit', '/#toolkit'],
+  ['Playground', '/#playground'],
+  ['Approach', '/#approach'],
+  ['Contact', '/#contact'],
+  ...CASE_STUDIES.map((p): readonly [string, string] => [`${p.title} — case study`, `/work/${p.slug}`]),
   ['GitHub', 'https://github.com/ArseniyCherednichenko'],
   ['LinkedIn', 'https://www.linkedin.com/in/arseniy-cherednichenko-bb3b962b9/'],
   ['Email', 'mailto:ars7ars3@gmail.com'],
@@ -16,6 +22,7 @@ const ITEMS: ReadonlyArray<readonly [string, string]> = [
 // Cmd/Ctrl+K quick-jump palette. Also opens on a window "open-command-palette"
 // event (so a hint button can trigger it). Arrow keys + Enter to navigate.
 export function CommandPalette() {
+  const navigate = useNavigate()
   const [open, setOpen] = useState(false)
   const [q, setQ] = useState('')
   const [sel, setSel] = useState(0)
@@ -49,7 +56,7 @@ export function CommandPalette() {
     if (!href) return
     setOpen(false)
     setQ('')
-    if (href.startsWith('#')) document.querySelector(href)?.scrollIntoView()
+    if (href.startsWith('/')) navigate(href)
     else window.location.href = href
   }
 
@@ -104,7 +111,7 @@ export function CommandPalette() {
                       className={`flex w-full items-center justify-between rounded-lg px-3 py-2.5 text-left transition-colors ${i === sel ? 'bg-white/10 text-white' : 'text-white/80'}`}
                     >
                       <span>{label}</span>
-                      <span className="text-xs text-white/30">{href.startsWith('#') ? 'section' : 'link'}</span>
+                      <span className="text-xs text-white/30">{href.includes('#') ? 'section' : href.startsWith('/') ? 'page' : 'link'}</span>
                     </button>
                   </li>
                 ))

@@ -1,20 +1,25 @@
 import { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
+import { Link, useLocation } from 'react-router-dom'
 import { useActiveSection } from '../hooks/useActiveSection'
 
-// Floating translucent nav with smooth-scroll anchors + a mobile dropdown menu.
+// Floating translucent nav. Section links resolve to /#section so they work
+// from any route — the ScrollManager scrolls them into view after navigation,
+// and on the homepage they just smooth-scroll. Plus a mobile dropdown menu.
 const LINKS: ReadonlyArray<readonly [string, string]> = [
-  ['Work', '#work'],
-  ['About', '#about'],
-  ['Toolkit', '#toolkit'],
-  ['Playground', '#playground'],
-  ['Approach', '#approach'],
-  ['Contact', '#contact'],
+  ['Work', 'work'],
+  ['About', 'about'],
+  ['Toolkit', 'toolkit'],
+  ['Playground', 'playground'],
+  ['Approach', 'approach'],
+  ['Contact', 'contact'],
 ]
 
 export function Nav() {
   const [open, setOpen] = useState(false)
-  const active = useActiveSection(LINKS.map(([, href]) => href.slice(1)))
+  const onHome = useLocation().pathname === '/'
+  // Scroll-spy only tracks sections that actually exist (the homepage).
+  const active = useActiveSection(onHome ? LINKS.map(([, id]) => id) : [])
 
   useEffect(() => {
     if (!open) return
@@ -28,21 +33,21 @@ export function Nav() {
   return (
     <nav className="fixed inset-x-0 top-4 z-50 mx-auto w-[min(92%,760px)]">
       <div className="flex items-center justify-between rounded-full border border-white/10 bg-black/40 px-5 py-3 backdrop-blur-xl">
-        <a href="#top" className="text-lg font-bold tracking-tight" onClick={() => setOpen(false)}>
+        <Link to="/" className="text-lg font-bold tracking-tight" onClick={() => setOpen(false)}>
           AC
-        </a>
+        </Link>
         <div className="hidden gap-7 sm:flex">
-          {LINKS.map(([label, href]) => {
-            const isActive = href.slice(1) === active
+          {LINKS.map(([label, id]) => {
+            const isActive = onHome && id === active
             return (
-              <a
-                key={href}
-                href={href}
+              <Link
+                key={id}
+                to={`/#${id}`}
                 aria-current={isActive ? 'true' : undefined}
                 className={`text-sm transition-colors ${isActive ? 'text-[#DCF87C]' : 'text-white/60 hover:text-white'}`}
               >
                 {label}
-              </a>
+              </Link>
             )
           })}
         </div>
@@ -75,18 +80,18 @@ export function Nav() {
             transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
           >
             <div className="flex flex-col p-2">
-              {LINKS.map(([label, href]) => {
-                const isActive = href.slice(1) === active
+              {LINKS.map(([label, id]) => {
+                const isActive = onHome && id === active
                 return (
-                  <a
-                    key={href}
-                    href={href}
+                  <Link
+                    key={id}
+                    to={`/#${id}`}
                     onClick={() => setOpen(false)}
                     aria-current={isActive ? 'true' : undefined}
                     className={`rounded-2xl px-4 py-3 transition-colors ${isActive ? 'text-[#DCF87C]' : 'text-white/75 hover:bg-white/5'}`}
                   >
                     {label}
-                  </a>
+                  </Link>
                 )
               })}
               <a
