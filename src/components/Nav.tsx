@@ -3,23 +3,37 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { Link, useLocation } from 'react-router-dom'
 import { useActiveSection } from '../hooks/useActiveSection'
 
-// Floating translucent nav. Section links resolve to /#section so they work
-// from any route — the ScrollManager scrolls them into view after navigation,
-// and on the homepage they just smooth-scroll. Plus a mobile dropdown menu.
-const LINKS: ReadonlyArray<readonly [string, string]> = [
-  ['Work', 'work'],
-  ['About', 'about'],
-  ['Toolkit', 'toolkit'],
-  ['Playground', 'playground'],
-  ['Approach', 'approach'],
-  ['Contact', 'contact'],
+// Floating translucent nav. Two kinds of links:
+//  - page links (to: '/about') are active when the route matches.
+//  - section links (to: '/#work', section: 'work') resolve to the homepage and
+//    are active via scroll-spy while on it. ScrollManager handles the scroll
+//    after cross-route navigation.
+interface NavLink {
+  label: string
+  to: string
+  section?: string
+}
+
+const LINKS: ReadonlyArray<NavLink> = [
+  { label: 'Work', to: '/#work', section: 'work' },
+  { label: 'About', to: '/about' },
+  { label: 'Playground', to: '/playground' },
+  { label: 'Uses', to: '/uses' },
+  { label: 'Contact', to: '/#contact', section: 'contact' },
 ]
+
+const SECTION_IDS = LINKS.filter((l) => l.section).map((l) => l.section as string)
 
 export function Nav() {
   const [open, setOpen] = useState(false)
-  const onHome = useLocation().pathname === '/'
+  const { pathname } = useLocation()
+  const onHome = pathname === '/'
   // Scroll-spy only tracks sections that actually exist (the homepage).
-  const active = useActiveSection(onHome ? LINKS.map(([, id]) => id) : [])
+  const active = useActiveSection(onHome ? SECTION_IDS : [])
+
+  function isActive(l: NavLink): boolean {
+    return l.section ? onHome && l.section === active : pathname === l.to
+  }
 
   useEffect(() => {
     if (!open) return
@@ -31,22 +45,22 @@ export function Nav() {
   }, [open])
 
   return (
-    <nav className="fixed inset-x-0 top-4 z-50 mx-auto w-[min(92%,760px)]">
+    <nav className="fixed inset-x-0 top-4 z-50 mx-auto w-[min(92%,800px)]">
       <div className="flex items-center justify-between rounded-full border border-white/10 bg-black/40 px-5 py-3 backdrop-blur-xl">
         <Link to="/" className="text-lg font-bold tracking-tight" onClick={() => setOpen(false)}>
           AC
         </Link>
         <div className="hidden gap-7 sm:flex">
-          {LINKS.map(([label, id]) => {
-            const isActive = onHome && id === active
+          {LINKS.map((l) => {
+            const act = isActive(l)
             return (
               <Link
-                key={id}
-                to={`/#${id}`}
-                aria-current={isActive ? 'true' : undefined}
-                className={`text-sm transition-colors ${isActive ? 'text-[#DCF87C]' : 'text-white/60 hover:text-white'}`}
+                key={l.to}
+                to={l.to}
+                aria-current={act ? 'true' : undefined}
+                className={`text-sm transition-colors ${act ? 'text-[#DCF87C]' : 'text-white/60 hover:text-white'}`}
               >
-                {label}
+                {l.label}
               </Link>
             )
           })}
@@ -65,7 +79,9 @@ export function Nav() {
             onClick={() => setOpen((o) => !o)}
             className="flex h-9 w-9 items-center justify-center rounded-full text-white/70 transition-colors hover:text-white sm:hidden"
           >
-            <span aria-hidden className="text-xl leading-none">{open ? '×' : '≡'}</span>
+            <span aria-hidden className="text-xl leading-none">
+              {open ? '×' : '≡'}
+            </span>
           </button>
         </div>
       </div>
@@ -80,17 +96,17 @@ export function Nav() {
             transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
           >
             <div className="flex flex-col p-2">
-              {LINKS.map(([label, id]) => {
-                const isActive = onHome && id === active
+              {LINKS.map((l) => {
+                const act = isActive(l)
                 return (
                   <Link
-                    key={id}
-                    to={`/#${id}`}
+                    key={l.to}
+                    to={l.to}
                     onClick={() => setOpen(false)}
-                    aria-current={isActive ? 'true' : undefined}
-                    className={`rounded-2xl px-4 py-3 transition-colors ${isActive ? 'text-[#DCF87C]' : 'text-white/75 hover:bg-white/5'}`}
+                    aria-current={act ? 'true' : undefined}
+                    className={`rounded-2xl px-4 py-3 transition-colors ${act ? 'text-[#DCF87C]' : 'text-white/75 hover:bg-white/5'}`}
                   >
-                    {label}
+                    {l.label}
                   </Link>
                 )
               })}
