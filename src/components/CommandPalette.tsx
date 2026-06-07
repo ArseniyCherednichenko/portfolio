@@ -9,6 +9,7 @@ const ITEMS: ReadonlyArray<readonly [string, string]> = [
   ['Approach', '#approach'],
   ['Contact', '#contact'],
   ['GitHub', 'https://github.com/ArseniyCherednichenko'],
+  ['LinkedIn', 'https://www.linkedin.com/in/arseniy-cherednichenko-bb3b962b9/'],
   ['Email', 'mailto:ars7ars3@gmail.com'],
 ]
 
