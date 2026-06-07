@@ -9,6 +9,7 @@ import { SpotlightCard } from '../components/SpotlightCard'
 import { AnimatedBorder } from '../components/AnimatedBorder'
 import { CountUp } from '../components/CountUp'
 import { Marquee } from '../components/Marquee'
+import { VelocitySkew } from '../components/VelocitySkew'
 import { MagneticButton } from '../components/MagneticButton'
 import { Tooltip } from '../components/Tooltip'
 import { useDocumentTitle } from '../hooks/useDocumentTitle'
@@ -101,9 +102,9 @@ export default function Playground() {
         {/* MARQUEE */}
         <div className="mt-10">
           <Reveal>
-            <Label>Infinite marquee, pauses on hover</Label>
+            <Label>Infinite marquee with scroll-velocity skew, pauses on hover</Label>
           </Reveal>
-          <div className="mt-5">
+          <VelocitySkew className="mt-5">
             <Marquee>
               {['React', 'TypeScript', 'SwiftUI', 'Tailwind', 'Framer Motion', 'Supabase', 'Vite', 'GSAP'].map((s) => (
                 <Tooltip key={s} label={`built with ${s}`}>
@@ -113,7 +114,7 @@ export default function Playground() {
                 </Tooltip>
               ))}
             </Marquee>
-          </div>
+          </VelocitySkew>
         </div>
 
         {/* CTA */}
