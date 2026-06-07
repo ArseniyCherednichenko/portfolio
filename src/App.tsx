@@ -328,6 +328,14 @@ export default function App() {
             <a href="https://askguided.com" className="transition-colors hover:text-white">
               Guided
             </a>
+            <a
+              href="https://github.com/ArseniyCherednichenko/portfolio"
+              target="_blank"
+              rel="noreferrer"
+              className="transition-colors hover:text-white"
+            >
+              Source
+            </a>
             <a href="#top" className="transition-colors hover:text-white">
               Back to top
             </a>
