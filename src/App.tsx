@@ -23,6 +23,7 @@ import { Accordion, type QA } from './components/Accordion'
 import { SkipLink } from './components/SkipLink'
 import { SectionDots } from './components/SectionDots'
 import { Tooltip } from './components/Tooltip'
+import { SocialLinks } from './components/SocialLinks'
 
 const EASE = [0.16, 1, 0.3, 1] as const
 
@@ -96,6 +97,12 @@ export default function App() {
             className="rounded-full border border-white/15 px-7 py-3.5 font-semibold text-white"
           >
             GitHub
+          </MagneticButton>
+          <MagneticButton
+            href="https://www.linkedin.com/in/arseniy-cherednichenko-bb3b962b9/"
+            className="rounded-full border border-white/15 px-7 py-3.5 font-semibold text-white"
+          >
+            LinkedIn
           </MagneticButton>
         </motion.div>
         <motion.button
@@ -282,6 +289,9 @@ export default function App() {
             </MagneticButton>
           </div>
         </Reveal>
+        <Reveal delay={0.2}>
+          <SocialLinks className="mt-10 justify-center" />
+        </Reveal>
       </section>
 
       {/* GOOD TO KNOW */}
@@ -306,6 +316,14 @@ export default function App() {
             </a>
             <a href="mailto:ars7ars3@gmail.com" className="transition-colors hover:text-white">
               Email
+            </a>
+            <a
+              href="https://www.linkedin.com/in/arseniy-cherednichenko-bb3b962b9/"
+              target="_blank"
+              rel="noreferrer"
+              className="transition-colors hover:text-white"
+            >
+              LinkedIn
             </a>
             <a href="https://askguided.com" className="transition-colors hover:text-white">
               Guided
