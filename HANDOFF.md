@@ -5,7 +5,16 @@
 > motion-led, professional portfolio over time, applying the craft from Guided.
 
 ## Stack
-React 18 + Vite + TypeScript (strict) + **Tailwind v4** (via `@tailwindcss/vite`, classes auto-detected, no content config) + **Framer Motion** for animation. Dark theme, lime accent `#DCF87C`. Single-page for now (`src/App.tsx`).
+React 18 + Vite + TypeScript (strict) + **Tailwind v4** (via `@tailwindcss/vite`, classes auto-detected, no content config) + **Framer Motion** for animation + **react-router-dom v6** for client-side routing. Dark theme, lime accent `#DCF87C`.
+
+## Architecture (routing)
+- `src/main.tsx` wraps the app in `<BrowserRouter>`.
+- `src/App.tsx` is the route table: a `Layout` route with children `index` (Home), `work/:slug` (WorkDetail), and `*` (NotFound).
+- `src/components/Layout.tsx` holds the persistent chrome (Aurora, Grain, ScrollProgress, CommandPalette, BackToTop, CursorDot, Nav, footer) + `<Outlet/>`. `SectionDots` only render on `/`.
+- `src/components/ScrollManager.tsx` handles scroll on route/hash change (top on nav, scroll-to-section for `/#id`).
+- Pages live in `src/pages/` (Home, WorkDetail, NotFound). Project content is centralized in `src/data/projects.ts` (used by the work grid, case-study pages, and command palette). Add real projects there.
+- Section nav uses `/#section` links so they work from any route. `vercel.json` rewrites all paths to `index.html` for SPA deep-links.
+- The old project `Modal` is no longer used on Home (work cards link to `/work/:slug` case studies); the component remains for reuse.
 
 ## Run / verify
 - `npm install`, `npm run dev`, `npm run build`, `npm run typecheck`.
