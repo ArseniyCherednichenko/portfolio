@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom'
 import { Reveal } from '../components/Reveal'
 import { GradientText } from '../components/GradientText'
 import { Divider } from '../components/Divider'
+import { Breadcrumb } from '../components/Breadcrumb'
 import { CASE_STUDIES, getProject } from '../data/projects'
 import { useDocumentTitle } from '../hooks/useDocumentTitle'
 import NotFound from './NotFound'
@@ -40,12 +41,7 @@ export default function WorkDetail() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: EASE }}
         >
-          <Link
-            to="/#work"
-            className="inline-flex items-center gap-2 text-sm text-white/50 transition-colors hover:text-white"
-          >
-            <span aria-hidden>&lt;-</span> Back to work
-          </Link>
+          <Breadcrumb trail={[{ label: 'Home', to: '/' }, { label: 'Work', to: '/#work' }, { label: project.title }]} />
         </motion.div>
         <motion.p
           initial={{ opacity: 0, y: 16 }}
