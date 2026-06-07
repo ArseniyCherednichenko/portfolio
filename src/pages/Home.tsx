@@ -14,6 +14,7 @@ import { Divider } from '../components/Divider'
 import { Accordion, type QA } from '../components/Accordion'
 import { Tooltip } from '../components/Tooltip'
 import { SocialLinks } from '../components/SocialLinks'
+import { CopyButton } from '../components/CopyButton'
 import { PROJECTS } from '../data/projects'
 
 const EASE = [0.16, 1, 0.3, 1] as const
@@ -120,6 +121,15 @@ export default function Home() {
             ))}
           </div>
         </Reveal>
+        <Reveal delay={0.15}>
+          <Link
+            to="/about"
+            className="mt-8 inline-flex items-center gap-1 text-sm font-semibold text-[#DCF87C] transition-opacity hover:opacity-80"
+          >
+            Read the full story
+            <span aria-hidden>-&gt;</span>
+          </Link>
+        </Reveal>
       </section>
 
       {/* WORK */}
@@ -225,6 +235,15 @@ export default function Home() {
             </TiltCard>
           </Reveal>
         </div>
+        <Reveal delay={0.2}>
+          <Link
+            to="/playground"
+            className="mt-10 inline-flex items-center gap-1 text-sm font-semibold text-[#DCF87C] transition-opacity hover:opacity-80"
+          >
+            Open the full playground
+            <span aria-hidden>-&gt;</span>
+          </Link>
+        </Reveal>
       </section>
 
       {/* APPROACH */}
@@ -267,6 +286,15 @@ export default function Home() {
             >
               ars7ars3@gmail.com
             </MagneticButton>
+          </div>
+        </Reveal>
+        <Reveal delay={0.15}>
+          <div className="mt-4 flex justify-center">
+            <CopyButton
+              value="ars7ars3@gmail.com"
+              label="Copy email"
+              className="text-sm text-white/45 hover:text-white"
+            />
           </div>
         </Reveal>
         <Reveal delay={0.2}>
