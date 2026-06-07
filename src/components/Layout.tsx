@@ -37,6 +37,15 @@ export function Layout() {
             &copy; {new Date().getFullYear()} Arseniy Cherednichenko. Built in Berlin with React and Framer Motion.
           </p>
           <div className="flex flex-wrap gap-5 text-sm text-white/55">
+            <Link to="/about" className="transition-colors hover:text-white">
+              About
+            </Link>
+            <Link to="/playground" className="transition-colors hover:text-white">
+              Playground
+            </Link>
+            <Link to="/uses" className="transition-colors hover:text-white">
+              Uses
+            </Link>
             <a href="https://github.com/ArseniyCherednichenko" className="transition-colors hover:text-white">
               GitHub
             </a>
