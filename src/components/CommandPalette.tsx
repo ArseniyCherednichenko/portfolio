@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, type KeyboardEvent as ReactKeyboardEvent } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 
 const ITEMS: ReadonlyArray<readonly [string, string]> = [
@@ -6,15 +6,18 @@ const ITEMS: ReadonlyArray<readonly [string, string]> = [
   ['About', '#about'],
   ['Toolkit', '#toolkit'],
   ['Playground', '#playground'],
+  ['Approach', '#approach'],
   ['Contact', '#contact'],
   ['GitHub', 'https://github.com/ArseniyCherednichenko'],
   ['Email', 'mailto:ars7ars3@gmail.com'],
 ]
 
-// Cmd/Ctrl+K quick-jump palette. Type to filter, Enter/click to go.
+// Cmd/Ctrl+K quick-jump palette. Also opens on a window "open-command-palette"
+// event (so a hint button can trigger it). Arrow keys + Enter to navigate.
 export function CommandPalette() {
   const [open, setOpen] = useState(false)
   const [q, setQ] = useState('')
+  const [sel, setSel] = useState(0)
 
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
@@ -24,17 +27,42 @@ export function CommandPalette() {
       }
       if (e.key === 'Escape') setOpen(false)
     }
+    function onOpen() {
+      setOpen(true)
+    }
     window.addEventListener('keydown', onKey)
-    return () => window.removeEventListener('keydown', onKey)
+    window.addEventListener('open-command-palette', onOpen)
+    return () => {
+      window.removeEventListener('keydown', onKey)
+      window.removeEventListener('open-command-palette', onOpen)
+    }
   }, [])
+
+  useEffect(() => {
+    setSel(0)
+  }, [q, open])
 
   const results = ITEMS.filter(([label]) => label.toLowerCase().includes(q.toLowerCase()))
 
-  function go(href: string) {
+  function go(href?: string) {
+    if (!href) return
     setOpen(false)
     setQ('')
     if (href.startsWith('#')) document.querySelector(href)?.scrollIntoView()
     else window.location.href = href
+  }
+
+  function onInputKey(e: ReactKeyboardEvent<HTMLInputElement>) {
+    if (e.key === 'ArrowDown') {
+      e.preventDefault()
+      setSel((s) => Math.min(s + 1, results.length - 1))
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault()
+      setSel((s) => Math.max(s - 1, 0))
+    } else if (e.key === 'Enter') {
+      e.preventDefault()
+      go(results[sel]?.[1])
+    }
   }
 
   return (
@@ -59,6 +87,7 @@ export function CommandPalette() {
               autoFocus
               value={q}
               onChange={(e) => setQ(e.target.value)}
+              onKeyDown={onInputKey}
               placeholder="Jump to..."
               className="w-full bg-transparent px-5 py-4 text-white outline-none placeholder:text-white/30"
             />
@@ -66,11 +95,12 @@ export function CommandPalette() {
               {results.length === 0 ? (
                 <li className="px-3 py-2 text-sm text-white/30">No matches</li>
               ) : (
-                results.map(([label, href]) => (
+                results.map(([label, href], i) => (
                   <li key={label}>
                     <button
                       onClick={() => go(href)}
-                      className="flex w-full items-center justify-between rounded-lg px-3 py-2.5 text-left text-white/80 transition-colors hover:bg-white/5"
+                      onMouseEnter={() => setSel(i)}
+                      className={`flex w-full items-center justify-between rounded-lg px-3 py-2.5 text-left transition-colors ${i === sel ? 'bg-white/10 text-white' : 'text-white/80'}`}
                     >
                       <span>{label}</span>
                       <span className="text-xs text-white/30">{href.startsWith('#') ? 'section' : 'link'}</span>
