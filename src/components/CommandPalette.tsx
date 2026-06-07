@@ -7,10 +7,12 @@ import { CASE_STUDIES } from '../data/projects'
 // rest (http, mailto) are external. Case studies are pulled in from the shared
 // data so the palette stays in sync with the work the site actually has.
 const ITEMS: ReadonlyArray<readonly [string, string]> = [
+  ['Home', '/'],
+  ['About', '/about'],
+  ['Playground', '/playground'],
+  ['Uses', '/uses'],
   ['Work', '/#work'],
-  ['About', '/#about'],
   ['Toolkit', '/#toolkit'],
-  ['Playground', '/#playground'],
   ['Approach', '/#approach'],
   ['Contact', '/#contact'],
   ...CASE_STUDIES.map((p): readonly [string, string] => [`${p.title} — case study`, `/work/${p.slug}`]),
