@@ -97,6 +97,22 @@ export default function Playground() {
               </div>
             </TiltCard>
           </Reveal>
+
+          <Reveal delay={0.24}>
+            <TiltCard className="flex h-52 flex-col justify-between p-7">
+              <Label>Animated dialog</Label>
+              <div>
+                <p className="mb-4 text-white/70">An accessible popup with a backdrop blur and spring entrance.</p>
+                <button
+                  type="button"
+                  onClick={() => window.dispatchEvent(new Event('open-contact'))}
+                  className="rounded-full bg-[#DCF87C] px-5 py-2.5 text-sm font-semibold text-black transition hover:brightness-105"
+                >
+                  Open the dialog
+                </button>
+              </div>
+            </TiltCard>
+          </Reveal>
         </div>
 
         {/* MARQUEE */}
