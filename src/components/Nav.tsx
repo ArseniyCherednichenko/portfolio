@@ -66,12 +66,13 @@ export function Nav() {
           })}
         </div>
         <div className="flex items-center gap-2">
-          <a
-            href="mailto:ars7ars3@gmail.com"
+          <button
+            type="button"
+            onClick={() => window.dispatchEvent(new Event('open-contact'))}
             className="hidden rounded-full bg-[#DCF87C] px-4 py-1.5 text-sm font-semibold text-black transition hover:brightness-105 sm:block"
           >
             Get in touch
-          </a>
+          </button>
           <button
             type="button"
             aria-label="Toggle menu"
@@ -110,13 +111,16 @@ export function Nav() {
                   </Link>
                 )
               })}
-              <a
-                href="mailto:ars7ars3@gmail.com"
-                onClick={() => setOpen(false)}
+              <button
+                type="button"
+                onClick={() => {
+                  setOpen(false)
+                  window.dispatchEvent(new Event('open-contact'))
+                }}
                 className="mt-1 rounded-2xl bg-[#DCF87C] px-4 py-3 text-center font-semibold text-black"
               >
                 Get in touch
-              </a>
+              </button>
             </div>
           </motion.div>
         )}
