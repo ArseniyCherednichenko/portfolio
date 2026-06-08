@@ -14,7 +14,8 @@ React 18 + Vite + TypeScript (strict) + **Tailwind v4** (via `@tailwindcss/vite`
 - `src/components/ScrollManager.tsx` handles scroll on route/hash change (top on nav, scroll-to-section for `/#id`).
 - Pages live in `src/pages/` (Home, WorkDetail, NotFound). Project content is centralized in `src/data/projects.ts` (used by the work grid, case-study pages, and command palette). Add real projects there.
 - Section nav uses `/#section` links so they work from any route. `vercel.json` rewrites all paths to `index.html` for SPA deep-links.
-- The old project `Modal` is no longer used on Home (work cards link to `/work/:slug` case studies); the component remains for reuse.
+- The old project `Modal` is the reusable dialog base. `ContactDialog` (mounted globally in `Layout`) builds on it: an honest "compose a message" form that assembles a `mailto:` link (no backend). It opens anywhere via a `window` `open-contact` event — dispatched by the nav "Get in touch" button, the home contact CTA, the Playground dialog demo, and the command palette's "Compose a message" entry.
+- Global popups follow an event convention: dispatch `new Event('open-<name>')` to open them. The command palette supports `action:<name>` targets, which it turns into `open-<name>` events (so any future dialog can be palette-triggered without bespoke wiring).
 
 ## Run / verify
 - `npm install`, `npm run dev`, `npm run build`, `npm run typecheck`.
