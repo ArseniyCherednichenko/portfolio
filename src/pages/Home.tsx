@@ -281,10 +281,20 @@ export default function Home() {
           </h2>
         </Reveal>
         <Reveal delay={0.1}>
-          <div className="mt-10 flex justify-center">
+          <div className="mt-10 flex flex-wrap justify-center gap-3">
             <MagneticButton
               href="mailto:ars7ars3@gmail.com"
+              onClick={(e) => {
+                e.preventDefault()
+                window.dispatchEvent(new Event('open-contact'))
+              }}
               className="rounded-full bg-[#DCF87C] px-8 py-4 text-lg font-semibold text-black"
+            >
+              Compose a message
+            </MagneticButton>
+            <MagneticButton
+              href="mailto:ars7ars3@gmail.com"
+              className="rounded-full border border-white/15 px-8 py-4 text-lg font-semibold text-white"
             >
               ars7ars3@gmail.com
             </MagneticButton>

@@ -1,8 +1,20 @@
 import { useRef, type ReactNode, type MouseEvent } from 'react'
 import { motion, useMotionValue, useSpring } from 'framer-motion'
 
-// Link/button that gently pulls toward the cursor (magnetic effect).
-export function MagneticButton({ children, href, className = '' }: { children: ReactNode; href: string; className?: string }) {
+// Link/button that gently pulls toward the cursor (magnetic effect). Renders an
+// anchor; an optional onClick lets it double as an action trigger while the
+// href stays as a graceful fallback (e.g. a mailto behind a dialog opener).
+export function MagneticButton({
+  children,
+  href,
+  className = '',
+  onClick,
+}: {
+  children: ReactNode
+  href: string
+  className?: string
+  onClick?: (e: MouseEvent<HTMLAnchorElement>) => void
+}) {
   const ref = useRef<HTMLAnchorElement>(null)
   const x = useMotionValue(0)
   const y = useMotionValue(0)
@@ -24,6 +36,7 @@ export function MagneticButton({ children, href, className = '' }: { children: R
     <motion.a
       ref={ref}
       href={href}
+      onClick={onClick}
       onMouseMove={onMove}
       onMouseLeave={reset}
       style={{ x: sx, y: sy }}
