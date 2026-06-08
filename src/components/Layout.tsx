@@ -3,6 +3,7 @@ import { Aurora } from './Aurora'
 import { Grain } from './Grain'
 import { ScrollProgress } from './ScrollProgress'
 import { CommandPalette } from './CommandPalette'
+import { ContactDialog } from './ContactDialog'
 import { BackToTop } from './BackToTop'
 import { CursorDot } from './CursorDot'
 import { Nav } from './Nav'
@@ -24,6 +25,7 @@ export function Layout() {
       <Grain />
       <ScrollProgress />
       <CommandPalette />
+      <ContactDialog />
       <BackToTop />
       <CursorDot />
       <Nav />
