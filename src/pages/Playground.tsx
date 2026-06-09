@@ -12,6 +12,8 @@ import { Marquee } from '../components/Marquee'
 import { VelocitySkew } from '../components/VelocitySkew'
 import { MagneticButton } from '../components/MagneticButton'
 import { Tooltip } from '../components/Tooltip'
+import { DotGrid } from '../components/DotGrid'
+import { Scramble } from '../components/Scramble'
 import { useDocumentTitle } from '../hooks/useDocumentTitle'
 
 const EASE = [0.16, 1, 0.3, 1] as const
@@ -44,6 +46,25 @@ export default function Playground() {
           few of them. Hover, move your cursor, and poke around.
         </motion.p>
       </header>
+
+      {/* FEATURED INTERACTION */}
+      <section className="mx-auto w-full max-w-5xl px-6 pb-12">
+        <Reveal>
+          <div className="group relative h-[360px] overflow-hidden rounded-3xl border border-white/10 bg-white/[0.02] sm:h-[440px]">
+            <DotGrid className="absolute inset-0" />
+            <div className="pointer-events-none absolute inset-0 flex flex-col justify-end p-8 sm:p-10">
+              <Label>Cursor field</Label>
+              <h2 className="mt-3 max-w-xl text-3xl font-bold leading-tight sm:text-4xl">
+                A grid of dots that <span className="text-[#DCF87C]">bends</span> around your cursor.
+              </h2>
+              <p className="mt-3 max-w-md text-white/55">
+                Pure canvas, no particle library. Each dot eases away and lights up by distance, then springs back.
+                Move your pointer across it.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+      </section>
 
       <section className="mx-auto w-full max-w-5xl px-6 pb-28">
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -99,6 +120,16 @@ export default function Playground() {
           </Reveal>
 
           <Reveal delay={0.24}>
+            <TiltCard className="flex h-52 flex-col justify-between p-7">
+              <Label>Decode text</Label>
+              <div>
+                <Scramble text="hover to decode" className="font-mono text-2xl text-white/85" />
+                <p className="mt-3 text-sm text-white/50">Characters settle from a stream of glyphs, left to right.</p>
+              </div>
+            </TiltCard>
+          </Reveal>
+
+          <Reveal delay={0.28}>
             <TiltCard className="flex h-52 flex-col justify-between p-7">
               <Label>Animated dialog</Label>
               <div>
