@@ -1,3 +1,4 @@
+import { lazy, Suspense } from 'react'
 import { motion } from 'framer-motion'
 import { Reveal } from '../components/Reveal'
 import { GradientText } from '../components/GradientText'
@@ -17,6 +18,9 @@ import { Scramble } from '../components/Scramble'
 import { useDocumentTitle } from '../hooks/useDocumentTitle'
 
 const EASE = [0.16, 1, 0.3, 1] as const
+
+// Lazy so three.js only downloads when this page is actually viewed.
+const Scene3D = lazy(() => import('../components/Scene3D'))
 
 function Label({ children }: { children: string }) {
   return <span className="text-xs font-semibold uppercase tracking-[0.2em] text-white/40">{children}</span>
@@ -67,6 +71,25 @@ export default function Playground() {
       </section>
 
       <section className="mx-auto w-full max-w-5xl px-6 pb-28">
+        <Reveal>
+          <div className="mb-6 overflow-hidden rounded-3xl border border-white/10 bg-white/[0.02]">
+            <div className="relative h-[340px]">
+              <Suspense
+                fallback={
+                  <div className="flex h-full items-center justify-center text-sm text-white/30">
+                    Loading 3D scene…
+                  </div>
+                }
+              >
+                <Scene3D />
+              </Suspense>
+              <div className="pointer-events-none absolute left-5 top-5">
+                <Label>Real-time 3D, react-three-fiber</Label>
+              </div>
+            </div>
+          </div>
+        </Reveal>
+
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           <Reveal>
             <TiltCard className="flex h-52 flex-col justify-between p-7">
