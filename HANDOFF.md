@@ -42,7 +42,7 @@ React 18 + Vite + TypeScript (strict) + **Tailwind v4** (via `@tailwindcss/vite`
 - 404 page, smooth anchor scrolling, a contact form (mailto or a no-backend service).
 
 ## Existing components (`src/components/`) — extend these, don't reinvent
-Aurora (ambient bg), GradientText (shine), RotatingWord, SpotlightCard (cursor glow), Marquee, MagneticButton, Nav, Reveal. Homepage composed in `src/App.tsx` (hero, about, work, toolkit, contact). Keyframes (`shine`, `marquee`) + reduced-motion guard live in `src/index.css`.
+Aurora (ambient bg), GradientText (shine), RotatingWord, SpotlightCard (cursor glow), Marquee, MagneticButton, Nav, Reveal, **DotGrid** (cursor-reactive canvas dot field, no particle lib — featured on /playground), **Scramble** (decode-on-view text, also drives Home's section eyebrows; `hoverable` replays on hover). The full component set is larger — `ls src/components` before adding. Homepage composed in `src/pages/Home.tsx` (hero, about, work, toolkit, playground, approach, contact, faq). Keyframes (`shine`, `marquee`) + reduced-motion guard live in `src/index.css`.
 
 ## Design bar
 Make it look VERY good: crazy-good motion design, professional, cool. Build original animated components in the spirit of **React Bits** and **21st.dev** (animated/gradient text, aurora/particle/mesh backgrounds, spotlight & tilt cards, magnetic buttons, marquees, scroll-linked & scroll-velocity motion, staggered reveals, section/page transitions, animated counters). Use Framer Motion well; always respect `prefers-reduced-motion`. Never templated, never "AI-generated".
