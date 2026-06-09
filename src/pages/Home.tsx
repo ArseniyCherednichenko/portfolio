@@ -15,13 +15,18 @@ import { Accordion, type QA } from '../components/Accordion'
 import { Tooltip } from '../components/Tooltip'
 import { SocialLinks } from '../components/SocialLinks'
 import { CopyButton } from '../components/CopyButton'
+import { Scramble } from '../components/Scramble'
 import { useDocumentTitle } from '../hooks/useDocumentTitle'
 import { PROJECTS } from '../data/projects'
 
 const EASE = [0.16, 1, 0.3, 1] as const
 
 function Eyebrow({ children }: { children: string }) {
-  return <p className="text-sm font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">{children}</p>
+  return (
+    <p className="text-sm font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">
+      <Scramble text={children} hoverable={false} />
+    </p>
+  )
 }
 
 export default function Home() {
