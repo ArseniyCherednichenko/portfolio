@@ -17,6 +17,7 @@ import { SocialLinks } from '../components/SocialLinks'
 import { CopyButton } from '../components/CopyButton'
 import { Scramble } from '../components/Scramble'
 import { useDocumentTitle } from '../hooks/useDocumentTitle'
+import { useMeta } from '../hooks/useMeta'
 import { PROJECTS } from '../data/projects'
 
 const EASE = [0.16, 1, 0.3, 1] as const
@@ -31,6 +32,9 @@ function Eyebrow({ children }: { children: string }) {
 
 export default function Home() {
   useDocumentTitle('Arseniy Cherednichenko — Builder and Founder')
+  useMeta(
+    'Arseniy Cherednichenko, builder and co-founder of Guided, a Socratic AI tutor. Calm, motion-led products in React, TypeScript, and SwiftUI.',
+  )
   return (
     <>
       {/* HERO */}

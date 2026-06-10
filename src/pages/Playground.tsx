@@ -16,6 +16,7 @@ import { Tooltip } from '../components/Tooltip'
 import { DotGrid } from '../components/DotGrid'
 import { Scramble } from '../components/Scramble'
 import { useDocumentTitle } from '../hooks/useDocumentTitle'
+import { useMeta } from '../hooks/useMeta'
 
 const EASE = [0.16, 1, 0.3, 1] as const
 
@@ -28,6 +29,9 @@ function Label({ children }: { children: string }) {
 
 export default function Playground() {
   useDocumentTitle('Playground — Arseniy Cherednichenko')
+  useMeta(
+    'A live playground of hand-built motion and 3D components, from cursor spotlights to a react-three-fiber orb.',
+  )
   return (
     <article id="main" tabIndex={-1} className="outline-none">
       <header className="mx-auto w-full max-w-5xl px-6 pb-12 pt-36 sm:pt-44">

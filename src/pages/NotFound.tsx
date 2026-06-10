@@ -2,11 +2,13 @@ import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { GradientText } from '../components/GradientText'
 import { useDocumentTitle } from '../hooks/useDocumentTitle'
+import { useMeta } from '../hooks/useMeta'
 
 const EASE = [0.16, 1, 0.3, 1] as const
 
 export default function NotFound() {
   useDocumentTitle('Not found — Arseniy Cherednichenko')
+  useMeta('This page does not exist. Head back to the homepage.')
   return (
     <section
       id="main"

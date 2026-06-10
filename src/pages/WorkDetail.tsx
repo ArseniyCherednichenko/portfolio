@@ -6,6 +6,7 @@ import { Divider } from '../components/Divider'
 import { Breadcrumb } from '../components/Breadcrumb'
 import { CASE_STUDIES, getProject } from '../data/projects'
 import { useDocumentTitle } from '../hooks/useDocumentTitle'
+import { useMeta } from '../hooks/useMeta'
 import NotFound from './NotFound'
 
 const EASE = [0.16, 1, 0.3, 1] as const
@@ -25,6 +26,7 @@ export default function WorkDetail() {
   useDocumentTitle(
     project && !project.soon ? `${project.title} — Arseniy Cherednichenko` : 'Not found — Arseniy Cherednichenko',
   )
+  useMeta(project && !project.soon ? project.detail : 'This project could not be found.')
   if (!project || project.soon) return <NotFound />
 
   // Wrap-around prev/next through the real case studies.

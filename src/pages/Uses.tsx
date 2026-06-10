@@ -3,6 +3,7 @@ import { Reveal } from '../components/Reveal'
 import { GradientText } from '../components/GradientText'
 import { Breadcrumb } from '../components/Breadcrumb'
 import { useDocumentTitle } from '../hooks/useDocumentTitle'
+import { useMeta } from '../hooks/useMeta'
 
 const EASE = [0.16, 1, 0.3, 1] as const
 
@@ -13,6 +14,7 @@ interface UseGroup {
 
 export default function Uses() {
   useDocumentTitle('Uses — Arseniy Cherednichenko')
+  useMeta('The tools Arseniy Cherednichenko builds with: TypeScript, SwiftUI, Tailwind, Framer Motion, and Supabase.')
   return (
     <article id="main" tabIndex={-1} className="outline-none">
       <header className="mx-auto w-full max-w-4xl px-6 pb-12 pt-36 sm:pt-44">
