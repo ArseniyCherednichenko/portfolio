@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { Link, useLocation } from 'react-router-dom'
 import { useActiveSection } from '../hooks/useActiveSection'
 
@@ -26,6 +26,7 @@ const SECTION_IDS = LINKS.filter((l) => l.section).map((l) => l.section as strin
 
 export function Nav() {
   const [open, setOpen] = useState(false)
+  const reduce = useReducedMotion()
   const { pathname } = useLocation()
   const onHome = pathname === '/'
   // Scroll-spy only tracks sections that actually exist (the homepage).
@@ -50,7 +51,7 @@ export function Nav() {
         <Link to="/" className="text-lg font-bold tracking-tight" onClick={() => setOpen(false)}>
           AC
         </Link>
-        <div className="hidden gap-7 sm:flex">
+        <div className="hidden items-center gap-1 sm:flex">
           {LINKS.map((l) => {
             const act = isActive(l)
             return (
@@ -58,9 +59,19 @@ export function Nav() {
                 key={l.to}
                 to={l.to}
                 aria-current={act ? 'true' : undefined}
-                className={`text-sm transition-colors ${act ? 'text-[#DCF87C]' : 'text-white/60 hover:text-white'}`}
+                className={`relative rounded-full px-3.5 py-1.5 text-sm transition-colors ${
+                  act ? 'text-[#DCF87C]' : 'text-white/60 hover:text-white'
+                }`}
               >
-                {l.label}
+                {act && (
+                  <motion.span
+                    layoutId={reduce ? undefined : 'nav-active'}
+                    aria-hidden
+                    className="absolute inset-0 rounded-full bg-white/[0.07] ring-1 ring-inset ring-white/10"
+                    transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                  />
+                )}
+                <span className="relative z-10">{l.label}</span>
               </Link>
             )
           })}
