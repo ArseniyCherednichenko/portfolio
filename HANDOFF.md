@@ -10,7 +10,8 @@ React 18 + Vite + TypeScript (strict) + **Tailwind v4** (via `@tailwindcss/vite`
 ## Architecture (routing)
 - `src/main.tsx` wraps the app in `<BrowserRouter>`.
 - `src/App.tsx` is the route table: a `Layout` route with children `index` (Home), `work/:slug` (WorkDetail), and `*` (NotFound).
-- `src/components/Layout.tsx` holds the persistent chrome (Aurora, Grain, ScrollProgress, CommandPalette, BackToTop, CursorDot, Nav, footer) + `<Outlet/>`. `SectionDots` only render on `/`.
+- `src/components/Layout.tsx` holds the persistent chrome (Aurora, Grain, ScrollProgress, RouteProgress, CommandPalette, BackToTop, CursorDot, Nav, footer) + `<PageTransition/>` (the animated Outlet). `SectionDots` only render on `/`.
+- **Navigation feel:** `PageTransition` re-keys the Outlet on `pathname` so each route fades/lifts in (entrance-only, so ScrollManager's scroll-to-top and `/#section` anchor jumps still work; same-route hash links don't replay it). `RouteProgress` sweeps a lime bar across the top on each navigation as a tactile "you moved" cue. `Nav` renders an active-state pill that slides between links via a shared `layoutId`. All three honor `prefers-reduced-motion`.
 - `src/components/ScrollManager.tsx` handles scroll on route/hash change (top on nav, scroll-to-section for `/#id`).
 - Pages live in `src/pages/` (Home, WorkDetail, NotFound). Project content is centralized in `src/data/projects.ts` (used by the work grid, case-study pages, and command palette). Add real projects there.
 - Section nav uses `/#section` links so they work from any route. `vercel.json` rewrites all paths to `index.html` for SPA deep-links.
