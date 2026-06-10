@@ -3,6 +3,7 @@ import { Aurora } from './Aurora'
 import { PageTransition } from './PageTransition'
 import { Grain } from './Grain'
 import { ScrollProgress } from './ScrollProgress'
+import { RouteProgress } from './RouteProgress'
 import { CommandPalette } from './CommandPalette'
 import { ContactDialog } from './ContactDialog'
 import { BackToTop } from './BackToTop'
@@ -25,6 +26,7 @@ export function Layout() {
       <Aurora />
       <Grain />
       <ScrollProgress />
+      <RouteProgress />
       <CommandPalette />
       <ContactDialog />
       <BackToTop />
