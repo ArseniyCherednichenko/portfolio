@@ -1,5 +1,6 @@
-import { Link, Outlet, useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { Aurora } from './Aurora'
+import { PageTransition } from './PageTransition'
 import { Grain } from './Grain'
 import { ScrollProgress } from './ScrollProgress'
 import { CommandPalette } from './CommandPalette'
@@ -31,7 +32,7 @@ export function Layout() {
       <Nav />
       {onHome && <SectionDots />}
 
-      <Outlet />
+      <PageTransition />
 
       <footer className="mx-auto w-full max-w-4xl border-t border-white/10 px-6 py-12">
         <div className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-center">
