@@ -9,11 +9,16 @@ import { CountUp } from '../components/CountUp'
 import { SocialLinks } from '../components/SocialLinks'
 import { MagneticButton } from '../components/MagneticButton'
 import { useDocumentTitle } from '../hooks/useDocumentTitle'
+import { useMeta } from '../hooks/useMeta'
+import { ParallaxLayer } from '../components/ParallaxLayer'
 
 const EASE = [0.16, 1, 0.3, 1] as const
 
 export default function About() {
   useDocumentTitle('About — Arseniy Cherednichenko')
+  useMeta(
+    'About Arseniy Cherednichenko, a builder and founder in Berlin. The story behind Guided and the craft behind the work.',
+  )
   return (
     <article id="main" tabIndex={-1} className="outline-none">
       <header className="mx-auto w-full max-w-4xl px-6 pb-10 pt-36 sm:pt-44">
@@ -56,12 +61,14 @@ export default function About() {
 
       {/* STORY */}
       <section className="mx-auto w-full max-w-4xl px-6 py-24">
-        <Reveal>
-          <h2 className="text-3xl font-medium leading-snug text-white/85 sm:text-4xl">
-            I care about products that feel effortless, the craft in the motion, the typography, and the small moments
-            people feel but cannot name.
-          </h2>
-        </Reveal>
+        <ParallaxLayer amount={30}>
+          <Reveal>
+            <h2 className="text-3xl font-medium leading-snug text-white/85 sm:text-4xl">
+              I care about products that feel effortless, the craft in the motion, the typography, and the small moments
+              people feel but cannot name.
+            </h2>
+          </Reveal>
+        </ParallaxLayer>
         <div className="mt-10 grid gap-6 text-lg leading-relaxed text-white/60 sm:grid-cols-2">
           <Reveal delay={0.05}>
             <p>
