@@ -2,8 +2,24 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { useEffect, type ReactNode } from 'react'
 
 // Accessible animated modal: backdrop blur, slide-up on mobile, escape to close,
-// locks body scroll while open.
-export function Modal({ open, onClose, children }: { open: boolean; onClose: () => void; children: ReactNode }) {
+// locks body scroll while open. `size` widens the panel for content-heavy
+// dialogs (e.g. the project quick-look) while keeping the compact default.
+const SIZES = {
+  md: 'max-w-lg',
+  lg: 'max-w-2xl',
+} as const
+
+export function Modal({
+  open,
+  onClose,
+  children,
+  size = 'md',
+}: {
+  open: boolean
+  onClose: () => void
+  children: ReactNode
+  size?: keyof typeof SIZES
+}) {
   useEffect(() => {
     if (!open) return
     function onKey(e: KeyboardEvent) {
@@ -31,7 +47,7 @@ export function Modal({ open, onClose, children }: { open: boolean; onClose: () 
           aria-modal="true"
         >
           <motion.div
-            className="relative w-full max-w-lg rounded-t-3xl border border-white/10 bg-[#101010] p-8 sm:rounded-3xl"
+            className={`relative max-h-[88vh] w-full ${SIZES[size]} overflow-y-auto rounded-t-3xl border border-white/10 bg-[#101010] p-8 sm:rounded-3xl`}
             initial={{ y: 40, opacity: 0, scale: 0.98 }}
             animate={{ y: 0, opacity: 1, scale: 1 }}
             exit={{ y: 20, opacity: 0, scale: 0.98 }}

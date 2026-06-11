@@ -6,6 +6,7 @@ import { ScrollProgress } from './ScrollProgress'
 import { RouteProgress } from './RouteProgress'
 import { CommandPalette } from './CommandPalette'
 import { ContactDialog } from './ContactDialog'
+import { ProjectQuickLook } from './ProjectQuickLook'
 import { BackToTop } from './BackToTop'
 import { CursorDot } from './CursorDot'
 import { Nav } from './Nav'
@@ -29,6 +30,7 @@ export function Layout() {
       <RouteProgress />
       <CommandPalette />
       <ContactDialog />
+      <ProjectQuickLook />
       <BackToTop />
       <CursorDot />
       <Nav />
