@@ -16,6 +16,7 @@ import { Tooltip } from '../components/Tooltip'
 import { SocialLinks } from '../components/SocialLinks'
 import { CopyButton } from '../components/CopyButton'
 import { Scramble } from '../components/Scramble'
+import { openProjectQuickLook } from '../components/ProjectQuickLook'
 import { useDocumentTitle } from '../hooks/useDocumentTitle'
 import { useMeta } from '../hooks/useMeta'
 import { PROJECTS } from '../data/projects'
@@ -163,7 +164,11 @@ export default function Home() {
             ) : (
               <Reveal key={p.slug} delay={idx * 0.05}>
                 <SpotlightCard className="h-full">
-                  <Link to={`/work/${p.slug}`} className="flex h-full w-full flex-col justify-between p-8 text-left">
+                  <button
+                    type="button"
+                    onClick={() => openProjectQuickLook(p.slug)}
+                    className="group/card flex h-full w-full flex-col justify-between p-8 text-left"
+                  >
                     <div className="flex items-baseline justify-between gap-4">
                       <h3 className="text-2xl font-bold">{p.title}</h3>
                       <span className="text-sm text-white/40">{p.year}</span>
@@ -177,10 +182,12 @@ export default function Home() {
                       ))}
                     </div>
                     <span className="mt-6 inline-flex items-center gap-1 text-sm font-semibold text-[#DCF87C]">
-                      Read case study
-                      <span aria-hidden>-&gt;</span>
+                      Quick look
+                      <span aria-hidden className="transition-transform duration-300 group-hover/card:translate-x-1">
+                        -&gt;
+                      </span>
                     </span>
-                  </Link>
+                  </button>
                 </SpotlightCard>
               </Reveal>
             ),
