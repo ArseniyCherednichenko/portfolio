@@ -2,11 +2,13 @@ import { useEffect, useState, type KeyboardEvent as ReactKeyboardEvent } from 'r
 import { AnimatePresence, motion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
 import { CASE_STUDIES } from '../data/projects'
+import { openProjectQuickLook } from './ProjectQuickLook'
 
 // Targets starting with "/" are in-app routes (incl. /#section hashes); those
-// starting with "action:" dispatch a window event (e.g. open a dialog); the
-// rest (http, mailto) are external. Case studies are pulled in from the shared
-// data so the palette stays in sync with the work the site actually has.
+// starting with "action:" dispatch a window event (e.g. open a dialog);
+// "project:<slug>" opens a project's quick-look preview; the rest (http,
+// mailto) are external. Case studies are pulled in from the shared data so the
+// palette stays in sync with the work the site actually has.
 const ITEMS: ReadonlyArray<readonly [string, string]> = [
   ['Home', '/'],
   ['About', '/about'],
@@ -17,6 +19,7 @@ const ITEMS: ReadonlyArray<readonly [string, string]> = [
   ['Approach', '/#approach'],
   ['Contact', '/#contact'],
   ['Compose a message', 'action:contact'],
+  ...CASE_STUDIES.map((p): readonly [string, string] => [`${p.title} — quick look`, `project:${p.slug}`]),
   ...CASE_STUDIES.map((p): readonly [string, string] => [`${p.title} — case study`, `/work/${p.slug}`]),
   ['GitHub', 'https://github.com/ArseniyCherednichenko'],
   ['LinkedIn', 'https://www.linkedin.com/in/arseniy-cherednichenko-bb3b962b9/'],
@@ -62,6 +65,8 @@ export function CommandPalette() {
     setQ('')
     if (href.startsWith('action:')) {
       window.dispatchEvent(new Event(`open-${href.slice('action:'.length)}`))
+    } else if (href.startsWith('project:')) {
+      openProjectQuickLook(href.slice('project:'.length))
     } else if (href.startsWith('/')) navigate(href)
     else window.location.href = href
   }
@@ -117,7 +122,7 @@ export function CommandPalette() {
                       className={`flex w-full items-center justify-between rounded-lg px-3 py-2.5 text-left transition-colors ${i === sel ? 'bg-white/10 text-white' : 'text-white/80'}`}
                     >
                       <span>{label}</span>
-                      <span className="text-xs text-white/30">{href.startsWith('action:') ? 'action' : href.includes('#') ? 'section' : href.startsWith('/') ? 'page' : 'link'}</span>
+                      <span className="text-xs text-white/30">{href.startsWith('action:') ? 'action' : href.startsWith('project:') ? 'preview' : href.includes('#') ? 'section' : href.startsWith('/') ? 'page' : 'link'}</span>
                     </button>
                   </li>
                 ))
