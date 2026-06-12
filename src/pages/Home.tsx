@@ -193,6 +193,15 @@ export default function Home() {
             ),
           )}
         </div>
+        <Reveal delay={0.1}>
+          <Link
+            to="/work"
+            className="mt-10 inline-flex items-center gap-1 text-sm font-semibold text-[#DCF87C] transition-opacity hover:opacity-80"
+          >
+            Browse the full archive
+            <span aria-hidden>-&gt;</span>
+          </Link>
+        </Reveal>
       </section>
 
       {/* TOOLKIT */}

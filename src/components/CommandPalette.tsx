@@ -14,6 +14,7 @@ const ITEMS: ReadonlyArray<readonly [string, string]> = [
   ['About', '/about'],
   ['Playground', '/playground'],
   ['Uses', '/uses'],
+  ['Work archive', '/work'],
   ['Work', '/#work'],
   ['Toolkit', '/#toolkit'],
   ['Approach', '/#approach'],

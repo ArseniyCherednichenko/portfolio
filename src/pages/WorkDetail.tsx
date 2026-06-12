@@ -43,7 +43,7 @@ export default function WorkDetail() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: EASE }}
         >
-          <Breadcrumb trail={[{ label: 'Home', to: '/' }, { label: 'Work', to: '/#work' }, { label: project.title }]} />
+          <Breadcrumb trail={[{ label: 'Home', to: '/' }, { label: 'Work', to: '/work' }, { label: project.title }]} />
         </motion.div>
         <motion.p
           initial={{ opacity: 0, y: 16 }}
