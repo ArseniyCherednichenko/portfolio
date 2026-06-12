@@ -8,6 +8,7 @@ import Home from './pages/Home'
 // code-split so a first-time visitor only downloads the homepage chunk, then
 // fetches About/Playground/Uses/case-studies on demand.
 const About = lazy(() => import('./pages/About'))
+const Work = lazy(() => import('./pages/Work'))
 const Playground = lazy(() => import('./pages/Playground'))
 const Uses = lazy(() => import('./pages/Uses'))
 const WorkDetail = lazy(() => import('./pages/WorkDetail'))
@@ -25,6 +26,14 @@ export default function App() {
           element={
             <Suspense fallback={<RouteFallback />}>
               <About />
+            </Suspense>
+          }
+        />
+        <Route
+          path="work"
+          element={
+            <Suspense fallback={<RouteFallback />}>
+              <Work />
             </Suspense>
           }
         />
