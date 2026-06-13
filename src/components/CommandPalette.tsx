@@ -12,6 +12,7 @@ import { openProjectQuickLook } from './ProjectQuickLook'
 const ITEMS: ReadonlyArray<readonly [string, string]> = [
   ['Home', '/'],
   ['About', '/about'],
+  ['Now', '/now'],
   ['Playground', '/playground'],
   ['Uses', '/uses'],
   ['Work archive', '/work'],

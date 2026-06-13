@@ -47,6 +47,9 @@ export function Layout() {
             <Link to="/about" className="transition-colors hover:text-white">
               About
             </Link>
+            <Link to="/now" className="transition-colors hover:text-white">
+              Now
+            </Link>
             <Link to="/playground" className="transition-colors hover:text-white">
               Playground
             </Link>

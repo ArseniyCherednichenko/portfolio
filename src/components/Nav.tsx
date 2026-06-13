@@ -17,6 +17,7 @@ interface NavLink {
 const LINKS: ReadonlyArray<NavLink> = [
   { label: 'Work', to: '/#work', section: 'work' },
   { label: 'About', to: '/about' },
+  { label: 'Now', to: '/now' },
   { label: 'Playground', to: '/playground' },
   { label: 'Uses', to: '/uses' },
   { label: 'Contact', to: '/#contact', section: 'contact' },
