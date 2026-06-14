@@ -15,6 +15,7 @@ import { MagneticButton } from '../components/MagneticButton'
 import { Tooltip } from '../components/Tooltip'
 import { DotGrid } from '../components/DotGrid'
 import { Scramble } from '../components/Scramble'
+import { TextPressure } from '../components/TextPressure'
 import { useDocumentTitle } from '../hooks/useDocumentTitle'
 import { useMeta } from '../hooks/useMeta'
 
@@ -70,6 +71,22 @@ export default function Playground() {
                 Move your pointer across it.
               </p>
             </div>
+          </div>
+        </Reveal>
+      </section>
+
+      {/* PRESSURE TYPE */}
+      <section className="mx-auto w-full max-w-5xl px-6 pb-12">
+        <Reveal>
+          <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.02] px-8 py-16 sm:px-12 sm:py-24">
+            <Label>Pressure type</Label>
+            <div className="mt-6 text-4xl font-bold leading-[1.05] tracking-tight sm:text-6xl">
+              <TextPressure text="Move your cursor across this line and watch the letters lean in." />
+            </div>
+            <p className="mt-8 max-w-md text-white/55">
+              Each letter swells, bolds, and lights toward the accent by how close your pointer is, then eases back.
+              One rAF loop, no per-letter React state.
+            </p>
           </div>
         </Reveal>
       </section>
