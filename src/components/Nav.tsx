@@ -1,10 +1,11 @@
 import { Link, NavLink } from 'react-router-dom'
 
-// Floating translucent nav. Section anchors point at the home page (/#id) so
-// they work from any route; Playground is a real page link.
-const SECTIONS: ReadonlyArray<readonly [string, string]> = [
-  ['Work', '/#work'],
-  ['About', '/#about'],
+// Floating translucent nav. The Work anchor points at the home page (/#work)
+// so it works from any route; About and Playground are real page links.
+const SECTIONS: ReadonlyArray<readonly [string, string]> = [['Work', '/#work']]
+const PAGES: ReadonlyArray<readonly [string, string]> = [
+  ['About', '/about'],
+  ['Playground', '/playground'],
 ]
 
 export function Nav() {
@@ -19,14 +20,17 @@ export function Nav() {
             {label}
           </Link>
         ))}
-        <NavLink
-          to="/playground"
-          className={({ isActive }) =>
-            `text-sm transition-colors hover:text-white ${isActive ? 'text-[#DCF87C]' : 'text-white/60'}`
-          }
-        >
-          Playground
-        </NavLink>
+        {PAGES.map(([label, to]) => (
+          <NavLink
+            key={to}
+            to={to}
+            className={({ isActive }) =>
+              `text-sm transition-colors hover:text-white ${isActive ? 'text-[#DCF87C]' : 'text-white/60'}`
+            }
+          >
+            {label}
+          </NavLink>
+        ))}
       </div>
       <a
         href="mailto:ars7ars3@gmail.com"

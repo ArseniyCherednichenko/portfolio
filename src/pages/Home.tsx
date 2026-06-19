@@ -87,6 +87,15 @@ export default function Home() {
             moments, the things people feel but cannot name.
           </p>
         </Reveal>
+        <Reveal delay={0.1}>
+          <Link
+            to="/about"
+            className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-[#DCF87C] transition-opacity hover:opacity-80"
+          >
+            More about me
+            <span aria-hidden>-&gt;</span>
+          </Link>
+        </Reveal>
       </section>
 
       {/* WORK */}
