@@ -1,23 +1,32 @@
-// Floating translucent nav with smooth-scroll anchors.
-const LINKS: ReadonlyArray<readonly [string, string]> = [
-  ['Work', '#work'],
-  ['About', '#about'],
-  ['Toolkit', '#toolkit'],
-  ['Contact', '#contact'],
+import { Link, NavLink } from 'react-router-dom'
+
+// Floating translucent nav. Section anchors point at the home page (/#id) so
+// they work from any route; Playground is a real page link.
+const SECTIONS: ReadonlyArray<readonly [string, string]> = [
+  ['Work', '/#work'],
+  ['About', '/#about'],
 ]
 
 export function Nav() {
   return (
     <nav className="fixed inset-x-0 top-4 z-50 mx-auto flex w-[min(92%,760px)] items-center justify-between rounded-full border border-white/10 bg-black/40 px-5 py-3 backdrop-blur-xl">
-      <a href="#top" className="text-lg font-bold tracking-tight">
+      <Link to="/" className="text-lg font-bold tracking-tight">
         AC
-      </a>
+      </Link>
       <div className="hidden gap-7 sm:flex">
-        {LINKS.map(([label, href]) => (
-          <a key={href} href={href} className="text-sm text-white/60 transition-colors hover:text-white">
+        {SECTIONS.map(([label, href]) => (
+          <Link key={href} to={href} className="text-sm text-white/60 transition-colors hover:text-white">
             {label}
-          </a>
+          </Link>
         ))}
+        <NavLink
+          to="/playground"
+          className={({ isActive }) =>
+            `text-sm transition-colors hover:text-white ${isActive ? 'text-[#DCF87C]' : 'text-white/60'}`
+          }
+        >
+          Playground
+        </NavLink>
       </div>
       <a
         href="mailto:ars7ars3@gmail.com"
