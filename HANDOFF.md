@@ -11,11 +11,11 @@ React 18 + Vite + TypeScript (strict) + **Tailwind v4** (via `@tailwindcss/vite`
 - `src/main.tsx` wraps `<App/>` in `<BrowserRouter>`.
 - `src/App.tsx` = route table only (`<Routes>`).
 - `src/components/Layout.tsx` = persistent shell (Aurora + Nav + footer) with `<AnimatePresence>` page transitions (keyed on pathname) and a `ScrollManager` that scrolls to `#hash` targets or resets to top on navigation.
-- Pages live in `src/pages/`: `Home.tsx` (hero/about/work/toolkit/contact + project modal), `Playground.tsx` (live motion experiments gallery), `NotFound.tsx` (404).
-- Routes: `/` Home, `/playground` Playground, `*` NotFound. Section anchors use `/#work`, `/#about` so they work from any page.
-- Shared data in `src/data/projects.ts` (`PROJECTS`, `SKILLS`, `Project` type).
+- Pages live in `src/pages/`: `Home.tsx` (hero/about teaser/work/toolkit/contact + project modal), `About.tsx` (intro, Now block, How-I-work principles, Path timeline, CTA), `Playground.tsx` (live motion experiments gallery), `NotFound.tsx` (404).
+- Routes: `/` Home, `/about` About, `/playground` Playground, `*` NotFound. The Work anchor uses `/#work` so it works from any page; About and Playground are real page links in Nav.
+- Shared data in `src/data/projects.ts` (`PROJECTS`, `SKILLS`, `Project` type). About-page content (Now/Principles/Path) lives inline in `About.tsx` — keep it honest and current.
 - `vercel.json` rewrites all paths to `/index.html` so deep links resolve on static hosts.
-- NEXT: project detail pages (`/work/:slug`), an About page, a Contact page/dialog, command palette.
+- NEXT: project detail pages (`/work/:slug`), a Contact page/dialog, command palette (Cmd+K).
 
 ## Run / verify
 - `npm install`, `npm run dev`, `npm run build`, `npm run typecheck`.
@@ -42,7 +42,7 @@ React 18 + Vite + TypeScript (strict) + **Tailwind v4** (via `@tailwindcss/vite`
 - 404 page, smooth anchor scrolling, a contact form (mailto or a no-backend service).
 
 ## Existing components (`src/components/`) — extend these, don't reinvent
-Aurora (ambient bg), GradientText (shine), RotatingWord, SpotlightCard (cursor glow), Marquee, MagneticButton, Nav (route-aware), Reveal, HeroOrbit, ScrollCue, Modal, Layout (shell + page transitions), TiltCard (3D cursor tilt + glare), AnimatedCounter (count-up on view). Homepage composed in `src/pages/Home.tsx`. Keyframes (`shine`, `marquee`) + reduced-motion guard live in `src/index.css`.
+Aurora (ambient bg), GradientText (shine), RotatingWord, SpotlightCard (cursor glow), Marquee, MagneticButton, Nav (route-aware), Reveal, HeroOrbit, ScrollCue, Modal, Layout (shell + page transitions), TiltCard (3D cursor tilt + glare), AnimatedCounter (count-up on view), Eyebrow (shared lime section label). Homepage composed in `src/pages/Home.tsx`. Keyframes (`shine`, `marquee`) + reduced-motion guard live in `src/index.css`.
 
 ## Design bar
 Make it look VERY good: crazy-good motion design, professional, cool. Build original animated components in the spirit of **React Bits** and **21st.dev** (animated/gradient text, aurora/particle/mesh backgrounds, spotlight & tilt cards, magnetic buttons, marquees, scroll-linked & scroll-velocity motion, staggered reveals, section/page transitions, animated counters). Use Framer Motion well; always respect `prefers-reduced-motion`. Never templated, never "AI-generated".
