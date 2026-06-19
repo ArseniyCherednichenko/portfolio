@@ -10,13 +10,10 @@ import { Marquee } from '../components/Marquee'
 import { MagneticButton } from '../components/MagneticButton'
 import { HeroOrbit } from '../components/HeroOrbit'
 import { ScrollCue } from '../components/ScrollCue'
+import { Eyebrow } from '../components/Eyebrow'
 import { PROJECTS, SKILLS, type Project } from '../data/projects'
 
 const EASE = [0.16, 1, 0.3, 1] as const
-
-function Eyebrow({ children }: { children: string }) {
-  return <p className="text-sm font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">{children}</p>
-}
 
 export default function Home() {
   const [active, setActive] = useState<Project | null>(null)
