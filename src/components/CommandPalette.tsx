@@ -87,24 +87,14 @@ function Palette({ open, onClose }: { open: boolean; onClose: () => void }) {
       { id: 'playground', label: 'Playground', group: 'Pages', hint: 'experiments', keywords: 'motion experiments demos', run: () => go('/playground') },
     ]
 
-    const projects: Command[] = PROJECTS.filter((p) => !p.soon).map((p) => {
-      const target = p.href ?? p.repo
-      return {
-        id: `project-${p.title}`,
-        label: p.title,
-        group: 'Projects',
-        hint: p.year || undefined,
-        keywords: `${p.blurb} ${p.stack.join(' ')}`,
-        run: () => {
-          if (p.href || p.repo) {
-            window.open(target, '_blank', 'noopener,noreferrer')
-            onClose()
-          } else {
-            go('/#work')
-          }
-        },
-      }
-    })
+    const projects: Command[] = PROJECTS.filter((p) => !p.soon).map((p) => ({
+      id: `project-${p.slug}`,
+      label: p.title,
+      group: 'Projects',
+      hint: p.year || undefined,
+      keywords: `${p.blurb} ${p.stack.join(' ')} case study`,
+      run: () => go(`/work/${p.slug}`),
+    }))
 
     const actions: Command[] = [
       {
