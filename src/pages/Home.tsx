@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { Modal } from '../components/Modal'
 import { Reveal } from '../components/Reveal'
 import { GradientText } from '../components/GradientText'
@@ -17,6 +17,7 @@ const EASE = [0.16, 1, 0.3, 1] as const
 
 export default function Home() {
   const [active, setActive] = useState<Project | null>(null)
+  const navigate = useNavigate()
   return (
     <>
       {/* HERO */}
@@ -195,13 +196,23 @@ export default function Home() {
                 </span>
               ))}
             </div>
-            <div className="mt-8 flex flex-wrap gap-3">
+            <div className="mt-8 flex flex-wrap items-center gap-3">
+              <button
+                onClick={() => {
+                  const slug = active.slug
+                  setActive(null)
+                  navigate(`/work/${slug}`)
+                }}
+                className="rounded-full bg-[#DCF87C] px-5 py-2.5 text-sm font-semibold text-black"
+              >
+                Read the full case study
+              </button>
               {active.href && (
                 <a
                   href={active.href}
                   target="_blank"
                   rel="noreferrer"
-                  className="rounded-full bg-[#DCF87C] px-5 py-2.5 text-sm font-semibold text-black"
+                  className="rounded-full border border-white/15 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-white/[0.06]"
                 >
                   Visit
                 </a>
@@ -211,7 +222,7 @@ export default function Home() {
                   href={active.repo}
                   target="_blank"
                   rel="noreferrer"
-                  className="rounded-full border border-white/15 px-5 py-2.5 text-sm font-semibold text-white"
+                  className="rounded-full border border-white/15 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-white/[0.06]"
                 >
                   Source
                 </a>
