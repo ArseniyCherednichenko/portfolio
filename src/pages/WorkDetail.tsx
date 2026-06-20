@@ -23,7 +23,7 @@ export default function WorkDetail() {
           That project does not exist, or it has moved. Head back to the work.
         </p>
         <Link
-          to="/#work"
+          to="/work"
           className="mt-8 inline-flex w-fit items-center gap-2 text-sm font-semibold text-[#DCF87C] transition-opacity hover:opacity-80"
         >
           <span aria-hidden>&lt;-</span> All work
@@ -45,7 +45,7 @@ export default function WorkDetail() {
         transition={{ duration: 0.5, ease: EASE }}
       >
         <Link
-          to="/#work"
+          to="/work"
           className="inline-flex items-center gap-2 text-sm font-semibold text-white/45 transition-colors hover:text-white"
         >
           <span aria-hidden>&lt;-</span> All work

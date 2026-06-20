@@ -102,7 +102,15 @@ export default function Home() {
       {/* WORK */}
       <section id="work" className="mx-auto w-full max-w-4xl px-6 py-24">
         <Reveal>
-          <Eyebrow>Selected work</Eyebrow>
+          <div className="flex items-baseline justify-between gap-4">
+            <Eyebrow>Selected work</Eyebrow>
+            <Link
+              to="/work"
+              className="text-sm font-semibold text-[#DCF87C] transition-opacity hover:opacity-80"
+            >
+              All work <span aria-hidden>-&gt;</span>
+            </Link>
+          </div>
         </Reveal>
         <div className="mt-10 grid gap-6 sm:grid-cols-2">
           {PROJECTS.map((p, idx) =>
