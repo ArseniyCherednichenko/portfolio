@@ -2,10 +2,9 @@ import { useEffect, useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import { useCommandPalette } from './CommandPalette'
 
-// Floating translucent nav. The Work anchor points at the home page (/#work)
-// so it works from any route; About and Playground are real page links.
-const SECTIONS: ReadonlyArray<readonly [string, string]> = [['Work', '/#work']]
+// Floating translucent nav. Work, About, and Playground are real page links.
 const PAGES: ReadonlyArray<readonly [string, string]> = [
+  ['Work', '/work'],
   ['About', '/about'],
   ['Playground', '/playground'],
 ]
@@ -24,11 +23,6 @@ export function Nav() {
         AC
       </Link>
       <div className="hidden gap-7 sm:flex">
-        {SECTIONS.map(([label, href]) => (
-          <Link key={href} to={href} className="text-sm text-white/60 transition-colors hover:text-white">
-            {label}
-          </Link>
-        ))}
         {PAGES.map(([label, to]) => (
           <NavLink
             key={to}
