@@ -1,10 +1,13 @@
 import { motion, useReducedMotion } from 'framer-motion'
+import { useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { Reveal } from '../components/Reveal'
 import { Eyebrow } from '../components/Eyebrow'
 import { GradientText } from '../components/GradientText'
 import { SpotlightCard } from '../components/SpotlightCard'
 import { MagneticButton } from '../components/MagneticButton'
+import { ProjectPoster } from '../components/ProjectPoster'
+import { Lightbox } from '../components/Lightbox'
 import { CASE_STUDIES, getProject } from '../data/projects'
 
 const EASE = [0.16, 1, 0.3, 1] as const
@@ -12,6 +15,7 @@ const EASE = [0.16, 1, 0.3, 1] as const
 export default function WorkDetail() {
   const { slug } = useParams()
   const reduce = useReducedMotion()
+  const [zoom, setZoom] = useState(false)
   const project = getProject(slug)
 
   if (!project) {
@@ -107,6 +111,27 @@ export default function WorkDetail() {
           )}
         </motion.div>
       </header>
+
+      {/* Poster: generative brand art, click to expand. */}
+      <Reveal className="mt-12">
+        <motion.button
+          type="button"
+          onClick={() => setZoom(true)}
+          whileHover={reduce ? undefined : { y: -3 }}
+          transition={{ duration: 0.3, ease: EASE }}
+          className="group relative block w-full overflow-hidden rounded-3xl focus:outline-none focus-visible:ring-2 focus-visible:ring-[#DCF87C]/60"
+          aria-label={`Expand the ${project.title} visual`}
+        >
+          <ProjectPoster project={project} className="aspect-[16/10] w-full sm:aspect-[16/8]" />
+          <span className="pointer-events-none absolute right-4 top-4 rounded-full border border-white/15 bg-black/40 px-3 py-1 text-xs font-semibold text-white/70 opacity-0 backdrop-blur-sm transition-opacity duration-300 group-hover:opacity-100">
+            Expand
+          </span>
+        </motion.button>
+      </Reveal>
+
+      <Lightbox open={zoom} onClose={() => setZoom(false)} caption={`${project.title} — generative brand art`}>
+        <ProjectPoster project={project} className="aspect-[16/10] w-full" />
+      </Lightbox>
 
       {/* Stack */}
       <Reveal className="mt-12">
