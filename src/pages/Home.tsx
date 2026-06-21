@@ -11,6 +11,7 @@ import { MagneticButton } from '../components/MagneticButton'
 import { HeroOrbit } from '../components/HeroOrbit'
 import { ScrollCue } from '../components/ScrollCue'
 import { Eyebrow } from '../components/Eyebrow'
+import { useContact } from '../components/ContactDialog'
 import { PROJECTS, SKILLS, type Project } from '../data/projects'
 
 const EASE = [0.16, 1, 0.3, 1] as const
@@ -18,6 +19,7 @@ const EASE = [0.16, 1, 0.3, 1] as const
 export default function Home() {
   const [active, setActive] = useState<Project | null>(null)
   const navigate = useNavigate()
+  const { open: openContact } = useContact()
   return (
     <>
       {/* HERO */}
@@ -186,6 +188,15 @@ export default function Home() {
               ars7ars3@gmail.com
             </MagneticButton>
           </div>
+        </Reveal>
+        <Reveal delay={0.18}>
+          <button
+            type="button"
+            onClick={openContact}
+            className="mt-6 text-sm font-medium text-white/45 underline-offset-4 transition-colors hover:text-[#DCF87C] hover:underline"
+          >
+            Other ways to reach me
+          </button>
         </Reveal>
       </section>
 
