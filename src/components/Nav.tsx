@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import { useCommandPalette } from './CommandPalette'
+import { useContact } from './ContactDialog'
 
 // Floating translucent nav. Work, About, and Playground are real page links.
 const PAGES: ReadonlyArray<readonly [string, string]> = [
@@ -11,6 +12,7 @@ const PAGES: ReadonlyArray<readonly [string, string]> = [
 
 export function Nav() {
   const { open } = useCommandPalette()
+  const { open: openContact } = useContact()
   // Show the platform-correct modifier glyph in the search hint.
   const [mod, setMod] = useState('Ctrl')
   useEffect(() => {
@@ -58,12 +60,13 @@ export function Nav() {
           </svg>
           <kbd className="hidden font-sans text-xs tracking-wide sm:inline">{mod} K</kbd>
         </button>
-        <a
-          href="mailto:ars7ars3@gmail.com"
+        <button
+          type="button"
+          onClick={openContact}
           className="rounded-full bg-[#DCF87C] px-4 py-1.5 text-sm font-semibold text-black transition hover:brightness-105"
         >
           Get in touch
-        </a>
+        </button>
       </div>
     </nav>
   )
