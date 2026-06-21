@@ -5,6 +5,7 @@ import About from './pages/About'
 import Work from './pages/Work'
 import Playground from './pages/Playground'
 import WorkDetail from './pages/WorkDetail'
+import Contact from './pages/Contact'
 import NotFound from './pages/NotFound'
 
 export default function App() {
@@ -16,6 +17,7 @@ export default function App() {
         <Route path="work" element={<Work />} />
         <Route path="playground" element={<Playground />} />
         <Route path="work/:slug" element={<WorkDetail />} />
+        <Route path="contact" element={<Contact />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
