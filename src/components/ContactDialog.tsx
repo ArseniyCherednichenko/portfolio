@@ -6,6 +6,7 @@ import {
   useState,
   type ReactNode,
 } from 'react'
+import { Link } from 'react-router-dom'
 import { Modal } from './Modal'
 import { Eyebrow } from './Eyebrow'
 import { ChannelList } from './ChannelList'
@@ -52,7 +53,19 @@ function ContactBody({ open, onClose }: { open: boolean; onClose: () => void }) 
         <ChannelList />
       </div>
 
-      <p className="mt-7 text-xs uppercase tracking-[0.2em] text-white/30">Based in Berlin · CET</p>
+      <div className="mt-7 flex items-center justify-between gap-4">
+        <p className="text-xs uppercase tracking-[0.2em] text-white/30">Based in Berlin · CET</p>
+        <Link
+          to="/contact"
+          onClick={onClose}
+          className="group inline-flex items-center gap-1.5 text-sm text-white/50 transition-colors hover:text-[#DCF87C]"
+        >
+          Contact page
+          <span aria-hidden className="transition-transform group-hover:translate-x-0.5">
+            -&gt;
+          </span>
+        </Link>
+      </div>
     </Modal>
   )
 }
