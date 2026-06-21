@@ -5,6 +5,7 @@ import { Eyebrow } from '../components/Eyebrow'
 import { GradientText } from '../components/GradientText'
 import { MagneticButton } from '../components/MagneticButton'
 import { AnimatedCounter } from '../components/AnimatedCounter'
+import { ProjectPoster } from '../components/ProjectPoster'
 import { PROJECTS, CASE_STUDIES, type Project } from '../data/projects'
 
 const EASE = [0.16, 1, 0.3, 1] as const
@@ -83,6 +84,13 @@ function WorkRow({ project, index }: { project: Project; index: number }) {
               -&gt;
             </span>
           </span>
+        </div>
+
+        {/* Generative poster preview, lifts a touch on hover. */}
+        <div className="hidden w-40 shrink-0 self-center md:block lg:w-52">
+          <div className="overflow-hidden rounded-2xl transition-transform duration-500 ease-out group-hover:-translate-y-1">
+            <ProjectPoster project={project} className="aspect-[4/3] w-full" rounded="rounded-2xl" />
+          </div>
         </div>
       </div>
     </Link>
