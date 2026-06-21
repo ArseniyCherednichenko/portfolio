@@ -11,6 +11,7 @@ import {
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
 import { PROJECTS } from '../data/projects'
+import { useContact } from './ContactDialog'
 
 // A site-wide command palette (Cmd/Ctrl+K). Fuzzy-search across pages,
 // projects, and quick actions, then jump with the keyboard. Accessible
@@ -64,6 +65,7 @@ export function CommandPaletteProvider({ children }: { children: ReactNode }) {
 
 function Palette({ open, onClose }: { open: boolean; onClose: () => void }) {
   const navigate = useNavigate()
+  const { open: openContact } = useContact()
   const reduce = useReducedMotion()
   const [query, setQuery] = useState('')
   const [active, setActive] = useState(0)
@@ -98,14 +100,14 @@ function Palette({ open, onClose }: { open: boolean; onClose: () => void }) {
 
     const actions: Command[] = [
       {
-        id: 'email',
-        label: 'Email Arseniy',
+        id: 'contact',
+        label: 'Get in touch',
         group: 'Actions',
-        hint: 'ars7ars3@gmail.com',
-        keywords: 'contact mail get in touch hire',
+        hint: 'ways to reach me',
+        keywords: 'contact email mail hire message reach work together',
         run: () => {
-          window.location.href = 'mailto:ars7ars3@gmail.com'
           onClose()
+          openContact()
         },
       },
       {
@@ -133,7 +135,7 @@ function Palette({ open, onClose }: { open: boolean; onClose: () => void }) {
     ]
 
     return [...pages, ...projects, ...actions]
-  }, [go, onClose])
+  }, [go, onClose, openContact])
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase()
