@@ -159,7 +159,15 @@ export default function Home() {
       <section id="toolkit" className="py-24">
         <div className="mx-auto mb-9 w-full max-w-4xl px-6">
           <Reveal>
-            <Eyebrow>Toolkit</Eyebrow>
+            <div className="flex items-baseline justify-between gap-4">
+              <Eyebrow>Toolkit</Eyebrow>
+              <Link
+                to="/toolkit"
+                className="text-sm font-semibold text-[#DCF87C] transition-opacity hover:opacity-80"
+              >
+                Full toolkit <span aria-hidden>-&gt;</span>
+              </Link>
+            </div>
           </Reveal>
         </div>
         <Marquee>
