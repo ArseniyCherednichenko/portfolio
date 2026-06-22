@@ -6,6 +6,7 @@ import { GradientText } from '../components/GradientText'
 import { TiltCard } from '../components/TiltCard'
 import { SpotlightCard } from '../components/SpotlightCard'
 import { MagneticButton } from '../components/MagneticButton'
+import { Seo } from '../components/Seo'
 
 const EASE = [0.16, 1, 0.3, 1] as const
 
@@ -60,6 +61,10 @@ export default function About() {
   const reduce = useReducedMotion()
   return (
     <>
+      <Seo
+        title="About"
+        description="Arseniy Cherednichenko — builder and co-founder of Guided in Berlin. What I am working on now, how I work, and the path that got me here."
+      />
       {/* INTRO */}
       <header className="mx-auto w-full max-w-4xl px-6 pb-16 pt-36 sm:pt-44">
         <motion.div

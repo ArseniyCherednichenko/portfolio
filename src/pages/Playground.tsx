@@ -8,6 +8,7 @@ import { MagneticButton } from '../components/MagneticButton'
 import { AnimatedCounter } from '../components/AnimatedCounter'
 import { DotGrid } from '../components/DotGrid'
 import { DecryptedText } from '../components/DecryptedText'
+import { Seo } from '../components/Seo'
 
 function Experiment({
   name,
@@ -37,6 +38,10 @@ export default function Playground() {
 
   return (
     <section className="mx-auto w-full max-w-5xl px-6 pt-36 pb-12">
+      <Seo
+        title="Playground"
+        description="A gallery of live motion experiments by Arseniy Cherednichenko — tilt cards, spotlight glows, decrypt text, an interactive dot field, and more."
+      />
       {/* HEADER */}
       <Reveal>
         <p className="text-sm font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Playground</p>

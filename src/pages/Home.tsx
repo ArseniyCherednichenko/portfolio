@@ -13,6 +13,7 @@ import { HeroOrbit } from '../components/HeroOrbit'
 import { ScrollCue } from '../components/ScrollCue'
 import { Eyebrow } from '../components/Eyebrow'
 import { useContact } from '../components/ContactDialog'
+import { Seo } from '../components/Seo'
 import { PROJECTS, SKILLS, type Project } from '../data/projects'
 
 const EASE = [0.16, 1, 0.3, 1] as const
@@ -23,6 +24,7 @@ export default function Home() {
   const { open: openContact } = useContact()
   return (
     <>
+      <Seo />
       {/* HERO */}
       <header className="relative mx-auto flex min-h-screen w-full max-w-4xl flex-col justify-center px-6">
         <HeroOrbit />

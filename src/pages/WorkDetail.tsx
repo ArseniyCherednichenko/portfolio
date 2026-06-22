@@ -8,6 +8,7 @@ import { SpotlightCard } from '../components/SpotlightCard'
 import { MagneticButton } from '../components/MagneticButton'
 import { ProjectPoster } from '../components/ProjectPoster'
 import { Lightbox } from '../components/Lightbox'
+import { Seo } from '../components/Seo'
 import { CASE_STUDIES, getProject } from '../data/projects'
 
 const EASE = [0.16, 1, 0.3, 1] as const
@@ -21,6 +22,7 @@ export default function WorkDetail() {
   if (!project) {
     return (
       <div className="mx-auto flex min-h-[70vh] w-full max-w-4xl flex-col justify-center px-6">
+        <Seo title="Project not found" description="That project does not exist, or it has moved. Head back to the work." />
         <Eyebrow>Not found</Eyebrow>
         <h1 className="mt-5 text-5xl font-bold tracking-tight">No such project.</h1>
         <p className="mt-5 max-w-md text-lg leading-relaxed text-white/55">
@@ -43,6 +45,7 @@ export default function WorkDetail() {
 
   return (
     <article className="mx-auto w-full max-w-3xl px-6 pb-28 pt-32">
+      <Seo title={project.title} description={project.blurb} />
       <motion.div
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}

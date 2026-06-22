@@ -6,6 +6,7 @@ import { GradientText } from '../components/GradientText'
 import { SpotlightCard } from '../components/SpotlightCard'
 import { MagneticButton } from '../components/MagneticButton'
 import { AnimatedCounter } from '../components/AnimatedCounter'
+import { Seo } from '../components/Seo'
 import { TOOLKIT, TOOL_COUNT, type Tool } from '../data/toolkit'
 
 const EASE = [0.16, 1, 0.3, 1] as const
@@ -36,6 +37,10 @@ export default function Toolkit() {
 
   return (
     <>
+      <Seo
+        title="Toolkit"
+        description="The languages, frameworks, and tools Arseniy Cherednichenko builds with — and an honest note on where each one fits."
+      />
       {/* INTRO */}
       <header className="mx-auto w-full max-w-4xl px-6 pb-12 pt-36 sm:pt-44">
         <motion.div

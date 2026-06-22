@@ -6,6 +6,7 @@ import { Eyebrow } from '../components/Eyebrow'
 import { GradientText } from '../components/GradientText'
 import { ChannelList } from '../components/ChannelList'
 import { SpotlightCard } from '../components/SpotlightCard'
+import { Seo } from '../components/Seo'
 
 const EASE = [0.16, 1, 0.3, 1] as const
 
@@ -54,6 +55,10 @@ export default function Contact() {
 
   return (
     <>
+      <Seo
+        title="Contact"
+        description="Get in touch with Arseniy Cherednichenko — email, GitHub, and the kinds of conversations he is open to. Based in Berlin."
+      />
       {/* HEADER */}
       <header className="mx-auto w-full max-w-4xl px-6 pb-12 pt-36 sm:pt-44">
         <motion.div

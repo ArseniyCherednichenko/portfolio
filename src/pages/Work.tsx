@@ -6,6 +6,7 @@ import { GradientText } from '../components/GradientText'
 import { MagneticButton } from '../components/MagneticButton'
 import { AnimatedCounter } from '../components/AnimatedCounter'
 import { ProjectPoster } from '../components/ProjectPoster'
+import { Seo } from '../components/Seo'
 import { PROJECTS, CASE_STUDIES, type Project } from '../data/projects'
 
 const EASE = [0.16, 1, 0.3, 1] as const
@@ -102,6 +103,10 @@ export default function Work() {
 
   return (
     <>
+      <Seo
+        title="Work"
+        description="Selected work from Arseniy Cherednichenko — a ledger of the products and case studies he has shipped, led by Guided."
+      />
       {/* INTRO */}
       <header className="mx-auto w-full max-w-4xl px-6 pb-12 pt-36 sm:pt-44">
         <motion.div
