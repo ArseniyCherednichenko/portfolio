@@ -6,6 +6,8 @@ import { SpotlightCard } from '../components/SpotlightCard'
 import { TiltCard } from '../components/TiltCard'
 import { MagneticButton } from '../components/MagneticButton'
 import { AnimatedCounter } from '../components/AnimatedCounter'
+import { DotGrid } from '../components/DotGrid'
+import { DecryptedText } from '../components/DecryptedText'
 
 function Experiment({
   name,
@@ -105,6 +107,17 @@ export default function Playground() {
           </Experiment>
         </Reveal>
 
+        <Reveal>
+          <Experiment name="Decrypt-on-view text" note="Characters resolve from random glyphs into the final string. Replays on hover.">
+            <div className="text-center font-mono text-2xl font-bold tracking-tight sm:text-3xl">
+              <DecryptedText text="DECODING CRAFT" className="text-[#DCF87C]" />
+              <div className="mt-3 text-base text-white/70">
+                <DecryptedText text="hover to replay" speed={26} />
+              </div>
+            </div>
+          </Experiment>
+        </Reveal>
+
         <Reveal delay={0.05}>
           <Experiment name="Stateful micro-interactions" note="Small, satisfying feedback loops: an optimistic like and a spring toggle.">
             <div className="flex flex-col items-center gap-6">
@@ -134,6 +147,28 @@ export default function Playground() {
           </Experiment>
         </Reveal>
       </div>
+
+      {/* FULL-WIDTH INTERACTIVE FIELD */}
+      <Reveal>
+        <div className="mt-12">
+          <div className="relative h-[340px] overflow-hidden rounded-3xl border border-white/10 bg-white/[0.02]">
+            <DotGrid />
+            <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center text-center">
+              <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Interactive field</span>
+              <p className="mt-3 max-w-md px-6 text-xl font-medium text-white/80 sm:text-2xl">
+                Move your cursor across the grid.
+              </p>
+            </div>
+          </div>
+          <div className="mt-4 px-1">
+            <h3 className="text-base font-semibold">Cursor-reactive dot grid</h3>
+            <p className="mt-1 text-sm leading-relaxed text-white/45">
+              A few hundred dots on a single canvas, each a tiny spring pushed by the pointer and pulled home. Lights up
+              lime within reach.
+            </p>
+          </div>
+        </div>
+      </Reveal>
 
       {/* CLOSER */}
       <Reveal>
