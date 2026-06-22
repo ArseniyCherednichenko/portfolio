@@ -1,0 +1,8 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Arseniy Cherednichenko">
+  <rect width="64" height="64" rx="14" fill="#09090b"/>
+  <rect x="0.5" y="0.5" width="63" height="63" rx="13.5" fill="none" stroke="#ffffff" stroke-opacity="0.08"/>
+  <!-- bold geometric A -->
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M32 13 L47 51 H39.2 L36.4 43.4 H27.6 L24.8 51 H17 L32 13 Z M30.4 36.6 H33.6 L32 30 L30.4 36.6 Z" fill="#DCF87C"/>
+  <!-- orbit dot -->
+  <circle cx="49" cy="17" r="3.2" fill="#DCF87C"/>
+</svg>
