@@ -93,7 +93,9 @@ export const PROJECTS: Project[] = [
   },
 ]
 
-export const SKILLS = ['React', 'TypeScript', 'SwiftUI', 'Tailwind', 'Framer Motion', 'Supabase', 'Vite', 'Node', 'Figma', 'GSAP']
+// SKILLS now lives in toolkit.ts (single source of truth) and is re-exported
+// here for the existing imports (e.g. the homepage marquee).
+export { SKILLS } from './toolkit'
 
 /** Find a non-placeholder project by slug. */
 export function getProject(slug: string | undefined): Project | undefined {
