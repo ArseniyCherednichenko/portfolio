@@ -7,6 +7,7 @@ import { useContact } from './ContactDialog'
 const PAGES: ReadonlyArray<readonly [string, string]> = [
   ['Work', '/work'],
   ['About', '/about'],
+  ['Toolkit', '/toolkit'],
   ['Playground', '/playground'],
 ]
 
