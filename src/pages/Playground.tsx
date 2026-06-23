@@ -7,6 +7,7 @@ import { TiltCard } from '../components/TiltCard'
 import { MagneticButton } from '../components/MagneticButton'
 import { AnimatedCounter } from '../components/AnimatedCounter'
 import { DotGrid } from '../components/DotGrid'
+import { ScrollVelocity } from '../components/ScrollVelocity'
 import { DecryptedText } from '../components/DecryptedText'
 import { Seo } from '../components/Seo'
 
@@ -152,6 +153,34 @@ export default function Playground() {
           </Experiment>
         </Reveal>
       </div>
+
+      {/* FULL-WIDTH SCROLL-VELOCITY BAND */}
+      <Reveal>
+        <div className="mt-12">
+          <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.02] py-12">
+            <ScrollVelocity
+              rows={[
+                { text: 'Scroll to feel it · ', baseVelocity: 4, className: 'text-white/85' },
+                {
+                  text: 'Faster scroll, faster drift · ',
+                  baseVelocity: -4,
+                  className: 'text-transparent [-webkit-text-stroke:1px_rgba(220,248,124,0.5)]',
+                },
+              ]}
+              className="space-y-1 text-5xl font-bold uppercase leading-none tracking-tight sm:text-7xl"
+            />
+            <div className="pointer-events-none absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-[#0c0c0c] to-transparent" />
+            <div className="pointer-events-none absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-[#0c0c0c] to-transparent" />
+          </div>
+          <div className="mt-4 px-1">
+            <h3 className="text-base font-semibold">Scroll-velocity text band</h3>
+            <p className="mt-1 text-sm leading-relaxed text-white/45">
+              Two rows drift on their own, then speed up and flip direction with the page's scroll velocity. Built on
+              Framer Motion's useVelocity and a wrapped offset.
+            </p>
+          </div>
+        </div>
+      </Reveal>
 
       {/* FULL-WIDTH INTERACTIVE FIELD */}
       <Reveal>
