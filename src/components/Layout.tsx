@@ -5,6 +5,8 @@ import { Aurora } from './Aurora'
 import { Nav } from './Nav'
 import { CommandPaletteProvider } from './CommandPalette'
 import { ContactProvider, useContact } from './ContactDialog'
+import { ScrollProgress } from './ScrollProgress'
+import { BackToTop } from './BackToTop'
 
 const PAGE_EASE = [0.16, 1, 0.3, 1] as const
 
@@ -35,6 +37,7 @@ export function Layout() {
       <CommandPaletteProvider>
         <div id="top" className="relative min-h-screen bg-[#0A0A0A] text-white">
           <Aurora />
+          <ScrollProgress />
           <ScrollManager />
           <Nav />
           <AnimatePresence mode="wait" initial={false}>
@@ -49,6 +52,7 @@ export function Layout() {
             </motion.main>
           </AnimatePresence>
           <SiteFooter />
+          <BackToTop />
         </div>
       </CommandPaletteProvider>
     </ContactProvider>
