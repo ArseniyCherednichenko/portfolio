@@ -7,6 +7,7 @@ import { CommandPaletteProvider } from './CommandPalette'
 import { ContactProvider, useContact } from './ContactDialog'
 import { ScrollProgress } from './ScrollProgress'
 import { BackToTop } from './BackToTop'
+import { Cursor } from './Cursor'
 
 const PAGE_EASE = [0.16, 1, 0.3, 1] as const
 
@@ -53,6 +54,7 @@ export function Layout() {
           </AnimatePresence>
           <SiteFooter />
           <BackToTop />
+          <Cursor />
         </div>
       </CommandPaletteProvider>
     </ContactProvider>
