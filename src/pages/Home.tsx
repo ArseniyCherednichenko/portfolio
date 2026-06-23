@@ -12,11 +12,20 @@ import { MagneticButton } from '../components/MagneticButton'
 import { HeroOrbit } from '../components/HeroOrbit'
 import { ScrollCue } from '../components/ScrollCue'
 import { Eyebrow } from '../components/Eyebrow'
+import { SectionNav } from '../components/SectionNav'
 import { useContact } from '../components/ContactDialog'
 import { Seo } from '../components/Seo'
 import { PROJECTS, SKILLS, type Project } from '../data/projects'
 
 const EASE = [0.16, 1, 0.3, 1] as const
+
+const SECTIONS = [
+  { id: 'intro', label: 'Intro' },
+  { id: 'about', label: 'About' },
+  { id: 'work', label: 'Work' },
+  { id: 'toolkit', label: 'Toolkit' },
+  { id: 'contact', label: 'Contact' },
+]
 
 export default function Home() {
   const [active, setActive] = useState<Project | null>(null)
@@ -25,8 +34,9 @@ export default function Home() {
   return (
     <>
       <Seo />
+      <SectionNav sections={SECTIONS} />
       {/* HERO */}
-      <header className="relative mx-auto flex min-h-screen w-full max-w-4xl flex-col justify-center px-6">
+      <header id="intro" className="relative mx-auto flex min-h-screen w-full max-w-4xl flex-col justify-center px-6">
         <HeroOrbit />
         <motion.p
           initial={{ opacity: 0, y: 20 }}
