@@ -22,6 +22,13 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* When the custom cursor is active, hide the native one everywhere. Only the
+   Cursor component (fine pointer + motion allowed) ever adds this class. */
+body.cursor-none,
+body.cursor-none * {
+  cursor: none !important;
+}
+
 @keyframes shine {
   to {
     background-position: 200% center;
