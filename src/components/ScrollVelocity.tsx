@@ -16,13 +16,11 @@ type Row = {
   text: string
   /** Base drift speed in %/s. Sign sets default direction. */
   baseVelocity?: number
+  /** Optional per-row classes layered on top of the shared text styling. */
+  className?: string
 }
 
-function VelocityRow({
-  text,
-  baseVelocity = 4,
-  className = '',
-}: Row & { className?: string }) {
+function VelocityRow({ text, baseVelocity = 4, className = '' }: Row) {
   const baseX = useMotionValue(0)
   const { scrollY } = useScroll()
   const scrollVelocity = useVelocity(scrollY)
@@ -51,8 +49,8 @@ function VelocityRow({
   })
 
   return (
-    <div className="flex flex-nowrap overflow-hidden whitespace-nowrap">
-      <motion.div className={`flex flex-nowrap whitespace-nowrap ${className}`} style={{ x }}>
+    <div className={`flex flex-nowrap overflow-hidden whitespace-nowrap ${className}`}>
+      <motion.div className="flex flex-nowrap whitespace-nowrap" style={{ x }}>
         {Array.from({ length: 4 }).map((_, i) => (
           <span key={i} aria-hidden={i > 0} className="block pr-[0.4em]">
             {text}
@@ -82,7 +80,10 @@ export function ScrollVelocity({
     return (
       <div className={className}>
         {rows.map((row, i) => (
-          <div key={i} className="overflow-hidden text-ellipsis whitespace-nowrap">
+          <div
+            key={i}
+            className={`overflow-hidden text-ellipsis whitespace-nowrap ${row.className ?? ''}`}
+          >
             {row.text}
           </div>
         ))}
@@ -93,7 +94,7 @@ export function ScrollVelocity({
   return (
     <div className={className}>
       {rows.map((row, i) => (
-        <VelocityRow key={i} text={row.text} baseVelocity={row.baseVelocity} />
+        <VelocityRow key={i} text={row.text} baseVelocity={row.baseVelocity} className={row.className} />
       ))}
     </div>
   )

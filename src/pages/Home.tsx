@@ -8,6 +8,7 @@ import { GradientText } from '../components/GradientText'
 import { RotatingWord } from '../components/RotatingWord'
 import { SpotlightCard } from '../components/SpotlightCard'
 import { Marquee } from '../components/Marquee'
+import { ScrollVelocity } from '../components/ScrollVelocity'
 import { MagneticButton } from '../components/MagneticButton'
 import { HeroOrbit } from '../components/HeroOrbit'
 import { ScrollCue } from '../components/ScrollCue'
@@ -165,6 +166,25 @@ export default function Home() {
             ),
           )}
         </div>
+      </section>
+
+      {/* VELOCITY BAND */}
+      <section aria-hidden className="relative py-20">
+        <div className="pointer-events-none select-none">
+          <ScrollVelocity
+            rows={[
+              { text: 'Craft · Motion · Typography · Detail · ', baseVelocity: 3, className: 'text-white/85' },
+              {
+                text: 'React · TypeScript · SwiftUI · AI · Berlin · ',
+                baseVelocity: -3,
+                className: 'text-transparent [-webkit-text-stroke:1px_rgba(220,248,124,0.45)]',
+              },
+            ]}
+            className="space-y-2 text-6xl font-bold uppercase leading-none tracking-tight sm:text-8xl"
+          />
+        </div>
+        <div className="pointer-events-none absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-[#0a0a0a] to-transparent sm:w-40" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-[#0a0a0a] to-transparent sm:w-40" />
       </section>
 
       {/* TOOLKIT */}
