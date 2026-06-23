@@ -124,6 +124,21 @@ export default function Playground() {
           </Experiment>
         </Reveal>
 
+        <Reveal>
+          <Experiment
+            name="Custom cursor"
+            note="On a pointer device with motion enabled, a lime dot tracks you site-wide and the trailing ring swells over anything you can click."
+          >
+            <div
+              data-cursor
+              className="flex h-full w-full flex-col items-center justify-center gap-3 rounded-2xl border border-dashed border-white/15 px-6 text-center"
+            >
+              <p className="text-2xl font-bold leading-tight">Hover in here</p>
+              <p className="text-sm text-white/50">Watch the ring open up as it meets a target.</p>
+            </div>
+          </Experiment>
+        </Reveal>
+
         <Reveal delay={0.05}>
           <Experiment name="Stateful micro-interactions" note="Small, satisfying feedback loops: an optimistic like and a spring toggle.">
             <div className="flex flex-col items-center gap-6">
