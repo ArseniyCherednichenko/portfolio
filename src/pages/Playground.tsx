@@ -10,6 +10,7 @@ import { DotGrid } from '../components/DotGrid'
 import { ScrollVelocity } from '../components/ScrollVelocity'
 import { DecryptedText } from '../components/DecryptedText'
 import { CardStack } from '../components/CardStack'
+import { ScrollReveal } from '../components/ScrollReveal'
 import { GO_TARGETS, useShortcuts } from '../components/Keyboard'
 import { Seo } from '../components/Seo'
 
@@ -271,6 +272,29 @@ export default function Playground() {
             <p className="mt-1 text-sm leading-relaxed text-white/45">
               A few hundred dots on a single canvas, each a tiny spring pushed by the pointer and pulled home. Lights up
               lime within reach.
+            </p>
+          </div>
+        </div>
+      </Reveal>
+
+      {/* FULL-WIDTH SCROLL REVEAL */}
+      <Reveal>
+        <div className="mt-12">
+          <div className="rounded-3xl border border-white/10 bg-white/[0.02] px-8 py-20 sm:px-14 sm:py-28">
+            <ScrollReveal
+              className="text-2xl font-semibold leading-[1.3] tracking-tight text-white/85 sm:text-4xl sm:leading-[1.25]"
+              highlight={['word', 'scroll', 'reads', 'itself']}
+            >
+              Scroll slowly and watch each word resolve. The paragraph reads
+              itself into focus as it travels up the page, one word at a time,
+              tied directly to your scroll.
+            </ScrollReveal>
+          </div>
+          <div className="mt-4 px-1">
+            <h3 className="text-base font-semibold">Scroll-linked text reveal</h3>
+            <p className="mt-1 text-sm leading-relaxed text-white/45">
+              Each word's opacity and lift map to a slice of the block's scroll progress, built on Framer Motion's
+              useScroll and useTransform. The full sentence stays the accessible label.
             </p>
           </div>
         </div>
