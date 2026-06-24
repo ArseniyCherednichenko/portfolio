@@ -8,6 +8,7 @@ import { GradientText } from '../components/GradientText'
 import { RotatingWord } from '../components/RotatingWord'
 import { SpotlightCard } from '../components/SpotlightCard'
 import { Marquee } from '../components/Marquee'
+import { CardStack, type StackCard } from '../components/CardStack'
 import { ScrollVelocity } from '../components/ScrollVelocity'
 import { MagneticButton } from '../components/MagneticButton'
 import { HeroOrbit } from '../components/HeroOrbit'
@@ -23,9 +24,39 @@ const EASE = [0.16, 1, 0.3, 1] as const
 const SECTIONS = [
   { id: 'intro', label: 'Intro' },
   { id: 'about', label: 'About' },
+  { id: 'range', label: 'Range' },
   { id: 'work', label: 'Work' },
   { id: 'toolkit', label: 'Toolkit' },
   { id: 'contact', label: 'Contact' },
+]
+
+// The breadth of what I actually build. Honest disciplines, not a single project.
+const RANGE: StackCard[] = [
+  {
+    tag: 'Frontend',
+    title: 'Interfaces that feel right',
+    body: 'React and TypeScript, with motion that earns its place. The part people touch, and the part they feel.',
+  },
+  {
+    tag: 'Native iOS',
+    title: 'At home on the device',
+    body: 'SwiftUI apps that behave like they belong, sharing one backend with the web so nothing drifts.',
+  },
+  {
+    tag: 'Backend and data',
+    title: 'The part you never see',
+    body: 'Supabase, auth, and the data model underneath, keeping web and native honest with each other.',
+  },
+  {
+    tag: 'Applied AI',
+    title: 'Building with models, not around them',
+    body: 'AI woven into real products. With Guided that means asking the right question instead of handing over the answer.',
+  },
+  {
+    tag: 'Motion and design',
+    title: 'Craft in the small moments',
+    body: 'The typography, the timing, the spacing between things. Hand-built, never templated, always reduced-motion aware.',
+  },
 ]
 
 export default function Home() {
@@ -113,6 +144,31 @@ export default function Home() {
             <span aria-hidden>-&gt;</span>
           </Link>
         </Reveal>
+      </section>
+
+      {/* RANGE */}
+      <section id="range" className="mx-auto w-full max-w-5xl px-6 py-24">
+        <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+          <div>
+            <Reveal>
+              <Eyebrow>Range</Eyebrow>
+            </Reveal>
+            <Reveal delay={0.05}>
+              <h2 className="mt-6 text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl">
+                More than <GradientText>one project.</GradientText>
+              </h2>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <p className="mt-6 max-w-md text-lg leading-relaxed text-white/55">
+                Guided is what I am building, but it is not the whole of what I do. I work across the
+                stack and across disciplines. The deck cycles on its own, or take it through yourself.
+              </p>
+            </Reveal>
+          </div>
+          <Reveal delay={0.1}>
+            <CardStack cards={RANGE} />
+          </Reveal>
+        </div>
       </section>
 
       {/* WORK */}
