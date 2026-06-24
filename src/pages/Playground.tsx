@@ -9,6 +9,7 @@ import { AnimatedCounter } from '../components/AnimatedCounter'
 import { DotGrid } from '../components/DotGrid'
 import { ScrollVelocity } from '../components/ScrollVelocity'
 import { DecryptedText } from '../components/DecryptedText'
+import { CardStack } from '../components/CardStack'
 import { GO_TARGETS, useShortcuts } from '../components/Keyboard'
 import { Seo } from '../components/Seo'
 
@@ -175,6 +176,23 @@ export default function Playground() {
                 </kbd>
               </button>
             </div>
+          </Experiment>
+        </Reveal>
+
+        <Reveal>
+          <Experiment
+            name="Auto-advancing card deck"
+            note="A 3D stack where the front card recedes to the back on a timer. Click a card or a dot to drive it; hover to pause."
+          >
+            <CardStack
+              className="w-full"
+              interval={3000}
+              cards={[
+                { tag: 'Depth', title: 'Cards behind peek out', body: 'Each layer is offset, scaled, and tilted for a real sense of stack.' },
+                { tag: 'Springs', title: 'Every move is eased', body: 'The recede-to-back transition runs on a shared motion curve.' },
+                { tag: 'Control', title: 'Yours to drive', body: 'Click, tab to focus, or use the dots. It pauses while you do.' },
+              ]}
+            />
           </Experiment>
         </Reveal>
 
