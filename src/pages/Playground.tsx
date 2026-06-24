@@ -9,6 +9,7 @@ import { AnimatedCounter } from '../components/AnimatedCounter'
 import { DotGrid } from '../components/DotGrid'
 import { ScrollVelocity } from '../components/ScrollVelocity'
 import { DecryptedText } from '../components/DecryptedText'
+import { GO_TARGETS, useShortcuts } from '../components/Keyboard'
 import { Seo } from '../components/Seo'
 
 function Experiment({
@@ -36,6 +37,7 @@ function Experiment({
 export default function Playground() {
   const [likes, setLikes] = useState(128)
   const [on, setOn] = useState(false)
+  const { openShortcuts } = useShortcuts()
 
   return (
     <section className="mx-auto w-full max-w-5xl px-6 pt-36 pb-12">
@@ -135,6 +137,43 @@ export default function Playground() {
             >
               <p className="text-2xl font-bold leading-tight">Hover in here</p>
               <p className="text-sm text-white/50">Watch the ring open up as it meets a target.</p>
+            </div>
+          </Experiment>
+        </Reveal>
+
+        <Reveal>
+          <Experiment
+            name="Keyboard navigation"
+            note="The whole site is keyboard-driven. Tap g then a page key to jump around, or open the full shortcuts panel with ?."
+          >
+            <div className="flex w-full flex-col items-center gap-5">
+              <div className="flex items-center gap-2 font-mono text-sm text-white/55">
+                <kbd className="inline-flex min-w-[1.8rem] items-center justify-center rounded-md border border-white/15 bg-white/[0.04] px-2 py-1.5 text-[#DCF87C]">
+                  g
+                </kbd>
+                <span className="text-white/30">then</span>
+                <div className="flex flex-wrap justify-center gap-1.5">
+                  {GO_TARGETS.map((t) => (
+                    <kbd
+                      key={t.key}
+                      title={t.label}
+                      className="inline-flex min-w-[1.8rem] items-center justify-center rounded-md border border-white/15 bg-white/[0.04] px-2 py-1.5 text-white/55"
+                    >
+                      {t.key}
+                    </kbd>
+                  ))}
+                </div>
+              </div>
+              <button
+                type="button"
+                onClick={openShortcuts}
+                className="inline-flex items-center gap-1.5 rounded-full border border-white/15 px-5 py-2.5 text-sm font-semibold transition-colors hover:border-[#DCF87C]/40 hover:text-[#DCF87C]"
+              >
+                Open shortcuts
+                <kbd className="rounded border border-white/15 bg-white/[0.03] px-1.5 py-0.5 text-[11px] text-white/50">
+                  ?
+                </kbd>
+              </button>
             </div>
           </Experiment>
         </Reveal>
