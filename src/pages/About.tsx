@@ -6,6 +6,7 @@ import { GradientText } from '../components/GradientText'
 import { TiltCard } from '../components/TiltCard'
 import { SpotlightCard } from '../components/SpotlightCard'
 import { MagneticButton } from '../components/MagneticButton'
+import { ScrollReveal } from '../components/ScrollReveal'
 import { Seo } from '../components/Seo'
 
 const EASE = [0.16, 1, 0.3, 1] as const
@@ -99,6 +100,22 @@ export default function About() {
           </p>
         </motion.div>
       </header>
+
+      {/* STATEMENT */}
+      <section className="mx-auto w-full max-w-4xl px-6 py-20 sm:py-28">
+        <Reveal>
+          <Eyebrow>What I am about</Eyebrow>
+        </Reveal>
+        <ScrollReveal
+          className="mt-8 text-3xl font-semibold leading-[1.25] tracking-tight text-white/85 sm:text-5xl sm:leading-[1.2]"
+          highlight={['craft', 'motion', 'type', 'feel', 'details']}
+        >
+          I build for the web and beyond — interfaces that move, products that
+          feel considered, and the systems underneath them. I care less about
+          any single project than about the craft that carries across all of
+          them: motion, type, and the quiet details most people only feel.
+        </ScrollReveal>
+      </section>
 
       {/* NOW */}
       <section className="mx-auto w-full max-w-4xl px-6 py-16">
