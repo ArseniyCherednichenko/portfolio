@@ -12,6 +12,7 @@ import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
 import { PROJECTS } from '../data/projects'
 import { useContact } from './ContactDialog'
+import { useShortcuts } from './Keyboard'
 
 // A site-wide command palette (Cmd/Ctrl+K). Fuzzy-search across pages,
 // projects, and quick actions, then jump with the keyboard. Accessible
@@ -66,6 +67,7 @@ export function CommandPaletteProvider({ children }: { children: ReactNode }) {
 function Palette({ open, onClose }: { open: boolean; onClose: () => void }) {
   const navigate = useNavigate()
   const { open: openContact } = useContact()
+  const { openShortcuts } = useShortcuts()
   const reduce = useReducedMotion()
   const [query, setQuery] = useState('')
   const [active, setActive] = useState(0)
@@ -124,6 +126,17 @@ function Palette({ open, onClose }: { open: boolean; onClose: () => void }) {
         },
       },
       {
+        id: 'shortcuts',
+        label: 'Keyboard shortcuts',
+        group: 'Actions',
+        hint: '?',
+        keywords: 'keys hotkeys navigation help cheatsheet chords go to',
+        run: () => {
+          onClose()
+          openShortcuts()
+        },
+      },
+      {
         id: 'github',
         label: 'GitHub',
         group: 'Actions',
@@ -137,7 +150,7 @@ function Palette({ open, onClose }: { open: boolean; onClose: () => void }) {
     ]
 
     return [...pages, ...projects, ...actions]
-  }, [go, onClose, openContact])
+  }, [go, onClose, openContact, openShortcuts])
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase()
