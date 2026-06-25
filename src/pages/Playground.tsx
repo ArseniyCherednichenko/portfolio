@@ -7,6 +7,7 @@ import { TiltCard } from '../components/TiltCard'
 import { MagneticButton } from '../components/MagneticButton'
 import { AnimatedCounter } from '../components/AnimatedCounter'
 import { DotGrid } from '../components/DotGrid'
+import { MagnetLines } from '../components/MagnetLines'
 import { ScrollVelocity } from '../components/ScrollVelocity'
 import { DecryptedText } from '../components/DecryptedText'
 import { CardStack } from '../components/CardStack'
@@ -272,6 +273,28 @@ export default function Playground() {
             <p className="mt-1 text-sm leading-relaxed text-white/45">
               A few hundred dots on a single canvas, each a tiny spring pushed by the pointer and pulled home. Lights up
               lime within reach.
+            </p>
+          </div>
+        </div>
+      </Reveal>
+
+      {/* FULL-WIDTH MAGNET LINES */}
+      <Reveal>
+        <div className="mt-12">
+          <div className="relative h-[340px] overflow-hidden rounded-3xl border border-white/10 bg-white/[0.02]">
+            <MagnetLines />
+            <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center text-center">
+              <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Needle field</span>
+              <p className="mt-3 max-w-md px-6 text-xl font-medium text-white/80 sm:text-2xl">
+                Every line turns to face the cursor.
+              </p>
+            </div>
+          </div>
+          <div className="mt-4 px-1">
+            <h3 className="text-base font-semibold">Cursor-tracking needle grid</h3>
+            <p className="mt-1 text-sm leading-relaxed text-white/45">
+              A canvas grid of small lines, each easing its angle toward the pointer and brightening lime within reach.
+              Reduced-motion gets a calm static radial instead.
             </p>
           </div>
         </div>
