@@ -83,7 +83,7 @@ export default function Home() {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.05, ease: EASE }}
-          className="text-6xl font-bold leading-[1.02] tracking-tight sm:text-8xl"
+          className="font-display text-6xl font-bold leading-[1.02] tracking-tight sm:text-8xl"
         >
           <GradientText>Arseniy</GradientText>
           <br />
@@ -131,7 +131,7 @@ export default function Home() {
           <Eyebrow>About</Eyebrow>
         </Reveal>
         <Reveal delay={0.05}>
-          <p className="mt-6 text-3xl font-medium leading-snug text-white/85 sm:text-4xl">
+          <p className="mt-6 font-display text-3xl font-medium leading-snug text-white/85 sm:text-4xl">
             I care about products that feel effortless. Real craft in the motion, the typography, and the small
             moments, the things people feel but cannot name.
           </p>
@@ -155,7 +155,7 @@ export default function Home() {
               <Eyebrow>Range</Eyebrow>
             </Reveal>
             <Reveal delay={0.05}>
-              <h2 className="mt-6 text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl">
+              <h2 className="mt-6 font-display text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl">
                 More than <GradientText>one project.</GradientText>
               </h2>
             </Reveal>
@@ -276,7 +276,7 @@ export default function Home() {
         </div>
         <div className="mx-auto w-full max-w-4xl px-6 text-center">
           <Reveal>
-            <h2 className="text-5xl font-bold tracking-tight sm:text-7xl">
+            <h2 className="font-display text-5xl font-bold tracking-tight sm:text-7xl">
               Let us build
               <br />
               something good.
@@ -311,7 +311,7 @@ export default function Home() {
             <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[#DCF87C]">
               {active.year || 'Project'}
             </span>
-            <h3 className="mt-2 text-3xl font-bold">{active.title}</h3>
+            <h3 className="mt-2 font-display text-3xl font-bold">{active.title}</h3>
             <p className="mt-4 leading-relaxed text-white/65">{active.detail}</p>
             <div className="mt-6 flex flex-wrap gap-2">
               {active.stack.map((s) => (

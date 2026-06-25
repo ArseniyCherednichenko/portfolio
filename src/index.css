@@ -33,10 +33,9 @@
   color-scheme: dark;
 }
 
-/* Display headlines: opsz tracks size automatically, slightly tighter tracking. */
+/* Display headlines: optical sizing tracks the font size automatically. */
 .font-display {
   font-optical-sizing: auto;
-  letter-spacing: -0.015em;
 }
 
 html {
