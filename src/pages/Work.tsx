@@ -22,7 +22,7 @@ function WorkRow({ project, index }: { project: Project; index: number }) {
         <div className="flex items-baseline gap-5 sm:gap-8">
           <span className="w-9 shrink-0 text-sm font-semibold tabular-nums text-white/20">{num}</span>
           <div>
-            <h2 className="text-3xl font-bold tracking-tight text-white/35 sm:text-5xl">{project.title}</h2>
+            <h2 className="font-display text-3xl font-bold tracking-tight text-white/35 sm:text-5xl">{project.title}</h2>
             <p className="mt-3 max-w-md text-sm text-white/30">{project.blurb}</p>
             <span className="mt-4 inline-block text-xs font-semibold uppercase tracking-[0.2em] text-white/25">
               In progress
@@ -50,7 +50,7 @@ function WorkRow({ project, index }: { project: Project; index: number }) {
 
         <div className="min-w-0 flex-1">
           <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
-            <h2 className="text-3xl font-bold leading-[1.05] tracking-tight transition-transform duration-500 ease-out group-hover:translate-x-1.5 sm:text-5xl">
+            <h2 className="font-display text-3xl font-bold leading-[1.05] tracking-tight transition-transform duration-500 ease-out group-hover:translate-x-1.5 sm:text-5xl">
               {project.title}
             </h2>
             <span className="shrink-0 text-sm tabular-nums text-white/35">{project.year}</span>
@@ -120,7 +120,7 @@ export default function Work() {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.05, ease: EASE }}
-          className="mt-6 text-5xl font-bold leading-[1.05] tracking-tight sm:text-7xl"
+          className="mt-6 font-display text-5xl font-bold leading-[1.05] tracking-tight sm:text-7xl"
         >
           Things I have <GradientText>built.</GradientText>
         </motion.h1>
@@ -173,7 +173,7 @@ export default function Work() {
       {/* CTA */}
       <section className="mx-auto w-full max-w-4xl px-6 py-24 text-center">
         <Reveal>
-          <h2 className="text-4xl font-bold tracking-tight sm:text-6xl">
+          <h2 className="font-display text-4xl font-bold tracking-tight sm:text-6xl">
             Have something
             <br />
             worth building?
