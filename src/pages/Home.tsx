@@ -12,6 +12,7 @@ import { CardStack, type StackCard } from '../components/CardStack'
 import { ScrollVelocity } from '../components/ScrollVelocity'
 import { MagneticButton } from '../components/MagneticButton'
 import { HeroOrbit } from '../components/HeroOrbit'
+import { MagnetLines } from '../components/MagnetLines'
 import { ScrollCue } from '../components/ScrollCue'
 import { Eyebrow } from '../components/Eyebrow'
 import { SectionNav } from '../components/SectionNav'
@@ -268,33 +269,39 @@ export default function Home() {
       </section>
 
       {/* CONTACT */}
-      <section id="contact" className="mx-auto w-full max-w-4xl px-6 py-28 text-center">
-        <Reveal>
-          <h2 className="text-5xl font-bold tracking-tight sm:text-7xl">
-            Let us build
-            <br />
-            something good.
-          </h2>
-        </Reveal>
-        <Reveal delay={0.1}>
-          <div className="mt-10 flex justify-center">
-            <MagneticButton
-              href="mailto:ars7ars3@gmail.com"
-              className="rounded-full bg-[#DCF87C] px-8 py-4 text-lg font-semibold text-black"
+      <section id="contact" className="relative isolate overflow-hidden py-32">
+        {/* Live needle field: rotates to follow the cursor across the closing band. */}
+        <div className="pointer-events-none absolute inset-0 -z-10 opacity-70 [mask-image:radial-gradient(ellipse_at_center,black,transparent_72%)]">
+          <MagnetLines />
+        </div>
+        <div className="mx-auto w-full max-w-4xl px-6 text-center">
+          <Reveal>
+            <h2 className="text-5xl font-bold tracking-tight sm:text-7xl">
+              Let us build
+              <br />
+              something good.
+            </h2>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <div className="mt-10 flex justify-center">
+              <MagneticButton
+                href="mailto:ars7ars3@gmail.com"
+                className="rounded-full bg-[#DCF87C] px-8 py-4 text-lg font-semibold text-black"
+              >
+                ars7ars3@gmail.com
+              </MagneticButton>
+            </div>
+          </Reveal>
+          <Reveal delay={0.18}>
+            <button
+              type="button"
+              onClick={openContact}
+              className="mt-6 text-sm font-medium text-white/45 underline-offset-4 transition-colors hover:text-[#DCF87C] hover:underline"
             >
-              ars7ars3@gmail.com
-            </MagneticButton>
-          </div>
-        </Reveal>
-        <Reveal delay={0.18}>
-          <button
-            type="button"
-            onClick={openContact}
-            className="mt-6 text-sm font-medium text-white/45 underline-offset-4 transition-colors hover:text-[#DCF87C] hover:underline"
-          >
-            Other ways to reach me
-          </button>
-        </Reveal>
+              Other ways to reach me
+            </button>
+          </Reveal>
+        </div>
       </section>
 
       <Modal open={active !== null} onClose={() => setActive(null)}>
