@@ -7,6 +7,9 @@
 ## Stack
 React 18 + Vite + TypeScript (strict) + **Tailwind v4** (via `@tailwindcss/vite`, classes auto-detected, no content config) + **Framer Motion** for animation + **react-router-dom v6** for client-side routing. Dark theme, lime accent `#DCF87C`.
 
+## Typography
+Two faces. **Inter** (system fallback stack) carries body copy and UI. **Fraunces** — a self-hosted variable serif (`public/fonts/fraunces-latin*.woff2`, opsz 9..144, wght 300..700) — is the display face for headlines, giving the site an editorial voice instead of a templated all-sans look. `@font-face` (latin + latin-ext subsets) and a Tailwind `@theme` token `--font-display: "Fraunces", ui-serif, Georgia, serif` live in `src/index.css`; that token generates the **`font-display`** utility, and a sibling `.font-display { font-optical-sizing: auto }` rule lets the optical-size axis track the rendered size. The latin woff2 is `<link rel="preload">`ed in `index.html` so headlines paint without a flash. Apply `font-display` to display-level headings only (hero/page titles, section H2/H3, project titles, modal titles, big statement lines, ProjectPoster name); keep small labels/eyebrows/sub-card headings in Inter for hierarchy. The variable subset is weight-capped at 700 (`font-bold`).
+
 ## Architecture (multi-page)
 - `src/main.tsx` wraps `<App/>` in `<BrowserRouter>`.
 - `src/App.tsx` = route table only (`<Routes>`).
