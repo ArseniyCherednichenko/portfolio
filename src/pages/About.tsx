@@ -79,7 +79,7 @@ export default function About() {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.05, ease: EASE }}
-          className="mt-6 text-5xl font-bold leading-[1.05] tracking-tight sm:text-7xl"
+          className="mt-6 font-display text-5xl font-bold leading-[1.05] tracking-tight sm:text-7xl"
         >
           A builder who <GradientText>sweats the details.</GradientText>
         </motion.h1>
@@ -107,7 +107,7 @@ export default function About() {
           <Eyebrow>What I am about</Eyebrow>
         </Reveal>
         <ScrollReveal
-          className="mt-8 text-3xl font-semibold leading-[1.25] tracking-tight text-white/85 sm:text-5xl sm:leading-[1.2]"
+          className="mt-8 font-display text-3xl font-semibold leading-[1.25] tracking-tight text-white/85 sm:text-5xl sm:leading-[1.2]"
           highlight={['craft', 'motion', 'type', 'feel', 'details']}
         >
           I build for the web and beyond — interfaces that move, products that
@@ -192,7 +192,7 @@ export default function About() {
       {/* CTA */}
       <section className="mx-auto w-full max-w-4xl px-6 py-24 text-center">
         <Reveal>
-          <h2 className="text-4xl font-bold tracking-tight sm:text-6xl">
+          <h2 className="font-display text-4xl font-bold tracking-tight sm:text-6xl">
             Want to see the work?
           </h2>
         </Reveal>
