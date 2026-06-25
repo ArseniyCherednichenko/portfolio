@@ -54,7 +54,7 @@ export default function Toolkit() {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.05, ease: EASE }}
-          className="mt-6 text-5xl font-bold leading-[1.05] tracking-tight sm:text-7xl"
+          className="mt-6 font-display text-5xl font-bold leading-[1.05] tracking-tight sm:text-7xl"
         >
           What I build <GradientText>with.</GradientText>
         </motion.h1>
@@ -93,7 +93,7 @@ export default function Toolkit() {
             <div className="grid gap-8 md:grid-cols-[14rem_1fr]">
               <div className="md:sticky md:top-28 md:self-start">
                 <Reveal>
-                  <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">{group.label}</h2>
+                  <h2 className="font-display text-2xl font-bold tracking-tight sm:text-3xl">{group.label}</h2>
                 </Reveal>
                 <Reveal delay={0.05}>
                   <p className="mt-3 max-w-xs text-sm leading-relaxed text-white/45">{group.blurb}</p>
@@ -134,7 +134,7 @@ export default function Toolkit() {
       {/* CTA */}
       <section className="mx-auto w-full max-w-4xl px-6 py-24 text-center">
         <Reveal>
-          <h2 className="text-4xl font-bold tracking-tight sm:text-6xl">
+          <h2 className="font-display text-4xl font-bold tracking-tight sm:text-6xl">
             See it
             <br />
             in motion.

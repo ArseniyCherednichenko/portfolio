@@ -72,7 +72,7 @@ export default function Contact() {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.05, ease: EASE }}
-          className="mt-6 text-5xl font-bold leading-[1.05] tracking-tight sm:text-7xl"
+          className="mt-6 font-display text-5xl font-bold leading-[1.05] tracking-tight sm:text-7xl"
         >
           Let us build something <GradientText>that feels right.</GradientText>
         </motion.h1>
@@ -165,7 +165,7 @@ export default function Contact() {
       {/* CLOSING */}
       <section className="mx-auto w-full max-w-4xl px-6 py-20 text-center">
         <Reveal>
-          <p className="text-2xl font-medium leading-snug text-white/80 sm:text-3xl">
+          <p className="font-display text-2xl font-medium leading-snug text-white/80 sm:text-3xl">
             Prefer to look around first?{' '}
             <Link to="/work" className="text-[#DCF87C] underline-offset-4 hover:underline">
               See the work

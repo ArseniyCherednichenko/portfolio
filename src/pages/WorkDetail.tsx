@@ -24,7 +24,7 @@ export default function WorkDetail() {
       <div className="mx-auto flex min-h-[70vh] w-full max-w-4xl flex-col justify-center px-6">
         <Seo title="Project not found" description="That project does not exist, or it has moved. Head back to the work." />
         <Eyebrow>Not found</Eyebrow>
-        <h1 className="mt-5 text-5xl font-bold tracking-tight">No such project.</h1>
+        <h1 className="mt-5 font-display text-5xl font-bold tracking-tight">No such project.</h1>
         <p className="mt-5 max-w-md text-lg leading-relaxed text-white/55">
           That project does not exist, or it has moved. Head back to the work.
         </p>
@@ -75,7 +75,7 @@ export default function WorkDetail() {
           initial={{ opacity: 0, y: 22 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.1, ease: EASE }}
-          className="mt-4 text-5xl font-bold leading-[1.04] tracking-tight sm:text-7xl"
+          className="mt-4 font-display text-5xl font-bold leading-[1.04] tracking-tight sm:text-7xl"
         >
           <GradientText>{project.title}</GradientText>
         </motion.h1>
@@ -185,7 +185,7 @@ export default function WorkDetail() {
           <SpotlightCard className="mt-5">
             <Link to={`/work/${next.slug}`} className="flex items-center justify-between gap-4 p-7">
               <span>
-                <span className="block text-2xl font-bold">{next.title}</span>
+                <span className="block font-display text-2xl font-bold">{next.title}</span>
                 <span className="mt-1 block text-sm text-white/55">{next.blurb}</span>
               </span>
               <span aria-hidden className="text-2xl text-[#DCF87C]">-&gt;</span>
