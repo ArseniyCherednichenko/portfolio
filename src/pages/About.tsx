@@ -7,6 +7,7 @@ import { TiltCard } from '../components/TiltCard'
 import { SpotlightCard } from '../components/SpotlightCard'
 import { MagneticButton } from '../components/MagneticButton'
 import { ScrollReveal } from '../components/ScrollReveal'
+import { VariableProximity } from '../components/VariableProximity'
 import { Seo } from '../components/Seo'
 
 const EASE = [0.16, 1, 0.3, 1] as const
@@ -192,9 +193,17 @@ export default function About() {
       {/* CTA */}
       <section className="mx-auto w-full max-w-4xl px-6 py-24 text-center">
         <Reveal>
-          <h2 className="font-display text-4xl font-bold tracking-tight sm:text-6xl">
-            Want to see the work?
+          <h2 className="text-4xl font-bold tracking-tight sm:text-6xl">
+            <VariableProximity
+              text="Want to see the work?"
+              className="leading-[1.05] tracking-tight"
+            />
           </h2>
+        </Reveal>
+        <Reveal delay={0.05}>
+          <p className="mx-auto mt-5 max-w-md text-white/45">
+            Move your cursor across the line above. The whole site is built like this.
+          </p>
         </Reveal>
         <Reveal delay={0.1}>
           <div className="mt-10 flex flex-wrap justify-center gap-3">
