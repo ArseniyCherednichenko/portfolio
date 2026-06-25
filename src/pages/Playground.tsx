@@ -12,6 +12,7 @@ import { ScrollVelocity } from '../components/ScrollVelocity'
 import { DecryptedText } from '../components/DecryptedText'
 import { CardStack } from '../components/CardStack'
 import { ScrollReveal } from '../components/ScrollReveal'
+import { VariableProximity } from '../components/VariableProximity'
 import { GO_TARGETS, useShortcuts } from '../components/Keyboard'
 import { Seo } from '../components/Seo'
 
@@ -295,6 +296,26 @@ export default function Playground() {
             <p className="mt-1 text-sm leading-relaxed text-white/45">
               A canvas grid of small lines, each easing its angle toward the pointer and brightening lime within reach.
               Reduced-motion gets a calm static radial instead.
+            </p>
+          </div>
+        </div>
+      </Reveal>
+
+      {/* FULL-WIDTH VARIABLE PROXIMITY */}
+      <Reveal>
+        <div className="mt-12">
+          <div className="relative flex min-h-[300px] items-center justify-center overflow-hidden rounded-3xl border border-white/10 bg-white/[0.02] px-8 py-20 text-center">
+            <p className="max-w-3xl text-5xl leading-[1.05] tracking-tight sm:text-7xl">
+              <VariableProximity text="Lean in." radius={200} />{' '}
+              <VariableProximity text="Type that feels you." radius={200} />
+            </p>
+          </div>
+          <div className="mt-4 px-1">
+            <h3 className="text-base font-semibold">Cursor-pressure variable type</h3>
+            <p className="mt-1 text-sm leading-relaxed text-white/45">
+              Each letter rides the variable Fraunces weight and optical-size axes, swelling toward the cursor and
+              easing back as it leaves. Pure requestAnimationFrame, no per-letter React state. Reduced-motion gets a
+              fixed-weight line.
             </p>
           </div>
         </div>
