@@ -53,7 +53,7 @@ export default function Playground() {
         <p className="text-sm font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Playground</p>
       </Reveal>
       <Reveal delay={0.05}>
-        <h1 className="mt-5 max-w-3xl text-5xl font-bold leading-[1.05] tracking-tight sm:text-7xl">
+        <h1 className="mt-5 max-w-3xl font-display text-5xl font-bold leading-[1.05] tracking-tight sm:text-7xl">
           Motion, <GradientText>up close.</GradientText>
         </h1>
       </Reveal>

@@ -101,7 +101,7 @@ export function CardStack({
                 </span>
               </div>
               <div>
-                <h3 className="text-2xl font-bold sm:text-3xl">{c.title}</h3>
+                <h3 className="font-display text-2xl font-bold sm:text-3xl">{c.title}</h3>
                 <p className="mt-3 leading-relaxed text-white/60">{c.body}</p>
               </div>
             </motion.button>

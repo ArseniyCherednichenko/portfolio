@@ -43,7 +43,7 @@ function ContactBody({ open, onClose }: { open: boolean; onClose: () => void }) 
   return (
     <Modal open={open} onClose={onClose}>
       <Eyebrow>Get in touch</Eyebrow>
-      <h2 className="mt-3 text-3xl font-bold tracking-tight">Let us talk.</h2>
+      <h2 className="mt-3 font-display text-3xl font-bold tracking-tight">Let us talk.</h2>
       <p className="mt-3 max-w-sm leading-relaxed text-white/60">
         Happy to hear about interesting products, collaborations, or to just talk shop. Email is the
         fastest way to reach me.

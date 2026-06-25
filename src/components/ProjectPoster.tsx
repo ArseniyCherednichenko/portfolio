@@ -126,7 +126,7 @@ export function ProjectPoster({
           {project.year}
           {project.role ? ` · ${project.role}` : ''}
         </p>
-        <p className="mt-2 text-3xl font-bold leading-[0.95] tracking-tight text-white sm:text-5xl">
+        <p className="mt-2 font-display text-3xl font-bold leading-[0.95] tracking-tight text-white sm:text-5xl">
           {project.title}
         </p>
       </div>
