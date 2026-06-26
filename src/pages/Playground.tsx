@@ -13,6 +13,7 @@ import { DecryptedText } from '../components/DecryptedText'
 import { CardStack } from '../components/CardStack'
 import { ScrollReveal } from '../components/ScrollReveal'
 import { VariableProximity } from '../components/VariableProximity'
+import { BentoGrid, BentoCell } from '../components/BentoGrid'
 import { GO_TARGETS, useShortcuts } from '../components/Keyboard'
 import { Seo } from '../components/Seo'
 
@@ -339,6 +340,39 @@ export default function Playground() {
             <p className="mt-1 text-sm leading-relaxed text-white/45">
               Each word's opacity and lift map to a slice of the block's scroll progress, built on Framer Motion's
               useScroll and useTransform. The full sentence stays the accessible label.
+            </p>
+          </div>
+        </div>
+      </Reveal>
+
+      {/* FULL-WIDTH BENTO GRID */}
+      <Reveal>
+        <div className="mt-12">
+          <BentoGrid>
+            <BentoCell className="col-span-2 sm:col-span-2 sm:row-span-2">
+              <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Bento</p>
+              <p className="mt-auto font-display text-3xl font-bold leading-tight sm:text-4xl">
+                Asymmetric, alive.
+              </p>
+            </BentoCell>
+            <BentoCell className="col-span-1 sm:col-span-2">
+              <p className="text-xs font-semibold uppercase tracking-[0.3em] text-white/40">Spotlight</p>
+              <p className="mt-auto text-sm leading-snug text-white/70">A lime glow tracks your cursor per cell.</p>
+            </BentoCell>
+            <BentoCell className="col-span-1 sm:col-span-1">
+              <p className="text-xs font-semibold uppercase tracking-[0.3em] text-white/40">Lift</p>
+              <p className="mt-auto text-sm leading-snug text-white/70">Cells rise on hover.</p>
+            </BentoCell>
+            <BentoCell className="col-span-2 sm:col-span-1">
+              <p className="text-xs font-semibold uppercase tracking-[0.3em] text-white/40">Stagger</p>
+              <p className="mt-auto text-sm leading-snug text-white/70">Reveals in sequence on view.</p>
+            </BentoCell>
+          </BentoGrid>
+          <div className="mt-4 px-1">
+            <h3 className="text-base font-semibold">Bento grid</h3>
+            <p className="mt-1 text-sm leading-relaxed text-white/45">
+              A dense, asymmetric card layout that staggers in on scroll, with a per-cell cursor spotlight and a
+              subtle hover lift. Drives the About page snapshot. Reduced-motion aware.
             </p>
           </div>
         </div>
