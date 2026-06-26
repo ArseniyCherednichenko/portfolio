@@ -91,6 +91,7 @@ function Palette({ open, onClose }: { open: boolean; onClose: () => void }) {
       { id: 'toolkit', label: 'Toolkit', group: 'Pages', hint: 'tools and stack', keywords: 'tools stack skills tech react typescript swift supabase', run: () => go('/toolkit') },
       { id: 'playground', label: 'Playground', group: 'Pages', hint: 'experiments', keywords: 'motion experiments demos', run: () => go('/playground') },
       { id: 'contact-page', label: 'Contact', group: 'Pages', hint: 'reach me', keywords: 'contact email hire reach availability', run: () => go('/contact') },
+      { id: 'colophon', label: 'Colophon', group: 'Pages', hint: 'how it is built', keywords: 'colophon stack build source open source craft typography fonts', run: () => go('/colophon') },
     ]
 
     const projects: Command[] = PROJECTS.filter((p) => !p.soon).map((p) => ({

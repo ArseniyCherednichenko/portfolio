@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { useLocation, useOutlet } from 'react-router-dom'
+import { Link, useLocation, useOutlet } from 'react-router-dom'
 import { Aurora } from './Aurora'
 import { Nav } from './Nav'
 import { CommandPaletteProvider } from './CommandPalette'
@@ -72,7 +72,15 @@ function SiteFooter() {
   const year = new Date().getFullYear()
   return (
     <footer className="mx-auto flex w-full max-w-4xl flex-col gap-3 px-6 py-12 text-sm text-white/35 sm:flex-row sm:items-center sm:justify-between">
-      <p>Built by Arseniy Cherednichenko in Berlin · {year}</p>
+      <p>
+        Built by Arseniy Cherednichenko in Berlin · {year} ·{' '}
+        <Link
+          to="/colophon"
+          className="text-white/45 underline-offset-4 transition-colors hover:text-[#DCF87C] hover:underline"
+        >
+          Colophon
+        </Link>
+      </p>
       <div className="flex items-center gap-5">
         <button
           type="button"

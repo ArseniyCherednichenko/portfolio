@@ -37,6 +37,7 @@ export const GO_TARGETS: GoTarget[] = [
   { key: 't', to: '/toolkit', label: 'Toolkit' },
   { key: 'p', to: '/playground', label: 'Playground' },
   { key: 'c', to: '/contact', label: 'Contact' },
+  { key: 'l', to: '/colophon', label: 'Colophon' },
 ]
 
 const CHORD_WINDOW_MS = 1400
