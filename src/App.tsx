@@ -7,6 +7,7 @@ import Playground from './pages/Playground'
 import Toolkit from './pages/Toolkit'
 import WorkDetail from './pages/WorkDetail'
 import Contact from './pages/Contact'
+import Colophon from './pages/Colophon'
 import NotFound from './pages/NotFound'
 
 export default function App() {
@@ -20,6 +21,7 @@ export default function App() {
         <Route path="toolkit" element={<Toolkit />} />
         <Route path="work/:slug" element={<WorkDetail />} />
         <Route path="contact" element={<Contact />} />
+        <Route path="colophon" element={<Colophon />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
