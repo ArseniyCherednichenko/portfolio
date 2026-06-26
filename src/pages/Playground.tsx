@@ -13,6 +13,7 @@ import { DecryptedText } from '../components/DecryptedText'
 import { CardStack } from '../components/CardStack'
 import { ScrollReveal } from '../components/ScrollReveal'
 import { VariableProximity } from '../components/VariableProximity'
+import { TrueFocus } from '../components/TrueFocus'
 import { BentoGrid, BentoCell } from '../components/BentoGrid'
 import { GO_TARGETS, useShortcuts } from '../components/Keyboard'
 import { Seo } from '../components/Seo'
@@ -196,6 +197,18 @@ export default function Playground() {
                 { tag: 'Springs', title: 'Every move is eased', body: 'The recede-to-back transition runs on a shared motion curve.' },
                 { tag: 'Control', title: 'Yours to drive', body: 'Click, tab to focus, or use the dots. It pauses while you do.' },
               ]}
+            />
+          </Experiment>
+        </Reveal>
+
+        <Reveal>
+          <Experiment
+            name="True focus"
+            note="A lime corner frame glides to the focused word while the rest blur out. It auto-cycles, or hover a word to pin it."
+          >
+            <TrueFocus
+              words={['Design', 'Build', 'Refine', 'Ship']}
+              className="justify-center text-3xl font-bold tracking-tight sm:text-4xl"
             />
           </Experiment>
         </Reveal>
