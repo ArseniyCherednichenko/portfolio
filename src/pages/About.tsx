@@ -8,7 +8,12 @@ import { SpotlightCard } from '../components/SpotlightCard'
 import { MagneticButton } from '../components/MagneticButton'
 import { ScrollReveal } from '../components/ScrollReveal'
 import { VariableProximity } from '../components/VariableProximity'
+import { BentoGrid, BentoCell } from '../components/BentoGrid'
+import { AnimatedCounter } from '../components/AnimatedCounter'
 import { Seo } from '../components/Seo'
+import { useBerlinTime } from '../hooks/useBerlinTime'
+import { CASE_STUDIES } from '../data/projects'
+import { GITHUB_URL } from '../data/contact'
 
 const EASE = [0.16, 1, 0.3, 1] as const
 
@@ -58,6 +63,113 @@ const PATH: ReadonlyArray<{ when: string; what: string; note: string }> = [
     note: 'Learning fast, building in public, and looking for hard problems worth solving.',
   },
 ]
+
+// Disciplines I actually work across — the range, not a single project.
+const DISCIPLINES = ['Frontend', 'Native iOS', 'Backend', 'Applied AI', 'Motion']
+
+// A scannable, live snapshot of who and where I am. Honest facts only.
+function Snapshot() {
+  const reduce = useReducedMotion()
+  const { time, awake } = useBerlinTime()
+  return (
+    <section className="mx-auto w-full max-w-4xl px-6 py-16">
+      <Reveal>
+        <Eyebrow>At a glance</Eyebrow>
+      </Reveal>
+      <Reveal delay={0.05}>
+        <h2 className="mt-4 max-w-xl text-lg leading-relaxed text-white/50">
+          The short version — where I am, what I build with, and how to find the work.
+        </h2>
+      </Reveal>
+
+      <BentoGrid className="mt-8">
+        {/* LIVE CLOCK — the big cell */}
+        <BentoCell className="col-span-2 sm:col-span-2 sm:row-span-2">
+          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Local time</p>
+          <div className="mt-auto flex flex-col gap-2">
+            <span className="font-display text-5xl font-bold tabular-nums tracking-tight sm:text-6xl">{time}</span>
+            <div className="flex items-center gap-2 text-sm text-white/50">
+              <span className="relative flex h-2 w-2">
+                {awake && !reduce && (
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#DCF87C]/60" />
+                )}
+                <span
+                  className={`relative inline-flex h-2 w-2 rounded-full ${awake ? 'bg-[#DCF87C]' : 'bg-white/30'}`}
+                />
+              </span>
+              <span>Berlin, Germany · {awake ? 'around' : 'probably asleep'}</span>
+            </div>
+          </div>
+        </BentoCell>
+
+        {/* CURRENTLY */}
+        <BentoCell className="col-span-2">
+          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-white/40">Currently</p>
+          <p className="mt-auto text-base leading-snug text-white/80">
+            Co-founding <span className="text-white">Guided</span>, and building across web, iOS, and the backend.
+          </p>
+        </BentoCell>
+
+        {/* DISCIPLINES / RANGE */}
+        <BentoCell className="col-span-2">
+          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-white/40">I work across</p>
+          <div className="mt-auto flex flex-wrap gap-2">
+            {DISCIPLINES.map((d) => (
+              <span
+                key={d}
+                className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 text-sm text-white/70 transition-colors group-hover:border-[#DCF87C]/30"
+              >
+                {d}
+              </span>
+            ))}
+          </div>
+        </BentoCell>
+
+        {/* SHIPPED COUNTER -> WORK */}
+        <BentoCell className="col-span-2 sm:col-span-2">
+          <Link to="/work" className="flex h-full flex-col" data-cursor>
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-white/40">Shipped</p>
+            <div className="mt-auto flex items-end justify-between gap-3">
+              <span className="font-display text-4xl font-bold leading-none">
+                <AnimatedCounter value={CASE_STUDIES.length} />
+              </span>
+              <span className="inline-flex items-center gap-1 text-sm text-white/60 transition-colors group-hover:text-[#DCF87C]">
+                See the work
+                <span aria-hidden className="transition-transform duration-300 group-hover:translate-x-1">
+                  -&gt;
+                </span>
+              </span>
+            </div>
+          </Link>
+        </BentoCell>
+
+        {/* OPEN SOURCE / GITHUB */}
+        <BentoCell className="col-span-2 sm:col-span-2">
+          <a
+            href={GITHUB_URL}
+            target="_blank"
+            rel="noreferrer"
+            className="flex h-full flex-col"
+            data-cursor
+          >
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-white/40">Open source</p>
+            <div className="mt-auto flex items-end justify-between gap-3">
+              <p className="max-w-[16rem] text-base leading-snug text-white/80">
+                This whole site is public, and grows most days.
+              </p>
+              <span className="inline-flex items-center gap-1 whitespace-nowrap text-sm text-white/60 transition-colors group-hover:text-[#DCF87C]">
+                GitHub
+                <span aria-hidden className="transition-transform duration-300 group-hover:translate-x-1">
+                  -&gt;
+                </span>
+              </span>
+            </div>
+          </a>
+        </BentoCell>
+      </BentoGrid>
+    </section>
+  )
+}
 
 export default function About() {
   const reduce = useReducedMotion()
@@ -117,6 +229,9 @@ export default function About() {
           them: motion, type, and the quiet details most people only feel.
         </ScrollReveal>
       </section>
+
+      {/* AT A GLANCE — live, scannable snapshot */}
+      <Snapshot />
 
       {/* NOW */}
       <section className="mx-auto w-full max-w-4xl px-6 py-16">
