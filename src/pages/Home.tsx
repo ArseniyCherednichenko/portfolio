@@ -9,6 +9,7 @@ import { RotatingWord } from '../components/RotatingWord'
 import { SpotlightCard } from '../components/SpotlightCard'
 import { Marquee } from '../components/Marquee'
 import { CardStack, type StackCard } from '../components/CardStack'
+import { TrueFocus } from '../components/TrueFocus'
 import { ScrollVelocity } from '../components/ScrollVelocity'
 import { MagneticButton } from '../components/MagneticButton'
 import { HeroOrbit } from '../components/HeroOrbit'
@@ -164,6 +165,12 @@ export default function Home() {
                 Guided is what I am building, but it is not the whole of what I do. I work across the
                 stack and across disciplines. The deck cycles on its own, or take it through yourself.
               </p>
+            </Reveal>
+            <Reveal delay={0.15}>
+              <TrueFocus
+                words={['Frontend', 'iOS', 'Backend', 'Applied AI', 'Motion']}
+                className="mt-9 font-display text-2xl font-semibold tracking-tight text-white sm:text-3xl"
+              />
             </Reveal>
           </div>
           <Reveal delay={0.1}>
