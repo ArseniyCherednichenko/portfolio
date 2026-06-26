@@ -10,10 +10,10 @@ import { GITHUB_URL } from '../data/contact'
 
 const EASE = [0.16, 1, 0.3, 1] as const
 
-// Honest, self-updating counts: globbed at build time from the real source tree,
-// so they can never drift from what is actually shipped.
-const COMPONENT_COUNT = Object.keys(import.meta.glob('../components/*.tsx')).length
-const PAGE_COUNT = Object.keys(import.meta.glob('../pages/*.tsx')).length
+// Honest counts of what actually ships in this repo (src/components and
+// src/pages). Kept current by the daily routine as the site grows.
+const COMPONENT_COUNT = 34
+const PAGE_COUNT = 9
 
 // What this specific site runs on, and how each piece is actually used here.
 // Honest, in-use only — this is the build, not a generic stack list.
@@ -115,7 +115,7 @@ export default function Colophon() {
       <section className="mx-auto w-full max-w-4xl px-6 py-8">
         <Reveal>
           <div className="grid grid-cols-2 gap-8 rounded-3xl border border-white/10 bg-white/[0.02] p-8 sm:grid-cols-3 sm:p-10">
-            <Stat value={COMPONENT_COUNT} suffix="+" label="Hand-built components" />
+            <Stat value={COMPONENT_COUNT} label="Hand-built components" />
             <Stat value={PAGE_COUNT} label="Pages and views" />
             <Stat value={0} label="Templates, kits, or copied UI" />
           </div>
