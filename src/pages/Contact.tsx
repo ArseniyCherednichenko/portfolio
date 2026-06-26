@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { Reveal } from '../components/Reveal'
@@ -7,6 +6,7 @@ import { GradientText } from '../components/GradientText'
 import { ChannelList } from '../components/ChannelList'
 import { SpotlightCard } from '../components/SpotlightCard'
 import { Seo } from '../components/Seo'
+import { useBerlinTime } from '../hooks/useBerlinTime'
 
 const EASE = [0.16, 1, 0.3, 1] as const
 
@@ -26,28 +26,6 @@ const OPEN_TO: ReadonlyArray<{ title: string; body: string }> = [
     body: 'Interface design, animation, the stack. Reach out even if there is nothing on the table yet.',
   },
 ]
-
-// Live local time in Berlin, so the page feels present rather than static.
-function useBerlinTime() {
-  const [now, setNow] = useState(() => new Date())
-  useEffect(() => {
-    const id = window.setInterval(() => setNow(new Date()), 1000)
-    return () => window.clearInterval(id)
-  }, [])
-  const time = new Intl.DateTimeFormat('en-GB', {
-    hour: '2-digit',
-    minute: '2-digit',
-    second: '2-digit',
-    timeZone: 'Europe/Berlin',
-    hour12: false,
-  }).format(now)
-  const hour = Number(
-    new Intl.DateTimeFormat('en-GB', { hour: '2-digit', hour12: false, timeZone: 'Europe/Berlin' }).format(now),
-  )
-  // A soft sense of whether a reply is likely soon, never a hard promise.
-  const awake = hour >= 8 && hour < 24
-  return { time, awake }
-}
 
 export default function Contact() {
   const reduce = useReducedMotion()
