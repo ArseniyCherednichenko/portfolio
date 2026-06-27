@@ -11,6 +11,7 @@ import { MagnetLines } from '../components/MagnetLines'
 import { ScrollVelocity } from '../components/ScrollVelocity'
 import { DecryptedText } from '../components/DecryptedText'
 import { CardStack } from '../components/CardStack'
+import { ScrollStack } from '../components/ScrollStack'
 import { ScrollReveal } from '../components/ScrollReveal'
 import { VariableProximity } from '../components/VariableProximity'
 import { TrueFocus } from '../components/TrueFocus'
@@ -386,6 +387,26 @@ export default function Playground() {
             <p className="mt-1 text-sm leading-relaxed text-white/45">
               A dense, asymmetric card layout that staggers in on scroll, with a per-cell cursor spotlight and a
               subtle hover lift. Drives the About page snapshot. Reduced-motion aware.
+            </p>
+          </div>
+        </div>
+      </Reveal>
+
+      {/* FULL-WIDTH SCROLL STACK */}
+      <Reveal>
+        <div className="mt-12">
+          <ScrollStack
+            cards={[
+              { tag: 'Pin', title: 'Each card sticks in turn', body: 'As you scroll, a card pins to the top of the viewport and waits for the next one to arrive.' },
+              { tag: 'Stack', title: 'The next slides up and lands', body: 'New cards travel up and settle on top, building a deck the further you scroll.' },
+              { tag: 'Recede', title: 'The ones beneath scale back', body: 'Covered cards shrink and dim a touch, so the growing stack reads as real depth.' },
+            ]}
+          />
+          <div className="mt-4 px-1">
+            <h3 className="text-base font-semibold">Scroll-stacking cards</h3>
+            <p className="mt-1 text-sm leading-relaxed text-white/45">
+              Scroll-driven sticky cards that pin, stack, and recede as the section moves. Built on position sticky and
+              a section-level scroll progress. Drives the Home process section. Reduced-motion gets a plain list.
             </p>
           </div>
         </div>
