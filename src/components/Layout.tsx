@@ -9,6 +9,7 @@ import { KeyboardProvider, useShortcuts } from './Keyboard'
 import { ScrollProgress } from './ScrollProgress'
 import { BackToTop } from './BackToTop'
 import { Cursor } from './Cursor'
+import { ClickSpark } from './ClickSpark'
 
 const PAGE_EASE = [0.16, 1, 0.3, 1] as const
 
@@ -57,6 +58,7 @@ export function Layout() {
           <SiteFooter />
           <BackToTop />
           <Cursor />
+          <ClickSpark />
         </div>
         </CommandPaletteProvider>
       </KeyboardProvider>
