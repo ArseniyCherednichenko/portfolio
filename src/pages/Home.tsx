@@ -9,6 +9,7 @@ import { RotatingWord } from '../components/RotatingWord'
 import { SpotlightCard } from '../components/SpotlightCard'
 import { Marquee } from '../components/Marquee'
 import { CardStack, type StackCard } from '../components/CardStack'
+import { ScrollStack, type ScrollStackCard } from '../components/ScrollStack'
 import { TrueFocus } from '../components/TrueFocus'
 import { ScrollVelocity } from '../components/ScrollVelocity'
 import { MagneticButton } from '../components/MagneticButton'
@@ -27,9 +28,40 @@ const SECTIONS = [
   { id: 'intro', label: 'Intro' },
   { id: 'about', label: 'About' },
   { id: 'range', label: 'Range' },
+  { id: 'process', label: 'Process' },
   { id: 'work', label: 'Work' },
   { id: 'toolkit', label: 'Toolkit' },
   { id: 'contact', label: 'Contact' },
+]
+
+// How I actually build — an honest process, not a single project. Frames the
+// craft that carries across everything, de-centering any one piece of work.
+const PROCESS: ScrollStackCard[] = [
+  {
+    tag: '01 · Understand',
+    title: 'Start with the problem',
+    body: 'Before a single screen, I get clear on what someone actually needs. Often the best interface is the one you find a way not to build.',
+  },
+  {
+    tag: '02 · Shape',
+    title: 'Prototype in the real thing',
+    body: 'I sketch fast, and in code. Motion and feel are hard to judge on paper, so I get a rough version moving early and let it tell me what is wrong.',
+  },
+  {
+    tag: '03 · Build',
+    title: 'Own the whole stack',
+    body: 'Frontend, backend, native, and the data underneath. Holding every layer keeps the seams invisible and the product coherent.',
+  },
+  {
+    tag: '04 · Refine',
+    title: 'Sweat the small moments',
+    body: 'Then the slow part: the timing of a transition, the weight of a heading, the spacing between things. This is where the craft actually lives.',
+  },
+  {
+    tag: '05 · Ship',
+    title: 'Get it in front of people',
+    body: 'Real products beat perfect plans. I ship, watch how it is used, and keep refining in the open, a little at a time.',
+  },
 ]
 
 // The breadth of what I actually build. Honest disciplines, not a single project.
@@ -177,6 +209,26 @@ export default function Home() {
             <CardStack cards={RANGE} />
           </Reveal>
         </div>
+      </section>
+
+      {/* PROCESS */}
+      <section id="process" className="mx-auto w-full max-w-4xl px-6 py-24">
+        <div className="mb-10">
+          <Reveal>
+            <Eyebrow>How I build</Eyebrow>
+          </Reveal>
+          <Reveal delay={0.05}>
+            <h2 className="mt-6 font-display text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl">
+              A way of <GradientText>working.</GradientText>
+            </h2>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <p className="mt-6 max-w-md text-lg leading-relaxed text-white/55">
+              Whatever the project, the process is the same. Keep scrolling, and the steps stack up.
+            </p>
+          </Reveal>
+        </div>
+        <ScrollStack cards={PROCESS} />
       </section>
 
       {/* WORK */}
