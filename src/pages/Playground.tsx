@@ -242,6 +242,23 @@ export default function Playground() {
             </div>
           </Experiment>
         </Reveal>
+
+        <Reveal delay={0.1}>
+          <Experiment
+            name="Click spark"
+            note="Every press anywhere on the site flings a small lime burst from the pointer. Canvas-drawn, and it sleeps when idle."
+          >
+            <div className="flex flex-col items-center gap-3 text-center">
+              <button
+                type="button"
+                className="rounded-full border border-white/15 px-6 py-3 text-sm font-semibold transition-colors hover:border-[#DCF87C]/40 hover:text-[#DCF87C]"
+              >
+                Click me
+              </button>
+              <p className="text-xs text-white/40">Or click anywhere at all.</p>
+            </div>
+          </Experiment>
+        </Reveal>
       </div>
 
       {/* FULL-WIDTH SCROLL-VELOCITY BAND */}
