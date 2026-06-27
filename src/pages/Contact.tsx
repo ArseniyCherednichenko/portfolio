@@ -4,6 +4,7 @@ import { Reveal } from '../components/Reveal'
 import { Eyebrow } from '../components/Eyebrow'
 import { GradientText } from '../components/GradientText'
 import { ChannelList } from '../components/ChannelList'
+import { ContactForm } from '../components/ContactForm'
 import { SpotlightCard } from '../components/SpotlightCard'
 import { Seo } from '../components/Seo'
 import { useBerlinTime } from '../hooks/useBerlinTime'
@@ -113,12 +114,35 @@ export default function Contact() {
             <SpotlightCard>
               <div className="p-6 sm:p-7">
                 <p className="text-sm leading-relaxed text-white/55">
-                  No forms, no funnels. A short, direct note about what you are working on gets the
-                  best reply.
+                  Prefer to just write? There is a short note form below. It opens a pre-filled draft
+                  in your own mail app — no funnel, nothing stored.
                 </p>
               </div>
             </SpotlightCard>
           </div>
+        </Reveal>
+      </section>
+
+      {/* WRITE A NOTE */}
+      <section className="mx-auto w-full max-w-4xl px-6 py-8">
+        <Reveal>
+          <SpotlightCard>
+            <div className="p-6 sm:p-8">
+              <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[#DCF87C]">
+                Write a note
+              </span>
+              <h2 className="mt-4 font-display text-2xl font-bold tracking-tight sm:text-3xl">
+                Skip the blank email.
+              </h2>
+              <p className="mt-3 max-w-lg text-sm leading-relaxed text-white/50">
+                Jot it down here and I will pre-fill a draft in your mail app, addressed and ready —
+                you stay in control of when it sends.
+              </p>
+              <div className="mt-7">
+                <ContactForm />
+              </div>
+            </div>
+          </SpotlightCard>
         </Reveal>
       </section>
 
