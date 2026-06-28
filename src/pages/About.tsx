@@ -10,6 +10,7 @@ import { ScrollReveal } from '../components/ScrollReveal'
 import { VariableProximity } from '../components/VariableProximity'
 import { BentoGrid, BentoCell } from '../components/BentoGrid'
 import { AnimatedCounter } from '../components/AnimatedCounter'
+import { Accordion, type AccordionItem } from '../components/Accordion'
 import { Seo } from '../components/Seo'
 import { useBerlinTime } from '../hooks/useBerlinTime'
 import { CASE_STUDIES } from '../data/projects'
@@ -66,6 +67,59 @@ const PATH: ReadonlyArray<{ when: string; what: string; note: string }> = [
 
 // Disciplines I actually work across — the range, not a single project.
 const DISCIPLINES = ['Frontend', 'Native iOS', 'Backend', 'Applied AI', 'Motion']
+
+// Honest answers to the questions people actually ask. No invented availability
+// or promises — real facts, framed to show the range beyond any one project.
+const QUESTIONS: AccordionItem[] = [
+  {
+    q: 'What do you actually do?',
+    a: 'I build products end to end — the interface, the systems underneath, and increasingly native iOS. Most of that energy goes into Guided right now, but the craft is the constant: design, frontend, backend, and applied AI, held together so the seams stay invisible.',
+  },
+  {
+    q: 'Where are you based?',
+    a: 'Berlin. I work remotely and am comfortable collaborating async across time zones — the live clock on this page is mine.',
+  },
+  {
+    q: 'What are you looking for?',
+    a: 'Hard problems worth solving, and people who care about the details. I am open to collaboration and conversations that might turn into something. No fixed checklist — if the work is interesting, I want to hear about it.',
+  },
+  {
+    q: 'What do you build with?',
+    a: (
+      <>
+        Mostly React and TypeScript on the web, SwiftUI on iOS, and Supabase
+        underneath, with a fair amount of applied AI in between. The full set,
+        and why I reach for each tool, lives on the{' '}
+        <Link to="/toolkit" className="text-[#DCF87C] underline-offset-4 hover:underline">
+          toolkit page
+        </Link>
+        .
+      </>
+    ),
+  },
+  {
+    q: 'Can I see the code?',
+    a: (
+      <>
+        Yes. This whole site is open source and grows most days — every
+        animation here is a hand-built component, no template.{' '}
+        <a
+          href={GITHUB_URL}
+          target="_blank"
+          rel="noreferrer"
+          className="text-[#DCF87C] underline-offset-4 hover:underline"
+        >
+          It is all on GitHub
+        </a>
+        .
+      </>
+    ),
+  },
+  {
+    q: 'How do you like to work?',
+    a: 'Close to the problem and in the real thing. I prototype in code early, ship, and refine in the open. Feel matters more to me than how something looks in a static mock — motion and timing are hard to judge any other way.',
+  },
+]
 
 // A scannable, live snapshot of who and where I am. Honest facts only.
 function Snapshot() {
@@ -303,6 +357,21 @@ export default function About() {
             </Reveal>
           ))}
         </ol>
+      </section>
+
+      {/* QUESTIONS */}
+      <section className="mx-auto w-full max-w-4xl px-6 py-16">
+        <Reveal>
+          <Eyebrow>Questions</Eyebrow>
+        </Reveal>
+        <Reveal delay={0.05}>
+          <p className="mt-6 max-w-2xl text-2xl font-medium leading-snug text-white/85 sm:text-3xl">
+            The things people tend to ask.
+          </p>
+        </Reveal>
+        <Reveal delay={0.1}>
+          <Accordion items={QUESTIONS} defaultOpen={0} className="mt-10" />
+        </Reveal>
       </section>
 
       {/* CTA */}
