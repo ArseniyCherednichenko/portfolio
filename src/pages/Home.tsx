@@ -12,6 +12,7 @@ import { CardStack, type StackCard } from '../components/CardStack'
 import { ScrollStack, type ScrollStackCard } from '../components/ScrollStack'
 import { TrueFocus } from '../components/TrueFocus'
 import { ScrollVelocity } from '../components/ScrollVelocity'
+import { FlowingMenu, type FlowingItem } from '../components/FlowingMenu'
 import { MagneticButton } from '../components/MagneticButton'
 import { HeroOrbit } from '../components/HeroOrbit'
 import { MagnetLines } from '../components/MagnetLines'
@@ -31,7 +32,18 @@ const SECTIONS = [
   { id: 'process', label: 'Process' },
   { id: 'work', label: 'Work' },
   { id: 'toolkit', label: 'Toolkit' },
+  { id: 'explore', label: 'Explore' },
   { id: 'contact', label: 'Contact' },
+]
+
+// The site is more than its home page. These rows foreground the breadth of
+// what is here, so no single project carries the whole story.
+const EXPLORE: FlowingItem[] = [
+  { label: 'Work', to: '/work', hint: 'Case studies' },
+  { label: 'About', to: '/about', hint: 'Who I am' },
+  { label: 'Playground', to: '/playground', hint: 'Live motion' },
+  { label: 'Toolkit', to: '/toolkit', hint: 'What I build with' },
+  { label: 'Contact', to: '/contact', hint: 'Say hello' },
 ]
 
 // How I actually build — an honest process, not a single project. Frames the
@@ -325,6 +337,28 @@ export default function Home() {
             </span>
           ))}
         </Marquee>
+      </section>
+
+      {/* EXPLORE */}
+      <section id="explore" className="mx-auto w-full max-w-4xl px-6 py-24">
+        <div className="mb-9">
+          <Reveal>
+            <Eyebrow>Explore</Eyebrow>
+          </Reveal>
+          <Reveal delay={0.05}>
+            <h2 className="mt-6 font-display text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl">
+              There is more <GradientText>to see.</GradientText>
+            </h2>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <p className="mt-6 max-w-md text-lg leading-relaxed text-white/55">
+              The whole site, a row at a time. Pick a thread and follow it.
+            </p>
+          </Reveal>
+        </div>
+        <Reveal delay={0.12}>
+          <FlowingMenu items={EXPLORE} />
+        </Reveal>
       </section>
 
       {/* CONTACT */}
