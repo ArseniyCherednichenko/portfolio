@@ -15,6 +15,7 @@ import { ScrollStack } from '../components/ScrollStack'
 import { ScrollReveal } from '../components/ScrollReveal'
 import { VariableProximity } from '../components/VariableProximity'
 import { TrueFocus } from '../components/TrueFocus'
+import { FlowingMenu } from '../components/FlowingMenu'
 import { BentoGrid, BentoCell } from '../components/BentoGrid'
 import { GO_TARGETS, useShortcuts } from '../components/Keyboard'
 import { Seo } from '../components/Seo'
@@ -424,6 +425,27 @@ export default function Playground() {
             <p className="mt-1 text-sm leading-relaxed text-white/45">
               Scroll-driven sticky cards that pin, stack, and recede as the section moves. Built on position sticky and
               a section-level scroll progress. Drives the Home process section. Reduced-motion gets a plain list.
+            </p>
+          </div>
+        </div>
+      </Reveal>
+
+      {/* FULL-WIDTH FLOWING MENU */}
+      <Reveal>
+        <div className="mt-12">
+          <FlowingMenu
+            items={[
+              { label: 'Slide', hint: 'From the top', href: 'https://reactbits.dev' },
+              { label: 'Marquee', hint: 'Label scrolls', href: 'https://reactbits.dev' },
+              { label: 'Edge-aware', hint: 'Follows the cursor', href: 'https://reactbits.dev' },
+            ]}
+          />
+          <div className="mt-4 px-1">
+            <h3 className="text-base font-semibold">Flowing menu</h3>
+            <p className="mt-1 text-sm leading-relaxed text-white/45">
+              Editorial link rows: hover one and a lime panel slides in from whichever edge the cursor crossed, the
+              label scrolling across it, then leaves the same way out. Drives the Home Explore section. Reduced-motion
+              just warms the row.
             </p>
           </div>
         </div>
