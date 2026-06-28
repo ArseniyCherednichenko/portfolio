@@ -18,6 +18,7 @@ import { TrueFocus } from '../components/TrueFocus'
 import { FlowingMenu } from '../components/FlowingMenu'
 import { Threads } from '../components/Threads'
 import { BentoGrid, BentoCell } from '../components/BentoGrid'
+import { Accordion } from '../components/Accordion'
 import { GO_TARGETS, useShortcuts } from '../components/Keyboard'
 import { Seo } from '../components/Seo'
 
@@ -469,6 +470,39 @@ export default function Playground() {
             <p className="mt-1 text-sm leading-relaxed text-white/45">
               Travelling sine waves on a single canvas; the threads nearest the pointer bulge away and warm lime.
               Backs the 404 page. Reduced-motion gets a calm static set of waves.
+            </p>
+          </div>
+        </div>
+      </Reveal>
+
+      {/* FULL-WIDTH ACCORDION */}
+      <Reveal>
+        <div className="mt-12">
+          <div className="rounded-3xl border border-white/10 bg-white/[0.02] px-6 py-6 sm:px-10 sm:py-8">
+            <Accordion
+              defaultOpen={0}
+              items={[
+                {
+                  q: 'What is a disclosure?',
+                  a: 'A row that expands to reveal its answer. One opens at a time here — the body springs down on a height and opacity transition.',
+                },
+                {
+                  q: 'How does the icon work?',
+                  a: 'Two short bars make a plus; the vertical one rotates flat to a minus when the row opens, and the whole mark warms to lime.',
+                },
+                {
+                  q: 'Is it accessible?',
+                  a: 'Each control carries aria-expanded and points at its panel, the panel is a labelled region, and under reduced motion it toggles instantly with no height animation.',
+                },
+              ]}
+            />
+          </div>
+          <div className="mt-4 px-1">
+            <h3 className="text-base font-semibold">Animated accordion</h3>
+            <p className="mt-1 text-sm leading-relaxed text-white/45">
+              An accessible disclosure list: one row open at a time, the body easing down on a height and opacity
+              transition while a lime plus rotates into a minus. Drives the About page Questions section. Reduced-motion
+              toggles instantly.
             </p>
           </div>
         </div>
