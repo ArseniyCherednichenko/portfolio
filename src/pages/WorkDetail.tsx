@@ -7,6 +7,7 @@ import { GradientText } from '../components/GradientText'
 import { SpotlightCard } from '../components/SpotlightCard'
 import { MagneticButton } from '../components/MagneticButton'
 import { ProjectPoster } from '../components/ProjectPoster'
+import { GlareHover } from '../components/GlareHover'
 import { Lightbox } from '../components/Lightbox'
 import { Seo } from '../components/Seo'
 import { CASE_STUDIES, getProject } from '../data/projects'
@@ -125,7 +126,9 @@ export default function WorkDetail() {
           className="group relative block w-full overflow-hidden rounded-3xl focus:outline-none focus-visible:ring-2 focus-visible:ring-[#DCF87C]/60"
           aria-label={`Expand the ${project.title} visual`}
         >
-          <ProjectPoster project={project} className="aspect-[16/10] w-full sm:aspect-[16/8]" />
+          <GlareHover trigger="group" rounded="rounded-3xl">
+            <ProjectPoster project={project} className="aspect-[16/10] w-full sm:aspect-[16/8]" />
+          </GlareHover>
           <span className="pointer-events-none absolute right-4 top-4 rounded-full border border-white/15 bg-black/40 px-3 py-1 text-xs font-semibold text-white/70 opacity-0 backdrop-blur-sm transition-opacity duration-300 group-hover:opacity-100">
             Expand
           </span>
