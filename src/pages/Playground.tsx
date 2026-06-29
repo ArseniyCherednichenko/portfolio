@@ -20,8 +20,28 @@ import { Threads } from '../components/Threads'
 import { LetterGlitch } from '../components/LetterGlitch'
 import { BentoGrid, BentoCell } from '../components/BentoGrid'
 import { Accordion } from '../components/Accordion'
+import { Dock, type DockItem } from '../components/Dock'
 import { GO_TARGETS, useShortcuts } from '../components/Keyboard'
 import { Seo } from '../components/Seo'
+import { GITHUB_URL } from '../data/contact'
+
+// Spare stroke icons for the dock — no emoji, currentColor so they warm to lime.
+const ic = (d: string) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round" className="h-full w-full">
+    {d.split('|').map((seg, i) => (
+      <path key={i} d={seg} />
+    ))}
+  </svg>
+)
+
+const DOCK_ITEMS: DockItem[] = [
+  { label: 'Home', to: '/', icon: ic('M3 11.5 12 4l9 7.5|M5 10v9h14v-9') },
+  { label: 'Work', to: '/work', icon: ic('M4 5h7v7H4z|M13 12h7v7h-7z|M13 5h7v4h-7z|M4 14h7v5H4z') },
+  { label: 'About', to: '/about', icon: ic('M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z|M4.5 20a7.5 7.5 0 0 1 15 0') },
+  { label: 'Toolkit', to: '/toolkit', icon: ic('M14.5 6.5a3.5 3.5 0 0 1-4.7 3.3L5 14.6 9.4 19l4.8-4.8a3.5 3.5 0 0 0 .3-7.7Z') },
+  { label: 'Contact', to: '/contact', icon: ic('M4 6h16v12H4z|m4 7 8 6 8-6') },
+  { label: 'GitHub', href: GITHUB_URL, icon: ic('M9 19c-4 1.4-4-2-6-2.5|M15 21v-3.4a3 3 0 0 0-.8-2.3c2.7-.3 5.5-1.3 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.3 4.3 0 0 0-.1-3.2s-1-.3-3.4 1.3a11.6 11.6 0 0 0-6.2 0C8.3 1.9 7.3 2.2 7.3 2.2a4.3 4.3 0 0 0-.1 3.2A4.6 4.6 0 0 0 5.9 8.6c0 4.7 2.8 5.7 5.5 6a3 3 0 0 0-.8 2.3V21') },
+]
 
 function Experiment({
   name,
@@ -528,6 +548,30 @@ export default function Playground() {
               An accessible disclosure list: one row open at a time, the body easing down on a height and opacity
               transition while a lime plus rotates into a minus. Drives the About page Questions section. Reduced-motion
               toggles instantly.
+            </p>
+          </div>
+        </div>
+      </Reveal>
+
+      {/* FULL-WIDTH DOCK */}
+      <Reveal>
+        <div className="mt-12">
+          <div className="relative flex h-[340px] items-end justify-center overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 pb-12">
+            <div className="pointer-events-none absolute inset-x-0 top-10 text-center">
+              <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Magnify</span>
+              <p className="mx-auto mt-3 max-w-md px-6 text-xl font-medium text-white/85 sm:text-2xl">
+                Sweep the row. Each tile leans toward the cursor.
+              </p>
+            </div>
+            <Dock items={DOCK_ITEMS} />
+          </div>
+          <div className="mt-4 px-1">
+            <h3 className="text-base font-semibold">Magnifying dock</h3>
+            <p className="mt-1 text-sm leading-relaxed text-white/45">
+              A working nav in the spirit of the macOS Dock: one shared pointer value feeds every tile, which swells
+              along a bell curve by its distance from the cursor and springs back as you leave, with a label rising on
+              hover. The tiles are real links, so it actually gets you around. Reduced-motion drops the magnify for a
+              plain, fully usable row.
             </p>
           </div>
         </div>
