@@ -17,6 +17,7 @@ import { VariableProximity } from '../components/VariableProximity'
 import { TrueFocus } from '../components/TrueFocus'
 import { FlowingMenu } from '../components/FlowingMenu'
 import { Threads } from '../components/Threads'
+import { LetterGlitch } from '../components/LetterGlitch'
 import { BentoGrid, BentoCell } from '../components/BentoGrid'
 import { Accordion } from '../components/Accordion'
 import { GO_TARGETS, useShortcuts } from '../components/Keyboard'
@@ -470,6 +471,30 @@ export default function Playground() {
             <p className="mt-1 text-sm leading-relaxed text-white/45">
               Travelling sine waves on a single canvas; the threads nearest the pointer bulge away and warm lime.
               Backs the 404 page. Reduced-motion gets a calm static set of waves.
+            </p>
+          </div>
+        </div>
+      </Reveal>
+
+      {/* FULL-WIDTH LETTER GLITCH */}
+      <Reveal>
+        <div className="mt-12">
+          <div className="relative h-[340px] overflow-hidden rounded-3xl border border-white/10 bg-black/40">
+            <LetterGlitch />
+            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,rgba(8,8,8,0.92)_85%)]" />
+            <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center text-center">
+              <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Glyph field</span>
+              <p className="mt-3 max-w-md px-6 text-xl font-medium text-white/85 sm:text-2xl">
+                Characters flicker and recolor in place.
+              </p>
+            </div>
+          </div>
+          <div className="mt-4 px-1">
+            <h3 className="text-base font-semibold">Letter glitch field</h3>
+            <p className="mt-1 text-sm leading-relaxed text-white/45">
+              A monospace grid drawn on one canvas. Every frame a slice of random cells swap glyph and ease toward a new
+              color, mostly cool grays with the odd cell warming lime, like a terminal mid-decode. A radial mask fades
+              the edges. Reduced-motion gets a single calm static frame.
             </p>
           </div>
         </div>
