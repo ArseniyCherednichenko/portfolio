@@ -6,6 +6,7 @@ import { GradientText } from '../components/GradientText'
 import { MagneticButton } from '../components/MagneticButton'
 import { AnimatedCounter } from '../components/AnimatedCounter'
 import { ProjectPoster } from '../components/ProjectPoster'
+import { GlareHover } from '../components/GlareHover'
 import { Seo } from '../components/Seo'
 import { PROJECTS, CASE_STUDIES, type Project } from '../data/projects'
 
@@ -89,8 +90,10 @@ function WorkRow({ project, index }: { project: Project; index: number }) {
 
         {/* Generative poster preview, lifts a touch on hover. */}
         <div className="hidden w-40 shrink-0 self-center md:block lg:w-52">
-          <div className="overflow-hidden rounded-2xl transition-transform duration-500 ease-out group-hover:-translate-y-1">
-            <ProjectPoster project={project} className="aspect-[4/3] w-full" rounded="rounded-2xl" />
+          <div className="transition-transform duration-500 ease-out group-hover:-translate-y-1">
+            <GlareHover trigger="group" rounded="rounded-2xl">
+              <ProjectPoster project={project} className="aspect-[4/3] w-full" rounded="rounded-2xl" />
+            </GlareHover>
           </div>
         </div>
       </div>
