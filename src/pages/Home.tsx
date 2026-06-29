@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Modal } from '../components/Modal'
 import { ProjectPoster } from '../components/ProjectPoster'
+import { GlareHover } from '../components/GlareHover'
 import { Reveal } from '../components/Reveal'
 import { GradientText } from '../components/GradientText'
 import { RotatingWord } from '../components/RotatingWord'
@@ -400,7 +401,9 @@ export default function Home() {
       <Modal open={active !== null} onClose={() => setActive(null)}>
         {active && (
           <div>
-            <ProjectPoster project={active} className="mb-6 aspect-[16/9] w-full" />
+            <GlareHover className="mb-6">
+              <ProjectPoster project={active} className="aspect-[16/9] w-full" />
+            </GlareHover>
             <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[#DCF87C]">
               {active.year || 'Project'}
             </span>
