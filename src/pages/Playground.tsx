@@ -4,6 +4,7 @@ import { GradientText } from '../components/GradientText'
 import { RotatingWord } from '../components/RotatingWord'
 import { SpotlightCard } from '../components/SpotlightCard'
 import { TiltCard } from '../components/TiltCard'
+import { GlareHover } from '../components/GlareHover'
 import { MagneticButton } from '../components/MagneticButton'
 import { AnimatedCounter } from '../components/AnimatedCounter'
 import { DotGrid } from '../components/DotGrid'
@@ -115,6 +116,18 @@ export default function Playground() {
                 <p className="text-sm text-white/50">Pointer-driven radial gradient, masked to the card.</p>
               </div>
             </SpotlightCard>
+          </Experiment>
+        </Reveal>
+
+        <Reveal>
+          <Experiment name="Glare sweep" note="A skewed band of light glides across the surface on hover, then slides back out. Pure CSS, clipped to the shape.">
+            <GlareHover className="w-full max-w-[260px] border border-white/10 bg-white/[0.03]">
+              <div className="flex flex-col gap-2 p-7">
+                <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[#DCF87C]">Sheen</span>
+                <p className="text-2xl font-bold leading-tight">Hover for the light</p>
+                <p className="text-sm text-white/50">Used across the work posters site-wide.</p>
+              </div>
+            </GlareHover>
           </Experiment>
         </Reveal>
 
