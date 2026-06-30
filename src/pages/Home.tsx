@@ -9,7 +9,7 @@ import { GradientText } from '../components/GradientText'
 import { RotatingWord } from '../components/RotatingWord'
 import { SpotlightCard } from '../components/SpotlightCard'
 import { Marquee } from '../components/Marquee'
-import { CardStack, type StackCard } from '../components/CardStack'
+import { HorizontalScroll, type HPanel } from '../components/HorizontalScroll'
 import { ScrollStack, type ScrollStackCard } from '../components/ScrollStack'
 import { TrueFocus } from '../components/TrueFocus'
 import { ScrollVelocity } from '../components/ScrollVelocity'
@@ -78,7 +78,7 @@ const PROCESS: ScrollStackCard[] = [
 ]
 
 // The breadth of what I actually build. Honest disciplines, not a single project.
-const RANGE: StackCard[] = [
+const RANGE: HPanel[] = [
   {
     tag: 'Frontend',
     title: 'Interfaces that feel right',
@@ -194,34 +194,30 @@ export default function Home() {
       </section>
 
       {/* RANGE */}
-      <section id="range" className="mx-auto w-full max-w-5xl px-6 py-24">
-        <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
-          <div>
-            <Reveal>
-              <Eyebrow>Range</Eyebrow>
-            </Reveal>
-            <Reveal delay={0.05}>
-              <h2 className="mt-6 font-display text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl">
-                More than <GradientText>one project.</GradientText>
-              </h2>
-            </Reveal>
-            <Reveal delay={0.1}>
-              <p className="mt-6 max-w-md text-lg leading-relaxed text-white/55">
-                Guided is what I am building, but it is not the whole of what I do. I work across the
-                stack and across disciplines. The deck cycles on its own, or take it through yourself.
-              </p>
-            </Reveal>
-            <Reveal delay={0.15}>
-              <TrueFocus
-                words={['Frontend', 'iOS', 'Backend', 'Applied AI', 'Motion']}
-                className="mt-9 font-display text-2xl font-semibold tracking-tight text-white sm:text-3xl"
-              />
-            </Reveal>
-          </div>
+      <section id="range" className="py-24">
+        <div className="mx-auto w-full max-w-4xl px-6">
+          <Reveal>
+            <Eyebrow>Range</Eyebrow>
+          </Reveal>
+          <Reveal delay={0.05}>
+            <h2 className="mt-6 font-display text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl">
+              More than <GradientText>one project.</GradientText>
+            </h2>
+          </Reveal>
           <Reveal delay={0.1}>
-            <CardStack cards={RANGE} />
+            <p className="mt-6 max-w-md text-lg leading-relaxed text-white/55">
+              Guided is what I am building, but it is not the whole of what I do. I work across the
+              stack and across disciplines. Scroll, and the range moves past.
+            </p>
+          </Reveal>
+          <Reveal delay={0.15}>
+            <TrueFocus
+              words={['Frontend', 'iOS', 'Backend', 'Applied AI', 'Motion']}
+              className="mt-9 font-display text-2xl font-semibold tracking-tight text-white sm:text-3xl"
+            />
           </Reveal>
         </div>
+        <HorizontalScroll panels={RANGE} className="mt-12" />
       </section>
 
       {/* PROCESS */}
