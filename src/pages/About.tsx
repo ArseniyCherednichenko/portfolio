@@ -11,6 +11,7 @@ import { VariableProximity } from '../components/VariableProximity'
 import { BentoGrid, BentoCell } from '../components/BentoGrid'
 import { AnimatedCounter } from '../components/AnimatedCounter'
 import { Accordion, type AccordionItem } from '../components/Accordion'
+import { Timeline } from '../components/Timeline'
 import { Seo } from '../components/Seo'
 import { useBerlinTime } from '../hooks/useBerlinTime'
 import { CASE_STUDIES } from '../data/projects'
@@ -226,7 +227,6 @@ function Snapshot() {
 }
 
 export default function About() {
-  const reduce = useReducedMotion()
   return (
     <>
       <Seo
@@ -339,24 +339,9 @@ export default function About() {
         <Reveal>
           <Eyebrow>Path</Eyebrow>
         </Reveal>
-        <ol className="mt-10 border-l border-white/10">
-          {PATH.map((step, i) => (
-            <Reveal key={step.what} delay={i * 0.05}>
-              <li className="relative pb-10 pl-8 last:pb-0">
-                <motion.span
-                  className="absolute -left-[6px] top-1.5 h-3 w-3 rounded-full bg-[#DCF87C]"
-                  initial={reduce ? false : { scale: 0 }}
-                  whileInView={reduce ? undefined : { scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, ease: EASE, delay: 0.1 + i * 0.05 }}
-                />
-                <span className="text-sm font-semibold uppercase tracking-[0.2em] text-white/40">{step.when}</span>
-                <h3 className="mt-1 text-2xl font-bold">{step.what}</h3>
-                <p className="mt-2 max-w-xl leading-relaxed text-white/55">{step.note}</p>
-              </li>
-            </Reveal>
-          ))}
-        </ol>
+        <Reveal delay={0.05}>
+          <Timeline items={PATH} className="mt-10" />
+        </Reveal>
       </section>
 
       {/* QUESTIONS */}
