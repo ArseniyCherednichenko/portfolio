@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import { useCommandPalette } from './CommandPalette'
 import { useContact } from './ContactDialog'
+import { MobileMenu } from './MobileMenu'
 
 // Floating translucent nav. Work, About, and Playground are real page links.
 const PAGES: ReadonlyArray<readonly [string, string]> = [
@@ -43,7 +44,7 @@ export function Nav() {
           type="button"
           onClick={open}
           aria-label="Open command palette"
-          className="flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3 py-1.5 text-sm text-white/50 transition hover:border-white/20 hover:text-white/80"
+          className="hidden items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3 py-1.5 text-sm text-white/50 transition hover:border-white/20 hover:text-white/80 sm:flex"
         >
           <svg
             width="14"
@@ -68,6 +69,7 @@ export function Nav() {
         >
           Get in touch
         </button>
+        <MobileMenu />
       </div>
     </nav>
   )
