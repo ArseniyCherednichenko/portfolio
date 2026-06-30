@@ -23,6 +23,7 @@ import { BentoGrid, BentoCell } from '../components/BentoGrid'
 import { Accordion } from '../components/Accordion'
 import { Dock, type DockItem } from '../components/Dock'
 import { Timeline, type TimelineItem } from '../components/Timeline'
+import { HorizontalScroll, type HPanel } from '../components/HorizontalScroll'
 import { GO_TARGETS, useShortcuts } from '../components/Keyboard'
 import { Seo } from '../components/Seo'
 import { GITHUB_URL } from '../data/contact'
@@ -52,6 +53,14 @@ const TIMELINE_STEPS: TimelineItem[] = [
   { when: 'Step two', what: 'The line draws down', note: 'As the block crosses the viewport, a lime gradient fills the spine with a glowing head at its tip.' },
   { when: 'Step three', what: 'Nodes light in turn', note: 'Each marker warms from grey to lime the moment the head reaches it, leading the eye one step at a time.' },
   { when: 'Step four', what: 'It settles', note: 'A spring smooths the progress, so the draw eases rather than snapping with the scroll.' },
+]
+
+const HSCROLL_PANELS: HPanel[] = [
+  { tag: 'Pin', title: 'The section sticks', body: 'When it reaches the top of the viewport, the section pins in place and stops travelling down.' },
+  { tag: 'Translate', title: 'Down becomes sideways', body: 'Your vertical scroll is mapped to horizontal travel, so the row of panels glides past instead.' },
+  { tag: 'Measure', title: 'Travel is measured', body: 'It reads the real track width against the window, so the distance adapts to panel count and screen size.' },
+  { tag: 'Spring', title: 'It eases, never snaps', body: 'A spring smooths the motion so the panels glide rather than jump frame to frame with the scroll.' },
+  { tag: 'Fallback', title: 'Calm under reduced motion', body: 'No pinning then — it becomes a plain, user-driven horizontal scroller with snap points, fully readable.' },
 ]
 
 function Experiment({
@@ -616,6 +625,27 @@ export default function Playground() {
               A vertical timeline whose lime spine draws itself down as the list scrolls through the viewport, a glowing
               head riding the tip, each node warming from grey to lime as the line reaches it. A spring eases the
               progress so it never snaps. Drives the About page Path. Reduced-motion renders it fully drawn and static.
+            </p>
+          </div>
+        </div>
+      </Reveal>
+
+      {/* FULL-WIDTH HORIZONTAL SCROLL */}
+      <Reveal>
+        <div className="mt-12">
+          <div className="rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-8 py-10 sm:px-12">
+            <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Sideways</span>
+            <p className="mt-3 max-w-md text-xl font-medium text-white/85 sm:text-2xl">
+              Keep scrolling down. The panels move across.
+            </p>
+          </div>
+          <HorizontalScroll panels={HSCROLL_PANELS} className="mt-6" />
+          <div className="mt-4 px-1">
+            <h3 className="text-base font-semibold">Pinned horizontal scroll</h3>
+            <p className="mt-1 text-sm leading-relaxed text-white/45">
+              The section pins to the viewport and maps vertical scroll to horizontal travel, so a row of panels glides
+              past as you scroll down. Travel is measured from the real track width, and a spring smooths it. Drives the
+              Home Range section. Reduced-motion gets a plain native scroller with snap points.
             </p>
           </div>
         </div>
