@@ -88,7 +88,7 @@ export function Timeline({
   items,
   className = '',
 }: {
-  items: TimelineItem[]
+  items: readonly TimelineItem[]
   className?: string
 }) {
   const reduce = useReducedMotion()
