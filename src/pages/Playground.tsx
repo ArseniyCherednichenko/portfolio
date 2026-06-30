@@ -22,6 +22,7 @@ import { LetterGlitch } from '../components/LetterGlitch'
 import { BentoGrid, BentoCell } from '../components/BentoGrid'
 import { Accordion } from '../components/Accordion'
 import { Dock, type DockItem } from '../components/Dock'
+import { Timeline, type TimelineItem } from '../components/Timeline'
 import { GO_TARGETS, useShortcuts } from '../components/Keyboard'
 import { Seo } from '../components/Seo'
 import { GITHUB_URL } from '../data/contact'
@@ -42,6 +43,15 @@ const DOCK_ITEMS: DockItem[] = [
   { label: 'Toolkit', to: '/toolkit', icon: ic('M14.5 6.5a3.5 3.5 0 0 1-4.7 3.3L5 14.6 9.4 19l4.8-4.8a3.5 3.5 0 0 0 .3-7.7Z') },
   { label: 'Contact', to: '/contact', icon: ic('M4 6h16v12H4z|m4 7 8 6 8-6') },
   { label: 'GitHub', href: GITHUB_URL, icon: ic('M9 19c-4 1.4-4-2-6-2.5|M15 21v-3.4a3 3 0 0 0-.8-2.3c2.7-.3 5.5-1.3 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.3 4.3 0 0 0-.1-3.2s-1-.3-3.4 1.3a11.6 11.6 0 0 0-6.2 0C8.3 1.9 7.3 2.2 7.3 2.2a4.3 4.3 0 0 0-.1 3.2A4.6 4.6 0 0 0 5.9 8.6c0 4.7 2.8 5.7 5.5 6a3 3 0 0 0-.8 2.3V21') },
+]
+
+// Generic steps to demo the scroll-linked timeline in isolation, without
+// borrowing the real About-page copy.
+const TIMELINE_STEPS: TimelineItem[] = [
+  { when: 'Step one', what: 'A faint spine waits', note: 'Before you scroll, the line is dim and every node sits grey and unlit.' },
+  { when: 'Step two', what: 'The line draws down', note: 'As the block crosses the viewport, a lime gradient fills the spine with a glowing head at its tip.' },
+  { when: 'Step three', what: 'Nodes light in turn', note: 'Each marker warms from grey to lime the moment the head reaches it, leading the eye one step at a time.' },
+  { when: 'Step four', what: 'It settles', note: 'A spring smooths the progress, so the draw eases rather than snapping with the scroll.' },
 ]
 
 function Experiment({
@@ -585,6 +595,27 @@ export default function Playground() {
               along a bell curve by its distance from the cursor and springs back as you leave, with a label rising on
               hover. The tiles are real links, so it actually gets you around. Reduced-motion drops the magnify for a
               plain, fully usable row.
+            </p>
+          </div>
+        </div>
+      </Reveal>
+
+      {/* FULL-WIDTH TIMELINE */}
+      <Reveal>
+        <div className="mt-12">
+          <div className="rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-8 py-12 sm:px-12">
+            <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Draw</span>
+            <p className="mt-3 max-w-md text-xl font-medium text-white/85 sm:text-2xl">
+              Scroll through it. The spine fills and the nodes catch.
+            </p>
+            <Timeline items={TIMELINE_STEPS} className="mt-10" />
+          </div>
+          <div className="mt-4 px-1">
+            <h3 className="text-base font-semibold">Scroll-linked timeline</h3>
+            <p className="mt-1 text-sm leading-relaxed text-white/45">
+              A vertical timeline whose lime spine draws itself down as the list scrolls through the viewport, a glowing
+              head riding the tip, each node warming from grey to lime as the line reaches it. A spring eases the
+              progress so it never snaps. Drives the About page Path. Reduced-motion renders it fully drawn and static.
             </p>
           </div>
         </div>
