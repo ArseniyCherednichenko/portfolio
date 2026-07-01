@@ -1,5 +1,7 @@
 import { useState } from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
 import { Reveal } from '../components/Reveal'
+import { GooeyTabs } from '../components/GooeyTabs'
 import { GradientText } from '../components/GradientText'
 import { RotatingWord } from '../components/RotatingWord'
 import { SpotlightCard } from '../components/SpotlightCard'
@@ -80,6 +82,60 @@ function Experiment({
       <div className="mt-4 px-1">
         <h3 className="text-base font-semibold">{name}</h3>
         <p className="mt-1 text-sm leading-relaxed text-white/45">{note}</p>
+      </div>
+    </div>
+  )
+}
+
+// Panels for the gooey-tabs demo. Honest and self-referential: each tab
+// describes a facet of how the effect itself is built, so nothing is claimed
+// that the component does not actually do.
+const GOO_PANELS: { label: string; title: string; body: string }[] = [
+  {
+    label: 'Blobs',
+    title: 'Two blobs, not one pill',
+    body: 'A snappy head jumps to the tab you pick; a laggier tail chases it. In the gap between them the selection reads as a single stretched shape.',
+  },
+  {
+    label: 'Goo',
+    title: 'Merged by a filter',
+    body: 'Both blobs live inside an SVG gooey filter: a blur fans them into halos, then a crushed alpha ramp fuses those halos wherever they overlap and keeps them crisp where they do not.',
+  },
+  {
+    label: 'Springs',
+    title: 'Timed by two springs',
+    body: 'The head and tail run on different spring stiffness, so the tail always trails a beat behind. That mismatch is what makes the shape drip forward instead of gliding rigidly.',
+  },
+  {
+    label: 'Reduced',
+    title: 'Calm fallback',
+    body: 'With reduced motion the goo and the tail both drop away. A single pill moves instantly under the active tab, and every label stays perfectly legible.',
+  },
+]
+
+function GooeyTabsDemo() {
+  const [active, setActive] = useState(0)
+  const panel = GOO_PANELS[active]
+  return (
+    <div className="flex flex-col items-center gap-8">
+      <GooeyTabs
+        tabs={GOO_PANELS.map((p) => p.label)}
+        value={active}
+        onChange={setActive}
+      />
+      <div className="relative min-h-[120px] w-full max-w-md text-center">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={active}
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <h4 className="font-display text-2xl font-semibold tracking-tight">{panel.title}</h4>
+            <p className="mt-3 text-sm leading-relaxed text-white/50">{panel.body}</p>
+          </motion.div>
+        </AnimatePresence>
       </div>
     </div>
   )
@@ -646,6 +702,23 @@ export default function Playground() {
               The section pins to the viewport and maps vertical scroll to horizontal travel, so a row of panels glides
               past as you scroll down. Travel is measured from the real track width, and a spring smooths it. Drives the
               Home Range section. Reduced-motion gets a plain native scroller with snap points.
+            </p>
+          </div>
+        </div>
+      </Reveal>
+
+      {/* FULL-WIDTH GOOEY TABS */}
+      <Reveal>
+        <div className="mt-12">
+          <div className="flex min-h-[300px] items-center justify-center rounded-3xl border border-white/10 bg-white/[0.02] px-6 py-14">
+            <GooeyTabsDemo />
+          </div>
+          <div className="mt-4 px-1">
+            <h3 className="text-base font-semibold">Liquid gooey tabs</h3>
+            <p className="mt-1 text-sm leading-relaxed text-white/45">
+              The active indicator is two lime blobs inside an SVG gooey filter, timed by two different springs so the
+              trailing blob stretches out of the old tab and drips into the new one before they merge. Labels sit above
+              the filter so text stays sharp. Reduced motion swaps it for a single instant pill.
             </p>
           </div>
         </div>
