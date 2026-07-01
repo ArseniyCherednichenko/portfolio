@@ -10,6 +10,7 @@ import { ScrollProgress } from './ScrollProgress'
 import { BackToTop } from './BackToTop'
 import { Cursor } from './Cursor'
 import { ClickSpark } from './ClickSpark'
+import { Preloader } from './Preloader'
 
 const PAGE_EASE = [0.16, 1, 0.3, 1] as const
 
@@ -59,6 +60,7 @@ export function Layout() {
           <BackToTop />
           <Cursor />
           <ClickSpark />
+          <Preloader />
         </div>
         </CommandPaletteProvider>
       </KeyboardProvider>
