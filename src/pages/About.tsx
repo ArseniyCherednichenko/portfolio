@@ -292,7 +292,12 @@ export default function About() {
         <Reveal>
           <div className="flex items-baseline justify-between gap-4">
             <Eyebrow>Now</Eyebrow>
-            <span className="text-sm text-white/35">Updated 2026</span>
+            <Link
+              to="/now"
+              className="text-sm text-white/40 underline-offset-4 transition-colors hover:text-[#DCF87C] hover:underline"
+            >
+              Full now page
+            </Link>
           </div>
         </Reveal>
         <div className="mt-8 grid gap-4 sm:grid-cols-2">
