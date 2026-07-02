@@ -4,6 +4,7 @@ import Home from './pages/Home'
 import About from './pages/About'
 import Work from './pages/Work'
 import Playground from './pages/Playground'
+import Writing from './pages/Writing'
 import Now from './pages/Now'
 import Toolkit from './pages/Toolkit'
 import WorkDetail from './pages/WorkDetail'
@@ -19,6 +20,7 @@ export default function App() {
         <Route path="about" element={<About />} />
         <Route path="work" element={<Work />} />
         <Route path="playground" element={<Playground />} />
+        <Route path="writing" element={<Writing />} />
         <Route path="now" element={<Now />} />
         <Route path="toolkit" element={<Toolkit />} />
         <Route path="work/:slug" element={<WorkDetail />} />
