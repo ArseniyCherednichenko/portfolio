@@ -7,6 +7,7 @@ import { RotatingWord } from '../components/RotatingWord'
 import { SpotlightCard } from '../components/SpotlightCard'
 import { TiltCard } from '../components/TiltCard'
 import { GlareHover } from '../components/GlareHover'
+import { BorderBeam } from '../components/BorderBeam'
 import { MagneticButton } from '../components/MagneticButton'
 import { AnimatedCounter } from '../components/AnimatedCounter'
 import { DotGrid } from '../components/DotGrid'
@@ -211,6 +212,19 @@ export default function Playground() {
             <div className="text-center">
               <AnimatedCounter value={2026} className="text-6xl font-bold tabular-nums sm:text-7xl" />
               <p className="mt-2 text-sm text-white/45">Eases from zero on reveal</p>
+            </div>
+          </Experiment>
+        </Reveal>
+
+        <Reveal delay={0.05}>
+          <Experiment name="Border beam" note="A comet of light laps the border on a loop. A conic gradient masked to a thin ring, its angle spun by a registered CSS property.">
+            <div className="relative w-full max-w-[260px] overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03]">
+              <div className="flex flex-col gap-2 p-7">
+                <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[#DCF87C]">Frame</span>
+                <p className="text-2xl font-bold leading-tight">Watch the edge</p>
+                <p className="text-sm text-white/50">The light traces the corners on a loop.</p>
+              </div>
+              <BorderBeam />
             </div>
           </Experiment>
         </Reveal>
