@@ -75,6 +75,22 @@ body.cursor-none * {
   }
 }
 
+/* BorderBeam — a light that travels around a rounded border. The registered
+   custom property lets the conic-gradient's start angle interpolate smoothly
+   (a plain CSS variable would jump). Reduced-motion users get a static ring
+   handled in the component, so this animation never runs for them. */
+@property --bb-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+@keyframes border-beam-spin {
+  to {
+    --bb-angle: 360deg;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
