@@ -4,6 +4,7 @@ import { Reveal } from '../components/Reveal'
 import { Eyebrow } from '../components/Eyebrow'
 import { GradientText } from '../components/GradientText'
 import { ChannelList } from '../components/ChannelList'
+import { BorderBeam } from '../components/BorderBeam'
 import { ContactForm } from '../components/ContactForm'
 import { SpotlightCard } from '../components/SpotlightCard'
 import { Seo } from '../components/Seo'
@@ -78,6 +79,8 @@ export default function Contact() {
                 <ChannelList />
               </div>
             </div>
+            {/* A slow lap of light frames the primary way to reach me. */}
+            <BorderBeam duration={7} />
           </SpotlightCard>
         </Reveal>
 
