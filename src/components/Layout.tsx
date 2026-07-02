@@ -79,6 +79,13 @@ function SiteFooter() {
       <p>
         Built by Arseniy Cherednichenko in Berlin · {year} ·{' '}
         <Link
+          to="/writing"
+          className="text-white/45 underline-offset-4 transition-colors hover:text-[#DCF87C] hover:underline"
+        >
+          Writing
+        </Link>
+        {' · '}
+        <Link
           to="/now"
           className="text-white/45 underline-offset-4 transition-colors hover:text-[#DCF87C] hover:underline"
         >
