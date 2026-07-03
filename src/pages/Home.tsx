@@ -13,6 +13,7 @@ import { Marquee } from '../components/Marquee'
 import { HorizontalScroll, type HPanel } from '../components/HorizontalScroll'
 import { ScrollStack, type ScrollStackCard } from '../components/ScrollStack'
 import { TrueFocus } from '../components/TrueFocus'
+import { SpotlightReveal } from '../components/SpotlightReveal'
 import { ScrollVelocity } from '../components/ScrollVelocity'
 import { FlowingMenu, type FlowingItem } from '../components/FlowingMenu'
 import { MagneticButton } from '../components/MagneticButton'
@@ -32,6 +33,7 @@ const SECTIONS = [
   { id: 'about', label: 'About' },
   { id: 'range', label: 'Range' },
   { id: 'process', label: 'Process' },
+  { id: 'ethos', label: 'Ethos' },
   { id: 'work', label: 'Work' },
   { id: 'toolkit', label: 'Toolkit' },
   { id: 'explore', label: 'Explore' },
@@ -247,6 +249,21 @@ export default function Home() {
           </Reveal>
         </div>
         <ScrollStack cards={PROCESS} />
+      </section>
+
+      {/* ETHOS — a statement you light up with the cursor */}
+      <section id="ethos" className="relative isolate overflow-hidden py-32">
+        <div className="mx-auto w-full max-w-4xl px-6">
+          <Reveal>
+            <Eyebrow>Ethos</Eyebrow>
+          </Reveal>
+          <SpotlightReveal
+            text="Good software should feel like someone cared. So I sweat the motion, the type, and the small moments no one notices, but everyone feels."
+            highlight={['cared', 'motion', 'type', 'feels']}
+            hint="Move your cursor across the words"
+            className="mt-8 max-w-3xl font-display text-3xl font-semibold leading-[1.18] tracking-tight sm:text-5xl sm:leading-[1.16]"
+          />
+        </div>
       </section>
 
       {/* WORK */}
