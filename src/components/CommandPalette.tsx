@@ -94,6 +94,7 @@ function Palette({ open, onClose }: { open: boolean; onClose: () => void }) {
       { id: 'writing', label: 'Writing', group: 'Pages', hint: 'notes, in progress', keywords: 'writing notes blog essays journal articles thoughts', run: () => go('/writing') },
       { id: 'contact-page', label: 'Contact', group: 'Pages', hint: 'reach me', keywords: 'contact email hire reach availability', run: () => go('/contact') },
       { id: 'colophon', label: 'Colophon', group: 'Pages', hint: 'how it is built', keywords: 'colophon stack build source open source craft typography fonts', run: () => go('/colophon') },
+      { id: 'resume', label: 'Résumé', group: 'Pages', hint: 'one-page CV, printable', keywords: 'resume cv curriculum vitae print pdf download experience hire', run: () => go('/resume') },
     ]
 
     const projects: Command[] = PROJECTS.filter((p) => !p.soon).map((p) => ({
