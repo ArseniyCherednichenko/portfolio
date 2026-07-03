@@ -19,6 +19,7 @@ import { CardStack } from '../components/CardStack'
 import { ScrollStack } from '../components/ScrollStack'
 import { ScrollReveal } from '../components/ScrollReveal'
 import { VariableProximity } from '../components/VariableProximity'
+import { SpotlightReveal } from '../components/SpotlightReveal'
 import { TrueFocus } from '../components/TrueFocus'
 import { FlowingMenu } from '../components/FlowingMenu'
 import { Threads } from '../components/Threads'
@@ -502,6 +503,28 @@ export default function Playground() {
               Each letter rides the variable Fraunces weight and optical-size axes, swelling toward the cursor and
               easing back as it leaves. Pure requestAnimationFrame, no per-letter React state. Reduced-motion gets a
               fixed-weight line.
+            </p>
+          </div>
+        </div>
+      </Reveal>
+
+      {/* FULL-WIDTH SPOTLIGHT REVEAL */}
+      <Reveal>
+        <div className="mt-12">
+          <div className="relative flex min-h-[320px] items-center justify-center overflow-hidden rounded-3xl border border-white/10 bg-white/[0.02] px-8 py-20 text-center sm:px-14">
+            <SpotlightReveal
+              text="Bring your own light. The words are already here, waiting in the dark for the cursor to find them."
+              highlight={['light.', 'dark', 'find']}
+              hint="Sweep the cursor across the line"
+              className="max-w-3xl font-display text-3xl font-semibold leading-[1.2] tracking-tight sm:text-5xl sm:leading-[1.18]"
+            />
+          </div>
+          <div className="mt-4 px-1">
+            <h3 className="text-base font-semibold">Cursor torch reveal</h3>
+            <p className="mt-1 text-sm leading-relaxed text-white/45">
+              A dim statement sits nearly dark until a soft torch of light, masked to the cursor, resolves the words
+              (and a few lime highlights) as you sweep across, then fades back out. A springed radial mask over a lit
+              copy of the text. Touch and reduced-motion get it fully lit.
             </p>
           </div>
         </div>
