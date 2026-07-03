@@ -101,3 +101,46 @@ body.cursor-none * {
     scroll-behavior: auto !important;
   }
 }
+
+/* Print — used by the /résumé page's "Save as PDF". The site is dark and full
+   of chrome (aurora, nav, custom cursor, footer); on paper none of that should
+   appear. We drop every direct child of the app shell except <main>, flatten
+   any leftover motion transforms so nothing prints faded or shifted, and let
+   the `.resume-print` sheet (styled with Tailwind `print:` utilities) carry the
+   document as clean ink on white. Any page prints cleanly this way; the résumé
+   is the one designed for it. */
+@media print {
+  @page {
+    margin: 16mm;
+  }
+
+  html,
+  body {
+    background: #fff !important;
+  }
+
+  /* Collapse the dark app shell and its full-height minimum. */
+  #top {
+    min-height: 0 !important;
+    background: #fff !important;
+  }
+
+  /* Everything in the shell except the routed page is chrome — hide it. */
+  #top > *:not(main) {
+    display: none !important;
+  }
+
+  /* Neutralise any scroll-reveal opacity/transform still in flight. */
+  main,
+  main * {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    animation: none !important;
+    box-shadow: none !important;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+}
