@@ -6,6 +6,7 @@ import { ProjectPoster } from '../components/ProjectPoster'
 import { GlareHover } from '../components/GlareHover'
 import { Reveal } from '../components/Reveal'
 import { GradientText } from '../components/GradientText'
+import { SplitText } from '../components/SplitText'
 import { RotatingWord } from '../components/RotatingWord'
 import { SpotlightCard } from '../components/SpotlightCard'
 import { Marquee } from '../components/Marquee'
@@ -126,16 +127,23 @@ export default function Home() {
         >
           Berlin · builder · founder
         </motion.p>
-        <motion.h1
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.05, ease: EASE }}
-          className="font-display text-6xl font-bold leading-[1.02] tracking-tight sm:text-8xl"
-        >
-          <GradientText>Arseniy</GradientText>
-          <br />
-          Cherednichenko
-        </motion.h1>
+        <h1 className="font-display text-6xl font-bold leading-[1.02] tracking-tight sm:text-8xl">
+          <SplitText
+            as="span"
+            text="Arseniy"
+            gradient
+            trigger="mount"
+            delay={0.15}
+            className="block"
+          />
+          <SplitText
+            as="span"
+            text="Cherednichenko"
+            trigger="mount"
+            delay={0.36}
+            className="block"
+          />
+        </h1>
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
