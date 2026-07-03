@@ -14,6 +14,7 @@ import { DotGrid } from '../components/DotGrid'
 import { MagnetLines } from '../components/MagnetLines'
 import { ScrollVelocity } from '../components/ScrollVelocity'
 import { DecryptedText } from '../components/DecryptedText'
+import { SplitText } from '../components/SplitText'
 import { CardStack } from '../components/CardStack'
 import { ScrollStack } from '../components/ScrollStack'
 import { ScrollReveal } from '../components/ScrollReveal'
@@ -84,6 +85,27 @@ function Experiment({
         <h3 className="text-base font-semibold">{name}</h3>
         <p className="mt-1 text-sm leading-relaxed text-white/45">{note}</p>
       </div>
+    </div>
+  )
+}
+
+// A replayable SplitText demo. Bumping the key remounts the lines so the
+// staggered entrance runs again on demand.
+function SplitTextDemo() {
+  const [run, setRun] = useState(0)
+  return (
+    <div className="flex w-full flex-col items-center gap-6 text-center">
+      <div key={run} className="font-display text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl">
+        <SplitText as="span" text="Made to" gradient trigger="mount" className="block" />
+        <SplitText as="span" text="move." trigger="mount" delay={0.24} className="block" />
+      </div>
+      <button
+        type="button"
+        onClick={() => setRun((n) => n + 1)}
+        className="rounded-full border border-white/15 px-5 py-2 text-sm font-semibold text-white/80 transition-colors hover:bg-white/[0.06] hover:text-white"
+      >
+        Replay
+      </button>
     </div>
   )
 }
@@ -256,6 +278,12 @@ export default function Playground() {
                 <DecryptedText text="hover to replay" speed={26} />
               </div>
             </div>
+          </Experiment>
+        </Reveal>
+
+        <Reveal>
+          <Experiment name="Split-text reveal" note="Each character lifts and fades into place, one after the next. Hit replay to run it again.">
+            <SplitTextDemo />
           </Experiment>
         </Reveal>
 
