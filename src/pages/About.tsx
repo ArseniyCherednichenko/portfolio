@@ -12,6 +12,8 @@ import { BentoGrid, BentoCell } from '../components/BentoGrid'
 import { AnimatedCounter } from '../components/AnimatedCounter'
 import { Accordion, type AccordionItem } from '../components/Accordion'
 import { Timeline } from '../components/Timeline'
+import { ProfileCard } from '../components/ProfileCard'
+import { useContact } from '../components/ContactDialog'
 import { Seo } from '../components/Seo'
 import { useBerlinTime } from '../hooks/useBerlinTime'
 import { CASE_STUDIES } from '../data/projects'
@@ -227,6 +229,7 @@ function Snapshot() {
 }
 
 export default function About() {
+  const { open: openContact } = useContact()
   return (
     <>
       <Seo
@@ -234,37 +237,62 @@ export default function About() {
         description="Arseniy Cherednichenko — builder and co-founder of Guided in Berlin. What I am working on now, how I work, and the path that got me here."
       />
       {/* INTRO */}
-      <header className="mx-auto w-full max-w-4xl px-6 pb-16 pt-36 sm:pt-44">
+      <header className="mx-auto grid w-full max-w-6xl items-center gap-14 px-6 pb-16 pt-36 sm:pt-44 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16">
+        <div>
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: EASE }}
+          >
+            <Eyebrow>About</Eyebrow>
+          </motion.div>
+          <motion.h1
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.05, ease: EASE }}
+            className="mt-6 font-display text-5xl font-bold leading-[1.05] tracking-tight sm:text-7xl"
+          >
+            A builder who <GradientText>sweats the details.</GradientText>
+          </motion.h1>
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.15, ease: EASE }}
+            className="mt-8 space-y-6 text-lg leading-relaxed text-white/60"
+          >
+            <p>
+              I am Arseniy Cherednichenko, a builder and founder based in Berlin. I co-founded Guided, a Socratic
+              AI tutor, and I work across the whole stack: React and TypeScript on the web, SwiftUI on iOS, and a lot
+              of applied AI in between.
+            </p>
+            <p>
+              I care about products that feel effortless. The kind where the motion, the typography, and the small
+              moments add up to something people trust. This site is where I keep that craft sharp in the open.
+            </p>
+          </motion.div>
+        </div>
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: EASE }}
+          initial={{ opacity: 0, y: 28, scale: 0.96 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 0.8, delay: 0.2, ease: EASE }}
+          className="flex justify-center lg:justify-end"
         >
-          <Eyebrow>About</Eyebrow>
-        </motion.div>
-        <motion.h1
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.05, ease: EASE }}
-          className="mt-6 font-display text-5xl font-bold leading-[1.05] tracking-tight sm:text-7xl"
-        >
-          A builder who <GradientText>sweats the details.</GradientText>
-        </motion.h1>
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.15, ease: EASE }}
-          className="mt-8 grid gap-6 text-lg leading-relaxed text-white/60 sm:grid-cols-2"
-        >
-          <p>
-            I am Arseniy Cherednichenko, a builder and founder based in Berlin. I co-founded Guided, a Socratic
-            AI tutor, and I work across the whole stack: React and TypeScript on the web, SwiftUI on iOS, and a lot
-            of applied AI in between.
-          </p>
-          <p>
-            I care about products that feel effortless. The kind where the motion, the typography, and the small
-            moments add up to something people trust. This site is where I keep that craft sharp in the open.
-          </p>
+          <ProfileCard
+            name="Arseniy Cherednichenko"
+            role="Builder - Co-founder of Guided. I work across web, native iOS, and applied AI."
+            location="Berlin, Germany"
+            initials="AC"
+            status="Building"
+            tags={['Frontend', 'Native iOS', 'Backend', 'Applied AI', 'Motion']}
+            action={
+              <MagneticButton
+                onClick={openContact}
+                className="w-full rounded-full bg-[#DCF87C] px-5 py-2.5 text-center text-sm font-semibold text-black transition-colors hover:bg-[#e6ff8f]"
+              >
+                Get in touch
+              </MagneticButton>
+            }
+          />
         </motion.div>
       </header>
 
