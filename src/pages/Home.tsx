@@ -18,6 +18,7 @@ import { ScrollVelocity } from '../components/ScrollVelocity'
 import { FlowingMenu, type FlowingItem } from '../components/FlowingMenu'
 import { MagneticButton } from '../components/MagneticButton'
 import { HeroOrbit } from '../components/HeroOrbit'
+import { CircularText } from '../components/CircularText'
 import { MagnetLines } from '../components/MagnetLines'
 import { ScrollCue } from '../components/ScrollCue'
 import { Eyebrow } from '../components/Eyebrow'
@@ -180,6 +181,33 @@ export default function Home() {
           </Link>
         </motion.div>
         <ScrollCue />
+        {/* Rotating seal — a premium scroll affordance, lg-only so it never
+            crowds the mobile hero, links down to the first section. */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, delay: 0.6, ease: EASE }}
+          className="pointer-events-none absolute bottom-10 right-8 hidden lg:block"
+        >
+          <div className="pointer-events-auto">
+            <CircularText
+              href="#about"
+              label="Scroll to explore"
+              text="SCROLL TO EXPLORE · SCROLL TO EXPLORE · "
+              radius={54}
+              spin={24}
+            >
+              <motion.span
+                aria-hidden
+                className="block text-2xl leading-none"
+                animate={{ y: [0, 4, 0] }}
+                transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}
+              >
+                &darr;
+              </motion.span>
+            </CircularText>
+          </div>
+        </motion.div>
       </header>
 
       {/* ABOUT */}
