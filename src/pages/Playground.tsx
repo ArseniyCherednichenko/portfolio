@@ -25,6 +25,7 @@ import { TrueFocus } from '../components/TrueFocus'
 import { FlowingMenu } from '../components/FlowingMenu'
 import { Threads } from '../components/Threads'
 import { LetterGlitch } from '../components/LetterGlitch'
+import { MetaBalls } from '../components/MetaBalls'
 import { BentoGrid, BentoCell } from '../components/BentoGrid'
 import { Accordion } from '../components/Accordion'
 import { Dock, type DockItem } from '../components/Dock'
@@ -793,6 +794,34 @@ export default function Playground() {
               The active indicator is two lime blobs inside an SVG gooey filter, timed by two different springs so the
               trailing blob stretches out of the old tab and drips into the new one before they merge. Labels sit above
               the filter so text stays sharp. Reduced motion swaps it for a single instant pill.
+            </p>
+          </div>
+        </div>
+      </Reveal>
+
+      {/* FULL-WIDTH META BALLS */}
+      <Reveal>
+        <div className="mt-12">
+          <div className="relative h-[380px] overflow-hidden rounded-3xl border border-white/10 bg-[#0b0b0b]">
+            <div className="absolute inset-0 [mask-image:radial-gradient(120%_120%_at_50%_50%,#000_55%,transparent_100%)]">
+              <MetaBalls />
+            </div>
+            <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center text-center">
+              <span className="text-xs font-semibold uppercase tracking-[0.3em] text-black/70 mix-blend-hard-light">
+                Liquid field
+              </span>
+              <p className="mt-3 max-w-md px-6 text-xl font-medium text-white/70 sm:text-2xl">
+                Move across the blobs and watch them merge.
+              </p>
+            </div>
+          </div>
+          <div className="mt-4 px-1">
+            <h3 className="text-base font-semibold">Gooey metaballs</h3>
+            <p className="mt-1 text-sm leading-relaxed text-white/45">
+              Lime blobs drift on their own paths inside an SVG gooey filter, so where two meet they fuse with a
+              stretching liquid neck instead of overlapping as flat discs. A cursor blob eases toward the pointer and
+              gathers the drifters as it passes. Attributes are written straight from requestAnimationFrame, no
+              per-blob React state. Reduced motion gets a single calm static arrangement.
             </p>
           </div>
         </div>
