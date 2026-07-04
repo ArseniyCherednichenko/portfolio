@@ -17,6 +17,7 @@ import { ScrollVelocity } from '../components/ScrollVelocity'
 import { DecryptedText } from '../components/DecryptedText'
 import { SplitText } from '../components/SplitText'
 import { CardStack } from '../components/CardStack'
+import { ProfileCard } from '../components/ProfileCard'
 import { ScrollStack } from '../components/ScrollStack'
 import { ScrollReveal } from '../components/ScrollReveal'
 import { VariableProximity } from '../components/VariableProximity'
@@ -369,6 +370,22 @@ export default function Playground() {
                 { tag: 'Springs', title: 'Every move is eased', body: 'The recede-to-back transition runs on a shared motion curve.' },
                 { tag: 'Control', title: 'Yours to drive', body: 'Click, tab to focus, or use the dots. It pauses while you do.' },
               ]}
+            />
+          </Experiment>
+        </Reveal>
+
+        <Reveal>
+          <Experiment
+            name="Holographic profile card"
+            note="An identity card that tilts toward the cursor while an iridescent film sweeps across it, brightening as you move off-centre. The same card anchors the About page."
+          >
+            <ProfileCard
+              name="Arseniy Cherednichenko"
+              role="Builder - Co-founder of Guided. Web, native iOS, and applied AI."
+              location="Berlin, Germany"
+              initials="AC"
+              status="Building"
+              tags={['Frontend', 'Native iOS', 'Motion']}
             />
           </Experiment>
         </Reveal>
