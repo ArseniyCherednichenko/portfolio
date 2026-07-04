@@ -179,20 +179,26 @@ export default function Playground() {
         description="A gallery of live motion experiments by Arseniy Cherednichenko — tilt cards, spotlight glows, decrypt text, an interactive dot field, and more."
       />
       {/* HEADER */}
-      <Reveal>
-        <p className="text-sm font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Playground</p>
-      </Reveal>
-      <Reveal delay={0.05}>
-        <h1 className="mt-5 max-w-3xl font-display text-5xl font-bold leading-[1.05] tracking-tight sm:text-7xl">
-          Motion, <GradientText>up close.</GradientText>
-        </h1>
-      </Reveal>
-      <Reveal delay={0.1}>
-        <p className="mt-6 max-w-xl text-lg leading-relaxed text-white/55">
-          A workbench for the interaction details I care about. Every piece here is hand-built with React and Framer
-          Motion, and every one respects reduced-motion. Hover, click, and poke around.
-        </p>
-      </Reveal>
+      <div className="relative isolate">
+        {/* A faint gooey field drifts behind the title so the page opens in motion. */}
+        <div className="pointer-events-none absolute -top-24 right-0 -z-10 h-[380px] w-[min(560px,90%)] opacity-30 [mask-image:radial-gradient(120%_100%_at_70%_30%,#000_35%,transparent_75%)]">
+          <MetaBalls count={6} />
+        </div>
+        <Reveal>
+          <p className="text-sm font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Playground</p>
+        </Reveal>
+        <Reveal delay={0.05}>
+          <h1 className="mt-5 max-w-3xl font-display text-5xl font-bold leading-[1.05] tracking-tight sm:text-7xl">
+            Motion, <GradientText>up close.</GradientText>
+          </h1>
+        </Reveal>
+        <Reveal delay={0.1}>
+          <p className="mt-6 max-w-xl text-lg leading-relaxed text-white/55">
+            A workbench for the interaction details I care about. Every piece here is hand-built with React and Framer
+            Motion, and every one respects reduced-motion. Hover, click, and poke around.
+          </p>
+        </Reveal>
+      </div>
 
       {/* GRID */}
       <div className="mt-16 grid gap-x-8 gap-y-12 sm:grid-cols-2">
