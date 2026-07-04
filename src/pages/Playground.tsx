@@ -8,6 +8,7 @@ import { SpotlightCard } from '../components/SpotlightCard'
 import { TiltCard } from '../components/TiltCard'
 import { GlareHover } from '../components/GlareHover'
 import { BorderBeam } from '../components/BorderBeam'
+import { CircularText } from '../components/CircularText'
 import { MagneticButton } from '../components/MagneticButton'
 import { AnimatedCounter } from '../components/AnimatedCounter'
 import { DotGrid } from '../components/DotGrid'
@@ -249,6 +250,14 @@ export default function Playground() {
               </div>
               <BorderBeam />
             </div>
+          </Experiment>
+        </Reveal>
+
+        <Reveal delay={0.05}>
+          <Experiment name="Circular text" note="A string laid around a ring that rotates on a constant loop. Each glyph is aria-hidden; the real label is read once. Drives the hero's scroll seal.">
+            <CircularText text="CRAFT · MOTION · DETAIL · " radius={52} spin={18} label="Craft, motion, detail">
+              <span aria-hidden className="block h-2.5 w-2.5 rounded-full bg-[#DCF87C]" />
+            </CircularText>
           </Experiment>
         </Reveal>
 
