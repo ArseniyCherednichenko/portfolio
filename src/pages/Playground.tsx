@@ -26,6 +26,7 @@ import { SpotlightReveal } from '../components/SpotlightReveal'
 import { TrueFocus } from '../components/TrueFocus'
 import { FlowingMenu } from '../components/FlowingMenu'
 import { Threads } from '../components/Threads'
+import { Beams } from '../components/Beams'
 import { LetterGlitch } from '../components/LetterGlitch'
 import { MetaBalls } from '../components/MetaBalls'
 import { BentoGrid, BentoCell } from '../components/BentoGrid'
@@ -635,6 +636,29 @@ export default function Playground() {
               <p className="mt-1 text-sm leading-relaxed text-white/45">
                 Travelling sine waves on a single canvas; the threads nearest the pointer bulge away and warm lime.
                 Backs the 404 page. Reduced-motion gets a calm static set of waves.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH BEAMS */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="relative h-[340px] overflow-hidden rounded-3xl border border-white/10 bg-[#0a0a0a]">
+              <Beams />
+              <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Light field</span>
+                <p className="mt-3 max-w-md px-6 text-xl font-medium text-white/80 sm:text-2xl">
+                  Shafts of light lean toward your cursor.
+                </p>
+              </div>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Tilted light-shaft field</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                Soft vertical gradients drawn with additive blending on one tilted canvas, so overlaps glow like light
+                through blinds. The beams sway, and the ones nearest the pointer brighten and warm lime. Backs the
+                Toolkit page. Reduced-motion gets a single calm static frame.
               </p>
             </div>
           </div>
