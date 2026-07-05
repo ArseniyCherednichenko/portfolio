@@ -18,6 +18,7 @@ import { DecryptedText } from '../components/DecryptedText'
 import { SplitText } from '../components/SplitText'
 import { CardStack } from '../components/CardStack'
 import { ProfileCard } from '../components/ProfileCard'
+import { PixelTransition } from '../components/PixelTransition'
 import { ScrollStack } from '../components/ScrollStack'
 import { ScrollReveal } from '../components/ScrollReveal'
 import { VariableProximity } from '../components/VariableProximity'
@@ -472,6 +473,32 @@ export default function Playground() {
                 initials="AC"
                 status="Building"
                 tags={['Frontend', 'Native iOS', 'Motion']}
+              />
+            </Experiment>
+          </Reveal>
+
+          <Reveal delay={0.05}>
+            <Experiment
+              name="Pixel dissolve"
+              note="Hover and a grid of squares flashes on in a scattered order to cover the card, swaps the face underneath at the peak, then flashes back off. The same reveal sits on every Work poster."
+            >
+              <PixelTransition
+                className="aspect-[4/3] w-full max-w-[260px] border border-white/10"
+                gridSize={10}
+                front={
+                  <div className="flex h-full w-full flex-col justify-between rounded-2xl bg-white/[0.03] p-6">
+                    <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[#DCF87C]">Pixels</span>
+                    <p className="font-display text-2xl font-bold leading-tight">Hover to dissolve</p>
+                    <p className="text-sm text-white/50">A grid, not a fade.</p>
+                  </div>
+                }
+                back={
+                  <div className="flex h-full w-full flex-col justify-between rounded-2xl bg-gradient-to-br from-[#DCF87C] to-[#c2e85a] p-6 text-black">
+                    <span className="text-xs font-semibold uppercase tracking-[0.2em] text-black/60">Revealed</span>
+                    <p className="font-display text-2xl font-bold leading-tight">The other face</p>
+                    <p className="text-sm font-medium text-black/70">Move away to flip it back.</p>
+                  </div>
+                }
               />
             </Experiment>
           </Reveal>
