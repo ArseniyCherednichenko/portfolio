@@ -6,7 +6,7 @@ import { GradientText } from '../components/GradientText'
 import { MagneticButton } from '../components/MagneticButton'
 import { AnimatedCounter } from '../components/AnimatedCounter'
 import { ProjectPoster } from '../components/ProjectPoster'
-import { GlareHover } from '../components/GlareHover'
+import { PixelTransition } from '../components/PixelTransition'
 import { Seo } from '../components/Seo'
 import { PROJECTS, CASE_STUDIES, type Project } from '../data/projects'
 
@@ -88,12 +88,28 @@ function WorkRow({ project, index }: { project: Project; index: number }) {
           </span>
         </div>
 
-        {/* Generative poster preview, lifts a touch on hover. */}
+        {/* Generative poster preview. Hover it and the pixels dissolve to a
+            lime card carrying a highlight — the same treatment on every real
+            project, so no single one is framed as the whole story. */}
         <div className="hidden w-40 shrink-0 self-center md:block lg:w-52">
           <div className="transition-transform duration-500 ease-out group-hover:-translate-y-1">
-            <GlareHover trigger="group" rounded="rounded-2xl">
-              <ProjectPoster project={project} className="aspect-[4/3] w-full" rounded="rounded-2xl" />
-            </GlareHover>
+            <PixelTransition
+              className="aspect-[4/3] w-full"
+              front={<ProjectPoster project={project} className="h-full w-full" rounded="rounded-2xl" />}
+              back={
+                <div className="flex h-full w-full flex-col justify-between rounded-2xl bg-gradient-to-br from-[#DCF87C] to-[#c2e85a] p-4 text-black">
+                  <span className="text-[10px] font-semibold uppercase tracking-[0.22em] text-black/60">
+                    {project.year}
+                  </span>
+                  <p className="font-display text-sm font-bold leading-snug">
+                    {project.highlights?.[0] ?? project.blurb}
+                  </p>
+                  <span className="inline-flex items-center gap-1 text-xs font-semibold">
+                    Case study <span aria-hidden>-&gt;</span>
+                  </span>
+                </div>
+              }
+            />
           </div>
         </div>
       </div>
