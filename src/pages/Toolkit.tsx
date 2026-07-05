@@ -6,6 +6,7 @@ import { GradientText } from '../components/GradientText'
 import { SpotlightCard } from '../components/SpotlightCard'
 import { MagneticButton } from '../components/MagneticButton'
 import { AnimatedCounter } from '../components/AnimatedCounter'
+import { Beams } from '../components/Beams'
 import { Seo } from '../components/Seo'
 import { TOOLKIT, TOOL_COUNT, type Tool } from '../data/toolkit'
 
@@ -42,7 +43,16 @@ export default function Toolkit() {
         description="The languages, frameworks, and tools Arseniy Cherednichenko builds with — and an honest note on where each one fits."
       />
       {/* INTRO */}
-      <header className="mx-auto w-full max-w-4xl px-6 pb-12 pt-36 sm:pt-44">
+      <header className="relative isolate overflow-hidden pb-12 pt-36 sm:pt-44">
+        {/* Light shafts drifting behind the title — this page's ambient layer,
+            radial-masked so it fades into the dark and never fights the copy. */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 -z-10 opacity-70 [mask-image:radial-gradient(ellipse_at_50%_35%,black,transparent_75%)]"
+        >
+          <Beams />
+        </div>
+        <div className="mx-auto w-full max-w-4xl px-6">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
@@ -84,6 +94,7 @@ export default function Toolkit() {
             day to day
           </span>
         </motion.div>
+        </div>
       </header>
 
       {/* GROUPS */}
