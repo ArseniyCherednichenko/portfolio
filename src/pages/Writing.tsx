@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { Reveal } from '../components/Reveal'
 import { Eyebrow } from '../components/Eyebrow'
 import { GradientText } from '../components/GradientText'
+import { PixelTrail } from '../components/PixelTrail'
 import { Seo } from '../components/Seo'
 import { NOTES, NOTE_TAGS, type Note, type NoteTag } from '../data/notes'
 
@@ -121,7 +122,14 @@ export default function Writing() {
       />
 
       {/* INTRO */}
-      <header className="mx-auto w-full max-w-4xl px-6 pb-12 pt-36 sm:pt-44">
+      <header className="relative isolate mx-auto w-full max-w-4xl px-6 pb-12 pt-36 sm:pt-44">
+        {/* Ambient pixel trail behind the title: it lights up in the cursor's
+            wake as you move toward reading, echoing notes being set a piece at a
+            time. pointer-events-none + window listener so the copy stays
+            selectable; radial-masked to fade into the page. */}
+        <div className="pointer-events-none absolute inset-0 -z-10 opacity-60 [mask-image:radial-gradient(120%_90%_at_20%_25%,#000_0%,transparent_70%)]">
+          <PixelTrail listen="window" gap={26} radius={46} />
+        </div>
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}

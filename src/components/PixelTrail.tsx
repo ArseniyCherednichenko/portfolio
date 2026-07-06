@@ -21,6 +21,7 @@ export function PixelTrail({
   radius = 42,
   decay = 0.9,
   color = '220,248,124',
+  listen = 'self',
 }: {
   className?: string
   /** Distance between pixel centres, px. */
@@ -33,6 +34,12 @@ export function PixelTrail({
   decay?: number
   /** Ignited pixel colour as an "r,g,b" string. */
   color?: string
+  /**
+   * Where to read the pointer. `'self'` listens on the canvas (an interactive
+   * panel). `'window'` listens globally, so the canvas can stay
+   * `pointer-events-none` behind selectable copy as an ambient layer.
+   */
+  listen?: 'self' | 'window'
 }) {
   const ref = useRef<HTMLCanvasElement>(null)
   const reduce = useReducedMotion()
@@ -168,19 +175,20 @@ export function PixelTrail({
       return () => ro.disconnect()
     }
 
-    canvas.addEventListener('pointermove', onMove)
-    canvas.addEventListener('pointerleave', onLeave)
+    const target: Window | HTMLCanvasElement = listen === 'window' ? window : canvas
+    target.addEventListener('pointermove', onMove as EventListener)
+    target.addEventListener('pointerleave', onLeave)
     const ro = new ResizeObserver(() => build())
     ro.observe(canvas)
     raf = requestAnimationFrame(frame)
 
     return () => {
       cancelAnimationFrame(raf)
-      canvas.removeEventListener('pointermove', onMove)
-      canvas.removeEventListener('pointerleave', onLeave)
+      target.removeEventListener('pointermove', onMove as EventListener)
+      target.removeEventListener('pointerleave', onLeave)
       ro.disconnect()
     }
-  }, [reduce, gap, size, radius, decay, color])
+  }, [reduce, gap, size, radius, decay, color, listen])
 
   return <canvas ref={ref} className={`h-full w-full ${className}`} aria-hidden="true" />
 }
