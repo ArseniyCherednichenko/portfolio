@@ -29,6 +29,7 @@ import { Threads } from '../components/Threads'
 import { Beams } from '../components/Beams'
 import { LetterGlitch } from '../components/LetterGlitch'
 import { MetaBalls } from '../components/MetaBalls'
+import { PixelTrail } from '../components/PixelTrail'
 import { BentoGrid, BentoCell } from '../components/BentoGrid'
 import { Accordion } from '../components/Accordion'
 import { Dock, type DockItem } from '../components/Dock'
@@ -711,6 +712,30 @@ export default function Playground() {
                 stretching liquid neck instead of overlapping as flat discs. A cursor blob eases toward the pointer and
                 gathers the drifters as it passes. Attributes are written straight from requestAnimationFrame, no
                 per-blob React state. Reduced motion gets a single calm static arrangement.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH PIXEL TRAIL */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="relative h-[340px] overflow-hidden rounded-3xl border border-white/10 bg-[#0a0a0a]">
+              <PixelTrail gap={22} radius={48} />
+              <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Pixel field</span>
+                <p className="mt-3 max-w-md px-6 text-xl font-medium text-white/80 sm:text-2xl">
+                  Sweep across the grid and leave a trail.
+                </p>
+              </div>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Cursor pixel trail</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                A grid of squares on one canvas, each holding a heat value. The pointer paints heat along its path,
+                interpolated between frames so a fast sweep leaves no gaps, and every cell cools a little each frame, so
+                the field glows lime in your wake and fades behind you. Backs the Writing page title. Reduced-motion gets
+                a single calm static grid.
               </p>
             </div>
           </div>
