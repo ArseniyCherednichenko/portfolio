@@ -56,17 +56,26 @@ function TagFilter({
   )
 }
 
-// A single note card. Every note is currently `planned`, so the card is a
-// calm, non-clickable surface with an honest "Draft" marker — no fake link,
-// no fake date, no invented content.
+// A single note card. Every note is currently `planned`, so it links to its
+// honest draft page — an outline of intent, never a fabricated finished post.
+// No fake date, no invented body: the "Draft" marker and the detail page tell
+// the truth about where each piece stands.
 function NoteCard({ note }: { note: Note }) {
   const planned = note.status === 'planned'
   return (
-    <article className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] p-6 transition-colors hover:border-white/20 sm:p-7">
+    <Link
+      to={`/writing/${note.slug}`}
+      className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] p-6 transition-colors hover:border-white/20 sm:p-7"
+    >
       {/* Faint lime wash that warms in on hover. */}
       <span
         aria-hidden
         className="pointer-events-none absolute inset-0 bg-gradient-to-br from-[#DCF87C]/[0.06] to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+      />
+      {/* Lime edge that grows in on hover, echoing the Work ledger. */}
+      <span
+        aria-hidden
+        className="absolute left-0 top-0 h-full w-[3px] origin-top scale-y-0 rounded-full bg-[#DCF87C] transition-transform duration-500 ease-out group-hover:scale-y-100"
       />
       <div className="relative flex items-center justify-between gap-4">
         <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[#DCF87C]/80">{note.tag}</span>
@@ -80,15 +89,18 @@ function NoteCard({ note }: { note: Note }) {
         )}
       </div>
 
-      <h2 className="relative mt-5 font-display text-2xl font-bold leading-tight tracking-tight text-white/90 sm:text-[1.7rem]">
+      <h2 className="relative mt-5 font-display text-2xl font-bold leading-tight tracking-tight text-white/90 transition-transform duration-500 ease-out group-hover:translate-x-1 sm:text-[1.7rem]">
         {note.title}
       </h2>
       <p className="relative mt-3 flex-1 text-sm leading-relaxed text-white/55">{note.summary}</p>
 
-      <span className="relative mt-6 text-xs font-medium uppercase tracking-[0.18em] text-white/30">
-        {planned ? 'Writing soon' : 'Read'}
+      <span className="relative mt-6 inline-flex items-center gap-2 text-xs font-medium uppercase tracking-[0.18em] text-white/40 transition-colors group-hover:text-[#DCF87C]">
+        {planned ? 'See the outline' : 'Read'}
+        <span aria-hidden className="transition-transform duration-300 ease-out group-hover:translate-x-1">
+          -&gt;
+        </span>
       </span>
-    </article>
+    </Link>
   )
 }
 
