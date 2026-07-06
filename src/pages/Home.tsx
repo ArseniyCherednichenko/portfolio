@@ -12,6 +12,7 @@ import { SpotlightCard } from '../components/SpotlightCard'
 import { Marquee } from '../components/Marquee'
 import { HorizontalScroll, type HPanel } from '../components/HorizontalScroll'
 import { ScrollStack, type ScrollStackCard } from '../components/ScrollStack'
+import { CircularGallery, type GalleryItem } from '../components/CircularGallery'
 import { TrueFocus } from '../components/TrueFocus'
 import { SpotlightReveal } from '../components/SpotlightReveal'
 import { ScrollVelocity } from '../components/ScrollVelocity'
@@ -36,6 +37,7 @@ const SECTIONS = [
   { id: 'process', label: 'Process' },
   { id: 'ethos', label: 'Ethos' },
   { id: 'work', label: 'Work' },
+  { id: 'playground', label: 'Playground' },
   { id: 'toolkit', label: 'Toolkit' },
   { id: 'explore', label: 'Explore' },
   { id: 'contact', label: 'Contact' },
@@ -108,6 +110,46 @@ const RANGE: HPanel[] = [
     tag: 'Motion and design',
     title: 'Craft in the small moments',
     body: 'The typography, the timing, the spacing between things. Hand-built, never templated, always reduced-motion aware.',
+  },
+]
+
+// A taste of the Playground, foregrounded on the home page so the site reads as
+// a body of craft, not one project. Each card leads into a real category there.
+const FEATURED: GalleryItem[] = [
+  {
+    tag: 'Type in motion',
+    title: 'Text that assembles',
+    body: 'Split-character reveals, decrypting glyphs, cursor-pressure display type. Headlines that arrive with intent.',
+    to: '/playground#type',
+    cta: 'See type',
+  },
+  {
+    tag: 'Surfaces',
+    title: 'Cards that respond',
+    body: 'Spotlight glows, real 3D tilt, pixel dissolves. Surfaces that lean toward the cursor as you move.',
+    to: '/playground#cards',
+    cta: 'See surfaces',
+  },
+  {
+    tag: 'Fields',
+    title: 'Fields that follow',
+    body: 'Gooey metaballs, a magnetic needle grid, a pointer heat-trail that ignites and cools in your wake.',
+    to: '/playground#fields',
+    cta: 'See fields',
+  },
+  {
+    tag: 'Scroll',
+    title: 'Tied to the scroll',
+    body: 'Sticky stacking decks, a pinned section that travels sideways, word-by-word scroll reveals.',
+    to: '/playground#scroll',
+    cta: 'See scroll',
+  },
+  {
+    tag: 'Controls',
+    title: 'Controls with feel',
+    body: 'Magnetic buttons, a liquid tab switcher, a magnifying macOS dock. Inputs worth reaching for.',
+    to: '/playground#controls',
+    cta: 'See controls',
   },
 ]
 
@@ -364,6 +406,39 @@ export default function Home() {
         </div>
         <div className="pointer-events-none absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-[#0a0a0a] to-transparent sm:w-40" />
         <div className="pointer-events-none absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-[#0a0a0a] to-transparent sm:w-40" />
+      </section>
+
+      {/* PLAYGROUND — a coverflow taste of the live motion work */}
+      <section id="playground" className="mx-auto w-full max-w-5xl overflow-hidden px-6 py-24">
+        <div className="mx-auto mb-12 max-w-2xl text-center">
+          <Reveal>
+            <Eyebrow>Playground</Eyebrow>
+          </Reveal>
+          <Reveal delay={0.05}>
+            <h2 className="mt-6 font-display text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl">
+              Motion, <GradientText>hand-built.</GradientText>
+            </h2>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <p className="mx-auto mt-6 max-w-md text-lg leading-relaxed text-white/55">
+              A shelf of live experiments. Drag to flip through, then open one.
+              Every piece here is coded from scratch and respects reduced motion.
+            </p>
+          </Reveal>
+        </div>
+        <Reveal delay={0.12}>
+          <CircularGallery items={FEATURED} />
+        </Reveal>
+        <Reveal delay={0.16}>
+          <div className="mt-12 text-center">
+            <Link
+              to="/playground"
+              className="text-sm font-semibold text-[#DCF87C] transition-opacity hover:opacity-80"
+            >
+              Open the playground <span aria-hidden>-&gt;</span>
+            </Link>
+          </div>
+        </Reveal>
       </section>
 
       {/* TOOLKIT */}
