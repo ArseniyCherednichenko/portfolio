@@ -36,6 +36,7 @@ import { Dock, type DockItem } from '../components/Dock'
 import { Timeline, type TimelineItem } from '../components/Timeline'
 import { HorizontalScroll, type HPanel } from '../components/HorizontalScroll'
 import { PillNav, type PillLink } from '../components/PillNav'
+import { CircularGallery, type GalleryItem } from '../components/CircularGallery'
 import { GO_TARGETS, useShortcuts } from '../components/Keyboard'
 import { Seo } from '../components/Seo'
 import { GITHUB_URL } from '../data/contact'
@@ -198,6 +199,16 @@ function SplitTextDemo() {
 // Panels for the gooey-tabs demo. Honest and self-referential: each tab
 // describes a facet of how the effect itself is built, so nothing is claimed
 // that the component does not actually do.
+// Self-referential cards for the coverflow demo — each describes a facet of the
+// component itself, so nothing is claimed that it does not actually do.
+const COVERFLOW_CARDS: GalleryItem[] = [
+  { tag: 'Drag', title: 'Grab and flip', body: 'Pointer or touch drags the deck; it rubber-bands past the ends and snaps to the nearest card on release.' },
+  { tag: 'Perspective', title: 'Real 3D depth', body: 'Side cards rotate away in perspective and dim, so the row reads as a coverflow, not a flat carousel.' },
+  { tag: 'Interpolated', title: 'Follows your finger', body: 'The same transform curve is evaluated at fractional offsets mid-drag, so cards glide rather than jump.' },
+  { tag: 'Steerable', title: 'Many ways in', body: 'Drag, wheel, arrow keys, the prev/next buttons, the dots, or a click on a side card to bring it forward.' },
+  { tag: 'Fallback', title: 'Calm without motion', body: 'Under reduced motion it drops the perspective and becomes a plain, fully readable snap-scroll row.' },
+]
+
 const GOO_PANELS: { label: string; title: string; body: string }[] = [
   {
     label: 'Blobs',
@@ -952,6 +963,23 @@ export default function Playground() {
                 Editorial link rows: hover one and a lime panel slides in from whichever edge the cursor crossed, the
                 label scrolling across it, then leaves the same way out. Drives the Home Explore section. Reduced-motion
                 just warms the row.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH COVERFLOW */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="rounded-3xl border border-white/10 bg-white/[0.02] px-6 py-10 sm:px-10">
+              <CircularGallery items={COVERFLOW_CARDS} />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Coverflow gallery</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                A draggable 3D coverflow. Cards fan out in perspective around an upright active card; drag, wheel, arrow
+                keys, the arrows, the dots, or a click on a side card all drive it, and it snaps to the nearest on
+                release. Drives the Home Playground section. Reduced-motion becomes a plain snap-scroll row.
               </p>
             </div>
           </div>
