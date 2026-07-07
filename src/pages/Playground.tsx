@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Reveal } from '../components/Reveal'
 import { GooeyTabs } from '../components/GooeyTabs'
@@ -16,6 +16,7 @@ import { MagnetLines } from '../components/MagnetLines'
 import { ScrollVelocity } from '../components/ScrollVelocity'
 import { DecryptedText } from '../components/DecryptedText'
 import { SplitText } from '../components/SplitText'
+import { SplitFlap } from '../components/SplitFlap'
 import { CardStack } from '../components/CardStack'
 import { ProfileCard } from '../components/ProfileCard'
 import { PixelTransition } from '../components/PixelTransition'
@@ -197,6 +198,22 @@ function SplitTextDemo() {
   )
 }
 
+// A split-flap board that cycles the craft words on a timer, so the two-phase
+// hinge flip reads like an airport departure board. All words are six letters,
+// so no cell is added or removed between changes.
+const FLAP_WORDS = ['MOTION', 'DESIGN', 'DETAIL', 'REFINE']
+
+function SplitFlapDemo() {
+  const [i, setI] = useState(0)
+  useEffect(() => {
+    const id = window.setInterval(() => setI((n) => (n + 1) % FLAP_WORDS.length), 2200)
+    return () => window.clearInterval(id)
+  }, [])
+  return (
+    <SplitFlap value={FLAP_WORDS[i]} height={62} width={42} aria-label="Split-flap board cycling craft words" />
+  )
+}
+
 // Panels for the gooey-tabs demo. Honest and self-referential: each tab
 // describes a facet of how the effect itself is built, so nothing is claimed
 // that the component does not actually do.
@@ -359,6 +376,15 @@ export default function Playground() {
                 words={['Design', 'Build', 'Refine', 'Ship']}
                 className="justify-center text-3xl font-bold tracking-tight sm:text-4xl"
               />
+            </Experiment>
+          </Reveal>
+
+          <Reveal>
+            <Experiment
+              name="Split-flap board"
+              note="A departure-board display: the top leaf folds down to hide the old glyph while a fresh bottom leaf drops into place. A two-phase mechanical hinge, not a spring. Drives the live Berlin clock on the contact page."
+            >
+              <SplitFlapDemo />
             </Experiment>
           </Reveal>
         </div>
