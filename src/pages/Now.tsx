@@ -4,6 +4,7 @@ import { Reveal } from '../components/Reveal'
 import { Eyebrow } from '../components/Eyebrow'
 import { GradientText } from '../components/GradientText'
 import { SpotlightCard } from '../components/SpotlightCard'
+import { Ribbons } from '../components/Ribbons'
 import { Seo } from '../components/Seo'
 import { useBerlinTime } from '../hooks/useBerlinTime'
 import { LAST_UPDATED, LOCATION, NOW_ITEMS } from '../data/now'
@@ -41,7 +42,14 @@ export default function Now() {
       />
 
       {/* HEADER */}
-      <header className="mx-auto w-full max-w-4xl px-6 pb-10 pt-36 sm:pt-44">
+      <header className="relative isolate mx-auto w-full max-w-4xl overflow-hidden px-6 pb-10 pt-36 sm:pt-44">
+        {/* Ambient ribbon field: flowing trails that drift, and chase the cursor
+            when it moves. pointer-events-none + window listener so the copy stays
+            selectable; radial-masked to the top-right so it never fights the
+            left-aligned text. This page previously had no ambient motion. */}
+        <div className="pointer-events-none absolute inset-0 -z-10 opacity-60 [mask-image:radial-gradient(115%_85%_at_78%_18%,#000_0%,transparent_68%)]">
+          <Ribbons listen="window" count={4} />
+        </div>
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
