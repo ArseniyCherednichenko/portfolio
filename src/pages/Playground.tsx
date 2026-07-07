@@ -30,6 +30,7 @@ import { Beams } from '../components/Beams'
 import { LetterGlitch } from '../components/LetterGlitch'
 import { MetaBalls } from '../components/MetaBalls'
 import { PixelTrail } from '../components/PixelTrail'
+import { Ribbons } from '../components/Ribbons'
 import { BentoGrid, BentoCell } from '../components/BentoGrid'
 import { Accordion } from '../components/Accordion'
 import { Dock, type DockItem } from '../components/Dock'
@@ -98,7 +99,7 @@ const CATEGORIES: { id: string; num: string; label: string; title: string; blurb
     num: '03',
     label: 'Pointer fields',
     title: 'Fields that follow.',
-    blurb: 'Full-canvas fields — dots, needles, threads, glyphs, blobs — that bend and warm toward the pointer.',
+    blurb: 'Full-canvas fields — dots, needles, threads, glyphs, blobs, ribbons — that bend and warm toward the pointer.',
   },
   {
     id: 'scroll',
@@ -747,6 +748,30 @@ export default function Playground() {
                 interpolated between frames so a fast sweep leaves no gaps, and every cell cools a little each frame, so
                 the field glows lime in your wake and fades behind you. Backs the Writing page title. Reduced-motion gets
                 a single calm static grid.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH RIBBONS */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="relative h-[340px] overflow-hidden rounded-3xl border border-white/10 bg-[#0a0a0a]">
+              <Ribbons count={5} />
+              <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Ribbon field</span>
+                <p className="mt-3 max-w-md px-6 text-xl font-medium text-white/80 sm:text-2xl">
+                  Move, and the ribbons whip after you.
+                </p>
+              </div>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Cursor-chasing ribbons</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                A few tapered trails, each a chain of points whose head eases toward the cursor while the body lags
+                behind, so every ribbon whips and settles like ink in water. Left alone they drift on their own paths.
+                Widest and brightest at the head, fading to nothing at the tail. Backs the Now page title.
+                Reduced-motion gets a calm static set of arcs.
               </p>
             </div>
           </div>
