@@ -7,6 +7,7 @@ import { ChannelList } from '../components/ChannelList'
 import { BorderBeam } from '../components/BorderBeam'
 import { ContactForm } from '../components/ContactForm'
 import { SpotlightCard } from '../components/SpotlightCard'
+import { SplitFlap } from '../components/SplitFlap'
 import { Seo } from '../components/Seo'
 import { useBerlinTime } from '../hooks/useBerlinTime'
 
@@ -92,10 +93,16 @@ export default function Contact() {
                   <span className="text-xs font-semibold uppercase tracking-[0.2em] text-white/35">
                     Local time
                   </span>
-                  <p className="mt-4 font-mono text-4xl font-semibold tabular-nums tracking-tight">
-                    {time}
-                  </p>
-                  <p className="mt-1 text-sm text-white/40">Berlin · CET</p>
+                  <div className="mt-4">
+                    <SplitFlap
+                      value={time}
+                      height={46}
+                      width={32}
+                      gap={4}
+                      aria-label={`Local time in Berlin, ${time}`}
+                    />
+                  </div>
+                  <p className="mt-2 text-sm text-white/40">Berlin · CET</p>
                 </div>
                 <div className="mt-6 flex items-center gap-2.5">
                   <span className="relative flex h-2.5 w-2.5">
