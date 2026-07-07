@@ -11,6 +11,7 @@ import Toolkit from './pages/Toolkit'
 import WorkDetail from './pages/WorkDetail'
 import Contact from './pages/Contact'
 import Colophon from './pages/Colophon'
+import Answers from './pages/Answers'
 import Resume from './pages/Resume'
 import NotFound from './pages/NotFound'
 
@@ -29,6 +30,7 @@ export default function App() {
         <Route path="work/:slug" element={<WorkDetail />} />
         <Route path="contact" element={<Contact />} />
         <Route path="colophon" element={<Colophon />} />
+        <Route path="answers" element={<Answers />} />
         <Route path="resume" element={<Resume />} />
         <Route path="*" element={<NotFound />} />
       </Route>
