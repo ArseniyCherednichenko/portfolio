@@ -75,6 +75,20 @@ body.cursor-none * {
   }
 }
 
+/* GlassSurface — a specular band of light that glides across the pane. The
+   translate is a multiple of the band's own width so it sweeps fully across
+   the surface and off the far edge. Reduced-motion users get it stilled by the
+   global guard below (the pane still reads as glass without the moving light). */
+@keyframes glass-sheen {
+  0% {
+    transform: translateX(0) skewX(-18deg);
+  }
+  60%,
+  100% {
+    transform: translateX(430%) skewX(-18deg);
+  }
+}
+
 /* BorderBeam — a light that travels around a rounded border. The registered
    custom property lets the conic-gradient's start angle interpolate smoothly
    (a plain CSS variable would jump). Reduced-motion users get a static ring
