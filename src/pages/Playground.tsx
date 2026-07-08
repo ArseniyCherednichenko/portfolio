@@ -34,6 +34,7 @@ import { PixelTrail } from '../components/PixelTrail'
 import { Ribbons } from '../components/Ribbons'
 import { Lightning } from '../components/Lightning'
 import { BentoGrid, BentoCell } from '../components/BentoGrid'
+import { GlassSurface } from '../components/GlassSurface'
 import { Accordion } from '../components/Accordion'
 import { Dock, type DockItem } from '../components/Dock'
 import { Timeline, type TimelineItem } from '../components/Timeline'
@@ -573,6 +574,51 @@ export default function Playground() {
               <p className="mt-1 text-sm leading-relaxed text-white/45">
                 A dense, asymmetric card layout that staggers in on scroll, with a per-cell cursor spotlight and a
                 subtle hover lift. Drives the About page snapshot. Reduced-motion aware.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH LIQUID GLASS */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="relative flex min-h-[22rem] items-center justify-center overflow-hidden rounded-3xl border border-white/10 bg-[#0b0b0b] p-6">
+              {/* A vivid, moving backdrop so the refraction is unmistakable —
+                  the glass bends these fields and the type as it passes over. */}
+              <div aria-hidden className="pointer-events-none absolute inset-0">
+                <motion.div
+                  className="absolute -left-10 top-2 h-56 w-56 rounded-full bg-[#DCF87C]/30 blur-3xl"
+                  animate={{ x: [0, 60, 0], y: [0, 24, 0] }}
+                  transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
+                />
+                <motion.div
+                  className="absolute bottom-0 right-0 h-64 w-64 rounded-full bg-violet-500/30 blur-3xl"
+                  animate={{ x: [0, -50, 0], y: [0, -20, 0] }}
+                  transition={{ duration: 14, repeat: Infinity, ease: 'easeInOut' }}
+                />
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <p className="font-display text-6xl font-bold tracking-tight text-white/[0.08] sm:text-8xl">
+                    REFRACTION
+                  </p>
+                </div>
+              </div>
+
+              <GlassSurface radius={26} displace={16} className="w-full max-w-sm p-7">
+                <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[#DCF87C]">Glass</span>
+                <p className="mt-2 font-display text-3xl font-bold leading-tight text-white">Poured, not blurred</p>
+                <p className="mt-2 text-sm leading-relaxed text-white/60">
+                  A displacement map warps everything behind the pane, so the fields and the type bend as if seen
+                  through real glass. Move the window; it refracts what it passes over.
+                </p>
+              </GlassSurface>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Liquid glass</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                A refractive pane — an feTurbulence noise field drives an feDisplacementMap wired into the element's
+                backdrop-filter, bending the content behind it, then frosting and tinting it with a specular edge and a
+                slow sheen. Anchors the live status chip in the Home hero. Degrades to premium frost where refraction is
+                unsupported; reduced-motion stills the sheen.
               </p>
             </div>
           </div>
