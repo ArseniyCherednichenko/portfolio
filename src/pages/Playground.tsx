@@ -41,9 +41,11 @@ import { Timeline, type TimelineItem } from '../components/Timeline'
 import { HorizontalScroll, type HPanel } from '../components/HorizontalScroll'
 import { PillNav, type PillLink } from '../components/PillNav'
 import { CircularGallery, type GalleryItem } from '../components/CircularGallery'
+import { Gravity } from '../components/Gravity'
 import { GO_TARGETS, useShortcuts } from '../components/Keyboard'
 import { Seo } from '../components/Seo'
 import { GITHUB_URL } from '../data/contact'
+import { SKILLS } from '../data/toolkit'
 
 // Spare stroke icons for the dock — no emoji, currentColor so they warm to lime.
 const ic = (d: string) => (
@@ -1176,6 +1178,31 @@ export default function Playground() {
                 The active indicator is two lime blobs inside an SVG gooey filter, timed by two different springs so the
                 trailing blob stretches out of the old tab and drips into the new one before they merge. Labels sit above
                 the filter so text stays sharp. Reduced motion swaps it for a single instant pill.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH GRAVITY */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30">
+              <div className="pointer-events-none absolute inset-x-0 top-8 z-10 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Toss</span>
+                <p className="mx-auto mt-3 max-w-md px-6 text-lg font-medium text-white/85 sm:text-xl">
+                  Grab a tag and fling it. They fall, pile, and bounce off each other.
+                </p>
+              </div>
+              <Gravity items={SKILLS} accent={['TypeScript', 'React', 'Framer Motion']} className="h-[440px] w-full" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Gravity tags</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                A different paradigm from the rest of this page: nothing else here simulates mass or contact. Each tool I
+                actually use is a physical body dropped into a bin, integrated frame by frame under gravity, with wall and
+                pairwise collisions resolved along the axis of least penetration. Grab one and it carries the momentum of
+                your throw. All hand-rolled, no physics library. Reduced motion lays the same tags out as a calm static
+                wrap.
               </p>
             </div>
           </div>
