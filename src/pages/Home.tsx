@@ -1,7 +1,9 @@
-import { motion } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Modal } from '../components/Modal'
+import { GlassSurface } from '../components/GlassSurface'
+import { useBerlinTime } from '../hooks/useBerlinTime'
 import { ProjectPoster } from '../components/ProjectPoster'
 import { GlareHover } from '../components/GlareHover'
 import { Reveal } from '../components/Reveal'
@@ -153,6 +155,33 @@ const FEATURED: GalleryItem[] = [
   },
 ]
 
+// A live glass chip anchored in the hero — refracts the orbit drifting behind
+// it and shows the honest local time, so the page opens feeling present. lg-only
+// so it never crowds the mobile hero; balances the scroll seal opposite it.
+function HeroStatus() {
+  const { time, awake } = useBerlinTime()
+  const reduce = useReducedMotion()
+  return (
+    <GlassSurface radius={20} className="w-[15rem] p-4" tint="rgba(255,255,255,0.05)">
+      <div className="flex items-center gap-2">
+        <span className="relative flex h-2 w-2">
+          {awake && !reduce && (
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#DCF87C] opacity-70" />
+          )}
+          <span
+            className={`relative inline-flex h-2 w-2 rounded-full ${awake ? 'bg-[#DCF87C]' : 'bg-white/30'}`}
+          />
+        </span>
+        <span className="text-[0.7rem] font-semibold uppercase tracking-[0.22em] text-white/55">
+          Berlin, local time
+        </span>
+      </div>
+      <p className="mt-2 font-display text-3xl font-bold tabular-nums tracking-tight text-white">{time}</p>
+      <p className="mt-0.5 text-xs text-white/45">{awake ? 'Around, probably building.' : 'Likely asleep.'}</p>
+    </GlassSurface>
+  )
+}
+
 export default function Home() {
   const [active, setActive] = useState<Project | null>(null)
   const navigate = useNavigate()
@@ -223,6 +252,15 @@ export default function Home() {
           </Link>
         </motion.div>
         <ScrollCue />
+        {/* Live glass status — refracts the orbit behind it, lg-only. */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.6, ease: EASE }}
+          className="absolute bottom-10 left-6 hidden lg:block"
+        >
+          <HeroStatus />
+        </motion.div>
         {/* Rotating seal — a premium scroll affordance, lg-only so it never
             crowds the mobile hero, links down to the first section. */}
         <motion.div
