@@ -105,6 +105,18 @@ body.cursor-none * {
   }
 }
 
+/* Gravity: the tag under the pointer lifts, brightens, and casts a soft glow
+   so the grab reads as physical. The transform easing is intentionally short —
+   the position itself is driven per-frame by the physics loop, not CSS. */
+.gravity-pill {
+  transition: box-shadow 0.18s ease, border-color 0.18s ease, background-color 0.18s ease;
+}
+.gravity-pill.is-grabbed {
+  z-index: 5;
+  border-color: rgba(220, 248, 124, 0.6);
+  box-shadow: 0 10px 30px -6px rgba(0, 0, 0, 0.6), 0 0 22px rgba(220, 248, 124, 0.25);
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
