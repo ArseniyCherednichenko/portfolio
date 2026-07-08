@@ -5,6 +5,7 @@ import { Eyebrow } from '../components/Eyebrow'
 import { GradientText } from '../components/GradientText'
 import { SpotlightCard } from '../components/SpotlightCard'
 import { AnimatedCounter } from '../components/AnimatedCounter'
+import { Lightning } from '../components/Lightning'
 import { Seo } from '../components/Seo'
 import { GITHUB_URL } from '../data/contact'
 
@@ -12,7 +13,7 @@ const EASE = [0.16, 1, 0.3, 1] as const
 
 // Honest counts of what actually ships in this repo (src/components and
 // src/pages). Kept current by the daily routine as the site grows.
-const COMPONENT_COUNT = 62
+const COMPONENT_COUNT = 63
 const PAGE_COUNT = 14
 
 // What this specific site runs on, and how each piece is actually used here.
@@ -84,7 +85,13 @@ export default function Colophon() {
       />
 
       {/* HEADER */}
-      <header className="mx-auto w-full max-w-4xl px-6 pb-12 pt-36 sm:pt-44">
+      <header className="relative isolate mx-auto w-full max-w-4xl px-6 pb-12 pt-36 sm:pt-44">
+        {/* Faint electric filaments behind the title — the engine room reads as
+            live current. pointer-events-none + window listener so the copy stays
+            selectable; radial-masked and dimmed to fade into the page. */}
+        <div className="pointer-events-none absolute inset-0 -z-10 opacity-70 [mask-image:radial-gradient(130%_90%_at_25%_30%,#000_0%,transparent_72%)]">
+          <Lightning listen="window" count={5} intensity={0.7} />
+        </div>
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
