@@ -7,8 +7,9 @@ import { SpotlightCard } from '../components/SpotlightCard'
 import { MagneticButton } from '../components/MagneticButton'
 import { AnimatedCounter } from '../components/AnimatedCounter'
 import { Beams } from '../components/Beams'
+import { Gravity } from '../components/Gravity'
 import { Seo } from '../components/Seo'
-import { TOOLKIT, TOOL_COUNT, type Tool } from '../data/toolkit'
+import { TOOLKIT, TOOL_COUNT, SKILLS, type Tool } from '../data/toolkit'
 
 const EASE = [0.16, 1, 0.3, 1] as const
 
@@ -131,6 +132,26 @@ export default function Toolkit() {
         ))}
         <div className="border-t border-white/10" />
       </div>
+
+      {/* THE WHOLE BENCH, IN ONE BIN — a tactile capstone: every tool as a
+          physical body you can grab and toss around. */}
+      <section className="mx-auto w-full max-w-4xl px-6 pb-16">
+        <Reveal>
+          <div className="flex items-end justify-between gap-6">
+            <div>
+              <h2 className="font-display text-2xl font-bold tracking-tight sm:text-3xl">The whole bench.</h2>
+              <p className="mt-3 max-w-md text-sm leading-relaxed text-white/45">
+                All of it in one bin. Grab a tag and toss it around — they fall, pile up, and knock into each other.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+        <Reveal delay={0.08}>
+          <div className="mt-6 overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30">
+            <Gravity items={SKILLS} accent={['TypeScript', 'React', 'Framer Motion', 'Supabase']} className="h-[380px] w-full" />
+          </div>
+        </Reveal>
+      </section>
 
       {/* HONEST NOTE */}
       <section className="mx-auto w-full max-w-4xl px-6 pb-8">
