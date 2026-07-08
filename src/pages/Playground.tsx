@@ -32,6 +32,7 @@ import { LetterGlitch } from '../components/LetterGlitch'
 import { MetaBalls } from '../components/MetaBalls'
 import { PixelTrail } from '../components/PixelTrail'
 import { Ribbons } from '../components/Ribbons'
+import { Lightning } from '../components/Lightning'
 import { BentoGrid, BentoCell } from '../components/BentoGrid'
 import { Accordion } from '../components/Accordion'
 import { Dock, type DockItem } from '../components/Dock'
@@ -798,6 +799,30 @@ export default function Playground() {
                 behind, so every ribbon whips and settles like ink in water. Left alone they drift on their own paths.
                 Widest and brightest at the head, fading to nothing at the tail. Backs the Now page title.
                 Reduced-motion gets a calm static set of arcs.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH LIGHTNING */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="relative h-[340px] overflow-hidden rounded-3xl border border-white/10 bg-[#070707]">
+              <Lightning count={6} />
+              <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Filament field</span>
+                <p className="mt-3 max-w-md px-6 text-xl font-medium text-white/80 sm:text-2xl">
+                  Draw near and the current reaches for you.
+                </p>
+              </div>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Cursor-reactive lightning</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                A few electric filaments, each a jagged polyline that wriggles between two drifting anchors while a bright
+                charge rides its length. The wriggle is summed seeded sines, never per-frame randomness, so it flickers
+                like live current instead of strobing. Come close and each bolt stretches its far end toward the pointer
+                and brightens. Backs the Colophon page title. Reduced-motion gets a still set of dim bolts.
               </p>
             </div>
           </div>
