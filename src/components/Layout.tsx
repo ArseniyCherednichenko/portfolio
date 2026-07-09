@@ -1,7 +1,8 @@
-import { useEffect } from 'react'
+import { Suspense, useEffect } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Link, useLocation, useOutlet } from 'react-router-dom'
 import { Aurora } from './Aurora'
+import { RouteFallback } from './RouteFallback'
 import { Nav } from './Nav'
 import { CommandPaletteProvider } from './CommandPalette'
 import { ContactProvider, useContact } from './ContactDialog'
@@ -53,7 +54,11 @@ export function Layout() {
               exit={{ opacity: 0, y: -12 }}
               transition={{ duration: 0.4, ease: PAGE_EASE }}
             >
-              {outlet}
+              {/* Lazy route chunks stream in here; the branded fallback shows
+                  only if a page's code hasn't loaded yet (Home is eager, so the
+                  landing never flashes it). The boundary lives inside the
+                  animated container so page transitions still play. */}
+              <Suspense fallback={<RouteFallback />}>{outlet}</Suspense>
             </motion.main>
           </AnimatePresence>
           <SiteFooter />
