@@ -2,16 +2,18 @@ import { motion, useReducedMotion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { GradientText } from '../components/GradientText'
 import { Threads } from '../components/Threads'
+import { ChromaGrid, type ChromaItem } from '../components/ChromaGrid'
 import { Seo } from '../components/Seo'
 
 const EASE = [0.16, 1, 0.3, 1] as const
 
-// A few honest places to land instead of the dead end.
-const ELSEWHERE = [
-  { to: '/work', label: 'Work' },
-  { to: '/playground', label: 'Playground' },
-  { to: '/about', label: 'About' },
-  { to: '/contact', label: 'Contact' },
+// A few honest places to land instead of the dead end. Sweep the cursor across
+// them to light the way out.
+const ELSEWHERE: ChromaItem[] = [
+  { tag: 'Work', title: 'The work', subtitle: 'What I have built.', to: '/work' },
+  { tag: 'Craft', title: 'Playground', subtitle: 'Motion, hand-built.', to: '/playground' },
+  { tag: 'Person', title: 'About', subtitle: 'A bit about me.', to: '/about' },
+  { tag: 'Reach', title: 'Contact', subtitle: 'Say hello.', to: '/contact' },
 ]
 
 export default function NotFound() {
@@ -64,17 +66,8 @@ export default function NotFound() {
         >
           Take me home
         </Link>
-        <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-sm text-white/45">
-          <span className="text-white/30">Or try</span>
-          {ELSEWHERE.map((e) => (
-            <Link
-              key={e.to}
-              to={e.to}
-              className="font-medium underline-offset-4 transition-colors hover:text-[#DCF87C] hover:underline"
-            >
-              {e.label}
-            </Link>
-          ))}
+        <div className="w-full max-w-2xl text-left">
+          <ChromaGrid items={ELSEWHERE} radius={200} />
         </div>
       </motion.div>
     </section>
