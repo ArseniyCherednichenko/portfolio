@@ -13,6 +13,7 @@ import { AnimatedCounter } from '../components/AnimatedCounter'
 import { Accordion, type AccordionItem } from '../components/Accordion'
 import { Timeline } from '../components/Timeline'
 import { ProfileCard } from '../components/ProfileCard'
+import { Folder, type FolderPaper } from '../components/Folder'
 import { useContact } from '../components/ContactDialog'
 import { Seo } from '../components/Seo'
 import { useBerlinTime } from '../hooks/useBerlinTime'
@@ -20,6 +21,15 @@ import { CASE_STUDIES } from '../data/projects'
 import { GITHUB_URL } from '../data/contact'
 
 const EASE = [0.16, 1, 0.3, 1] as const
+
+// The other facets of the site, tucked into a folder you open — so About does
+// not have to be the last word, and no single project is the whole story.
+const FACETS: FolderPaper[] = [
+  { label: 'Résumé', hint: 'The one-pager', to: '/resume' },
+  { label: 'Writing', hint: 'Notes, in progress', to: '/writing' },
+  { label: 'Now', hint: 'What I am on', to: '/now' },
+  { label: 'Toolkit', hint: 'What I build with', to: '/toolkit' },
+]
 
 // What I'm focused on right now. Keep this honest and current.
 const NOW: ReadonlyArray<readonly [string, string]> = [
@@ -375,6 +385,33 @@ export default function About() {
         <Reveal delay={0.05}>
           <Timeline items={PATH} className="mt-10" />
         </Reveal>
+      </section>
+
+      {/* MORE OF ME — a folder that opens to the other facets of the site */}
+      <section className="mx-auto w-full max-w-4xl px-6 py-16">
+        <div className="grid items-center gap-10 sm:grid-cols-[1fr_auto] sm:gap-14">
+          <div>
+            <Reveal>
+              <Eyebrow>More of me</Eyebrow>
+            </Reveal>
+            <Reveal delay={0.05}>
+              <h2 className="mt-6 font-display text-3xl font-bold leading-[1.1] tracking-tight sm:text-4xl">
+                This page is not <GradientText>the whole story.</GradientText>
+              </h2>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <p className="mt-6 max-w-md text-lg leading-relaxed text-white/55">
+                Open the folder for the other threads — the one-page résumé, notes in progress, what I
+                am on right now, and the tools I reach for.
+              </p>
+            </Reveal>
+          </div>
+          <Reveal delay={0.12}>
+            <div className="flex justify-center pt-6 sm:justify-end sm:pt-0">
+              <Folder papers={FACETS} label="Open me" />
+            </div>
+          </Reveal>
+        </div>
       </section>
 
       {/* QUESTIONS */}
