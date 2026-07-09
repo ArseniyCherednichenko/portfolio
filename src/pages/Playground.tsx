@@ -20,6 +20,7 @@ import { SplitFlap } from '../components/SplitFlap'
 import { CardStack } from '../components/CardStack'
 import { ProfileCard } from '../components/ProfileCard'
 import { PixelTransition } from '../components/PixelTransition'
+import { Folder } from '../components/Folder'
 import { ScrollStack } from '../components/ScrollStack'
 import { ScrollReveal } from '../components/ScrollReveal'
 import { VariableProximity } from '../components/VariableProximity'
@@ -544,6 +545,25 @@ export default function Playground() {
                   </div>
                 }
               />
+            </Experiment>
+          </Reveal>
+
+          <Reveal delay={0.05}>
+            <Experiment
+              name="Folder"
+              note="A container that opens. Closed it is a slim folder with a tab; click and the pocket tips open while the papers lift out into a fanned hand of clickable links. The same folder holds the other facets on the About page. Reduced-motion drops to a plain grid."
+            >
+              <div className="flex min-h-[360px] w-full items-end justify-center pb-2">
+                <Folder
+                  label="Open me"
+                  papers={[
+                    { label: 'Résumé', hint: 'The one-pager', to: '/resume' },
+                    { label: 'Writing', hint: 'Notes', to: '/writing' },
+                    { label: 'Now', hint: 'What I am on', to: '/now' },
+                    { label: 'Toolkit', hint: 'The bench', to: '/toolkit' },
+                  ]}
+                />
+              </div>
             </Experiment>
           </Reveal>
         </div>
