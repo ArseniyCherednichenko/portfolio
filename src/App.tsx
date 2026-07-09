@@ -1,19 +1,25 @@
+import { lazy } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { Layout } from './components/Layout'
+// Home is eager — it's the landing page, so it ships in the initial bundle and
+// never shows a route-loading flash. Every other page (the Playground alone
+// pulls in most of the experiment components) is code-split into its own chunk
+// and streamed in on navigation, so first paint stays lean. The Suspense
+// boundary that catches these lives in Layout.
 import Home from './pages/Home'
-import About from './pages/About'
-import Work from './pages/Work'
-import Playground from './pages/Playground'
-import Writing from './pages/Writing'
-import WritingDetail from './pages/WritingDetail'
-import Now from './pages/Now'
-import Toolkit from './pages/Toolkit'
-import WorkDetail from './pages/WorkDetail'
-import Contact from './pages/Contact'
-import Colophon from './pages/Colophon'
-import Answers from './pages/Answers'
-import Resume from './pages/Resume'
-import NotFound from './pages/NotFound'
+const About = lazy(() => import('./pages/About'))
+const Work = lazy(() => import('./pages/Work'))
+const Playground = lazy(() => import('./pages/Playground'))
+const Writing = lazy(() => import('./pages/Writing'))
+const WritingDetail = lazy(() => import('./pages/WritingDetail'))
+const Now = lazy(() => import('./pages/Now'))
+const Toolkit = lazy(() => import('./pages/Toolkit'))
+const WorkDetail = lazy(() => import('./pages/WorkDetail'))
+const Contact = lazy(() => import('./pages/Contact'))
+const Colophon = lazy(() => import('./pages/Colophon'))
+const Answers = lazy(() => import('./pages/Answers'))
+const Resume = lazy(() => import('./pages/Resume'))
+const NotFound = lazy(() => import('./pages/NotFound'))
 
 export default function App() {
   return (
