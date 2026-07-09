@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Reveal } from '../components/Reveal'
+import { ChromaGrid } from '../components/ChromaGrid'
 import { GooeyTabs } from '../components/GooeyTabs'
 import { GradientText } from '../components/GradientText'
 import { RotatingWord } from '../components/RotatingWord'
@@ -641,6 +642,30 @@ export default function Playground() {
                 backdrop-filter, bending the content behind it, then frosting and tinting it with a specular edge and a
                 slow sheen. Anchors the live status chip in the Home hero. Degrades to premium frost where refraction is
                 unsupported; reduced-motion stills the sheen.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH CHROMA GRID */}
+        <Reveal>
+          <div className="mt-12">
+            <ChromaGrid
+              items={[
+                { tag: 'Craft', title: 'Motion, hand-built', subtitle: 'Every effect on this site is its own component.', to: '/playground' },
+                { tag: 'Work', title: 'What I have shipped', subtitle: 'Guided, this site, and what comes next.', to: '/work' },
+                { tag: 'Person', title: 'A bit about me', subtitle: 'Berlin, student, co-founder.', to: '/about' },
+                { tag: 'Tools', title: 'The bench', subtitle: 'What I reach for, and why.', to: '/toolkit' },
+                { tag: 'Notes', title: 'Thinking in the open', subtitle: 'Drafts and outlines, honestly marked.', to: '/writing' },
+                { tag: 'Reach', title: 'Say hello', subtitle: 'The inbox is open.', to: '/contact' },
+              ]}
+            />
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Chroma grid</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                A torch in the dark. The grid is drawn twice — a lit layer of real links beneath a drained copy on top —
+                and the cursor punches a spotlight hole in the dim layer, so the cards it sweeps over warm up and light.
+                Two CSS variables carry the pointer; no per-frame React state. Reduced motion leaves it fully lit and still.
               </p>
             </div>
           </div>
