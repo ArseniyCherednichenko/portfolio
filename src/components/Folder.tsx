@@ -132,14 +132,14 @@ export function Folder({ papers, label = 'Open me', className = '' }: FolderProp
         id={id}
         role="group"
         aria-label={label}
-        className="absolute inset-0"
-        style={{ zIndex: open ? 30 : 10, pointerEvents: open ? 'auto' : 'none' }}
+        className="pointer-events-none absolute inset-0"
+        style={{ zIndex: open ? 30 : 10 }}
       >
         {papers.map((p, i) => (
           <motion.div
             key={p.label}
             className="absolute bottom-3.5 left-1/2 h-[104px] w-[156px] -translate-x-1/2"
-            style={{ transformOrigin: 'bottom center' }}
+            style={{ transformOrigin: 'bottom center', pointerEvents: open ? 'auto' : 'none' }}
             initial={false}
             animate={target(i)}
             transition={{ type: 'spring', stiffness: 260, damping: 26, delay: open ? i * 0.05 : 0 }}
