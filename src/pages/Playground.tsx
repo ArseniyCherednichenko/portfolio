@@ -38,6 +38,7 @@ import { Lightning } from '../components/Lightning'
 import { BentoGrid, BentoCell } from '../components/BentoGrid'
 import { GlassSurface } from '../components/GlassSurface'
 import { Accordion } from '../components/Accordion'
+import { Stepper, type StepperStep } from '../components/Stepper'
 import { Dock, type DockItem } from '../components/Dock'
 import { Timeline, type TimelineItem } from '../components/Timeline'
 import { HorizontalScroll, type HPanel } from '../components/HorizontalScroll'
@@ -231,6 +232,29 @@ const COVERFLOW_CARDS: GalleryItem[] = [
   { tag: 'Interpolated', title: 'Follows your finger', body: 'The same transform curve is evaluated at fractional offsets mid-drag, so cards glide rather than jump.' },
   { tag: 'Steerable', title: 'Many ways in', body: 'Drag, wheel, arrow keys, the prev/next buttons, the dots, or a click on a side card to bring it forward.' },
   { tag: 'Fallback', title: 'Calm without motion', body: 'Under reduced motion it drops the perspective and becomes a plain, fully readable snap-scroll row.' },
+]
+
+const STEPPER_DEMO: StepperStep[] = [
+  {
+    label: 'Ways in',
+    title: 'Move it however you like',
+    body: 'Click a node on the rail, press the buttons, or focus the rail and use the arrow keys. On the panel below you can also drag or swipe. No single right way in.',
+  },
+  {
+    label: 'The rail',
+    title: 'A rail that keeps score',
+    body: 'The lime fill sweeps along the connector to the active node, cleared steps carry a check, and the dots under the buttons widen to mark where you are. Orientation without a word of instruction.',
+  },
+  {
+    label: 'Direction',
+    title: 'Motion that mirrors intent',
+    body: 'Advance and the next panel slides in from the right; go back and it comes from the left. The travel matches the direction you asked for, so the change reads as movement, not a flicker.',
+  },
+  {
+    label: 'Reduced',
+    title: 'Calm when asked',
+    body: 'Under prefers-reduced-motion the drag comes off and panels cross-fade in place with no directional drift. Same content, same controls, none of the travel.',
+  },
 ]
 
 const GOO_PANELS: { label: string; title: string; body: string }[] = [
@@ -1223,6 +1247,25 @@ export default function Playground() {
                 The active indicator is two lime blobs inside an SVG gooey filter, timed by two different springs so the
                 trailing blob stretches out of the old tab and drips into the new one before they merge. Labels sit above
                 the filter so text stays sharp. Reduced motion swaps it for a single instant pill.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH STEPPER */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="rounded-3xl border border-white/10 bg-white/[0.02] px-6 py-12 sm:px-10">
+              <Stepper steps={STEPPER_DEMO} className="mx-auto max-w-2xl" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Guided stepper</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                A step-through with more ways in than most: the numbered rail is clickable, the Back and Next buttons
+                move one at a time, arrow keys walk it when the rail is focused, and you can drag or swipe the panel
+                itself. The lime connector sweeps up to the active node, and each panel slides in from the direction of
+                travel. Reduced motion cross-fades in place with no drift. It drives the real build pipeline on the
+                colophon.
               </p>
             </div>
           </div>
