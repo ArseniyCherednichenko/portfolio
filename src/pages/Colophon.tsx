@@ -5,6 +5,7 @@ import { Eyebrow } from '../components/Eyebrow'
 import { GradientText } from '../components/GradientText'
 import { SpotlightCard } from '../components/SpotlightCard'
 import { AnimatedCounter } from '../components/AnimatedCounter'
+import { Stepper } from '../components/Stepper'
 import { Lightning } from '../components/Lightning'
 import { Seo } from '../components/Seo'
 import { GITHUB_URL } from '../data/contact'
@@ -62,6 +63,37 @@ const PRINCIPLES: ReadonlyArray<{ title: string; body: string }> = [
   {
     title: 'Open and always growing',
     body: 'The whole thing is public on GitHub and gains one coherent improvement most days, so the commit history is part of the story.',
+  },
+]
+
+// The real path a single change takes from an idea to the live site. Honest to
+// how this repo actually works: strict types and a passing build gate every
+// commit, and the daily routine ships one coherent step at a time.
+const PIPELINE: ReadonlyArray<{ label: string; title: string; body: string }> = [
+  {
+    label: 'Sketch',
+    title: 'Decide what earns a place',
+    body: 'Every change starts as one honest question: does this make the site clearer, more alive, or more mine? Nothing ships to fill space. If an animation would not help someone read or orient, it does not get built.',
+  },
+  {
+    label: 'Build',
+    title: 'Write the component by hand',
+    body: 'The piece is written from scratch in React and Framer Motion, in the same file conventions as everything around it. It reads prefers-reduced-motion first, so the calm fallback is designed, not bolted on.',
+  },
+  {
+    label: 'Type-check',
+    title: 'Let strict TypeScript object',
+    body: 'tsc runs in strict mode across every prop and data shape. A type slip fails here, long before it could ever reach the page. Green types are the price of entry, not a nice-to-have.',
+  },
+  {
+    label: 'Verify',
+    title: 'Prove the build still stands',
+    body: 'Vite builds the whole site static. Because this repo is public and it is the real showcase, main has to build and look premium on every push, so the build gate is non-negotiable.',
+  },
+  {
+    label: 'Ship',
+    title: 'Commit small, push to main',
+    body: 'The work lands as granular commits straight to main and deploys itself. One coherent improvement most days means the commit history is part of the portfolio too.',
   },
 ]
 
@@ -169,6 +201,28 @@ export default function Colophon() {
             </Reveal>
           ))}
         </div>
+      </section>
+
+      {/* PIPELINE */}
+      <section className="mx-auto w-full max-w-4xl px-6 py-16">
+        <Reveal>
+          <Eyebrow>From idea to live</Eyebrow>
+        </Reveal>
+        <Reveal delay={0.05}>
+          <h2 className="mt-6 font-display text-3xl font-bold tracking-tight sm:text-4xl">
+            How a change ships.
+          </h2>
+        </Reveal>
+        <Reveal delay={0.08}>
+          <p className="mt-3 max-w-xl text-base leading-relaxed text-white/50">
+            The path every improvement takes to reach this page. Step through it, or swipe.
+          </p>
+        </Reveal>
+        <Reveal delay={0.12}>
+          <div className="mt-10">
+            <Stepper steps={PIPELINE} />
+          </div>
+        </Reveal>
       </section>
 
       {/* TYPE */}
