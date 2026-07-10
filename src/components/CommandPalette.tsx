@@ -95,6 +95,7 @@ function Palette({ open, onClose }: { open: boolean; onClose: () => void }) {
       { id: 'contact-page', label: 'Contact', group: 'Pages', hint: 'reach me', keywords: 'contact email hire reach availability', run: () => go('/contact') },
       { id: 'colophon', label: 'Colophon', group: 'Pages', hint: 'how it is built', keywords: 'colophon stack build source open source craft typography fonts', run: () => go('/colophon') },
       { id: 'answers', label: 'Answers', group: 'Pages', hint: 'questions people ask', keywords: 'answers faq questions about who what ask frequently help', run: () => go('/answers') },
+      { id: 'craft', label: 'On motion', group: 'Pages', hint: 'notes on craft, playable', keywords: 'craft motion animation easing spring stagger reduced motion interactive demos notes principles', run: () => go('/craft') },
       { id: 'resume', label: 'Résumé', group: 'Pages', hint: 'one-page CV, printable', keywords: 'resume cv curriculum vitae print pdf download experience hire', run: () => go('/resume') },
     ]
 
