@@ -43,7 +43,7 @@ export function Stepper({
   defaultStep = 0,
   className = '',
 }: {
-  steps: StepperStep[]
+  steps: readonly StepperStep[]
   defaultStep?: number
   className?: string
 }) {
