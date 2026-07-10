@@ -26,6 +26,7 @@ import { ScrollStack } from '../components/ScrollStack'
 import { ScrollReveal } from '../components/ScrollReveal'
 import { VariableProximity } from '../components/VariableProximity'
 import { SpotlightReveal } from '../components/SpotlightReveal'
+import { ASCIIText } from '../components/ASCIIText'
 import { TrueFocus } from '../components/TrueFocus'
 import { FlowingMenu } from '../components/FlowingMenu'
 import { Threads } from '../components/Threads'
@@ -456,6 +457,24 @@ export default function Playground() {
                 A dim statement sits nearly dark until a soft torch of light, masked to the cursor, resolves the words
                 (and a few lime highlights) as you sweep across, then fades back out. A springed radial mask over a lit
                 copy of the text. Touch and reduced-motion get it fully lit.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH ASCII TEXT */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="relative h-[300px] w-full overflow-hidden rounded-3xl border border-white/10 bg-black/40">
+              <ASCIIText text="PLAYGROUND" cell={10} />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Live ASCII type</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The word is rendered once into a grid-resolution buffer, so every cell knows how much
+                of a letter it covers, then painted one monospace glyph at a time, picking a denser
+                character the brighter the cell. A slow shimmer keeps it breathing; the cursor is a
+                torch that lights the field as it passes. Reduced-motion paints one still frame.
               </p>
             </div>
           </div>
