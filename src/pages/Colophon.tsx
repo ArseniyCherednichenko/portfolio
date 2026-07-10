@@ -7,6 +7,7 @@ import { SpotlightCard } from '../components/SpotlightCard'
 import { AnimatedCounter } from '../components/AnimatedCounter'
 import { Stepper } from '../components/Stepper'
 import { Lightning } from '../components/Lightning'
+import { ASCIIText } from '../components/ASCIIText'
 import { Seo } from '../components/Seo'
 import { GITHUB_URL } from '../data/contact'
 
@@ -262,6 +263,31 @@ export default function Colophon() {
             </SpotlightCard>
           </Reveal>
         </div>
+      </section>
+
+      {/* SIGNATURE — the name itself, sampled into a live ASCII field. Every
+          glyph here is drawn from the word's own coverage; sweep the cursor to
+          light it. A small proof that even the type on this page is hand-made. */}
+      <section className="mx-auto w-full max-w-5xl px-6 py-16">
+        <Reveal>
+          <Eyebrow>Signed</Eyebrow>
+        </Reveal>
+        <Reveal delay={0.05}>
+          <h2 className="mt-6 font-display text-3xl font-bold tracking-tight sm:text-4xl">
+            The name, in the machine.
+          </h2>
+        </Reveal>
+        <Reveal delay={0.08}>
+          <p className="mt-3 max-w-xl text-base leading-relaxed text-white/50">
+            Rendered once into a grid, then painted glyph by glyph from its own coverage. Sweep the
+            cursor across it.
+          </p>
+        </Reveal>
+        <Reveal delay={0.12}>
+          <div className="mt-8 h-44 w-full overflow-hidden rounded-3xl border border-white/10 bg-black/40 sm:h-56">
+            <ASCIIText text="ARSENIY" />
+          </div>
+        </Reveal>
       </section>
 
       {/* CLOSING */}
