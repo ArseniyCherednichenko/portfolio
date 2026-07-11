@@ -155,20 +155,11 @@ function MotionColumn({
     if (e.currentTarget.hasPointerCapture(e.pointerId)) e.currentTarget.releasePointerCapture(e.pointerId)
   }
 
-  const Copy = ({ hidden }: { hidden?: boolean }) => (
-    <div
-      ref={hidden ? undefined : copyRef}
-      aria-hidden={hidden || undefined}
-      className="flex flex-col"
-      style={{ gap, paddingBottom: gap }}
-    >
-      {items.map((it) => (
-        <div key={it.key} className={itemClassName}>
-          {it.content}
-        </div>
-      ))}
+  const rows = items.map((it) => (
+    <div key={it.key} className={itemClassName}>
+      {it.content}
     </div>
-  )
+  ))
 
   return (
     <div
@@ -193,8 +184,14 @@ function MotionColumn({
         onPointerLeave={() => (hovering.current = false)}
       >
         <motion.div style={{ y }} className="will-change-transform">
-          <Copy />
-          <Copy hidden />
+          {/* Two stacked copies so the loop wraps seamlessly; the first is
+              measured for the wrap distance, the second is a hidden echo. */}
+          <div ref={copyRef} className="flex flex-col" style={{ gap, paddingBottom: gap }}>
+            {rows}
+          </div>
+          <div aria-hidden className="flex flex-col" style={{ gap, paddingBottom: gap }}>
+            {rows}
+          </div>
         </motion.div>
       </div>
     </div>
