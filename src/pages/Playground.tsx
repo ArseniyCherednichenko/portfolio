@@ -45,6 +45,7 @@ import { Timeline, type TimelineItem } from '../components/Timeline'
 import { HorizontalScroll, type HPanel } from '../components/HorizontalScroll'
 import { PillNav, type PillLink } from '../components/PillNav'
 import { CircularGallery, type GalleryItem } from '../components/CircularGallery'
+import { InfiniteScroll, type InfiniteScrollItem } from '../components/InfiniteScroll'
 import { Gravity } from '../components/Gravity'
 import { GO_TARGETS, useShortcuts } from '../components/Keyboard'
 import { Seo } from '../components/Seo'
@@ -234,6 +235,37 @@ const COVERFLOW_CARDS: GalleryItem[] = [
   { tag: 'Steerable', title: 'Many ways in', body: 'Drag, wheel, arrow keys, the prev/next buttons, the dots, or a click on a side card to bring it forward.' },
   { tag: 'Fallback', title: 'Calm without motion', body: 'Under reduced motion it drops the perspective and becomes a plain, fully readable snap-scroll row.' },
 ]
+
+// Honest, personal rows for the infinite-scroll demo — how Arseniy works and
+// what he cares about, not claims about any one project. Split across two
+// columns that drift in opposite directions.
+const SCROLL_ROWS: { tag: string; line: string }[] = [
+  { tag: 'Craft', line: 'Every effect on this site is its own hand-built component.' },
+  { tag: 'Type', line: 'A serif display face against clean sans, for an editorial voice.' },
+  { tag: 'Access', line: 'Reduced-motion first — every animation has a calm fallback.' },
+  { tag: 'Cadence', line: 'The site grows one coherent commit at a time, in the open.' },
+  { tag: 'Range', line: 'React on the web, SwiftUI on iOS, backend in between.' },
+  { tag: 'Place', line: 'Made in Berlin, between school and shipping real products.' },
+  { tag: 'Feel', line: 'The details you notice but cannot name — springs, easing, weight.' },
+  { tag: 'Open', line: 'The whole thing is public on GitHub, commit history and all.' },
+]
+
+function scrollColumn(rows: { tag: string; line: string }[], keyPrefix: string): InfiniteScrollItem[] {
+  return rows.map((r, i) => ({
+    key: `${keyPrefix}-${i}`,
+    content: (
+      <div className="rounded-2xl border border-white/10 bg-white/[0.03] px-5 py-4">
+        <span className="text-[11px] font-semibold uppercase tracking-[0.25em] text-[#DCF87C]">{r.tag}</span>
+        <p className="mt-2 text-sm leading-relaxed text-white/70">{r.line}</p>
+      </div>
+    ),
+  }))
+}
+
+// Left column drifts up, right column drifts down, so the two read as a living
+// pair; both share the same fling-with-momentum drag.
+const SCROLL_COL_A = scrollColumn(SCROLL_ROWS, 'a')
+const SCROLL_COL_B = scrollColumn([...SCROLL_ROWS].reverse(), 'b')
 
 const STEPPER_DEMO: StepperStep[] = [
   {
@@ -1310,6 +1342,31 @@ export default function Playground() {
                 pairwise collisions resolved along the axis of least penetration. Grab one and it carries the momentum of
                 your throw. All hand-rolled, no physics library. Reduced motion lays the same tags out as a calm static
                 wrap.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH INFINITE SCROLL */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 py-10 sm:px-10">
+              <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Fling</span>
+              <p className="mt-3 max-w-md text-xl font-medium text-white/85 sm:text-2xl">
+                Grab a column and throw it. It carries the momentum, then settles back into its drift.
+              </p>
+              <div className="mt-8 grid grid-cols-2 gap-4">
+                <InfiniteScroll items={SCROLL_COL_A} direction="up" speed={26} height="20rem" />
+                <InfiniteScroll items={SCROLL_COL_B} direction="down" speed={26} height="20rem" />
+              </div>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Infinite fling column</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                A vertical column that loops seamlessly — two stacked copies wrapped across one copy's measured height, so
+                there is no seam. It drifts on its own, but grab it and the release carries a fling that decays back into
+                the drift on an exponential curve. The two columns run opposite directions and dissolve into a gradient
+                mask at each edge. Reduced motion swaps it for a plain, native-scrolling list.
               </p>
             </div>
           </div>
