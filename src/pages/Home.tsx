@@ -49,6 +49,7 @@ const SECTIONS = [
 // what is here, so no single project carries the whole story.
 const EXPLORE: FlowingItem[] = [
   { label: 'Work', to: '/work', hint: 'Case studies' },
+  { label: 'Range', to: '/range', hint: 'Disciplines' },
   { label: 'About', to: '/about', hint: 'Who I am' },
   { label: 'Playground', to: '/playground', hint: 'Live motion' },
   { label: 'On motion', to: '/craft', hint: 'Craft, playable' },
@@ -335,6 +336,15 @@ export default function Home() {
               words={['Frontend', 'iOS', 'Backend', 'Applied AI', 'Motion']}
               className="mt-9 font-display text-2xl font-semibold tracking-tight text-white sm:text-3xl"
             />
+          </Reveal>
+          <Reveal delay={0.2}>
+            <Link
+              to="/range"
+              className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-[#DCF87C] transition-opacity hover:opacity-80"
+            >
+              Explore the range
+              <span aria-hidden>-&gt;</span>
+            </Link>
           </Reveal>
         </div>
         <HorizontalScroll panels={RANGE} className="mt-12" />
