@@ -21,6 +21,7 @@ import { SplitFlap } from '../components/SplitFlap'
 import { CardStack } from '../components/CardStack'
 import { ProfileCard } from '../components/ProfileCard'
 import { PixelTransition } from '../components/PixelTransition'
+import { FlipCard } from '../components/FlipCard'
 import { Folder } from '../components/Folder'
 import { ScrollStack } from '../components/ScrollStack'
 import { ScrollReveal } from '../components/ScrollReveal'
@@ -618,6 +619,32 @@ export default function Playground() {
                     <span className="text-xs font-semibold uppercase tracking-[0.2em] text-black/60">Revealed</span>
                     <p className="font-display text-2xl font-bold leading-tight">The other face</p>
                     <p className="text-sm font-medium text-black/70">Move away to flip it back.</p>
+                  </div>
+                }
+              />
+            </Experiment>
+          </Reveal>
+
+          <Reveal delay={0.05}>
+            <Experiment
+              name="Flip card"
+              note="A real 3D turn: the card rotates on its vertical axis to show its back, a specular band catching it edge-on. Hover to flip; click to pin it turned. Reduced motion cross-fades instead."
+            >
+              <FlipCard
+                className="aspect-[4/3] w-full max-w-[260px]"
+                aria-label="Flip card demo. Front reads Turn me over; back reads The other side."
+                front={
+                  <div className="flex h-full w-full flex-col justify-between rounded-2xl border border-white/10 bg-white/[0.03] p-6">
+                    <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[#DCF87C]">Front</span>
+                    <p className="font-display text-2xl font-bold leading-tight">Turn me over</p>
+                    <p className="text-sm text-white/50">Hover, or click to pin.</p>
+                  </div>
+                }
+                back={
+                  <div className="flex h-full w-full flex-col justify-between bg-gradient-to-br from-[#DCF87C] to-[#c2e85a] p-6 text-black">
+                    <span className="text-xs font-semibold uppercase tracking-[0.2em] text-black/60">Back</span>
+                    <p className="font-display text-2xl font-bold leading-tight">The other side</p>
+                    <p className="text-sm font-medium text-black/70">One surface, two faces.</p>
                   </div>
                 }
               />
