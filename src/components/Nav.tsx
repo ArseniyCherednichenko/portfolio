@@ -4,11 +4,12 @@ import { useCommandPalette } from './CommandPalette'
 import { useContact } from './ContactDialog'
 import { MobileMenu } from './MobileMenu'
 
-// Floating translucent nav. Work, About, and Playground are real page links.
+// Floating translucent nav. Work, Range, About, and Playground are real page
+// links; Toolkit and the rest stay one keystroke away in the command palette.
 const PAGES: ReadonlyArray<readonly [string, string]> = [
   ['Work', '/work'],
+  ['Range', '/range'],
   ['About', '/about'],
-  ['Toolkit', '/toolkit'],
   ['Playground', '/playground'],
 ]
 
