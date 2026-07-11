@@ -33,6 +33,7 @@ type GoTarget = { key: string; to: string; label: string }
 export const GO_TARGETS: GoTarget[] = [
   { key: 'h', to: '/', label: 'Home' },
   { key: 'w', to: '/work', label: 'Work' },
+  { key: 'd', to: '/range', label: 'Range' },
   { key: 'a', to: '/about', label: 'About' },
   { key: 't', to: '/toolkit', label: 'Toolkit' },
   { key: 'p', to: '/playground', label: 'Playground' },

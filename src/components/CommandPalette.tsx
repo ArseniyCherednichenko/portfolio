@@ -87,6 +87,7 @@ function Palette({ open, onClose }: { open: boolean; onClose: () => void }) {
     const pages: Command[] = [
       { id: 'home', label: 'Home', group: 'Pages', hint: '/', keywords: 'start landing', run: () => go('/') },
       { id: 'work', label: 'Work', group: 'Pages', hint: 'all projects', keywords: 'projects portfolio case studies', run: () => go('/work') },
+      { id: 'range', label: 'Range', group: 'Pages', hint: 'disciplines I work across', keywords: 'range disciplines breadth frontend ios backend applied ai motion skills more than one project', run: () => go('/range') },
       { id: 'about', label: 'About', group: 'Pages', hint: 'story, path', keywords: 'bio story timeline principles', run: () => go('/about') },
       { id: 'now', label: 'Now', group: 'Pages', hint: 'current focus', keywords: 'now current focus building learning today snapshot status', run: () => go('/now') },
       { id: 'toolkit', label: 'Toolkit', group: 'Pages', hint: 'tools and stack', keywords: 'tools stack skills tech react typescript swift supabase', run: () => go('/toolkit') },
