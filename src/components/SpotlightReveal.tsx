@@ -1,5 +1,6 @@
-import { useEffect, useRef, useState } from 'react'
+import { useRef } from 'react'
 import { motion, useMotionValue, useMotionTemplate, useSpring, useReducedMotion } from 'framer-motion'
+import { useFinePointer } from '../hooks/useFinePointer'
 
 interface Props {
   /** The full statement. Read once by assistive tech; split into words visually. */
@@ -11,21 +12,6 @@ interface Props {
   /** Optional small prompt shown under the text — only on fine pointers with motion allowed. */
   hint?: string
   className?: string
-}
-
-// True only for a real mouse/trackpad with motion allowed. Touch and
-// reduced-motion users get the statement fully lit and legible instead.
-function useFinePointer() {
-  const [fine, setFine] = useState(false)
-  useEffect(() => {
-    if (!window.matchMedia) return
-    const m = window.matchMedia('(pointer: fine)')
-    const on = () => setFine(m.matches)
-    on()
-    m.addEventListener('change', on)
-    return () => m.removeEventListener('change', on)
-  }, [])
-  return fine
 }
 
 function words(text: string, highlight: string[], lit: boolean) {
