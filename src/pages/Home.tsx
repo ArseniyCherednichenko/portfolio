@@ -5,6 +5,7 @@ import { Modal } from '../components/Modal'
 import { GlassSurface } from '../components/GlassSurface'
 import { useBerlinTime } from '../hooks/useBerlinTime'
 import { ProjectPoster } from '../components/ProjectPoster'
+import { FlipCard } from '../components/FlipCard'
 import { GlareHover } from '../components/GlareHover'
 import { Reveal } from '../components/Reveal'
 import { GradientText } from '../components/GradientText'
@@ -31,6 +32,14 @@ import { Seo } from '../components/Seo'
 import { PROJECTS, SKILLS, type Project } from '../data/projects'
 
 const EASE = [0.16, 1, 0.3, 1] as const
+
+// Three honest facets of the person, not the product — each a label that turns
+// over to its detail. Keeps the About teaser about him, not any one project.
+const FACETS: { front: string; back: string }[] = [
+  { front: 'Builds', back: 'The web, native iOS, and applied AI.' },
+  { front: 'Based', back: 'Berlin, Germany.' },
+  { front: 'Believes', back: 'Motion is meaning, not decoration.' },
+]
 
 const SECTIONS = [
   { id: 'intro', label: 'Intro' },
@@ -303,7 +312,29 @@ export default function Home() {
             moments, the things people feel but cannot name.
           </p>
         </Reveal>
-        <Reveal delay={0.1}>
+        <div className="mt-10 grid gap-4 sm:grid-cols-3">
+          {FACETS.map((f, i) => (
+            <Reveal key={f.front} delay={0.1 + i * 0.05}>
+              <FlipCard
+                className="h-32"
+                aria-label={`${f.front}: ${f.back}`}
+                front={
+                  <div className="flex h-full w-full flex-col justify-between rounded-2xl border border-white/10 bg-white/[0.03] p-5">
+                    <span className="text-xs font-semibold uppercase tracking-[0.2em] text-white/40">{f.front}</span>
+                    <span className="text-sm text-white/40">Turn</span>
+                  </div>
+                }
+                back={
+                  <div className="flex h-full w-full flex-col justify-between rounded-2xl bg-gradient-to-br from-[#DCF87C] to-[#c2e85a] p-5 text-black">
+                    <span className="text-xs font-semibold uppercase tracking-[0.2em] text-black/50">{f.front}</span>
+                    <p className="font-display text-lg font-semibold leading-snug">{f.back}</p>
+                  </div>
+                }
+              />
+            </Reveal>
+          ))}
+        </div>
+        <Reveal delay={0.25}>
           <Link
             to="/about"
             className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-[#DCF87C] transition-opacity hover:opacity-80"
