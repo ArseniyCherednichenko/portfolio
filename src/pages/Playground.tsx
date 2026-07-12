@@ -48,6 +48,7 @@ import { PillNav, type PillLink } from '../components/PillNav'
 import { CircularGallery, type GalleryItem } from '../components/CircularGallery'
 import { InfiniteScroll, type InfiniteScrollItem } from '../components/InfiniteScroll'
 import { Gravity } from '../components/Gravity'
+import TagSphere from '../components/TagSphere'
 import { GO_TARGETS, useShortcuts } from '../components/Keyboard'
 import { Seo } from '../components/Seo'
 import { GITHUB_URL } from '../data/contact'
@@ -1369,6 +1370,33 @@ export default function Playground() {
                 pairwise collisions resolved along the axis of least penetration. Grab one and it carries the momentum of
                 your throw. All hand-rolled, no physics library. Reduced motion lays the same tags out as a calm static
                 wrap.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH TAG SPHERE */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 py-10">
+              <div className="pointer-events-none absolute inset-x-0 top-8 z-10 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Spin</span>
+                <p className="mx-auto mt-3 max-w-md px-6 text-lg font-medium text-white/85 sm:text-xl">
+                  Grab the sphere and turn it. The front faces you; the far side recedes.
+                </p>
+              </div>
+              <div className="mt-24">
+                <TagSphere items={SKILLS} radius={170} accent={['TypeScript', 'React', 'SwiftUI']} />
+              </div>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Tag sphere</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The same tools as the gravity bin above, but a wholly different motion: words spread evenly over a real
+                sphere (a Fibonacci lattice), rotated and depth-sorted every frame so the near face sits large and bright
+                while the back dims and blurs. It drifts on a slow auto-spin; grab it and the release carries the throw as
+                inertia that eases back into the drift. Drives the Home Toolkit section. Reduced motion drops the sphere
+                for a plain, legible wrap.
               </p>
             </div>
           </div>
