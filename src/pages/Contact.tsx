@@ -8,6 +8,7 @@ import { BorderBeam } from '../components/BorderBeam'
 import { ContactForm } from '../components/ContactForm'
 import { SpotlightCard } from '../components/SpotlightCard'
 import { SplitFlap } from '../components/SplitFlap'
+import { Globe } from '../components/Globe'
 import { Seo } from '../components/Seo'
 import { useBerlinTime } from '../hooks/useBerlinTime'
 
@@ -91,9 +92,14 @@ export default function Contact() {
               <div className="flex h-full flex-col justify-between p-6 sm:p-7">
                 <div>
                   <span className="text-xs font-semibold uppercase tracking-[0.2em] text-white/35">
-                    Local time
+                    Where I am
                   </span>
-                  <div className="mt-4">
+                  {/* A live sense of place: the globe turns Berlin into view, the
+                      board reads the time there. */}
+                  <div className="mt-3 h-40 w-full">
+                    <Globe />
+                  </div>
+                  <div className="mt-3">
                     <SplitFlap
                       value={time}
                       height={46}
