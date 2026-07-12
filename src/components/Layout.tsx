@@ -124,6 +124,13 @@ function SiteFooter() {
         >
           Résumé
         </Link>
+        {' · '}
+        <Link
+          to="/log"
+          className="text-white/45 underline-offset-4 transition-colors hover:text-[#DCF87C] hover:underline"
+        >
+          Build log
+        </Link>
       </p>
       <div className="flex items-center gap-5">
         <button
