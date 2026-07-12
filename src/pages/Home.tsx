@@ -13,6 +13,7 @@ import { SplitText } from '../components/SplitText'
 import { RotatingWord } from '../components/RotatingWord'
 import { SpotlightCard } from '../components/SpotlightCard'
 import { Marquee } from '../components/Marquee'
+import TagSphere from '../components/TagSphere'
 import { HorizontalScroll, type HPanel } from '../components/HorizontalScroll'
 import { ScrollStack, type ScrollStackCard } from '../components/ScrollStack'
 import { CircularGallery, type GalleryItem } from '../components/CircularGallery'
@@ -536,13 +537,27 @@ export default function Home() {
             </div>
           </Reveal>
         </div>
-        <Marquee>
-          {SKILLS.map((s) => (
-            <span key={s} className="rounded-2xl border border-white/10 bg-white/[0.03] px-6 py-3 text-lg text-white/75">
-              {s}
-            </span>
-          ))}
-        </Marquee>
+        <Reveal delay={0.05}>
+          <TagSphere
+            items={SKILLS}
+            radius={160}
+            accent={['TypeScript', 'React', 'SwiftUI']}
+          />
+        </Reveal>
+        <Reveal delay={0.1}>
+          <p className="mx-auto mt-2 max-w-4xl px-6 text-center text-xs uppercase tracking-[0.2em] text-white/30">
+            Drag to spin
+          </p>
+        </Reveal>
+        <div className="mt-10 opacity-60">
+          <Marquee>
+            {SKILLS.map((s) => (
+              <span key={s} className="rounded-2xl border border-white/10 bg-white/[0.03] px-6 py-3 text-lg text-white/75">
+                {s}
+              </span>
+            ))}
+          </Marquee>
+        </div>
       </section>
 
       {/* EXPLORE */}
