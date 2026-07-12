@@ -21,6 +21,7 @@ const Answers = lazy(() => import('./pages/Answers'))
 const Craft = lazy(() => import('./pages/Craft'))
 const Range = lazy(() => import('./pages/Range'))
 const Resume = lazy(() => import('./pages/Resume'))
+const BuildLog = lazy(() => import('./pages/BuildLog'))
 const NotFound = lazy(() => import('./pages/NotFound'))
 
 export default function App() {
@@ -42,6 +43,7 @@ export default function App() {
         <Route path="craft" element={<Craft />} />
         <Route path="range" element={<Range />} />
         <Route path="resume" element={<Resume />} />
+        <Route path="log" element={<BuildLog />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
