@@ -308,6 +308,12 @@ export default function Colophon() {
               View the source
             </a>
             <Link
+              to="/log"
+              className="rounded-full border border-white/15 px-7 py-3.5 font-semibold text-white transition-colors hover:bg-white/[0.06]"
+            >
+              Read the build log
+            </Link>
+            <Link
               to="/playground"
               className="rounded-full border border-white/15 px-7 py-3.5 font-semibold text-white transition-colors hover:bg-white/[0.06]"
             >
