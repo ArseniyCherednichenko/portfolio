@@ -43,6 +43,7 @@ import { GlassSurface } from '../components/GlassSurface'
 import { Accordion } from '../components/Accordion'
 import { Stepper, type StepperStep } from '../components/Stepper'
 import { Dock, type DockItem } from '../components/Dock'
+import { ElasticSlider } from '../components/ElasticSlider'
 import { Timeline, type TimelineItem } from '../components/Timeline'
 import { HorizontalScroll, type HPanel } from '../components/HorizontalScroll'
 import { PillNav, type PillLink } from '../components/PillNav'
@@ -341,6 +342,38 @@ function GooeyTabsDemo() {
           </motion.div>
         </AnimatePresence>
       </div>
+    </div>
+  )
+}
+
+// The elastic slider driving something real: its value dials the glow on a lime
+// tile in real time, so the control has a visible consequence, not a number in
+// a vacuum. Drag past either end and the track stretches and recoils.
+function ElasticSliderDemo() {
+  const [v, setV] = useState(62)
+  return (
+    <div className="flex w-full flex-col items-center gap-8">
+      <div
+        className="flex h-24 w-24 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.03]"
+        style={{
+          boxShadow: `0 0 ${v * 0.7}px ${v * 0.14}px rgba(220,248,124,${0.06 + (v / 100) * 0.5})`,
+        }}
+      >
+        <span
+          className="h-9 w-9 rounded-full bg-[#DCF87C]"
+          style={{ opacity: 0.25 + (v / 100) * 0.75 }}
+        />
+      </div>
+      <ElasticSlider
+        min={0}
+        max={100}
+        defaultValue={62}
+        label="Glow intensity"
+        format={(n) => `${Math.round(n)}%`}
+        leftIcon={<span className="block h-1.5 w-1.5 rounded-full bg-current" />}
+        rightIcon={<span className="block h-3.5 w-3.5 rounded-full bg-current" />}
+        onChange={setV}
+      />
     </div>
   )
 }
@@ -1226,6 +1259,15 @@ export default function Playground() {
                   />
                 </button>
               </div>
+            </Experiment>
+          </Reveal>
+
+          <Reveal delay={0.05}>
+            <Experiment
+              name="Elastic slider"
+              note="Drag to dial the glow. The bar fattens under your finger, and pulling past either end stretches the whole track on a decaying curve, then springs back on release. A real ARIA slider — tab to it and use the arrow keys. Reduced motion drops the give, keeps the control."
+            >
+              <ElasticSliderDemo />
             </Experiment>
           </Reveal>
         </div>
