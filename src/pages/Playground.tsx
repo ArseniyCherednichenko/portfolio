@@ -52,6 +52,7 @@ import { InfiniteScroll, type InfiniteScrollItem } from '../components/InfiniteS
 import { Gravity } from '../components/Gravity'
 import TagSphere from '../components/TagSphere'
 import { Globe } from '../components/Globe'
+import { Terminal, type TerminalLine } from '../components/Terminal'
 import { GO_TARGETS, useShortcuts } from '../components/Keyboard'
 import { Seo } from '../components/Seo'
 import { GITHUB_URL } from '../data/contact'
@@ -94,6 +95,22 @@ const HSCROLL_PANELS: HPanel[] = [
 
 // The Playground's five families of experiments. `PillNav` scroll-spies these
 // ids, and each drives a titled section below.
+// Transcript for the Playground terminal demo — a light, honest walk-through
+// of what the component does, spoken in its own voice.
+const TERMINAL_LINES: TerminalLine[] = [
+  { cmd: 'echo "hello"', out: 'hello', hold: 560 },
+  {
+    cmd: 'cat features.txt',
+    out: (
+      <span className="text-[#DCF87C]">types on view · jittered keystrokes · blinking caret</span>
+    ),
+    outText: 'types on view · jittered keystrokes · blinking caret',
+    hold: 680,
+  },
+  { cmd: 'cat a11y.txt', out: 'reduced-motion aware · full screen-reader transcript', hold: 680 },
+  { cmd: 'whoami', out: 'a hand-built React + Framer Motion component', hold: 320 },
+]
+
 const CATEGORIES: { id: string; num: string; label: string; title: string; blurb: string }[] = [
   {
     id: 'type',
@@ -535,6 +552,27 @@ export default function Playground() {
                 A dim statement sits nearly dark until a soft torch of light, masked to the cursor, resolves the words
                 (and a few lime highlights) as you sweep across, then fades back out. A springed radial mask over a lit
                 copy of the text. Touch and reduced-motion get it fully lit.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH TERMINAL */}
+        <Reveal>
+          <div className="mt-12 grid items-center gap-8 lg:grid-cols-[1.1fr_0.9fr]">
+            <Terminal
+              title="zsh — playground"
+              prompt="visitor@playground ~ %"
+              lines={TERMINAL_LINES}
+            />
+            <div className="px-1">
+              <h3 className="text-base font-semibold">Typed terminal</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                A window-chromed shell that plays a transcript one keystroke at a time, with a little
+                jitter so it never feels metronomic, then holds an idle blinking caret. It waits until
+                it scrolls into view, and a cancellable timer loop means nothing keeps typing after it
+                leaves. Reduced motion prints the whole thing at once with a steady caret, and a
+                visually-hidden mirror keeps every line legible to screen readers.
               </p>
             </div>
           </div>
