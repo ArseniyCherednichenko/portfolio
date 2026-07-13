@@ -14,6 +14,7 @@ import { Accordion, type AccordionItem } from '../components/Accordion'
 import { Timeline } from '../components/Timeline'
 import { ProfileCard } from '../components/ProfileCard'
 import { Folder, type FolderPaper } from '../components/Folder'
+import { Terminal, type TerminalLine } from '../components/Terminal'
 import { useContact } from '../components/ContactDialog'
 import { Seo } from '../components/Seo'
 import { useBerlinTime } from '../hooks/useBerlinTime'
@@ -132,6 +133,24 @@ const QUESTIONS: AccordionItem[] = [
     q: 'How do you like to work?',
     a: 'Close to the problem and in the real thing. I prototype in code early, ship, and refine in the open. Feel matters more to me than how something looks in a static mock — motion and timing are hard to judge any other way.',
   },
+]
+
+// The short version, in the medium I actually live in. Every line is an honest
+// fact; Guided is one of them, not the frame. Keeps the person in front.
+const SHELL: TerminalLine[] = [
+  { cmd: 'whoami', out: 'arseniy — builder, co-founder of Guided', hold: 620 },
+  { cmd: 'cat location.txt', out: 'Berlin, Germany · remote, async-friendly', hold: 620 },
+  {
+    cmd: 'ls disciplines/',
+    out: (
+      <span className="text-[#DCF87C]">frontend  native-ios  backend  applied-ai  motion</span>
+    ),
+    outText: 'frontend  native-ios  backend  applied-ai  motion',
+    hold: 700,
+  },
+  { cmd: 'cat now.txt', out: 'Building across web, iOS, and the backend. Finishing school.', hold: 700 },
+  { cmd: 'echo $PHILOSOPHY', out: 'Motion is meaning, not decoration.', hold: 700 },
+  { cmd: 'git log --oneline | wc -l', out: 'this site grows most days — it is all on GitHub', hold: 300 },
 ]
 
 // A scannable, live snapshot of who and where I am. Honest facts only.
@@ -320,6 +339,31 @@ export default function About() {
           any single project than about the craft that carries across all of
           them: motion, type, and the quiet details most people only feel.
         </ScrollReveal>
+      </section>
+
+      {/* IN A SHELL — the short version, typed out in the medium I live in */}
+      <section className="mx-auto w-full max-w-4xl px-6 py-16">
+        <div className="grid items-center gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-14">
+          <div>
+            <Reveal>
+              <Eyebrow>In a shell</Eyebrow>
+            </Reveal>
+            <Reveal delay={0.05}>
+              <h2 className="mt-6 font-display text-3xl font-bold leading-[1.1] tracking-tight sm:text-4xl">
+                The short version, <GradientText>in my own medium.</GradientText>
+              </h2>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <p className="mt-6 max-w-md text-lg leading-relaxed text-white/55">
+                Same facts as the snapshot below, run through the place I actually spend my days.
+                It types itself out when it scrolls into view.
+              </p>
+            </Reveal>
+          </div>
+          <Reveal delay={0.12}>
+            <Terminal lines={SHELL} className="w-full" />
+          </Reveal>
+        </div>
       </section>
 
       {/* AT A GLANCE — live, scannable snapshot */}
