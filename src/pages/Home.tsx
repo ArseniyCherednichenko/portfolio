@@ -133,7 +133,7 @@ const RANGE: HPanel[] = [
 // page figures are the same ones the Colophon tracks; disciplines is the length
 // of the Range list above, so the numbers can never quietly drift from reality.
 const STATS: { value: number; suffix?: string; label: string; note: string }[] = [
-  { value: 75, label: 'Hand-built components', note: 'Every animation coded here, none off a shelf.' },
+  { value: 76, label: 'Hand-built components', note: 'Every animation coded here, none off a shelf.' },
   { value: 17, label: 'Pages and views', note: 'A whole site to wander, not a single scroll.' },
   { value: RANGE.length, label: 'Disciplines across the stack', note: 'Frontend, iOS, backend, applied AI, motion.' },
   { value: 100, suffix: '%', label: 'Hand-built, no templates', note: 'The portfolio is itself a sample of the work.' },
