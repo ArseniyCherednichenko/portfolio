@@ -23,6 +23,7 @@ import { ScrollVelocity } from '../components/ScrollVelocity'
 import { FlowingMenu, type FlowingItem } from '../components/FlowingMenu'
 import { MagneticButton } from '../components/MagneticButton'
 import { HeroOrbit } from '../components/HeroOrbit'
+import { Odometer } from '../components/Odometer'
 import { CircularText } from '../components/CircularText'
 import { MagnetLines } from '../components/MagnetLines'
 import { ScrollCue } from '../components/ScrollCue'
@@ -48,6 +49,7 @@ const SECTIONS = [
   { id: 'range', label: 'Range' },
   { id: 'process', label: 'Process' },
   { id: 'ethos', label: 'Ethos' },
+  { id: 'numbers', label: 'Numbers' },
   { id: 'work', label: 'Work' },
   { id: 'playground', label: 'Playground' },
   { id: 'toolkit', label: 'Toolkit' },
@@ -125,6 +127,16 @@ const RANGE: HPanel[] = [
     title: 'Craft in the small moments',
     body: 'The typography, the timing, the spacing between things. Hand-built, never templated, always reduced-motion aware.',
   },
+]
+
+// An honest count of the body of craft, not any one project. The component and
+// page figures are the same ones the Colophon tracks; disciplines is the length
+// of the Range list above, so the numbers can never quietly drift from reality.
+const STATS: { value: number; suffix?: string; label: string; note: string }[] = [
+  { value: 74, label: 'Hand-built components', note: 'Every animation coded here, none off a shelf.' },
+  { value: 17, label: 'Pages and views', note: 'A whole site to wander, not a single scroll.' },
+  { value: RANGE.length, label: 'Disciplines across the stack', note: 'Frontend, iOS, backend, applied AI, motion.' },
+  { value: 100, suffix: '%', label: 'Hand-built, no templates', note: 'The portfolio is itself a sample of the work.' },
 ]
 
 // A taste of the Playground, foregrounded on the home page so the site reads as
@@ -414,6 +426,42 @@ export default function Home() {
             hint="Move your cursor across the words"
             className="mt-8 max-w-3xl font-display text-3xl font-semibold leading-[1.18] tracking-tight sm:text-5xl sm:leading-[1.16]"
           />
+        </div>
+      </section>
+
+      {/* NUMBERS — an honest scale of the craft, counted on the reels */}
+      <section id="numbers" className="mx-auto w-full max-w-5xl px-6 py-24">
+        <div className="mb-12 max-w-2xl">
+          <Reveal>
+            <Eyebrow>By the numbers</Eyebrow>
+          </Reveal>
+          <Reveal delay={0.05}>
+            <h2 className="mt-6 font-display text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl">
+              A body of <GradientText>craft.</GradientText>
+            </h2>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <p className="mt-6 max-w-md text-lg leading-relaxed text-white/55">
+              Not one project, but a whole thing, built in the open a little at a time. The reels tell
+              the honest count.
+            </p>
+          </Reveal>
+        </div>
+        <div className="grid gap-px overflow-hidden rounded-3xl border border-white/10 bg-white/[0.06] sm:grid-cols-2 lg:grid-cols-4">
+          {STATS.map((s, i) => (
+            <Reveal key={s.label} delay={0.08 + i * 0.06}>
+              <div className="group h-full bg-[#0b0b0b] p-7 transition-colors hover:bg-white/[0.03]">
+                <Odometer
+                  value={s.value}
+                  suffix={s.suffix}
+                  className="font-display text-6xl font-bold tracking-tight text-white sm:text-7xl"
+                />
+                <p className="mt-5 text-sm font-semibold text-white/80">{s.label}</p>
+                <p className="mt-1.5 text-sm leading-relaxed text-white/45">{s.note}</p>
+                <span className="mt-5 block h-px w-10 origin-left scale-x-100 bg-[#DCF87C]/60 transition-transform duration-500 group-hover:scale-x-[2.4]" />
+              </div>
+            </Reveal>
+          ))}
         </div>
       </section>
 
