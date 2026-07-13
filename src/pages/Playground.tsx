@@ -12,6 +12,7 @@ import { BorderBeam } from '../components/BorderBeam'
 import { CircularText } from '../components/CircularText'
 import { MagneticButton } from '../components/MagneticButton'
 import { AnimatedCounter } from '../components/AnimatedCounter'
+import { Odometer } from '../components/Odometer'
 import { DotGrid } from '../components/DotGrid'
 import { MagnetLines } from '../components/MagnetLines'
 import { ScrollVelocity } from '../components/ScrollVelocity'
@@ -393,6 +394,15 @@ export default function Playground() {
               <div className="text-center">
                 <AnimatedCounter value={2026} className="text-6xl font-bold tabular-nums sm:text-7xl" />
                 <p className="mt-2 text-sm text-white/45">Eases from zero on reveal</p>
+              </div>
+            </Experiment>
+          </Reveal>
+
+          <Reveal delay={0.05}>
+            <Experiment name="Odometer" note="Each digit is its own reel that rolls a full 0-9 turn and settles, higher places landing a beat before lower ones. A mechanical roll, not a text swap. Counts the craft on the home page.">
+              <div className="text-center">
+                <Odometer value={74} className="font-display text-6xl font-bold tracking-tight sm:text-7xl" />
+                <p className="mt-2 text-sm text-white/45">Reels roll on reveal</p>
               </div>
             </Experiment>
           </Reveal>
