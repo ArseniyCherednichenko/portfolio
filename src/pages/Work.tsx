@@ -7,6 +7,7 @@ import { MagneticButton } from '../components/MagneticButton'
 import { AnimatedCounter } from '../components/AnimatedCounter'
 import { ProjectPoster } from '../components/ProjectPoster'
 import { PixelTransition } from '../components/PixelTransition'
+import { CurvedLoop } from '../components/CurvedLoop'
 import { Seo } from '../components/Seo'
 import { PROJECTS, CASE_STUDIES, type Project } from '../data/projects'
 
@@ -187,6 +188,16 @@ export default function Work() {
           ))}
         </ul>
         <div className="border-t border-white/10" />
+      </section>
+
+      {/* CURVED EDITORIAL BAND — full-bleed, de-centering: the through-line is
+          the craft, not any one project. Draggable on a fine pointer. */}
+      <section className="relative w-full overflow-hidden py-4 sm:py-10">
+        <CurvedLoop
+          text="Craft carries across every project — "
+          curveAmount={300}
+          className="text-white/70"
+        />
       </section>
 
       {/* CTA */}
