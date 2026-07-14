@@ -39,6 +39,8 @@ import { MetaBalls } from '../components/MetaBalls'
 import { PixelTrail } from '../components/PixelTrail'
 import { Ribbons } from '../components/Ribbons'
 import { Lightning } from '../components/Lightning'
+import { GridMotion } from '../components/GridMotion'
+import { FACETS as FACET_GRID } from '../data/facets'
 import { BentoGrid, BentoCell } from '../components/BentoGrid'
 import { GlassSurface } from '../components/GlassSurface'
 import { Accordion } from '../components/Accordion'
@@ -1120,6 +1122,26 @@ export default function Playground() {
                 charge rides its length. The wriggle is summed seeded sines, never per-frame randomness, so it flickers
                 like live current instead of strobing. Come close and each bolt stretches its far end toward the pointer
                 and brightens. Backs the Colophon page title. Reduced-motion gets a still set of dim bolts.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH GRID MOTION */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.02] py-6">
+              <GridMotion rows={FACET_GRID} />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Pointer-parallax tile grid</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                Rows of labelled tiles, each easing sideways by a different amount
+                as the cursor sweeps — and on alternate rows against it, so the
+                field parts and crosses like layered parallax. One motion value
+                feeds every row's own spring; no per-frame React state. The same
+                field carries the honest facets on the About page. Touch and
+                reduced-motion get the rows still and centred, fully legible.
               </p>
             </div>
           </div>
