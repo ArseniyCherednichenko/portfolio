@@ -1,6 +1,7 @@
 import { useMemo, useState, type FormEvent, type ReactNode } from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
 import { EMAIL } from '../data/contact'
+import { useToast } from './Toast'
 
 // Honest, no-backend contact form. Nothing is sent from this page and there is
 // no server, no tracking, no third-party form service. The button simply
@@ -32,6 +33,7 @@ function buildMailto({
 
 export function ContactForm() {
   const reduce = useReducedMotion()
+  const { toast } = useToast()
   const [name, setName] = useState('')
   const [subject, setSubject] = useState('')
   const [message, setMessage] = useState('')
@@ -52,6 +54,10 @@ export function ContactForm() {
     }
     window.location.href = mailto
     setOpened(true)
+    toast('Draft ready', {
+      description: 'Review and send it from your mail app.',
+      variant: 'success',
+    })
     window.setTimeout(() => setOpened(false), 4000)
   }
 
