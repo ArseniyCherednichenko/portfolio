@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Reveal } from '../components/Reveal'
 import { ChromaGrid } from '../components/ChromaGrid'
@@ -57,6 +57,7 @@ import TagSphere from '../components/TagSphere'
 import { Globe } from '../components/Globe'
 import { Terminal, type TerminalLine } from '../components/Terminal'
 import { GO_TARGETS, useShortcuts } from '../components/Keyboard'
+import { useToast } from '../components/Toast'
 import { Seo } from '../components/Seo'
 import { GITHUB_URL } from '../data/contact'
 import { SKILLS } from '../data/toolkit'
@@ -394,6 +395,46 @@ function ElasticSliderDemo() {
         rightIcon={<span className="block h-3.5 w-3.5 rounded-full bg-current" />}
         onChange={setV}
       />
+    </div>
+  )
+}
+
+// Fires the real site toast — the same primitive that confirms a copied email
+// or a handed-off mail draft — so the Playground shows the live component, not
+// a mock of it. Each button raises a different variant.
+function ToastDemo() {
+  const { toast } = useToast()
+  const n = useRef(0)
+  const buttons: { label: string; run: () => void }[] = [
+    {
+      label: 'Neutral',
+      run: () => toast('Saved for later', { description: 'A quiet, informational note.' }),
+    },
+    {
+      label: 'Success',
+      run: () => toast('Email copied', { description: 'ars7ars3@gmail.com', variant: 'success' }),
+    },
+    {
+      label: 'Error',
+      run: () => toast('Could not copy', { description: 'Clipboard access was blocked.', variant: 'error' }),
+    },
+    {
+      label: 'Stack them',
+      run: () => toast(`Notification ${(n.current += 1)}`, { description: 'They stack, cap at four, and expire oldest-first.' }),
+    },
+  ]
+  return (
+    <div className="flex flex-wrap items-center justify-center gap-3">
+      {buttons.map((b) => (
+        <button
+          key={b.label}
+          type="button"
+          onClick={b.run}
+          className="rounded-full border border-white/15 px-5 py-2 text-sm font-semibold text-white/80 transition-colors hover:bg-white/[0.06] hover:text-white"
+        >
+          {b.label}
+        </button>
+      ))}
     </div>
   )
 }
@@ -1581,6 +1622,24 @@ export default function Playground() {
                 there is no seam. It drifts on its own, but grab it and the release carries a fling that decays back into
                 the drift on an exponential curve. The two columns run opposite directions and dissolve into a gradient
                 mask at each edge. Reduced motion swaps it for a plain, native-scrolling list.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+        {/* FULL-WIDTH TOASTS */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="flex min-h-[200px] items-center justify-center rounded-3xl border border-white/10 bg-white/[0.02] px-6 py-14">
+              <ToastDemo />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Toasts</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The site's transient-feedback primitive — the same one that confirms a copied email or a handed-off mail
+                draft. A single portal viewport on the body raises polite, auto-expiring cards into an aria-live region,
+                so screen readers hear them without the page ever stealing focus. They stack newest-first, cap at four,
+                pause the instant the pointer or keyboard focus rests on them, and resume with exactly the time that was
+                left. Reduced motion cross-fades them in place and drops the sweeping countdown bar.
               </p>
             </div>
           </div>
