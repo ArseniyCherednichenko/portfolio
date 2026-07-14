@@ -15,6 +15,8 @@ import { Timeline } from '../components/Timeline'
 import { ProfileCard } from '../components/ProfileCard'
 import { Folder, type FolderPaper } from '../components/Folder'
 import { Terminal, type TerminalLine } from '../components/Terminal'
+import { GridMotion } from '../components/GridMotion'
+import { FACETS as FACET_GRID } from '../data/facets'
 import { useContact } from '../components/ContactDialog'
 import { Seo } from '../components/Seo'
 import { useBerlinTime } from '../hooks/useBerlinTime'
@@ -368,6 +370,25 @@ export default function About() {
 
       {/* AT A GLANCE — live, scannable snapshot */}
       <Snapshot />
+
+      {/* FACETS — a full-bleed field of the many honest facets, drifting with
+          the cursor. No single project owns it; the whole of the work at once. */}
+      <section className="py-16">
+        <div className="mx-auto w-full max-w-4xl px-6">
+          <Reveal>
+            <Eyebrow>The whole of it</Eyebrow>
+          </Reveal>
+          <Reveal delay={0.05}>
+            <p className="mt-6 max-w-2xl text-lg leading-relaxed text-white/50">
+              Tools, roles, the place, and the rules I build by — no single one of
+              them the headline. Move across the field and it parts.
+            </p>
+          </Reveal>
+        </div>
+        <div className="mt-10">
+          <GridMotion rows={FACET_GRID} />
+        </div>
+      </section>
 
       {/* NOW */}
       <section className="mx-auto w-full max-w-4xl px-6 py-16">
