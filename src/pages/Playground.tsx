@@ -29,6 +29,7 @@ import { ScrollReveal } from '../components/ScrollReveal'
 import { VariableProximity } from '../components/VariableProximity'
 import { SpotlightReveal } from '../components/SpotlightReveal'
 import { ASCIIText } from '../components/ASCIIText'
+import { CurvedLoop } from '../components/CurvedLoop'
 import { TrueFocus } from '../components/TrueFocus'
 import { FlowingMenu } from '../components/FlowingMenu'
 import { Threads } from '../components/Threads'
@@ -591,6 +592,24 @@ export default function Playground() {
                 of a letter it covers, then painted one monospace glyph at a time, picking a denser
                 character the brighter the cell. A slow shimmer keeps it breathing; the cursor is a
                 torch that lights the field as it passes. Reduced-motion paints one still frame.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH CURVED LOOP */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="relative w-full overflow-hidden rounded-3xl border border-white/10 bg-white/[0.02] py-8">
+              <CurvedLoop text="Type that follows the path — drag me — " curveAmount={280} className="text-white/75" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Curved text loop</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                One line of type set along a curved SVG path, its start offset advanced every frame and
+                wrapped by exactly one phrase-length so the loop is seamless. On a mouse or trackpad you
+                can grab it — dragging scrubs the line 1:1 and the release carries an inertial fling that
+                eases back into the drift. Reduced motion sets the phrase once along the curve, still.
               </p>
             </div>
           </div>
