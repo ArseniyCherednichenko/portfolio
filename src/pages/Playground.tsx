@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
+import { Annotate, type AnnotateType } from '../components/Annotate'
 import { Reveal } from '../components/Reveal'
 import { ChromaGrid } from '../components/ChromaGrid'
 import { GooeyTabs } from '../components/GooeyTabs'
@@ -229,6 +230,45 @@ function SplitTextDemo() {
       >
         Replay
       </button>
+    </div>
+  )
+}
+
+// The five marker kinds sketched over honest phrases, so the demo reads as a
+// marked-up note rather than a claim. Replay remounts the block to redraw.
+const ANNOTATE_LINES: { type: AnnotateType; pre: string; mark: string; post: string; seed: number }[] = [
+  { type: 'underline', pre: 'Craft in the ', mark: 'small moments', post: '.', seed: 7 },
+  { type: 'circle', pre: 'Based in ', mark: 'Berlin', post: '.', seed: 3 },
+  { type: 'box', pre: 'Every animation ', mark: 'hand-built', post: '.', seed: 11 },
+  { type: 'bracket', pre: 'Always ', mark: 'reduced-motion aware', post: '.', seed: 5 },
+  { type: 'strike', pre: 'No ', mark: 'templates', post: ', anywhere.', seed: 9 },
+]
+
+function AnnotateDemo() {
+  const [run, setRun] = useState(0)
+  const reduced = useReducedMotion()
+  return (
+    <div className="flex w-full flex-col items-start gap-5">
+      <div key={run} className="flex flex-col items-start gap-4">
+        {ANNOTATE_LINES.map((l, i) => (
+          <p key={l.type} className="font-display text-xl font-medium leading-snug text-white/85 sm:text-2xl">
+            {l.pre}
+            <Annotate type={l.type} seed={l.seed} delay={i * 0.18}>
+              {l.mark}
+            </Annotate>
+            {l.post}
+          </p>
+        ))}
+      </div>
+      {!reduced && (
+        <button
+          type="button"
+          onClick={() => setRun((n) => n + 1)}
+          className="rounded-full border border-white/15 px-5 py-2 text-sm font-semibold text-white/80 transition-colors hover:bg-white/[0.06] hover:text-white"
+        >
+          Replay
+        </button>
+      )}
     </div>
   )
 }
@@ -555,6 +595,15 @@ export default function Playground() {
               note="A departure-board display: the top leaf folds down to hide the old glyph while a fresh bottom leaf drops into place. A two-phase mechanical hinge, not a spring. Drives the live Berlin clock on the contact page."
             >
               <SplitFlapDemo />
+            </Experiment>
+          </Reveal>
+
+          <Reveal>
+            <Experiment
+              name="Hand-drawn marker"
+              note="An editorial pen stroke sketched over a phrase as it scrolls in: underline, circle, box, bracket, strike. The wobble is a seeded path drawn on via pathLength, so the same words always mark the same way. Underlines 'small moments' on the home page."
+            >
+              <AnnotateDemo />
             </Experiment>
           </Reveal>
         </div>
