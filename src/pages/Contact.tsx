@@ -9,6 +9,7 @@ import { ContactForm } from '../components/ContactForm'
 import { SpotlightCard } from '../components/SpotlightCard'
 import { SplitFlap } from '../components/SplitFlap'
 import { Globe } from '../components/Globe'
+import { Orb } from '../components/Orb'
 import { Seo } from '../components/Seo'
 import { useBerlinTime } from '../hooks/useBerlinTime'
 
@@ -42,8 +43,16 @@ export default function Contact() {
         description="Get in touch with Arseniy Cherednichenko — email, GitHub, and the kinds of conversations he is open to. Based in Berlin."
       />
       {/* HEADER */}
-      <header className="mx-auto w-full max-w-4xl px-6 pb-12 pt-36 sm:pt-44">
+      <header className="relative mx-auto w-full max-w-4xl overflow-hidden px-6 pb-12 pt-36 sm:pt-44">
+        {/* A living orb drifts off the top-right of the title, glowing lime and
+            leaning toward the cursor — a warm, present anchor for the invitation
+            to reach out. It sits behind the copy and never blocks a click. */}
+        <Orb
+          size={380}
+          className="absolute -right-24 -top-6 opacity-70 sm:-right-10 sm:opacity-90"
+        />
         <motion.div
+          className="relative"
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: EASE }}
@@ -54,7 +63,7 @@ export default function Contact() {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.05, ease: EASE }}
-          className="mt-6 font-display text-5xl font-bold leading-[1.05] tracking-tight sm:text-7xl"
+          className="relative mt-6 font-display text-5xl font-bold leading-[1.05] tracking-tight sm:text-7xl"
         >
           Let us build something <GradientText>that feels right.</GradientText>
         </motion.h1>
@@ -62,7 +71,7 @@ export default function Contact() {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.15, ease: EASE }}
-          className="mt-8 max-w-xl text-lg leading-relaxed text-white/60"
+          className="relative mt-8 max-w-xl text-lg leading-relaxed text-white/60"
         >
           Whether it is a product to build, a collaboration, or just a conversation about craft and
           AI, I would love to hear from you. Email is the fastest way to reach me.
