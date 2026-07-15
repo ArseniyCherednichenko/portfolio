@@ -24,6 +24,7 @@ import { FlowingMenu, type FlowingItem } from '../components/FlowingMenu'
 import { MagneticButton } from '../components/MagneticButton'
 import { HeroOrbit } from '../components/HeroOrbit'
 import { Odometer } from '../components/Odometer'
+import { Annotate } from '../components/Annotate'
 import { CircularText } from '../components/CircularText'
 import { MagnetLines } from '../components/MagnetLines'
 import { ScrollCue } from '../components/ScrollCue'
@@ -133,7 +134,7 @@ const RANGE: HPanel[] = [
 // page figures are the same ones the Colophon tracks; disciplines is the length
 // of the Range list above, so the numbers can never quietly drift from reality.
 const STATS: { value: number; suffix?: string; label: string; note: string }[] = [
-  { value: 79, label: 'Hand-built components', note: 'Every animation coded here, none off a shelf.' },
+  { value: 80, label: 'Hand-built components', note: 'Every animation coded here, none off a shelf.' },
   { value: 17, label: 'Pages and views', note: 'A whole site to wander, not a single scroll.' },
   { value: RANGE.length, label: 'Disciplines across the stack', note: 'Frontend, iOS, backend, applied AI, motion.' },
   { value: 100, suffix: '%', label: 'Hand-built, no templates', note: 'The portfolio is itself a sample of the work.' },
@@ -321,8 +322,11 @@ export default function Home() {
         </Reveal>
         <Reveal delay={0.05}>
           <p className="mt-6 font-display text-3xl font-medium leading-snug text-white/85 sm:text-4xl">
-            I care about products that feel effortless. Real craft in the motion, the typography, and the small
-            moments, the things people feel but cannot name.
+            I care about products that feel effortless. Real craft in the motion, the typography, and the{' '}
+            <Annotate type="underline" seed={7} strokeWidth={2.5}>
+              small moments
+            </Annotate>
+            , the things people feel but cannot name.
           </p>
         </Reveal>
         <div className="mt-10 grid gap-4 sm:grid-cols-3">
