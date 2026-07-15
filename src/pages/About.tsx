@@ -7,6 +7,7 @@ import { TiltCard } from '../components/TiltCard'
 import { SpotlightCard } from '../components/SpotlightCard'
 import { MagneticButton } from '../components/MagneticButton'
 import { ScrollReveal } from '../components/ScrollReveal'
+import { BlurText } from '../components/BlurText'
 import { VariableProximity } from '../components/VariableProximity'
 import { BentoGrid, BentoCell } from '../components/BentoGrid'
 import { AnimatedCounter } from '../components/AnimatedCounter'
@@ -261,6 +262,7 @@ function Snapshot() {
 
 export default function About() {
   const { open: openContact } = useContact()
+  const reduce = useReducedMotion()
   return (
     <>
       <Seo
@@ -277,14 +279,19 @@ export default function About() {
           >
             <Eyebrow>About</Eyebrow>
           </motion.div>
-          <motion.h1
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.05, ease: EASE }}
-            className="mt-6 font-display text-5xl font-bold leading-[1.05] tracking-tight sm:text-7xl"
-          >
-            A builder who <GradientText>sweats the details.</GradientText>
-          </motion.h1>
+          {/* The opening line racks into focus word by word (BlurText), then the
+              accent phrase resolves as one unit — a lens finding the sentence. */}
+          <h1 className="mt-6 font-display text-5xl font-bold leading-[1.05] tracking-tight sm:text-7xl">
+            <BlurText as="span" text="A builder who" trigger="mount" delay={0.05} className="block text-white" />
+            <motion.span
+              className="block"
+              initial={reduce ? false : { opacity: 0, filter: 'blur(14px)', y: 14 }}
+              animate={{ opacity: 1, filter: 'blur(0px)', y: 0 }}
+              transition={{ duration: 0.72, delay: 0.5, ease: EASE }}
+            >
+              <GradientText>sweats the details.</GradientText>
+            </motion.span>
+          </h1>
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
