@@ -42,6 +42,7 @@ import { PixelTrail } from '../components/PixelTrail'
 import { Ribbons } from '../components/Ribbons'
 import { Lightning } from '../components/Lightning'
 import { GridMotion } from '../components/GridMotion'
+import { Orb } from '../components/Orb'
 import { FACETS as FACET_GRID } from '../data/facets'
 import { BentoGrid, BentoCell } from '../components/BentoGrid'
 import { GlassSurface } from '../components/GlassSurface'
@@ -1260,6 +1261,31 @@ export default function Playground() {
                 feeds every row's own spring; no per-frame React state. The same
                 field carries the honest facets on the About page. Touch and
                 reduced-motion get the rows still and centred, fully legible.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH ORB */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="relative flex h-[380px] items-center justify-center overflow-hidden rounded-3xl border border-white/10 bg-[#070707]">
+              <Orb size={300} />
+              <div className="pointer-events-none absolute inset-x-0 bottom-6 flex flex-col items-center text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Sphere</span>
+                <p className="mt-3 max-w-md px-6 text-xl font-medium text-white/80 sm:text-2xl">
+                  Move around it and the light leans your way.
+                </p>
+              </div>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Living gradient orb</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                No WebGL and no canvas — just stacked CSS gradients and springs. A bottom-lit base reads as a solid ball,
+                two plasma fields drift opposite ways behind a circular mask so the interior churns, and an inset rim
+                catches the light. The specular highlight slides toward the pointer while the whole sphere tilts a few
+                degrees after it in perspective; left alone it just breathes. Backs the Contact page header.
+                Reduced-motion gets one calm, centred frame.
               </p>
             </div>
           </div>
