@@ -19,6 +19,7 @@ import { MagnetLines } from '../components/MagnetLines'
 import { ScrollVelocity } from '../components/ScrollVelocity'
 import { DecryptedText } from '../components/DecryptedText'
 import { SplitText } from '../components/SplitText'
+import { BlurText } from '../components/BlurText'
 import { SplitFlap } from '../components/SplitFlap'
 import { CardStack } from '../components/CardStack'
 import { ProfileCard } from '../components/ProfileCard'
@@ -222,6 +223,27 @@ function SplitTextDemo() {
       <div key={run} className="font-display text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl">
         <SplitText as="span" text="Made to" gradient trigger="mount" className="block" />
         <SplitText as="span" text="move." trigger="mount" delay={0.24} className="block" />
+      </div>
+      <button
+        type="button"
+        onClick={() => setRun((n) => n + 1)}
+        className="rounded-full border border-white/15 px-5 py-2 text-sm font-semibold text-white/80 transition-colors hover:bg-white/[0.06] hover:text-white"
+      >
+        Replay
+      </button>
+    </div>
+  )
+}
+
+// A replayable BlurText demo. Bumping the key remounts the lines so the
+// focus-in runs again on demand; a heavier blur here makes the rack obvious.
+function BlurTextDemo() {
+  const [run, setRun] = useState(0)
+  return (
+    <div className="flex w-full flex-col items-center gap-6 text-center">
+      <div key={run} className="font-display text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl">
+        <BlurText as="span" text="Racks into" trigger="mount" blur={16} className="block text-white" />
+        <BlurText as="span" text="focus." trigger="mount" delay={0.28} blur={16} className="block text-[#DCF87C]" />
       </div>
       <button
         type="button"
@@ -574,6 +596,12 @@ export default function Playground() {
           <Reveal>
             <Experiment name="Split-text reveal" note="Each character lifts and fades into place, one after the next. Hit replay to run it again.">
               <SplitTextDemo />
+            </Experiment>
+          </Reveal>
+
+          <Reveal>
+            <Experiment name="Blur-to-focus reveal" note="Each word starts heavily out of focus and racks into clarity, one after the next, like a lens finding it. Plays only with depth of field, no sliding. Titles the About page's opening line.">
+              <BlurTextDemo />
             </Experiment>
           </Reveal>
 
