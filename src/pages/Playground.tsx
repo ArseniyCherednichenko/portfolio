@@ -50,6 +50,7 @@ import { Accordion } from '../components/Accordion'
 import { Stepper, type StepperStep } from '../components/Stepper'
 import { Dock, type DockItem } from '../components/Dock'
 import { ElasticSlider } from '../components/ElasticSlider'
+import { Tooltip } from '../components/Tooltip'
 import { Timeline, type TimelineItem } from '../components/Timeline'
 import { HorizontalScroll, type HPanel } from '../components/HorizontalScroll'
 import { PillNav, type PillLink } from '../components/PillNav'
@@ -1416,6 +1417,33 @@ export default function Playground() {
               <MagneticButton href="#" className="rounded-full bg-[#DCF87C] px-8 py-4 text-lg font-semibold text-black">
                 Pull me
               </MagneticButton>
+            </Experiment>
+          </Reveal>
+
+          <Reveal delay={0.05}>
+            <Experiment
+              name="Tooltip"
+              note="A labelled hint that rises on hover and — this is the part most skip — on keyboard focus, so tabbing surfaces it too. Point each one inward and it drifts in from that edge. The trigger carries aria-describedby, Escape dismisses it, and reduced motion drops the travel for a plain fade. Hovers the toolkit's tools and this page's own labels."
+            >
+              <div className="grid grid-cols-2 gap-3">
+                {(
+                  [
+                    { placement: 'top', label: 'Top', hint: 'Rises from above' },
+                    { placement: 'bottom', label: 'Bottom', hint: 'Drops from below' },
+                    { placement: 'left', label: 'Left', hint: 'Slides in from the left' },
+                    { placement: 'right', label: 'Right', hint: 'Slides in from the right' },
+                  ] as const
+                ).map((t) => (
+                  <Tooltip key={t.placement} content={t.hint} placement={t.placement}>
+                    <button
+                      type="button"
+                      className="w-full rounded-full border border-white/15 px-4 py-2.5 text-sm font-semibold transition-colors hover:border-[#DCF87C]/40 hover:text-[#DCF87C]"
+                    >
+                      {t.label}
+                    </button>
+                  </Tooltip>
+                ))}
+              </div>
             </Experiment>
           </Reveal>
 
