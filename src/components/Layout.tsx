@@ -112,6 +112,13 @@ function SiteFooter() {
         </Link>
         {' · '}
         <Link
+          to="/terminal"
+          className="text-white/45 underline-offset-4 transition-colors hover:text-[#DCF87C] hover:underline"
+        >
+          Terminal
+        </Link>
+        {' · '}
+        <Link
           to="/colophon"
           className="text-white/45 underline-offset-4 transition-colors hover:text-[#DCF87C] hover:underline"
         >

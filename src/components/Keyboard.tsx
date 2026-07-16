@@ -43,6 +43,7 @@ export const GO_TARGETS: GoTarget[] = [
   { key: 'q', to: '/answers', label: 'Answers' },
   { key: 'm', to: '/craft', label: 'On motion' },
   { key: 'r', to: '/resume', label: 'Résumé' },
+  { key: 's', to: '/terminal', label: 'Terminal' },
 ]
 
 const CHORD_WINDOW_MS = 1400
