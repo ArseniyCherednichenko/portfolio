@@ -4,6 +4,7 @@ import { Reveal } from '../components/Reveal'
 import { Eyebrow } from '../components/Eyebrow'
 import { GradientText } from '../components/GradientText'
 import { ChannelList } from '../components/ChannelList'
+import { Particles } from '../components/Particles'
 import { BorderBeam } from '../components/BorderBeam'
 import { ContactForm } from '../components/ContactForm'
 import { SpotlightCard } from '../components/SpotlightCard'
@@ -41,7 +42,16 @@ export default function Contact() {
         description="Get in touch with Arseniy Cherednichenko — email, GitHub, and the kinds of conversations he is open to. Based in Berlin."
       />
       {/* HEADER */}
-      <header className="mx-auto w-full max-w-4xl px-6 pb-12 pt-36 sm:pt-44">
+      <header className="relative isolate mx-auto w-full max-w-4xl overflow-hidden px-6 pb-12 pt-36 sm:pt-44">
+        {/* Ambient constellation, radial-masked to the top-right so the drifting
+            web frames the title without fighting the left-aligned copy. This
+            page had no ambient motion of its own. */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 -z-10 opacity-60 [mask-image:radial-gradient(120%_80%_at_78%_14%,#000_0%,transparent_68%)]"
+        >
+          <Particles className="h-full w-full" maxCount={70} speed={0.16} />
+        </div>
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
