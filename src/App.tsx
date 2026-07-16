@@ -20,6 +20,7 @@ const Colophon = lazy(() => import('./pages/Colophon'))
 const Answers = lazy(() => import('./pages/Answers'))
 const Craft = lazy(() => import('./pages/Craft'))
 const Resume = lazy(() => import('./pages/Resume'))
+const TerminalPage = lazy(() => import('./pages/Terminal'))
 const NotFound = lazy(() => import('./pages/NotFound'))
 
 export default function App() {
@@ -40,6 +41,7 @@ export default function App() {
         <Route path="answers" element={<Answers />} />
         <Route path="craft" element={<Craft />} />
         <Route path="resume" element={<Resume />} />
+        <Route path="terminal" element={<TerminalPage />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
