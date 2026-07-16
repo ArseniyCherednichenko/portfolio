@@ -13,6 +13,7 @@ import { CircularText } from '../components/CircularText'
 import { MagneticButton } from '../components/MagneticButton'
 import { AnimatedCounter } from '../components/AnimatedCounter'
 import { DotGrid } from '../components/DotGrid'
+import { Particles } from '../components/Particles'
 import { MagnetLines } from '../components/MagnetLines'
 import { ScrollVelocity } from '../components/ScrollVelocity'
 import { DecryptedText } from '../components/DecryptedText'
@@ -768,6 +769,30 @@ export default function Playground() {
               <p className="mt-1 text-sm leading-relaxed text-white/45">
                 A few hundred dots on a single canvas, each a tiny spring pushed by the pointer and pulled home. Lights up
                 lime within reach.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH PARTICLES */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="relative h-[340px] overflow-hidden rounded-3xl border border-white/10 bg-[#0a0a0a]">
+              <Particles />
+              <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Constellation field</span>
+                <p className="mt-3 max-w-md px-6 text-xl font-medium text-white/80 sm:text-2xl">
+                  Gather the web toward your cursor.
+                </p>
+              </div>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Drifting constellation</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                A cloud of points floats on a slow wrapping drift, joined by a line whenever two pass close, so the field
+                reads as a shifting web. The cursor is a soft attractor: points within reach lean toward it and warm from
+                white to lime, and the links they share warm with them, dragging a brighter knot along behind the pointer.
+                All on one canvas, no per-point React state. Reduced-motion gets a single calm static web.
               </p>
             </div>
           </div>
