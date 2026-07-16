@@ -3,14 +3,17 @@ import { Link, NavLink } from 'react-router-dom'
 import { useCommandPalette } from './CommandPalette'
 import { useContact } from './ContactDialog'
 import { MobileMenu } from './MobileMenu'
+import { Tooltip } from './Tooltip'
 
 // Floating translucent nav. Work, Range, About, and Playground are real page
 // links; Toolkit and the rest stay one keystroke away in the command palette.
-const PAGES: ReadonlyArray<readonly [string, string]> = [
-  ['Work', '/work'],
-  ['Range', '/range'],
-  ['About', '/about'],
-  ['Playground', '/playground'],
+// The third field is a short hint surfaced in a tooltip on hover and focus, so
+// the terse labels gain context without cluttering the bar.
+const PAGES: ReadonlyArray<readonly [string, string, string]> = [
+  ['Work', '/work', 'Case studies'],
+  ['Range', '/range', 'The disciplines'],
+  ['About', '/about', 'Who I am'],
+  ['Playground', '/playground', 'Live motion'],
 ]
 
 export function Nav() {
@@ -28,16 +31,17 @@ export function Nav() {
         AC
       </Link>
       <div className="hidden gap-7 sm:flex">
-        {PAGES.map(([label, to]) => (
-          <NavLink
-            key={to}
-            to={to}
-            className={({ isActive }) =>
-              `text-sm transition-colors hover:text-white ${isActive ? 'text-[#DCF87C]' : 'text-white/60'}`
-            }
-          >
-            {label}
-          </NavLink>
+        {PAGES.map(([label, to, hint]) => (
+          <Tooltip key={to} content={hint} placement="bottom">
+            <NavLink
+              to={to}
+              className={({ isActive }) =>
+                `text-sm transition-colors hover:text-white ${isActive ? 'text-[#DCF87C]' : 'text-white/60'}`
+              }
+            >
+              {label}
+            </NavLink>
+          </Tooltip>
         ))}
       </div>
       <div className="flex items-center gap-2">
@@ -63,13 +67,15 @@ export function Nav() {
           </svg>
           <kbd className="hidden font-sans text-xs tracking-wide sm:inline">{mod} K</kbd>
         </button>
-        <button
-          type="button"
-          onClick={openContact}
-          className="rounded-full bg-[#DCF87C] px-4 py-1.5 text-sm font-semibold text-black transition hover:brightness-105"
-        >
-          Get in touch
-        </button>
+        <Tooltip content="Email, socials, and more" placement="bottom">
+          <button
+            type="button"
+            onClick={openContact}
+            className="rounded-full bg-[#DCF87C] px-4 py-1.5 text-sm font-semibold text-black transition hover:brightness-105"
+          >
+            Get in touch
+          </button>
+        </Tooltip>
         <MobileMenu />
       </div>
     </nav>
