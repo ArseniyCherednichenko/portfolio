@@ -99,6 +99,14 @@ body.cursor-none * {
   initial-value: 0deg;
 }
 
+/* Orb: the internal energy band rotates slowly inside the sphere. The global
+   reduced-motion guard below stills it to a single frame. */
+@keyframes orb-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 @keyframes border-beam-spin {
   to {
     --bb-angle: 360deg;
