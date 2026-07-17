@@ -119,6 +119,13 @@ function SiteFooter() {
         </Link>
         {' · '}
         <Link
+          to="/changelog"
+          className="text-white/45 underline-offset-4 transition-colors hover:text-[#DCF87C] hover:underline"
+        >
+          Changelog
+        </Link>
+        {' · '}
+        <Link
           to="/colophon"
           className="text-white/45 underline-offset-4 transition-colors hover:text-[#DCF87C] hover:underline"
         >
