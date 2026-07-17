@@ -10,6 +10,7 @@ import { BorderBeam } from '../components/BorderBeam'
 import { ContactForm } from '../components/ContactForm'
 import { SpotlightCard } from '../components/SpotlightCard'
 import { SplitFlap } from '../components/SplitFlap'
+import { ScratchReveal } from '../components/ScratchReveal'
 import { Seo } from '../components/Seo'
 import { useBerlinTime } from '../hooks/useBerlinTime'
 
@@ -200,6 +201,29 @@ export default function Contact() {
             </Reveal>
           ))}
         </div>
+      </section>
+
+      {/* A SMALL P.S. — a scratch-off note, just for the people who wander this
+          far. Nothing important is hidden here; the email is everywhere on the
+          page. It is only a bit of warmth you have to earn. */}
+      <section className="mx-auto w-full max-w-4xl px-6 py-8">
+        <Reveal>
+          <div className="mx-auto max-w-xl">
+            <ScratchReveal
+              className="border border-white/10 bg-white/[0.02]"
+              hint="A note for you"
+              subhint="Scratch this off"
+            >
+              <div className="flex min-h-[150px] flex-col items-center justify-center px-8 py-10 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[#DCF87C]">P.S.</span>
+                <p className="mt-3 font-display text-xl font-semibold leading-snug text-white/90 sm:text-2xl">
+                  I read everything that lands in my inbox, and I actually reply.
+                </p>
+                <p className="mt-2 text-sm text-white/45">Even the ones that just say hello.</p>
+              </div>
+            </ScratchReveal>
+          </div>
+        </Reveal>
       </section>
 
       {/* CLOSING */}
