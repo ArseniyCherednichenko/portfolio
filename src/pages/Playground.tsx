@@ -22,6 +22,7 @@ import { SplitFlap } from '../components/SplitFlap'
 import { CardStack } from '../components/CardStack'
 import { ProfileCard } from '../components/ProfileCard'
 import { PixelTransition } from '../components/PixelTransition'
+import { ScratchReveal } from '../components/ScratchReveal'
 import { Folder } from '../components/Folder'
 import { ScrollStack } from '../components/ScrollStack'
 import { ScrollReveal } from '../components/ScrollReveal'
@@ -597,6 +598,21 @@ export default function Playground() {
                   </div>
                 }
               />
+            </Experiment>
+          </Reveal>
+
+          <Reveal>
+            <Experiment
+              name="Scratch-off foil"
+              note="Drag across the panel and a canvas foil erases under a soft round brush, uncovering the card beneath. A coarse grid tracks how much is cleared; past the threshold the foil fades on its own. Reduced motion skips the foil so the content is never gated behind it."
+            >
+              <ScratchReveal className="aspect-[4/3] w-full max-w-[260px] border border-white/10">
+                <div className="flex h-full w-full flex-col justify-between rounded-3xl bg-gradient-to-br from-[#DCF87C] to-[#c2e85a] p-6 text-black">
+                  <span className="text-xs font-semibold uppercase tracking-[0.2em] text-black/60">Uncovered</span>
+                  <p className="font-display text-2xl font-bold leading-tight">You did the work.</p>
+                  <p className="text-sm font-medium text-black/70">Nice scratch. Try again below.</p>
+                </div>
+              </ScratchReveal>
             </Experiment>
           </Reveal>
 
