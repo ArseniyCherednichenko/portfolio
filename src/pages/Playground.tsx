@@ -39,6 +39,7 @@ import { Ribbons } from '../components/Ribbons'
 import { Lightning } from '../components/Lightning'
 import { BentoGrid, BentoCell } from '../components/BentoGrid'
 import { GlassSurface } from '../components/GlassSurface'
+import { Orb } from '../components/Orb'
 import { Accordion } from '../components/Accordion'
 import { Stepper, type StepperStep } from '../components/Stepper'
 import { Dock, type DockItem } from '../components/Dock'
@@ -498,6 +499,12 @@ export default function Playground() {
           </Reveal>
 
           <Reveal delay={0.05}>
+            <Experiment name="Glowing orb" note="A lit sphere with real volume: a dark base shaded from the upper-left, a slow energy band rotating inside, and a specular highlight plus a 3D tilt that both track the cursor. Anchors the Contact page.">
+              <Orb size={180} listen="self" />
+            </Experiment>
+          </Reveal>
+
+          <Reveal>
             <Experiment name="Cursor spotlight" note="A radial glow tracks the pointer inside the card's bounds.">
               <SpotlightCard className="w-full max-w-[260px]">
                 <div className="flex flex-col gap-2 p-7">
