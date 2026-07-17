@@ -5,6 +5,7 @@ import { Eyebrow } from '../components/Eyebrow'
 import { GradientText } from '../components/GradientText'
 import { ChannelList } from '../components/ChannelList'
 import { Particles } from '../components/Particles'
+import { Orb } from '../components/Orb'
 import { BorderBeam } from '../components/BorderBeam'
 import { ContactForm } from '../components/ContactForm'
 import { SpotlightCard } from '../components/SpotlightCard'
@@ -52,30 +53,47 @@ export default function Contact() {
         >
           <Particles className="h-full w-full" maxCount={70} speed={0.16} />
         </div>
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: EASE }}
-        >
-          <Eyebrow>Contact</Eyebrow>
-        </motion.div>
-        <motion.h1
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.05, ease: EASE }}
-          className="mt-6 font-display text-5xl font-bold leading-[1.05] tracking-tight sm:text-7xl"
-        >
-          Let us build something <GradientText>that feels right.</GradientText>
-        </motion.h1>
-        <motion.p
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.15, ease: EASE }}
-          className="mt-8 max-w-xl text-lg leading-relaxed text-white/60"
-        >
-          Whether it is a product to build, a collaboration, or just a conversation about craft and
-          AI, I would love to hear from you. Email is the fastest way to reach me.
-        </motion.p>
+        <div className="grid items-center gap-y-12 lg:grid-cols-[1fr_auto] lg:gap-x-14">
+          <div>
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: EASE }}
+            >
+              <Eyebrow>Contact</Eyebrow>
+            </motion.div>
+            <motion.h1
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.05, ease: EASE }}
+              className="mt-6 font-display text-5xl font-bold leading-[1.05] tracking-tight sm:text-7xl"
+            >
+              Let us build something <GradientText>that feels right.</GradientText>
+            </motion.h1>
+            <motion.p
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.15, ease: EASE }}
+              className="mt-8 max-w-xl text-lg leading-relaxed text-white/60"
+            >
+              Whether it is a product to build, a collaboration, or just a conversation about craft
+              and AI, I would love to hear from you. Email is the fastest way to reach me.
+            </motion.p>
+          </div>
+
+          {/* A glowing presence — the orb leans and lights toward the cursor as
+              it moves anywhere across the header, so the page reads as "someone
+              is home" before a word is exchanged. The constellation above webs
+              around it. */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.86 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.9, delay: 0.2, ease: EASE }}
+            className="order-first justify-self-center lg:order-none lg:justify-self-end"
+          >
+            <Orb size={248} listen="window" />
+          </motion.div>
+        </div>
       </header>
 
       {/* CHANNELS + AVAILABILITY */}
