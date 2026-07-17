@@ -39,6 +39,7 @@ const PAGES: { slug: string; to: string; blurb: string }[] = [
   { slug: 'answers', to: '/answers', blurb: 'questions people ask' },
   { slug: 'resume', to: '/resume', blurb: 'a one-page CV' },
   { slug: 'colophon', to: '/colophon', blurb: 'how this site is built' },
+  { slug: 'changelog', to: '/changelog', blurb: 'the build log' },
   { slug: 'contact', to: '/contact', blurb: 'say hello' },
 ]
 
