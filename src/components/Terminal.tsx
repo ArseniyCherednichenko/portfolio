@@ -41,6 +41,7 @@ const PAGES: { slug: string; to: string; blurb: string }[] = [
   { slug: 'colophon', to: '/colophon', blurb: 'how this site is built' },
   { slug: 'changelog', to: '/changelog', blurb: 'the build log' },
   { slug: 'contact', to: '/contact', blurb: 'say hello' },
+  { slug: 'contents', to: '/contents', blurb: 'the index of everything' },
 ]
 
 type Line = { id: number; kind: 'in' | 'out' | 'err'; node: ReactNode }

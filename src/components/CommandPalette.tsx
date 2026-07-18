@@ -99,6 +99,7 @@ function Palette({ open, onClose }: { open: boolean; onClose: () => void }) {
       { id: 'resume', label: 'Résumé', group: 'Pages', hint: 'one-page CV, printable', keywords: 'resume cv curriculum vitae print pdf download experience hire', run: () => go('/resume') },
       { id: 'terminal', label: 'Terminal', group: 'Pages', hint: 'drive the site by typing', keywords: 'terminal shell command line console type cli bash prompt play interactive', run: () => go('/terminal') },
       { id: 'changelog', label: 'Changelog', group: 'Pages', hint: 'the build log', keywords: 'changelog build log history releases updates commits shipped open source what changed', run: () => go('/changelog') },
+      { id: 'contents', label: 'Index', group: 'Pages', hint: 'every page in one place', keywords: 'index contents sitemap map directory all pages everything table of contents overview', run: () => go('/contents') },
     ]
 
     const projects: Command[] = PROJECTS.filter((p) => !p.soon).map((p) => ({
