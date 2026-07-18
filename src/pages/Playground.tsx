@@ -42,6 +42,7 @@ import { BentoGrid, BentoCell } from '../components/BentoGrid'
 import { GlassSurface } from '../components/GlassSurface'
 import { Orb } from '../components/Orb'
 import { Accordion } from '../components/Accordion'
+import { ElasticSlider } from '../components/ElasticSlider'
 import { Stepper, type StepperStep } from '../components/Stepper'
 import { Dock, type DockItem } from '../components/Dock'
 import { Timeline, type TimelineItem } from '../components/Timeline'
@@ -315,6 +316,7 @@ function GooeyTabsDemo() {
 export default function Playground() {
   const [likes, setLikes] = useState(128)
   const [on, setOn] = useState(false)
+  const [volume, setVolume] = useState(62)
   const { openShortcuts } = useShortcuts()
 
   return (
@@ -1202,6 +1204,34 @@ export default function Playground() {
                     style={{ transitionTimingFunction: 'cubic-bezier(0.34, 1.56, 0.64, 1)' }}
                   />
                 </button>
+              </div>
+            </Experiment>
+          </Reveal>
+
+          <Reveal>
+            <Experiment
+              name="Elastic slider"
+              note="Drag the thumb, or click anywhere on the track. Push past either end and the whole bar stretches against the pull, then springs back the moment you let go — the give an iOS volume slider has at its limits. Fully keyboard-driven, and reduced motion drops the stretch for a plain slider."
+            >
+              <div className="w-full max-w-[320px]">
+                <ElasticSlider
+                  label="Volume"
+                  value={volume}
+                  onChange={setVolume}
+                  format={(v) => `${Math.round(v)}%`}
+                  leading={
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                      <path d="M11 5 6 9H2v6h4l5 4z" />
+                    </svg>
+                  }
+                  trailing={
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                      <path d="M11 5 6 9H2v6h4l5 4z" />
+                      <path d="M15.5 8.5a5 5 0 0 1 0 7" />
+                      <path d="M18.5 5.5a9 9 0 0 1 0 13" />
+                    </svg>
+                  }
+                />
               </div>
             </Experiment>
           </Reveal>
