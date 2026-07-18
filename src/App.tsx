@@ -22,6 +22,7 @@ const Craft = lazy(() => import('./pages/Craft'))
 const Resume = lazy(() => import('./pages/Resume'))
 const TerminalPage = lazy(() => import('./pages/Terminal'))
 const Changelog = lazy(() => import('./pages/Changelog'))
+const Contents = lazy(() => import('./pages/Contents'))
 const NotFound = lazy(() => import('./pages/NotFound'))
 
 export default function App() {
@@ -44,6 +45,7 @@ export default function App() {
         <Route path="resume" element={<Resume />} />
         <Route path="terminal" element={<TerminalPage />} />
         <Route path="changelog" element={<Changelog />} />
+        <Route path="contents" element={<Contents />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
