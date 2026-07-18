@@ -44,6 +44,7 @@ export const CHAPTERS: Chapter[] = [
     summary:
       'The most recent stretch: a run of interactive, cursor-aware experiments — the kind of thing the playground exists to hold. Each one is its own hand-built component, wired into the pages that suit it.',
     items: [
+      { kind: 'component', text: 'CurvedLoop — a line of type that rides a curved path, looping forever; grab it to scrub and flick it to fling' },
       { kind: 'component', text: 'ScratchReveal — a canvas scratch-off foil you drag away to uncover the card beneath' },
       { kind: 'component', text: 'Particles — a drifting constellation field that webs and warms toward the cursor' },
       { kind: 'page', text: 'Terminal — an interactive shell that drives the whole site by typing' },
