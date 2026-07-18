@@ -29,6 +29,7 @@ import { ScrollReveal } from '../components/ScrollReveal'
 import { VariableProximity } from '../components/VariableProximity'
 import { SpotlightReveal } from '../components/SpotlightReveal'
 import { ASCIIText } from '../components/ASCIIText'
+import { CurvedLoop } from '../components/CurvedLoop'
 import { TrueFocus } from '../components/TrueFocus'
 import { FlowingMenu } from '../components/FlowingMenu'
 import { Threads } from '../components/Threads'
@@ -480,6 +481,28 @@ export default function Playground() {
                 of a letter it covers, then painted one monospace glyph at a time, picking a denser
                 character the brighter the cell. A slow shimmer keeps it breathing; the cursor is a
                 torch that lights the field as it passes. Reduced-motion paints one still frame.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH CURVED LOOP */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="relative flex min-h-[240px] items-center overflow-hidden rounded-3xl border border-white/10 bg-white/[0.02]">
+              <CurvedLoop
+                text="Design · Motion · Type · Detail ·"
+                textClassName="fill-white font-display text-[76px] font-bold uppercase tracking-tight"
+                curveAmount={360}
+              />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Type on a curve</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The phrase is laid along an SVG arc with a textPath and looped by driving its
+                startOffset every frame — no straight marquee, the words bow with the curve. Grab
+                the band to scrub it and a flick carries a decaying fling on top of the drift.
+                Reduced-motion paints one still frame on the curve.
               </p>
             </div>
           </div>
