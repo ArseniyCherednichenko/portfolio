@@ -18,6 +18,7 @@ import { CircularGallery, type GalleryItem } from '../components/CircularGallery
 import { TrueFocus } from '../components/TrueFocus'
 import { SpotlightReveal } from '../components/SpotlightReveal'
 import { ScrollVelocity } from '../components/ScrollVelocity'
+import { CurvedLoop } from '../components/CurvedLoop'
 import { FlowingMenu, type FlowingItem } from '../components/FlowingMenu'
 import { MagneticButton } from '../components/MagneticButton'
 import { HeroOrbit } from '../components/HeroOrbit'
@@ -445,6 +446,16 @@ export default function Home() {
         </div>
         <div className="pointer-events-none absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-[#0a0a0a] to-transparent sm:w-40" />
         <div className="pointer-events-none absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-[#0a0a0a] to-transparent sm:w-40" />
+      </section>
+
+      {/* CURVED LOOP BAND — a phrase riding an arc, grab to scrub */}
+      <section aria-hidden className="relative -mt-6 overflow-hidden py-4">
+        <CurvedLoop
+          text="Build it well · Then make it move ·"
+          textClassName="fill-transparent font-display text-[70px] font-bold uppercase tracking-tight [stroke:rgba(220,248,124,0.5)] [stroke-width:1px]"
+          curveAmount={300}
+          direction="right"
+        />
       </section>
 
       {/* PLAYGROUND — a coverflow taste of the live motion work */}
