@@ -16,6 +16,7 @@ import {
   type Chapter,
   type EntryKind,
 } from '../data/changelog'
+import { COMPONENT_COUNT, PAGE_COUNT } from './Colophon'
 
 const EASE = [0.16, 1, 0.3, 1] as const
 
@@ -181,8 +182,8 @@ export default function Changelog() {
           className="mt-10 grid max-w-lg grid-cols-3 gap-4"
         >
           {[
-            { value: 71, label: 'Hand-built components' },
-            { value: 17, label: 'Pages and views' },
+            { value: COMPONENT_COUNT, label: 'Hand-built components' },
+            { value: PAGE_COUNT, label: 'Pages and views' },
             { value: 0, label: 'Templates or copied UI' },
           ].map((s) => (
             <div
