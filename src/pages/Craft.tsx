@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { Reveal } from '../components/Reveal'
 import { Eyebrow } from '../components/Eyebrow'
 import { GradientText } from '../components/GradientText'
+import { Iridescence } from '../components/Iridescence'
 import { Seo } from '../components/Seo'
 
 const EASE = [0.16, 1, 0.3, 1] as const
@@ -324,7 +325,16 @@ export default function Craft() {
       />
       <div className="mx-auto w-full max-w-4xl px-6 py-24 sm:py-32">
         {/* HEADER */}
-        <header className="max-w-2xl">
+        <header className="relative isolate max-w-2xl">
+          {/* A breathing iridescent sheen behind the title — a fitting ambient
+              layer for a page about motion. Radial-masked and dimmed so it
+              fades into the dark and never competes with the copy. */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute -inset-x-6 -top-16 -z-10 h-72 opacity-40 [mask-image:radial-gradient(120%_80%_at_20%_30%,#000_0%,transparent_70%)]"
+          >
+            <Iridescence scale={13} speed={0.85} />
+          </div>
           <Reveal>
             <Eyebrow>Notes on craft</Eyebrow>
           </Reveal>
