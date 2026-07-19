@@ -44,6 +44,7 @@ export const CHAPTERS: Chapter[] = [
     summary:
       'The most recent stretch: a run of interactive, cursor-aware experiments — the kind of thing the playground exists to hold. Each one is its own hand-built component, wired into the pages that suit it.',
     items: [
+      { kind: 'component', text: 'Iridescence — a breathing, palette-tinted sheen computed on a tiny buffer and blown up smooth; the cursor spreads a ripple through it. Backs the On-motion title' },
       { kind: 'page', text: 'Design language — a living style guide of the site’s own tokens: three colours, two faces, one curve, each one copyable' },
       { kind: 'page', text: 'Index — an editorial, searchable table of contents for the whole site, grouped into sections with live counts' },
       { kind: 'component', text: 'CurvedLoop — a line of type that rides a curved path, looping forever; grab it to scrub and flick it to fling' },
