@@ -49,6 +49,7 @@ import { Stepper, type StepperStep } from '../components/Stepper'
 import { Dock, type DockItem } from '../components/Dock'
 import { Timeline, type TimelineItem } from '../components/Timeline'
 import { HorizontalScroll, type HPanel } from '../components/HorizontalScroll'
+import { ScrollScene, type Scene } from '../components/ScrollScene'
 import { PillNav, type PillLink } from '../components/PillNav'
 import { CircularGallery, type GalleryItem } from '../components/CircularGallery'
 import { Gravity } from '../components/Gravity'
@@ -90,6 +91,13 @@ const HSCROLL_PANELS: HPanel[] = [
   { tag: 'Measure', title: 'Travel is measured', body: 'It reads the real track width against the window, so the distance adapts to panel count and screen size.' },
   { tag: 'Spring', title: 'It eases, never snaps', body: 'A spring smooths the motion so the panels glide rather than jump frame to frame with the scroll.' },
   { tag: 'Fallback', title: 'Calm under reduced motion', body: 'No pinning then — it becomes a plain, user-driven horizontal scroller with snap points, fully readable.' },
+]
+
+const SCROLLSCENE_STEPS: readonly Scene[] = [
+  { tag: 'Step 01', title: 'The stage pins in place', body: 'As the section arrives, the visual sticks to the viewport and waits while the steps scroll past it.' },
+  { tag: 'Step 02', title: 'Each step takes the floor', body: 'A step crosses the mid-line and becomes active — the rail lights and the copy comes forward.' },
+  { tag: 'Step 03', title: 'The stage cross-fades', body: 'The pinned frame transforms to match the active step, so the picture and the words stay in lock-step.' },
+  { tag: 'Step 04', title: 'It reads on a phone too', body: 'On a narrow screen the stage pins to the top and the steps scroll underneath it. Same story, one column.' },
 ]
 
 // The Playground's five families of experiments. `PillNav` scroll-spies these
@@ -1173,6 +1181,27 @@ export default function Playground() {
                 The section pins to the viewport and maps vertical scroll to horizontal travel, so a row of panels glides
                 past as you scroll down. Travel is measured from the real track width, and a spring smooths it. Drives the
                 Home Range section. Reduced-motion gets a plain native scroller with snap points.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH SCROLL SCENE */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-8 py-10 sm:px-12">
+              <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Scrollytelling</span>
+              <p className="mt-3 max-w-md text-xl font-medium text-white/85 sm:text-2xl">
+                Keep scrolling. The stage stays; the story moves through it.
+              </p>
+              <ScrollScene scenes={SCROLLSCENE_STEPS} className="mt-8" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Sticky scroll scene</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                A visual stage pins to the viewport while a column of steps scrolls past; the stage cross-fades to whichever
+                step crosses the mid-line. Active tracking is a rAF-throttled measure of the step rects, no per-step
+                listeners. Drives the Colophon anatomy section. Reduced-motion shows the stage composed and a plain list.
               </p>
             </div>
           </div>
