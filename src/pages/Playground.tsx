@@ -30,6 +30,7 @@ import { VariableProximity } from '../components/VariableProximity'
 import { SpotlightReveal } from '../components/SpotlightReveal'
 import { ASCIIText } from '../components/ASCIIText'
 import { CurvedLoop } from '../components/CurvedLoop'
+import { Iridescence } from '../components/Iridescence'
 import { TrueFocus } from '../components/TrueFocus'
 import { FlowingMenu } from '../components/FlowingMenu'
 import { Threads } from '../components/Threads'
@@ -113,7 +114,7 @@ const CATEGORIES: { id: string; num: string; label: string; title: string; blurb
     num: '03',
     label: 'Pointer fields',
     title: 'Fields that follow.',
-    blurb: 'Full-canvas fields — dots, needles, threads, glyphs, blobs, ribbons — that bend and warm toward the pointer.',
+    blurb: 'Full-canvas fields — dots, needles, threads, glyphs, blobs, ribbons, sheens — that bend and warm toward the pointer.',
   },
   {
     id: 'scroll',
@@ -1032,6 +1033,30 @@ export default function Playground() {
                 charge rides its length. The wriggle is summed seeded sines, never per-frame randomness, so it flickers
                 like live current instead of strobing. Come close and each bolt stretches its far end toward the pointer
                 and brightens. Backs the Colophon page title. Reduced-motion gets a still set of dim bolts.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH IRIDESCENCE */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="relative h-[340px] overflow-hidden rounded-3xl border border-white/10 bg-[#070707]">
+              <Iridescence />
+              <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Iridescent field</span>
+                <p className="mt-3 max-w-md px-6 text-xl font-medium text-white/80 sm:text-2xl">
+                  Trail the cursor and a ripple spreads out from it.
+                </p>
+              </div>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Breathing iridescent sheen</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                A handful of drifting sine waves summed into a scalar at every pixel of a small offscreen buffer, read
+                through the site's own navy-to-lime ramp, then blown up smoothly to fill the panel — so the whole sheen
+                costs a few thousand pixels a frame, not a few million. The pointer adds a travelling ripple that warms
+                the field toward lime as it passes. Reduced-motion holds a single calm frame.
               </p>
             </div>
           </div>
