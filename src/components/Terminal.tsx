@@ -33,6 +33,7 @@ const PAGES: { slug: string; to: string; blurb: string }[] = [
   { slug: 'work', to: '/work', blurb: 'what I have shipped' },
   { slug: 'playground', to: '/playground', blurb: 'live motion experiments' },
   { slug: 'craft', to: '/craft', blurb: 'notes on motion' },
+  { slug: 'design', to: '/design', blurb: 'the style guide' },
   { slug: 'toolkit', to: '/toolkit', blurb: 'the tools I reach for' },
   { slug: 'writing', to: '/writing', blurb: 'thinking in the open' },
   { slug: 'now', to: '/now', blurb: 'what I am on right now' },

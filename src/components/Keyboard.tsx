@@ -42,6 +42,7 @@ export const GO_TARGETS: GoTarget[] = [
   { key: 'l', to: '/colophon', label: 'Colophon' },
   { key: 'q', to: '/answers', label: 'Answers' },
   { key: 'm', to: '/craft', label: 'On motion' },
+  { key: 'd', to: '/design', label: 'Design language' },
   { key: 'r', to: '/resume', label: 'Résumé' },
   { key: 's', to: '/terminal', label: 'Terminal' },
   { key: 'b', to: '/changelog', label: 'Changelog' },

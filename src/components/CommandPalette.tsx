@@ -96,6 +96,7 @@ function Palette({ open, onClose }: { open: boolean; onClose: () => void }) {
       { id: 'colophon', label: 'Colophon', group: 'Pages', hint: 'how it is built', keywords: 'colophon stack build source open source craft typography fonts', run: () => go('/colophon') },
       { id: 'answers', label: 'Answers', group: 'Pages', hint: 'questions people ask', keywords: 'answers faq questions about who what ask frequently help', run: () => go('/answers') },
       { id: 'craft', label: 'On motion', group: 'Pages', hint: 'notes on craft, playable', keywords: 'craft motion animation easing spring stagger reduced motion interactive demos notes principles', run: () => go('/craft') },
+      { id: 'design', label: 'Design language', group: 'Pages', hint: 'the style guide', keywords: 'design language style guide system palette colours colors tokens type typography fraunces inter scale motion easing swatch hex copy', run: () => go('/design') },
       { id: 'resume', label: 'Résumé', group: 'Pages', hint: 'one-page CV, printable', keywords: 'resume cv curriculum vitae print pdf download experience hire', run: () => go('/resume') },
       { id: 'terminal', label: 'Terminal', group: 'Pages', hint: 'drive the site by typing', keywords: 'terminal shell command line console type cli bash prompt play interactive', run: () => go('/terminal') },
       { id: 'changelog', label: 'Changelog', group: 'Pages', hint: 'the build log', keywords: 'changelog build log history releases updates commits shipped open source what changed', run: () => go('/changelog') },
