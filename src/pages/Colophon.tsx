@@ -6,6 +6,7 @@ import { GradientText } from '../components/GradientText'
 import { SpotlightCard } from '../components/SpotlightCard'
 import { AnimatedCounter } from '../components/AnimatedCounter'
 import { Stepper } from '../components/Stepper'
+import { ScrollScene, type Scene } from '../components/ScrollScene'
 import { Lightning } from '../components/Lightning'
 import { ASCIIText } from '../components/ASCIIText'
 import { Seo } from '../components/Seo'
@@ -15,7 +16,7 @@ const EASE = [0.16, 1, 0.3, 1] as const
 
 // Honest counts of what actually ships in this repo (src/components and
 // src/pages). Kept current by the daily routine as the site grows.
-export const COMPONENT_COUNT = 76
+export const COMPONENT_COUNT = 77
 export const PAGE_COUNT = 19
 
 // What this specific site runs on, and how each piece is actually used here.
@@ -97,6 +98,104 @@ const PIPELINE: ReadonlyArray<{ label: string; title: string; body: string }> = 
     body: 'The work lands as granular commits straight to main and deploys itself. One coherent improvement most days means the commit history is part of the portfolio too.',
   },
 ]
+
+// The layers every screen on this site is built up from, in the order they go
+// on. Honest to how the pages are actually composed: a quiet field first, one
+// small mark, then type, then motion. The stage below assembles them as you
+// scroll, so the section shows the anatomy rather than just describing it.
+const ANATOMY: readonly Scene[] = [
+  {
+    tag: 'Layer 01 · The field',
+    title: 'A quiet field sets the mood',
+    body: 'Every screen opens on a calm backdrop — a slow aurora, a cursor-reactive field, a faint grid. Never loud, but never dead: the page feels alive before a single word is read.',
+  },
+  {
+    tag: 'Layer 02 · The mark',
+    title: 'One small mark anchors it',
+    body: 'A single lime orbit — the same one in the favicon — gives the eye somewhere to land. Restraint over logos: one honest mark, drawn by hand in SVG, not a stock badge.',
+  },
+  {
+    tag: 'Layer 03 · The type',
+    title: 'Type carries the voice',
+    body: 'A variable serif for headlines against a clean sans for everything else. The optical-size axis tracks the rendered size, so large type stays crisp and small type stays warm.',
+  },
+  {
+    tag: 'Layer 04 · The motion',
+    title: 'Motion makes it land',
+    body: 'The last layer is the one you feel more than see: entrances, scroll-reveals, hovers — each hand-built, each checking prefers-reduced-motion first so the calm path is designed, not bolted on.',
+  },
+]
+
+/** Cumulative stage for the Anatomy section: each real layer of a screen fades
+ *  in once the scroll reaches its step, so the composition literally assembles.
+ *  Pure CSS + SVG — no heavy components mounted per step. */
+function anatomyStage(active: number): JSX.Element {
+  const layer = (i: number) => (active >= i ? 1 : 0)
+  return (
+    <>
+      {/* 01 — the field */}
+      <motion.div
+        aria-hidden
+        className="absolute inset-0"
+        animate={{ opacity: layer(0) }}
+        transition={{ duration: 0.7, ease: EASE }}
+        style={{
+          background:
+            'radial-gradient(120% 120% at 25% 15%, rgba(220,248,124,0.16) 0%, transparent 55%), radial-gradient(120% 120% at 85% 95%, rgba(124,224,248,0.12) 0%, transparent 60%)',
+        }}
+      />
+      <motion.div
+        aria-hidden
+        className="absolute inset-0 [background-image:linear-gradient(#fff_1px,transparent_1px),linear-gradient(90deg,#fff_1px,transparent_1px)] [background-size:34px_34px]"
+        animate={{ opacity: layer(0) * 0.05 }}
+        transition={{ duration: 0.7, ease: EASE }}
+      />
+
+      {/* 02 — the mark: an orbit ring + lime dot, echoing the favicon */}
+      <motion.div
+        aria-hidden
+        className="absolute inset-0 flex items-center justify-center"
+        animate={{ opacity: layer(1), scale: active >= 1 ? 1 : 0.85 }}
+        transition={{ duration: 0.6, ease: EASE }}
+      >
+        <svg viewBox="0 0 120 120" className="h-40 w-40 sm:h-48 sm:w-48">
+          <circle cx="60" cy="60" r="46" fill="none" stroke="rgba(255,255,255,0.12)" strokeWidth="1" />
+          <circle cx="60" cy="60" r="30" fill="none" stroke="rgba(220,248,124,0.35)" strokeWidth="1" />
+          <circle cx="60" cy="14" r="4.5" fill="#DCF87C" />
+          <circle cx="60" cy="60" r="3" fill="rgba(255,255,255,0.6)" />
+        </svg>
+      </motion.div>
+
+      {/* 03 — the type */}
+      <motion.div
+        aria-hidden
+        className="absolute inset-0 flex items-center justify-center"
+        animate={{ opacity: layer(2), y: active >= 2 ? 0 : 10 }}
+        transition={{ duration: 0.6, ease: EASE }}
+      >
+        <span className="font-display text-6xl font-bold leading-none tracking-tight text-white sm:text-7xl">
+          Aa
+        </span>
+      </motion.div>
+
+      {/* 04 — the motion: a lime accent line that draws itself */}
+      <motion.div
+        aria-hidden
+        className="absolute inset-x-10 bottom-12 h-px origin-left bg-gradient-to-r from-[#DCF87C] to-transparent"
+        animate={{ scaleX: active >= 3 ? 1 : 0, opacity: layer(3) }}
+        transition={{ duration: 0.7, ease: EASE }}
+      />
+      <motion.div
+        aria-hidden
+        className="absolute bottom-8 left-10 text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]"
+        animate={{ opacity: layer(3) }}
+        transition={{ duration: 0.5, ease: EASE }}
+      >
+        In motion
+      </motion.div>
+    </>
+  )
+}
 
 function Stat({ value, suffix, label }: { value: number; suffix?: string; label: string }) {
   return (
@@ -224,6 +323,30 @@ export default function Colophon() {
             <Stepper steps={PIPELINE} />
           </div>
         </Reveal>
+      </section>
+
+      {/* ANATOMY — a scrollytelling of how a single screen is composed. The
+          pinned stage assembles the real layers as the steps scroll past. */}
+      <section className="mx-auto w-full max-w-5xl px-6 py-16">
+        <Reveal>
+          <Eyebrow>Anatomy</Eyebrow>
+        </Reveal>
+        <Reveal delay={0.05}>
+          <h2 className="mt-6 font-display text-3xl font-bold tracking-tight sm:text-4xl">
+            How a screen is built up.
+          </h2>
+        </Reveal>
+        <Reveal delay={0.08}>
+          <p className="mt-3 max-w-xl text-base leading-relaxed text-white/50">
+            Scroll, and the layers of a single screen assemble one at a time —
+            the same order every page here is made in.
+          </p>
+        </Reveal>
+        <ScrollScene
+          scenes={ANATOMY}
+          renderStage={(active) => anatomyStage(active)}
+          className="mt-12"
+        />
       </section>
 
       {/* TYPE */}
