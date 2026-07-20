@@ -1,6 +1,7 @@
 import { motion, useReducedMotion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { GradientText } from '../components/GradientText'
+import { FuzzyText } from '../components/FuzzyText'
 import { Threads } from '../components/Threads'
 import { ChromaGrid, type ChromaItem } from '../components/ChromaGrid'
 import { Seo } from '../components/Seo'
@@ -27,20 +28,23 @@ export default function NotFound() {
         <Threads count={16} amplitude={14} />
       </div>
 
-      <motion.p
+      {/* The number itself, torn into signal-fuzz — a lost page as a lost
+          signal. Hover it to shear it harder; reduced motion holds it still. */}
+      <motion.div
         initial={reduce ? false : { opacity: 0, y: 14 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: EASE }}
-        className="text-sm font-semibold uppercase tracking-[0.3em] text-[#DCF87C]"
+        className="flex justify-center"
+        data-cursor
       >
-        Error 404
-      </motion.p>
+        <FuzzyText text="404" fontSize={132} color="#DCF87C" />
+      </motion.div>
 
       <motion.h1
         initial={reduce ? false : { opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, delay: 0.06, ease: EASE }}
-        className="mt-6 font-display text-7xl font-bold tracking-tight sm:text-9xl"
+        className="mt-4 font-display text-7xl font-bold tracking-tight sm:text-9xl"
       >
         <GradientText>Lost the thread.</GradientText>
       </motion.h1>
