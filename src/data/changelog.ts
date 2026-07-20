@@ -44,6 +44,8 @@ export const CHAPTERS: Chapter[] = [
     summary:
       'The most recent stretch: a run of interactive, cursor-aware experiments — the kind of thing the playground exists to hold. Each one is its own hand-built component, wired into the pages that suit it.',
     items: [
+      { kind: 'motion', text: 'Home — a By-the-numbers band that turns the by-hand ethos into concrete, animated counts (components, pages, zero UI kits, one pair of hands), each figure literally true of the repo' },
+      { kind: 'infra', text: 'data/stats — the site’s own counts moved to a single source of truth, so the home band, Colophon, Contents, and Changelog all read one number' },
       { kind: 'component', text: 'FlipCard — a card that physically turns over between two faces, a real half-rotation with the far face hidden; distinct from a dissolve or a cross-fade' },
       { kind: 'component', text: 'FuzzyText — clean type torn into analog signal-fuzz scanline by scanline, harder under the pointer; it turns the 404 number into a lost signal' },
       { kind: 'component', text: 'ScrollScene — a sticky scrollytelling stage that transforms as steps scroll past; on the Colophon it assembles a screen’s real layers one at a time' },
