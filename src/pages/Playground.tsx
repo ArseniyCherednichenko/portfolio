@@ -22,6 +22,7 @@ import { SplitFlap } from '../components/SplitFlap'
 import { CardStack } from '../components/CardStack'
 import { ProfileCard } from '../components/ProfileCard'
 import { PixelTransition } from '../components/PixelTransition'
+import { FlipCard } from '../components/FlipCard'
 import { ScratchReveal } from '../components/ScratchReveal'
 import { Folder } from '../components/Folder'
 import { ScrollStack } from '../components/ScrollStack'
@@ -641,6 +642,32 @@ export default function Playground() {
                     <span className="text-xs font-semibold uppercase tracking-[0.2em] text-black/60">Revealed</span>
                     <p className="font-display text-2xl font-bold leading-tight">The other face</p>
                     <p className="text-sm font-medium text-black/70">Move away to flip it back.</p>
+                  </div>
+                }
+              />
+            </Experiment>
+          </Reveal>
+
+          <Reveal>
+            <Experiment
+              name="3D flip card"
+              note="A card that physically turns over — not a dissolve or a cross-fade, a real half-rotation with the far face hidden. Hover on a mouse, tap or press Enter on touch and keyboard. Reduced motion swaps the faces instantly instead."
+            >
+              <FlipCard
+                className="w-full max-w-[260px]"
+                label="Flip: a card that turns over"
+                front={
+                  <div className="flex min-h-[196px] w-full flex-col justify-between rounded-3xl border border-white/10 bg-white/[0.03] p-6">
+                    <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[#DCF87C]">Front</span>
+                    <p className="font-display text-2xl font-bold leading-tight">Turn me over</p>
+                    <p className="text-sm text-white/50">Hover, tap, or press Enter.</p>
+                  </div>
+                }
+                back={
+                  <div className="flex h-full w-full flex-col justify-between rounded-3xl bg-gradient-to-br from-[#DCF87C] to-[#c2e85a] p-6 text-black">
+                    <span className="text-xs font-semibold uppercase tracking-[0.2em] text-black/60">Back</span>
+                    <p className="font-display text-2xl font-bold leading-tight">The other side.</p>
+                    <p className="text-sm font-medium text-black/70">A real rotation, backface hidden.</p>
                   </div>
                 }
               />
