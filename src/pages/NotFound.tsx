@@ -20,7 +20,7 @@ const ELSEWHERE: ChromaItem[] = [
 export default function NotFound() {
   const reduce = useReducedMotion()
   return (
-    <section className="relative isolate flex min-h-[88vh] w-full flex-col items-center justify-center overflow-hidden px-6 text-center">
+    <section className="relative isolate flex min-h-screen w-full flex-col items-center justify-center overflow-hidden px-6 pb-16 pt-28 text-center sm:pt-24">
       <Seo title="Page not found" description="This page wandered off. Head back to the home page." />
 
       {/* Live thread field, radially masked so the copy stays legible. */}
