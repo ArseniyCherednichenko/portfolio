@@ -30,6 +30,7 @@ import { VariableProximity } from '../components/VariableProximity'
 import { SpotlightReveal } from '../components/SpotlightReveal'
 import { ASCIIText } from '../components/ASCIIText'
 import { CurvedLoop } from '../components/CurvedLoop'
+import { FuzzyText } from '../components/FuzzyText'
 import { Iridescence } from '../components/Iridescence'
 import { TrueFocus } from '../components/TrueFocus'
 import { FlowingMenu } from '../components/FlowingMenu'
@@ -431,6 +432,17 @@ export default function Playground() {
               note="A departure-board display: the top leaf folds down to hide the old glyph while a fresh bottom leaf drops into place. A two-phase mechanical hinge, not a spring. Drives the live Berlin clock on the contact page."
             >
               <SplitFlapDemo />
+            </Experiment>
+          </Reveal>
+
+          <Reveal>
+            <Experiment
+              name="Signal fuzz"
+              note="Clean type torn sideways scanline by scanline, like a word caught on a detuned screen. Drawn once to an offscreen buffer, then blitted back row by row with a jitter that swells under the pointer. Reduced motion holds it crisp and still."
+            >
+              <div data-cursor className="flex justify-center">
+                <FuzzyText text="FUZZY" fontSize={78} />
+              </div>
             </Experiment>
           </Reveal>
         </div>
