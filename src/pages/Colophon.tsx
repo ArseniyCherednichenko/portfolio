@@ -16,7 +16,7 @@ const EASE = [0.16, 1, 0.3, 1] as const
 
 // Honest counts of what actually ships in this repo (src/components and
 // src/pages). Kept current by the daily routine as the site grows.
-export const COMPONENT_COUNT = 78
+export const COMPONENT_COUNT = 79
 export const PAGE_COUNT = 19
 
 // What this specific site runs on, and how each piece is actually used here.
