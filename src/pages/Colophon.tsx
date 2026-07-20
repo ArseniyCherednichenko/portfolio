@@ -11,13 +11,15 @@ import { Lightning } from '../components/Lightning'
 import { ASCIIText } from '../components/ASCIIText'
 import { Seo } from '../components/Seo'
 import { GITHUB_URL } from '../data/contact'
+import { COMPONENT_COUNT, PAGE_COUNT } from '../data/stats'
 
 const EASE = [0.16, 1, 0.3, 1] as const
 
 // Honest counts of what actually ships in this repo (src/components and
-// src/pages). Kept current by the daily routine as the site grows.
-export const COMPONENT_COUNT = 79
-export const PAGE_COUNT = 19
+// src/pages). The numbers now live in data/stats.ts as the single source of
+// truth; re-exported here so existing importers (Contents, Changelog) keep
+// working unchanged.
+export { COMPONENT_COUNT, PAGE_COUNT }
 
 // What this specific site runs on, and how each piece is actually used here.
 // Honest, in-use only — this is the build, not a generic stack list.
