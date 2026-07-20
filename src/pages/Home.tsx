@@ -27,9 +27,11 @@ import { MagnetLines } from '../components/MagnetLines'
 import { ScrollCue } from '../components/ScrollCue'
 import { Eyebrow } from '../components/Eyebrow'
 import { SectionNav } from '../components/SectionNav'
+import { AnimatedCounter } from '../components/AnimatedCounter'
 import { useContact } from '../components/ContactDialog'
 import { Seo } from '../components/Seo'
 import { PROJECTS, SKILLS, type Project } from '../data/projects'
+import { SITE_STATS } from '../data/stats'
 
 const EASE = [0.16, 1, 0.3, 1] as const
 
@@ -373,6 +375,42 @@ export default function Home() {
             hint="Move your cursor across the words"
             className="mt-8 max-w-3xl font-display text-3xl font-semibold leading-[1.18] tracking-tight sm:text-5xl sm:leading-[1.16]"
           />
+        </div>
+      </section>
+
+      {/* BY THE NUMBERS — the ethos, made concrete: proof it is made, not assembled */}
+      <section id="numbers" className="mx-auto w-full max-w-4xl px-6 py-24">
+        <div className="mb-10">
+          <Reveal>
+            <Eyebrow>By the numbers</Eyebrow>
+          </Reveal>
+          <Reveal delay={0.05}>
+            <h2 className="mt-6 font-display text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl">
+              Made <GradientText>by hand.</GradientText>
+            </h2>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <p className="mt-6 max-w-md text-lg leading-relaxed text-white/55">
+              No template underneath any of this. A few honest counts of what actually ships in the repo.
+            </p>
+          </Reveal>
+        </div>
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {SITE_STATS.map((stat, idx) => (
+            <Reveal key={stat.label} delay={idx * 0.06}>
+              <SpotlightCard className="h-full">
+                <div className="flex h-full flex-col p-6">
+                  <AnimatedCounter
+                    value={stat.value}
+                    suffix={stat.suffix}
+                    className="font-display text-5xl font-bold leading-none tracking-tight text-[#DCF87C]"
+                  />
+                  <h3 className="mt-4 text-sm font-semibold text-white/85">{stat.label}</h3>
+                  <p className="mt-1.5 text-sm leading-relaxed text-white/45">{stat.detail}</p>
+                </div>
+              </SpotlightCard>
+            </Reveal>
+          ))}
         </div>
       </section>
 
