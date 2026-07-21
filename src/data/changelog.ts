@@ -44,6 +44,7 @@ export const CHAPTERS: Chapter[] = [
     summary:
       'The most recent stretch: a run of interactive, cursor-aware experiments — the kind of thing the playground exists to hold. Each one is its own hand-built component, wired into the pages that suit it.',
     items: [
+      { kind: 'component', text: 'SphereMenu — a draggable 3D sphere of links you grab and spin: points on a real Fibonacci sphere, projected to 2D each frame so the labels always face you while the ones turned away shrink and dim. Every label routes into the site, so no one project sits at the centre' },
       { kind: 'motion', text: 'Home — a By-the-numbers band that turns the by-hand ethos into concrete, animated counts (components, pages, zero UI kits, one pair of hands), each figure literally true of the repo' },
       { kind: 'infra', text: 'data/stats — the site’s own counts moved to a single source of truth, so the home band, Colophon, Contents, and Changelog all read one number' },
       { kind: 'component', text: 'FlipCard — a card that physically turns over between two faces, a real half-rotation with the far face hidden; distinct from a dissolve or a cross-fade' },
