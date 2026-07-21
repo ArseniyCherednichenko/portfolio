@@ -56,6 +56,7 @@ import { ScrollScene, type Scene } from '../components/ScrollScene'
 import { PillNav, type PillLink } from '../components/PillNav'
 import { CircularGallery, type GalleryItem } from '../components/CircularGallery'
 import { SphereMenu, type SphereItem } from '../components/SphereMenu'
+import { Lanyard } from '../components/Lanyard'
 import { Gravity } from '../components/Gravity'
 import { GO_TARGETS, useShortcuts } from '../components/Keyboard'
 import { Seo } from '../components/Seo'
@@ -1578,6 +1579,32 @@ export default function Playground() {
                 of them and writes transform and depth straight onto the nodes, no React state on the hot path. Drag to
                 spin with release inertia; left alone it drifts. Every label is a real link into the site, so no single
                 project sits at the centre. Reduced motion drops the sphere for a plain, legible wrap of the same links.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH LANYARD */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 pb-6">
+              <div className="pointer-events-none absolute inset-x-0 top-8 z-20 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Throw</span>
+                <p className="mx-auto mt-3 max-w-md px-6 text-lg font-medium text-white/85 sm:text-xl">
+                  Grab the badge and let it go. It swings, then settles.
+                </p>
+              </div>
+              <Lanyard className="h-[440px]" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Lanyard</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                A name badge on a cord, hung from a pin. The whole thing is a single constrained mass — the state is just
+                an angle and an angular velocity, so grabbing and flinging it sets a throw the physics carries into a
+                swing that damps back to hanging straight down. The badge is real HTML, so the type stays crisp and
+                on-brand while it tilts; the cord and the placement are written straight onto refs every frame, no React
+                state on the hot path. A different kind of motion from everything else here: not a field, a card, or a
+                trail, but one weight on a string. Reduced motion just lets it hang still.
               </p>
             </div>
           </div>
