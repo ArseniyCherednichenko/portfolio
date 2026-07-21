@@ -54,6 +54,7 @@ import { HorizontalScroll, type HPanel } from '../components/HorizontalScroll'
 import { ScrollScene, type Scene } from '../components/ScrollScene'
 import { PillNav, type PillLink } from '../components/PillNav'
 import { CircularGallery, type GalleryItem } from '../components/CircularGallery'
+import { SphereMenu, type SphereItem } from '../components/SphereMenu'
 import { Gravity } from '../components/Gravity'
 import { GO_TARGETS, useShortcuts } from '../components/Keyboard'
 import { Seo } from '../components/Seo'
@@ -249,6 +250,28 @@ const COVERFLOW_CARDS: GalleryItem[] = [
   { tag: 'Interpolated', title: 'Follows your finger', body: 'The same transform curve is evaluated at fractional offsets mid-drag, so cards glide rather than jump.' },
   { tag: 'Steerable', title: 'Many ways in', body: 'Drag, wheel, arrow keys, the prev/next buttons, the dots, or a click on a side card to bring it forward.' },
   { tag: 'Fallback', title: 'Calm without motion', body: 'Under reduced motion it drops the perspective and becomes a plain, fully readable snap-scroll row.' },
+]
+
+// The whole site, orbiting — every destination as a link on the sphere, so no
+// single project is the centre. Grab it and spin to browse.
+const SPHERE_LINKS: SphereItem[] = [
+  { label: 'Home', to: '/' },
+  { label: 'Work', to: '/work', hint: 'Case studies' },
+  { label: 'About', to: '/about' },
+  { label: 'Playground', to: '/playground' },
+  { label: 'Toolkit', to: '/toolkit' },
+  { label: 'Writing', to: '/writing' },
+  { label: 'On motion', to: '/craft' },
+  { label: 'Design', to: '/design' },
+  { label: 'Now', to: '/now' },
+  { label: 'Contact', to: '/contact' },
+  { label: 'Colophon', to: '/colophon' },
+  { label: 'Answers', to: '/answers' },
+  { label: 'Résumé', to: '/resume' },
+  { label: 'Terminal', to: '/terminal' },
+  { label: 'Changelog', to: '/changelog' },
+  { label: 'Index', to: '/contents' },
+  { label: 'GitHub', href: 'https://github.com/ArseniyCherednichenko/portfolio', hint: 'Source' },
 ]
 
 const STEPPER_DEMO: StepperStep[] = [
@@ -1504,6 +1527,31 @@ export default function Playground() {
                 pairwise collisions resolved along the axis of least penetration. Grab one and it carries the momentum of
                 your throw. All hand-rolled, no physics library. Reduced motion lays the same tags out as a calm static
                 wrap.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH SPHERE MENU */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 py-12">
+              <div className="pointer-events-none absolute inset-x-0 top-8 z-10 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Spin</span>
+                <p className="mx-auto mt-3 max-w-md px-6 text-lg font-medium text-white/85 sm:text-xl">
+                  The whole site, orbiting. Grab it and give it a spin.
+                </p>
+              </div>
+              <SphereMenu items={SPHERE_LINKS} className="mt-16" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Sphere menu</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                A different 3D from the coverflow: points sit on a real Fibonacci sphere and are projected to 2D every
+                frame, so the labels always face you while the ones turned away shrink and dim. One RAF loop rotates all
+                of them and writes transform and depth straight onto the nodes, no React state on the hot path. Drag to
+                spin with release inertia; left alone it drifts. Every label is a real link into the site, so no single
+                project sits at the centre. Reduced motion drops the sphere for a plain, legible wrap of the same links.
               </p>
             </div>
           </div>
