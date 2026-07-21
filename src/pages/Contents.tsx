@@ -5,6 +5,7 @@ import { Reveal } from '../components/Reveal'
 import { Eyebrow } from '../components/Eyebrow'
 import { GradientText } from '../components/GradientText'
 import { SpotlightCard } from '../components/SpotlightCard'
+import { Squares } from '../components/Squares'
 import { AnimatedCounter } from '../components/AnimatedCounter'
 import { Seo } from '../components/Seo'
 import { CONTENTS, ALL_CONTENT_ENTRIES, type ContentEntry } from '../data/contents'
@@ -94,7 +95,15 @@ export default function Contents() {
       />
 
       {/* HEADER */}
-      <header className="mx-auto w-full max-w-5xl px-6 pb-12 pt-36 sm:pt-44">
+      <header className="relative isolate overflow-hidden">
+        {/* The index, backed by the site's own structure: a live lattice. */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 -z-10 opacity-60 [mask-image:radial-gradient(115%_75%_at_75%_15%,#000_0%,transparent_68%)]"
+        >
+          <Squares size={52} />
+        </div>
+        <div className="mx-auto w-full max-w-5xl px-6 pb-12 pt-36 sm:pt-44">
         <Reveal>
           <Eyebrow>Index</Eyebrow>
         </Reveal>
@@ -158,6 +167,7 @@ export default function Contents() {
             </p>
           </div>
         </Reveal>
+        </div>
       </header>
 
       {/* SECTIONS */}
