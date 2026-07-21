@@ -15,6 +15,7 @@ import { AnimatedCounter } from '../components/AnimatedCounter'
 import { DotGrid } from '../components/DotGrid'
 import { Particles } from '../components/Particles'
 import { MagnetLines } from '../components/MagnetLines'
+import { Squares } from '../components/Squares'
 import { ScrollVelocity } from '../components/ScrollVelocity'
 import { DecryptedText } from '../components/DecryptedText'
 import { SplitText } from '../components/SplitText'
@@ -125,7 +126,7 @@ const CATEGORIES: { id: string; num: string; label: string; title: string; blurb
     num: '03',
     label: 'Pointer fields',
     title: 'Fields that follow.',
-    blurb: 'Full-canvas fields — dots, needles, threads, glyphs, blobs, ribbons, sheens — that bend and warm toward the pointer.',
+    blurb: 'Full-canvas fields — dots, needles, cells, threads, glyphs, blobs, ribbons, sheens — that bend and warm toward the pointer.',
   },
   {
     id: 'scroll',
@@ -934,6 +935,31 @@ export default function Playground() {
               <p className="mt-1 text-sm leading-relaxed text-white/45">
                 A canvas grid of small lines, each easing its angle toward the pointer and brightening lime within reach.
                 Reduced-motion gets a calm static radial instead.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH SQUARES */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="relative h-[340px] overflow-hidden rounded-3xl border border-white/10 bg-white/[0.02]">
+              <div className="absolute inset-0 [mask-image:radial-gradient(120%_120%_at_50%_50%,#000_45%,transparent_92%)]">
+                <Squares />
+              </div>
+              <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Lattice field</span>
+                <p className="mt-3 max-w-md px-6 text-xl font-medium text-white/80 sm:text-2xl">
+                  A scan drifts through, cells bloom under your cursor.
+                </p>
+              </div>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Cursor-reactive lattice</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                A grid of square cells on one canvas. A soft band of light drifts along the diagonal forever, and the cells
+                under the pointer warm lime and lift their stroke while a faint bloom fills the nearest ones. Backs the Index
+                page. Reduced-motion gets a single calm lattice, no scan.
               </p>
             </div>
           </div>
