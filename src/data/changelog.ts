@@ -44,6 +44,7 @@ export const CHAPTERS: Chapter[] = [
     summary:
       'The most recent stretch: a run of interactive, cursor-aware experiments — the kind of thing the playground exists to hold. Each one is its own hand-built component, wired into the pages that suit it.',
     items: [
+      { kind: 'component', text: 'Lanyard — a name badge on a cord you grab, throw, and watch swing to rest: a single constrained mass (an angle and an angular velocity) driven as a damped pendulum, with the badge as real crisp HTML that tilts with the cord. A different kind of motion from the fields and cards — one weight on a string' },
       { kind: 'component', text: 'Squares — a structural lattice field on one canvas: a soft band of light drifts along the diagonal forever while the cells under the cursor warm lime, lift their stroke, and bloom. Backs the Index header' },
       { kind: 'component', text: 'SphereMenu — a draggable 3D sphere of links you grab and spin: points on a real Fibonacci sphere, projected to 2D each frame so the labels always face you while the ones turned away shrink and dim. Every label routes into the site, so no one project sits at the centre' },
       { kind: 'motion', text: 'Home — a By-the-numbers band that turns the by-hand ethos into concrete, animated counts (components, pages, zero UI kits, one pair of hands), each figure literally true of the repo' },
