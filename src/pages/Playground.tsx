@@ -43,6 +43,7 @@ import { MetaBalls } from '../components/MetaBalls'
 import { PixelTrail } from '../components/PixelTrail'
 import { Ribbons } from '../components/Ribbons'
 import { Lightning } from '../components/Lightning'
+import { Starfield } from '../components/Starfield'
 import { BentoGrid, BentoCell } from '../components/BentoGrid'
 import { GlassSurface } from '../components/GlassSurface'
 import { Orb } from '../components/Orb'
@@ -1154,6 +1155,30 @@ export default function Playground() {
                 through the site's own navy-to-lime ramp, then blown up smoothly to fill the panel — so the whole sheen
                 costs a few thousand pixels a frame, not a few million. The pointer adds a travelling ripple that warms
                 the field toward lime as it passes. Reduced-motion holds a single calm frame.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH STARFIELD */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="relative h-[340px] overflow-hidden rounded-3xl border border-white/10 bg-[#050505]">
+              <Starfield count={260} speed={1.1} listen="self" />
+              <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Warp field</span>
+                <p className="mt-3 max-w-md px-6 text-xl font-medium text-white/80 sm:text-2xl">
+                  Point, and the whole field banks your way.
+                </p>
+              </div>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Pointer-steered warp starfield</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                Points stream out of a vanishing point and toward you, each drawn as a short streak so the field reads as
+                travel through space rather than a twinkle — nearer stars fan out faster and warm toward lime. The
+                vanishing point eases after the cursor, so the whole field banks the way you point. One RAF loop over a
+                simple frustum, no per-star React state. Reduced-motion paints a still star lattice with no streaks.
               </p>
             </div>
           </div>
