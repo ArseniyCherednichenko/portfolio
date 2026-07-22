@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { Reveal } from '../components/Reveal'
@@ -7,14 +8,25 @@ import { MagneticButton } from '../components/MagneticButton'
 import { AnimatedCounter } from '../components/AnimatedCounter'
 import { ProjectPoster } from '../components/ProjectPoster'
 import { PixelTransition } from '../components/PixelTransition'
+import { ProjectQuickLook } from '../components/ProjectQuickLook'
 import { Seo } from '../components/Seo'
 import { PROJECTS, CASE_STUDIES, type Project } from '../data/projects'
 
 const EASE = [0.16, 1, 0.3, 1] as const
 
-// A row in the work ledger. Real projects link to their case study and react
-// to hover; the placeholder is a calm, non-clickable "in progress" row.
-function WorkRow({ project, index }: { project: Project; index: number }) {
+// A row in the work ledger. Real projects offer two ways in — a quick-look
+// modal (the poster and the "Quick look" pill) for a fast preview, and a link
+// through to the full case study — so browsing stays light without hiding the
+// depth. The placeholder is a calm, non-clickable "in progress" row.
+function WorkRow({
+  project,
+  index,
+  onQuickLook,
+}: {
+  project: Project
+  index: number
+  onQuickLook: (p: Project) => void
+}) {
   const num = String(index + 1).padStart(2, '0')
 
   if (project.soon) {
@@ -35,10 +47,7 @@ function WorkRow({ project, index }: { project: Project; index: number }) {
   }
 
   return (
-    <Link
-      to={`/work/${project.slug}`}
-      className="group relative block border-t border-white/10 py-8 transition-colors hover:bg-white/[0.015] sm:py-10"
-    >
+    <div className="group relative border-t border-white/10 py-8 transition-colors hover:bg-white/[0.015] sm:py-10">
       {/* Lime edge that grows in on hover. */}
       <span
         aria-hidden
@@ -51,8 +60,13 @@ function WorkRow({ project, index }: { project: Project; index: number }) {
 
         <div className="min-w-0 flex-1">
           <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
-            <h2 className="font-display text-3xl font-bold leading-[1.05] tracking-tight transition-transform duration-500 ease-out group-hover:translate-x-1.5 sm:text-5xl">
-              {project.title}
+            <h2 className="font-display text-3xl font-bold leading-[1.05] tracking-tight sm:text-5xl">
+              <Link
+                to={`/work/${project.slug}`}
+                className="inline-block transition-transform duration-500 ease-out hover:text-white group-hover:translate-x-1.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#DCF87C]/60 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+              >
+                {project.title}
+              </Link>
             </h2>
             <span className="shrink-0 text-sm tabular-nums text-white/35">{project.year}</span>
           </div>
@@ -80,19 +94,39 @@ function WorkRow({ project, index }: { project: Project; index: number }) {
             </div>
           </div>
 
-          <span className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#DCF87C]">
-            Read the case study
-            <span aria-hidden className="transition-transform duration-300 ease-out group-hover:translate-x-1">
-              -&gt;
-            </span>
-          </span>
+          <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-3">
+            <button
+              type="button"
+              onClick={() => onQuickLook(project)}
+              className="inline-flex items-center gap-2 rounded-full border border-white/15 px-4 py-1.5 text-sm font-semibold text-white/80 transition-colors hover:border-[#DCF87C]/50 hover:bg-white/[0.04] hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#DCF87C]/60"
+              aria-label={`Quick look at ${project.title}`}
+            >
+              <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-[#DCF87C]" />
+              Quick look
+            </button>
+            <Link
+              to={`/work/${project.slug}`}
+              className="inline-flex items-center gap-2 text-sm font-semibold text-[#DCF87C] transition-opacity hover:opacity-80"
+            >
+              Read the case study
+              <span aria-hidden className="transition-transform duration-300 ease-out group-hover:translate-x-1">
+                -&gt;
+              </span>
+            </Link>
+          </div>
         </div>
 
-        {/* Generative poster preview. Hover it and the pixels dissolve to a
-            lime card carrying a highlight — the same treatment on every real
-            project, so no single one is framed as the whole story. */}
+        {/* Generative poster preview — click it for a quick look. Hover and the
+            pixels dissolve to a lime card carrying a highlight; the same
+            treatment on every real project, so no single one is framed as the
+            whole story. */}
         <div className="hidden w-40 shrink-0 self-center md:block lg:w-52">
-          <div className="transition-transform duration-500 ease-out group-hover:-translate-y-1">
+          <button
+            type="button"
+            onClick={() => onQuickLook(project)}
+            aria-label={`Quick look at ${project.title}`}
+            className="block w-full transition-transform duration-500 ease-out hover:-translate-y-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#DCF87C]/60 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+          >
             <PixelTransition
               className="aspect-[4/3] w-full"
               front={<ProjectPoster project={project} className="h-full w-full" rounded="rounded-2xl" />}
@@ -105,20 +139,21 @@ function WorkRow({ project, index }: { project: Project; index: number }) {
                     {project.highlights?.[0] ?? project.blurb}
                   </p>
                   <span className="inline-flex items-center gap-1 text-xs font-semibold">
-                    Case study <span aria-hidden>-&gt;</span>
+                    Quick look <span aria-hidden>-&gt;</span>
                   </span>
                 </div>
               }
             />
-          </div>
+          </button>
         </div>
       </div>
-    </Link>
+    </div>
   )
 }
 
 export default function Work() {
   const reduce = useReducedMotion()
+  const [preview, setPreview] = useState<Project | null>(null)
 
   return (
     <>
@@ -182,7 +217,7 @@ export default function Work() {
               viewport={{ once: true, margin: '-60px' }}
               transition={{ duration: 0.55, ease: EASE, delay: Math.min(i * 0.06, 0.24) }}
             >
-              <WorkRow project={p} index={i} />
+              <WorkRow project={p} index={i} onQuickLook={setPreview} />
             </motion.li>
           ))}
         </ul>
@@ -215,6 +250,8 @@ export default function Work() {
           </div>
         </Reveal>
       </section>
+
+      <ProjectQuickLook project={preview} onClose={() => setPreview(null)} />
     </>
   )
 }
