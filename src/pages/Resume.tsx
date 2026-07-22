@@ -6,6 +6,7 @@ import { Eyebrow } from '../components/Eyebrow'
 import { GradientText } from '../components/GradientText'
 import { MagneticButton } from '../components/MagneticButton'
 import { Seo } from '../components/Seo'
+import { Starfield } from '../components/Starfield'
 import {
   RESUME_NAME,
   RESUME_ROLE,
@@ -58,7 +59,16 @@ export default function Resume() {
       />
 
       {/* HEADER — screen only */}
-      <header className="no-print mx-auto w-full max-w-3xl px-6 pb-10 pt-36 sm:pt-44">
+      <header className="no-print relative isolate mx-auto w-full max-w-3xl overflow-hidden px-6 pb-10 pt-36 sm:pt-44">
+        {/* Ambient warp field, radial-masked to the top-right so it stays out
+            of the left-aligned copy. This page had no ambient motion; a quiet
+            starfield reads as the long view behind a one-page summary. */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 -z-10 opacity-40 [mask-image:radial-gradient(120%_85%_at_82%_10%,#000_0%,transparent_64%)]"
+        >
+          <Starfield count={160} speed={0.7} listen="window" />
+        </div>
         <motion.div
           initial={reduce ? false : { opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
