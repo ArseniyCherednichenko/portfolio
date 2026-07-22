@@ -44,6 +44,7 @@ export const CHAPTERS: Chapter[] = [
     summary:
       'The most recent stretch: a run of interactive, cursor-aware experiments — the kind of thing the playground exists to hold. Each one is its own hand-built component, wired into the pages that suit it.',
     items: [
+      { kind: 'component', text: 'ProjectQuickLook — a shared project preview modal: the poster, role, blurb, stack, and highlights in a fast pop-over that always offers a way through to the full case study. Opened from the work ledger and the home cards, it replaced the one-off modal that used to live inside the home page, so both surfaces now share one honest component' },
       { kind: 'polish', text: 'Footer — the one un-crafted surface, a run-on paragraph of links, rebuilt as a proper closing statement: a get-in-touch CTA, a grouped map of every route, a live Berlin clock with an awake/asleep sense, and the keyboard hint. Present on every page, so the site now ends the way it begins' },
       { kind: 'component', text: 'Lanyard — a name badge on a cord you grab, throw, and watch swing to rest: a single constrained mass (an angle and an angular velocity) driven as a damped pendulum, with the badge as real crisp HTML that tilts with the cord. A different kind of motion from the fields and cards — one weight on a string' },
       { kind: 'component', text: 'Squares — a structural lattice field on one canvas: a soft band of light drifts along the diagonal forever while the cells under the cursor warm lime, lift their stroke, and bloom. Backs the Index header' },
