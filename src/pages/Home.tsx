@@ -1,11 +1,9 @@
 import { motion, useReducedMotion } from 'framer-motion'
 import { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import { Modal } from '../components/Modal'
+import { Link } from 'react-router-dom'
 import { GlassSurface } from '../components/GlassSurface'
 import { useBerlinTime } from '../hooks/useBerlinTime'
-import { ProjectPoster } from '../components/ProjectPoster'
-import { GlareHover } from '../components/GlareHover'
+import { ProjectQuickLook } from '../components/ProjectQuickLook'
 import { Reveal } from '../components/Reveal'
 import { GradientText } from '../components/GradientText'
 import { SplitText } from '../components/SplitText'
@@ -188,7 +186,6 @@ function HeroStatus() {
 
 export default function Home() {
   const [active, setActive] = useState<Project | null>(null)
-  const navigate = useNavigate()
   const { open: openContact } = useContact()
   return (
     <>
@@ -611,59 +608,7 @@ export default function Home() {
         </div>
       </section>
 
-      <Modal open={active !== null} onClose={() => setActive(null)}>
-        {active && (
-          <div>
-            <GlareHover className="mb-6">
-              <ProjectPoster project={active} className="aspect-[16/9] w-full" />
-            </GlareHover>
-            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[#DCF87C]">
-              {active.year || 'Project'}
-            </span>
-            <h3 className="mt-2 font-display text-3xl font-bold">{active.title}</h3>
-            <p className="mt-4 leading-relaxed text-white/65">{active.detail}</p>
-            <div className="mt-6 flex flex-wrap gap-2">
-              {active.stack.map((s) => (
-                <span key={s} className="rounded-full border border-white/10 px-3 py-1 text-xs text-white/55">
-                  {s}
-                </span>
-              ))}
-            </div>
-            <div className="mt-8 flex flex-wrap items-center gap-3">
-              <button
-                onClick={() => {
-                  const slug = active.slug
-                  setActive(null)
-                  navigate(`/work/${slug}`)
-                }}
-                className="rounded-full bg-[#DCF87C] px-5 py-2.5 text-sm font-semibold text-black"
-              >
-                Read the full case study
-              </button>
-              {active.href && (
-                <a
-                  href={active.href}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="rounded-full border border-white/15 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-white/[0.06]"
-                >
-                  Visit
-                </a>
-              )}
-              {active.repo && (
-                <a
-                  href={active.repo}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="rounded-full border border-white/15 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-white/[0.06]"
-                >
-                  Source
-                </a>
-              )}
-            </div>
-          </div>
-        )}
-      </Modal>
+      <ProjectQuickLook project={active} onClose={() => setActive(null)} />
     </>
   )
 }
