@@ -46,6 +46,7 @@ import { PixelTrail } from '../components/PixelTrail'
 import { Ribbons } from '../components/Ribbons'
 import { Lightning } from '../components/Lightning'
 import { Starfield } from '../components/Starfield'
+import { Globe } from '../components/Globe'
 import { BentoGrid, BentoCell } from '../components/BentoGrid'
 import { GlassSurface } from '../components/GlassSurface'
 import { Orb } from '../components/Orb'
@@ -1219,6 +1220,39 @@ export default function Playground() {
                 travel through space rather than a twinkle — nearer stars fan out faster and warm toward lime. The
                 vanishing point eases after the cursor, so the whole field banks the way you point. One RAF loop over a
                 simple frustum, no per-star React state. Reduced-motion paints a still star lattice with no streaks.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH GLOBE */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="relative flex h-[420px] items-center justify-center overflow-hidden rounded-3xl border border-white/10 bg-[#060606]">
+              <div className="h-[360px] w-[360px] max-w-full">
+                <Globe
+                  markers={[
+                    { lat: 52.52, lon: 13.405, label: 'Berlin' },
+                    { lat: 40.7128, lon: -74.006, label: 'New York' },
+                    { lat: 35.6762, lon: 139.6503, label: 'Tokyo' },
+                  ]}
+                />
+              </div>
+              <div className="pointer-events-none absolute inset-x-0 bottom-6 flex flex-col items-center text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Real coordinates</span>
+                <p className="mt-2 max-w-md px-6 text-lg font-medium text-white/70">
+                  Grab it and spin. Berlin is where I am.
+                </p>
+              </div>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Draggable dotted globe</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                A Fibonacci lattice of dots rotated in 3D on a plain 2D canvas — near-face dots bright, the far face a
+                faint glass haze, no WebGL and no map texture. Cities sit at their true latitude and longitude as lime
+                pins that pulse and label themselves, then fade as they turn to the back. It drifts on its own and a
+                flick carries an inertial spin. Backs the About snapshot. Reduced-motion holds a still frame, Berlin
+                facing front.
               </p>
             </div>
           </div>
