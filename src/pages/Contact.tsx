@@ -10,6 +10,7 @@ import { BorderBeam } from '../components/BorderBeam'
 import { ContactForm } from '../components/ContactForm'
 import { SpotlightCard } from '../components/SpotlightCard'
 import { SplitFlap } from '../components/SplitFlap'
+import { Clock } from '../components/Clock'
 import { ScratchReveal } from '../components/ScratchReveal'
 import { Seo } from '../components/Seo'
 import { useBerlinTime } from '../hooks/useBerlinTime'
@@ -122,16 +123,19 @@ export default function Contact() {
                   <span className="text-xs font-semibold uppercase tracking-[0.2em] text-white/35">
                     Local time
                   </span>
-                  <div className="mt-4">
-                    <SplitFlap
-                      value={time}
-                      height={46}
-                      width={32}
-                      gap={4}
-                      aria-label={`Local time in Berlin, ${time}`}
-                    />
+                  <div className="mt-4 flex items-center gap-5">
+                    <Clock size={92} label="Berlin" />
+                    <div>
+                      <SplitFlap
+                        value={time}
+                        height={46}
+                        width={32}
+                        gap={4}
+                        aria-label={`Local time in Berlin, ${time}`}
+                      />
+                      <p className="mt-2 text-sm text-white/40">Berlin · CET</p>
+                    </div>
                   </div>
-                  <p className="mt-2 text-sm text-white/40">Berlin · CET</p>
                 </div>
                 <div className="mt-6 flex items-center gap-2.5">
                   <span className="relative flex h-2.5 w-2.5">
