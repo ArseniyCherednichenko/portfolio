@@ -20,6 +20,7 @@ import { ScrollVelocity } from '../components/ScrollVelocity'
 import { DecryptedText } from '../components/DecryptedText'
 import { SplitText } from '../components/SplitText'
 import { SplitFlap } from '../components/SplitFlap'
+import { Clock } from '../components/Clock'
 import { CardStack } from '../components/CardStack'
 import { ProfileCard } from '../components/ProfileCard'
 import { PixelTransition } from '../components/PixelTransition'
@@ -459,6 +460,17 @@ export default function Playground() {
               note="A departure-board display: the top leaf folds down to hide the old glyph while a fresh bottom leaf drops into place. A two-phase mechanical hinge, not a spring. Drives the live Berlin clock on the contact page."
             >
               <SplitFlapDemo />
+            </Experiment>
+          </Reveal>
+
+          <Reveal>
+            <Experiment
+              name="Analog clock"
+              note="A hand-drawn SVG dial reading real Berlin time. One RAF loop sweeps the second hand continuously and writes transforms straight to the hand nodes — no per-frame React render. Timezone-correct via Intl; the twelve-marker and second hand warm to lime when the local hours are awake. Reduced motion drops the sweep to an honest once-a-second tick."
+            >
+              <div className="flex justify-center py-2">
+                <Clock size={132} label="Berlin" />
+              </div>
             </Experiment>
           </Reveal>
 
