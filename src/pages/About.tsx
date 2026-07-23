@@ -14,6 +14,7 @@ import { Accordion, type AccordionItem } from '../components/Accordion'
 import { Timeline } from '../components/Timeline'
 import { ProfileCard } from '../components/ProfileCard'
 import { Folder, type FolderPaper } from '../components/Folder'
+import { Globe } from '../components/Globe'
 import { useContact } from '../components/ContactDialog'
 import { Seo } from '../components/Seo'
 import { useBerlinTime } from '../hooks/useBerlinTime'
@@ -150,10 +151,17 @@ function Snapshot() {
       </Reveal>
 
       <BentoGrid className="mt-8">
-        {/* LIVE CLOCK — the big cell */}
+        {/* LIVE CLOCK + GLOBE — the big cell. The turning globe pins Berlin, so
+            the local time reads next to the place it belongs to. */}
         <BentoCell className="col-span-2 sm:col-span-2 sm:row-span-2">
           <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Local time</p>
-          <div className="mt-auto flex flex-col gap-2">
+          {/* The globe fills the lower body of the cell; grab it and spin. */}
+          <div className="pointer-events-none absolute inset-x-0 bottom-24 top-9 [mask-image:radial-gradient(ellipse_at_center,black_60%,transparent_94%)]">
+            <div className="pointer-events-auto h-full w-full">
+              <Globe />
+            </div>
+          </div>
+          <div className="relative mt-auto flex flex-col gap-2">
             <span className="font-display text-5xl font-bold tabular-nums tracking-tight sm:text-6xl">{time}</span>
             <div className="flex items-center gap-2 text-sm text-white/50">
               <span className="relative flex h-2 w-2">
