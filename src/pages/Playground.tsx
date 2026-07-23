@@ -26,6 +26,7 @@ import { ProfileCard } from '../components/ProfileCard'
 import { PixelTransition } from '../components/PixelTransition'
 import { FlipCard } from '../components/FlipCard'
 import { ScratchReveal } from '../components/ScratchReveal'
+import { CompareSlider } from '../components/CompareSlider'
 import { Folder } from '../components/Folder'
 import { ScrollStack } from '../components/ScrollStack'
 import { ScrollReveal } from '../components/ScrollReveal'
@@ -724,6 +725,33 @@ export default function Playground() {
                   <p className="text-sm font-medium text-black/70">Nice scratch. Try again below.</p>
                 </div>
               </ScratchReveal>
+            </Experiment>
+          </Reveal>
+
+          <Reveal>
+            <Experiment
+              name="Compare slider"
+              note="A before/after seam you drag to wipe between two states. The top layer is clipped to the divider; a spring eases the seam toward your pointer. Click anywhere on the frame, or focus the handle and use the arrow keys. Reduced motion drops the spring and the entrance sweep — the seam still drags."
+            >
+              <CompareSlider
+                className="aspect-[4/3] w-full max-w-[280px]"
+                beforeLabel="Flat"
+                afterLabel="Lit"
+                before={
+                  <div className="flex h-full w-full flex-col justify-between bg-[#101014] p-6 text-white/70 grayscale">
+                    <span className="text-xs font-semibold uppercase tracking-[0.2em] text-white/40">Same card</span>
+                    <p className="font-display text-2xl font-bold leading-tight">No finish yet.</p>
+                    <p className="text-sm text-white/40">Flat, grey, waiting.</p>
+                  </div>
+                }
+                after={
+                  <div className="flex h-full w-full flex-col justify-between bg-gradient-to-br from-[#DCF87C] to-[#b7e048] p-6 text-black shadow-[inset_0_0_60px_rgba(0,0,0,0.06)]">
+                    <span className="text-xs font-semibold uppercase tracking-[0.2em] text-black/60">Same card</span>
+                    <p className="font-display text-2xl font-bold leading-tight">With the finish.</p>
+                    <p className="text-sm font-medium text-black/70">Colour, weight, glow.</p>
+                  </div>
+                }
+              />
             </Experiment>
           </Reveal>
 
