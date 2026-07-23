@@ -5,6 +5,7 @@ import { Reveal } from '../components/Reveal'
 import { Eyebrow } from '../components/Eyebrow'
 import { GradientText } from '../components/GradientText'
 import { Iridescence } from '../components/Iridescence'
+import { CompareSlider } from '../components/CompareSlider'
 import { Seo } from '../components/Seo'
 
 const EASE = [0.16, 1, 0.3, 1] as const
@@ -316,12 +317,74 @@ function ReducedMotionDemo() {
   )
 }
 
+// 05 — Structure, then surface. The site's own order of work, made draggable:
+// the same card as its bare frame on one side and its finished, lit self on the
+// other, with a seam you slide to trade one for the other. Build it well, then
+// make it move — the two children are the same layout, only the finish differs.
+function StructureSurfaceDemo() {
+  return (
+    <>
+      <CompareSlider
+        className="aspect-[16/10] w-full"
+        beforeLabel="Structure"
+        afterLabel="Surface"
+        ariaLabel="Drag to compare the bare structure with the finished surface"
+        before={
+          // The frame: right blocks, right places, no finish yet.
+          <div className="flex h-full w-full flex-col justify-between bg-[#0b0c09] p-6 sm:p-7">
+            <div className="space-y-4">
+              <div className="h-2.5 w-24 rounded-full border border-dashed border-white/25" />
+              <div className="space-y-2.5">
+                <div className="h-6 w-3/4 rounded bg-white/[0.08]" />
+                <div className="h-6 w-1/2 rounded bg-white/[0.08]" />
+              </div>
+              <div className="space-y-2 pt-1">
+                <div className="h-2 w-full rounded-full bg-white/[0.06]" />
+                <div className="h-2 w-11/12 rounded-full bg-white/[0.06]" />
+                <div className="h-2 w-3/5 rounded-full bg-white/[0.06]" />
+              </div>
+            </div>
+            <div className="h-10 w-40 rounded-full border border-dashed border-white/25" />
+          </div>
+        }
+        after={
+          // The finish: the exact same frame, resolved with type, colour, glow.
+          <div className="flex h-full w-full flex-col justify-between bg-[#0b0c09] bg-[radial-gradient(130%_130%_at_12%_8%,rgba(220,248,124,0.16),transparent_55%)] p-6 sm:p-7">
+            <div className="space-y-4">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-[#DCF87C]">
+                Selected work
+              </p>
+              <h4 className="font-display text-2xl font-bold leading-[1.05] tracking-tight text-white sm:text-3xl">
+                A calm, fast
+                <br />
+                interface.
+              </h4>
+              <p className="max-w-sm text-sm leading-relaxed text-white/55">
+                Type, colour, and a little motion resolve the same frame into
+                something you want to keep looking at.
+              </p>
+            </div>
+            <span className="inline-flex w-fit items-center gap-2 rounded-full bg-[#DCF87C] px-5 py-2.5 text-sm font-semibold text-black">
+              Read the case study
+              <span aria-hidden>&#8594;</span>
+            </span>
+          </div>
+        }
+      />
+      <p className="mt-6 text-sm text-white/40">
+        Same layout on both sides. The bones are set first; the finish comes
+        after. Drag the seam, or focus the handle and use the arrow keys.
+      </p>
+    </>
+  )
+}
+
 export default function Craft() {
   return (
     <>
       <Seo
         title="On motion"
-        description="Notes on interface motion — four small, playable demonstrations of the craft behind the animation on this site: easing, springs, stagger, and respecting reduced motion."
+        description="Notes on interface motion — five small, playable demonstrations of the craft behind the animation on this site: easing, springs, stagger, respecting reduced motion, and structure before surface."
       />
       <div className="mx-auto w-full max-w-4xl px-6 py-24 sm:py-32">
         {/* HEADER */}
@@ -389,16 +452,25 @@ export default function Craft() {
           >
             <ReducedMotionDemo />
           </Demo>
+
+          <Demo
+            n="05"
+            title="Structure, then surface"
+            claim="Nothing here is styled into existence. The layout is right first — the frame, the order, the spacing — and only then does the finish go on: type, colour, a little motion. Slide the seam and trade one for the other; the bones underneath are the same."
+            controls={null}
+          >
+            <StructureSurfaceDemo />
+          </Demo>
         </div>
 
         {/* OUTRO */}
         <Reveal>
           <div className="mt-16 rounded-3xl border border-white/10 bg-white/[0.02] p-8 sm:p-10">
             <p className="max-w-xl font-display text-2xl font-semibold leading-snug text-white/85 sm:text-3xl">
-              These four ideas run under every animation on the site.
+              These five ideas run under every animation on the site.
             </p>
             <p className="mt-4 max-w-xl leading-relaxed text-white/55">
-              The Playground is where they are put to work across seventy-odd hand-built components.
+              The Playground is where they are put to work across eighty-odd hand-built components.
               The work is where they ship.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
