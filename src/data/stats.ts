@@ -10,7 +10,7 @@
 // these numbers first (Colophon, Contents, Changelog) re-import from here.
 
 /** Hand-built components in `src/components`. Nothing off the shelf. */
-export const COMPONENT_COUNT = 85
+export const COMPONENT_COUNT = 86
 
 /** Distinct routed pages the site serves. */
 export const PAGE_COUNT = 19
