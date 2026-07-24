@@ -119,6 +119,7 @@ export const LIBRARY: LibraryGroup[] = [
       { name: 'Dock', note: 'A magnifying, macOS-style dock that swells under the pointer.', tags: ['control', 'nav', 'pointer'], to: '/playground', where: 'Playground' },
       { name: 'GooeyTabs', note: 'A liquid tab switcher whose blobs merge as the selection moves.', tags: ['control', 'tabs', 'liquid'], to: '/changelog', where: 'Changelog' },
       { name: 'ElasticSlider', note: 'A range control that stretches elastically past its ends.', tags: ['control', 'slider', 'input'], to: '/playground', where: 'Playground' },
+      { name: 'Knob', note: 'A rotary dial you turn like hardware — drag, wheel, or arrow keys.', tags: ['control', 'knob', 'input'], to: '/design', where: 'Design' },
       { name: 'FlowingMenu', note: 'Editorial link rows with a lime panel that slides in on hover.', tags: ['control', 'menu', 'hover'], to: '/', where: 'Home' },
       { name: 'Accordion', note: 'An animated disclosure list, one row open at a time.', tags: ['control', 'accordion', 'a11y'], to: '/about', where: 'About' },
       { name: 'SphereMenu', note: 'A menu of items wrapped around a rotating sphere.', tags: ['control', 'menu', '3d'], to: '/playground', where: 'Playground' },
