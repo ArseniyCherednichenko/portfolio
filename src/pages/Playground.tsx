@@ -52,6 +52,7 @@ import { GlassSurface } from '../components/GlassSurface'
 import { Orb } from '../components/Orb'
 import { Accordion } from '../components/Accordion'
 import { ElasticSlider } from '../components/ElasticSlider'
+import { Knob } from '../components/Knob'
 import { Stepper, type StepperStep } from '../components/Stepper'
 import { Dock, type DockItem } from '../components/Dock'
 import { Timeline, type TimelineItem } from '../components/Timeline'
@@ -203,6 +204,24 @@ function Experiment({
       <div className="mt-4 px-1">
         <h3 className="text-base font-semibold">{name}</h3>
         <p className="mt-1 text-sm leading-relaxed text-white/45">{note}</p>
+      </div>
+    </div>
+  )
+}
+
+// A Knob showcase: the dial drives a live preview so the value is felt, not
+// just read. Turning it warms a lime meter and grows the ring — pointer drag,
+// wheel, or keyboard all move it.
+function KnobDemo() {
+  const [level, setLevel] = useState(62)
+  return (
+    <div className="flex items-center gap-10">
+      <Knob label="Level" min={0} max={100} value={level} onChange={setLevel} format={(v) => `${Math.round(v)}`} />
+      <div className="flex h-28 w-8 items-end overflow-hidden rounded-full border border-white/12 bg-white/[0.03]">
+        <div
+          className="w-full rounded-full bg-[#DCF87C] transition-[height] duration-150"
+          style={{ height: `${level}%` }}
+        />
       </div>
     </div>
   )
@@ -1498,6 +1517,15 @@ export default function Playground() {
                   }
                 />
               </div>
+            </Experiment>
+          </Reveal>
+
+          <Reveal>
+            <Experiment
+              name="Rotary knob"
+              note="A dial you turn like hardware: drag up or down to sweep the pointer around a 270° arc, spin the wheel for fine steps, or focus it and use the arrows. The pointer rides a spring so it settles with a little give. A real role=slider, keyboard-driven, and calm under reduced motion. Drives the spring tuner on the Design page."
+            >
+              <KnobDemo />
             </Experiment>
           </Reveal>
         </div>
