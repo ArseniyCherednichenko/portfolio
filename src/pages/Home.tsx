@@ -25,7 +25,7 @@ import { MagnetLines } from '../components/MagnetLines'
 import { ScrollCue } from '../components/ScrollCue'
 import { Eyebrow } from '../components/Eyebrow'
 import { SectionNav } from '../components/SectionNav'
-import { AnimatedCounter } from '../components/AnimatedCounter'
+import { Odometer } from '../components/Odometer'
 import { useContact } from '../components/ContactDialog'
 import { Seo } from '../components/Seo'
 import { PROJECTS, SKILLS, type Project } from '../data/projects'
@@ -397,7 +397,7 @@ export default function Home() {
             <Reveal key={stat.label} delay={idx * 0.06}>
               <SpotlightCard className="h-full">
                 <div className="flex h-full flex-col p-6">
-                  <AnimatedCounter
+                  <Odometer
                     value={stat.value}
                     suffix={stat.suffix}
                     className="font-display text-5xl font-bold leading-none tracking-tight text-[#DCF87C]"
