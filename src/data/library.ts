@@ -98,7 +98,8 @@ export const LIBRARY: LibraryGroup[] = [
     intro: 'Motion wired to the scroll position — drawing, counting, stacking, and travelling as you move down the page.',
     items: [
       { name: 'Reveal', note: 'The base scroll-into-view fade-and-lift the whole site leans on.', tags: ['scroll', 'reveal', 'sitewide'], to: '/', where: 'Home' },
-      { name: 'AnimatedCounter', note: 'A number that counts up the moment it scrolls into view.', tags: ['scroll', 'counter', 'numbers'], to: '/', where: 'Home' },
+      { name: 'AnimatedCounter', note: 'A number that counts up the moment it scrolls into view.', tags: ['scroll', 'counter', 'numbers'], to: '/about', where: 'About' },
+      { name: 'Odometer', note: 'A trip-meter counter whose digit reels roll up from zero into place.', tags: ['scroll', 'counter', 'numbers', 'mechanical'], to: '/', where: 'Home' },
       { name: 'HorizontalScroll', note: 'A pinned section where vertical scroll becomes sideways travel.', tags: ['scroll', 'pin', 'horizontal'], to: '/', where: 'Home' },
       { name: 'ScrollScene', note: 'A pinned scrollytelling stage that assembles in steps.', tags: ['scroll', 'pin', 'scrollytelling'], to: '/colophon', where: 'Colophon' },
       { name: 'ScrollStack', note: 'Cards that pin and stack into a deck as you scroll.', tags: ['scroll', 'pin', 'stack'], to: '/playground', where: 'Playground' },

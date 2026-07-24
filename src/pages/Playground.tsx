@@ -12,6 +12,7 @@ import { BorderBeam } from '../components/BorderBeam'
 import { CircularText } from '../components/CircularText'
 import { MagneticButton } from '../components/MagneticButton'
 import { AnimatedCounter } from '../components/AnimatedCounter'
+import { Odometer } from '../components/Odometer'
 import { DotGrid } from '../components/DotGrid'
 import { Particles } from '../components/Particles'
 import { MagnetLines } from '../components/MagnetLines'
@@ -423,6 +424,15 @@ export default function Playground() {
               <div className="text-center">
                 <AnimatedCounter value={2026} className="text-6xl font-bold tabular-nums sm:text-7xl" />
                 <p className="mt-2 text-sm text-white/45">Eases from zero on reveal</p>
+              </div>
+            </Experiment>
+          </Reveal>
+
+          <Reveal delay={0.05}>
+            <Experiment name="Odometer" note="A mechanical trip-meter count: each place is a reel of 0-9 that rolls up from zero into place, higher places landing a beat later. A physical slide, not a text-swap. Drives the by-the-numbers row on the homepage.">
+              <div className="text-center">
+                <Odometer value={1024} minDigits={4} className="text-6xl font-bold tabular-nums text-[#DCF87C] sm:text-7xl" />
+                <p className="mt-2 text-sm text-white/45">Reels travel up on reveal</p>
               </div>
             </Experiment>
           </Reveal>
