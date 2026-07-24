@@ -6,6 +6,7 @@ import { Eyebrow } from '../components/Eyebrow'
 import { GradientText } from '../components/GradientText'
 import { SpotlightCard } from '../components/SpotlightCard'
 import { DotGrid } from '../components/DotGrid'
+import { Knob } from '../components/Knob'
 import { Seo } from '../components/Seo'
 import {
   CORE_COLORS,
@@ -151,6 +152,91 @@ function EaseDemo() {
             Replay
           </button>
         )}
+      </div>
+    </div>
+  )
+}
+
+// A hands-on spring lab: two Knobs tune the stiffness and damping of a live
+// Framer spring, and a puck springs between two rests so you feel the numbers
+// instead of reading them. This is the "held back for things that should feel
+// physical" note made playable, and the only place on the site a real spring
+// is exposed for tuning rather than just described.
+function SpringTuner() {
+  const reduce = useReducedMotion()
+  const [stiffness, setStiffness] = useState(180)
+  const [damping, setDamping] = useState(14)
+  const [at, setAt] = useState(0) // which rest the puck sits at: 0 or 1
+  const trackRef = useRef<HTMLButtonElement>(null)
+  const [travel, setTravel] = useState(0)
+
+  // Measure how far the puck can travel: track width minus the puck and the
+  // 0.5rem inset on each side. Recomputed on resize so it stays honest.
+  useEffect(() => {
+    const el = trackRef.current
+    if (!el) return
+    const measure = () => setTravel(Math.max(0, el.clientWidth - 36 - 16))
+    measure()
+    const ro = new ResizeObserver(measure)
+    ro.observe(el)
+    return () => ro.disconnect()
+  }, [])
+
+  return (
+    <div>
+      <div className="flex flex-col gap-8 sm:flex-row sm:items-center">
+        <div className="flex shrink-0 justify-center gap-8">
+          <Knob
+            label="Stiffness"
+            min={20}
+            max={400}
+            step={5}
+            value={stiffness}
+            onChange={setStiffness}
+            size={92}
+          />
+          <Knob
+            label="Damping"
+            min={2}
+            max={40}
+            step={1}
+            value={damping}
+            onChange={setDamping}
+            size={92}
+          />
+        </div>
+
+        <div className="min-w-0 flex-1">
+          <div className="relative h-16 overflow-hidden rounded-xl border border-white/10 bg-white/[0.02]">
+            <button
+              ref={trackRef}
+              type="button"
+              aria-label="Nudge the puck to the other rest"
+              onClick={() => setAt((n) => (n === 0 ? 1 : 0))}
+              className="absolute inset-0 flex items-center px-2"
+            >
+              {reduce ? (
+                <span
+                  className="h-9 w-9 rounded-lg bg-[#DCF87C] transition-transform duration-200"
+                  style={{ transform: `translateX(${at ? travel : 0}px)` }}
+                />
+              ) : (
+                <motion.span
+                  className="h-9 w-9 rounded-lg bg-[#DCF87C]"
+                  animate={{ x: at ? travel : 0 }}
+                  transition={{ type: 'spring', stiffness, damping }}
+                />
+              )}
+            </button>
+          </div>
+          <p className="mt-3 text-sm leading-relaxed text-white/45">
+            Turn the dials, then tap the track to send the puck across on your spring. Low damping
+            overshoots and rings; raise it to land clean.
+          </p>
+          <div className="mt-2 font-mono text-xs text-white/40">
+            {`{ type: "spring", stiffness: ${stiffness}, damping: ${damping} }`}
+          </div>
+        </div>
       </div>
     </div>
   )
@@ -352,6 +438,21 @@ export default function Design() {
               </SpotlightCard>
             </Reveal>
           </div>
+          <Reveal delay={0.1}>
+            <SpotlightCard className="mt-6">
+              <div className="p-6">
+                <div className="flex flex-wrap items-baseline justify-between gap-2">
+                  <h3 className="text-sm font-semibold uppercase tracking-[0.2em] text-white/70">
+                    Tune a spring
+                  </h3>
+                  <span className="text-xs text-white/40">The physical bits, made playable</span>
+                </div>
+                <div className="mt-6">
+                  <SpringTuner />
+                </div>
+              </div>
+            </SpotlightCard>
+          </Reveal>
         </section>
 
         {/* CLOSE */}
