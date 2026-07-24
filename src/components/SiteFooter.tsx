@@ -22,6 +22,7 @@ const GROUPS: FooterGroup[] = [
     links: [
       { to: '/work', label: 'Work' },
       { to: '/playground', label: 'Playground' },
+      { to: '/library', label: 'The library' },
       { to: '/toolkit', label: 'Toolkit' },
       { to: '/about', label: 'About' },
       { to: '/now', label: 'Now' },

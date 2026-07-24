@@ -47,6 +47,7 @@ export const GO_TARGETS: GoTarget[] = [
   { key: 's', to: '/terminal', label: 'Terminal' },
   { key: 'b', to: '/changelog', label: 'Changelog' },
   { key: 'i', to: '/contents', label: 'Index' },
+  { key: 'y', to: '/library', label: 'Library' },
 ]
 
 const CHORD_WINDOW_MS = 1400

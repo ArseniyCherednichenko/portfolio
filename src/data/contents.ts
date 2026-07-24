@@ -48,6 +48,7 @@ export const CONTENTS: ContentSection[] = [
       { to: '/toolkit', title: 'Toolkit', blurb: 'The stack and the tools, and how I actually reach for them.', chord: 't' },
       { to: '/craft', title: 'On motion', blurb: 'Notes on animation craft, each one playable in place.', chord: 'm' },
       { to: '/design', title: 'Design language', blurb: 'A living style guide — palette, type, and motion, each token copyable.', chord: 'd' },
+      { to: '/library', title: 'The library', blurb: 'Every hand-built component, catalogued and searchable.', chord: 'y' },
       { to: '/colophon', title: 'Colophon', blurb: 'How this site is built, down to the fonts and the counts.', chord: 'l' },
     ],
   },
