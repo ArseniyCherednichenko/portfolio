@@ -24,6 +24,7 @@ const Resume = lazy(() => import('./pages/Resume'))
 const TerminalPage = lazy(() => import('./pages/Terminal'))
 const Changelog = lazy(() => import('./pages/Changelog'))
 const Contents = lazy(() => import('./pages/Contents'))
+const Library = lazy(() => import('./pages/Library'))
 const NotFound = lazy(() => import('./pages/NotFound'))
 
 export default function App() {
@@ -48,6 +49,7 @@ export default function App() {
         <Route path="terminal" element={<TerminalPage />} />
         <Route path="changelog" element={<Changelog />} />
         <Route path="contents" element={<Contents />} />
+        <Route path="library" element={<Library />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>

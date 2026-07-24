@@ -9,11 +9,13 @@
 // without pulling a whole page component into its bundle. Pages that showed
 // these numbers first (Colophon, Contents, Changelog) re-import from here.
 
-/** Hand-built components in `src/components`. Nothing off the shelf. */
-export const COMPONENT_COUNT = 87
+/** Hand-built components in `src/components`. Nothing off the shelf. This is
+ * the literal count of files there, catalogued one by one on the /library
+ * page (LIBRARY in src/data/library.ts) — keep the two in step. */
+export const COMPONENT_COUNT = 89
 
 /** Distinct routed pages the site serves. */
-export const PAGE_COUNT = 19
+export const PAGE_COUNT = 20
 
 export interface SiteStat {
   value: number
