@@ -63,6 +63,7 @@ import { PillNav, type PillLink } from '../components/PillNav'
 import { CircularGallery, type GalleryItem } from '../components/CircularGallery'
 import { SphereMenu, type SphereItem } from '../components/SphereMenu'
 import { Lanyard } from '../components/Lanyard'
+import { HoverIndex, type HoverIndexItem } from '../components/HoverIndex'
 import { Gravity } from '../components/Gravity'
 import { GO_TARGETS, useShortcuts } from '../components/Keyboard'
 import { Seo } from '../components/Seo'
@@ -298,6 +299,18 @@ const SPHERE_LINKS: SphereItem[] = [
   { label: 'Changelog', to: '/changelog' },
   { label: 'Index', to: '/contents' },
   { label: 'GitHub', href: 'https://github.com/ArseniyCherednichenko/portfolio', hint: 'Source' },
+]
+
+const INDEX_LINKS: HoverIndexItem[] = [
+  { label: 'Work', to: '/work', meta: 'Case studies' },
+  { label: 'About', to: '/about', meta: 'Who' },
+  { label: 'Playground', to: '/playground', meta: 'Motion' },
+  { label: 'Toolkit', to: '/toolkit', meta: 'What I build with' },
+  { label: 'On motion', to: '/craft', meta: 'Craft' },
+  { label: 'Design language', to: '/design', meta: 'Tokens' },
+  { label: 'Writing', to: '/writing', meta: 'Notes' },
+  { label: 'Now', to: '/now', meta: 'This week' },
+  { label: 'Contact', to: '/contact', meta: 'Reach me' },
 ]
 
 const STEPPER_DEMO: StepperStep[] = [
@@ -1742,6 +1755,31 @@ export default function Playground() {
                 on-brand while it tilts; the cord and the placement are written straight onto refs every frame, no React
                 state on the hot path. A different kind of motion from everything else here: not a field, a card, or a
                 trail, but one weight on a string. Reduced motion just lets it hang still.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH HOVER INDEX */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 py-10 sm:px-10">
+              <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Hover</span>
+              <p className="mt-3 max-w-md text-lg font-medium text-white/85 sm:text-xl">
+                Run the cursor down the list. Each row summons its own preview.
+              </p>
+              <HoverIndex items={INDEX_LINKS} className="mt-8" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Hover index</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                An editorial index where hovering a row floats a generative preview panel that trails the cursor with a
+                little spring lag — the awwwards-style hover-reveal list. A different kind of thing from the rest here:
+                not a field, a card, or a text effect, but a list whose entries call up a floating thumbnail (distinct
+                from FlowingMenu, whose panel slides in and stays inside the row). The previews are honest brand art
+                generated per label, not screenshots; every row is a real link into the site, so it doubles as
+                navigation. On touch or under reduced motion the floating preview is dropped for a clean, fully legible
+                list.
               </p>
             </div>
           </div>
