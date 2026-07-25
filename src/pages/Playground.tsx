@@ -49,6 +49,7 @@ import { Ribbons } from '../components/Ribbons'
 import { Lightning } from '../components/Lightning'
 import { Starfield } from '../components/Starfield'
 import { Globe } from '../components/Globe'
+import { GridMotion } from '../components/GridMotion'
 import { BentoGrid, BentoCell } from '../components/BentoGrid'
 import { GlassSurface } from '../components/GlassSurface'
 import { Orb } from '../components/Orb'
@@ -1311,6 +1312,53 @@ export default function Playground() {
                 pins that pulse and label themselves, then fade as they turn to the back. It drifts on its own and a
                 flick carries an inertial spin. Backs the About snapshot. Reduced-motion holds a still frame, Berlin
                 facing front.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH GRID MOTION — a wall of the range, tilting to the cursor */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="relative h-[420px] overflow-hidden rounded-3xl border border-white/10 bg-[#0a0a0a]">
+              <GridMotion
+                className="h-full w-full"
+                rows={5}
+                accent={['Frontend', 'Native iOS', 'Backend', 'Applied AI', 'Motion']}
+                items={[
+                  'Frontend',
+                  'Native iOS',
+                  'Backend',
+                  'Applied AI',
+                  'Motion',
+                  'React',
+                  'TypeScript',
+                  'SwiftUI',
+                  'Supabase',
+                  'Tailwind',
+                  'Framer Motion',
+                  'Typography',
+                  'Accessibility',
+                  'Detail',
+                  'Vite',
+                  'Berlin',
+                ]}
+              />
+              <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Range field</span>
+                <p className="mt-3 max-w-md px-6 text-xl font-medium text-white/80 sm:text-2xl">
+                  Lean over it, and the whole wall tilts your way.
+                </p>
+              </div>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Tilting wall of tiles</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                Five rows of tiles drift sideways at their own pace and in alternating directions — the seamless
+                duplicate-and-slide loop stacked into a field — while the whole slab tilts in 3D toward the cursor like a
+                panel you are leaning over. Fed the disciplines and tools I work across rather than one message, so it
+                reads as range: no single tile carries the story. Reduced motion holds it still and square, every tile
+                there and legible.
               </p>
             </div>
           </div>
