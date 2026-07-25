@@ -92,6 +92,7 @@ export const LIBRARY: LibraryGroup[] = [
       { name: 'Ribbons', note: 'Flowing ribbons that trail after the cursor.', tags: ['field', 'ribbon', 'pointer'], to: '/playground', where: 'Playground' },
       { name: 'PixelTrail', note: 'A trail of pixels that light up under the moving pointer.', tags: ['field', 'pixel', 'pointer'], to: '/playground', where: 'Playground' },
       { name: 'Gravity', note: 'Objects that fall, collide, and pile with real physics.', tags: ['field', 'physics', 'drag'], to: '/playground', where: 'Playground' },
+      { name: 'GridMotion', note: 'Stacked rows of tiles that drift in alternating directions while the slab tilts in 3D toward the cursor.', tags: ['field', 'grid', 'pointer', 'parallax'], to: '/playground', where: 'Playground' },
     ],
   },
   {
