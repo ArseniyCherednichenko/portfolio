@@ -25,6 +25,12 @@ export interface GooeyTextProps {
   morph?: number
   /** Peak blur (px) each layer reaches at the midpoint of a swap. */
   blur?: number
+  /**
+   * SVG gooey stdDeviation. Larger fuses more aggressively but eats thin
+   * glyphs, so it is kept modest and paired with a gentle alpha ramp so
+   * resting type stays crisp at body sizes, not only display sizes.
+   */
+  goo?: number
   /** Accessible label prefix, e.g. "I build" → announces "I build motion". */
   label?: string
   className?: string
@@ -38,7 +44,8 @@ export function GooeyText({
   words,
   interval = 2600,
   morph = 900,
-  blur = 14,
+  blur = 10,
+  goo = 3,
   label,
   className = '',
 }: GooeyTextProps) {
@@ -94,6 +101,11 @@ export function GooeyText({
   // Ease the raw progress so the melt lingers at its liquid midpoint.
   const ease = (x: number) => 0.5 - 0.5 * Math.cos(Math.PI * x)
   const e = ease(t)
+  // The gooey filter's alpha-crush is what fuses the two words into one liquid
+  // mass — but it also eats thin, sharp glyphs. So it is engaged ONLY inside
+  // the morph, where both layers already carry CSS blur; at rest the word
+  // renders with no filter and stays perfectly crisp at any size.
+  const gooOn = t > 0.06 && t < 0.94
   // Outgoing word: sharp and solid at t=0, blurred and gone by t=1.
   const outOpacity = 1 - e
   const outBlur = blur * e
@@ -125,11 +137,14 @@ export function GooeyText({
       <svg aria-hidden width="0" height="0" className="absolute">
         <defs>
           <filter id={filterId}>
-            <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur" />
+            <feGaussianBlur in="SourceGraphic" stdDeviation={goo} result="blur" />
+            {/* Gentle alpha ramp: solid glyph interiors (alpha≈1) survive so
+                resting type stays legible, while the soft halos of the two
+                CSS-blurred words fuse where they overlap mid-morph. */}
             <feColorMatrix
               in="blur"
               mode="matrix"
-              values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 20 -9"
+              values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 14 -5"
               result="goo"
             />
           </filter>
@@ -142,7 +157,7 @@ export function GooeyText({
       <span
         aria-hidden
         className="grid"
-        style={{ filter: `url(#${filterId})` }}
+        style={{ filter: gooOn ? `url(#${filterId})` : 'none' }}
       >
         <span
           className="block whitespace-nowrap [grid-area:1/1]"
