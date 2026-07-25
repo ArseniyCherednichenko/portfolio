@@ -4,6 +4,7 @@ import { Reveal } from '../components/Reveal'
 import { ChromaGrid } from '../components/ChromaGrid'
 import { GooeyTabs } from '../components/GooeyTabs'
 import { GradientText } from '../components/GradientText'
+import { GooeyText } from '../components/GooeyText'
 import { RotatingWord } from '../components/RotatingWord'
 import { SpotlightCard } from '../components/SpotlightCard'
 import { TiltCard } from '../components/TiltCard'
@@ -483,6 +484,21 @@ export default function Playground() {
           <Reveal>
             <Experiment name="Split-text reveal" note="Each character lifts and fades into place, one after the next. Hit replay to run it again.">
               <SplitTextDemo />
+            </Experiment>
+          </Reveal>
+
+          <Reveal>
+            <Experiment
+              name="Gooey text morph"
+              note="One word melts into the next. Two text layers live under a gooey SVG filter (blur, then an alpha-crushing matrix — the same metaball trick GooeyTabs uses on its blobs); as one word blurs out and the next sharpens in, their glyph-halos fuse into a liquid mass mid-swap before resolving. It drives the hero's 'I build ...' line. Reduced motion swaps them plainly."
+            >
+              <GooeyText
+                words={['Motion', 'Craft', 'Detail', 'Type']}
+                label="I build with"
+                interval={2200}
+                blur={16}
+                className="font-display text-5xl font-bold tracking-tight text-[#DCF87C] sm:text-6xl"
+              />
             </Experiment>
           </Reveal>
 
