@@ -49,7 +49,8 @@ export const LIBRARY: LibraryGroup[] = [
       { name: 'ASCIIText', note: 'A word rendered as a shimmering field of ASCII glyphs.', tags: ['text', 'ascii'], to: '/colophon', where: 'Colophon' },
       { name: 'CircularText', note: 'A rotating circular text seal with a mark in its centre.', tags: ['text', 'circular', 'motion'], to: '/playground', where: 'Playground' },
       { name: 'CurvedLoop', note: 'Text flowing endlessly along a looping curved path.', tags: ['text', 'path', 'marquee'], to: '/playground', where: 'Playground' },
-      { name: 'RotatingWord', note: 'A single slot that cycles through alternative words.', tags: ['text', 'motion'], to: '/', where: 'Home' },
+      { name: 'RotatingWord', note: 'A single slot that cross-fades through alternative words.', tags: ['text', 'motion'], to: '/playground', where: 'Playground' },
+      { name: 'GooeyText', note: 'One word melts into the next through a gooey filter, glyph-halos fusing mid-swap.', tags: ['text', 'liquid', 'motion'], to: '/', where: 'Home' },
     ],
   },
   {
