@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { Reveal } from '../components/Reveal'
 import { Eyebrow } from '../components/Eyebrow'
 import { GradientText } from '../components/GradientText'
+import { GooeyText } from '../components/GooeyText'
 import { TiltCard } from '../components/TiltCard'
 import { SpotlightCard } from '../components/SpotlightCard'
 import { MagneticButton } from '../components/MagneticButton'
@@ -328,6 +329,30 @@ export default function About() {
           any single project than about the craft that carries across all of
           them: motion, type, and the quiet details most people only feel.
         </ScrollReveal>
+      </section>
+
+      {/* RANGE — one craft, several materials, morphing through GooeyText */}
+      <section className="mx-auto w-full max-w-4xl px-6 pb-16 text-center sm:pb-24">
+        <Reveal>
+          <p className="font-display text-2xl font-semibold tracking-tight text-white/70 sm:text-3xl">
+            I work across
+          </p>
+        </Reveal>
+        <Reveal delay={0.05}>
+          <div className="mt-3 flex justify-center">
+            <GooeyText
+              words={['Frontend', 'Native iOS', 'Backend', 'Applied AI', 'Motion']}
+              label="I work across"
+              interval={2200}
+              className="font-display text-5xl font-bold leading-none tracking-tight text-[#DCF87C] sm:text-7xl"
+            />
+          </div>
+        </Reveal>
+        <Reveal delay={0.1}>
+          <p className="mx-auto mt-6 max-w-md text-base leading-relaxed text-white/50">
+            One craft, several materials — held together so the seams stay invisible.
+          </p>
+        </Reveal>
       </section>
 
       {/* AT A GLANCE — live, scannable snapshot */}
