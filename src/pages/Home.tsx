@@ -7,7 +7,7 @@ import { ProjectQuickLook } from '../components/ProjectQuickLook'
 import { Reveal } from '../components/Reveal'
 import { GradientText } from '../components/GradientText'
 import { SplitText } from '../components/SplitText'
-import { RotatingWord } from '../components/RotatingWord'
+import { GooeyText } from '../components/GooeyText'
 import { SpotlightCard } from '../components/SpotlightCard'
 import { Marquee } from '../components/Marquee'
 import { HorizontalScroll, type HPanel } from '../components/HorizontalScroll'
@@ -226,7 +226,12 @@ export default function Home() {
           className="mt-7 flex flex-wrap items-center gap-2 text-2xl text-white/70 sm:text-3xl"
         >
           <span>I build</span>
-          <RotatingWord words={['beautiful products.', 'Socratic AI.', 'calm interfaces.', 'things with craft.']} />
+          <GooeyText
+            words={['beautiful products.', 'Socratic AI.', 'calm interfaces.', 'things with craft.']}
+            label="I build"
+            interval={2800}
+            className="font-medium text-[#DCF87C]"
+          />
         </motion.div>
         <motion.p
           initial={{ opacity: 0, y: 24 }}
