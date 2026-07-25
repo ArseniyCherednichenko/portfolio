@@ -9,10 +9,23 @@ import { AnimatedCounter } from '../components/AnimatedCounter'
 import { ProjectPoster } from '../components/ProjectPoster'
 import { PixelTransition } from '../components/PixelTransition'
 import { ProjectQuickLook } from '../components/ProjectQuickLook'
+import { HoverIndex, type HoverIndexItem } from '../components/HoverIndex'
 import { Seo } from '../components/Seo'
 import { PROJECTS, CASE_STUDIES, type Project } from '../data/projects'
 
 const EASE = [0.16, 1, 0.3, 1] as const
+
+// The work is one facet, not the whole story. This outward index points past
+// the projects to the rest of the site — the person, the craft, the range —
+// so no single project carries everything.
+const ELSEWHERE: HoverIndexItem[] = [
+  { label: 'About', to: '/about', meta: 'Who I am' },
+  { label: 'Playground', to: '/playground', meta: 'Motion, hand-built' },
+  { label: 'Toolkit', to: '/toolkit', meta: 'What I build with' },
+  { label: 'On motion', to: '/craft', meta: 'How I think' },
+  { label: 'Writing', to: '/writing', meta: 'Notes in the open' },
+  { label: 'Now', to: '/now', meta: 'This week' },
+]
 
 // A row in the work ledger. Real projects offer two ways in — a quick-look
 // modal (the poster and the "Quick look" pill) for a fast preview, and a link
@@ -222,6 +235,22 @@ export default function Work() {
           ))}
         </ul>
         <div className="border-t border-white/10" />
+      </section>
+
+      {/* THE REST OF THE SITE */}
+      <section className="mx-auto w-full max-w-4xl px-6 pt-8 pb-4">
+        <Reveal>
+          <div className="flex items-baseline justify-between gap-4">
+            <Eyebrow>Not just the work</Eyebrow>
+            <span className="text-xs uppercase tracking-[0.22em] text-white/35">Explore</span>
+          </div>
+          <p className="mt-3 max-w-xl text-lg leading-relaxed text-white/60">
+            These projects are one facet. The rest of the site is where the range, the craft, and the person live.
+          </p>
+        </Reveal>
+        <Reveal delay={0.08}>
+          <HoverIndex items={ELSEWHERE} className="mt-6" />
+        </Reveal>
       </section>
 
       {/* CTA */}
