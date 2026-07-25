@@ -490,7 +490,7 @@ export default function Playground() {
           <Reveal>
             <Experiment
               name="Gooey text morph"
-              note="One word melts into the next. Two text layers live under a gooey SVG filter (blur, then an alpha-crushing matrix — the same metaball trick GooeyTabs uses on its blobs); as one word blurs out and the next sharpens in, their glyph-halos fuse into a liquid mass mid-swap before resolving. It drives the hero's 'I build ...' line. Reduced motion swaps them plainly."
+              note="One word melts into the next. Two text layers live under a gooey SVG filter (blur, then an alpha-crushing matrix — the same metaball trick GooeyTabs uses on its blobs); as one word blurs out and the next sharpens in, their glyph-halos fuse into a liquid mass mid-swap before resolving. The filter engages only mid-morph, so resting type stays crisp. It drives the About page's 'I work across ...' band. Reduced motion swaps them plainly."
             >
               <GooeyText
                 words={['Motion', 'Craft', 'Detail', 'Type']}
