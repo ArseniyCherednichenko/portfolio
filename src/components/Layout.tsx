@@ -11,6 +11,7 @@ import { ScrollProgress } from './ScrollProgress'
 import { BackToTop } from './BackToTop'
 import { Cursor } from './Cursor'
 import { ClickSpark } from './ClickSpark'
+import { Grain } from './Grain'
 import { Preloader } from './Preloader'
 import { SiteFooter } from './SiteFooter'
 
@@ -63,6 +64,11 @@ export function Layout() {
             </motion.main>
           </AnimatePresence>
           <SiteFooter />
+          {/* Editorial film grain over the whole page — a fine, filmic texture
+              that gives the dark theme a printed feel. Above content, below the
+              nav/overlays/cursor; pointer-events: none, so it never interferes.
+              Held to a single still frame under reduced motion. */}
+          <Grain fixed className="z-[40]" />
           <BackToTop />
           <Cursor />
           <ClickSpark />
