@@ -51,6 +51,7 @@ import { Starfield } from '../components/Starfield'
 import { Globe } from '../components/Globe'
 import { GridMotion } from '../components/GridMotion'
 import { Grain } from '../components/Grain'
+import { MeshGradient } from '../components/MeshGradient'
 import { BentoGrid, BentoCell } from '../components/BentoGrid'
 import { GlassSurface } from '../components/GlassSurface'
 import { Orb } from '../components/Orb'
@@ -1389,6 +1390,30 @@ export default function Playground() {
                 repaint. It composites under content through a blend mode, so mid-gray reads as neutral while brighter
                 specks lift and darker ones sink: the classic filmic texture, not a flat wash. Held at a whisper site-wide;
                 cranked up on this panel so you can see it move. Reduced motion holds a single still frame.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH MESH GRADIENT — a warm colour wash you steer with the cursor */}
+        <Reveal>
+          <div className="mt-12">
+            <MeshGradient className="h-[420px] rounded-3xl border border-white/10">
+              <div className="pointer-events-none flex h-[420px] flex-col items-center justify-center text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Colour field</span>
+                <p className="mt-3 max-w-md px-6 text-xl font-medium text-white sm:text-2xl">
+                  Move across it — the colour gathers toward your cursor.
+                </p>
+              </div>
+            </MeshGradient>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Flowing colour mesh</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                Five large, heavily-blurred radial blobs — lime, emerald, sky, violet — sit at fixed anchors and each
+                wanders on its own slow idle loop, so the field is never still. On top of that the whole mesh leans toward
+                the pointer, every blob parallaxing by its own depth so the colour seems to pool under the cursor and warm
+                as it nears. Pure layered gradients moved by transforms, no canvas. Backs the About manifesto; reduced
+                motion holds a balanced, still mesh with the lean off.
               </p>
             </div>
           </div>
