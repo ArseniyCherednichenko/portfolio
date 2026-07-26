@@ -50,6 +50,7 @@ import { Lightning } from '../components/Lightning'
 import { Starfield } from '../components/Starfield'
 import { Globe } from '../components/Globe'
 import { GridMotion } from '../components/GridMotion'
+import { Grain } from '../components/Grain'
 import { BentoGrid, BentoCell } from '../components/BentoGrid'
 import { GlassSurface } from '../components/GlassSurface'
 import { Orb } from '../components/Orb'
@@ -1359,6 +1360,35 @@ export default function Playground() {
                 panel you are leaning over. Fed the disciplines and tools I work across rather than one message, so it
                 reads as range: no single tile carries the story. Reduced motion holds it still and square, every tile
                 there and legible.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH GRAIN — the site's own film grain, turned up to show */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="relative flex h-[340px] items-center justify-center overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-[#141414] via-[#0c0c0c] to-[#161616]">
+              {/* A pooled lime glow beneath the grain so the specks read against
+                  a mid-tone the way film emulsion does — soft-light needs a
+                  surface to bite into. */}
+              <div className="pointer-events-none absolute -inset-24 bg-[radial-gradient(ellipse_at_50%_40%,rgba(220,248,124,0.12),transparent_60%)]" />
+              <Grain opacity={0.5} fps={20} blend="overlay" className="rounded-3xl" />
+              <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Film grain</span>
+                <p className="mt-3 max-w-md px-6 text-xl font-medium text-white/80 sm:text-2xl">
+                  The same texture is over this whole site — turned up here.
+                </p>
+              </div>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Editorial film grain</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                A small tile of random grayscale bytes is reshuffled a few times a second and repeated across the surface
+                as a canvas pattern — so a full-screen grain costs one tiny noise buffer per refresh, not a per-pixel
+                repaint. It composites under content through a blend mode, so mid-gray reads as neutral while brighter
+                specks lift and darker ones sink: the classic filmic texture, not a flat wash. Held at a whisper site-wide;
+                cranked up on this panel so you can see it move. Reduced motion holds a single still frame.
               </p>
             </div>
           </div>
