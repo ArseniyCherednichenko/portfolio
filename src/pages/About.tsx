@@ -16,6 +16,7 @@ import { Timeline } from '../components/Timeline'
 import { ProfileCard } from '../components/ProfileCard'
 import { Folder, type FolderPaper } from '../components/Folder'
 import { Globe } from '../components/Globe'
+import { MeshGradient } from '../components/MeshGradient'
 import { useContact } from '../components/ContactDialog'
 import { Seo } from '../components/Seo'
 import { useBerlinTime } from '../hooks/useBerlinTime'
@@ -316,19 +317,21 @@ export default function About() {
       </header>
 
       {/* STATEMENT */}
-      <section className="mx-auto w-full max-w-4xl px-6 py-20 sm:py-28">
-        <Reveal>
-          <Eyebrow>What I am about</Eyebrow>
-        </Reveal>
-        <ScrollReveal
-          className="mt-8 font-display text-3xl font-semibold leading-[1.25] tracking-tight text-white/85 sm:text-5xl sm:leading-[1.2]"
-          highlight={['craft', 'motion', 'type', 'feel', 'details']}
-        >
-          I build for the web and beyond — interfaces that move, products that
-          feel considered, and the systems underneath them. I care less about
-          any single project than about the craft that carries across all of
-          them: motion, type, and the quiet details most people only feel.
-        </ScrollReveal>
+      <section className="mx-auto w-full max-w-5xl px-6 py-20 sm:py-28">
+        <MeshGradient className="rounded-[2rem] border border-white/10 p-8 sm:p-14">
+          <Reveal>
+            <Eyebrow>What I am about</Eyebrow>
+          </Reveal>
+          <ScrollReveal
+            className="mt-8 font-display text-3xl font-semibold leading-[1.25] tracking-tight text-white sm:text-5xl sm:leading-[1.2]"
+            highlight={['craft', 'motion', 'type', 'feel', 'details']}
+          >
+            I build for the web and beyond — interfaces that move, products that
+            feel considered, and the systems underneath them. I care less about
+            any single project than about the craft that carries across all of
+            them: motion, type, and the quiet details most people only feel.
+          </ScrollReveal>
+        </MeshGradient>
       </section>
 
       {/* RANGE — one craft, several materials, morphing through GooeyText */}
