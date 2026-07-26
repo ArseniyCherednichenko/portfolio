@@ -54,6 +54,7 @@ import { Grain } from '../components/Grain'
 import { MeshGradient } from '../components/MeshGradient'
 import { BentoGrid, BentoCell } from '../components/BentoGrid'
 import { GlassSurface } from '../components/GlassSurface'
+import { Masonry, type MasonryItem } from '../components/Masonry'
 import { Orb } from '../components/Orb'
 import { Accordion } from '../components/Accordion'
 import { ElasticSlider } from '../components/ElasticSlider'
@@ -229,6 +230,128 @@ function KnobDemo() {
           style={{ height: `${level}%` }}
         />
       </div>
+    </div>
+  )
+}
+
+// A masonry "wall" of honest tiles — the site's own making-by-hand ethos and a
+// couple of plain facts, deliberately varied in height so the packing shows.
+// Distinct from the site's fixed grids: each tile drops into the shortest
+// column from its measured height, and a shuffle reflows the wall on a spring.
+type WallTile =
+  | { id: string; kind: 'stat'; value: string; unit?: string; label: string; accent?: boolean }
+  | { id: string; kind: 'note'; eyebrow: string; title: string; body?: string; tall?: boolean }
+  | { id: string; kind: 'quote'; text: string }
+
+const WALL_BASE: WallTile[] = [
+  { id: 'w-count', kind: 'stat', value: '97', unit: '+', label: 'components, hand-built', accent: true },
+  { id: 'w-motto', kind: 'quote', text: 'Build it well. Then make it move.' },
+  {
+    id: 'w-spring',
+    kind: 'note',
+    eyebrow: 'Motion',
+    title: 'Spring, not tween',
+    body: 'Almost everything here eases on a spring, so it settles with a little physical give instead of a mechanical stop.',
+  },
+  { id: 'w-faces', kind: 'stat', value: '2', label: 'type faces: Inter + Fraunces' },
+  {
+    id: 'w-reduced',
+    kind: 'note',
+    eyebrow: 'Care',
+    title: 'Reduced motion, always',
+    body: 'Every effect has a still, legible fallback. The calm path is designed, not bolted on.',
+    tall: true,
+  },
+  { id: 'w-berlin', kind: 'note', eyebrow: 'Place', title: 'Berlin', body: 'Where I build from.' },
+  {
+    id: 'w-template',
+    kind: 'note',
+    eyebrow: 'Ethos',
+    title: 'No template',
+    body: 'The aurora, the cursor, every card — each is its own file in this repository, written by hand.',
+  },
+  { id: 'w-open', kind: 'stat', value: '100', unit: '%', label: 'open source, on GitHub' },
+  {
+    id: 'w-pointer',
+    kind: 'note',
+    eyebrow: 'Feel',
+    title: 'The pointer is a light',
+    body: 'Fields warm and lean toward the cursor, so a surface feels alive before you touch it.',
+  },
+  { id: 'w-student', kind: 'note', eyebrow: 'Now', title: 'Student, co-founder', body: 'Learning in the day, building at night.' },
+]
+
+function WallCard({ tile }: { tile: WallTile }) {
+  if (tile.kind === 'stat') {
+    return (
+      <div
+        className={`rounded-3xl border p-6 ${
+          tile.accent
+            ? 'border-[#DCF87C]/30 bg-[#DCF87C]/[0.06]'
+            : 'border-white/10 bg-white/[0.03]'
+        }`}
+      >
+        <p className="font-display text-5xl font-bold leading-none tracking-tight text-white">
+          {tile.value}
+          {tile.unit ? <span className="text-[#DCF87C]">{tile.unit}</span> : null}
+        </p>
+        <p className="mt-3 text-sm leading-relaxed text-white/55">{tile.label}</p>
+      </div>
+    )
+  }
+  if (tile.kind === 'quote') {
+    return (
+      <div className="rounded-3xl border border-white/10 bg-gradient-to-br from-white/[0.06] to-transparent p-7">
+        <p className="font-display text-2xl font-bold leading-snug tracking-tight text-white">
+          &ldquo;{tile.text}&rdquo;
+        </p>
+      </div>
+    )
+  }
+  return (
+    <div className={`rounded-3xl border border-white/10 bg-white/[0.03] p-6 ${tile.tall ? 'sm:pb-10' : ''}`}>
+      <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#DCF87C]">{tile.eyebrow}</p>
+      <p className="mt-3 font-display text-xl font-bold leading-tight tracking-tight text-white">{tile.title}</p>
+      {tile.body ? <p className="mt-2 text-sm leading-relaxed text-white/50">{tile.body}</p> : null}
+    </div>
+  )
+}
+
+// Fisher-Yates with a caller-supplied index seed (no Math.random in render):
+// each "Shuffle" click advances the seed so the reflow is deterministic yet
+// visibly different every press.
+function reorder<T>(list: T[], seed: number): T[] {
+  const out = list.slice()
+  let s = seed * 9301 + 49297
+  for (let i = out.length - 1; i > 0; i--) {
+    s = (s * 9301 + 49297) % 233280
+    const j = Math.floor((s / 233280) * (i + 1))
+    ;[out[i], out[j]] = [out[j], out[i]]
+  }
+  return out
+}
+
+function MasonryDemo() {
+  const [seed, setSeed] = useState(0)
+  const items: MasonryItem[] = (seed === 0 ? WALL_BASE : reorder(WALL_BASE, seed)).map((tile) => ({
+    id: tile.id,
+    content: <WallCard tile={tile} />,
+  }))
+  return (
+    <div>
+      <div className="mb-5 flex items-center justify-between gap-4">
+        <p className="text-sm text-white/45">
+          Tiles of any height, packed into the shortest column. Resize the window, or shuffle.
+        </p>
+        <button
+          type="button"
+          onClick={() => setSeed((s) => s + 1)}
+          className="shrink-0 rounded-full border border-white/15 bg-white/[0.04] px-4 py-2 text-sm font-semibold text-white/80 transition-colors hover:border-[#DCF87C]/40 hover:text-white"
+        >
+          Shuffle
+        </button>
+      </div>
+      <Masonry items={items} minColWidth={220} gap={18} />
     </div>
   )
 }
@@ -934,6 +1057,22 @@ export default function Playground() {
                 A torch in the dark. The grid is drawn twice — a lit layer of real links beneath a drained copy on top —
                 and the cursor punches a spotlight hole in the dim layer, so the cards it sweeps over warm up and light.
                 Two CSS variables carry the pointer; no per-frame React state. Reduced motion leaves it fully lit and still.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH MASONRY WALL */}
+        <Reveal>
+          <div className="mt-12">
+            <MasonryDemo />
+            <div className="mt-6 px-1">
+              <h3 className="text-base font-semibold">Masonry wall</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                A real masonry layout, not a fixed grid. A single ResizeObserver measures the container and every tile,
+                and each one is absolutely positioned into the currently-shortest column from its own height — so content
+                of any height packs tight with no gaps. Change the width or shuffle and the whole wall reflows on a spring
+                rather than snapping. No per-frame React state; reduced motion places the same layout instantly.
               </p>
             </div>
           </div>
