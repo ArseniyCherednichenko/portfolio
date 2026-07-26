@@ -170,6 +170,7 @@ export const LIBRARY: LibraryGroup[] = [
       { name: 'SiteFooter', note: 'The structured closing footer — CTA, site map, live clock.', tags: ['foundation', 'footer', 'sitewide'] },
       { name: 'Cursor', note: 'The custom lime cursor and its hover and press states.', tags: ['foundation', 'cursor', 'pointer'] },
       { name: 'ClickSpark', note: 'A burst of lime sparks on every click, anywhere.', tags: ['foundation', 'feedback', 'canvas'] },
+      { name: 'Grain', note: 'The fine film-grain texture laid over the whole site.', tags: ['foundation', 'texture', 'sitewide', 'canvas'], to: '/playground#fields', where: 'Playground' },
       { name: 'ChannelList', note: 'The shared, honest list of ways to reach me.', tags: ['foundation', 'contact'], to: '/contact', where: 'Contact' },
       { name: 'ContactForm', note: 'A no-backend form that drafts a mailto for you to send.', tags: ['foundation', 'contact', 'form'], to: '/contact', where: 'Contact' },
       { name: 'ProjectPoster', note: 'A generative, seeded poster rendered per project.', tags: ['foundation', 'generative', 'work'], to: '/work', where: 'Work' },
