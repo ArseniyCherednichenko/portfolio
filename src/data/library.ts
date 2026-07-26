@@ -71,6 +71,7 @@ export const LIBRARY: LibraryGroup[] = [
       { name: 'PixelTransition', note: 'A pixel-dissolve that reveals a second image on hover.', tags: ['card', 'pixel', 'hover'], to: '/work', where: 'Work' },
       { name: 'ScratchReveal', note: 'A scratch-off surface you rub away to reveal what is under it.', tags: ['card', 'reveal', 'pointer'], to: '/playground', where: 'Playground' },
       { name: 'CompareSlider', note: 'A draggable seam that wipes between a before and an after.', tags: ['card', 'drag', 'compare'], to: '/craft', where: 'On motion' },
+      { name: 'Masonry', note: 'A measured masonry wall that packs tiles of any height into the shortest column and reflows on a spring.', tags: ['card', 'layout', 'grid'], to: '/playground', where: 'Playground' },
     ],
   },
   {
