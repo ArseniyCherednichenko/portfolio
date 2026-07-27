@@ -5,6 +5,7 @@ import { ChromaGrid } from '../components/ChromaGrid'
 import { GooeyTabs } from '../components/GooeyTabs'
 import { GradientText } from '../components/GradientText'
 import { GooeyText } from '../components/GooeyText'
+import { TextType } from '../components/TextType'
 import { RotatingWord } from '../components/RotatingWord'
 import { SpotlightCard } from '../components/SpotlightCard'
 import { TiltCard } from '../components/TiltCard'
@@ -667,6 +668,22 @@ export default function Playground() {
             >
               <div data-cursor className="flex justify-center">
                 <FuzzyText text="FUZZY" fontSize={78} />
+              </div>
+            </Experiment>
+          </Reveal>
+
+          <Reveal>
+            <Experiment
+              name="Typewriter"
+              note="The classic terminal cadence: a phrase types out one keystroke at a time, holds, erases, and the next one takes its place — a blinking block caret riding the end. A single self-rescheduling timeout advances one character per tick; distinct from the scramble, melt, and hinge effects elsewhere. It types a live prompt line on the /terminal page. Reduced motion renders the first phrase in full with a steady caret."
+            >
+              <div className="text-center font-mono text-2xl font-bold tracking-tight sm:text-3xl">
+                <span className="text-white/40">$ </span>
+                <TextType
+                  phrases={['ship the detail', 'make it move', 'build by hand', 'respect the still']}
+                  caret="block"
+                  className="text-[#DCF87C]"
+                />
               </div>
             </Experiment>
           </Reveal>
