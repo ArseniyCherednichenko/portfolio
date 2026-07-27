@@ -60,6 +60,7 @@ import { Orb } from '../components/Orb'
 import { Accordion } from '../components/Accordion'
 import { ElasticSlider } from '../components/ElasticSlider'
 import { Knob } from '../components/Knob'
+import { Tooltip } from '../components/Tooltip'
 import { Stepper, type StepperStep } from '../components/Stepper'
 import { Dock, type DockItem } from '../components/Dock'
 import { Timeline, type TimelineItem } from '../components/Timeline'
@@ -2055,6 +2056,79 @@ export default function Playground() {
                 generated per label, not screenshots; every row is a real link into the site, so it doubles as
                 navigation. On touch or under reduced motion the floating preview is dropped for a clean, fully legible
                 list.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH TOOLTIP */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 py-14 sm:px-10">
+              <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Hover</span>
+              <p className="mt-3 max-w-md text-lg font-medium text-white/85 sm:text-xl">
+                Point at each control. The hint rises from the edge, and flips when it would run off-screen.
+              </p>
+              <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
+                <Tooltip content="Rises from above" placement="top">
+                  <button
+                    type="button"
+                    className="rounded-full border border-white/15 bg-white/[0.04] px-5 py-2.5 text-sm text-white/80 transition hover:border-white/30 hover:text-white"
+                  >
+                    Top
+                  </button>
+                </Tooltip>
+                <Tooltip content="Drops from below" placement="bottom">
+                  <button
+                    type="button"
+                    className="rounded-full border border-white/15 bg-white/[0.04] px-5 py-2.5 text-sm text-white/80 transition hover:border-white/30 hover:text-white"
+                  >
+                    Bottom
+                  </button>
+                </Tooltip>
+                <Tooltip content="Slides in from the left" placement="left">
+                  <button
+                    type="button"
+                    className="rounded-full border border-white/15 bg-white/[0.04] px-5 py-2.5 text-sm text-white/80 transition hover:border-white/30 hover:text-white"
+                  >
+                    Left
+                  </button>
+                </Tooltip>
+                <Tooltip content="Slides in from the right" placement="right">
+                  <button
+                    type="button"
+                    className="rounded-full border border-white/15 bg-white/[0.04] px-5 py-2.5 text-sm text-white/80 transition hover:border-white/30 hover:text-white"
+                  >
+                    Right
+                  </button>
+                </Tooltip>
+              </div>
+              {/* An edge-hugging trigger: its preferred side has no room, so the
+                  bubble flips to the opposite side and clamps into the frame. */}
+              <div className="mt-8 flex justify-end">
+                <Tooltip
+                  content="I asked to open to the right, but there is no room — so I flipped left and stayed on-screen."
+                  placement="right"
+                >
+                  <button
+                    type="button"
+                    className="rounded-full border border-[#DCF87C]/40 bg-[#DCF87C]/10 px-5 py-2.5 text-sm text-[#DCF87C] transition hover:bg-[#DCF87C]/20"
+                  >
+                    Corner control
+                  </button>
+                </Tooltip>
+              </div>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Tooltip</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                A small accessible hint that rises on hover and on keyboard focus, then closes on leave, blur, or Escape.
+                It is rendered through a portal as a fixed-position bubble, positioned from the trigger's measured rect,
+                so it is never clipped by an overflow-hidden parent or trapped under a lower stacking context — and it
+                flips to the opposite side and clamps inside the viewport when the preferred placement would run off the
+                edge, with the arrow tracking the trigger's centre. The trigger carries aria-describedby, so assistive
+                tech announces the hint with the control. It backs the nav's terse buttons across the whole site. Under
+                reduced motion it just fades, no travel.
               </p>
             </div>
           </div>
