@@ -130,6 +130,7 @@ export const LIBRARY: LibraryGroup[] = [
       { name: 'Accordion', note: 'An animated disclosure list, one row open at a time.', tags: ['control', 'accordion', 'a11y'], to: '/about', where: 'About' },
       { name: 'SphereMenu', note: 'A menu of items wrapped around a rotating sphere.', tags: ['control', 'menu', '3d'], to: '/playground', where: 'Playground' },
       { name: 'HoverIndex', note: 'An editorial list whose rows float a generative preview that trails the cursor.', tags: ['control', 'menu', 'hover'], to: '/work', where: 'Work' },
+      { name: 'AnimatedList', note: 'A scroll-revealed list whose lime highlight springs between real, focusable rows as you hover or arrow through.', tags: ['control', 'list', 'keyboard'], to: '/', where: 'Home' },
       { name: 'PillNav', note: 'A scroll-spy pill rail that jumps between sections.', tags: ['control', 'nav', 'scroll-spy'], to: '/playground', where: 'Playground' },
       { name: 'SectionNav', note: 'A right-rail scroll-spy for long pages.', tags: ['control', 'nav', 'scroll-spy'], to: '/', where: 'Home' },
       { name: 'Nav', note: 'The persistent top navigation bar and its active states.', tags: ['control', 'nav', 'sitewide'] },
