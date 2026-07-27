@@ -26,10 +26,12 @@ import { ScrollCue } from '../components/ScrollCue'
 import { Eyebrow } from '../components/Eyebrow'
 import { SectionNav } from '../components/SectionNav'
 import { Odometer } from '../components/Odometer'
+import { AnimatedList, type AnimatedListItem } from '../components/AnimatedList'
 import { useContact } from '../components/ContactDialog'
 import { Seo } from '../components/Seo'
 import { PROJECTS, SKILLS, type Project } from '../data/projects'
 import { SITE_STATS } from '../data/stats'
+import { LATEST_LOG } from '../data/latestLog'
 
 const EASE = [0.16, 1, 0.3, 1] as const
 
@@ -43,8 +45,27 @@ const SECTIONS = [
   { id: 'playground', label: 'Playground' },
   { id: 'toolkit', label: 'Toolkit' },
   { id: 'explore', label: 'Explore' },
+  { id: 'log', label: 'In the open' },
   { id: 'contact', label: 'Contact' },
 ]
+
+// The latest entries from the real build log, as a compact list. The site is
+// open source and grows most days; surfacing the recent work keeps that honest
+// and de-centres any one project. Each row links through to the full log.
+const LOG_ITEMS: AnimatedListItem[] = LATEST_LOG.map((entry, i) => ({
+  id: `log-${i}`,
+  to: '/changelog',
+  content: (
+    <span className="font-display text-lg font-medium tracking-tight text-white/85 sm:text-xl">
+      {entry.title}
+    </span>
+  ),
+  meta: (
+    <span className="rounded-full border border-white/12 px-2.5 py-0.5 text-[0.7rem] font-semibold uppercase tracking-[0.15em] text-white/45">
+      {entry.tag}
+    </span>
+  ),
+}))
 
 // The site is more than its home page. These rows foreground the breadth of
 // what is here, so no single project carries the whole story.
@@ -569,6 +590,40 @@ export default function Home() {
         </div>
         <Reveal delay={0.12}>
           <FlowingMenu items={EXPLORE} />
+        </Reveal>
+      </section>
+
+      {/* IN THE OPEN — the latest from the build log */}
+      <section id="log" className="mx-auto w-full max-w-4xl px-6 py-24">
+        <div className="mb-9">
+          <Reveal>
+            <Eyebrow>In the open</Eyebrow>
+          </Reveal>
+          <Reveal delay={0.05}>
+            <h2 className="mt-6 font-display text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl">
+              The site grows <GradientText>most days.</GradientText>
+            </h2>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <p className="mt-6 max-w-md text-lg leading-relaxed text-white/55">
+              Open source, built in the open, one coherent improvement at a time. The most recent
+              of them, newest first.
+            </p>
+          </Reveal>
+        </div>
+        <Reveal delay={0.12}>
+          <div className="-mx-2">
+            <AnimatedList items={LOG_ITEMS} />
+          </div>
+        </Reveal>
+        <Reveal delay={0.16}>
+          <Link
+            to="/changelog"
+            className="mt-8 inline-flex items-center gap-2 px-2 text-sm font-semibold text-[#DCF87C] transition-opacity hover:opacity-80"
+          >
+            Read the full build log
+            <span aria-hidden>-&gt;</span>
+          </Link>
         </Reveal>
       </section>
 
