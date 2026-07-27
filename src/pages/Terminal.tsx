@@ -4,6 +4,7 @@ import { Eyebrow } from '../components/Eyebrow'
 import { GradientText } from '../components/GradientText'
 import { Reveal } from '../components/Reveal'
 import { Terminal } from '../components/Terminal'
+import { TextType } from '../components/TextType'
 import { Seo } from '../components/Seo'
 
 const EASE = [0.16, 1, 0.3, 1] as const
@@ -37,6 +38,19 @@ export default function TerminalPage() {
             around, or <Cmd>open work</Cmd> to jump somewhere. Every command maps to something real —
             nothing here is faked, and it has no access to anything but this site.
           </p>
+
+          <div
+            className="mt-8 inline-flex max-w-full items-center gap-2 rounded-xl border border-white/10 bg-white/[0.02] px-4 py-3 font-mono text-sm text-white/70"
+            aria-hidden="true"
+          >
+            <span className="text-[#DCF87C]/80">arseniy@portfolio</span>
+            <span className="text-white/30">~ %</span>
+            <TextType
+              phrases={['help', 'whoami', 'ls', 'open work', 'stack', 'contact']}
+              caret="block"
+              className="text-white/85"
+            />
+          </div>
         </motion.div>
       </header>
 
