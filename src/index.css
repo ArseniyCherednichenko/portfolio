@@ -113,6 +113,27 @@ body.cursor-none * {
   }
 }
 
+/* TextType: the typewriter caret. A steps() blink so it snaps on/off like a
+   real terminal cursor rather than fading. It ends on opacity 1, so the
+   reduced-motion guard (which collapses this to a single instant iteration)
+   leaves the caret resting visible and steady. */
+@keyframes text-type-blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  99% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.text-type-caret {
+  animation: text-type-blink 1.05s step-end infinite;
+}
+
 /* Gravity: the tag under the pointer lifts, brightens, and casts a soft glow
    so the grab reads as physical. The transform easing is intentionally short —
    the position itself is driven per-frame by the physics loop, not CSS. */
