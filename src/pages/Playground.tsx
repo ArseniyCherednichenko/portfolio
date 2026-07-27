@@ -69,6 +69,7 @@ import { ScrollScene, type Scene } from '../components/ScrollScene'
 import { PillNav, type PillLink } from '../components/PillNav'
 import { CircularGallery, type GalleryItem } from '../components/CircularGallery'
 import { SphereMenu, type SphereItem } from '../components/SphereMenu'
+import { AnimatedList } from '../components/AnimatedList'
 import { Lanyard } from '../components/Lanyard'
 import { HoverIndex, type HoverIndexItem } from '../components/HoverIndex'
 import { Gravity } from '../components/Gravity'
@@ -1759,6 +1760,23 @@ export default function Playground() {
                   </kbd>
                 </button>
               </div>
+            </Experiment>
+          </Reveal>
+
+          <Reveal delay={0.05}>
+            <Experiment
+              name="Animated list"
+              note="A navigation list with life: rows stagger in on scroll and a lime highlight springs to whichever row you hover or move focus to. They stay real, individually-focusable links — arrow keys and Home/End move between them. Drives the Home 'In the open' build-log list. Reduced motion drops the stagger and the glide."
+            >
+              <AnimatedList
+                className="w-full max-w-[300px]"
+                items={[
+                  { id: 'l-work', to: '/work', content: <span className="font-medium">Work</span>, meta: <span className="text-xs text-white/35">Case studies</span> },
+                  { id: 'l-play', to: '/playground', content: <span className="font-medium">Playground</span>, meta: <span className="text-xs text-white/35">Live motion</span> },
+                  { id: 'l-about', to: '/about', content: <span className="font-medium">About</span>, meta: <span className="text-xs text-white/35">Who I am</span> },
+                  { id: 'l-tools', to: '/toolkit', content: <span className="font-medium">Toolkit</span>, meta: <span className="text-xs text-white/35">The bench</span> },
+                ]}
+              />
             </Experiment>
           </Reveal>
 
