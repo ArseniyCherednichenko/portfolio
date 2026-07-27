@@ -51,6 +51,7 @@ export const LIBRARY: LibraryGroup[] = [
       { name: 'CurvedLoop', note: 'Text flowing endlessly along a looping curved path.', tags: ['text', 'path', 'marquee'], to: '/playground', where: 'Playground' },
       { name: 'RotatingWord', note: 'A single slot that cross-fades through alternative words.', tags: ['text', 'motion'], to: '/', where: 'Home' },
       { name: 'GooeyText', note: 'One word melts into the next through a gooey filter, glyph-halos fusing mid-swap.', tags: ['text', 'liquid', 'motion'], to: '/about', where: 'About' },
+      { name: 'TextType', note: 'A typewriter that types a phrase, holds, erases it, and cycles to the next behind a blinking caret.', tags: ['text', 'typewriter', 'terminal'], to: '/terminal', where: 'Terminal' },
     ],
   },
   {
