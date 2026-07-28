@@ -20,6 +20,7 @@ import { DotGrid } from '../components/DotGrid'
 import { Particles } from '../components/Particles'
 import { MagnetLines } from '../components/MagnetLines'
 import { Squares } from '../components/Squares'
+import { FlowField } from '../components/FlowField'
 import { ScrollVelocity } from '../components/ScrollVelocity'
 import { DecryptedText } from '../components/DecryptedText'
 import { SplitText } from '../components/SplitText'
@@ -1255,6 +1256,30 @@ export default function Playground() {
               <p className="mt-1 text-sm leading-relaxed text-white/45">
                 A canvas grid of small lines, each easing its angle toward the pointer and brightening lime within reach.
                 Reduced-motion gets a calm static radial instead.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH FLOW FIELD */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="relative h-[340px] overflow-hidden rounded-3xl border border-white/10 bg-[#09090b]">
+              <FlowField />
+              <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Flow field</span>
+                <p className="mt-3 max-w-md px-6 text-xl font-medium text-white/80 sm:text-2xl">
+                  Move through the current, and it curls around you.
+                </p>
+              </div>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Cursor-swirled vector field</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                A few hundred motes stream through a smooth vector field whose angle is a cheap wrap of sines of position
+                and time, each leaving a fading trail so the canvas reads as moving current. Within reach of the pointer the
+                flow bends toward the tangent and curls into a lime eddy that the cursor drags along. One canvas, one loop,
+                no noise library. Reduced motion traces static streamlines through the frozen field instead.
               </p>
             </div>
           </div>
