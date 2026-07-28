@@ -93,6 +93,7 @@ export const LIBRARY: LibraryGroup[] = [
       { name: 'Iridescence', note: 'A shifting, oil-slick iridescent sheen.', tags: ['field', 'shader', 'colour'], to: '/playground', where: 'Playground' },
       { name: 'Ribbons', note: 'Flowing ribbons that trail after the cursor.', tags: ['field', 'ribbon', 'pointer'], to: '/playground', where: 'Playground' },
       { name: 'PixelTrail', note: 'A trail of pixels that light up under the moving pointer.', tags: ['field', 'pixel', 'pointer'], to: '/playground', where: 'Playground' },
+      { name: 'FlowField', note: 'Motes streaming through an evolving vector field, curling into a lime eddy around the cursor.', tags: ['field', 'canvas', 'flow', 'pointer'], to: '/playground', where: 'Playground' },
       { name: 'Gravity', note: 'Objects that fall, collide, and pile with real physics.', tags: ['field', 'physics', 'drag'], to: '/playground', where: 'Playground' },
       { name: 'GridMotion', note: 'Stacked rows of tiles that drift in alternating directions while the slab tilts in 3D toward the cursor.', tags: ['field', 'grid', 'pointer', 'parallax'], to: '/playground', where: 'Playground' },
       { name: 'MeshGradient', note: 'A wash of blurred colour blobs that idle-drift and lean toward the cursor, pooling where it goes.', tags: ['field', 'gradient', 'pointer', 'ambient'], to: '/about', where: 'About' },
