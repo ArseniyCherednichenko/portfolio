@@ -62,6 +62,7 @@ import { Accordion } from '../components/Accordion'
 import { ElasticSlider } from '../components/ElasticSlider'
 import { Knob } from '../components/Knob'
 import { Tooltip } from '../components/Tooltip'
+import { useToast } from '../components/Toast'
 import { Stepper, type StepperStep } from '../components/Stepper'
 import { Dock, type DockItem } from '../components/Dock'
 import { Timeline, type TimelineItem } from '../components/Timeline'
@@ -234,6 +235,50 @@ function KnobDemo() {
           style={{ height: `${level}%` }}
         />
       </div>
+    </div>
+  )
+}
+
+// A live trigger board for the site-wide toast queue. Each button raises a real
+// toast through the same useToast() the contact channels and command palette
+// use, so the demo shows the exact stacking, countdown meter, hover-pause, and
+// flick-to-dismiss that ship everywhere else.
+function ToastDemo() {
+  const { toast } = useToast()
+  return (
+    <div className="flex flex-wrap items-center justify-center gap-3">
+      <button
+        type="button"
+        onClick={() => toast('Email address copied', { tone: 'success' })}
+        className="rounded-full border border-[#DCF87C]/40 bg-[#DCF87C]/10 px-5 py-2.5 text-sm font-semibold text-[#DCF87C] transition hover:bg-[#DCF87C]/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#DCF87C]/60"
+      >
+        Confirmation
+      </button>
+      <button
+        type="button"
+        onClick={() => toast('Nothing to send yet — write a line first', { tone: 'error' })}
+        className="rounded-full border border-white/15 bg-white/[0.04] px-5 py-2.5 text-sm text-white/80 transition hover:border-white/30 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#DCF87C]/60"
+      >
+        Gentle error
+      </button>
+      <button
+        type="button"
+        onClick={() => toast('This one waits for you — hover to hold it', { duration: 6000 })}
+        className="rounded-full border border-white/15 bg-white/[0.04] px-5 py-2.5 text-sm text-white/80 transition hover:border-white/30 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#DCF87C]/60"
+      >
+        Longer
+      </button>
+      <button
+        type="button"
+        onClick={() => {
+          toast('First')
+          toast('Second, stacking up')
+          toast('Third — the oldest falls off the top')
+        }}
+        className="rounded-full border border-white/15 bg-white/[0.04] px-5 py-2.5 text-sm text-white/80 transition hover:border-white/30 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#DCF87C]/60"
+      >
+        Stack three
+      </button>
     </div>
   )
 }
@@ -2160,6 +2205,34 @@ export default function Playground() {
                 edge, with the arrow tracking the trigger's centre. The trigger carries aria-describedby, so assistive
                 tech announces the hint with the control. It backs the nav's terse buttons across the whole site. Under
                 reduced motion it just fades, no travel.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH TOAST */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 py-14 sm:px-10">
+              <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Press</span>
+              <p className="mt-3 max-w-md text-lg font-medium text-white/85 sm:text-xl">
+                Raise a toast. It springs up from the edge, counts itself down, pauses when you hover, and can be
+                flicked aside — stack a few and the oldest steps off the top.
+              </p>
+              <div className="mt-10">
+                <ToastDemo />
+              </div>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Toast</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                A site-wide notification queue. A provider at the top of the shell owns a shallow stack and hands any
+                page or dialog a toast() call; the messages render through a portal into an aria-live region pinned to
+                the bottom edge, so a screen reader hears each one. When motion is allowed, a single CSS animation both
+                depletes the lime meter and, on its end, dismisses the toast — meter and clock are the same thing, and
+                hovering pauses both. It backs the real "email copied" confirmation from the contact channels and the
+                command palette. Under reduced motion the drift and travelling meter drop for a clean fade on a plain
+                timer.
               </p>
             </div>
           </div>
