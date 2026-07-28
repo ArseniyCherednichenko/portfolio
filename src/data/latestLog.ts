@@ -20,10 +20,10 @@ export interface LogHeadline {
 }
 
 export const LATEST_LOG: LogHeadline[] = [
+  { title: 'FlowField', tag: 'Component' },
+  { title: 'Toast', tag: 'Component' },
   { title: 'The reel', tag: 'Page' },
   { title: 'AnimatedList', tag: 'Component' },
   { title: 'Tooltip', tag: 'Component' },
   { title: 'TextType', tag: 'Component' },
-  { title: 'Masonry', tag: 'Component' },
-  { title: 'MeshGradient', tag: 'Component' },
 ]
