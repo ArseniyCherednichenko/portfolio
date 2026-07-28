@@ -7,6 +7,7 @@ import { Nav } from './Nav'
 import { CommandPaletteProvider } from './CommandPalette'
 import { ContactProvider } from './ContactDialog'
 import { KeyboardProvider } from './Keyboard'
+import { ToastProvider } from './Toast'
 import { ScrollProgress } from './ScrollProgress'
 import { BackToTop } from './BackToTop'
 import { Cursor } from './Cursor'
@@ -40,7 +41,8 @@ export function Layout() {
   // through its exit animation while the new one enters.
   const outlet = useOutlet()
   return (
-    <ContactProvider>
+    <ToastProvider>
+      <ContactProvider>
       <KeyboardProvider>
         <CommandPaletteProvider>
         <div id="top" className="relative min-h-screen bg-[#0A0A0A] text-white">
@@ -76,6 +78,7 @@ export function Layout() {
         </div>
         </CommandPaletteProvider>
       </KeyboardProvider>
-    </ContactProvider>
+      </ContactProvider>
+    </ToastProvider>
   )
 }
