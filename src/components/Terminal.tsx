@@ -32,6 +32,7 @@ const PAGES: { slug: string; to: string; blurb: string }[] = [
   { slug: 'about', to: '/about', blurb: 'who I am, how I work' },
   { slug: 'work', to: '/work', blurb: 'what I have shipped' },
   { slug: 'playground', to: '/playground', blurb: 'live motion experiments' },
+  { slug: 'reel', to: '/reel', blurb: 'a full-screen showreel' },
   { slug: 'craft', to: '/craft', blurb: 'notes on motion' },
   { slug: 'design', to: '/design', blurb: 'the style guide' },
   { slug: 'toolkit', to: '/toolkit', blurb: 'the tools I reach for' },

@@ -45,6 +45,7 @@ export const CONTENTS: ContentSection[] = [
     intro: 'How the work is made, and the tools that make it.',
     entries: [
       { to: '/playground', title: 'Playground', blurb: 'A live gallery of motion experiments you can poke at.', chord: 'p' },
+      { to: '/reel', title: 'The reel', blurb: 'A full-screen showreel — nine hand-built scenes and a point of view.', chord: 'e' },
       { to: '/toolkit', title: 'Toolkit', blurb: 'The stack and the tools, and how I actually reach for them.', chord: 't' },
       { to: '/craft', title: 'On motion', blurb: 'Notes on animation craft, each one playable in place.', chord: 'm' },
       { to: '/design', title: 'Design language', blurb: 'A living style guide — palette, type, and motion, each token copyable.', chord: 'd' },
