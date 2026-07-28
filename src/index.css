@@ -134,6 +134,19 @@ body.cursor-none * {
   animation: text-type-blink 1.05s step-end infinite;
 }
 
+/* Toast: the countdown meter under each toast. It deplete-scales left to right,
+   and its onAnimationEnd is what dismisses the toast — so bar and clock are one.
+   Under reduced motion the meter is never mounted (a plain timer stands in), so
+   the global reduced-motion collapse of animation-duration can't fire it early. */
+@keyframes toastMeter {
+  from {
+    transform: scaleX(1);
+  }
+  to {
+    transform: scaleX(0);
+  }
+}
+
 /* Gravity: the tag under the pointer lifts, brightens, and casts a soft glow
    so the grab reads as physical. The transform easing is intentionally short —
    the position itself is driven per-frame by the physics loop, not CSS. */
