@@ -146,6 +146,7 @@ export const LIBRARY: LibraryGroup[] = [
       { name: 'CommandPalette', note: 'The Cmd/Ctrl+K fuzzy palette that jumps anywhere.', tags: ['overlay', 'palette', 'search'] },
       { name: 'ContactDialog', note: 'The site-wide get-in-touch modal.', tags: ['overlay', 'dialog', 'contact'] },
       { name: 'Tooltip', note: 'A portal-based hint that rises on hover and focus and flips to stay on-screen.', tags: ['overlay', 'tooltip', 'a11y'], to: '/playground', where: 'Playground' },
+      { name: 'Toast', note: 'A site-wide notification queue whose lime meter both counts down and, on its end, dismisses the toast.', tags: ['overlay', 'toast', 'a11y'], to: '/playground', where: 'Playground' },
       { name: 'ProjectQuickLook', note: 'An in-page project preview modal beside the case study.', tags: ['overlay', 'modal', 'work'], to: '/work', where: 'Work' },
       { name: 'Lightbox', note: 'A focused fullscreen viewer for a single piece of media.', tags: ['overlay', 'lightbox', 'media'] },
       { name: 'Preloader', note: 'The once-per-session intro curtain that wipes away to reveal the site.', tags: ['overlay', 'intro', 'sitewide'] },

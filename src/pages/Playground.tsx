@@ -293,7 +293,7 @@ type WallTile =
   | { id: string; kind: 'quote'; text: string }
 
 const WALL_BASE: WallTile[] = [
-  { id: 'w-count', kind: 'stat', value: '97', unit: '+', label: 'components, hand-built', accent: true },
+  { id: 'w-count', kind: 'stat', value: '100', unit: '+', label: 'components, hand-built', accent: true },
   { id: 'w-motto', kind: 'quote', text: 'Build it well. Then make it move.' },
   {
     id: 'w-spring',
