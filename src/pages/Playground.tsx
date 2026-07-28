@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Reveal } from '../components/Reveal'
 import { ChromaGrid } from '../components/ChromaGrid'
@@ -548,6 +549,18 @@ export default function Playground() {
             A workbench for the interaction details I care about, grouped by the kind of motion at work. Every piece here
             is hand-built with React and Framer Motion, and every one respects reduced-motion. Hover, click, and poke
             around.
+          </p>
+        </Reveal>
+        <Reveal delay={0.14}>
+          <p className="mt-5 max-w-xl text-sm leading-relaxed text-white/45">
+            Want it art-directed instead of dissected?{' '}
+            <Link
+              to="/reel"
+              className="font-medium text-white/80 underline decoration-white/25 underline-offset-4 transition-colors hover:text-[#DCF87C] hover:decoration-[#DCF87C]"
+            >
+              Watch the reel
+            </Link>{' '}
+            — the same pieces, full-screen, as a sequence.
           </p>
         </Reveal>
       </div>
