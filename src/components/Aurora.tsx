@@ -1,9 +1,17 @@
 import { motion } from 'framer-motion'
 
 // Ambient animated background: slow-drifting blurred colour fields behind everything.
-export function Aurora() {
+// Defaults to the site-wide `fixed` layer in Layout; pass `scoped` to pin it to a
+// positioned parent instead (e.g. a single full-bleed scene on the reel), where
+// it fills that box rather than the viewport.
+export function Aurora({ scoped = false }: { scoped?: boolean } = {}) {
   return (
-    <div aria-hidden className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
+    <div
+      aria-hidden
+      className={`pointer-events-none overflow-hidden ${
+        scoped ? 'absolute inset-0' : 'fixed inset-0 -z-10'
+      }`}
+    >
       <motion.div
         className="absolute -top-1/3 left-1/4 h-[60vmax] w-[60vmax] rounded-full bg-[#DCF87C]/18 blur-[140px]"
         animate={{ x: [0, 80, -40, 0], y: [0, 60, 20, 0] }}
