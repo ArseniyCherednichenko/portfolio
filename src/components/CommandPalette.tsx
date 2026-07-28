@@ -13,6 +13,7 @@ import { useNavigate } from 'react-router-dom'
 import { PROJECTS } from '../data/projects'
 import { useContact } from './ContactDialog'
 import { useShortcuts } from './Keyboard'
+import { useToast } from './Toast'
 
 // A site-wide command palette (Cmd/Ctrl+K). Fuzzy-search across pages,
 // projects, and quick actions, then jump with the keyboard. Accessible
@@ -68,6 +69,7 @@ function Palette({ open, onClose }: { open: boolean; onClose: () => void }) {
   const navigate = useNavigate()
   const { open: openContact } = useContact()
   const { openShortcuts } = useShortcuts()
+  const { toast } = useToast()
   const reduce = useReducedMotion()
   const [query, setQuery] = useState('')
   const [active, setActive] = useState(0)
@@ -135,6 +137,7 @@ function Palette({ open, onClose }: { open: boolean; onClose: () => void }) {
           navigator.clipboard?.writeText('ars7ars3@gmail.com').catch(() => {})
           setCopied(true)
           window.setTimeout(() => setCopied(false), 1400)
+          toast('Email address copied', { tone: 'success' })
         },
       },
       {
@@ -162,7 +165,7 @@ function Palette({ open, onClose }: { open: boolean; onClose: () => void }) {
     ]
 
     return [...pages, ...projects, ...actions]
-  }, [go, onClose, openContact, openShortcuts])
+  }, [go, onClose, openContact, openShortcuts, toast])
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase()

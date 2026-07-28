@@ -1,6 +1,7 @@
 import { useCallback, useState } from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
 import { CHANNELS, EMAIL, type Channel } from '../data/contact'
+import { useToast } from './Toast'
 
 // Shared, honest list of ways to reach Arseniy. One source of truth for the
 // row markup, the copy-to-clipboard behaviour, and the channel icons — used by
@@ -10,12 +11,17 @@ import { CHANNELS, EMAIL, type Channel } from '../data/contact'
 export function ChannelList({ stagger = 0.06 }: { stagger?: number }) {
   const reduce = useReducedMotion()
   const [copied, setCopied] = useState(false)
+  const { toast } = useToast()
 
   const copyEmail = useCallback(() => {
+    // The row flips to a local "Copied" label for the moment the pointer stays,
+    // and a toast rises so the confirmation still lands if the eye has moved on
+    // (or the dialog it lives in is dismissed straight after).
     navigator.clipboard?.writeText(EMAIL).catch(() => {})
     setCopied(true)
     window.setTimeout(() => setCopied(false), 1600)
-  }, [])
+    toast('Email address copied', { tone: 'success' })
+  }, [toast])
 
   return (
     <ul className="space-y-2.5">
