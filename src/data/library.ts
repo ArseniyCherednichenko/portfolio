@@ -112,6 +112,7 @@ export const LIBRARY: LibraryGroup[] = [
       { name: 'ScrollStack', note: 'Cards that pin and stack into a deck as you scroll.', tags: ['scroll', 'pin', 'stack'], to: '/playground', where: 'Playground' },
       { name: 'ScrollProgress', note: 'A springed lime reading bar pinned to the top edge.', tags: ['scroll', 'progress', 'sitewide'] },
       { name: 'ScrollCue', note: 'A bobbing hint that there is more below the fold.', tags: ['scroll', 'hint'] },
+      { name: 'DrawSVG', note: 'Line art that draws itself, one stroke at a time, by tracing the real path length.', tags: ['scroll', 'reveal', 'svg', 'draw'], to: '/about', where: 'About' },
       { name: 'Timeline', note: 'A vertical timeline with lit nodes marking a path.', tags: ['scroll', 'timeline'], to: '/about', where: 'About' },
       { name: 'Stepper', note: 'A numbered pipeline that lights up stage by stage.', tags: ['scroll', 'steps', 'process'], to: '/colophon', where: 'Colophon' },
       { name: 'CircularGallery', note: 'A carousel of images bent around a curved arc.', tags: ['scroll', 'gallery', 'carousel'], to: '/playground', where: 'Playground' },
