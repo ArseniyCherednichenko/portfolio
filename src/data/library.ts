@@ -97,6 +97,7 @@ export const LIBRARY: LibraryGroup[] = [
       { name: 'Gravity', note: 'Objects that fall, collide, and pile with real physics.', tags: ['field', 'physics', 'drag'], to: '/playground', where: 'Playground' },
       { name: 'GridMotion', note: 'Stacked rows of tiles that drift in alternating directions while the slab tilts in 3D toward the cursor.', tags: ['field', 'grid', 'pointer', 'parallax'], to: '/playground', where: 'Playground' },
       { name: 'MeshGradient', note: 'A wash of blurred colour blobs that idle-drift and lean toward the cursor, pooling where it goes.', tags: ['field', 'gradient', 'pointer', 'ambient'], to: '/about', where: 'About' },
+      { name: 'Crosshair', note: 'A precision reticle — two spring-eased hairlines that span a surface, track the pointer, and read out its X/Y over a calibrated tick scale.', tags: ['field', 'reticle', 'pointer', 'measure'], to: '/colophon', where: 'Colophon' },
     ],
   },
   {
