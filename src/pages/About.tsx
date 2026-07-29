@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { Reveal } from '../components/Reveal'
 import { Eyebrow } from '../components/Eyebrow'
 import { GradientText } from '../components/GradientText'
+import { HandUnderline } from '../components/DrawSVG'
 import { GooeyText } from '../components/GooeyText'
 import { TiltCard } from '../components/TiltCard'
 import { SpotlightCard } from '../components/SpotlightCard'
@@ -274,6 +275,14 @@ export default function About() {
           >
             A builder who <GradientText>sweats the details.</GradientText>
           </motion.h1>
+          {/* An editorial swash that draws itself under the line — the page's
+              own claim to craft, made in a hand-drawn stroke rather than stated. */}
+          <HandUnderline
+            className="mt-3 h-6 w-56 sm:h-7 sm:w-72"
+            trigger="mount"
+            delay={0.5}
+            ariaLabel=""
+          />
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
