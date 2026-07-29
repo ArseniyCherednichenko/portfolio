@@ -8,6 +8,7 @@ import { AnimatedCounter } from '../components/AnimatedCounter'
 import { Stepper } from '../components/Stepper'
 import { ScrollScene, type Scene } from '../components/ScrollScene'
 import { Lightning } from '../components/Lightning'
+import { Crosshair } from '../components/Crosshair'
 import { ASCIIText } from '../components/ASCIIText'
 import { Seo } from '../components/Seo'
 import { GITHUB_URL } from '../data/contact'
@@ -416,7 +417,17 @@ export default function Colophon() {
       </section>
 
       {/* CLOSING */}
-      <section className="mx-auto w-full max-w-4xl px-6 py-24 text-center">
+      <section className="relative isolate overflow-hidden py-24 text-center">
+        {/* A precision reticle behind the closing note — the engine-room page ends
+            on the language of alignment and measurement, and the lines find the
+            cursor as you read. Radial-masked so it fades into the dark. */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 -z-10 [mask-image:radial-gradient(ellipse_at_50%_50%,black,transparent_72%)]"
+        >
+          <Crosshair />
+        </div>
+        <div className="mx-auto w-full max-w-4xl px-6">
         <Reveal>
           <p className="mx-auto max-w-2xl font-display text-2xl font-medium leading-snug text-white/80 sm:text-3xl">
             The best way to read the colophon is the source itself.
@@ -440,6 +451,7 @@ export default function Colophon() {
             </Link>
           </div>
         </Reveal>
+        </div>
       </section>
     </>
   )
