@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { motion, useReducedMotion } from 'framer-motion'
 import { Reveal } from '../components/Reveal'
@@ -7,33 +7,127 @@ import { GradientText } from '../components/GradientText'
 import { SpotlightCard } from '../components/SpotlightCard'
 import { LetterGlitch } from '../components/LetterGlitch'
 import { AnimatedCounter } from '../components/AnimatedCounter'
+import { Modal } from '../components/Modal'
 import { Seo } from '../components/Seo'
 import { LIBRARY, ALL_LIBRARY_ITEMS, type LibraryItem } from '../data/library'
 import { COMPONENT_COUNT } from './Colophon'
 
 const EASE = [0.16, 1, 0.3, 1] as const
 
+// A flat entry pairs a component with the kind (group) it belongs to, so the
+// quick-look modal can show its kind and page through the filtered set.
+interface FlatEntry {
+  item: LibraryItem
+  kind: string
+}
+
 // A single component card. It carries the name, an honest one-liner, its scan
-// tags (clickable — they set the filter), and, when the component is on show
-// somewhere real, a link straight to that place. When there is a destination
-// the whole card is a Link; otherwise it is a plain, non-interactive panel so
-// nothing pretends to be clickable that is not.
+// tags, and — when the component is on show somewhere real — a badge for where.
+// The whole card is one button that opens a quick-look modal, so every one of
+// the components is explorable in place, not only the ones with a destination.
 function ComponentCard({
   item,
   num,
-  onTag,
+  onOpen,
 }: {
   item: LibraryItem
   num: number
-  onTag: (tag: string) => void
+  onOpen: () => void
 }) {
   const label = String(num).padStart(2, '0')
 
-  const inner = (
-    <SpotlightCard className="flex h-full flex-col gap-3 p-6">
-      <div className="flex items-center justify-between">
-        <span className="text-xs font-semibold tabular-nums tracking-[0.2em] text-white/25">
-          {label}
+  return (
+    <button
+      type="button"
+      onClick={onOpen}
+      aria-label={`Quick look at ${item.name}`}
+      className="group block h-full w-full rounded-3xl text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-[#DCF87C]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+    >
+      <SpotlightCard className="flex h-full flex-col gap-3 p-6">
+        <div className="flex items-center justify-between">
+          <span className="text-xs font-semibold tabular-nums tracking-[0.2em] text-white/25">
+            {label}
+          </span>
+          {item.where && (
+            <span className="rounded-md border border-[#DCF87C]/20 bg-[#DCF87C]/[0.06] px-1.5 py-0.5 font-mono text-[10px] uppercase tracking-wider text-[#DCF87C]/70">
+              {item.where}
+            </span>
+          )}
+        </div>
+
+        <div className="flex items-baseline gap-2">
+          <h3 className="font-display text-xl font-bold tracking-tight text-white">{item.name}</h3>
+          <span
+            aria-hidden
+            className="translate-x-0 text-[#DCF87C] opacity-0 transition-all duration-300 ease-out group-hover:translate-x-1 group-hover:opacity-100"
+          >
+            &rarr;
+          </span>
+        </div>
+
+        <p className="text-sm leading-relaxed text-white/55">{item.note}</p>
+
+        <div className="mt-auto flex flex-wrap gap-1.5 pt-2">
+          {item.tags.map((tag) => (
+            <span
+              key={tag}
+              className="rounded-full border border-white/10 bg-white/[0.02] px-2 py-0.5 font-mono text-[10px] text-white/35"
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
+      </SpotlightCard>
+    </button>
+  )
+}
+
+// The quick-look modal: a component's full card, one at a time, with clickable
+// tags (they set the page filter), a link to where it is on show, and prev/next
+// paging through whatever set is currently filtered in (arrow keys too).
+function QuickLook({
+  entry,
+  num,
+  index,
+  total,
+  onPrev,
+  onNext,
+  onTag,
+  onClose,
+}: {
+  entry: FlatEntry
+  num: number
+  index: number
+  total: number
+  onPrev: () => void
+  onNext: () => void
+  onTag: (tag: string) => void
+  onClose: () => void
+}) {
+  const { item, kind } = entry
+  const label = String(num).padStart(2, '0')
+
+  // Left/right arrows page through the filtered set while the modal is open.
+  useEffect(() => {
+    function onKey(e: KeyboardEvent) {
+      if (e.key === 'ArrowRight') {
+        e.preventDefault()
+        onNext()
+      } else if (e.key === 'ArrowLeft') {
+        e.preventDefault()
+        onPrev()
+      }
+    }
+    document.addEventListener('keydown', onKey)
+    return () => document.removeEventListener('keydown', onKey)
+  }, [onNext, onPrev])
+
+  return (
+    <div className="pr-8">
+      <div className="flex flex-wrap items-center gap-2">
+        <span className="font-mono text-xs tabular-nums tracking-[0.2em] text-white/30">{label}</span>
+        <span className="rounded-full border border-white/10 bg-white/[0.03] px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-wider text-white/45">
+          {kind}
         </span>
         {item.where && (
           <span className="rounded-md border border-[#DCF87C]/20 bg-[#DCF87C]/[0.06] px-1.5 py-0.5 font-mono text-[10px] uppercase tracking-wider text-[#DCF87C]/70">
@@ -42,58 +136,62 @@ function ComponentCard({
         )}
       </div>
 
-      <div className="flex items-baseline gap-2">
-        <h3 className="font-display text-xl font-bold tracking-tight text-white">{item.name}</h3>
-        {item.to && (
-          <span
-            aria-hidden
-            className="translate-x-0 text-[#DCF87C] opacity-0 transition-all duration-300 ease-out group-hover:translate-x-1 group-hover:opacity-100"
-          >
-            &rarr;
-          </span>
-        )}
-      </div>
+      <h2 className="mt-4 font-display text-3xl font-bold tracking-tight text-white">{item.name}</h2>
+      <p className="mt-3 text-[15px] leading-relaxed text-white/65">{item.note}</p>
 
-      <p className="text-sm leading-relaxed text-white/55">{item.note}</p>
-
-      <div className="mt-auto flex flex-wrap gap-1.5 pt-2">
+      <div className="mt-5 flex flex-wrap gap-1.5">
         {item.tags.map((tag) => (
           <button
             key={tag}
             type="button"
-            onClick={(e) => {
-              // Keep the tag click from also triggering the card's link.
-              e.preventDefault()
-              e.stopPropagation()
-              onTag(tag)
-            }}
-            className="rounded-full border border-white/10 bg-white/[0.02] px-2 py-0.5 font-mono text-[10px] text-white/35 transition-colors hover:border-[#DCF87C]/40 hover:text-white/70"
+            onClick={() => onTag(tag)}
+            className="rounded-full border border-white/10 bg-white/[0.02] px-2.5 py-1 font-mono text-[11px] text-white/45 transition-colors hover:border-[#DCF87C]/40 hover:text-white/80"
           >
             {tag}
           </button>
         ))}
       </div>
-    </SpotlightCard>
-  )
 
-  if (item.to) {
-    return (
-      <Link
-        to={item.to}
-        className="group block h-full rounded-2xl focus:outline-none focus-visible:ring-2 focus-visible:ring-[#DCF87C]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
-        title={`See ${item.name} on ${item.where}`}
-      >
-        {inner}
-      </Link>
-    )
-  }
-  return <div className="group h-full">{inner}</div>
+      {item.to && (
+        <Link
+          to={item.to}
+          onClick={onClose}
+          className="mt-6 inline-flex items-center gap-1.5 rounded-full bg-[#DCF87C] px-4 py-2 text-sm font-semibold text-black transition hover:brightness-105"
+        >
+          See it live on {item.where}
+          <span aria-hidden>&rarr;</span>
+        </Link>
+      )}
+
+      {/* Pager — move through the filtered set without leaving the modal. */}
+      <div className="mt-8 flex items-center justify-between border-t border-white/10 pt-5">
+        <button
+          type="button"
+          onClick={onPrev}
+          className="inline-flex items-center gap-1.5 rounded-full border border-white/10 px-3.5 py-1.5 text-xs font-semibold text-white/60 transition-colors hover:border-white/25 hover:text-white"
+        >
+          <span aria-hidden>&larr;</span> Prev
+        </button>
+        <span className="font-mono text-xs tabular-nums text-white/30">
+          {index + 1} / {total}
+        </span>
+        <button
+          type="button"
+          onClick={onNext}
+          className="inline-flex items-center gap-1.5 rounded-full border border-white/10 px-3.5 py-1.5 text-xs font-semibold text-white/60 transition-colors hover:border-white/25 hover:text-white"
+        >
+          Next <span aria-hidden>&rarr;</span>
+        </button>
+      </div>
+    </div>
+  )
 }
 
 export default function Library() {
   const reduce = useReducedMotion()
   const [query, setQuery] = useState('')
   const [group, setGroup] = useState<string | null>(null)
+  const [activeName, setActiveName] = useState<string | null>(null)
 
   const q = query.trim().toLowerCase()
 
@@ -116,8 +214,32 @@ export default function Library() {
     })).filter((g) => g.items.length > 0)
   }, [q, group])
 
+  // The flat, in-order list the modal pages through — exactly what is on screen.
+  const flat = useMemo<FlatEntry[]>(
+    () => filtered.flatMap((g) => g.items.map((item) => ({ item, kind: g.label }))),
+    [filtered],
+  )
+
+  const activeIndex = activeName ? flat.findIndex((f) => f.item.name === activeName) : -1
+
+  // If the active component is filtered out from under the open modal, close it.
+  useEffect(() => {
+    if (activeName && activeIndex === -1) setActiveName(null)
+  }, [activeName, activeIndex])
+
+  const closeModal = useCallback(() => setActiveName(null), [])
+  const step = useCallback(
+    (dir: 1 | -1) => {
+      if (flat.length === 0 || activeIndex === -1) return
+      const next = (activeIndex + dir + flat.length) % flat.length
+      setActiveName(flat[next].item.name)
+    },
+    [flat, activeIndex],
+  )
+
   const hitCount = filtered.reduce((n, g) => n + g.items.length, 0)
   const cleared = !q && !group
+  const activeEntry = activeIndex === -1 ? null : flat[activeIndex]
 
   return (
     <>
@@ -148,8 +270,8 @@ export default function Library() {
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-white/55">
               The site&rsquo;s whole argument is that it is made, not assembled. So here
               is the proof, laid out: every component in the repository, written here,
-              nothing pulled off a shelf. Search it, filter by kind, or follow a card to
-              where the piece is actually on show.
+              nothing pulled off a shelf. Search it, filter by kind, or open any one for
+              a closer look and a way through to where it is on show.
             </p>
           </Reveal>
 
@@ -270,10 +392,7 @@ export default function Library() {
                       <ComponentCard
                         item={item}
                         num={numberOf.get(item.name) ?? 0}
-                        onTag={(t) => {
-                          setGroup(null)
-                          setQuery(t)
-                        }}
+                        onOpen={() => setActiveName(item.name)}
                       />
                     </motion.div>
                   ))}
@@ -308,6 +427,28 @@ export default function Library() {
           </div>
         </div>
       </main>
+
+      {/* QUICK-LOOK MODAL */}
+      <Modal open={activeEntry !== null} onClose={closeModal}>
+        {activeEntry && (
+          <QuickLook
+            entry={activeEntry}
+            num={numberOf.get(activeEntry.item.name) ?? 0}
+            index={activeIndex}
+            total={flat.length}
+            onPrev={() => step(-1)}
+            onNext={() => step(1)}
+            onTag={(t) => {
+              setGroup(null)
+              setQuery(t)
+              // The filter change re-derives the flat set; keep the modal on the
+              // tapped component if it survives, otherwise the effect closes it.
+              setActiveName(activeEntry.item.name)
+            }}
+            onClose={closeModal}
+          />
+        )}
+      </Modal>
     </>
   )
 }
