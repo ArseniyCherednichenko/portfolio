@@ -70,6 +70,7 @@ import { Dock, type DockItem } from '../components/Dock'
 import { Timeline, type TimelineItem } from '../components/Timeline'
 import { HorizontalScroll, type HPanel } from '../components/HorizontalScroll'
 import { ScrollScene, type Scene } from '../components/ScrollScene'
+import { DrawSVG } from '../components/DrawSVG'
 import { PillNav, type PillLink } from '../components/PillNav'
 import { CircularGallery, type GalleryItem } from '../components/CircularGallery'
 import { SphereMenu, type SphereItem } from '../components/SphereMenu'
@@ -1817,6 +1818,80 @@ export default function Playground() {
                 A visual stage pins to the viewport while a column of steps scrolls past; the stage cross-fades to whichever
                 step crosses the mid-line. Active tracking is a rAF-throttled measure of the step rects, no per-step
                 listeners. Drives the Colophon anatomy section. Reduced-motion shows the stage composed and a plain list.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH SELF-DRAWING LINE ART */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="rounded-3xl border border-white/10 bg-white/[0.02] px-8 py-14 sm:px-12">
+              <div className="grid grid-cols-2 gap-x-8 gap-y-12 sm:grid-cols-4">
+                <div className="flex flex-col items-center gap-4">
+                  <DrawSVG
+                    viewBox="0 0 320 34"
+                    className="h-8 w-full max-w-[180px] text-[#DCF87C]"
+                    strokeWidth={4}
+                    duration={0.9}
+                    stagger={0.22}
+                    trigger="loop"
+                    paths={[
+                      'M8 20 C 78 8, 168 6, 236 14 C 274 18, 300 17, 314 9',
+                      { d: 'M18 27 C 96 21, 214 22, 292 27', strokeWidth: 2.5 },
+                    ]}
+                  />
+                  <span className="text-xs uppercase tracking-[0.2em] text-white/40">Underline swash</span>
+                </div>
+
+                <div className="flex flex-col items-center gap-4">
+                  <DrawSVG
+                    viewBox="0 0 80 80"
+                    className="h-20 w-20 text-[#DCF87C]"
+                    strokeWidth={4}
+                    duration={1.3}
+                    trigger="loop"
+                    paths={[
+                      'M40 8 A 32 32 0 1 1 39.9 8',
+                      { d: 'M40 40 m -4 0 a 4 4 0 1 0 8 0 a 4 4 0 1 0 -8 0', fill: '#DCF87C', strokeWidth: 0, delay: 0.2 },
+                    ]}
+                  />
+                  <span className="text-xs uppercase tracking-[0.2em] text-white/40">Orbit mark</span>
+                </div>
+
+                <div className="flex flex-col items-center gap-4">
+                  <DrawSVG
+                    viewBox="0 0 84 64"
+                    className="h-20 w-24 text-[#DCF87C]"
+                    strokeWidth={5}
+                    duration={0.7}
+                    trigger="loop"
+                    paths={['M10 34 L 32 54 L 74 12']}
+                  />
+                  <span className="text-xs uppercase tracking-[0.2em] text-white/40">Check</span>
+                </div>
+
+                <div className="flex flex-col items-center gap-4">
+                  <DrawSVG
+                    viewBox="0 0 80 72"
+                    className="h-20 w-20 text-white"
+                    strokeWidth={5}
+                    duration={0.6}
+                    stagger={0.3}
+                    trigger="loop"
+                    paths={['M14 64 L 40 8 L 66 64', { d: 'M24 46 L 56 46', stroke: '#DCF87C' }]}
+                  />
+                  <span className="text-xs uppercase tracking-[0.2em] text-white/40">Monogram</span>
+                </div>
+              </div>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Self-drawing line art</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                Each mark traces itself one stroke at a time by animating the real path length (Framer's pathLength 0 to 1),
+                not by scaling a bar — so any hand-authored curve appears as if drawn by a pen, rounded caps and all. These
+                loop to show the trace; in the wild it fires once on scroll-in and re-traces on hover. Drives the swash
+                under the About page title. Reduced motion paints every stroke finished from the first frame.
               </p>
             </div>
           </div>
