@@ -21,6 +21,7 @@ import { Particles } from '../components/Particles'
 import { MagnetLines } from '../components/MagnetLines'
 import { Squares } from '../components/Squares'
 import { FlowField } from '../components/FlowField'
+import { Crosshair } from '../components/Crosshair'
 import { ScrollVelocity } from '../components/ScrollVelocity'
 import { DecryptedText } from '../components/DecryptedText'
 import { SplitText } from '../components/SplitText'
@@ -1305,6 +1306,30 @@ export default function Playground() {
                 A grid of square cells on one canvas. A soft band of light drifts along the diagonal forever, and the cells
                 under the pointer warm lime and lift their stroke while a faint bloom fills the nearest ones. Backs the Index
                 page. Reduced-motion gets a single calm lattice, no scan.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH CROSSHAIR */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="relative h-[340px] overflow-hidden rounded-3xl border border-white/10 bg-[#09090b]">
+              <Crosshair />
+              <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Precision reticle</span>
+                <p className="mt-3 max-w-md px-6 text-xl font-medium text-white/80 sm:text-2xl">
+                  Two hairlines find your cursor, and read out where it is.
+                </p>
+              </div>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Section-scoped crosshair</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                Not the site cursor and not a canvas — a DOM overlay of two spring-eased guide-lines that span the surface,
+                meet at a lit node, and carry live X/Y readouts along a calibrated tick scale, written straight to the DOM off
+                the springs so a moving cursor never re-renders. It is decorative and never intercepts a click. Reduced-motion
+                and touch get a single still, centred crosshair.
               </p>
             </div>
           </div>
