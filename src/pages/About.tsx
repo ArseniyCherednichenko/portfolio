@@ -1,5 +1,7 @@
+import { createRef, useRef } from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
 import { Link } from 'react-router-dom'
+import { AnimatedBeam } from '../components/AnimatedBeam'
 import { Reveal } from '../components/Reveal'
 import { Eyebrow } from '../components/Eyebrow'
 import { GradientText } from '../components/GradientText'
@@ -84,6 +86,98 @@ const PATH: ReadonlyArray<{ when: string; what: string; note: string }> = [
 
 // Disciplines I actually work across — the range, not a single project.
 const DISCIPLINES = ['Frontend', 'Native iOS', 'Backend', 'Applied AI', 'Motion']
+
+// The same range, wired into one hub for the "How it fits together" node web.
+// Each hint names a real tool I reach for — honest, and the point is that these
+// are not five separate jobs but one craft with several materials converging.
+const STACK_NODES: ReadonlyArray<{ label: string; hint: string }> = [
+  { label: 'Frontend', hint: 'React · TypeScript' },
+  { label: 'Native iOS', hint: 'SwiftUI' },
+  { label: 'Motion', hint: 'Framer Motion' },
+  { label: 'Backend', hint: 'Supabase' },
+  { label: 'Applied AI', hint: 'in between' },
+]
+
+// A small node web: each discipline beams into a central "AC" hub, so the range
+// reads as convergent, not scattered. Beams are measured off the real DOM nodes
+// (AnimatedBeam), so the wiring holds at any width; the light flows disciplines
+// -> hub. Reduced motion stills every beam to a faint resting line.
+function StackWeb() {
+  const reduce = useReducedMotion()
+  const containerRef = useRef<HTMLDivElement>(null)
+  const hubRef = useRef<HTMLDivElement>(null)
+  const nodeRefs = useRef(STACK_NODES.map(() => createRef<HTMLDivElement>()))
+  const mid = (STACK_NODES.length - 1) / 2
+
+  return (
+    <section className="mx-auto w-full max-w-4xl px-6 pb-16 sm:pb-24">
+      <Reveal>
+        <Eyebrow>How it fits together</Eyebrow>
+      </Reveal>
+      <Reveal delay={0.05}>
+        <h2 className="mt-4 max-w-xl font-display text-2xl font-semibold leading-snug tracking-tight text-white sm:text-3xl">
+          Not five jobs — one craft, wired together.
+        </h2>
+      </Reveal>
+      <Reveal delay={0.1}>
+        <div
+          ref={containerRef}
+          className="relative mt-10 grid grid-cols-[1fr_auto] items-center gap-x-8 gap-y-0 rounded-[2rem] border border-white/10 bg-white/[0.02] p-6 sm:gap-x-16 sm:p-10"
+        >
+          {/* Discipline nodes — the spokes. z-10 so the wiring reads behind them. */}
+          <div className="relative z-10 flex flex-col gap-3 sm:gap-4">
+            {STACK_NODES.map((n, i) => (
+              <div
+                key={n.label}
+                ref={nodeRefs.current[i]}
+                className="flex items-center justify-between gap-3 rounded-xl border border-white/10 bg-[#0B0B0B]/80 px-4 py-3 backdrop-blur-sm transition-colors hover:border-[#DCF87C]/40"
+              >
+                <span className="text-sm font-semibold text-white/85 sm:text-base">{n.label}</span>
+                <span className="text-xs text-white/35">{n.hint}</span>
+              </div>
+            ))}
+          </div>
+
+          {/* The hub — me. A lime-ringed node echoing the site's orbit mark. */}
+          <div className="relative z-10 flex justify-center">
+            <div
+              ref={hubRef}
+              className="relative grid h-20 w-20 place-items-center rounded-full border border-[#DCF87C]/50 bg-[#DCF87C]/[0.06] sm:h-24 sm:w-24"
+            >
+              {!reduce && (
+                <span className="absolute inset-0 animate-ping rounded-full border border-[#DCF87C]/25 [animation-duration:3s]" />
+              )}
+              <span className="font-display text-2xl font-bold tracking-tight text-[#DCF87C] sm:text-3xl">
+                AC
+              </span>
+            </div>
+          </div>
+
+          {/* One beam per discipline, flowing spoke -> hub, staggered. */}
+          {STACK_NODES.map((n, i) => (
+            <AnimatedBeam
+              key={n.label}
+              containerRef={containerRef}
+              fromRef={nodeRefs.current[i]}
+              toRef={hubRef}
+              curvature={(i - mid) * 16}
+              delay={i * 0.55}
+              duration={3.2}
+              startXOffset={12}
+              endXOffset={-8}
+            />
+          ))}
+        </div>
+      </Reveal>
+      <Reveal delay={0.15}>
+        <p className="mt-6 max-w-md text-base leading-relaxed text-white/50">
+          Owning the whole thing is the point — design, frontend, backend, and native held
+          in one head, so the seams between them stay invisible.
+        </p>
+      </Reveal>
+    </section>
+  )
+}
 
 // Honest answers to the questions people actually ask. No invented availability
 // or promises — real facts, framed to show the range beyond any one project.
@@ -366,6 +460,9 @@ export default function About() {
           </p>
         </Reveal>
       </section>
+
+      {/* HOW IT FITS TOGETHER — the range, wired into one hub */}
+      <StackWeb />
 
       {/* AT A GLANCE — live, scannable snapshot */}
       <Snapshot />
