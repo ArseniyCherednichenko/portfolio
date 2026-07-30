@@ -43,6 +43,7 @@ export const LIBRARY: LibraryGroup[] = [
       { name: 'ScrollVelocity', note: 'Text bands that drift and flip direction with scroll speed.', tags: ['text', 'scroll', 'marquee'], to: '/', where: 'Home' },
       { name: 'TrueFocus', note: 'A line that pulls one word at a time into sharp focus.', tags: ['text', 'focus', 'motion'], to: '/', where: 'Home' },
       { name: 'SplitText', note: 'A headline split into letters that stagger into place.', tags: ['text', 'stagger', 'reveal'], to: '/playground', where: 'Playground' },
+      { name: 'BlurText', note: 'Words that resolve out of a soft focus, one at a time, as the line sharpens in.', tags: ['text', 'blur', 'reveal'], to: '/', where: 'Home' },
       { name: 'DecryptedText', note: 'Text that resolves out of random glyphs, left to right.', tags: ['text', 'glitch', 'reveal'], to: '/playground', where: 'Playground' },
       { name: 'FuzzyText', note: 'A jittering, glitching display headline.', tags: ['text', 'glitch'], to: '/playground', where: 'Playground' },
       { name: 'LetterGlitch', note: 'A canvas grid of glyphs flickering like a decode.', tags: ['text', 'canvas', 'glitch'], to: '/playground', where: 'Playground' },
