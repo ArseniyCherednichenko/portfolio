@@ -66,6 +66,7 @@ export const LIBRARY: LibraryGroup[] = [
       { name: 'GlassSurface', note: 'A frosted-glass panel with real depth and edge light.', tags: ['card', 'glass'], to: '/playground', where: 'Playground' },
       { name: 'GlareHover', note: 'A soft band of light that sweeps across any surface on hover.', tags: ['card', 'hover', 'css'], to: '/playground', where: 'Playground' },
       { name: 'BorderBeam', note: 'A comet of light tracing a rounded border.', tags: ['card', 'border', 'motion'], to: '/contact', where: 'Contact' },
+      { name: 'AnimatedBeam', note: 'A beam of light travelling a curved line drawn between two real DOM nodes.', tags: ['beam', 'diagram', 'svg', 'motion'], to: '/about', where: 'About' },
       { name: 'SpotlightReveal', note: 'Content uncovered under a moving spotlight mask.', tags: ['card', 'reveal', 'pointer'], to: '/playground', where: 'Playground' },
       { name: 'CardStack', note: 'An auto-advancing 3D deck of cards you can flick through.', tags: ['card', '3d', 'drag'], to: '/playground', where: 'Playground' },
       { name: 'FlipCard', note: 'A card that flips in 3D to reveal its back.', tags: ['card', '3d', 'flip'], to: '/playground', where: 'Playground' },
