@@ -92,6 +92,7 @@ export const LIBRARY: LibraryGroup[] = [
       { name: 'Orb', note: 'A glowing orb that leans and lights toward the cursor.', tags: ['field', 'orb', 'pointer'], to: '/contact', where: 'Contact' },
       { name: 'MetaBalls', note: 'Liquid metaballs that merge and split as they drift.', tags: ['field', 'canvas', 'liquid'], to: '/playground', where: 'Playground' },
       { name: 'Beams', note: 'Sweeping volumetric beams of light.', tags: ['field', 'light'], to: '/playground', where: 'Playground' },
+      { name: 'Meteors', note: 'A steady diagonal rain of light streaks, each fading from a bright head to nothing, warming toward lime near the pointer.', tags: ['field', 'canvas', 'light'], to: '/reel', where: 'The reel' },
       { name: 'Iridescence', note: 'A shifting, oil-slick iridescent sheen.', tags: ['field', 'shader', 'colour'], to: '/playground', where: 'Playground' },
       { name: 'Ribbons', note: 'Flowing ribbons that trail after the cursor.', tags: ['field', 'ribbon', 'pointer'], to: '/playground', where: 'Playground' },
       { name: 'PixelTrail', note: 'A trail of pixels that light up under the moving pointer.', tags: ['field', 'pixel', 'pointer'], to: '/playground', where: 'Playground' },
