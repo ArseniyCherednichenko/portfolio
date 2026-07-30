@@ -7,6 +7,7 @@ import { ProjectQuickLook } from '../components/ProjectQuickLook'
 import { Reveal } from '../components/Reveal'
 import { GradientText } from '../components/GradientText'
 import { SplitText } from '../components/SplitText'
+import { BlurText } from '../components/BlurText'
 import { RotatingWord } from '../components/RotatingWord'
 import { SpotlightCard } from '../components/SpotlightCard'
 import { Marquee } from '../components/Marquee'
@@ -340,11 +341,10 @@ export default function Home() {
           <Reveal>
             <Eyebrow>Range</Eyebrow>
           </Reveal>
-          <Reveal delay={0.05}>
-            <h2 className="mt-6 font-display text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl">
-              More than <GradientText>one project.</GradientText>
-            </h2>
-          </Reveal>
+          <h2 className="mt-6 font-display text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl">
+            <BlurText as="span" text="More than" />{' '}
+            <BlurText as="span" text="one project." gradient delay={0.28} />
+          </h2>
           <Reveal delay={0.1}>
             <p className="mt-6 max-w-md text-lg leading-relaxed text-white/55">
               Guided is what I am building, but it is not the whole of what I do. I work across the
