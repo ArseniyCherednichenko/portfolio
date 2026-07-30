@@ -48,6 +48,7 @@ import { TrueFocus } from '../components/TrueFocus'
 import { FlowingMenu } from '../components/FlowingMenu'
 import { Threads } from '../components/Threads'
 import { Beams } from '../components/Beams'
+import { Meteors } from '../components/Meteors'
 import { LetterGlitch } from '../components/LetterGlitch'
 import { MetaBalls } from '../components/MetaBalls'
 import { PixelTrail } from '../components/PixelTrail'
@@ -1511,6 +1512,32 @@ export default function Playground() {
                 Soft vertical gradients drawn with additive blending on one tilted canvas, so overlaps glow like light
                 through blinds. The beams sway, and the ones nearest the pointer brighten and warm lime. Backs the
                 Toolkit page. Reduced-motion gets a single calm static frame.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH METEORS */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="relative h-[340px] overflow-hidden rounded-3xl border border-white/10 bg-[#08080b]">
+              <Meteors count={28} />
+              <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Meteor field</span>
+                <p className="mt-3 max-w-md px-6 text-xl font-medium text-white/80 sm:text-2xl">
+                  Pass your cursor through, and the streaks near it warm and stretch.
+                </p>
+              </div>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Diagonal meteor shower</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                A steady rain of light streaks on one canvas — the gentle, directional kind the field family did not have
+                (not Starfield's radial warp, Lightning's filaments, or Beams' shafts). Each streak crosses along one
+                angle with a bright head and a tail that fades out, its brightness enveloped over the run so a recycle
+                never pops, most cool white with a lime minority; any streak whose head passes near the pointer warms
+                toward lime and lengthens. Seeded so the scatter is stable, no per-streak React state. Backs the reel's
+                'On pace' scene. Reduced-motion lays a few faint streaks still.
               </p>
             </div>
           </div>
