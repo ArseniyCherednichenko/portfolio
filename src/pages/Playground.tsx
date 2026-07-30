@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react'
+import { createRef, useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Reveal } from '../components/Reveal'
+import { AnimatedBeam } from '../components/AnimatedBeam'
 import { ChromaGrid } from '../components/ChromaGrid'
 import { GooeyTabs } from '../components/GooeyTabs'
 import { GradientText } from '../components/GradientText'
@@ -220,6 +221,87 @@ function Experiment({
         <h3 className="text-base font-semibold">{name}</h3>
         <p className="mt-1 text-sm leading-relaxed text-white/45">{note}</p>
       </div>
+    </div>
+  )
+}
+
+// A node-web demo of AnimatedBeam: three source nodes on the left feed a lime
+// hub, which fans out to two on the right, so the light reads as flowing left
+// -> hub -> right through the whole graph. Shows off the primitive's curvature,
+// the staggered delays, and the two reversed spokes. Beams are measured off the
+// real DOM nodes, so the wiring holds however the flex boxes lay out.
+const BEAM_LEFT = ['Design', 'Systems', 'Motion']
+const BEAM_RIGHT = ['Web', 'iOS']
+function BeamDemo() {
+  const containerRef = useRef<HTMLDivElement>(null)
+  const hubRef = useRef<HTMLDivElement>(null)
+  const leftRefs = useRef(BEAM_LEFT.map(() => createRef<HTMLDivElement>()))
+  const rightRefs = useRef(BEAM_RIGHT.map(() => createRef<HTMLDivElement>()))
+  const lMid = (BEAM_LEFT.length - 1) / 2
+  const rMid = (BEAM_RIGHT.length - 1) / 2
+
+  const dot =
+    'grid h-11 w-11 place-items-center rounded-full border border-white/12 bg-[#0B0B0B] text-[10px] font-semibold uppercase tracking-wide text-white/60 sm:h-14 sm:w-14 sm:text-xs'
+
+  return (
+    <div
+      ref={containerRef}
+      className="relative flex items-center justify-between gap-2 px-2 py-6 sm:px-10"
+    >
+      {/* Sources */}
+      <div className="relative z-10 flex flex-col gap-5 sm:gap-8">
+        {BEAM_LEFT.map((l, i) => (
+          <div key={l} ref={leftRefs.current[i]} className={dot}>
+            {l}
+          </div>
+        ))}
+      </div>
+
+      {/* Hub */}
+      <div className="relative z-10">
+        <div
+          ref={hubRef}
+          className="grid h-16 w-16 place-items-center rounded-full border border-[#DCF87C]/50 bg-[#DCF87C]/[0.07] sm:h-20 sm:w-20"
+        >
+          <span className="font-display text-lg font-bold text-[#DCF87C] sm:text-xl">AC</span>
+        </div>
+      </div>
+
+      {/* Outputs */}
+      <div className="relative z-10 flex flex-col gap-8 sm:gap-12">
+        {BEAM_RIGHT.map((r, i) => (
+          <div key={r} ref={rightRefs.current[i]} className={dot}>
+            {r}
+          </div>
+        ))}
+      </div>
+
+      {/* Left -> hub */}
+      {BEAM_LEFT.map((l, i) => (
+        <AnimatedBeam
+          key={`l-${l}`}
+          containerRef={containerRef}
+          fromRef={leftRefs.current[i]}
+          toRef={hubRef}
+          curvature={(i - lMid) * 20}
+          delay={i * 0.4}
+          duration={3}
+        />
+      ))}
+      {/* Hub -> right (reversed, so the light keeps travelling outward) */}
+      {BEAM_RIGHT.map((r, i) => (
+        <AnimatedBeam
+          key={`r-${r}`}
+          containerRef={containerRef}
+          fromRef={hubRef}
+          toRef={rightRefs.current[i]}
+          curvature={(i - rMid) * 26}
+          delay={0.6 + i * 0.4}
+          duration={3}
+          gradientStartColor="#8ad0ff"
+          gradientStopColor="#DCF87C"
+        />
+      ))}
     </div>
   )
 }
@@ -1153,6 +1235,31 @@ export default function Playground() {
                 and each one is absolutely positioned into the currently-shortest column from its own height — so content
                 of any height packs tight with no gaps. Change the width or shuffle and the whole wall reflows on a spring
                 rather than snapping. No per-frame React state; reduced motion places the same layout instantly.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH ANIMATED BEAM NODE WEB */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-4 py-10 sm:px-12">
+              <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Wire</span>
+              <p className="mt-3 max-w-md text-xl font-medium text-white/85 sm:text-2xl">
+                Light travelling a line drawn between two things.
+              </p>
+              <div className="mt-6">
+                <BeamDemo />
+              </div>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Animated beam</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                A beam of light that travels a curved line drawn between two real DOM nodes — the connective cousin of
+                BorderBeam. The path geometry is measured off the nodes with getBoundingClientRect and re-measured on
+                resize, so the wiring holds at any width; the travelling light is a single SVG gradient whose endpoints
+                sweep across, so no per-frame React state runs. Wires the About &ldquo;How it fits together&rdquo; hub.
+                Reduced motion holds every beam as a faint resting line.
               </p>
             </div>
           </div>
