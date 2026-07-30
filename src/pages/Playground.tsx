@@ -26,6 +26,7 @@ import { Crosshair } from '../components/Crosshair'
 import { ScrollVelocity } from '../components/ScrollVelocity'
 import { DecryptedText } from '../components/DecryptedText'
 import { SplitText } from '../components/SplitText'
+import { BlurText } from '../components/BlurText'
 import { SplitFlap } from '../components/SplitFlap'
 import { Clock } from '../components/Clock'
 import { CardStack } from '../components/CardStack'
@@ -511,6 +512,27 @@ function SplitTextDemo() {
   )
 }
 
+// A replayable BlurText demo. Bumping the key remounts the lines so the
+// blur-to-focus reveal runs again on demand.
+function BlurTextDemo() {
+  const [run, setRun] = useState(0)
+  return (
+    <div className="flex w-full flex-col items-center gap-6 text-center">
+      <div key={run} className="font-display text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl">
+        <BlurText as="span" text="Pulled into" trigger="mount" className="block" />
+        <BlurText as="span" text="focus." trigger="mount" gradient delay={0.4} className="block" />
+      </div>
+      <button
+        type="button"
+        onClick={() => setRun((n) => n + 1)}
+        className="rounded-full border border-white/15 px-5 py-2 text-sm font-semibold text-white/80 transition-colors hover:bg-white/[0.06] hover:text-white"
+      >
+        Replay
+      </button>
+    </div>
+  )
+}
+
 // A split-flap board that cycles the craft words on a timer, so the two-phase
 // hinge flip reads like an airport departure board. All words are six letters,
 // so no cell is added or removed between changes.
@@ -756,6 +778,12 @@ export default function Playground() {
           <Reveal>
             <Experiment name="Split-text reveal" note="Each character lifts and fades into place, one after the next. Hit replay to run it again.">
               <SplitTextDemo />
+            </Experiment>
+          </Reveal>
+
+          <Reveal>
+            <Experiment name="Blur-to-focus text" note="Words resolve out of a soft focus — each begins heavily blurred and drifts a touch as it sharpens, like a lens pulling in. The blur is the signature, distinct from the split-text lift and the scroll-linked word fade. Drives the Home 'More than one project.' line. Hit replay to run it again.">
+              <BlurTextDemo />
             </Experiment>
           </Reveal>
 
