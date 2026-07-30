@@ -19,6 +19,7 @@ export type ReelBackdrop =
   | 'particles'
   | 'orb'
   | 'squares'
+  | 'meteors'
 
 export interface ReelScene {
   /** Stable id, used for the anchor and the progress rail. */
@@ -41,7 +42,7 @@ export const REEL: ReelScene[] = [
     backdrop: 'aurora',
     eyebrow: 'The reel',
     statement: 'Every frame here is hand-built.',
-    note: 'No template, no drag-and-drop. Nine scenes, each one a component I wrote from scratch, running live.',
+    note: 'No template, no drag-and-drop. Ten scenes, each one a component I wrote from scratch, running live.',
     made: 'Backdrop: Aurora',
   },
   {
@@ -99,6 +100,14 @@ export const REEL: ReelScene[] = [
     statement: 'One object, lit well, can hold a room.',
     note: 'Before the layout, before the copy, there is a single form that has to feel like it could be touched.',
     made: 'Backdrop: Orb',
+  },
+  {
+    id: 'pace',
+    backdrop: 'meteors',
+    eyebrow: 'On pace',
+    statement: 'Small, steady work reads like a shower, not a flash.',
+    note: 'One thing shipped most days, none of it loud on its own. Watch long enough and the cadence, not any single streak, is the thing.',
+    made: 'Backdrop: Meteors',
   },
   {
     id: 'grid',
