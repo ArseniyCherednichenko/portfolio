@@ -38,6 +38,7 @@ export const LIBRARY: LibraryGroup[] = [
     intro: 'Letters and words that respond to the cursor, the scroll, and the moment they first appear.',
     items: [
       { name: 'GradientText', note: 'An animated lime-to-white gradient washing across a headline.', tags: ['text', 'gradient', 'motion'], to: '/', where: 'Home' },
+      { name: 'ShinyText', note: 'A soft highlight that sweeps across otherwise-muted text — the quiet cousin of the gradient wash, built for small labels and status lines.', tags: ['text', 'shine', 'label'], to: '/now', where: 'Now' },
       { name: 'VariableProximity', note: 'Variable-font letters that lean and swell toward the cursor.', tags: ['text', 'variable font', 'pointer'], to: '/about', where: 'About' },
       { name: 'ScrollReveal', note: 'A paragraph that assembles itself word by word as it scrolls.', tags: ['text', 'scroll', 'reveal'], to: '/about', where: 'About' },
       { name: 'ScrollVelocity', note: 'Text bands that drift and flip direction with scroll speed.', tags: ['text', 'scroll', 'marquee'], to: '/', where: 'Home' },
