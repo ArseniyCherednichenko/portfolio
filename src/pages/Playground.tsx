@@ -27,6 +27,7 @@ import { ScrollVelocity } from '../components/ScrollVelocity'
 import { DecryptedText } from '../components/DecryptedText'
 import { SplitText } from '../components/SplitText'
 import { BlurText } from '../components/BlurText'
+import { Highlighter } from '../components/Highlighter'
 import { SplitFlap } from '../components/SplitFlap'
 import { Clock } from '../components/Clock'
 import { CardStack } from '../components/CardStack'
@@ -534,6 +535,38 @@ function BlurTextDemo() {
   )
 }
 
+// A replayable Highlighter demo. Bumping the key remounts the line so both
+// marker strokes sweep in again — one behind a phrase, one under another — with
+// the trigger set to 'mount' so they run on demand rather than on scroll.
+function HighlighterDemo() {
+  const [run, setRun] = useState(0)
+  return (
+    <div className="flex w-full flex-col items-center gap-6 text-center">
+      <p
+        key={run}
+        className="max-w-sm font-display text-2xl font-semibold leading-[1.5] tracking-tight text-white sm:text-3xl"
+      >
+        The best work is the part you{' '}
+        <Highlighter trigger="mount" delay={0.2}>
+          never notice
+        </Highlighter>
+        , only the part you{' '}
+        <Highlighter trigger="mount" delay={0.85} underline>
+          feel
+        </Highlighter>
+        .
+      </p>
+      <button
+        type="button"
+        onClick={() => setRun((n) => n + 1)}
+        className="rounded-full border border-white/15 px-5 py-2 text-sm font-semibold text-white/80 transition-colors hover:bg-white/[0.06] hover:text-white"
+      >
+        Replay
+      </button>
+    </div>
+  )
+}
+
 // A split-flap board that cycles the craft words on a timer, so the two-phase
 // hinge flip reads like an airport departure board. All words are six letters,
 // so no cell is added or removed between changes.
@@ -785,6 +818,15 @@ export default function Playground() {
           <Reveal>
             <Experiment name="Blur-to-focus text" note="Words resolve out of a soft focus — each begins heavily blurred and drifts a touch as it sharpens, like a lens pulling in. The blur is the signature, distinct from the split-text lift and the scroll-linked word fade. Drives the Home 'More than one project.' line. Hit replay to run it again.">
               <BlurTextDemo />
+            </Experiment>
+          </Reveal>
+
+          <Reveal>
+            <Experiment
+              name="Marker highlight"
+              note="A highlighter dragged once across the words: a translucent lime band with soft, slightly uneven ends grows left-to-right from nothing, transform-origin left, one phrase behind the text and one as an underline. Distinct from the self-drawing underline (a traced vector path) and the cursor spotlight (a moving mask) — this is a marker sweep, and the text stays real and selectable on top. It marks two beliefs in the About intro. Reduced motion paints the band still. Hit replay to run it again."
+            >
+              <HighlighterDemo />
             </Experiment>
           </Reveal>
 
