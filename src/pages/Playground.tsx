@@ -79,6 +79,7 @@ import { PillNav, type PillLink } from '../components/PillNav'
 import { CircularGallery, type GalleryItem } from '../components/CircularGallery'
 import { SphereMenu, type SphereItem } from '../components/SphereMenu'
 import { AnimatedList } from '../components/AnimatedList'
+import { InfiniteScroll, type InfiniteScrollItem } from '../components/InfiniteScroll'
 import { Lanyard } from '../components/Lanyard'
 import { HoverIndex, type HoverIndexItem } from '../components/HoverIndex'
 import { Gravity } from '../components/Gravity'
@@ -629,6 +630,46 @@ const INDEX_LINKS: HoverIndexItem[] = [
   { label: 'Now', to: '/now', meta: 'This week' },
   { label: 'Contact', to: '/contact', meta: 'Reach me' },
 ]
+
+// An endless column for the InfiniteScroll demo — the disciplines Arseniy
+// works across, one honest line each. Non-interactive display cards (the loop
+// duplicates them), so nothing here is a link.
+const SCROLL_ROWS: { tag: string; title: string; line: string; accent?: boolean }[] = [
+  { tag: 'Frontend', title: 'React & TypeScript', line: 'The web app — components, state, the whole surface.', accent: true },
+  { tag: 'Native', title: 'iOS in SwiftUI', line: 'A native app on the same backend, built by hand.' },
+  { tag: 'Motion', title: 'Framer Motion', line: 'Entrances, springs, and reveals — the site itself.', accent: true },
+  { tag: 'Backend', title: 'Supabase & Postgres', line: 'Auth, data, and the seams kept invisible.' },
+  { tag: 'Applied AI', title: 'Building with LLMs', line: 'A Socratic tutor that asks rather than answers.' },
+  { tag: 'Design', title: 'The whole thing', line: 'Type, colour, and rhythm, not just the code.' },
+]
+
+const SCROLL_ITEMS: InfiniteScrollItem[] = SCROLL_ROWS.map((r, i) => ({
+  key: `${r.tag}-${i}`,
+  content: (
+    <div
+      className={`mx-auto flex w-[min(340px,80vw)] items-center gap-4 rounded-2xl border px-5 py-4 ${
+        r.accent
+          ? 'border-[#DCF87C]/25 bg-[#DCF87C]/[0.05]'
+          : 'border-white/10 bg-white/[0.03]'
+      }`}
+    >
+      <span
+        className={`grid h-9 w-9 shrink-0 place-items-center rounded-full text-[11px] font-semibold ${
+          r.accent ? 'bg-[#DCF87C]/15 text-[#DCF87C]' : 'bg-white/[0.05] text-white/60'
+        }`}
+      >
+        {String(i + 1).padStart(2, '0')}
+      </span>
+      <div className="min-w-0">
+        <div className="flex items-baseline gap-2">
+          <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#DCF87C]/80">{r.tag}</span>
+          <span className="truncate text-sm font-semibold text-white/90">{r.title}</span>
+        </div>
+        <p className="mt-0.5 truncate text-xs text-white/45">{r.line}</p>
+      </div>
+    </div>
+  ),
+}))
 
 const STEPPER_DEMO: StepperStep[] = [
   {
@@ -2562,6 +2603,37 @@ export default function Playground() {
                 hovering pauses both. It backs the real "email copied" confirmation from the contact channels and the
                 command palette. Under reduced motion the drift and travelling meter drop for a clean fade on a plain
                 timer.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH INFINITE SCROLL */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 py-12 sm:px-10">
+              <div className="pointer-events-none absolute inset-x-0 top-8 z-10 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Drag</span>
+                <p className="mx-auto mt-3 max-w-md px-6 text-lg font-medium text-white/85 sm:text-xl">
+                  A column that never ends. It drifts on its own — grab it and throw it to send it spinning.
+                </p>
+              </div>
+              <div className="mt-24 grid gap-8 sm:grid-cols-2">
+                <InfiniteScroll items={SCROLL_ITEMS} speed={38} direction="up" height={360} />
+                <InfiniteScroll items={SCROLL_ITEMS} speed={30} direction="down" tilt={8} height={360} />
+              </div>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Infinite scroll</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                A vertical column of cards that loops forever and never seams. One RAF loop drifts the track at a steady
+                speed and wraps it by exactly one sequence height — measured off the real DOM, so it holds at any size or
+                gap — so the same content re-enters from the opposite edge with no pop. A different primitive from the
+                Marquee (horizontal, CSS-only, no drag) and the coverflow (which snaps): grab it and it scrubs under your
+                finger, and the release carries a decaying momentum on top of the drift before it eases back to the base
+                speed. The second column leans in 3D and drifts the other way. No per-item React state — the loop writes
+                the transform straight onto the track. Under reduced motion the loop is dropped entirely for a plain,
+                natively-scrollable column, fully legible.
               </p>
             </div>
           </div>
