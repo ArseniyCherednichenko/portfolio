@@ -6,6 +6,7 @@ import { Reveal } from '../components/Reveal'
 import { Eyebrow } from '../components/Eyebrow'
 import { GradientText } from '../components/GradientText'
 import { HandUnderline } from '../components/DrawSVG'
+import { Highlighter } from '../components/Highlighter'
 import { GooeyText } from '../components/GooeyText'
 import { TiltCard } from '../components/TiltCard'
 import { SpotlightCard } from '../components/SpotlightCard'
@@ -389,8 +390,10 @@ export default function About() {
               of applied AI in between.
             </p>
             <p>
-              I care about products that feel effortless. The kind where the motion, the typography, and the small
-              moments add up to something people trust. This site is where I keep that craft sharp in the open.
+              I care about products that{' '}
+              <Highlighter delay={0.9}>feel effortless</Highlighter>. The kind where the motion, the typography, and
+              the <Highlighter delay={1.15}>small moments</Highlighter> add up to something people trust. This site is
+              where I keep that craft sharp in the open.
             </p>
           </motion.div>
         </div>
