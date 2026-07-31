@@ -10,7 +10,7 @@
 // should be replaced with real detail (or removed) rather than left forever.
 
 /** ISO date (YYYY-MM-DD) the entries below were last revised. */
-export const LAST_UPDATED = '2026-07-01'
+export const LAST_UPDATED = '2026-07-31'
 
 /** Where Arseniy is, for the little dateline under the title. */
 export const LOCATION = 'Berlin'
@@ -40,7 +40,7 @@ export const NOW_ITEMS: readonly NowItem[] = [
   {
     label: 'Sharpening',
     title: 'Motion design, in public',
-    body: 'This site is my open workbench for interface animation — a new hand-built component most days. Pinned scroll, magnetic controls, cursor fields. If it lands here, I understand it.',
+    body: 'This site is my open workbench for interface animation, now past a hundred hand-built components — pinned scroll, magnetic controls, cursor fields, self-drawing line art. A new one most days. If it lands here, I understand it.',
   },
   {
     label: 'Thinking about',

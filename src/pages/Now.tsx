@@ -4,6 +4,7 @@ import { Reveal } from '../components/Reveal'
 import { Eyebrow } from '../components/Eyebrow'
 import { GradientText } from '../components/GradientText'
 import { SpotlightCard } from '../components/SpotlightCard'
+import { ShinyText } from '../components/ShinyText'
 import { Ribbons } from '../components/Ribbons'
 import { Seo } from '../components/Seo'
 import { useBerlinTime } from '../hooks/useBerlinTime'
@@ -25,6 +26,26 @@ function formatUpdated(iso: string): string {
   }).format(date)
 }
 
+// A now page is honest precisely because it goes stale — so rather than hide
+// that, this reads the age at load and says it out loud. Returns a plain-English
+// gap ("today", "3 days ago", "2 months ago") plus a `stale` flag once the
+// snapshot passes six weeks, which the dateline uses to warm the wording toward
+// a gentle "getting old" rather than pretending it is fresh.
+function freshness(iso: string, now: Date): { phrase: string; stale: boolean } {
+  const [y, m, d] = iso.split('-').map(Number)
+  if (!y || !m || !d) return { phrase: '', stale: false }
+  const then = Date.UTC(y, m - 1, d)
+  const today = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate())
+  const days = Math.max(0, Math.round((today - then) / 86_400_000))
+  const stale = days > 42
+  if (days <= 0) return { phrase: 'today', stale }
+  if (days === 1) return { phrase: 'yesterday', stale }
+  if (days < 14) return { phrase: `${days} days ago`, stale }
+  if (days < 60) return { phrase: `${Math.round(days / 7)} weeks ago`, stale }
+  const months = Math.round(days / 30)
+  return { phrase: `${months} month${months === 1 ? '' : 's'} ago`, stale }
+}
+
 // The /now page: an honest, dated snapshot of what I'm focused on right now.
 // A recognised personal-site convention (nownownow.com) — deliberately a
 // moment in time, not a permanent bio. It de-centers any single project by
@@ -33,6 +54,9 @@ export default function Now() {
   const reduce = useReducedMotion()
   const { time, awake } = useBerlinTime()
   const updated = formatUpdated(LAST_UPDATED)
+  // Computed at render, so the "how long ago" reads true whenever the page loads
+  // — no library, no rebuild needed for it to keep counting up.
+  const age = freshness(LAST_UPDATED, new Date())
 
   return (
     <>
@@ -101,11 +125,24 @@ export default function Now() {
                 className={`relative inline-flex h-2 w-2 rounded-full ${awake ? 'bg-[#DCF87C]' : 'bg-white/30'}`}
               />
             </span>
-            {LOCATION}
+            <ShinyText tone="lime" speed={6} className="font-semibold uppercase tracking-[0.18em]">
+              {LOCATION}
+            </ShinyText>
             <span className="tabular-nums text-white/55">{time}</span>
           </span>
           <span className="text-white/30">
             Last revised <span className="text-white/55">{updated}</span>
+            {age.phrase && (
+              <span
+                className={
+                  age.stale
+                    ? 'ml-2 rounded-full border border-amber-300/25 px-2 py-0.5 text-[11px] text-amber-200/70'
+                    : 'ml-2 rounded-full border border-white/10 px-2 py-0.5 text-[11px] text-white/45'
+                }
+              >
+                {age.phrase}
+              </span>
+            )}
           </span>
         </motion.div>
       </header>
