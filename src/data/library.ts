@@ -44,6 +44,7 @@ export const LIBRARY: LibraryGroup[] = [
       { name: 'TrueFocus', note: 'A line that pulls one word at a time into sharp focus.', tags: ['text', 'focus', 'motion'], to: '/', where: 'Home' },
       { name: 'SplitText', note: 'A headline split into letters that stagger into place.', tags: ['text', 'stagger', 'reveal'], to: '/playground', where: 'Playground' },
       { name: 'BlurText', note: 'Words that resolve out of a soft focus, one at a time, as the line sharpens in.', tags: ['text', 'blur', 'reveal'], to: '/', where: 'Home' },
+      { name: 'Highlighter', note: 'A marker-pen sweep that grows in behind (or under) a run of words, transform-origin left, like a highlighter dragged once across the line.', tags: ['text', 'marker', 'reveal', 'scroll'], to: '/about', where: 'About' },
       { name: 'DecryptedText', note: 'Text that resolves out of random glyphs, left to right.', tags: ['text', 'glitch', 'reveal'], to: '/playground', where: 'Playground' },
       { name: 'FuzzyText', note: 'A jittering, glitching display headline.', tags: ['text', 'glitch'], to: '/playground', where: 'Playground' },
       { name: 'LetterGlitch', note: 'A canvas grid of glyphs flickering like a decode.', tags: ['text', 'canvas', 'glitch'], to: '/playground', where: 'Playground' },
