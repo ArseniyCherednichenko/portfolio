@@ -78,10 +78,6 @@ export const PROJECTS: Project[] = [
         heading: 'Curriculum-aware',
         body: 'It is built around real syllabuses, the German Abitur, the IB, and GCSE, so the questions and examples line up with what a student is actually being taught and tested on, rather than a generic approximation.',
       },
-      {
-        heading: 'What I build',
-        body: 'As a co-founder I work across the whole stack: the React and TypeScript web app, a native iOS app in SwiftUI, and a shared Supabase backend that keeps both in sync. Design, frontend, backend, native, the seams are mine to keep invisible.',
-      },
     ],
     highlights: [
       'Socratic by design, it asks rather than answers',
