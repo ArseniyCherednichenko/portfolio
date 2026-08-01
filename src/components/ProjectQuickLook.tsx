@@ -58,6 +58,14 @@ export function ProjectQuickLook({
             <GradientText>{p.title}</GradientText>
           </motion.h2>
 
+          {(p.platforms?.length || p.status) && (
+            <motion.div {...item(2)} className="mt-3 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-white/45">
+              {p.platforms?.length ? <span>{p.platforms.join(' · ')}</span> : null}
+              {p.platforms?.length && p.status ? <span aria-hidden className="text-white/20">·</span> : null}
+              {p.status ? <span className="text-[#DCF87C]/70">{p.status}</span> : null}
+            </motion.div>
+          )}
+
           <motion.p {...item(3)} className="mt-3 text-[15px] leading-relaxed text-white/65">
             {p.detail || p.blurb}
           </motion.p>
