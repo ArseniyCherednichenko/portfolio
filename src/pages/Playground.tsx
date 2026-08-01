@@ -68,6 +68,7 @@ import { Orb } from '../components/Orb'
 import { Accordion } from '../components/Accordion'
 import { ElasticSlider } from '../components/ElasticSlider'
 import { Knob } from '../components/Knob'
+import { Switch } from '../components/Switch'
 import { Tooltip } from '../components/Tooltip'
 import { useToast } from '../components/Toast'
 import { Stepper, type StepperStep } from '../components/Stepper'
@@ -749,6 +750,8 @@ function GooeyTabsDemo() {
 export default function Playground() {
   const [likes, setLikes] = useState(128)
   const [on, setOn] = useState(false)
+  const [wifi, setWifi] = useState(true)
+  const [reduce, setReduce] = useState(false)
   const [volume, setVolume] = useState(62)
   const { openShortcuts } = useShortcuts()
 
@@ -2246,21 +2249,7 @@ export default function Playground() {
                   <span className="transition-transform group-active:scale-125">Like</span>
                   <span className="tabular-nums text-white/60">{likes}</span>
                 </button>
-                <button
-                  role="switch"
-                  aria-checked={on}
-                  onClick={() => setOn((v) => !v)}
-                  className={`relative h-9 w-16 rounded-full border transition-colors ${
-                    on ? 'border-[#DCF87C]/50 bg-[#DCF87C]/20' : 'border-white/15 bg-white/[0.04]'
-                  }`}
-                >
-                  <span
-                    className={`absolute top-1 h-6 w-6 rounded-full transition-all duration-300 ${
-                      on ? 'left-9 bg-[#DCF87C]' : 'left-1 bg-white/60'
-                    }`}
-                    style={{ transitionTimingFunction: 'cubic-bezier(0.34, 1.56, 0.64, 1)' }}
-                  />
-                </button>
+                <Switch checked={on} onChange={setOn} label="Notifications" size={34} />
               </div>
             </Experiment>
           </Reveal>
@@ -2299,6 +2288,19 @@ export default function Playground() {
               note="A dial you turn like hardware: drag up or down to sweep the pointer around a 270° arc, spin the wheel for fine steps, or focus it and use the arrows. The pointer rides a spring so it settles with a little give. A real role=slider, keyboard-driven, and calm under reduced motion. Drives the spring tuner on the Design page."
             >
               <KnobDemo />
+            </Experiment>
+          </Reveal>
+
+          <Reveal>
+            <Experiment
+              name="Toggle switch"
+              note="The binary control the sliders and dial were missing. The thumb rides a spring across the track instead of snapping, squashing and stretching into the travel so a flick lands with weight; the rail crossfades to lime and a dash morphs into a check as it crosses. A real role=switch — click or Space/Enter, controlled, disable-able. Reduced motion drops the physics for a near-instant, plain toggle."
+            >
+              <div className="flex w-full max-w-[280px] flex-col gap-5">
+                <Switch checked={wifi} onChange={setWifi} label="Wi-Fi" size={34} />
+                <Switch checked={reduce} onChange={setReduce} label="Reduce motion" size={34} />
+                <Switch defaultChecked label="Locked on" size={34} disabled />
+              </div>
             </Experiment>
           </Reveal>
         </div>
