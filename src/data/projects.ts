@@ -3,6 +3,13 @@ export interface CaseStudySection {
   body: string
 }
 
+/** One area of the work and an honest one-line account of what I did in it.
+ * No metrics, no invented percentages — just the truthful division of labour. */
+export interface Contribution {
+  area: string
+  detail: string
+}
+
 export interface Project {
   slug: string
   title: string
@@ -15,6 +22,12 @@ export interface Project {
   soon?: boolean
   /** Short label for the kind of involvement, e.g. "Co-founder · full stack". */
   role?: string
+  /** Where it runs, e.g. ["Web app", "Native iOS"]. Shown in the spec panel. */
+  platforms?: string[]
+  /** One honest status line, e.g. "Live" or "Open source · in the open". */
+  status?: string
+  /** The honest division of labour — what I personally made on this project. */
+  contributions?: Contribution[]
   /** Longer narrative shown on the project detail page. Keep honest. */
   sections?: CaseStudySection[]
   /** Short, factual highlights shown as a list on the detail page. */
@@ -28,10 +41,34 @@ export const PROJECTS: Project[] = [
     year: '2026',
     href: 'https://askguided.com',
     role: 'Co-founder · full stack',
+    platforms: ['Web app', 'Native iOS'],
+    status: 'Live',
     blurb: 'A Socratic AI tutor for students aged 8 to 18.',
     detail:
       'A Socratic AI tutor that asks the questions that build real understanding instead of giving away answers. Curriculum-aware for the German Abitur, IB, and GCSE. Web app plus a native iOS app on a shared Supabase backend. I co-founded it and build across the whole stack.',
     stack: ['React', 'TypeScript', 'SwiftUI', 'Supabase'],
+    contributions: [
+      {
+        area: 'Product',
+        detail: 'Co-founded it and shaped the Socratic model — the tutor that asks rather than answers.',
+      },
+      {
+        area: 'Design',
+        detail: 'Designed the interface for a wide age range, 8 to 18, across web and native.',
+      },
+      {
+        area: 'Frontend',
+        detail: 'Built the React and TypeScript web app.',
+      },
+      {
+        area: 'Native iOS',
+        detail: 'Built the SwiftUI app that shares one backend with the web.',
+      },
+      {
+        area: 'Backend',
+        detail: 'Set up the Supabase backend that keeps web and native in sync.',
+      },
+    ],
     sections: [
       {
         heading: 'The idea',
@@ -58,10 +95,26 @@ export const PROJECTS: Project[] = [
     year: '2026',
     repo: 'https://github.com/ArseniyCherednichenko/portfolio',
     role: 'Design and build',
+    platforms: ['Web'],
+    status: 'Open source · in the open',
     blurb: 'An open-source, motion-led portfolio.',
     detail:
       'This portfolio. React, Vite, Tailwind v4, and Framer Motion. Every animation is a hand-built component: an aurora background, spotlight cards, magnetic buttons, an orbiting hero, a marquee, and more. Open source on GitHub.',
     stack: ['React', 'Tailwind', 'Framer Motion', 'Vite'],
+    contributions: [
+      {
+        area: 'Design',
+        detail: 'Every layout, the Fraunces-and-Inter type system, and the lime-on-ink palette.',
+      },
+      {
+        area: 'Motion',
+        detail: 'Over a hundred hand-built animation components, each one reduced-motion aware.',
+      },
+      {
+        area: 'Engineering',
+        detail: 'React, Vite, strict TypeScript, Tailwind v4, and client-side routing.',
+      },
+    ],
     sections: [
       {
         heading: 'Why build it from scratch',
