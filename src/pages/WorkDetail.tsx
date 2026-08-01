@@ -44,6 +44,15 @@ export default function WorkDetail() {
   const next = CASE_STUDIES[(index + 1) % CASE_STUDIES.length]
   const showNext = next && next.slug !== project.slug
 
+  // The spec panel is built from whatever facts the project actually carries —
+  // no empty rows, no invented ones.
+  const specRows: { label: string; value: string }[] = [
+    project.role ? { label: 'Role', value: project.role } : null,
+    project.year ? { label: 'Year', value: project.year } : null,
+    project.platforms?.length ? { label: 'Platform', value: project.platforms.join(' · ') } : null,
+    project.status ? { label: 'Status', value: project.status } : null,
+  ].filter((r): r is { label: string; value: string } => r !== null)
+
   return (
     <article className="mx-auto w-full max-w-3xl px-6 pb-28 pt-32">
       <Seo title={project.title} description={project.blurb} />
@@ -139,6 +148,23 @@ export default function WorkDetail() {
         <ProjectPoster project={project} className="aspect-[16/10] w-full" />
       </Lightbox>
 
+      {/* At a glance — an editorial spec panel. Only rows with a real value
+          render, so nothing is padded with a placeholder. */}
+      {specRows.length > 0 && (
+        <Reveal className="mt-12">
+          <div className="overflow-hidden rounded-3xl border border-white/10 bg-white/[0.02]">
+            <dl className="divide-y divide-white/10">
+              {specRows.map(({ label, value }) => (
+                <div key={label} className="grid grid-cols-[100px_1fr] gap-4 px-6 py-4 sm:grid-cols-[140px_1fr]">
+                  <dt className="text-xs font-semibold uppercase tracking-[0.2em] text-white/40">{label}</dt>
+                  <dd className="text-sm leading-relaxed text-white/80">{value}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+        </Reveal>
+      )}
+
       {/* Stack */}
       <Reveal className="mt-12">
         <Eyebrow>Built with</Eyebrow>
@@ -160,6 +186,37 @@ export default function WorkDetail() {
                 <span aria-hidden className="mb-3 block h-1 w-6 rounded-full bg-[#DCF87C]" />
                 {h}
               </li>
+            ))}
+          </ul>
+        </Reveal>
+      )}
+
+      {/* What I did — the honest division of labour. This is the person-first
+          view of the project: not what the product is, but what these hands
+          made in it, area by area. */}
+      {project.contributions && project.contributions.length > 0 && (
+        <Reveal className="mt-16">
+          <Eyebrow>What I did</Eyebrow>
+          <ul className="mt-6 space-y-px overflow-hidden rounded-3xl border border-white/10">
+            {project.contributions.map((c, i) => (
+              <motion.li
+                key={c.area}
+                initial={reduce ? false : { opacity: 0, y: 14 }}
+                whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-40px' }}
+                transition={{ duration: 0.5, ease: EASE, delay: reduce ? 0 : Math.min(i * 0.06, 0.3) }}
+                className="group relative grid grid-cols-1 gap-1 bg-[#0A0A0A] px-6 py-5 transition-colors hover:bg-white/[0.02] sm:grid-cols-[180px_1fr] sm:gap-6"
+              >
+                <span
+                  aria-hidden
+                  className="absolute left-0 top-0 h-full w-[3px] origin-top scale-y-0 bg-[#DCF87C] transition-transform duration-500 ease-out group-hover:scale-y-100"
+                />
+                <span className="flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.16em] text-[#DCF87C] sm:pt-0.5">
+                  <span aria-hidden className="h-1.5 w-1.5 shrink-0 rounded-full bg-[#DCF87C]" />
+                  {c.area}
+                </span>
+                <span className="text-base leading-relaxed text-white/75">{c.detail}</span>
+              </motion.li>
             ))}
           </ul>
         </Reveal>
