@@ -50,6 +50,7 @@ import { FlowingMenu } from '../components/FlowingMenu'
 import { Threads } from '../components/Threads'
 import { Beams } from '../components/Beams'
 import { Meteors } from '../components/Meteors'
+import { BlobCursor } from '../components/BlobCursor'
 import { LetterGlitch } from '../components/LetterGlitch'
 import { MetaBalls } from '../components/MetaBalls'
 import { PixelTrail } from '../components/PixelTrail'
@@ -1621,6 +1622,33 @@ export default function Playground() {
                 never pops, most cool white with a lime minority; any streak whose head passes near the pointer warms
                 toward lime and lengthens. Seeded so the scatter is stable, no per-streak React state. Backs the reel's
                 'On pace' scene. Reduced-motion lays a few faint streaks still.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH BLOB CURSOR */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="relative h-[340px] cursor-none overflow-hidden rounded-3xl border border-white/10 bg-[#08080a]">
+              <BlobCursor count={5} size={72} />
+              <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Gooey cursor</span>
+                <p className="mt-3 max-w-md px-6 text-xl font-medium text-white/80 sm:text-2xl">
+                  Move across the panel — the blob chases you, and pressing swells it.
+                </p>
+              </div>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Gooey blob cursor</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                A short chain of solid circles trails the pointer — the lead eases toward the cursor and each follower
+                toward the one ahead — all welded under an SVG gooey filter (a Gaussian blur crushed by an alpha-ramp
+                matrix), so they fuse into one liquid mass with a stretching tail rather than reading as separate dots.
+                The soft, physical kind of pointer response the field family did not have (not MetaBalls' free drift,
+                Ribbons' thin streaks, or Crosshair's precise reticle); pressing swells the whole chain and the release
+                ripples down the tail. One RAF loop writes the transforms, no per-blob React state. Reduced motion rests
+                a single still blob at the centre.
               </p>
             </div>
           </div>
