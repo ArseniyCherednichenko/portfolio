@@ -49,6 +49,7 @@ export const LIBRARY: LibraryGroup[] = [
       { name: 'DecryptedText', note: 'Text that resolves out of random glyphs, left to right.', tags: ['text', 'glitch', 'reveal'], to: '/playground', where: 'Playground' },
       { name: 'FuzzyText', note: 'A jittering, glitching display headline.', tags: ['text', 'glitch'], to: '/playground', where: 'Playground' },
       { name: 'LetterGlitch', note: 'A canvas grid of glyphs flickering like a decode.', tags: ['text', 'canvas', 'glitch'], to: '/playground', where: 'Playground' },
+      { name: 'GlitchText', note: 'Two colour-split ghost copies snap to sliced offsets over a clean base, tearing the word into chromatic signal corruption then re-forming.', tags: ['text', 'glitch', 'chromatic'], to: '/playground', where: 'Playground' },
       { name: 'ASCIIText', note: 'A word rendered as a shimmering field of ASCII glyphs.', tags: ['text', 'ascii'], to: '/colophon', where: 'Colophon' },
       { name: 'CircularText', note: 'A rotating circular text seal with a mark in its centre.', tags: ['text', 'circular', 'motion'], to: '/playground', where: 'Playground' },
       { name: 'CurvedLoop', note: 'Text flowing endlessly along a looping curved path.', tags: ['text', 'path', 'marquee'], to: '/playground', where: 'Playground' },
