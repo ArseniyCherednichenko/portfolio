@@ -20,11 +20,11 @@ export interface LogHeadline {
 }
 
 export const LATEST_LOG: LogHeadline[] = [
+  { title: 'Magnifying lens', tag: 'Component' },
+  { title: 'Chromatic glitch text', tag: 'Component' },
   { title: 'Dynamic island', tag: 'Component' },
   { title: 'Spring toggle switch', tag: 'Component' },
   { title: 'Gooey blob cursor', tag: 'Component' },
   { title: 'Infinite scroll', tag: 'Component' },
   { title: 'Shiny text', tag: 'Component' },
-  { title: 'Now page, live again', tag: 'Polish' },
-  { title: 'Marker highlight', tag: 'Component' },
 ]
