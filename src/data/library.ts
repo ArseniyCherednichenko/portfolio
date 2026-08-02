@@ -78,6 +78,7 @@ export const LIBRARY: LibraryGroup[] = [
       { name: 'ScratchReveal', note: 'A scratch-off surface you rub away to reveal what is under it.', tags: ['card', 'reveal', 'pointer'], to: '/playground', where: 'Playground' },
       { name: 'CompareSlider', note: 'A draggable seam that wipes between a before and an after.', tags: ['card', 'drag', 'compare'], to: '/craft', where: 'On motion' },
       { name: 'Masonry', note: 'A measured masonry wall that packs tiles of any height into the shortest column and reflows on a spring.', tags: ['card', 'layout', 'grid'], to: '/playground', where: 'Playground' },
+      { name: 'Lens', note: 'A magnifying loupe that follows the pointer and reveals a zoomed circle of the surface in place — one radial mask over a copy scaled from the cursor, so what sits under the glass stays put as it grows.', tags: ['card', 'magnify', 'pointer', 'mask'], to: '/playground', where: 'Playground' },
     ],
   },
   {
