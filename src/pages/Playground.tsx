@@ -69,6 +69,7 @@ import { Accordion } from '../components/Accordion'
 import { ElasticSlider } from '../components/ElasticSlider'
 import { Knob } from '../components/Knob'
 import { Switch } from '../components/Switch'
+import { DynamicIsland, type IslandActivity } from '../components/DynamicIsland'
 import { Tooltip } from '../components/Tooltip'
 import { useToast } from '../components/Toast'
 import { Stepper, type StepperStep } from '../components/Stepper'
@@ -753,6 +754,7 @@ export default function Playground() {
   const [wifi, setWifi] = useState(true)
   const [reduce, setReduce] = useState(false)
   const [volume, setVolume] = useState(62)
+  const [island, setIsland] = useState<IslandActivity>('music')
   const { openShortcuts } = useShortcuts()
 
   return (
@@ -2304,6 +2306,43 @@ export default function Playground() {
             </Experiment>
           </Reveal>
         </div>
+
+        {/* FULL-WIDTH DYNAMIC ISLAND */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="flex flex-col items-center gap-8 rounded-3xl border border-white/10 bg-white/[0.02] px-6 py-14 sm:px-10">
+              <DynamicIsland activity={island} onActivityChange={setIsland} />
+              <div className="flex flex-wrap items-center justify-center gap-2">
+                {(['idle', 'music', 'timer', 'call'] as IslandActivity[]).map((a) => (
+                  <button
+                    key={a}
+                    type="button"
+                    onClick={() => setIsland(a)}
+                    aria-pressed={island === a}
+                    className={`rounded-full px-4 py-1.5 text-sm font-medium capitalize transition-colors ${
+                      island === a
+                        ? 'bg-[#DCF87C] text-black'
+                        : 'bg-white/[0.06] text-white/60 hover:bg-white/10 hover:text-white/85'
+                    }`}
+                  >
+                    {a}
+                  </button>
+                ))}
+              </div>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Dynamic island</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                A pill that changes its own shape to fit what it carries, in the spirit of Apple's Dynamic Island. Pick a
+                state and the frame springs to a new width, height, and radius while the contents crossfade in — a
+                resting notch, a now-playing bar with a live waveform, a countdown draining a lime ring, or an incoming
+                call with real accept and decline buttons. The size change is the animation, not a decoration on one:
+                one spring drives the frame, the inner faces blur-and-rise across each other, and a role=status label
+                narrates the current activity. Reduced motion keeps the shape change but stills every loop.
+              </p>
+            </div>
+          </div>
+        </Reveal>
 
         {/* FULL-WIDTH FLOWING MENU */}
         <Reveal>
