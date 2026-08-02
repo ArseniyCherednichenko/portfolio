@@ -45,6 +45,7 @@ import { ASCIIText } from '../components/ASCIIText'
 import { CurvedLoop } from '../components/CurvedLoop'
 import { FuzzyText } from '../components/FuzzyText'
 import { GlitchText } from '../components/GlitchText'
+import { Lens } from '../components/Lens'
 import { Iridescence } from '../components/Iridescence'
 import { TrueFocus } from '../components/TrueFocus'
 import { FlowingMenu } from '../components/FlowingMenu'
@@ -1250,6 +1251,30 @@ export default function Playground() {
                   ]}
                 />
               </div>
+            </Experiment>
+          </Reveal>
+
+          <Reveal>
+            <Experiment
+              name="Magnifying lens"
+              note="A loupe that follows your pointer and magnifies the fine print in place. One radial mask over a copy of the surface scaled from the cursor — so whatever sits under the glass stays put as it grows, and the alignment holds at any zoom without measuring. The rim and inner light are pointer-events-none. Reduced motion drops the entrance and the springy rim; the loupe still works, since it is direct manipulation."
+            >
+              <Lens className="aspect-[4/3] w-full max-w-[280px] rounded-3xl border border-white/10 bg-[#0B0B0B]" zoom={2.1} size={150}>
+                <div className="flex h-full w-full flex-col justify-between p-6">
+                  <div className="flex items-start justify-between">
+                    <span className="text-[10px] font-semibold uppercase tracking-[0.25em] text-[#DCF87C]">Loupe</span>
+                    <span className="font-mono text-[9px] leading-none text-white/30">01 · 08 · 26</span>
+                  </div>
+                  <p className="font-display text-2xl font-bold leading-[1.05] text-white">
+                    Made, not assembled.
+                  </p>
+                  <p className="max-w-[34ch] font-mono text-[8px] leading-[1.5] text-white/45">
+                    Every surface on this site is a hand-built React and Framer Motion
+                    component — no template, no UI kit, nothing pulled from a shelf. Bring
+                    the glass close and the small print holds its edge.
+                  </p>
+                </div>
+              </Lens>
             </Experiment>
           </Reveal>
         </div>
