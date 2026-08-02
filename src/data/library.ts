@@ -136,6 +136,7 @@ export const LIBRARY: LibraryGroup[] = [
       { name: 'ElasticSlider', note: 'A range control that stretches elastically past its ends.', tags: ['control', 'slider', 'input'], to: '/playground', where: 'Playground' },
       { name: 'Knob', note: 'A rotary dial you turn like hardware — drag, wheel, or arrow keys.', tags: ['control', 'knob', 'input'], to: '/design', where: 'Design' },
       { name: 'Switch', note: 'A binary toggle whose thumb rides a spring across the track — squashing into the travel while the rail crossfades to lime and a dash morphs into a check.', tags: ['control', 'toggle', 'switch', 'input'], to: '/playground', where: 'Playground' },
+      { name: 'DynamicIsland', note: "A status pill that changes its own shape to fit what it carries — springing between a resting notch, a now-playing bar, a countdown ring, and an incoming call, the contents crossfading in as it re-shapes.", tags: ['control', 'status', 'morph', 'motion'], to: '/playground', where: 'Playground' },
       { name: 'FlowingMenu', note: 'Editorial link rows with a lime panel that slides in on hover.', tags: ['control', 'menu', 'hover'], to: '/', where: 'Home' },
       { name: 'Accordion', note: 'An animated disclosure list, one row open at a time.', tags: ['control', 'accordion', 'a11y'], to: '/about', where: 'About' },
       { name: 'SphereMenu', note: 'A menu of items wrapped around a rotating sphere.', tags: ['control', 'menu', '3d'], to: '/playground', where: 'Playground' },
