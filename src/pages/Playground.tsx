@@ -44,6 +44,7 @@ import { SpotlightReveal } from '../components/SpotlightReveal'
 import { ASCIIText } from '../components/ASCIIText'
 import { CurvedLoop } from '../components/CurvedLoop'
 import { FuzzyText } from '../components/FuzzyText'
+import { GlitchText } from '../components/GlitchText'
 import { Iridescence } from '../components/Iridescence'
 import { TrueFocus } from '../components/TrueFocus'
 import { FlowingMenu } from '../components/FlowingMenu'
@@ -932,6 +933,19 @@ export default function Playground() {
               <div data-cursor className="flex justify-center">
                 <FuzzyText text="FUZZY" fontSize={78} />
               </div>
+            </Experiment>
+          </Reveal>
+
+          <Reveal>
+            <Experiment
+              name="Chromatic glitch"
+              note="Two colour-split ghost copies snap to sliced offsets over a clean base, so the word tears into digital signal corruption then re-forms. Distinct from the signal-fuzz tear beside it: that shears grayscale scanlines, this rips coloured channels off the type. The base stays crisp and readable throughout; the slices are pure CSS keyframes cut with steps(1). Reduced motion drops the ghosts for clean type."
+            >
+              <GlitchText
+                text="GLITCH"
+                intensity={5}
+                className="font-display text-6xl font-bold tracking-tight sm:text-7xl"
+              />
             </Experiment>
           </Reveal>
 
