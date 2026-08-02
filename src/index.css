@@ -159,6 +159,100 @@ body.cursor-none * {
   box-shadow: 0 10px 30px -6px rgba(0, 0, 0, 0.6), 0 0 22px rgba(220, 248, 124, 0.25);
 }
 
+/* GlitchText: two colour-split ghost copies stacked over a clean base. At rest
+   they are invisible; during a burst (`.is-glitching`) they run the slice
+   keyframes — snapped with steps(1) so the offsets cut rather than slide, which
+   is what reads as digital corruption instead of a smooth wobble. `screen`
+   blend lets the cyan/lime channels glow where they poke past the base. The
+   base layer is untouched, so the word stays crisp and readable throughout.
+   Horizontal offset is driven by the inline `--glitch-x` var. */
+.glitch-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  user-select: none;
+  opacity: 0;
+  mix-blend-mode: screen;
+  will-change: transform, clip-path, opacity;
+}
+.glitch.is-glitching .glitch-layer--a {
+  animation: glitch-a 0.45s steps(1, end) infinite;
+}
+.glitch.is-glitching .glitch-layer--b {
+  animation: glitch-b 0.4s steps(1, end) infinite;
+}
+@keyframes glitch-a {
+  0%,
+  100% {
+    opacity: 0;
+    clip-path: inset(0 0 100% 0);
+    transform: translate(0, 0);
+  }
+  12% {
+    opacity: 0.9;
+    clip-path: inset(8% 0 62% 0);
+    transform: translate(calc(var(--glitch-x, 4px) * -1), 0);
+  }
+  28% {
+    opacity: 0.9;
+    clip-path: inset(46% 0 22% 0);
+    transform: translate(var(--glitch-x, 4px), 0);
+  }
+  44% {
+    opacity: 0.9;
+    clip-path: inset(70% 0 6% 0);
+    transform: translate(calc(var(--glitch-x, 4px) * -1), 0);
+  }
+  60% {
+    opacity: 0.9;
+    clip-path: inset(20% 0 55% 0);
+    transform: translate(var(--glitch-x, 4px), 0);
+  }
+  76% {
+    opacity: 0.9;
+    clip-path: inset(4% 0 82% 0);
+    transform: translate(calc(var(--glitch-x, 4px) * -0.5), 0);
+  }
+  92% {
+    opacity: 0.9;
+    clip-path: inset(58% 0 30% 0);
+    transform: translate(var(--glitch-x, 4px), 0);
+  }
+}
+@keyframes glitch-b {
+  0%,
+  100% {
+    opacity: 0;
+    clip-path: inset(0 0 100% 0);
+    transform: translate(0, 0);
+  }
+  16% {
+    opacity: 0.85;
+    clip-path: inset(60% 0 12% 0);
+    transform: translate(var(--glitch-x, 4px), 0);
+  }
+  34% {
+    opacity: 0.85;
+    clip-path: inset(18% 0 58% 0);
+    transform: translate(calc(var(--glitch-x, 4px) * -1), 0);
+  }
+  52% {
+    opacity: 0.85;
+    clip-path: inset(80% 0 4% 0);
+    transform: translate(calc(var(--glitch-x, 4px) * 0.5), 0);
+  }
+  70% {
+    opacity: 0.85;
+    clip-path: inset(38% 0 40% 0);
+    transform: translate(calc(var(--glitch-x, 4px) * -1), 0);
+  }
+  88% {
+    opacity: 0.85;
+    clip-path: inset(6% 0 74% 0);
+    transform: translate(var(--glitch-x, 4px), 0);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
