@@ -42,7 +42,8 @@ export function Lamp({
     <div className={`relative isolate flex flex-col items-center overflow-hidden ${className}`}>
       {/* LIGHT RIG — purely decorative, lit from the top edge. */}
       <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 z-0 h-72">
-        {/* The beam: a trapezoid of light that fans down from the tube. */}
+        {/* The beam: a trapezoid of light that fans down from the tube — its
+            narrow apex sits on the tube so the light reads as cast by the bar. */}
         <motion.div
           initial={reduce ? false : { opacity: 0, scaleX: 0.4 }}
           whileInView={{ opacity: 1, scaleX: 1 }}
@@ -50,10 +51,10 @@ export function Lamp({
           transition={t(0.15)}
           style={{
             transformOrigin: 'top center',
-            background: 'linear-gradient(to bottom, rgba(220,248,124,0.32), transparent 72%)',
-            clipPath: 'polygon(43% 0%, 57% 0%, 84% 100%, 16% 100%)',
+            background: 'linear-gradient(to bottom, rgba(220,248,124,0.34), transparent 72%)',
+            clipPath: 'polygon(44% 0%, 56% 0%, 84% 100%, 16% 100%)',
           }}
-          className="absolute inset-x-0 top-0 mx-auto h-72 w-[36rem] max-w-[92vw] blur-[7px]"
+          className="absolute inset-x-0 top-12 mx-auto h-64 w-[36rem] max-w-[92vw] blur-[7px]"
         />
         {/* The pool: a soft ellipse of light blooming just under the tube. */}
         <motion.div
