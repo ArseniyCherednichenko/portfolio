@@ -46,6 +46,7 @@ import { CurvedLoop } from '../components/CurvedLoop'
 import { FuzzyText } from '../components/FuzzyText'
 import { GlitchText } from '../components/GlitchText'
 import { Lens } from '../components/Lens'
+import { Lamp } from '../components/Lamp'
 import { Iridescence } from '../components/Iridescence'
 import { TrueFocus } from '../components/TrueFocus'
 import { FlowingMenu } from '../components/FlowingMenu'
@@ -803,6 +804,35 @@ function GooeyTabsDemo() {
   )
 }
 
+// A replayable Lamp scene. The rig switches on when it scrolls into view; the
+// remount key lets you flick it off and on again to watch the ignition, since
+// the real thing fires once per arrival. A dim scene behind it so the additive
+// lime light reads.
+function LampDemo() {
+  const [run, setRun] = useState(0)
+  return (
+    <div className="relative">
+      <div key={run} className="flex min-h-[360px] flex-col items-center px-6 pb-10">
+        <Lamp className="w-full">
+          <h4 className="font-display text-4xl font-bold tracking-tight sm:text-6xl">
+            Switched <GradientText>on.</GradientText>
+          </h4>
+          <p className="mx-auto mt-4 max-w-sm text-sm leading-relaxed text-white/55">
+            The tube stretches, the beam fans down, and the words rise up into the light it casts.
+          </p>
+        </Lamp>
+      </div>
+      <button
+        type="button"
+        onClick={() => setRun((n) => n + 1)}
+        className="absolute bottom-5 left-1/2 -translate-x-1/2 rounded-full border border-white/15 bg-black/50 px-5 py-2 text-sm font-semibold text-white/80 backdrop-blur-sm transition-colors hover:border-[#DCF87C]/40 hover:text-white"
+      >
+        Switch off, then on
+      </button>
+    </div>
+  )
+}
+
 export default function Playground() {
   const [likes, setLikes] = useState(128)
   const [on, setOn] = useState(false)
@@ -1057,6 +1087,25 @@ export default function Playground() {
                 A dim statement sits nearly dark until a soft torch of light, masked to the cursor, resolves the words
                 (and a few lime highlights) as you sweep across, then fades back out. A springed radial mask over a lit
                 copy of the text. Touch and reduced-motion get it fully lit.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH LAMP */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-black/40">
+              <LampDemo />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Overhead lamp</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                A light rig that switches on as the section arrives: a thin glowing tube stretches wide, a beam fans
+                down, a soft pool blooms, and the heading rises up into the light. The whole thing is additive lime
+                over the background, so it lights what is behind rather than boxing it in. In the spirit of
+                Aceternity&rsquo;s Lamp, rebuilt from scratch. It lights the closing statement on the work page.
+                Reduced motion renders it already lit and still.
               </p>
             </div>
           </div>
