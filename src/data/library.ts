@@ -56,6 +56,7 @@ export const LIBRARY: LibraryGroup[] = [
       { name: 'RotatingWord', note: 'A single slot that cross-fades through alternative words.', tags: ['text', 'motion'], to: '/', where: 'Home' },
       { name: 'GooeyText', note: 'One word melts into the next through a gooey filter, glyph-halos fusing mid-swap.', tags: ['text', 'liquid', 'motion'], to: '/about', where: 'About' },
       { name: 'TextType', note: 'A typewriter that types a phrase, holds, erases it, and cycles to the next behind a blinking caret.', tags: ['text', 'typewriter', 'terminal'], to: '/terminal', where: 'Terminal' },
+      { name: 'Lamp', note: 'An overhead light rig that switches on as it scrolls into view — a glowing tube stretches wide, a beam fans down, and the heading rises up into the pool of light. Additive, so it lights what is behind rather than boxing it.', tags: ['text', 'light', 'reveal', 'scroll'], to: '/work', where: 'Work' },
     ],
   },
   {
