@@ -88,6 +88,7 @@ import { SphereMenu, type SphereItem } from '../components/SphereMenu'
 import { AnimatedList } from '../components/AnimatedList'
 import { InfiniteScroll, type InfiniteScrollItem } from '../components/InfiniteScroll'
 import { Lanyard } from '../components/Lanyard'
+import { Turntable } from '../components/Turntable'
 import { HoverIndex, type HoverIndexItem } from '../components/HoverIndex'
 import { Gravity } from '../components/Gravity'
 import { GO_TARGETS, useShortcuts } from '../components/Keyboard'
@@ -2696,6 +2697,33 @@ export default function Playground() {
                 on-brand while it tilts; the cord and the placement are written straight onto refs every frame, no React
                 state on the hot path. A different kind of motion from everything else here: not a field, a card, or a
                 trail, but one weight on a string. Reduced motion just lets it hang still.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH TURNTABLE */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 py-12 sm:px-10">
+              <div className="text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Spin</span>
+                <p className="mx-auto mt-3 max-w-md text-lg font-medium text-white/85 sm:text-xl">
+                  Hit play, or grab the vinyl and spin it yourself.
+                </p>
+              </div>
+              <Turntable className="mt-10" title="Side A" subtitle="hand-built in Berlin" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Turntable</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                A record deck with real momentum. The platter is a free-spinning mass carrying a single number — an
+                angular velocity in degrees per second — integrated every frame off the animation clock, no React state
+                on the hot path. Play eases it up to 33 rpm and swings the tonearm down onto the lead-in groove; grab the
+                vinyl and you drive the rotation straight from the pointer angle, and the hand motion you impart becomes
+                the velocity it coasts on when you let go, bleeding off on friction. A different kind of object from the
+                Lanyard next door: not a weight on a string but a wheel you can flick and watch spin down. Reduced motion
+                keeps it still, arm resting, fully labelled.
               </p>
             </div>
           </div>
