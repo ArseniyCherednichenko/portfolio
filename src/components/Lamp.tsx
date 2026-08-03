@@ -1,4 +1,4 @@
-import { motion, useReducedMotion, type Transition } from 'framer-motion'
+import { motion, useReducedMotion, type TargetAndTransition, type Transition } from 'framer-motion'
 import type { ReactNode } from 'react'
 
 /**
@@ -35,7 +35,7 @@ export function Lamp({
   // initial={false} renders the element straight at its `whileInView` target —
   // that is the fully-lit resting state, which is exactly what reduced motion
   // wants (no from-state, no animation), so it doubles as the still fallback.
-  const from = (s: Record<string, unknown>) => (reduce ? false : s)
+  const from = (s: TargetAndTransition): TargetAndTransition | false => (reduce ? false : s)
   const view = { once: true, margin: '-120px' } as const
 
   return (
