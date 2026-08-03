@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { Reveal } from '../components/Reveal'
 import { Eyebrow } from '../components/Eyebrow'
 import { GradientText } from '../components/GradientText'
+import { Lamp } from '../components/Lamp'
 import { MagneticButton } from '../components/MagneticButton'
 import { AnimatedCounter } from '../components/AnimatedCounter'
 import { ProjectPoster } from '../components/ProjectPoster'
@@ -253,16 +254,14 @@ export default function Work() {
         </Reveal>
       </section>
 
-      {/* CTA */}
-      <section className="mx-auto w-full max-w-4xl px-6 py-24 text-center">
-        <Reveal>
+      {/* CTA — a closing statement the overhead lamp switches on as you reach it */}
+      <section className="mx-auto w-full max-w-4xl px-6 pb-24 pt-10 text-center">
+        <Lamp>
           <h2 className="font-display text-4xl font-bold tracking-tight sm:text-6xl">
             Have something
             <br />
             worth building?
           </h2>
-        </Reveal>
-        <Reveal delay={0.1}>
           <div className="mt-10 flex flex-wrap justify-center gap-3">
             <MagneticButton
               href="mailto:ars7ars3@gmail.com"
@@ -277,7 +276,7 @@ export default function Work() {
               About me
             </Link>
           </div>
-        </Reveal>
+        </Lamp>
       </section>
 
       <ProjectQuickLook project={preview} onClose={() => setPreview(null)} />
