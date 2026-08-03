@@ -71,6 +71,7 @@ import { Accordion } from '../components/Accordion'
 import { ElasticSlider } from '../components/ElasticSlider'
 import { Knob } from '../components/Knob'
 import { Switch } from '../components/Switch'
+import { CodeInput } from '../components/CodeInput'
 import { DynamicIsland, type IslandActivity } from '../components/DynamicIsland'
 import { Tooltip } from '../components/Tooltip'
 import { useToast } from '../components/Toast'
@@ -328,6 +329,58 @@ function KnobDemo() {
           className="w-full rounded-full bg-[#DCF87C] transition-[height] duration-150"
           style={{ height: `${level}%` }}
         />
+      </div>
+    </div>
+  )
+}
+
+// A CodeInput showcase: a live six-cell passcode field wired to a real success
+// state. Filling every cell fires onComplete once — flipping the field into a
+// verified chip and raising a toast — and Reset clears it back to empty. The
+// value is controlled so the reset and the completion state stay in step.
+function CodeInputDemo() {
+  const [code, setCode] = useState('')
+  const [verified, setVerified] = useState(false)
+  const { toast } = useToast()
+  return (
+    <div className="flex flex-col items-center gap-6">
+      <CodeInput
+        value={code}
+        onChange={(v) => {
+          setCode(v)
+          if (verified) setVerified(false)
+        }}
+        onComplete={(v) => {
+          setVerified(true)
+          toast(`Code ${v} entered`, { tone: 'success' })
+        }}
+        label="Verification code"
+        size={50}
+      />
+      <div className="flex items-center gap-4">
+        <span
+          className={`inline-flex items-center gap-2 text-sm transition-colors ${
+            verified ? 'text-[#DCF87C]' : 'text-white/40'
+          }`}
+          aria-live="polite"
+        >
+          <span
+            className={`h-1.5 w-1.5 rounded-full transition-colors ${
+              verified ? 'bg-[#DCF87C]' : 'bg-white/25'
+            }`}
+          />
+          {verified ? 'Code entered' : 'Enter all six'}
+        </span>
+        <button
+          type="button"
+          onClick={() => {
+            setCode('')
+            setVerified(false)
+          }}
+          className="rounded-full border border-white/15 px-4 py-1.5 text-sm text-white/70 transition-colors hover:border-[#DCF87C]/40 hover:text-[#DCF87C]"
+        >
+          Reset
+        </button>
       </div>
     </div>
   )
@@ -2342,6 +2395,15 @@ export default function Playground() {
                 <Switch checked={reduce} onChange={setReduce} label="Reduce motion" size={34} />
                 <Switch defaultChecked label="Locked on" size={34} disabled />
               </div>
+            </Experiment>
+          </Reveal>
+
+          <Reveal>
+            <Experiment
+              name="One-time-code field"
+              note="The segmented passcode box the entry family was missing. Type and focus hands itself forward; Backspace clears and steps back; paste a whole code and it scatters across the empty cells. Each digit springs in, the focused cell blinks a lime caret while empty, and a full code lifts the row in a lime-lit stagger — then flips to a verified chip. A real per-cell input, arrow/Home/End navigable and autofill-ready. Reduced motion drops the pop and the blink."
+            >
+              <CodeInputDemo />
             </Experiment>
           </Reveal>
         </div>
