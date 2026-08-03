@@ -1,4 +1,4 @@
-import { motion, useReducedMotion, type TargetAndTransition, type Transition } from 'framer-motion'
+import { motion, useReducedMotion, type Transition } from 'framer-motion'
 import type { ReactNode } from 'react'
 
 /**
@@ -32,11 +32,11 @@ export function Lamp({
   const reduce = useReducedMotion()
   const EASE = [0.16, 1, 0.3, 1] as const
   const t = (delay = 0): Transition => ({ duration: 0.9, delay, ease: EASE })
-  // initial={false} renders the element straight at its `whileInView` target —
-  // that is the fully-lit resting state, which is exactly what reduced motion
-  // wants (no from-state, no animation), so it doubles as the still fallback.
-  const from = (s: TargetAndTransition): TargetAndTransition | false => (reduce ? false : s)
   const view = { once: true, margin: '-120px' } as const
+  // Under reduced motion each layer uses initial={false}, which renders it
+  // straight at its `whileInView` target — the fully-lit resting state — with no
+  // from-state and no animation. So the same markup doubles as the still
+  // fallback: the composition is the point, the ignition is the flourish.
 
   return (
     <div className={`relative isolate flex flex-col items-center overflow-hidden ${className}`}>
@@ -44,7 +44,7 @@ export function Lamp({
       <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 z-0 h-72">
         {/* The beam: a trapezoid of light that fans down from the tube. */}
         <motion.div
-          initial={from({ opacity: 0, scaleX: 0.4 })}
+          initial={reduce ? false : { opacity: 0, scaleX: 0.4 }}
           whileInView={{ opacity: 1, scaleX: 1 }}
           viewport={view}
           transition={t(0.15)}
@@ -57,7 +57,7 @@ export function Lamp({
         />
         {/* The pool: a soft ellipse of light blooming just under the tube. */}
         <motion.div
-          initial={from({ opacity: 0, scale: 0.55 })}
+          initial={reduce ? false : { opacity: 0, scale: 0.55 }}
           whileInView={{ opacity: 0.6, scale: 1 }}
           viewport={view}
           transition={t(0.3)}
@@ -66,7 +66,7 @@ export function Lamp({
         />
         {/* The tube: a bright hairline that stretches wide as it switches on. */}
         <motion.div
-          initial={from({ opacity: 0, width: '9rem' })}
+          initial={reduce ? false : { opacity: 0, width: '9rem' }}
           whileInView={{ opacity: 1, width: '30rem' }}
           viewport={view}
           transition={t(0)}
@@ -78,7 +78,7 @@ export function Lamp({
       {/* CONTENT — rises up into the pool of light the rig casts. */}
       <div className="relative z-10 w-full pt-36 sm:pt-40">
         <motion.div
-          initial={from({ opacity: 0, y: 44 })}
+          initial={reduce ? false : { opacity: 0, y: 44 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={view}
           transition={t(0.35)}
