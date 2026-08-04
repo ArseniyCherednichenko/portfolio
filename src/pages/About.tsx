@@ -20,6 +20,7 @@ import { Timeline } from '../components/Timeline'
 import { ProfileCard } from '../components/ProfileCard'
 import { Folder, type FolderPaper } from '../components/Folder'
 import { Globe } from '../components/Globe'
+import { Carousel, type CarouselSlide } from '../components/Carousel'
 import { MeshGradient } from '../components/MeshGradient'
 import { useContact } from '../components/ContactDialog'
 import { Seo } from '../components/Seo'
@@ -28,6 +29,29 @@ import { CASE_STUDIES } from '../data/projects'
 import { GITHUB_URL } from '../data/contact'
 
 const EASE = [0.16, 1, 0.3, 1] as const
+
+// The short version — the same facts the intro states in prose, cut into
+// glanceable frames for the Carousel. First person, honest, and it names
+// Guided as one thing among several rather than the whole story.
+const FRAMES: CarouselSlide[] = [
+  { n: '01', title: 'Berlin-based.', body: 'Where I build from — most days, and most nights.' },
+  { n: '02', title: 'Co-founder of Guided.', body: 'A Socratic AI tutor. One of the things I have made, not the whole story.' },
+  { n: '03', title: 'Full-stack, and then some.', body: 'React and TypeScript on the web, SwiftUI on iOS, and a lot of applied AI in between.' },
+  { n: '04', title: 'Motion is the medium.', body: 'I care most about how an interface moves and feels — the part you sense before you read it.' },
+  { n: '05', title: 'Always a student.', body: 'Learning by making, and keeping the whole of it in the open.' },
+].map(({ n, title, body }) => ({
+  id: n,
+  label: title,
+  content: (
+    <div className="text-center">
+      <span className="font-display text-5xl font-semibold tabular-nums text-[#DCF87C]/20 sm:text-6xl">{n}</span>
+      <h3 className="mt-3 font-display text-2xl font-semibold tracking-tight sm:text-3xl">
+        <GradientText>{title}</GradientText>
+      </h3>
+      <p className="mx-auto mt-3 max-w-sm text-base leading-relaxed text-white/55">{body}</p>
+    </div>
+  ),
+}))
 
 // The other facets of the site, tucked into a folder you open — so About does
 // not have to be the last word, and no single project is the whole story.
@@ -438,6 +462,23 @@ export default function About() {
             them: motion, type, and the quiet details most people only feel.
           </ScrollReveal>
         </MeshGradient>
+      </section>
+
+      {/* THE SHORT VERSION — the intro, cut into glanceable auto-running frames */}
+      <section className="mx-auto w-full max-w-4xl px-6 py-16">
+        <Reveal>
+          <Eyebrow>The short version</Eyebrow>
+        </Reveal>
+        <Reveal delay={0.05}>
+          <p className="mt-6 max-w-2xl text-2xl font-medium leading-snug text-white/85 sm:text-3xl">
+            If you only have a few seconds.
+          </p>
+        </Reveal>
+        <Reveal delay={0.1}>
+          <div className="mt-10 flex justify-center">
+            <Carousel slides={FRAMES} label="The short version" />
+          </div>
+        </Reveal>
       </section>
 
       {/* RANGE — one craft, several materials, morphing through GooeyText */}
