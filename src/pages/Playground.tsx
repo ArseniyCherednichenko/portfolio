@@ -91,6 +91,7 @@ import { Lanyard } from '../components/Lanyard'
 import { Turntable } from '../components/Turntable'
 import { Harmonograph } from '../components/Harmonograph'
 import { Sortable } from '../components/Sortable'
+import { Carousel, type CarouselSlide } from '../components/Carousel'
 import { HoverIndex, type HoverIndexItem } from '../components/HoverIndex'
 import { Gravity } from '../components/Gravity'
 import { GO_TARGETS, useShortcuts } from '../components/Keyboard'
@@ -181,6 +182,28 @@ const CATEGORIES: { id: string; num: string; label: string; title: string; blurb
 ]
 
 const NAV_LINKS: PillLink[] = CATEGORIES.map((c) => ({ id: c.id, label: c.label }))
+
+// Panels for the Carousel demo — honest beliefs about the craft, one line each,
+// deliberately about how the work is made rather than any single project.
+const CRAFT_FRAMES: CarouselSlide[] = [
+  { n: '01', title: 'Made, not assembled.', body: 'Every field, cursor, and card here is written by hand — nothing pulled from a shelf.' },
+  { n: '02', title: 'Motion with a reason.', body: 'It moves to guide the eye and give weight to a moment, never just to show off.' },
+  { n: '03', title: 'Respect the still.', body: 'Reduced motion is a real path through everything, designed on purpose — not an afterthought.' },
+  { n: '04', title: 'The details you feel.', body: 'Most of the work lives in small moments people never consciously notice, only sense.' },
+  { n: '05', title: 'Built in the open.', body: 'The site grows most days, one commit at a time, all of it on GitHub to read.' },
+].map(({ n, title, body }) => ({
+  id: n,
+  label: title,
+  content: (
+    <div className="text-center">
+      <span className="font-display text-5xl font-semibold tabular-nums text-[#DCF87C]/25 sm:text-6xl">{n}</span>
+      <h4 className="mt-3 font-display text-2xl font-semibold sm:text-3xl">
+        <GradientText>{title}</GradientText>
+      </h4>
+      <p className="mx-auto mt-3 max-w-sm text-sm leading-relaxed text-white/55 sm:text-base">{body}</p>
+    </div>
+  ),
+}))
 
 // A titled band of experiments. The eyebrow/heading orient the reader and give
 // the PillNav a real target to scroll-spy and jump to.
@@ -2784,6 +2807,36 @@ export default function Playground() {
                 rearrange, the state itself becoming the toy. Honest to a11y — each row is a real control with an
                 arrow-key travel and a polite live region that reads the new position, so it reorders exactly the same by
                 keyboard as by drag, and reduced motion swaps the glide for an instant jump.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH CAROUSEL */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 py-12 sm:px-10">
+              <div className="text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Sequence</span>
+                <p className="mx-auto mt-3 max-w-md text-lg font-medium text-white/85 sm:text-xl">
+                  It runs on its own. Hold to pause, click an edge to step, or swipe.
+                </p>
+              </div>
+              <div className="mt-10 flex justify-center">
+                <Carousel slides={CRAFT_FRAMES} label="How the work is made" />
+              </div>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Carousel</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The stories pattern, hand-built: a timed sequence of panels with a row of segmented bars filling across
+                the top. The bar is the clock — the active segment fills over the interval, and when it tops out the panel
+                advances, so the progress you see and the timing are the same thing and can never disagree. A different
+                kind of motion from the objects nearby — not a coverflow you scrub (CircularGallery) or a passive deck on
+                a timer (CardStack), but a sequence you can drive: hold anywhere to pause, click the left or right edge to
+                step, swipe on touch, tap a bar to jump, or use the arrows and the keyboard. Honest to a11y — the controls
+                are real labelled buttons and a polite live region names each panel; under reduced motion the auto-run and
+                the fill drop away and it becomes a plain, manually-stepped sequence.
               </p>
             </div>
           </div>
