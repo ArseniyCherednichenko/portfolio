@@ -90,6 +90,7 @@ import { InfiniteScroll, type InfiniteScrollItem } from '../components/InfiniteS
 import { Lanyard } from '../components/Lanyard'
 import { Turntable } from '../components/Turntable'
 import { Harmonograph } from '../components/Harmonograph'
+import { Sortable } from '../components/Sortable'
 import { HoverIndex, type HoverIndexItem } from '../components/HoverIndex'
 import { Gravity } from '../components/Gravity'
 import { GO_TARGETS, useShortcuts } from '../components/Keyboard'
@@ -2753,6 +2754,36 @@ export default function Playground() {
                 turntable next door: not an object with momentum but a deterministic plotter — the same seed always draws
                 the same plate. Click the plate or the button to hang new pendulums. Reduced motion lays the finished
                 figure down in one frame.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH SORTABLE */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 py-12 sm:px-10">
+              <div className="text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Order</span>
+                <p className="mx-auto mt-3 max-w-md text-lg font-medium text-white/85 sm:text-xl">
+                  Grab a row and drag it. The rest make room and settle into the gap.
+                </p>
+              </div>
+              <div className="mt-10 flex justify-center">
+                <Sortable />
+              </div>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Sortable</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                A list you put in order by hand. Rows are laid out absolutely by index, so the whole reorder collapses to
+                one number — index times the row pitch — and the dragged row simply tracks the pointer while every other
+                row springs to its new slot. The moment your dragged row's centre crosses a neighbour, the order re-solves
+                live underneath you and the layout re-solves with it; let go and the row settles into the gap it made. A
+                different kind of interaction from the objects nearby: not a mass with momentum but a structure you
+                rearrange, the state itself becoming the toy. Honest to a11y — each row is a real control with an
+                arrow-key travel and a polite live region that reads the new position, so it reorders exactly the same by
+                keyboard as by drag, and reduced motion swaps the glide for an instant jump.
               </p>
             </div>
           </div>
