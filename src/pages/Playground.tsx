@@ -89,6 +89,7 @@ import { AnimatedList } from '../components/AnimatedList'
 import { InfiniteScroll, type InfiniteScrollItem } from '../components/InfiniteScroll'
 import { Lanyard } from '../components/Lanyard'
 import { Turntable } from '../components/Turntable'
+import { Harmonograph } from '../components/Harmonograph'
 import { HoverIndex, type HoverIndexItem } from '../components/HoverIndex'
 import { Gravity } from '../components/Gravity'
 import { GO_TARGETS, useShortcuts } from '../components/Keyboard'
@@ -2724,6 +2725,34 @@ export default function Playground() {
                 the velocity it coasts on when you let go, bleeding off on friction. A different kind of object from the
                 Lanyard next door: not a weight on a string but a wheel you can flick and watch spin down. Reduced motion
                 keeps it still, arm resting, fully labelled.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH HARMONOGRAPH */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 py-12 sm:px-10">
+              <div className="text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Draw</span>
+                <p className="mx-auto mt-3 max-w-md text-lg font-medium text-white/85 sm:text-xl">
+                  Hang a fresh set of pendulums and watch the pen find its figure.
+                </p>
+              </div>
+              <Harmonograph className="mt-10" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Harmonograph</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The Victorian drawing machine, in maths. Each axis is the sum of two decaying sinusoids —
+                x(t) = Σ aᵢ·sin(fᵢt + pᵢ)·e^(−dᵢt) — and it is the near-integer frequency ratios with a hair of detuning
+                that make the loops precess into a figure instead of closing on themselves. The whole curve is pre-sampled
+                once from a seed, then a pen tip replays it in real time; crossings glow because the trace is composited
+                additively, so density reads as light, the way graphite builds on paper. A different kind of thing from the
+                turntable next door: not an object with momentum but a deterministic plotter — the same seed always draws
+                the same plate. Click the plate or the button to hang new pendulums. Reduced motion lays the finished
+                figure down in one frame.
               </p>
             </div>
           </div>
