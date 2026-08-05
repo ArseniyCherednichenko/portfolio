@@ -91,6 +91,7 @@ import { Lanyard } from '../components/Lanyard'
 import { Turntable } from '../components/Turntable'
 import { Harmonograph } from '../components/Harmonograph'
 import { Kaleidoscope } from '../components/Kaleidoscope'
+import { Contour } from '../components/Contour'
 import { Sortable } from '../components/Sortable'
 import { Carousel, type CarouselSlide } from '../components/Carousel'
 import { HoverIndex, type HoverIndexItem } from '../components/HoverIndex'
@@ -2155,6 +2156,33 @@ export default function Playground() {
                 deliberate petals; sweep fast to fling bright arms to the rim. Leave it be and a gentle lissajous keeps
                 the figure blooming on its own. One canvas, one animation loop, no per-point state on the hot path.
                 Reduced motion lays down a single still, seeded mandala.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH CONTOUR — a topographic map that rises under the pointer */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="relative h-[440px] overflow-hidden rounded-3xl border border-white/10 bg-[#09090b]">
+              <Contour />
+              <div className="pointer-events-none absolute inset-x-0 top-8 z-10 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Survey</span>
+                <p className="mx-auto mt-3 max-w-md px-6 text-lg font-medium text-white/90 sm:text-xl">
+                  Move over the land. It rises into a peak wherever you rest.
+                </p>
+              </div>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Contour</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                A different pointer field again: not a swarm that reacts locally but a whole terrain. A smooth elevation
+                field of soft hills, drifting on their own slow paths, is resampled onto a grid every frame and traced
+                into iso-lines with marching squares — the exact contour a real map uses to draw elevation. Where two
+                hills meet the rings merge like the saddle between peaks; the higher a ring sits, the more it warms from
+                cool white to lime. The pointer is a hill of its own, easing under the cursor and swelling while it hovers,
+                so a bright lime bullseye rises and the surrounding land bends around it. One canvas, one loop, no
+                per-line state. Reduced motion contours the frozen field once into a calm, still relief.
               </p>
             </div>
           </div>
