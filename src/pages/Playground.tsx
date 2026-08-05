@@ -90,6 +90,7 @@ import { InfiniteScroll, type InfiniteScrollItem } from '../components/InfiniteS
 import { Lanyard } from '../components/Lanyard'
 import { Turntable } from '../components/Turntable'
 import { Harmonograph } from '../components/Harmonograph'
+import { Kaleidoscope } from '../components/Kaleidoscope'
 import { Sortable } from '../components/Sortable'
 import { Carousel, type CarouselSlide } from '../components/Carousel'
 import { HoverIndex, type HoverIndexItem } from '../components/HoverIndex'
@@ -2126,6 +2127,34 @@ export default function Playground() {
                 the pointer, every blob parallaxing by its own depth so the colour seems to pool under the cursor and warm
                 as it nears. Pure layered gradients moved by transforms, no canvas. Backs the About manifesto; reduced
                 motion holds a balanced, still mesh with the lean off.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH KALEIDOSCOPE — the pointer's path folded into a mandala */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="relative h-[440px] overflow-hidden rounded-3xl border border-white/10 bg-[#09090b]">
+              <Kaleidoscope />
+              <div className="pointer-events-none absolute inset-x-0 top-8 z-10 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Draw</span>
+                <p className="mx-auto mt-3 max-w-md px-6 text-lg font-medium text-white/90 sm:text-xl">
+                  Move across it. Whatever you trace blooms into a mandala.
+                </p>
+              </div>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Kaleidoscope</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                A pointer field of a different kind from all the others here. The rest react locally — dots spring,
+                needles turn, threads bulge, ribbons chase; this one takes the path your pointer traces and reflects it
+                into six-fold rotational and mirror symmetry, then lets the strokes accumulate into a slowly-fading
+                figure. A translucent fill of the background decays the whole surface every frame — that is the trail —
+                while the fresh strokes composite additively, so crossings build into light. Move slowly to draw
+                deliberate petals; sweep fast to fling bright arms to the rim. Leave it be and a gentle lissajous keeps
+                the figure blooming on its own. One canvas, one animation loop, no per-point state on the hot path.
+                Reduced motion lays down a single still, seeded mandala.
               </p>
             </div>
           </div>
