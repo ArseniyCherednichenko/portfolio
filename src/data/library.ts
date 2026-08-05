@@ -107,6 +107,7 @@ export const LIBRARY: LibraryGroup[] = [
       { name: 'MeshGradient', note: 'A wash of blurred colour blobs that idle-drift and lean toward the cursor, pooling where it goes.', tags: ['field', 'gradient', 'pointer', 'ambient'], to: '/about', where: 'About' },
       { name: 'Crosshair', note: 'A precision reticle — two spring-eased hairlines that span a surface, track the pointer, and read out its X/Y over a calibrated tick scale.', tags: ['field', 'reticle', 'pointer', 'measure'], to: '/colophon', where: 'Colophon' },
       { name: 'BlobCursor', note: 'A gooey blob that chases the pointer — a chain of circles welded under an SVG goo filter into one liquid mass with a stretching tail, swelling when you press.', tags: ['field', 'cursor', 'goo', 'pointer'], to: '/playground', where: 'Playground' },
+      { name: 'Kaleidoscope', note: 'Folds the path the pointer traces into six-fold rotational and mirror symmetry, accumulating the strokes into a slowly-fading, self-composing mandala.', tags: ['field', 'canvas', 'pointer', 'symmetry', 'generative'], to: '/playground', where: 'Playground' },
     ],
   },
   {
