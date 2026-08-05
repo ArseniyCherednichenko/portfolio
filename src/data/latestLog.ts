@@ -20,11 +20,11 @@ export interface LogHeadline {
 }
 
 export const LATEST_LOG: LogHeadline[] = [
+  { title: 'Interactive type specimen', tag: 'Page' },
   { title: 'Stories-style carousel', tag: 'Component' },
   { title: 'Drag-to-reorder list', tag: 'Component' },
   { title: 'Harmonograph plotter', tag: 'Component' },
   { title: 'Spin-by-hand turntable', tag: 'Component' },
   { title: 'Overhead lamp', tag: 'Component' },
   { title: 'One-time-code field', tag: 'Component' },
-  { title: 'Magnifying lens', tag: 'Component' },
 ]
