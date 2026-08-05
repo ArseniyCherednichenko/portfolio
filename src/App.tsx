@@ -21,6 +21,7 @@ const Colophon = lazy(() => import('./pages/Colophon'))
 const Answers = lazy(() => import('./pages/Answers'))
 const Craft = lazy(() => import('./pages/Craft'))
 const Design = lazy(() => import('./pages/Design'))
+const Specimen = lazy(() => import('./pages/Specimen'))
 const Resume = lazy(() => import('./pages/Resume'))
 const TerminalPage = lazy(() => import('./pages/Terminal'))
 const Changelog = lazy(() => import('./pages/Changelog'))
@@ -47,6 +48,7 @@ export default function App() {
         <Route path="answers" element={<Answers />} />
         <Route path="craft" element={<Craft />} />
         <Route path="design" element={<Design />} />
+        <Route path="specimen" element={<Specimen />} />
         <Route path="resume" element={<Resume />} />
         <Route path="terminal" element={<TerminalPage />} />
         <Route path="changelog" element={<Changelog />} />
