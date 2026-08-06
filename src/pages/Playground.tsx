@@ -23,6 +23,7 @@ import { Particles } from '../components/Particles'
 import { MagnetLines } from '../components/MagnetLines'
 import { Squares } from '../components/Squares'
 import { FlowField } from '../components/FlowField'
+import { Murmuration } from '../components/Murmuration'
 import { Crosshair } from '../components/Crosshair'
 import { ScrollVelocity } from '../components/ScrollVelocity'
 import { DecryptedText } from '../components/DecryptedText'
@@ -1698,6 +1699,33 @@ export default function Playground() {
                 and time, each leaving a fading trail so the canvas reads as moving current. Within reach of the pointer the
                 flow bends toward the tangent and curls into a lime eddy that the cursor drags along. One canvas, one loop,
                 no noise library. Reduced motion traces static streamlines through the frozen field instead.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH MURMURATION */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="relative h-[420px] overflow-hidden rounded-3xl border border-white/10 bg-[#09090b]">
+              <Murmuration className="absolute inset-0" />
+              <div className="pointer-events-none absolute inset-x-0 top-8 z-10 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Emergent flock</span>
+                <p className="mx-auto mt-3 max-w-md px-6 text-xl font-medium text-white/80 sm:text-2xl">
+                  Move to lead the flock. Press, and you are a hawk.
+                </p>
+              </div>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Murmuration</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                Every other field on this page is authored and the cursor only bends it. This one has no field at all.
+                Each of a hundred darts steers by the three rules a real flock runs on — keep your distance, match your
+                neighbours' heading, drift toward their centre — reading only the birds within sight, and the wheeling,
+                folding shape of the whole is nobody's design; it emerges from a hundred agents each minding a small
+                neighbourhood. Hover and they lean toward you; press and you become a hawk and they scatter. One canvas,
+                one loop, the flock in flat typed arrays, forces read from the last frame so it turns in lockstep.
+                Reduced motion never starts the loop — the flock is settled into one composed still instead.
               </p>
             </div>
           </div>
