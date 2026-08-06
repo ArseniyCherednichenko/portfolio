@@ -62,11 +62,17 @@ export function ClickSpark() {
       // Sparks: short streaks flung outward, easing to a stop and fading.
       for (let i = sparks.length - 1; i >= 0; i--) {
         const s = sparks[i]
-        const t = (now - s.born) / SPARK_LIFE
-        if (t >= 1) {
+        const raw = (now - s.born) / SPARK_LIFE
+        if (raw >= 1) {
           sparks.splice(i, 1)
           continue
         }
+        // The rAF timestamp is the frame's start; a burst spawned by a
+        // pointerdown handler later in that same (busy) frame can carry a
+        // `born` a few ms ahead of it, making `raw` briefly negative. Clamp so
+        // the eased value never runs past its ends (a negative feeds a negative
+        // radius into arc() downstream and throws).
+        const t = raw < 0 ? 0 : raw
         const e = easeOut(t)
         const cx = s.x + Math.cos(s.angle) * SPARK_DIST * e
         const cy = s.y + Math.sin(s.angle) * SPARK_DIST * e
@@ -85,11 +91,14 @@ export function ClickSpark() {
       // Rings: a thin shockwave that expands and dims.
       for (let i = rings.length - 1; i >= 0; i--) {
         const r = rings[i]
-        const t = (now - r.born) / RING_LIFE
-        if (t >= 1) {
+        const raw = (now - r.born) / RING_LIFE
+        if (raw >= 1) {
           rings.splice(i, 1)
           continue
         }
+        // Same frame-start vs born clamp as the sparks: a negative `raw` here
+        // makes `4 + RING_RADIUS * e` negative, which throws in arc().
+        const t = raw < 0 ? 0 : raw
         const e = easeOut(t)
         ctx.strokeStyle = `rgba(${ACCENT}, ${0.5 * (1 - t)})`
         ctx.lineWidth = 1.5 * (1 - t)
