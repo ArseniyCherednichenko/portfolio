@@ -164,6 +164,7 @@ export const LIBRARY: LibraryGroup[] = [
     items: [
       { name: 'Modal', note: 'The shared accessible dialog primitive the others build on.', tags: ['overlay', 'dialog', 'a11y'] },
       { name: 'CommandPalette', note: 'The Cmd/Ctrl+K fuzzy palette that jumps anywhere.', tags: ['overlay', 'palette', 'search'] },
+      { name: 'PlaygroundFinder', note: 'A scoped palette for the Playground — search, jump, surprise, and deep-link any of its experiments. Press /.', tags: ['overlay', 'palette', 'search', 'finder'], to: '/playground', where: 'Playground' },
       { name: 'ContactDialog', note: 'The site-wide get-in-touch modal.', tags: ['overlay', 'dialog', 'contact'] },
       { name: 'Tooltip', note: 'A portal-based hint that rises on hover and focus and flips to stay on-screen.', tags: ['overlay', 'tooltip', 'a11y'], to: '/playground', where: 'Playground' },
       { name: 'Toast', note: 'A site-wide notification queue whose lime meter both counts down and, on its end, dismisses the toast.', tags: ['overlay', 'toast', 'a11y'], to: '/playground', where: 'Playground' },
