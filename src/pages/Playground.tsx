@@ -91,6 +91,7 @@ import { InfiniteScroll, type InfiniteScrollItem } from '../components/InfiniteS
 import { Lanyard } from '../components/Lanyard'
 import { Turntable } from '../components/Turntable'
 import { Harmonograph } from '../components/Harmonograph'
+import { Ballpit } from '../components/Ballpit'
 import { Kaleidoscope } from '../components/Kaleidoscope'
 import { Contour } from '../components/Contour'
 import { Sortable } from '../components/Sortable'
@@ -2855,6 +2856,35 @@ export default function Playground() {
                 turntable next door: not an object with momentum but a deterministic plotter — the same seed always draws
                 the same plate. Click the plate or the button to hang new pendulums. Reduced motion lays the finished
                 figure down in one frame.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH BALLPIT */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30">
+              <div className="pointer-events-none absolute inset-x-0 top-8 z-10 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Fill</span>
+                <p className="mx-auto mt-3 max-w-md px-6 text-lg font-medium text-white/85 sm:text-xl">
+                  Grab a ball and toss it. They fall, pile, and bounce off one another.
+                </p>
+              </div>
+              <Ballpit className="h-[440px] w-full" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Ballpit</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                A second take on physics, and a deliberately different one from the Gravity bin above. That one drops DOM
+                pills and resolves them as axis-aligned boxes; this drops round bodies onto a canvas and resolves real
+                circle-circle contact — each pair is separated along the line between their centres and exchanges an
+                impulse along it, with the bigger ball (mass scales with area) shoving the smaller one more than the
+                reverse. The balls are drawn as lit spheres — a radial gradient for volume, a specular dot, a cast shadow —
+                so it reads as a physical thing rather than a tag cloud. One canvas, one animation loop, the whole
+                simulation in refs with no React state on the hot path; the step is clamped so a backgrounded tab can never
+                explode it. Grab one and the motion you impart is carried into the toss. Reduced motion never starts the
+                loop — the balls settle into a calm, static pile instead.
               </p>
             </div>
           </div>
