@@ -184,6 +184,7 @@ export const LIBRARY: LibraryGroup[] = [
       { name: 'Lanyard', note: 'A name badge on a cord you can grab, throw, and watch swing.', tags: ['object', 'physics', 'drag'], to: '/playground', where: 'Playground' },
       { name: 'Turntable', note: 'A record deck you can play or spin by hand — it coasts on real momentum.', tags: ['object', 'physics', 'drag', 'spin'], to: '/playground', where: 'Playground' },
       { name: 'Harmonograph', note: 'A pendulum plotter that traces real decaying-sinusoid figures; crossings glow, and every seed redraws the same plate.', tags: ['object', 'canvas', 'generative', 'physics'], to: '/playground', where: 'Playground' },
+      { name: 'Ballpit', note: 'A canvas bin of lit spheres with real circle-circle physics — grab one and toss it, they pile and bounce.', tags: ['object', 'canvas', 'physics', 'drag'], to: '/playground', where: 'Playground' },
       { name: 'Folder', note: 'A folder that opens and fans out the papers inside it.', tags: ['object', 'folder', 'hover'], to: '/playground', where: 'Playground' },
       { name: 'Terminal', note: 'An interactive shell that drives the whole site by typing.', tags: ['object', 'terminal', 'interactive'], to: '/terminal', where: 'Terminal' },
       { name: 'HeroOrbit', note: 'The orbiting mark that circles behind the hero.', tags: ['object', 'orbit', 'motion'], to: '/', where: 'Home' },
