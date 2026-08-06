@@ -2,6 +2,7 @@ import { createRef, useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Reveal } from '../components/Reveal'
+import { PlaygroundFinder, slugifyExperiment } from '../components/PlaygroundFinder'
 import { AnimatedBeam } from '../components/AnimatedBeam'
 import { ChromaGrid } from '../components/ChromaGrid'
 import { GooeyTabs } from '../components/GooeyTabs'
@@ -225,7 +226,7 @@ function Category({
   children: React.ReactNode
 }) {
   return (
-    <section id={id} className="scroll-mt-32 pt-20">
+    <section id={id} data-category={label} className="scroll-mt-32 pt-20">
       <Reveal>
         <p className="text-sm font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">
           {num} — {label}
@@ -251,14 +252,34 @@ function Experiment({
   note: string
   children: React.ReactNode
 }) {
+  const id = slugifyExperiment(name)
+  const [copied, setCopied] = useState(false)
+  function copyLink() {
+    const url = `${window.location.origin}/playground#${id}`
+    navigator.clipboard?.writeText(url).catch(() => {})
+    setCopied(true)
+    window.setTimeout(() => setCopied(false), 1400)
+  }
   return (
-    <div className="flex flex-col">
+    <div id={id} data-experiment={name} className="group/exp flex scroll-mt-32 flex-col">
       <div className="flex min-h-[220px] flex-1 items-center justify-center rounded-3xl border border-white/10 bg-white/[0.02] p-8">
         {children}
       </div>
-      <div className="mt-4 px-1">
-        <h3 className="text-base font-semibold">{name}</h3>
-        <p className="mt-1 text-sm leading-relaxed text-white/45">{note}</p>
+      <div className="mt-4 flex items-start justify-between gap-3 px-1">
+        <div>
+          <h3 className="text-base font-semibold">{name}</h3>
+          <p className="mt-1 text-sm leading-relaxed text-white/45">{note}</p>
+        </div>
+        {/* Every experiment is addressable — copy a deep link that scrolls here
+            and flashes the card on arrival. Quiet until hover/focus. */}
+        <button
+          type="button"
+          onClick={copyLink}
+          aria-label={`Copy link to ${name}`}
+          className="mt-0.5 shrink-0 rounded-full border border-white/12 px-2 py-1 text-[10px] font-semibold uppercase tracking-wide text-white/40 opacity-0 transition-all hover:border-[#DCF87C]/50 hover:text-[#DCF87C] focus-visible:opacity-100 group-hover/exp:opacity-100"
+        >
+          {copied ? 'Copied' : 'Link'}
+        </button>
       </div>
     </div>
   )
@@ -3074,6 +3095,10 @@ export default function Playground() {
           </div>
         </div>
       </Reveal>
+
+      {/* A scoped finder for the three dozen experiments below — search, jump,
+          surprise, deep-link. Floating trigger, or press "/". */}
+      <PlaygroundFinder />
     </section>
   )
 }
