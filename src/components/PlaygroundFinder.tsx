@@ -66,6 +66,10 @@ export function PlaygroundFinder() {
   const [active, setActive] = useState(0)
   const inputRef = useRef<HTMLInputElement>(null)
   const listRef = useRef<HTMLDivElement>(null)
+  // A jump is deferred until the overlay has fully closed — scrolling and the
+  // flash reflow mid-exit thrash the layout and stall Framer's exit, so we run
+  // them from onExitComplete instead of on a timer that lands inside it.
+  const pendingRef = useRef<Item | null>(null)
 
   const close = useCallback(() => setOpen(false), [])
 
@@ -128,15 +132,20 @@ export function PlaygroundFinder() {
     listRef.current?.querySelector<HTMLElement>(`[data-index="${active}"]`)?.scrollIntoView({ block: 'nearest' })
   }, [active])
 
-  const pick = useCallback(
-    (item: Item | undefined) => {
-      if (!item) return
-      setOpen(false)
-      // Let the overlay unmount and body scroll unlock before we scroll.
-      window.setTimeout(() => jumpTo(item, !!reduce), reduce ? 0 : 130)
-    },
-    [reduce],
-  )
+  const pick = useCallback((item: Item | undefined) => {
+    if (!item) return
+    // Remember the target, close, and let onExitComplete do the scroll+flash
+    // once the overlay is gone and body scroll is unlocked.
+    pendingRef.current = item
+    setOpen(false)
+  }, [])
+
+  const onExitComplete = useCallback(() => {
+    const item = pendingRef.current
+    if (!item) return
+    pendingRef.current = null
+    jumpTo(item, !!reduce)
+  }, [reduce])
 
   const surprise = useCallback(() => {
     const pool = filtered.length ? filtered : items
@@ -181,9 +190,10 @@ export function PlaygroundFinder() {
         </kbd>
       </button>
 
-      <AnimatePresence>
+      <AnimatePresence onExitComplete={onExitComplete}>
         {open && (
           <motion.div
+            key="pg-finder-overlay"
             className="fixed inset-0 z-[110] flex items-start justify-center bg-black/60 px-4 pt-[12vh] backdrop-blur-sm sm:pt-[16vh]"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -253,11 +263,7 @@ export function PlaygroundFinder() {
                         }`}
                       >
                         {isActive && (
-                          <motion.span
-                            layoutId={reduce ? undefined : 'pg-finder-active'}
-                            className="absolute left-0 top-1/2 h-5 w-[3px] -translate-y-1/2 rounded-full bg-[#DCF87C]"
-                            transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
-                          />
+                          <span className="absolute left-0 top-1/2 h-5 w-[3px] -translate-y-1/2 rounded-full bg-[#DCF87C]" />
                         )}
                         <span className={`text-sm ${isActive ? 'text-white' : 'text-white/75'}`}>{it.name}</span>
                       </button>
