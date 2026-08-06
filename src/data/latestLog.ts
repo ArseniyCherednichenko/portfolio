@@ -20,6 +20,7 @@ export interface LogHeadline {
 }
 
 export const LATEST_LOG: LogHeadline[] = [
+  { title: 'An emergent flock of starlings', tag: 'Component' },
   { title: 'A canvas ballpit with real physics', tag: 'Component' },
   { title: 'Find any Playground experiment', tag: 'Component' },
   { title: 'Fixed a click-spark crash', tag: 'Polish' },
@@ -27,5 +28,4 @@ export const LATEST_LOG: LogHeadline[] = [
   { title: 'Pointer-drawn kaleidoscope', tag: 'Component' },
   { title: 'Interactive type specimen', tag: 'Page' },
   { title: 'Stories-style carousel', tag: 'Component' },
-  { title: 'Drag-to-reorder list', tag: 'Component' },
 ]
