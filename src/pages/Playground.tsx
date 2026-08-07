@@ -96,6 +96,7 @@ import { Ballpit } from '../components/Ballpit'
 import { Cloth } from '../components/Cloth'
 import { Kaleidoscope } from '../components/Kaleidoscope'
 import { Contour } from '../components/Contour'
+import { Truchet } from '../components/Truchet'
 import { Sortable } from '../components/Sortable'
 import { Carousel, type CarouselSlide } from '../components/Carousel'
 import { HoverIndex, type HoverIndexItem } from '../components/HoverIndex'
@@ -2944,6 +2945,36 @@ export default function Playground() {
                 scallops, a slow breeze keeps it breathing, and dragging the pointer through catches the weave and shoves it
                 open. Each cell is shaded by how much it compresses, so folds catch the light. One canvas, one loop, a fixed
                 physics step so the solve stays stable at any frame rate; reduced motion relaxes it into a still drape.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH TRUCHET */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30">
+              <div className="pointer-events-none absolute inset-x-0 top-8 z-10 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Weave</span>
+                <p className="mx-auto mt-3 max-w-md px-6 text-lg font-medium text-white/85 sm:text-xl">
+                  Move across the tiles. The maze re-threads and curls toward the cursor.
+                </p>
+              </div>
+              <Truchet className="h-[440px] w-full" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Truchet</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The oldest trick in generative pattern, from Sebastien Truchet's 1704 study of a single divided square.
+                Every cell of the grid draws one of two things: a pair of quarter-circle arcs joining its top edge to its
+                left and its bottom to its right, or the mirror of that. Lay the two tiles at random across a grid and the
+                arcs meet edge to edge into long flowing curves, loops, and knots. Here the weave is alive: a slow field of
+                drifting sine waves decides each tile's orientation, so the maze re-threads itself as the waves pass, every
+                tile flipping on its own beat and cross-fading from the old arcs to the new so the pattern breathes rather
+                than snaps. The pointer is a rotating pinwheel pressed into the field: tiles near the cursor bend toward it
+                and warm from cool white to lime, brightest at the centre and falling off with distance. One canvas, one
+                loop, the orientation and flip progress held in flat typed arrays with no per-tile state; reduced motion
+                freezes the field once into a single calm weave.
               </p>
             </div>
           </div>
