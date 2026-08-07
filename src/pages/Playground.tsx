@@ -93,6 +93,7 @@ import { Lanyard } from '../components/Lanyard'
 import { Turntable } from '../components/Turntable'
 import { Harmonograph } from '../components/Harmonograph'
 import { Ballpit } from '../components/Ballpit'
+import { Cloth } from '../components/Cloth'
 import { Kaleidoscope } from '../components/Kaleidoscope'
 import { Contour } from '../components/Contour'
 import { Sortable } from '../components/Sortable'
@@ -2913,6 +2914,36 @@ export default function Playground() {
                 simulation in refs with no React state on the hot path; the step is clamped so a backgrounded tab can never
                 explode it. Grab one and the motion you impart is carried into the toss. Reduced motion never starts the
                 loop — the balls settle into a calm, static pile instead.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH CLOTH */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30">
+              <div className="pointer-events-none absolute inset-x-0 top-8 z-10 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Weave</span>
+                <p className="mx-auto mt-3 max-w-md px-6 text-lg font-medium text-white/85 sm:text-xl">
+                  Drag through the sheet. It folds, swings, and settles back.
+                </p>
+              </div>
+              <Cloth className="h-[440px] w-full" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Cloth</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                A fourth take on physics, and the odd one out: every other simulation here — Gravity's boxes, the Ballpit's
+                spheres, the Murmuration's birds — is a cloud of separate bodies bumping into each other. This is a single
+                connected soft body. A grid of point masses is integrated with Verlet — each point remembers only where it
+                was last frame, and velocity is read as the gap between then and now — and held together by distance
+                constraints relaxed over several passes every frame, the classic recipe for cloth. Fabric resists a stretch
+                far more than a fold, so an over-stretched link snaps back hard while a compressed one barely pushes, which
+                is what lets the sheet crease into soft folds instead of a taut trampoline. The top edge is pinned in
+                scallops, a slow breeze keeps it breathing, and dragging the pointer through catches the weave and shoves it
+                open. Each cell is shaded by how much it compresses, so folds catch the light. One canvas, one loop, a fixed
+                physics step so the solve stays stable at any frame rate; reduced motion relaxes it into a still drape.
               </p>
             </div>
           </div>
