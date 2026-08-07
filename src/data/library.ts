@@ -110,6 +110,7 @@ export const LIBRARY: LibraryGroup[] = [
       { name: 'BlobCursor', note: 'A gooey blob that chases the pointer — a chain of circles welded under an SVG goo filter into one liquid mass with a stretching tail, swelling when you press.', tags: ['field', 'cursor', 'goo', 'pointer'], to: '/playground', where: 'Playground' },
       { name: 'Kaleidoscope', note: 'Folds the path the pointer traces into six-fold rotational and mirror symmetry, accumulating the strokes into a slowly-fading, self-composing mandala.', tags: ['field', 'canvas', 'pointer', 'symmetry', 'generative'], to: '/playground', where: 'Playground' },
       { name: 'Contour', note: 'A living topographic map — a smooth field of drifting hills resampled each frame and traced into iso-lines with marching squares, the rings warming to lime at the peaks and rising into a bright bullseye wherever the pointer rests.', tags: ['field', 'canvas', 'pointer', 'generative', 'marching-squares'], to: '/playground', where: 'Playground' },
+      { name: 'Truchet', note: 'A living weave of arc tiles after Truchet 1704 — a drifting sine field flips each tile on its own beat, cross-fading old arcs into new so the maze re-threads itself, while a rotating pinwheel under the pointer curls the tiles toward it and warms them to lime.', tags: ['field', 'canvas', 'pointer', 'generative', 'truchet'], to: '/playground', where: 'Playground' },
     ],
   },
   {
