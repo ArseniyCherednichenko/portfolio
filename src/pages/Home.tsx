@@ -357,6 +357,15 @@ export default function Home() {
               className="mt-9 font-display text-2xl font-semibold tracking-tight text-white sm:text-3xl"
             />
           </Reveal>
+          <Reveal delay={0.2}>
+            <Link
+              to="/range"
+              className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-[#DCF87C] transition-opacity hover:opacity-80"
+            >
+              Explore the range
+              <span aria-hidden>-&gt;</span>
+            </Link>
+          </Reveal>
         </div>
         <HorizontalScroll panels={RANGE} className="mt-12" />
       </section>

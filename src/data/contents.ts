@@ -38,6 +38,7 @@ export const CONTENTS: ContentSection[] = [
     intro: 'The projects, and the thinking underneath them.',
     entries: [
       { to: '/work', title: 'Work', blurb: 'Every project as an animated ledger, each with its own case study.', chord: 'w' },
+      { to: '/range', title: 'The range', blurb: 'The five disciplines I work across, one interactive panel at a time.' },
     ],
   },
   {
