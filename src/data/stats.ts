@@ -15,7 +15,7 @@
 export const COMPONENT_COUNT = 126
 
 /** Distinct routed pages the site serves. */
-export const PAGE_COUNT = 22
+export const PAGE_COUNT = 23
 
 export interface SiteStat {
   value: number
