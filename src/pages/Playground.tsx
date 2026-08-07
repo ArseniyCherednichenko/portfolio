@@ -2955,7 +2955,7 @@ export default function Playground() {
           <div className="mt-12">
             <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30">
               <div className="pointer-events-none absolute inset-x-0 top-8 z-10 text-center">
-                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Weave</span>
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Pattern</span>
                 <p className="mx-auto mt-3 max-w-md px-6 text-lg font-medium text-white/85 sm:text-xl">
                   Move across the tiles. The maze re-threads and curls toward the cursor.
                 </p>
