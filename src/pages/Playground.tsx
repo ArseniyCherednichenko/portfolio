@@ -32,6 +32,7 @@ import { BlurText } from '../components/BlurText'
 import { Highlighter } from '../components/Highlighter'
 import { SplitFlap } from '../components/SplitFlap'
 import { Clock } from '../components/Clock'
+import { WordClock } from '../components/WordClock'
 import { CardStack } from '../components/CardStack'
 import { ProfileCard } from '../components/ProfileCard'
 import { PixelTransition } from '../components/PixelTransition'
@@ -1058,6 +1059,17 @@ export default function Playground() {
             >
               <div className="flex justify-center py-2">
                 <Clock size={132} label="Berlin" />
+              </div>
+            </Experiment>
+          </Reveal>
+
+          <Reveal>
+            <Experiment
+              name="Word clock"
+              note="The third way this site reads its Berlin time — not a dial or rolling digits but a wall of letters, QLOCKTWO-style, where only the words spelling the current time light up. Read to the nearest five minutes from a real timezone via Intl; the lit set drives state and only re-renders when the phrase turns over, four times an hour. Reduced motion snaps the glow in instead of breathing it."
+            >
+              <div className="flex justify-center py-2">
+                <WordClock label="Berlin" />
               </div>
             </Experiment>
           </Reveal>
