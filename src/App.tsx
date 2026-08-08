@@ -28,6 +28,7 @@ const TerminalPage = lazy(() => import('./pages/Terminal'))
 const Changelog = lazy(() => import('./pages/Changelog'))
 const Contents = lazy(() => import('./pages/Contents'))
 const Library = lazy(() => import('./pages/Library'))
+const Atlas = lazy(() => import('./pages/Atlas'))
 const NotFound = lazy(() => import('./pages/NotFound'))
 
 export default function App() {
@@ -56,6 +57,7 @@ export default function App() {
         <Route path="changelog" element={<Changelog />} />
         <Route path="contents" element={<Contents />} />
         <Route path="library" element={<Library />} />
+        <Route path="atlas" element={<Atlas />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
