@@ -49,6 +49,7 @@ export const GO_TARGETS: GoTarget[] = [
   { key: 's', to: '/terminal', label: 'Terminal' },
   { key: 'b', to: '/changelog', label: 'Changelog' },
   { key: 'i', to: '/contents', label: 'Index' },
+  { key: 'k', to: '/atlas', label: 'Atlas' },
   { key: 'y', to: '/library', label: 'Library' },
 ]
 

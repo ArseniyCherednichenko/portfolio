@@ -44,6 +44,7 @@ const PAGES: { slug: string; to: string; blurb: string }[] = [
   { slug: 'changelog', to: '/changelog', blurb: 'the build log' },
   { slug: 'contact', to: '/contact', blurb: 'say hello' },
   { slug: 'contents', to: '/contents', blurb: 'the index of everything' },
+  { slug: 'atlas', to: '/atlas', blurb: 'the site as a constellation' },
   { slug: 'library', to: '/library', blurb: 'every component, catalogued' },
 ]
 

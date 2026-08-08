@@ -106,6 +106,7 @@ function Palette({ open, onClose }: { open: boolean; onClose: () => void }) {
       { id: 'terminal', label: 'Terminal', group: 'Pages', hint: 'drive the site by typing', keywords: 'terminal shell command line console type cli bash prompt play interactive', run: () => go('/terminal') },
       { id: 'changelog', label: 'Changelog', group: 'Pages', hint: 'the build log', keywords: 'changelog build log history releases updates commits shipped open source what changed', run: () => go('/changelog') },
       { id: 'contents', label: 'Index', group: 'Pages', hint: 'every page in one place', keywords: 'index contents sitemap map directory all pages everything table of contents overview', run: () => go('/contents') },
+      { id: 'atlas', label: 'Atlas', group: 'Pages', hint: 'the site as a constellation', keywords: 'atlas map constellation graph network nodes sitemap shape structure visual index force directed stars galaxy overview', run: () => go('/atlas') },
       { id: 'library', label: 'The library', group: 'Pages', hint: 'every component, catalogued', keywords: 'library components catalogue catalog gallery parts made by hand ui kit built no template list showcase', run: () => go('/library') },
     ]
 
