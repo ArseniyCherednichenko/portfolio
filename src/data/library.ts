@@ -182,6 +182,7 @@ export const LIBRARY: LibraryGroup[] = [
     items: [
       { name: 'Globe', note: 'A draggable dotted globe with pins on real coordinates.', tags: ['object', 'globe', 'drag'], to: '/about', where: 'About' },
       { name: 'Clock', note: 'A hand-drawn analog dial reading a real timezone.', tags: ['object', 'clock', 'time'], to: '/contact', where: 'Contact' },
+      { name: 'WordClock', note: 'A QLOCKTWO-style letter grid that spells the Berlin time in words — only the words for the current time light up out of a dim field of glyphs. Read to the nearest five minutes from a real timezone; the lit set drives state and re-renders only when the phrase turns over.', tags: ['object', 'clock', 'time', 'type', 'grid'], to: '/playground', where: 'Playground' },
       { name: 'SplitFlap', note: 'A split-flap departure board that clatters to new text.', tags: ['object', 'flip', 'board'], to: '/playground', where: 'Playground' },
       { name: 'Lanyard', note: 'A name badge on a cord you can grab, throw, and watch swing.', tags: ['object', 'physics', 'drag'], to: '/playground', where: 'Playground' },
       { name: 'Turntable', note: 'A record deck you can play or spin by hand — it coasts on real momentum.', tags: ['object', 'physics', 'drag', 'spin'], to: '/playground', where: 'Playground' },
