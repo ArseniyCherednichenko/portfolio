@@ -98,6 +98,7 @@ import { Cloth } from '../components/Cloth'
 import { Kaleidoscope } from '../components/Kaleidoscope'
 import { Contour } from '../components/Contour'
 import { Truchet } from '../components/Truchet'
+import { Morphogen } from '../components/Morphogen'
 import { Sortable } from '../components/Sortable'
 import { Carousel, type CarouselSlide } from '../components/Carousel'
 import { HoverIndex, type HoverIndexItem } from '../components/HoverIndex'
@@ -2987,6 +2988,38 @@ export default function Playground() {
                 and warm from cool white to lime, brightest at the centre and falling off with distance. One canvas, one
                 loop, the orientation and flip progress held in flat typed arrays with no per-tile state; reduced motion
                 freezes the field once into a single calm weave.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH MORPHOGEN */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30">
+              <div className="pointer-events-none absolute inset-x-0 top-8 z-10 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Chemistry</span>
+                <p className="mx-auto mt-3 max-w-md px-6 text-lg font-medium text-white/85 sm:text-xl">
+                  Trace across the field. Fresh growth blooms in your wake, then heals.
+                </p>
+              </div>
+              <Morphogen className="h-[440px] w-full" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Morphogen</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                Every other simulation here pushes mass around — the Cloth's nodes, the Murmuration's birds, the Truchet's
+                tiles. This one grows a pattern out of nothing but chemistry. It is the Gray-Scott reaction-diffusion
+                system, the modern form of the mechanism Alan Turing set out in his 1952 paper "The Chemical Basis of
+                Morphogenesis" to explain how a featureless egg decides where a leopard's spots or a fish's stripes go.
+                Two virtual chemicals share the grid: A, everywhere at rest, and B, the catalyst. B consumes A wherever
+                they meet, A is fed back in at a steady rate, and B slowly decays. Both spread by diffusion — but A spreads
+                faster than B, and that one imbalance is the whole trick: left to run, the field self-organises into coral,
+                worms, and dividing cells, a pattern that never quite settles. It runs on a downscaled float grid wrapped
+                seamlessly at the edges, several reaction steps a frame, double-buffered in flat typed arrays with no
+                per-cell state, drawn into a small bitmap the browser scales up for the soft biological edges. The pointer
+                is a pipette that injects B, so growth blooms under the cursor and heals back in. Reduced motion runs the
+                reaction forward once to a mature pattern and holds it still.
               </p>
             </div>
           </div>
