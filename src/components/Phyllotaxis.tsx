@@ -65,7 +65,6 @@ export function Phyllotaxis({
     let cx = 0
     let cy = 0
     let count = 0 // number of florets, scaled to the card area
-    let maxR = 0 // radius of the outermost floret, for normalising brightness
     let raf = 0
     let t = 0 // frame-driven time phase; no Date.now, so resize-stable and safe
 
@@ -86,7 +85,6 @@ export function Phyllotaxis({
       // radius so density stays even across card sizes. Bounded for a calm budget.
       const room = Math.min(w, h) * 0.46
       count = Math.max(300, Math.min(1900, Math.round((room / spacing) ** 2)))
-      maxR = spacing * Math.sqrt(count - 1)
     }
 
     // Draw the whole head once for a given divergence angle and rotation. Florets
