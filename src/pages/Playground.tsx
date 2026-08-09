@@ -99,6 +99,7 @@ import { Kaleidoscope } from '../components/Kaleidoscope'
 import { Contour } from '../components/Contour'
 import { Truchet } from '../components/Truchet'
 import { Morphogen } from '../components/Morphogen'
+import { Phyllotaxis } from '../components/Phyllotaxis'
 import { Sortable } from '../components/Sortable'
 import { Carousel, type CarouselSlide } from '../components/Carousel'
 import { HoverIndex, type HoverIndexItem } from '../components/HoverIndex'
@@ -3020,6 +3021,40 @@ export default function Playground() {
                 per-cell state, drawn into a small bitmap the browser scales up for the soft biological edges. The pointer
                 is a pipette that injects B, so growth blooms under the cursor and heals back in. Reduced motion runs the
                 reaction forward once to a mature pattern and holds it still.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH PHYLLOTAXIS */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30">
+              <div className="pointer-events-none absolute inset-x-0 top-8 z-10 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Growth</span>
+                <p className="mx-auto mt-3 max-w-md px-6 text-lg font-medium text-white/85 sm:text-xl">
+                  Move over the head. Florets swell and warm under the cursor as the spirals re-thread.
+                </p>
+              </div>
+              <Phyllotaxis className="h-[440px] w-full" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Phyllotaxis</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                Where the Morphogen grows a pattern out of chemistry and the Murmuration pushes birds around, this one
+                places nothing but points and lets a single irrational number do all the work. It is the packing a
+                sunflower, a pinecone, or a daisy uses to fit the most seeds into a disc with no gaps and no seams:
+                Vogel's model, where seed i sits at angle i times the golden angle — 360 degrees over the golden ratio
+                squared, about 137.5 degrees — and radius proportional to the square root of i. That one angle is the
+                whole trick. Because the golden ratio is the most irrational number, resisting any rational
+                approximation longer than any other value, consecutive seeds never line up into spokes and the florets
+                pack evenly all the way out; the eye then reads two interleaved families of spirals whose counts are
+                always adjacent Fibonacci numbers. To make the geometry legible, the divergence angle breathes a few
+                thousandths of a radian around the golden angle, so the arms visibly wind, unwind, and snap to a new
+                Fibonacci family — the demonstration that only the golden angle stops the seeds clumping into arms at
+                all. The head turns slowly and the pointer is a lens that swells and warms nearby florets. One canvas,
+                one loop, pure math with no per-floret state and no randomness; reduced motion draws the grown head once
+                and holds it still.
               </p>
             </div>
           </div>
