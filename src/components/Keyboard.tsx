@@ -51,6 +51,7 @@ export const GO_TARGETS: GoTarget[] = [
   { key: 'i', to: '/contents', label: 'Index' },
   { key: 'k', to: '/atlas', label: 'Atlas' },
   { key: 'y', to: '/library', label: 'Library' },
+  { key: '0', to: '/numbers', label: 'By the numbers' },
 ]
 
 const CHORD_WINDOW_MS = 1400
