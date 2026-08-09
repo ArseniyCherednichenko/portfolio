@@ -108,6 +108,7 @@ function Palette({ open, onClose }: { open: boolean; onClose: () => void }) {
       { id: 'contents', label: 'Index', group: 'Pages', hint: 'every page in one place', keywords: 'index contents sitemap map directory all pages everything table of contents overview', run: () => go('/contents') },
       { id: 'atlas', label: 'Atlas', group: 'Pages', hint: 'the site as a constellation', keywords: 'atlas map constellation graph network nodes sitemap shape structure visual index force directed stars galaxy overview', run: () => go('/atlas') },
       { id: 'library', label: 'The library', group: 'Pages', hint: 'every component, catalogued', keywords: 'library components catalogue catalog gallery parts made by hand ui kit built no template list showcase', run: () => go('/library') },
+      { id: 'numbers', label: 'By the numbers', group: 'Pages', hint: 'the site, counted', keywords: 'numbers stats statistics metrics measured counts data dashboard breakdown charts bars components pages made by hand', run: () => go('/numbers') },
     ]
 
     const projects: Command[] = PROJECTS.filter((p) => !p.soon).map((p) => ({
