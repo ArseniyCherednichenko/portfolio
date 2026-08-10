@@ -22,6 +22,7 @@ import { DotGrid } from '../components/DotGrid'
 import { Particles } from '../components/Particles'
 import { MagnetLines } from '../components/MagnetLines'
 import { Squares } from '../components/Squares'
+import { Cubes } from '../components/Cubes'
 import { FlowField } from '../components/FlowField'
 import { Murmuration } from '../components/Murmuration'
 import { Crosshair } from '../components/Crosshair'
@@ -1645,6 +1646,30 @@ export default function Playground() {
               <p className="mt-1 text-sm leading-relaxed text-white/45">
                 A few hundred dots on a single canvas, each a tiny spring pushed by the pointer and pulled home. Lights up
                 lime within reach.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH ISOMETRIC CUBES */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="relative flex h-[400px] items-center justify-center overflow-hidden rounded-3xl border border-white/10 bg-[#0a0a0a]">
+              <Cubes rows={7} cols={7} cell={44} gap={9} />
+              <div className="pointer-events-none absolute inset-x-0 bottom-5 flex flex-col items-center text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Isometric field</span>
+                <p className="mt-2 max-w-md px-6 text-sm text-white/60">
+                  Sweep across the blocks — the one you touch rises highest and a wave follows.
+                </p>
+              </div>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Isometric cube field</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                A grid of extruded blocks on an isometric plane — the pointer-field family's first surface with real
+                height. Each cube is a top face and two lit walls in pure CSS 3D; the block under your cursor lifts and
+                lights lime, and a ripple radiates out on a per-cube delay keyed to grid distance. The tops breathe on a
+                staggered loop, so the plane is alive before you touch it. Reduced motion stills it flat.
               </p>
             </div>
           </div>
