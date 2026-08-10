@@ -271,6 +271,56 @@ body.cursor-none * {
   animation: pg-flash 1.5s ease-out;
 }
 
+/* Cubes — an isometric field of extruded blocks (src/components/Cubes.tsx).
+   Each cube is a top face and two lit walls built in CSS 3D; the top faces
+   light lime and breathe on a staggered loop, brightening as a cube rises
+   (--k, set per cube in the component). All motion is animation/transition, so
+   the reduced-motion guard below stills the whole plane. */
+.cube-face {
+  position: absolute;
+  inset: 0;
+  width: var(--cube);
+  height: var(--cube);
+}
+.cube-top {
+  transform: translateZ(calc(var(--cube) / 2));
+  background:
+    linear-gradient(
+      135deg,
+      rgba(220, 248, 124, calc(0.9 * var(--k))),
+      rgba(220, 248, 124, calc(0.4 * var(--k)))
+    ),
+    #202127;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.08),
+    0 0 calc(20px * var(--k)) rgba(220, 248, 124, calc(0.65 * var(--k)));
+  animation: cubes-breathe 5.5s ease-in-out infinite;
+  animation-delay: var(--idle);
+}
+.cube-left {
+  transform: rotateY(-90deg) translateZ(calc(var(--cube) / 2));
+  background:
+    linear-gradient(rgba(220, 248, 124, calc(0.18 * var(--k))), transparent),
+    #111217;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+}
+.cube-right {
+  transform: rotateX(90deg) translateZ(calc(var(--cube) / 2));
+  background:
+    linear-gradient(rgba(220, 248, 124, calc(0.1 * var(--k))), transparent),
+    #0a0b0f;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+}
+@keyframes cubes-breathe {
+  0%,
+  100% {
+    filter: brightness(0.92);
+  }
+  50% {
+    filter: brightness(1.25);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
