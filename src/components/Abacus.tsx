@@ -89,14 +89,12 @@ export function Abacus({
 
   const [state, setState] = useState<Rod[]>(initial)
 
-  const setRod = useCallback((col: number, next: Rod) => {
-    setState((prev) => prev.map((r, i) => (i === col ? next : r)))
+  // All mutations go through a functional updater keyed on the rod's *previous*
+  // state, so two interactions landing in the same frame (a fast double tap, or
+  // a click plus a key) compose correctly instead of racing on a stale prop.
+  const updateRod = useCallback((col: number, fn: (rod: Rod) => Rod) => {
+    setState((prev) => prev.map((r, i) => (i === col ? fn(r) : r)))
   }, [])
-
-  const setDigit = useCallback(
-    (col: number, digit: number) => setRod(col, digitToRod(clampDigit(digit))),
-    [setRod],
-  )
 
   const digits = state.map(rodToDigit)
   const total = digits.join('')
@@ -150,9 +148,7 @@ export function Abacus({
               col={col}
               place={rods - 1 - col}
               digit={digits[col]}
-              onSetRod={setRod}
-              onStepDigit={(delta) => setDigit(col, digits[col] + delta)}
-              onSetDigit={(d) => setDigit(col, d)}
+              onUpdateRod={updateRod}
               spring={springy}
             />
           ))}
@@ -172,20 +168,19 @@ function Column({
   col,
   place,
   digit,
-  onSetRod,
-  onStepDigit,
-  onSetDigit,
+  onUpdateRod,
   spring,
 }: {
   rod: Rod
   col: number
   place: number
   digit: number
-  onSetRod: (col: number, next: Rod) => void
-  onStepDigit: (delta: number) => void
-  onSetDigit: (d: number) => void
+  onUpdateRod: (col: number, fn: (rod: Rod) => Rod) => void
   spring: object
 }) {
+  const stepDigit = (delta: number) =>
+    onUpdateRod(col, (r) => digitToRod(clampDigit(rodToDigit(r) + delta)))
+  const setDigit = (d: number) => onUpdateRod(col, () => digitToRod(clampDigit(d)))
   // Heaven bead: rests at the top, drops toward the bar when active.
   const heavenTop = rod.heaven ? HEAVEN_H - BEAD_H - PAD : PAD
 
@@ -199,35 +194,35 @@ function Column({
   // Clicking the kth earth bead (0 = nearest the bar): if it is already up,
   // clear it and everything below it (new count k); if it is down, push it and
   // everything above it up (new count k + 1). The classic soroban toggle.
-  const clickEarth = (k: number) => {
-    const next = k < rod.earth ? k : k + 1
-    onSetRod(col, { ...rod, earth: next })
-  }
+  const clickEarth = (k: number) =>
+    onUpdateRod(col, (r) => ({ ...r, earth: k < r.earth ? k : k + 1 }))
+
+  const toggleHeaven = () => onUpdateRod(col, (r) => ({ ...r, heaven: !r.heaven }))
 
   const onKeyDown = (e: ReactKeyboardEvent<HTMLDivElement>) => {
     switch (e.key) {
       case 'ArrowUp':
       case 'ArrowRight':
         e.preventDefault()
-        onStepDigit(1)
+        stepDigit(1)
         break
       case 'ArrowDown':
       case 'ArrowLeft':
         e.preventDefault()
-        onStepDigit(-1)
+        stepDigit(-1)
         break
       case 'Home':
         e.preventDefault()
-        onSetDigit(0)
+        setDigit(0)
         break
       case 'End':
         e.preventDefault()
-        onSetDigit(9)
+        setDigit(9)
         break
       default:
         if (/^[0-9]$/.test(e.key)) {
           e.preventDefault()
-          onSetDigit(Number(e.key))
+          setDigit(Number(e.key))
         }
     }
   }
@@ -260,7 +255,7 @@ function Column({
         <Bead
           top={heavenTop}
           active={rod.heaven}
-          onClick={() => onSetRod(col, { ...rod, heaven: !rod.heaven })}
+          onClick={toggleHeaven}
           spring={spring}
           label={`Five bead, rod ${col + 1}`}
         />
