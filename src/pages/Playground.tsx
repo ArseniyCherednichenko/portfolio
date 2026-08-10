@@ -94,6 +94,7 @@ import { InfiniteScroll, type InfiniteScrollItem } from '../components/InfiniteS
 import { Lanyard } from '../components/Lanyard'
 import { Turntable } from '../components/Turntable'
 import { Harmonograph } from '../components/Harmonograph'
+import { Abacus } from '../components/Abacus'
 import { Ballpit } from '../components/Ballpit'
 import { Cloth } from '../components/Cloth'
 import { Kaleidoscope } from '../components/Kaleidoscope'
@@ -2925,6 +2926,35 @@ export default function Playground() {
                 turntable next door: not an object with momentum but a deterministic plotter — the same seed always draws
                 the same plate. Click the plate or the button to hang new pendulums. Reduced motion lays the finished
                 figure down in one frame.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH ABACUS */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 py-12 sm:px-10">
+              <div className="text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Reckon</span>
+                <p className="mx-auto mt-3 max-w-md text-lg font-medium text-white/85 sm:text-xl">
+                  Slide the beads. The number above is whatever they add up to.
+                </p>
+              </div>
+              <Abacus className="mt-10" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Abacus</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                A working soroban, and the odd one out in this family: not a passive dial like the Clock, a wheel with
+                momentum like the Turntable, or a seeded plotter like the Harmonograph — an object whose state actually
+                means something. Each rod carries one heaven bead worth five above the reckoning bar and four earth beads
+                worth one below it; a bead counts once it is pushed toward the bar, so a rod reads zero to nine and the
+                columns left to right are the decimal places. The big number is the honest sum of every bead's place —
+                move a bead and the arithmetic follows. Click a bead and the ones it should carry with it move too, the
+                way the real instrument works, or focus a rod and drive its digit straight from the arrow keys — each rod
+                is a real spinbutton that reads its value to a screen reader. Reduced motion drops the bead springs for a
+                clean snap; it stays a fully usable, fully labelled instrument.
               </p>
             </div>
           </div>
