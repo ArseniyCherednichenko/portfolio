@@ -60,6 +60,7 @@ export const CONTENTS: ContentSection[] = [
     label: 'Words',
     intro: 'Writing, and answers to what people tend to ask.',
     entries: [
+      { to: '/principles', title: 'Principles', blurb: 'The manifesto — eight beliefs behind how the work gets made.', chord: 'v' },
       { to: '/writing', title: 'Writing', blurb: 'Notes and essays, honestly still in progress.', chord: 'j' },
       { to: '/answers', title: 'Answers', blurb: 'The questions people ask, answered plainly.', chord: 'q' },
     ],

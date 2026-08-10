@@ -32,6 +32,7 @@ const GROUPS: FooterGroup[] = [
   {
     title: 'In words',
     links: [
+      { to: '/principles', label: 'Principles' },
       { to: '/writing', label: 'Writing' },
       { to: '/answers', label: 'Answers' },
       { to: '/craft', label: 'On motion' },

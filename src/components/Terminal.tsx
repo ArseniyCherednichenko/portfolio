@@ -38,6 +38,7 @@ const PAGES: { slug: string; to: string; blurb: string }[] = [
   { slug: 'toolkit', to: '/toolkit', blurb: 'the tools I reach for' },
   { slug: 'writing', to: '/writing', blurb: 'thinking in the open' },
   { slug: 'now', to: '/now', blurb: 'what I am on right now' },
+  { slug: 'principles', to: '/principles', blurb: 'the manifesto, eight beliefs' },
   { slug: 'answers', to: '/answers', blurb: 'questions people ask' },
   { slug: 'resume', to: '/resume', blurb: 'a one-page CV' },
   { slug: 'colophon', to: '/colophon', blurb: 'how this site is built' },

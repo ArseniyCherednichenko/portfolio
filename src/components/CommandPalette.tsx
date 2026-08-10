@@ -98,6 +98,7 @@ function Palette({ open, onClose }: { open: boolean; onClose: () => void }) {
       { id: 'writing', label: 'Writing', group: 'Pages', hint: 'notes, in progress', keywords: 'writing notes blog essays journal articles thoughts', run: () => go('/writing') },
       { id: 'contact-page', label: 'Contact', group: 'Pages', hint: 'reach me', keywords: 'contact email hire reach availability', run: () => go('/contact') },
       { id: 'colophon', label: 'Colophon', group: 'Pages', hint: 'how it is built', keywords: 'colophon stack build source open source craft typography fonts', run: () => go('/colophon') },
+      { id: 'principles', label: 'Principles', group: 'Pages', hint: 'the manifesto', keywords: 'principles manifesto beliefs values ethos philosophy how i build craft process convictions statement rules', run: () => go('/principles') },
       { id: 'answers', label: 'Answers', group: 'Pages', hint: 'questions people ask', keywords: 'answers faq questions about who what ask frequently help', run: () => go('/answers') },
       { id: 'craft', label: 'On motion', group: 'Pages', hint: 'notes on craft, playable', keywords: 'craft motion animation easing spring stagger reduced motion interactive demos notes principles', run: () => go('/craft') },
       { id: 'design', label: 'Design language', group: 'Pages', hint: 'the style guide', keywords: 'design language style guide system palette colours colors tokens type typography fraunces inter scale motion easing swatch hex copy', run: () => go('/design') },
