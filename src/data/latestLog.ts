@@ -20,6 +20,7 @@ export interface LogHeadline {
 }
 
 export const LATEST_LOG: LogHeadline[] = [
+  { title: 'An isometric field of cubes that rise to the cursor', tag: 'Component' },
   { title: 'A sunflower head packed by the golden angle', tag: 'Component' },
   { title: 'A living Turing pattern, grown by chemistry', tag: 'Component' },
   { title: 'Atlas — the whole site as a constellation', tag: 'Page' },
