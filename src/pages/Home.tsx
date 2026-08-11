@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { GlassSurface } from '../components/GlassSurface'
 import { useBerlinTime } from '../hooks/useBerlinTime'
 import { ProjectQuickLook } from '../components/ProjectQuickLook'
+import { ProjectShowcase } from '../components/ProjectShowcase'
 import { Reveal } from '../components/Reveal'
 import { GradientText } from '../components/GradientText'
 import { SplitText } from '../components/SplitText'
@@ -454,44 +455,7 @@ export default function Home() {
             </Link>
           </div>
         </Reveal>
-        <div className="mt-10 grid gap-6 sm:grid-cols-2">
-          {PROJECTS.map((p, idx) =>
-            p.soon ? (
-              <Reveal key={p.title} delay={idx * 0.05}>
-                <div className="flex h-full min-h-[210px] flex-col justify-between rounded-3xl border border-dashed border-white/15 p-8 text-white/40">
-                  <span className="text-xs font-semibold uppercase tracking-[0.2em]">In progress</span>
-                  <div>
-                    <h3 className="text-2xl font-bold text-white/55">{p.title}</h3>
-                    <p className="mt-2 text-sm">{p.blurb}</p>
-                  </div>
-                </div>
-              </Reveal>
-            ) : (
-              <Reveal key={p.title} delay={idx * 0.05}>
-                <SpotlightCard className="h-full">
-                  <button
-                    onClick={() => setActive(p)}
-                    className="flex h-full w-full flex-col justify-between p-8 text-left"
-                  >
-                    <div className="flex items-baseline justify-between gap-4">
-                      <h3 className="text-2xl font-bold">{p.title}</h3>
-                      <span className="text-sm text-white/40">{p.year}</span>
-                    </div>
-                    <p className="mt-4 leading-relaxed text-white/60">{p.blurb}</p>
-                    <div className="mt-6 flex flex-wrap gap-2">
-                      {p.stack.map((s) => (
-                        <span key={s} className="rounded-full border border-white/10 px-3 py-1 text-xs text-white/55">
-                          {s}
-                        </span>
-                      ))}
-                    </div>
-                    <span className="mt-6 inline-flex items-center gap-1 text-sm font-semibold text-[#DCF87C]">Read more</span>
-                  </button>
-                </SpotlightCard>
-              </Reveal>
-            ),
-          )}
-        </div>
+        <ProjectShowcase projects={PROJECTS} onQuickLook={setActive} className="mt-10" />
       </section>
 
       {/* VELOCITY BAND */}
