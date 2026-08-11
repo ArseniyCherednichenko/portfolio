@@ -102,6 +102,7 @@ import { Contour } from '../components/Contour'
 import { Truchet } from '../components/Truchet'
 import { Morphogen } from '../components/Morphogen'
 import { Phyllotaxis } from '../components/Phyllotaxis'
+import { Attractor } from '../components/Attractor'
 import { Sortable } from '../components/Sortable'
 import { Carousel, type CarouselSlide } from '../components/Carousel'
 import { HoverIndex, type HoverIndexItem } from '../components/HoverIndex'
@@ -2275,6 +2276,34 @@ export default function Playground() {
                 cool white to lime. The pointer is a hill of its own, easing under the cursor and swelling while it hovers,
                 so a bright lime bullseye rises and the surrounding land bends around it. One canvas, one loop, no
                 per-line state. Reduced motion contours the frozen field once into a calm, still relief.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH ATTRACTOR — deterministic chaos drawn as additive light */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="relative h-[440px] overflow-hidden rounded-3xl border border-white/10 bg-[#060606]">
+              <Attractor />
+              <div className="pointer-events-none absolute inset-x-0 top-8 z-10 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Strange attractor</span>
+                <p className="mx-auto mt-3 max-w-md px-6 text-lg font-medium text-white/90 sm:text-xl">
+                  Move across it. The cursor bends the whole shape as it re-forms.
+                </p>
+              </div>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Strange attractor</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                A pointer field grown from deterministic chaos rather than physics or a swarm. It iterates one simple
+                nonlinear map — the Clifford attractor — thousands of times a frame and plots where the orbit lands; any
+                single step is dull, but the orbit never settles and never repeats, wandering a fractal set of infinite
+                detail. Drawn with additive compositing, so where the orbit lingers sums into light — dense arms bloom
+                from lime toward white while the faint rim stays cool. The four parameters pick which attractor you get,
+                so the cursor morphs the family while an idle drift keeps all four breathing on slow, out-of-phase sines;
+                the shape endlessly re-forms whether or not you touch it. One canvas, one loop, a fixed seed and no
+                randomness. Reduced motion plots a single crisp attractor once, at rest.
               </p>
             </div>
           </div>
