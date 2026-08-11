@@ -20,6 +20,7 @@ export interface LogHeadline {
 }
 
 export const LATEST_LOG: LogHeadline[] = [
+  { title: 'A strange attractor drawn as light from deterministic chaos', tag: 'Component' },
   { title: 'A poster-forward, cursor-tilt showcase for the home work band', tag: 'Polish' },
   { title: 'Principles — a manifesto of how I build', tag: 'Page' },
   { title: 'A working abacus whose beads compute a real number', tag: 'Component' },
@@ -29,5 +30,4 @@ export const LATEST_LOG: LogHeadline[] = [
   { title: 'Atlas — the whole site as a constellation', tag: 'Page' },
   { title: 'A word clock that spells the time', tag: 'Component' },
   { title: 'A living weave of Truchet tiles', tag: 'Component' },
-  { title: 'A sheet of Verlet-simulated cloth', tag: 'Component' },
 ]
