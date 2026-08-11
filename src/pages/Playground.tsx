@@ -103,6 +103,7 @@ import { Truchet } from '../components/Truchet'
 import { Morphogen } from '../components/Morphogen'
 import { Phyllotaxis } from '../components/Phyllotaxis'
 import { Attractor } from '../components/Attractor'
+import { PendulumWave } from '../components/PendulumWave'
 import { Sortable } from '../components/Sortable'
 import { Carousel, type CarouselSlide } from '../components/Carousel'
 import { HoverIndex, type HoverIndexItem } from '../components/HoverIndex'
@@ -2304,6 +2305,35 @@ export default function Playground() {
                 so the cursor morphs the family while an idle drift keeps all four breathing on slow, out-of-phase sines;
                 the shape endlessly re-forms whether or not you touch it. One canvas, one loop, a fixed seed and no
                 randomness. Reduced motion plots a single crisp attractor once, at rest.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH PENDULUM WAVE — tuned oscillators dephasing into travelling waves */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="relative h-[440px] overflow-hidden rounded-3xl border border-white/10 bg-[#060606]">
+              <PendulumWave />
+              <div className="pointer-events-none absolute inset-x-0 top-8 z-10 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Pendulum wave</span>
+                <p className="mx-auto mt-3 max-w-md px-6 text-lg font-medium text-white/90 sm:text-xl">
+                  Press the rack. Every bob lifts to a line, then the wave re-forms.
+                </p>
+              </div>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Pendulum wave</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                A pointer field grown from the plainest physics there is: a row of simple pendulums, hung longest to
+                shortest so each swings at its own rate. The tuning is the trick — over one shared cycle the i-th bob
+                completes exactly one more full swing than its neighbour, whole numbers all, so after that cycle every
+                bob returns to the same place at the same instant and the rack snaps back into a single line. In between
+                they drift out of step, and the eye reads the drift as a wave travelling the rack — a smooth snake, then
+                two and three waves, then a scatter that looks random but never is, then a clean re-alignment. Each angle
+                is a pure cosine of a frame-driven phase, no integration and no randomness; press anywhere and the phase
+                eases back to zero so the wave re-forms from a clean line under your hand. Reduced motion paints one
+                graceful wave, at rest.
               </p>
             </div>
           </div>
