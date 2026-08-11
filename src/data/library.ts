@@ -66,6 +66,7 @@ export const LIBRARY: LibraryGroup[] = [
       { name: 'SpotlightCard', note: 'A card with a soft spotlight that tracks the cursor.', tags: ['card', 'pointer', 'glow'], to: '/playground', where: 'Playground' },
       { name: 'TiltCard', note: 'A surface that tilts in 3D toward the pointer.', tags: ['card', '3d', 'pointer'], to: '/playground', where: 'Playground' },
       { name: 'ProfileCard', note: 'A tilting identity card under a sweeping iridescent film.', tags: ['card', '3d', 'pointer'], to: '/about', where: 'About' },
+      { name: 'ProjectShowcase', note: 'The home work band: generative-poster project cards that tilt toward the cursor under a lime spotlight.', tags: ['card', '3d', 'pointer', 'work'], to: '/', where: 'Home' },
       { name: 'ChromaGrid', note: 'A grid of cards lit by a colour that follows the pointer.', tags: ['card', 'grid', 'pointer'], to: '/playground', where: 'Playground' },
       { name: 'BentoGrid', note: 'An asymmetric bento layout of framed, responsive cells.', tags: ['card', 'grid', 'layout'], to: '/playground', where: 'Playground' },
       { name: 'GlassSurface', note: 'A frosted-glass panel with real depth and edge light.', tags: ['card', 'glass'], to: '/playground', where: 'Playground' },
