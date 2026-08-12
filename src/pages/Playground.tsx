@@ -78,6 +78,7 @@ import { Knob } from '../components/Knob'
 import { Switch } from '../components/Switch'
 import { CodeInput } from '../components/CodeInput'
 import { DynamicIsland, type IslandActivity } from '../components/DynamicIsland'
+import { Sheet } from '../components/Sheet'
 import { Tooltip } from '../components/Tooltip'
 import { useToast } from '../components/Toast'
 import { Stepper, type StepperStep } from '../components/Stepper'
@@ -901,6 +902,7 @@ export default function Playground() {
   const [reduce, setReduce] = useState(false)
   const [volume, setVolume] = useState(62)
   const [island, setIsland] = useState<IslandActivity>('music')
+  const [sheetOpen, setSheetOpen] = useState(false)
   const { openShortcuts } = useShortcuts()
 
   return (
@@ -2757,6 +2759,41 @@ export default function Playground() {
           </div>
         </Reveal>
 
+        {/* FULL-WIDTH BOTTOM SHEET */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="flex flex-col items-center gap-6 rounded-3xl border border-white/10 bg-white/[0.02] px-6 py-14 sm:px-10">
+              <button
+                type="button"
+                onClick={() => setSheetOpen(true)}
+                className="rounded-full bg-[#DCF87C] px-6 py-3 text-sm font-semibold text-black transition-transform active:scale-[0.97]"
+              >
+                Open the sheet
+              </button>
+              <p className="max-w-sm text-center text-xs leading-relaxed text-white/40">
+                Drag the grabber to move between heights, flick to throw it, or pull it
+                down past the smallest stop to dismiss. Keyboard and reduced-motion users
+                get the same three stops as buttons.
+              </p>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Bottom sheet with detents</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The native iOS sheet, rebuilt for the web — the pattern behind Apple's
+                UISheetPresentationController. It rests at one of three heights (its
+                detents); drag the grabber and it snaps to the nearest on release,
+                throwing to the closest with a flick, and a pull past the smallest stop
+                dismisses it. A backdrop dims in step with how far it is raised. Distinct
+                from the plain Modal: here the height change, the snapping, and the
+                drag-to-dismiss are the whole control. Honest to a11y — role=dialog,
+                Escape, a focus trap, a labelled grabber that cycles the stops from the
+                keyboard, and body-scroll lock. Reduced motion drops the drag for instant,
+                spring-free stops.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
         {/* FULL-WIDTH FLOWING MENU */}
         <Reveal>
           <div className="mt-12">
@@ -3438,6 +3475,41 @@ export default function Playground() {
           </div>
         </div>
       </Reveal>
+
+      {/* The bottom-sheet overlay itself. Fixed to the viewport, so it lives at
+          the end of the tree; the trigger for it sits in the controls band. */}
+      <Sheet open={sheetOpen} onOpenChange={setSheetOpen} title="Bottom sheet">
+        <div className="space-y-5">
+          <p className="text-sm leading-relaxed text-white/60">
+            This is a real detented sheet, not a screenshot. Drag the grabber at the top
+            to raise or lower it; it snaps to the nearest of three heights on release and
+            throws further with a flick. Pull it down past the lowest stop and it
+            dismisses. The buttons above do the same thing without a drag.
+          </p>
+          <ul className="space-y-2 text-sm text-white/55">
+            {[
+              ['Peek', 'A glance — the smallest resting height.'],
+              ['Half', 'The working height, most of the content in view.'],
+              ['Full', 'Everything, a sliver of backdrop still showing.'],
+            ].map(([label, note]) => (
+              <li
+                key={label}
+                className="flex items-baseline gap-3 rounded-2xl border border-white/8 bg-white/[0.02] px-4 py-3"
+              >
+                <span className="w-12 shrink-0 text-xs font-semibold uppercase tracking-wide text-[#DCF87C]">
+                  {label}
+                </span>
+                <span className="leading-relaxed">{note}</span>
+              </li>
+            ))}
+          </ul>
+          <p className="text-sm leading-relaxed text-white/45">
+            The same drag model powers native sheets on iOS. Rebuilding it here keeps the
+            native side of the work tangible on the web, and every part of it is reachable
+            from the keyboard.
+          </p>
+        </div>
+      </Sheet>
 
       {/* A scoped finder for the three dozen experiments below — search, jump,
           surprise, deep-link. Floating trigger, or press "/". */}
