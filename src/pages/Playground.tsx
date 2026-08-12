@@ -104,6 +104,7 @@ import { Morphogen } from '../components/Morphogen'
 import { Phyllotaxis } from '../components/Phyllotaxis'
 import { Attractor } from '../components/Attractor'
 import { PendulumWave } from '../components/PendulumWave'
+import { RippleTank } from '../components/RippleTank'
 import { Sortable } from '../components/Sortable'
 import { Carousel, type CarouselSlide } from '../components/Carousel'
 import { HoverIndex, type HoverIndexItem } from '../components/HoverIndex'
@@ -2334,6 +2335,34 @@ export default function Playground() {
                 is a pure cosine of a frame-driven phase, no integration and no randomness; press anywhere and the phase
                 eases back to zero so the wave re-forms from a clean line under your hand. Reduced motion paints one
                 graceful wave, at rest.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH RIPPLE TANK — the 2D wave equation, pointer-drawn and reflecting off the walls */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="relative h-[440px] overflow-hidden rounded-3xl border border-white/10 bg-[#040404]">
+              <RippleTank />
+              <div className="pointer-events-none absolute inset-x-0 top-8 z-10 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Ripple tank</span>
+                <p className="mx-auto mt-3 max-w-md px-6 text-lg font-medium text-white/90 sm:text-xl">
+                  Drag to draw a wake. Press to drop a stone. Watch the rings meet.
+                </p>
+              </div>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Ripple tank</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The Pendulum wave's two-dimensional cousin: a real shallow-water surface solved on a grid. Every
+                disturbance obeys the honest 2D wave equation, next = 2·cur − prev + c²·∇²cur, leapfrogged across two
+                height buffers each frame; the tank walls are held fixed so rings reflect and cross into a live
+                interference lattice. Drag the pointer to lay down a continuous wake, press to drop a stone, or leave it
+                and a slow deterministic drip keeps the surface breathing. The height field is shaded by its own slope
+                into lime caustics — painted to a grid-sized buffer and smoothed up to full width, so the hot loop
+                touches about ten thousand cells, not a million pixels. No wall clock and no per-frame randomness, so it
+                is stable across resizes; reduced motion steps a few drops to a frozen lattice and paints it once.
               </p>
             </div>
           </div>
