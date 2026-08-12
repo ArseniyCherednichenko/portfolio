@@ -20,6 +20,7 @@ export interface LogHeadline {
 }
 
 export const LATEST_LOG: LogHeadline[] = [
+  { title: "Conway's Game of Life as a phosphor field you seed by hand", tag: 'Component' },
   { title: 'An iOS-style bottom sheet with drag-to-snap detents', tag: 'Component' },
   { title: 'A ripple tank solving the 2D wave equation, drawn in caustics', tag: 'Component' },
   { title: 'A tuned pendulum rack that dephases into travelling waves', tag: 'Component' },
@@ -29,5 +30,4 @@ export const LATEST_LOG: LogHeadline[] = [
   { title: 'A working abacus whose beads compute a real number', tag: 'Component' },
   { title: 'An isometric field of cubes that rise to the cursor', tag: 'Component' },
   { title: 'A sunflower head packed by the golden angle', tag: 'Component' },
-  { title: 'A living Turing pattern, grown by chemistry', tag: 'Component' },
 ]
