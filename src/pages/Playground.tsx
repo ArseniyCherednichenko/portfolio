@@ -106,6 +106,7 @@ import { Phyllotaxis } from '../components/Phyllotaxis'
 import { Attractor } from '../components/Attractor'
 import { PendulumWave } from '../components/PendulumWave'
 import { RippleTank } from '../components/RippleTank'
+import { Life } from '../components/Life'
 import { Sortable } from '../components/Sortable'
 import { Carousel, type CarouselSlide } from '../components/Carousel'
 import { HoverIndex, type HoverIndexItem } from '../components/HoverIndex'
@@ -2365,6 +2366,36 @@ export default function Playground() {
                 into lime caustics — painted to a grid-sized buffer and smoothed up to full width, so the hot loop
                 touches about ten thousand cells, not a million pixels. No wall clock and no per-frame randomness, so it
                 is stable across resizes; reduced motion steps a few drops to a frozen lattice and paints it once.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH GAME OF LIFE — Conway's rules on a torus, painted as a phosphor field */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="relative h-[440px] overflow-hidden rounded-3xl border border-white/10 bg-[#040404]">
+              <Life />
+              <div className="pointer-events-none absolute inset-x-0 top-8 z-10 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Game of Life</span>
+                <p className="mx-auto mt-3 max-w-md px-6 text-lg font-medium text-white/90 sm:text-xl">
+                  Drag to paint life. Press to stamp a cluster. Watch it grow.
+                </p>
+              </div>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Game of Life</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The most famous discrete system there is, made into a pointer field. Every cell lives or dies each
+                generation by four plain rules — born on exactly three live neighbours, surviving on two or three — and
+                out of nothing but those rules come gliders that walk, blinkers that tick, and soup that never settles the
+                same way twice. The board is a torus, so a glider off the right edge reappears on the left and travels
+                forever, and nothing piles against a wall. Drag to paint living cells straight into the soup, press to
+                stamp a bright cluster and see what it grows into; left alone the board reseeds itself when the population
+                thins and launches the odd glider so something is always moving. The look is a phosphor screen, not a
+                checkerboard: a second heat field bleeds off where a cell just died, so life glows lime and leaves cooling
+                ghosts behind it, painted to a grid-sized buffer and smoothed up to full width. No wall clock and no
+                per-frame randomness; reduced motion steps a seeded board to a settled still and paints it once.
               </p>
             </div>
           </div>
