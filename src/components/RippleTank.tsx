@@ -32,8 +32,10 @@ import { useReducedMotion } from 'framer-motion'
 const CELL = 7 // target px per grid cell before smoothing
 const MAX_CELLS = 12000 // clamp the grid so the solver stays cheap
 const C2 = 0.28 // wave speed² (Courant term); must stay < 0.5 for this stencil
-const DAMP = 0.9965 // per-step energy loss so rings fade and the tank settles
-const IDLE_EVERY = 74 // frames between automatic drips when nothing is touched
+const DAMP = 0.995 // per-step energy loss so rings fade and the tank settles
+const SPONGE = 8 // cells of absorbing margin at the walls (a soft boundary)
+const SPONGE_MIN = 0.9 // damping at the very edge — soaks reflections so the tank stays calm
+const IDLE_EVERY = 78 // frames between automatic drips when nothing is touched
 
 // mulberry32 — a tiny deterministic PRNG so idle drips wander without Math.random.
 function mulberry32(seed: number) {
@@ -77,6 +79,7 @@ export function RippleTank({
     let cur = new Float32Array(0)
     let prev = new Float32Array(0)
     let next = new Float32Array(0)
+    let damp = new Float32Array(0) // per-cell damping — a sponge layer at the walls
     let img: ImageData | null = null
     let raf = 0
     let frame = 0
@@ -114,6 +117,23 @@ export function RippleTank({
       cur = new Float32Array(gw * gh)
       prev = new Float32Array(gw * gh)
       next = new Float32Array(gw * gh)
+      // Damping field: DAMP across the interior, ramping down to SPONGE_MIN
+      // within SPONGE cells of any wall. That soft absorbing margin soaks most
+      // of the reflected energy, so rings fade near the walls instead of bouncing
+      // back into a saturated standing plaid — the tank reads as expanding rings
+      // that meet and settle, not a strobing lattice.
+      damp = new Float32Array(gw * gh)
+      for (let y = 0; y < gh; y++) {
+        for (let x = 0; x < gw; x++) {
+          const edge = Math.min(x, y, gw - 1 - x, gh - 1 - y)
+          let d = DAMP
+          if (edge < SPONGE) {
+            const t = edge / SPONGE // 0 at the wall, 1 at the sponge's inner edge
+            d = SPONGE_MIN + (DAMP - SPONGE_MIN) * (t * t)
+          }
+          damp[y * gw + x] = d
+        }
+      }
       img = gctx.createImageData(gw, gh)
     }
 
@@ -165,7 +185,7 @@ export function RippleTank({
         for (let x = 1; x < gw - 1; x++) {
           const i = row + x
           const lap = cur[i - 1] + cur[i + 1] + cur[i - gw] + cur[i + gw] - 4 * cur[i]
-          next[i] = (2 * cur[i] - prev[i] + C2 * lap) * DAMP
+          next[i] = (2 * cur[i] - prev[i] + C2 * lap) * damp[i]
         }
       }
       // Rotate buffers: prev <- cur <- next, reusing prev as the new scratch.
@@ -187,14 +207,18 @@ export function RippleTank({
           // turns a flat height field into caustics.
           const sx = x > 0 && x < gw - 1 ? cur[i + 1] - cur[i - 1] : 0
           const sy = y > 0 && y < gh - 1 ? cur[i + gw] - cur[i - gw] : 0
-          const spec = (sx + sy) * 3.4
-          let e = hgt * 5.5 + spec
+          const spec = (sx + sy) * 2.6
+          let e = hgt * 3.4 + spec
           if (e < 0) e = 0
           else if (e > 1) e = 1
-          const lime = 0.05 + e * 0.95
+          // A soft toe keeps the dark water dark and lets the caustics bloom in
+          // the upper range, so the field reads as light on water, not a flat map.
+          e = e * e * (3 - 2 * e) // smoothstep
+          const lime = 0.045 + e * 0.9
           const p = i * 4
-          // Crests tip toward white so the brightest ridges sparkle.
-          const white = e * e * 0.5
+          // Only the brightest ridges tip toward white, and gently, so crests
+          // sparkle without the whole surface blowing out.
+          const white = e * e * e * 0.4
           data[p] = Math.min(255, ar * lime + 255 * white)
           data[p + 1] = Math.min(255, ag * lime + 255 * white)
           data[p + 2] = Math.min(255, ab * lime + 255 * white)
