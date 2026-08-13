@@ -9,6 +9,7 @@ import { Reveal } from '../components/Reveal'
 import { GradientText } from '../components/GradientText'
 import { SplitText } from '../components/SplitText'
 import { BlurText } from '../components/BlurText'
+import { LinkPreview } from '../components/LinkPreview'
 import { RotatingWord } from '../components/RotatingWord'
 import { SpotlightCard } from '../components/SpotlightCard'
 import { Marquee } from '../components/Marquee'
@@ -348,8 +349,25 @@ export default function Home() {
           </h2>
           <Reveal delay={0.1}>
             <p className="mt-6 max-w-md text-lg leading-relaxed text-white/55">
-              Guided is what I am building, but it is not the whole of what I do. I work across the
-              stack and across disciplines. Scroll, and the range moves past.
+              <LinkPreview
+                to="/work/guided"
+                poster="guided"
+                title="Guided"
+                blurb="A Socratic AI tutor — one project, not the whole story."
+              >
+                Guided
+              </LinkPreview>{' '}
+              is what I am building, but it is not the whole of what I do. I work across the stack
+              and{' '}
+              <LinkPreview
+                to="/range"
+                glyph="Range"
+                title="The range"
+                blurb="Five disciplines, laid out and explorable."
+              >
+                across disciplines
+              </LinkPreview>
+              . Scroll, and the range moves past.
             </p>
           </Reveal>
           <Reveal delay={0.15}>
