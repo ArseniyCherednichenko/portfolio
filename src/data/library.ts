@@ -179,6 +179,7 @@ export const LIBRARY: LibraryGroup[] = [
       { name: 'PlaygroundFinder', note: 'A scoped palette for the Playground — search, jump, surprise, and deep-link any of its experiments. Press /.', tags: ['overlay', 'palette', 'search', 'finder'], to: '/playground', where: 'Playground' },
       { name: 'ContactDialog', note: 'The site-wide get-in-touch modal.', tags: ['overlay', 'dialog', 'contact'] },
       { name: 'Tooltip', note: 'A portal-based hint that rises on hover and focus and flips to stay on-screen.', tags: ['overlay', 'tooltip', 'a11y'], to: '/playground', where: 'Playground' },
+      { name: 'LinkPreview', note: 'An inline link that floats a rich preview card above it on hover and focus — a project poster or a gradient glyph tile — so you feel where a link leads before following it.', tags: ['overlay', 'preview', 'link', 'hover'], to: '/', where: 'Home' },
       { name: 'Toast', note: 'A site-wide notification queue whose lime meter both counts down and, on its end, dismisses the toast.', tags: ['overlay', 'toast', 'a11y'], to: '/playground', where: 'Playground' },
       { name: 'ProjectQuickLook', note: 'An in-page project preview modal beside the case study.', tags: ['overlay', 'modal', 'work'], to: '/work', where: 'Work' },
       { name: 'Lightbox', note: 'A focused fullscreen viewer for a single piece of media.', tags: ['overlay', 'lightbox', 'media'] },
