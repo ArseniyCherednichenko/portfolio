@@ -47,6 +47,7 @@ import { VariableProximity } from '../components/VariableProximity'
 import { SpotlightReveal } from '../components/SpotlightReveal'
 import { ASCIIText } from '../components/ASCIIText'
 import { CurvedLoop } from '../components/CurvedLoop'
+import { LinkPreview } from '../components/LinkPreview'
 import { FuzzyText } from '../components/FuzzyText'
 import { GlitchText } from '../components/GlitchText'
 import { Lens } from '../components/Lens'
@@ -1221,6 +1222,59 @@ export default function Playground() {
                 startOffset every frame — no straight marquee, the words bow with the curve. Grab
                 the band to scrub it and a flick carries a decaying fling on top of the drift.
                 Reduced-motion paints one still frame on the curve.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH LINK PREVIEW */}
+        <Reveal>
+          <div className="mt-12">
+            <div
+              data-experiment="Link preview"
+              id={slugifyExperiment('Link preview')}
+              className="group/exp relative flex min-h-[280px] scroll-mt-32 items-center justify-center overflow-hidden rounded-3xl border border-white/10 bg-white/[0.02] px-8 py-16 text-center sm:px-14"
+            >
+              <p className="max-w-2xl font-display text-2xl font-medium leading-[1.5] text-white/85 sm:text-3xl sm:leading-[1.5]">
+                Hover a link and the place it points to comes forward. See{' '}
+                <LinkPreview
+                  to="/work"
+                  title="The work"
+                  blurb="The ledger of projects, each with a case study."
+                  glyph="Work"
+                >
+                  the work
+                </LinkPreview>
+                , wander{' '}
+                <LinkPreview
+                  to="/playground"
+                  title="The playground"
+                  blurb="Where the motion gets built and taken apart."
+                  glyph="Play"
+                >
+                  the playground
+                </LinkPreview>
+                , or open{' '}
+                <LinkPreview
+                  to="/work/guided"
+                  poster="guided"
+                  title="Guided"
+                  blurb="A Socratic AI tutor — one project, not the whole story."
+                >
+                  Guided
+                </LinkPreview>
+                .
+              </p>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Link preview</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                An inline link that floats a hand-built preview card above it on hover and keyboard
+                focus — a project&rsquo;s generative poster, or a gradient glyph tile for a page —
+                so a reader can feel where a link leads before following it. The card leans a few
+                pixels toward the cursor as it moves. Distinct from the worded tooltip; the link
+                stays the real, focusable element and the card is decoration. Reduced motion drops
+                the tracking and blur for a plain, instant appearance.
               </p>
             </div>
           </div>
