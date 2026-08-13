@@ -7,6 +7,7 @@ import { GradientText } from '../components/GradientText'
 import { SpotlightCard } from '../components/SpotlightCard'
 import { AnimatedCounter } from '../components/AnimatedCounter'
 import { DonutChart } from '../components/DonutChart'
+import { AreaChart, type AreaDatum } from '../components/AreaChart'
 import { Contour } from '../components/Contour'
 import { Seo } from '../components/Seo'
 import { COMPONENT_COUNT, PAGE_COUNT } from '../data/stats'
@@ -151,6 +152,20 @@ export default function Numbers() {
     )
   }, [])
 
+  // The site's growth as a curve: cumulative components shipped, read chapter by
+  // chapter from the changelog in chronological order (it is stored newest-first,
+  // so reverse it). Each point carries the running total of component-kind entries
+  // up to and including that chapter — the honest shape of the making over time.
+  const growth = useMemo<AreaDatum[]>(() => {
+    let running = 0
+    return [...CHAPTERS]
+      .reverse()
+      .map((chapter) => {
+        running += chapter.items.filter((it) => it.kind === 'component').length
+        return { label: chapter.marker, value: running }
+      })
+  }, [])
+
   // The share of components that are actually on show somewhere reachable.
   const onShow = useMemo(() => {
     const shown = ALL_LIBRARY_ITEMS.filter((i) => i.to).length
@@ -237,6 +252,36 @@ export default function Numbers() {
         <Reveal delay={0.14}>
           <div className="mt-10 rounded-3xl border border-white/10 bg-white/[0.02] p-8 sm:p-10">
             <DonutChart data={byCategory} unit="components" centerLabel="components, total" />
+          </div>
+        </Reveal>
+      </section>
+
+      {/* THE BUILD, OVER TIME — the second chart. Where the donut holds a single
+          instant, this shows one number moving: the component library growing
+          chapter over chapter, drawn as an area curve that wipes itself in. */}
+      <section className="mx-auto mt-28 w-full max-w-4xl px-6">
+        <Reveal>
+          <Eyebrow>Over time</Eyebrow>
+        </Reveal>
+        <Reveal delay={0.05}>
+          <h2 className="mt-4 font-display text-3xl font-bold leading-tight tracking-tight sm:text-4xl">
+            The build, chapter by chapter.
+          </h2>
+        </Reveal>
+        <Reveal delay={0.1}>
+          <p className="mt-4 max-w-xl text-base leading-relaxed text-white/50">
+            The same library, seen as a curve instead of a spread: the running total of hand-built
+            components at the close of each chapter of the changelog. It only ever climbs. Hover a
+            point to read where it stood.
+          </p>
+        </Reveal>
+        <Reveal delay={0.14}>
+          <div className="mt-10 rounded-3xl border border-white/10 bg-white/[0.02] p-6 sm:p-10">
+            <AreaChart data={growth} unit="components" ariaLabel={
+              `The cumulative count of hand-built components at the end of each changelog chapter, ` +
+              `climbing from ${growth[0]?.value ?? 0} in chapter ${growth[0]?.label ?? '01'} to ` +
+              `${growth[growth.length - 1]?.value ?? 0} in chapter ${growth[growth.length - 1]?.label ?? 'now'}.`
+            } />
           </div>
         </Reveal>
       </section>
