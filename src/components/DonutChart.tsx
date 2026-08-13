@@ -109,7 +109,7 @@ export function DonutChart({
     >
       {/* THE RING */}
       <div className="relative shrink-0" style={{ width: 'min(72vw, 260px)', aspectRatio: '1' }}>
-        <svg viewBox="0 0 100 100" className="h-full w-full -rotate-0" role="img" aria-label={summary}>
+        <svg viewBox="0 0 100 100" className="h-full w-full" role="img" aria-label={summary}>
           {/* Track — a faint full ring the slices sit on, so a partial total
               still reads as a whole. */}
           <circle

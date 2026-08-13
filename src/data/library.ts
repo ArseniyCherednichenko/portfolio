@@ -204,6 +204,7 @@ export const LIBRARY: LibraryGroup[] = [
       { name: 'Folder', note: 'A folder that opens and fans out the papers inside it.', tags: ['object', 'folder', 'hover'], to: '/playground', where: 'Playground' },
       { name: 'Terminal', note: 'An interactive shell that drives the whole site by typing.', tags: ['object', 'terminal', 'interactive'], to: '/terminal', where: 'Terminal' },
       { name: 'HeroOrbit', note: 'The orbiting mark that circles behind the hero.', tags: ['object', 'orbit', 'motion'], to: '/', where: 'Home' },
+      { name: 'DonutChart', note: 'The site\'s first chart, made not assembled: an SVG donut whose arcs draw themselves in on scroll through pathLength, held to a single lime stepped by rank so colour only ever encodes magnitude. The legend names every slice and doubles as the readout — hover or focus a row and its arc lifts as the centre figure changes. Charts the real spread of the component library on the Numbers page.', tags: ['object', 'chart', 'data-viz', 'svg', 'interactive'], to: '/numbers', where: 'Numbers' },
     ],
   },
   {
