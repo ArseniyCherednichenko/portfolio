@@ -205,6 +205,7 @@ export const LIBRARY: LibraryGroup[] = [
       { name: 'Terminal', note: 'An interactive shell that drives the whole site by typing.', tags: ['object', 'terminal', 'interactive'], to: '/terminal', where: 'Terminal' },
       { name: 'HeroOrbit', note: 'The orbiting mark that circles behind the hero.', tags: ['object', 'orbit', 'motion'], to: '/', where: 'Home' },
       { name: 'DonutChart', note: 'The site\'s first chart, made not assembled: an SVG donut whose arcs draw themselves in on scroll through pathLength, held to a single lime stepped by rank so colour only ever encodes magnitude. The legend names every slice and doubles as the readout — hover or focus a row and its arc lifts as the centre figure changes. Charts the real spread of the component library on the Numbers page.', tags: ['object', 'chart', 'data-viz', 'svg', 'interactive'], to: '/numbers', where: 'Numbers' },
+      { name: 'AreaChart', note: 'The sibling to the donut and the site\'s second chart: where the donut holds a spread at one instant, this shows one number moving across an ordered axis. A smooth Catmull-Rom spline over SVG with a lime-to-transparent wash beneath, revealed by a single left-to-right mask wipe so line and fill draw in together. Every vertex is a focusable button that floats a readout and drops a guide to the axis. Plots the library\'s cumulative growth, chapter by chapter, on the Numbers page.', tags: ['object', 'chart', 'data-viz', 'svg', 'interactive', 'trend'], to: '/numbers', where: 'Numbers' },
     ],
   },
   {
