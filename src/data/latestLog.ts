@@ -20,6 +20,7 @@ export interface LogHeadline {
 }
 
 export const LATEST_LOG: LogHeadline[] = [
+  { title: 'An animated area curve charting the build growing, chapter by chapter', tag: 'Component' },
   { title: "The site's first chart — an animated single-hue donut of the library", tag: 'Component' },
   { title: 'An inline link that floats a rich preview card on hover', tag: 'Component' },
   { title: "Conway's Game of Life as a phosphor field you seed by hand", tag: 'Component' },
@@ -30,5 +31,4 @@ export const LATEST_LOG: LogHeadline[] = [
   { title: 'A poster-forward, cursor-tilt showcase for the home work band', tag: 'Polish' },
   { title: 'Principles — a manifesto of how I build', tag: 'Page' },
   { title: 'A working abacus whose beads compute a real number', tag: 'Component' },
-  { title: 'An isometric field of cubes that rise to the cursor', tag: 'Component' },
 ]
