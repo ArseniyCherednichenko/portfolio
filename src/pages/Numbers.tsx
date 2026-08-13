@@ -6,6 +6,7 @@ import { Eyebrow } from '../components/Eyebrow'
 import { GradientText } from '../components/GradientText'
 import { SpotlightCard } from '../components/SpotlightCard'
 import { AnimatedCounter } from '../components/AnimatedCounter'
+import { DonutChart } from '../components/DonutChart'
 import { Contour } from '../components/Contour'
 import { Seo } from '../components/Seo'
 import { COMPONENT_COUNT, PAGE_COUNT } from '../data/stats'
@@ -216,15 +217,28 @@ export default function Numbers() {
         </div>
       </section>
 
-      {/* COMPONENTS BY CATEGORY — the centrepiece breakdown */}
+      {/* COMPONENTS BY CATEGORY — the centrepiece breakdown, drawn as the site's
+          first chart: an animated donut whose legend doubles as the readout. */}
       <section className="mx-auto mt-28 w-full max-w-4xl px-6">
-        <Breakdown
-          eyebrow="The library"
-          title="Components, by kind."
-          note="Every hand-built component sorts into one family. This is the spread — where the making has gone deepest, and where there is still room to grow."
-          data={byCategory}
-          reduce={reduce}
-        />
+        <Reveal>
+          <Eyebrow>The library</Eyebrow>
+        </Reveal>
+        <Reveal delay={0.05}>
+          <h2 className="mt-4 font-display text-3xl font-bold leading-tight tracking-tight sm:text-4xl">
+            Components, by kind.
+          </h2>
+        </Reveal>
+        <Reveal delay={0.1}>
+          <p className="mt-4 max-w-xl text-base leading-relaxed text-white/50">
+            Every hand-built component sorts into one family. This is the spread — where the making
+            has gone deepest, and where there is still room to grow. Hover a slice to read it.
+          </p>
+        </Reveal>
+        <Reveal delay={0.14}>
+          <div className="mt-10 rounded-3xl border border-white/10 bg-white/[0.02] p-8 sm:p-10">
+            <DonutChart data={byCategory} unit="components" centerLabel="components, total" />
+          </div>
+        </Reveal>
       </section>
 
       {/* PAGES BY SECTION */}
