@@ -8,6 +8,7 @@ import { SpotlightCard } from '../components/SpotlightCard'
 import { AnimatedCounter } from '../components/AnimatedCounter'
 import { DonutChart } from '../components/DonutChart'
 import { AreaChart, type AreaDatum } from '../components/AreaChart'
+import { BarChart } from '../components/BarChart'
 import { Contour } from '../components/Contour'
 import { Seo } from '../components/Seo'
 import { COMPONENT_COUNT, PAGE_COUNT } from '../data/stats'
@@ -306,15 +307,38 @@ export default function Numbers() {
         </Reveal>
       </section>
 
-      {/* BUILD LOG BY KIND */}
+      {/* BUILD LOG BY KIND — the third chart. Where the section breakdown above
+          lays its bars out flat to be read like a list, this stands the same
+          shape of question up as columns, so the kinds of work can be compared
+          by height at a glance. */}
       <section className="mx-auto mt-28 w-full max-w-4xl px-6">
-        <Breakdown
-          eyebrow="In the open"
-          title="The build log, by kind."
-          note="Every entry in the changelog is tagged by the kind of work it was. This is what the site has actually been made of, chapter over chapter."
-          data={byKind}
-          reduce={reduce}
-        />
+        <Reveal>
+          <Eyebrow>In the open</Eyebrow>
+        </Reveal>
+        <Reveal delay={0.05}>
+          <h2 className="mt-4 font-display text-3xl font-bold leading-tight tracking-tight sm:text-4xl">
+            The build log, by kind.
+          </h2>
+        </Reveal>
+        <Reveal delay={0.1}>
+          <p className="mt-4 max-w-xl text-base leading-relaxed text-white/50">
+            Every entry in the changelog is tagged by the kind of work it was. Stood up as columns,
+            this is what the site has actually been made of. Hover a column to read it.
+          </p>
+        </Reveal>
+        <Reveal delay={0.14}>
+          <div className="mt-10 rounded-3xl border border-white/10 bg-white/[0.02] p-6 sm:p-10">
+            <BarChart
+              data={byKind}
+              unit="entries"
+              ariaLabel={
+                `Changelog entries by kind of work: ` +
+                byKind.map((d) => `${d.label}, ${d.value}`).join('; ') +
+                '.'
+              }
+            />
+          </div>
+        </Reveal>
         <Reveal delay={0.1}>
           <Link
             to="/changelog"
