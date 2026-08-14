@@ -20,6 +20,7 @@ export interface LogHeadline {
 }
 
 export const LATEST_LOG: LogHeadline[] = [
+  { title: 'A living Voronoi tessellation you carry and re-seed with the pointer', tag: 'Component' },
   { title: 'A radar chart drawing the shape of the whole site, section by section', tag: 'Component' },
   { title: 'An animated column chart comparing the build log by kind of work', tag: 'Component' },
   { title: 'An animated area curve charting the build growing, chapter by chapter', tag: 'Component' },
@@ -32,5 +33,4 @@ export const LATEST_LOG: LogHeadline[] = [
   { title: 'A strange attractor drawn as light from deterministic chaos', tag: 'Component' },
   { title: 'A poster-forward, cursor-tilt showcase for the home work band', tag: 'Polish' },
   { title: 'Principles — a manifesto of how I build', tag: 'Page' },
-  { title: 'A working abacus whose beads compute a real number', tag: 'Component' },
 ]
