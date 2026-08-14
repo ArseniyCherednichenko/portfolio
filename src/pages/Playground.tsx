@@ -108,6 +108,7 @@ import { Attractor } from '../components/Attractor'
 import { PendulumWave } from '../components/PendulumWave'
 import { RippleTank } from '../components/RippleTank'
 import { Life } from '../components/Life'
+import { Voronoi } from '../components/Voronoi'
 import { Sortable } from '../components/Sortable'
 import { Carousel, type CarouselSlide } from '../components/Carousel'
 import { HoverIndex, type HoverIndexItem } from '../components/HoverIndex'
@@ -2450,6 +2451,37 @@ export default function Playground() {
                 checkerboard: a second heat field bleeds off where a cell just died, so life glows lime and leaves cooling
                 ghosts behind it, painted to a grid-sized buffer and smoothed up to full width. No wall clock and no
                 per-frame randomness; reduced motion steps a seeded board to a settled still and paints it once.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH VORONOI — a living tessellation read from its distance field */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="relative h-[440px] overflow-hidden rounded-3xl border border-white/10 bg-[#040404]">
+              <Voronoi />
+              <div className="pointer-events-none absolute inset-x-0 top-8 z-10 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Voronoi</span>
+                <p className="mx-auto mt-3 max-w-md px-6 text-lg font-medium text-white/90 sm:text-xl">
+                  Move to carry a cell. Press to drop a seed. Watch the borders re-knit.
+                </p>
+              </div>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Voronoi tessellation</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The geometry behind how cells pack and how cracks run: scatter a set of seeds and the plane divides
+                itself, every location claimed by whichever seed is nearest, the borders between those territories tracing
+                the Voronoi diagram. Here the seeds are alive — each drifts on its own heading and bounces off the walls,
+                so the borders breathe and re-knit without ever tearing. The pointer is a seed too: move it to carry a cell
+                that shoves its neighbours aside, press to drop a fresh seed and watch the tessellation re-partition around
+                it. The trick is to skip the polygons entirely and read the distance field — for every point measure the
+                distance to the nearest seed and to the second nearest; their difference is the signed distance to the
+                closest border, so a smoothstep lights the seams as clean lime lines with no clipping and no aliasing, and
+                a soft core glows where the nearest distance falls to zero. Painted to a grid-sized buffer and smoothed up
+                to full width, so the hot loop weighs about twelve thousand cells against thirty seeds. No wall clock and
+                no per-frame randomness; reduced motion paints one settled arrangement and holds it still.
               </p>
             </div>
           </div>
