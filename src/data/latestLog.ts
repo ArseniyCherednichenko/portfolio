@@ -20,6 +20,7 @@ export interface LogHeadline {
 }
 
 export const LATEST_LOG: LogHeadline[] = [
+  { title: 'An animated column chart comparing the build log by kind of work', tag: 'Component' },
   { title: 'An animated area curve charting the build growing, chapter by chapter', tag: 'Component' },
   { title: "The site's first chart — an animated single-hue donut of the library", tag: 'Component' },
   { title: 'An inline link that floats a rich preview card on hover', tag: 'Component' },
