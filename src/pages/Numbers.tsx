@@ -9,6 +9,7 @@ import { AnimatedCounter } from '../components/AnimatedCounter'
 import { DonutChart } from '../components/DonutChart'
 import { AreaChart, type AreaDatum } from '../components/AreaChart'
 import { BarChart } from '../components/BarChart'
+import { RadarChart } from '../components/RadarChart'
 import { Contour } from '../components/Contour'
 import { Seo } from '../components/Seo'
 import { COMPONENT_COUNT, PAGE_COUNT } from '../data/stats'
@@ -26,100 +27,6 @@ interface Datum {
   value: number
   /** Optional route the row links to, so a bar is also a way in. */
   to?: string
-}
-
-/**
- * One horizontal bar in a breakdown. The fill grows from zero to its share of
- * the largest value when the row scrolls into view; the count ticks up beside
- * it. Under reduced motion the bar is simply drawn at full width with the final
- * number already in place — no growth, no tick.
- */
-function Bar({
-  datum,
-  max,
-  index,
-  reduce,
-}: {
-  datum: Datum
-  max: number
-  index: number
-  reduce: boolean | null
-}) {
-  const pct = max > 0 ? (datum.value / max) * 100 : 0
-  const label = (
-    <span className="flex items-baseline justify-between gap-4">
-      <span className="text-sm font-medium text-white/80">{datum.label}</span>
-      <span className="font-display text-sm font-bold tabular-nums text-[#DCF87C]">
-        {reduce ? (
-          datum.value
-        ) : (
-          <AnimatedCounter value={datum.value} duration={1.1} />
-        )}
-      </span>
-    </span>
-  )
-
-  return (
-    <div className="group">
-      {datum.to ? (
-        <Link
-          to={datum.to}
-          className="block rounded-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-[#DCF87C]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
-        >
-          {label}
-        </Link>
-      ) : (
-        label
-      )}
-      <div className="relative mt-2 h-2.5 w-full overflow-hidden rounded-full bg-white/[0.05]">
-        <motion.div
-          className="absolute inset-y-0 left-0 rounded-full bg-gradient-to-r from-[#DCF87C]/55 to-[#DCF87C] group-hover:from-[#DCF87C]/70"
-          initial={reduce ? false : { width: 0 }}
-          whileInView={reduce ? undefined : { width: `${pct}%` }}
-          style={reduce ? { width: `${pct}%` } : undefined}
-          viewport={{ once: true, amount: 0.6 }}
-          transition={{ duration: 1, ease: EASE, delay: 0.05 + index * 0.06 }}
-        />
-      </div>
-    </div>
-  )
-}
-
-/** A titled group of bars sharing one scale. */
-function Breakdown({
-  eyebrow,
-  title,
-  note,
-  data,
-  reduce,
-}: {
-  eyebrow: string
-  title: string
-  note: string
-  data: Datum[]
-  reduce: boolean | null
-}) {
-  const max = Math.max(...data.map((d) => d.value), 1)
-  return (
-    <div>
-      <Reveal>
-        <Eyebrow>{eyebrow}</Eyebrow>
-      </Reveal>
-      <Reveal delay={0.05}>
-        <h2 className="mt-4 font-display text-3xl font-bold leading-tight tracking-tight sm:text-4xl">
-          {title}
-        </h2>
-      </Reveal>
-      <Reveal delay={0.1}>
-        <p className="mt-4 max-w-xl text-base leading-relaxed text-white/50">{note}</p>
-      </Reveal>
-      <div className="mt-9 space-y-5">
-        {data.map((d, i) => (
-          <Bar key={d.label} datum={d} max={max} index={i} reduce={reduce} />
-        ))}
-      </div>
-    </div>
-  )
 }
 
 export default function Numbers() {
@@ -287,15 +194,42 @@ export default function Numbers() {
         </Reveal>
       </section>
 
-      {/* PAGES BY SECTION */}
+      {/* PAGES BY SECTION — the fourth chart. Where the bar chart compares
+          heights along one baseline, this spokes the six sections of the index
+          out from a shared centre and joins them into one silhouette, so the
+          site's shape as a publication — where it runs deep, where it is spare —
+          reads at a glance. Its subject is the breadth of the whole site, not any
+          one project. */}
       <section className="mx-auto mt-28 w-full max-w-4xl px-6">
-        <Breakdown
-          eyebrow="The map"
-          title="Pages, by section."
-          note="The site reads as a small publication. These are its sections and how many pages sit inside each — the same grouping the index uses."
-          data={bySection}
-          reduce={reduce}
-        />
+        <Reveal>
+          <Eyebrow>The map</Eyebrow>
+        </Reveal>
+        <Reveal delay={0.05}>
+          <h2 className="mt-4 font-display text-3xl font-bold leading-tight tracking-tight sm:text-4xl">
+            The shape of the site.
+          </h2>
+        </Reveal>
+        <Reveal delay={0.1}>
+          <p className="mt-4 max-w-xl text-base leading-relaxed text-white/50">
+            The site reads as a small publication with range, not a single-project landing. Spoked
+            out from the centre, these are its six sections and how many pages sit inside each — the
+            same grouping the index uses. The silhouette is the site's own shape. Hover a point to
+            read it.
+          </p>
+        </Reveal>
+        <Reveal delay={0.14}>
+          <div className="mt-10 rounded-3xl border border-white/10 bg-white/[0.02] p-6 sm:p-10">
+            <RadarChart
+              data={bySection}
+              unit="pages"
+              ariaLabel={
+                `Radar chart of the site's pages by section: ` +
+                bySection.map((d) => `${d.label}, ${d.value}`).join('; ') +
+                '.'
+              }
+            />
+          </div>
+        </Reveal>
         <Reveal delay={0.1}>
           <Link
             to="/contents"
