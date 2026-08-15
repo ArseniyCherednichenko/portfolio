@@ -108,6 +108,7 @@ import { Attractor } from '../components/Attractor'
 import { PendulumWave } from '../components/PendulumWave'
 import { Cradle } from '../components/Cradle'
 import { Chladni } from '../components/Chladni'
+import { Galton } from '../components/Galton'
 import { RippleTank } from '../components/RippleTank'
 import { Life } from '../components/Life'
 import { Voronoi } from '../components/Voronoi'
@@ -3233,6 +3234,39 @@ export default function Playground() {
                 of real modes, easing the numbers between figures so the lines re-thread rather than snap; move the
                 pointer to tune it by hand, or press to strike the plate and toss the settled sand back up. One canvas,
                 one loop, every grain held in flat typed arrays. Reduced motion settles one figure up front and holds it.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH GALTON BOARD */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-[#040404]">
+              <div className="pointer-events-none absolute inset-x-0 top-8 z-10 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Chance</span>
+                <p className="mx-auto mt-3 max-w-md px-6 text-lg font-medium text-white/90 sm:text-xl">
+                  Press to pour beads anywhere. Watch the bell curve build itself.
+                </p>
+              </div>
+              <Galton className="h-[460px] w-full" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Galton board</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                Francis Galton's 1873 bean machine, with the physics kept honest. Each bead is a point mass under gravity,
+                integrated by semi-implicit Euler; a peg is a real circle, and a contact is resolved the textbook way —
+                push the bead out along the contact normal and reflect the normal part of its velocity with a little
+                restitution, plus a whisper of tangential kick because no real bead strikes a peg dead-centre. That
+                sensitivity is the whole point: a bead's swerve left or right is genuine chaos seeded by where it met the
+                peg, not a coin flipped in code. Do that over eight rows and a bead's landing bin is the sum of eight
+                independent nudges — a binomial — so a crowd of beads poured one after another piles up into the bell
+                curve nobody drew. It is the moving counterpart to the column chart over on the numbers page: instead of
+                stating that a set is normal, it lets the distribution precipitate out of the physics in front of you. It
+                mounts with the bins already leaning toward the shape and beads falling; press to pour a stream from
+                wherever you touch, so you can aim the beads and skew the pile, then release and watch the centre pull it
+                back. When a column fills, the board sweeps clean and starts the curve over. Reduced motion fills the bins
+                to the exact binomial silhouette and holds it.
               </p>
             </div>
           </div>
