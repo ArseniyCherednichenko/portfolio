@@ -107,6 +107,7 @@ import { Phyllotaxis } from '../components/Phyllotaxis'
 import { Attractor } from '../components/Attractor'
 import { PendulumWave } from '../components/PendulumWave'
 import { Cradle } from '../components/Cradle'
+import { Chladni } from '../components/Chladni'
 import { RippleTank } from '../components/RippleTank'
 import { Life } from '../components/Life'
 import { Voronoi } from '../components/Voronoi'
@@ -3199,6 +3200,39 @@ export default function Playground() {
                 touch, so the story is the handoff. Drag either end bob to lift it — the rest hang still under your hand —
                 and release to let it fall; a struck bob briefly sparks so the blow is easy to follow. Reduced motion
                 paints one bob caught mid-fall and holds it.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH CHLADNI */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-[#040404]">
+              <div className="pointer-events-none absolute inset-x-0 top-8 z-10 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Resonance</span>
+                <p className="mx-auto mt-3 max-w-md px-6 text-lg font-medium text-white/90 sm:text-xl">
+                  Move over the plate to tune it. The sand flees the shaking and settles on the still lines.
+                </p>
+              </div>
+              <Chladni className="h-[440px] w-full" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Chladni plate</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                Ernst Chladni's 1787 demonstration, in maths. Bow the edge of a sand-strewn metal plate and the grains
+                flee the parts that shake hardest and gather along the lines that barely move at all, tracing the plate's
+                standing-wave pattern in sand. The model here is the honest, standard one: for a square plate the
+                vibration amplitude at a point is s = sin(pi*n*x)*sin(pi*m*y) + sin(pi*m*x)*sin(pi*n*y) over the unit
+                square, and the nodal lines where s = 0 are the still places. Each grain takes a random step whose length
+                grows with how hard the plate shakes under it, so out on an antinode it is flung about and can't rest,
+                near a nodal line it barely moves, and over time the whole crowd drains onto the lines and the figure
+                precipitates out of noise. Nothing places the pattern — it is the walk biased by the field, which makes
+                this the odd one out among the toys: not particles pushing on each other like the Ballpit or the Cloth,
+                but particles reading a field none of them can see. It mounts already sweeping slowly through a sequence
+                of real modes, easing the numbers between figures so the lines re-thread rather than snap; move the
+                pointer to tune it by hand, or press to strike the plate and toss the settled sand back up. One canvas,
+                one loop, every grain held in flat typed arrays. Reduced motion settles one figure up front and holds it.
               </p>
             </div>
           </div>
