@@ -20,6 +20,7 @@ export interface LogHeadline {
 }
 
 export const LATEST_LOG: LogHeadline[] = [
+  { title: 'A Chladni plate whose sand flees the shaking and settles on the still nodal lines', tag: 'Component' },
   { title: "A Newton's cradle with honest elastic-collision physics you drive by hand", tag: 'Component' },
   { title: 'A living Voronoi tessellation you carry and re-seed with the pointer', tag: 'Component' },
   { title: 'A radar chart drawing the shape of the whole site, section by section', tag: 'Component' },
