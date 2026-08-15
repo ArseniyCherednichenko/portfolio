@@ -106,6 +106,7 @@ import { Morphogen } from '../components/Morphogen'
 import { Phyllotaxis } from '../components/Phyllotaxis'
 import { Attractor } from '../components/Attractor'
 import { PendulumWave } from '../components/PendulumWave'
+import { Cradle } from '../components/Cradle'
 import { RippleTank } from '../components/RippleTank'
 import { Life } from '../components/Life'
 import { Voronoi } from '../components/Voronoi'
@@ -3168,6 +3169,36 @@ export default function Playground() {
                 turntable next door: not an object with momentum but a deterministic plotter — the same seed always draws
                 the same plate. Click the plate or the button to hang new pendulums. Reduced motion lays the finished
                 figure down in one frame.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH NEWTON'S CRADLE */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="relative h-[420px] overflow-hidden rounded-3xl border border-white/10 bg-[#040404]">
+              <Cradle />
+              <div className="pointer-events-none absolute inset-x-0 top-8 z-10 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Transfer</span>
+                <p className="mx-auto mt-3 max-w-md px-6 text-lg font-medium text-white/90 sm:text-xl">
+                  Lift an end bob and let it fall. Watch the blow pass straight down the line.
+                </p>
+              </div>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Newton's cradle</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The desk toy, with the physics kept honest. Each bob is a real simple pendulum, integrated by
+                semi-implicit Euler at a fixed substep, and a contact is resolved the textbook way: when two touching
+                bobs overlap, equal masses on equal strings swap their velocities and are nudged back to the kiss so they
+                never stick. Sweep that rule along the row a few times per frame and the famous behaviour falls straight
+                out of it — lift one, one leaps off the far end; lift two, two leap — nothing is scripted, the transfer of
+                a single blow just ripples through the line. It is the coupled counterpart to the Pendulum wave elsewhere
+                here: there the pendulums are independent, each keeping its own time, so the eye reads drift; here they
+                touch, so the story is the handoff. Drag either end bob to lift it — the rest hang still under your hand —
+                and release to let it fall; a struck bob briefly sparks so the blow is easy to follow. Reduced motion
+                paints one bob caught mid-fall and holds it.
               </p>
             </div>
           </div>
