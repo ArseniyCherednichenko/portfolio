@@ -20,6 +20,7 @@ export interface LogHeadline {
 }
 
 export const LATEST_LOG: LogHeadline[] = [
+  { title: 'A 3D word sphere of the tools I reach for, turning in space and steered by the pointer', tag: 'Component' },
   { title: 'A Galton board where beads clatter through pegs and pile into the bell curve', tag: 'Component' },
   { title: 'A Chladni plate whose sand flees the shaking and settles on the still nodal lines', tag: 'Component' },
   { title: "A Newton's cradle with honest elastic-collision physics you drive by hand", tag: 'Component' },
@@ -33,5 +34,4 @@ export const LATEST_LOG: LogHeadline[] = [
   { title: 'An iOS-style bottom sheet with drag-to-snap detents', tag: 'Component' },
   { title: 'A ripple tank solving the 2D wave equation, drawn in caustics', tag: 'Component' },
   { title: 'A tuned pendulum rack that dephases into travelling waves', tag: 'Component' },
-  { title: 'A strange attractor drawn as light from deterministic chaos', tag: 'Component' },
 ]
