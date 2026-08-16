@@ -20,6 +20,7 @@ export interface LogHeadline {
 }
 
 export const LATEST_LOG: LogHeadline[] = [
+  { title: 'A Taste page that shows the same interface plain and considered, so the care reads as the delta', tag: 'Page' },
   { title: 'A fractal tree grown from one recursive rule, unfurling and swaying on honest wind', tag: 'Component' },
   { title: 'A 3D word sphere of the tools I reach for, turning in space and steered by the pointer', tag: 'Component' },
   { title: 'A Galton board where beads clatter through pegs and pile into the bell curve', tag: 'Component' },
