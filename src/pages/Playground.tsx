@@ -117,6 +117,7 @@ import { Carousel, type CarouselSlide } from '../components/Carousel'
 import { HoverIndex, type HoverIndexItem } from '../components/HoverIndex'
 import { Gravity } from '../components/Gravity'
 import { WordSphere } from '../components/WordSphere'
+import { FractalTree } from '../components/FractalTree'
 import { GO_TARGETS, useShortcuts } from '../components/Keyboard'
 import { Seo } from '../components/Seo'
 import { GITHUB_URL } from '../data/contact'
@@ -3299,6 +3300,43 @@ export default function Playground() {
                 move the pointer across it and the sphere turns to follow like a trackball, faster the further you push
                 from the centre, and hovering a single word slows the whole thing so you can read it. Reduced motion lays
                 the globe out once, tipped to a readable three-quarter angle, and holds it perfectly still.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH FRACTAL TREE */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-[#040404]">
+              <div className="pointer-events-none absolute inset-x-0 top-8 z-10 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Grow</span>
+                <p className="mx-auto mt-3 max-w-md px-6 text-lg font-medium text-white/90 sm:text-xl">
+                  One rule, applied to itself nine times over. Lean it with the pointer; press for a gust.
+                </p>
+              </div>
+              <FractalTree className="h-[480px] w-full" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Fractal tree</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                A thing grown rather than drawn, and this family's quiet answer to all the physics beside it — every
+                other piece here is a crowd of bodies pushing on one another; this is one rule, applied to itself, all
+                the way down. A branch is a line; at its tip it forks into two shorter branches turned a little to either
+                side, and each of those does the same, and the same again, nine times over, until a whole crown falls out
+                of a single instruction. It is recursion made visible: the motif a programmer reaches for a dozen times a
+                day, standing here as a tree. Nothing about the shape is placed by hand — the fork angles and the length
+                of each child are jittered per branch by a fixed integer hash of that branch's position in the tree, so
+                the crown is asymmetric and organic yet perfectly deterministic, the same tree every load and at every
+                size. It grows on arrival, the trunk opening first and each deeper ring of branches a beat later, so the
+                tree unfurls from the ground up, then settles and breathes. The breathing is honest wind: each branch
+                sways on its own sine, and because every child is drawn from its parent's already-swayed direction the
+                sway compounds down the tree the way it does in a real one — the trunk barely stirs while the outermost
+                twigs whip. Move the pointer across it and the whole crown leans the way you push, harder the further
+                out; press to send a gust through it, and the buds at the tips warm to lime and pulse. No Date.now and no
+                Math.random anywhere — the growth and sway run off the rAF delta, every jitter from the seeded hash — so
+                it is resize-stable. Reduced motion lays the finished tree out once with a gentle fixed lean and holds it
+                still.
               </p>
             </div>
           </div>
