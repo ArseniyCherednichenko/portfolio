@@ -31,6 +31,7 @@ const Library = lazy(() => import('./pages/Library'))
 const Atlas = lazy(() => import('./pages/Atlas'))
 const Numbers = lazy(() => import('./pages/Numbers'))
 const Principles = lazy(() => import('./pages/Principles'))
+const Taste = lazy(() => import('./pages/Taste'))
 const NotFound = lazy(() => import('./pages/NotFound'))
 
 export default function App() {
@@ -62,6 +63,7 @@ export default function App() {
         <Route path="atlas" element={<Atlas />} />
         <Route path="numbers" element={<Numbers />} />
         <Route path="principles" element={<Principles />} />
+        <Route path="taste" element={<Taste />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
