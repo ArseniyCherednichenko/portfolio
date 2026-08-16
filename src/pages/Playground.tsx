@@ -116,6 +116,7 @@ import { Sortable } from '../components/Sortable'
 import { Carousel, type CarouselSlide } from '../components/Carousel'
 import { HoverIndex, type HoverIndexItem } from '../components/HoverIndex'
 import { Gravity } from '../components/Gravity'
+import { WordSphere } from '../components/WordSphere'
 import { GO_TARGETS, useShortcuts } from '../components/Keyboard'
 import { Seo } from '../components/Seo'
 import { GITHUB_URL } from '../data/contact'
@@ -3267,6 +3268,37 @@ export default function Playground() {
                 wherever you touch, so you can aim the beads and skew the pile, then release and watch the centre pull it
                 back. When a column fills, the board sweeps clean and starts the curve over. Reduced motion fills the bins
                 to the exact binomial silhouette and holds it.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH WORD SPHERE */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="relative h-[460px] overflow-hidden rounded-3xl border border-white/10 bg-[#040404]">
+              <WordSphere words={SKILLS} className="absolute inset-0" />
+              <div className="pointer-events-none absolute inset-x-0 top-8 z-[200] text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Reach</span>
+                <p className="mx-auto mt-3 max-w-md px-6 text-lg font-medium text-white/90 sm:text-xl">
+                  The tools I actually reach for, turning in space. Move across it to steer.
+                </p>
+              </div>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Word sphere</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The old tag cloud, rebuilt as honest 3D. Every tool I genuinely use sits on the surface of a globe, its
+                words laid out on a Fibonacci lattice — points walked around the golden angle so they spread evenly with
+                no clumping at the poles, the same trick that scatters seeds on a sunflower. Each frame the whole cloud is
+                turned by two angular velocities, yaw and pitch, then every point is perspective-projected to the plane:
+                words at the front swell, brighten, and lift above their neighbours; words at the back shrink, dim, and
+                blur, so depth reads without any z-buffer, and the one nearest you catches the lime. It is not a picture —
+                each word is a live element of real, selectable text, read to a screen reader as a plain list, with the
+                transforms written straight to the DOM so the words render exactly once. It mounts already drifting;
+                move the pointer across it and the sphere turns to follow like a trackball, faster the further you push
+                from the centre, and hovering a single word slows the whole thing so you can read it. Reduced motion lays
+                the globe out once, tipped to a readable three-quarter angle, and holds it perfectly still.
               </p>
             </div>
           </div>
