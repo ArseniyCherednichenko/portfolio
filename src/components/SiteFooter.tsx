@@ -36,6 +36,7 @@ const GROUPS: FooterGroup[] = [
       { to: '/writing', label: 'Writing' },
       { to: '/answers', label: 'Answers' },
       { to: '/craft', label: 'On motion' },
+      { to: '/taste', label: 'Taste' },
       { to: '/design', label: 'Design language' },
       { to: '/resume', label: 'Résumé' },
     ],

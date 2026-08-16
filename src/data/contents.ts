@@ -49,6 +49,7 @@ export const CONTENTS: ContentSection[] = [
       { to: '/reel', title: 'The reel', blurb: 'A full-screen showreel — nine hand-built scenes and a point of view.', chord: 'e' },
       { to: '/toolkit', title: 'Toolkit', blurb: 'The stack and the tools, and how I actually reach for them.', chord: 't' },
       { to: '/craft', title: 'On motion', blurb: 'Notes on animation craft, each one playable in place.', chord: 'm' },
+      { to: '/taste', title: 'Taste', blurb: 'The same interface, plain and considered — the care shown as the delta.', chord: 'f' },
       { to: '/design', title: 'Design language', blurb: 'A living style guide — palette, type, and motion, each token copyable.', chord: 'd' },
       { to: '/specimen', title: 'Type specimen', blurb: 'The type up close — drive the variable Fraunces axes and set your own words.' },
       { to: '/library', title: 'The library', blurb: 'Every hand-built component, catalogued and searchable.', chord: 'y' },

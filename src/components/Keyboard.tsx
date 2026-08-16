@@ -45,6 +45,7 @@ export const GO_TARGETS: GoTarget[] = [
   { key: 'v', to: '/principles', label: 'Principles' },
   { key: 'q', to: '/answers', label: 'Answers' },
   { key: 'm', to: '/craft', label: 'On motion' },
+  { key: 'f', to: '/taste', label: 'Taste' },
   { key: 'd', to: '/design', label: 'Design language' },
   { key: 'r', to: '/resume', label: 'Résumé' },
   { key: 's', to: '/terminal', label: 'Terminal' },
