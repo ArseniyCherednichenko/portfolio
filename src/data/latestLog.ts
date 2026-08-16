@@ -20,6 +20,7 @@ export interface LogHeadline {
 }
 
 export const LATEST_LOG: LogHeadline[] = [
+  { title: 'A fractal tree grown from one recursive rule, unfurling and swaying on honest wind', tag: 'Component' },
   { title: 'A 3D word sphere of the tools I reach for, turning in space and steered by the pointer', tag: 'Component' },
   { title: 'A Galton board where beads clatter through pegs and pile into the bell curve', tag: 'Component' },
   { title: 'A Chladni plate whose sand flees the shaking and settles on the still nodal lines', tag: 'Component' },
@@ -33,5 +34,4 @@ export const LATEST_LOG: LogHeadline[] = [
   { title: "Conway's Game of Life as a phosphor field you seed by hand", tag: 'Component' },
   { title: 'An iOS-style bottom sheet with drag-to-snap detents', tag: 'Component' },
   { title: 'A ripple tank solving the 2D wave equation, drawn in caustics', tag: 'Component' },
-  { title: 'A tuned pendulum rack that dephases into travelling waves', tag: 'Component' },
 ]
