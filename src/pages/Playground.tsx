@@ -118,6 +118,7 @@ import { HoverIndex, type HoverIndexItem } from '../components/HoverIndex'
 import { Gravity } from '../components/Gravity'
 import { WordSphere } from '../components/WordSphere'
 import { FractalTree } from '../components/FractalTree'
+import { Slime } from '../components/Slime'
 import { GO_TARGETS, useShortcuts } from '../components/Keyboard'
 import { Seo } from '../components/Seo'
 import { GITHUB_URL } from '../data/contact'
@@ -3337,6 +3338,38 @@ export default function Playground() {
                 Math.random anywhere — the growth and sway run off the rAF delta, every jitter from the seeded hash — so
                 it is resize-stable. Reduced motion lays the finished tree out once with a gentle fixed lean and holds it
                 still.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH SLIME (PHYSARUM) */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-[#040404]">
+              <div className="pointer-events-none absolute inset-x-0 top-8 z-10 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Grow</span>
+                <p className="mx-auto mt-3 max-w-md px-6 text-lg font-medium text-white/90 sm:text-xl">
+                  Thousands of agents, one instinct each. Move to feed them; press to drop a bloom.
+                </p>
+              </div>
+              <Slime className="h-[520px] w-full" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Slime</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                A Physarum simulation — the slime mould that, given oats laid out like Tokyo's suburbs, grew a network
+                that matched the city's rail map. Every agent here is almost nothing: a position, a heading, and one
+                instinct. It sniffs the trail just ahead of it, a little to the left and a little to the right, turns
+                toward whichever smells strongest, steps forward, and leaves a little scent where it lands. That is the
+                entire program. Thousands of them running it at once, on a scent field that softly blurs and fades every
+                frame, and out of it assembles the reticulate, vein-like mesh a real slime mould grows to connect its
+                food — emergence you can watch build itself, with no brain, no map, and no centre anywhere in it. Nothing
+                is placed by hand: every agent's start and heading, and the small wander it takes when the trail ahead is
+                flat, come from a fixed hash of its index, so the same network grows every load and it never touches
+                Math.random. The pointer is food — move across it and scent pools under your cursor so the veins reach
+                toward you and thicken; press to drop a richer bloom they race to colonise. Reduced motion steps the
+                colony to a settled network, draws it once, and holds it still.
               </p>
             </div>
           </div>
