@@ -120,6 +120,7 @@ import { Gravity } from '../components/Gravity'
 import { WordSphere } from '../components/WordSphere'
 import { FractalTree } from '../components/FractalTree'
 import { Slime } from '../components/Slime'
+import { DoublePendulum } from '../components/DoublePendulum'
 import { GO_TARGETS, useShortcuts } from '../components/Keyboard'
 import { Seo } from '../components/Seo'
 import { GITHUB_URL } from '../data/contact'
@@ -3419,6 +3420,40 @@ export default function Playground() {
                 Math.random. The pointer is food — move across it and scent pools under your cursor so the veins reach
                 toward you and thicken; press to drop a richer bloom they race to colonise. Reduced motion steps the
                 colony to a settled network, draws it once, and holds it still.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH DOUBLE PENDULUM */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-[#040404]">
+              <div className="pointer-events-none absolute inset-x-0 top-8 z-10 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Diverge</span>
+                <p className="mx-auto mt-3 max-w-md px-6 text-lg font-medium text-white/90 sm:text-xl">
+                  Eleven clones from all-but-identical starts. Press anywhere to re-release them.
+                </p>
+              </div>
+              <DoublePendulum className="h-[520px] w-full" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Double pendulum</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The smallest machine that refuses to be predicted. One arm hangs from a fixed pivot; a second hangs from
+                the tip of the first. Two rods, two weights, one law of gravity — and the whole thing is deterministic to
+                the last decimal, yet no one can tell you where the lower weight will be a minute from now, because the
+                equations that govern it are chaotic: change the starting angle by a hair and the paths diverge into
+                completely different lives. So this does not show one pendulum, it shows a family of them, all released
+                from all-but-identical starts. For the first few seconds they swing as one; then the hairline differences
+                amplify, the arms peel apart, and a tidy line of clones fans into chaos. The physics is honest — each
+                clone integrates the real double-pendulum equations of motion with RK4 on a small fixed timestep, an
+                accumulator eating the frame delta in 1/240s bites, so the divergence you see is true sensitive
+                dependence on initial conditions, not a rendering trick. The hairline offsets come from a fixed hash of
+                each clone's index, so the same family diverges the same way every load and it never touches Math.random.
+                Each weight leaves a short fading trail, so the fan blooms into the signature scribble of chaos. Press
+                anywhere and the whole family re-releases from rest, every arm aimed at the cursor. Reduced motion lays a
+                single settled pendulum out once with faint ghosts behind it and holds it still.
               </p>
             </div>
           </div>
