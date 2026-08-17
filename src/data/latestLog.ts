@@ -20,6 +20,7 @@ export interface LogHeadline {
 }
 
 export const LATEST_LOG: LogHeadline[] = [
+  { title: 'A slime-mould colony that grows a vein network from thousands of agents, each with one instinct', tag: 'Component' },
   { title: 'A Taste page that shows the same interface plain and considered, so the care reads as the delta', tag: 'Page' },
   { title: 'A fractal tree grown from one recursive rule, unfurling and swaying on honest wind', tag: 'Component' },
   { title: 'A 3D word sphere of the tools I reach for, turning in space and steered by the pointer', tag: 'Component' },
@@ -34,5 +35,4 @@ export const LATEST_LOG: LogHeadline[] = [
   { title: 'An inline link that floats a rich preview card on hover', tag: 'Component' },
   { title: "Conway's Game of Life as a phosphor field you seed by hand", tag: 'Component' },
   { title: 'An iOS-style bottom sheet with drag-to-snap detents', tag: 'Component' },
-  { title: 'A ripple tank solving the 2D wave equation, drawn in caustics', tag: 'Component' },
 ]
