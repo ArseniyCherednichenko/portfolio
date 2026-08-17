@@ -77,6 +77,7 @@ import { Accordion } from '../components/Accordion'
 import { ElasticSlider } from '../components/ElasticSlider'
 import { Knob } from '../components/Knob'
 import { Switch } from '../components/Switch'
+import { Select, type SelectOption } from '../components/Select'
 import { CodeInput } from '../components/CodeInput'
 import { DynamicIsland, type IslandActivity } from '../components/DynamicIsland'
 import { Sheet } from '../components/Sheet'
@@ -402,6 +403,45 @@ function KnobDemo() {
           style={{ height: `${level}%` }}
         />
       </div>
+    </div>
+  )
+}
+
+// A Select showcase: a real, styled form control. Picking a face live-swaps the
+// preview line beneath it so the value is felt, not just read; the list glides
+// its lime highlight, keyboard type-ahead jumps by letter, and one option is
+// disabled to show the state.
+const SELECT_FONTS: SelectOption[] = [
+  { value: 'fraunces', label: 'Fraunces', hint: 'The display serif' },
+  { value: 'inter', label: 'Inter', hint: 'Body and UI' },
+  { value: 'mono', label: 'Monospace', hint: 'Code and figures' },
+  { value: 'georgia', label: 'Georgia', hint: 'A system serif' },
+  { value: 'system', label: 'System sans', hint: 'The OS default' },
+  { value: 'cursive', label: 'Handwriting', hint: 'Not on this site', disabled: true },
+]
+const SELECT_STACK: Record<string, string> = {
+  fraunces: '"Fraunces", ui-serif, Georgia, serif',
+  inter: 'Inter, ui-sans-serif, system-ui, sans-serif',
+  mono: 'ui-monospace, SFMono-Regular, Menlo, monospace',
+  georgia: 'Georgia, "Times New Roman", serif',
+  system: 'system-ui, sans-serif',
+}
+function SelectDemo() {
+  const [font, setFont] = useState('fraunces')
+  return (
+    <div className="flex w-full max-w-[300px] flex-col gap-6">
+      <Select
+        label="Typeface"
+        options={SELECT_FONTS}
+        value={font}
+        onChange={setFont}
+      />
+      <p
+        className="text-center text-3xl leading-tight text-white/85"
+        style={{ fontFamily: SELECT_STACK[font] ?? SELECT_STACK.inter }}
+      >
+        The quick brown fox
+      </p>
     </div>
   )
 }
@@ -2819,6 +2859,15 @@ export default function Playground() {
               note="A dial you turn like hardware: drag up or down to sweep the pointer around a 270° arc, spin the wheel for fine steps, or focus it and use the arrows. The pointer rides a spring so it settles with a little give. A real role=slider, keyboard-driven, and calm under reduced motion. Drives the spring tuner on the Design page."
             >
               <KnobDemo />
+            </Experiment>
+          </Reveal>
+
+          <Reveal>
+            <Experiment
+              name="Select menu"
+              note="The one control every form leans on, hand-built because the native select can't be animated past its box. A real accessible listbox — the trigger keeps focus and drives the list through aria-activedescendant, so arrows, Home/End, Enter, Escape, and type-a-letter-to-jump all work. The panel springs open with a blur-and-rise, a single lime highlight glides between options instead of blinking, and the choice carries a check. Picking a face restyles the line below. Reduced motion drops the spring, blur, and glide for a plain, instant menu."
+            >
+              <SelectDemo />
             </Experiment>
           </Reveal>
 
