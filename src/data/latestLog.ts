@@ -20,6 +20,7 @@ export interface LogHeadline {
 }
 
 export const LATEST_LOG: LogHeadline[] = [
+  { title: 'A hand-built Select menu — the styled, animated, fully keyboard-driven listbox the native one can never be', tag: 'Component' },
   { title: 'A slime-mould colony that grows a vein network from thousands of agents, each with one instinct', tag: 'Component' },
   { title: 'A Taste page that shows the same interface plain and considered, so the care reads as the delta', tag: 'Page' },
   { title: 'A fractal tree grown from one recursive rule, unfurling and swaying on honest wind', tag: 'Component' },
