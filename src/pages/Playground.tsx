@@ -79,6 +79,7 @@ import { Knob } from '../components/Knob'
 import { Switch } from '../components/Switch'
 import { Select, type SelectOption } from '../components/Select'
 import { Calendar } from '../components/Calendar'
+import { ColorField } from '../components/ColorField'
 import { CodeInput } from '../components/CodeInput'
 import { DynamicIsland, type IslandActivity } from '../components/DynamicIsland'
 import { Sheet } from '../components/Sheet'
@@ -471,6 +472,58 @@ function CalendarDemo() {
           'No date chosen yet.'
         )}
       </p>
+    </div>
+  )
+}
+
+// A ColorField showcase: the picker beside a live preview that spends the
+// chosen colour — a tinted card, a button, a chip, a ring — so the value is
+// felt as a working accent, not just read as a hex string.
+function ColorFieldDemo() {
+  const [color, setColor] = useState('#DCF87C')
+  return (
+    <div className="flex w-full flex-col items-start gap-10 md:flex-row md:justify-center md:gap-14">
+      <ColorField value={color} onChange={setColor} />
+      <div className="flex w-full max-w-[340px] flex-col gap-4" aria-hidden>
+        <div
+          className="rounded-2xl border p-5"
+          style={{ borderColor: `${color}55`, background: `${color}12` }}
+        >
+          <span className="text-[0.7rem] font-semibold uppercase tracking-[0.2em]" style={{ color }}>
+            Live accent
+          </span>
+          <p className="mt-2 text-lg font-medium text-white/90">
+            Every accent on this card is the colour you just chose.
+          </p>
+          <div className="mt-4 flex flex-wrap items-center gap-3">
+            <span
+              className="rounded-full px-4 py-1.5 text-sm font-semibold text-black"
+              style={{ background: color }}
+            >
+              Primary
+            </span>
+            <span
+              className="rounded-full border px-4 py-1.5 text-sm font-medium"
+              style={{ borderColor: color, color }}
+            >
+              Ghost
+            </span>
+            <span className="inline-flex items-center gap-2 text-sm text-white/60">
+              <span className="h-2.5 w-2.5 rounded-full" style={{ background: color }} />
+              in stock
+            </span>
+          </div>
+        </div>
+        <div className="flex items-center gap-4 rounded-2xl border border-white/10 bg-white/[0.02] p-5">
+          <span className="grid h-11 w-11 place-items-center rounded-full" style={{ background: `${color}22` }}>
+            <span className="h-4 w-4 rounded-full" style={{ background: color }} />
+          </span>
+          <div className="min-w-0">
+            <p className="truncate text-sm font-medium text-white/85">Notification</p>
+            <p className="truncate text-xs text-white/45">The dot and the glow follow the picker.</p>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }
@@ -2949,6 +3002,39 @@ export default function Playground() {
                 pill glides from the old day to the new on a shared layoutId instead of blinking. Today wears a lime dot;
                 the chosen day, the pill. Reduced motion drops the slide and the glide for a plain, instant grid that is
                 exactly as usable.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH COLOUR PICKER */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="flex flex-col items-center gap-8 rounded-3xl border border-white/10 bg-white/[0.02] px-6 py-14 sm:px-10">
+              <div className="max-w-md text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Choose a colour</span>
+                <p className="mx-auto mt-3 text-lg font-medium text-white/85 sm:text-xl">
+                  The one control the browser hides in an OS dialog you can never style. Here it is, rebuilt from the
+                  colour maths up.
+                </p>
+              </div>
+              <ColorFieldDemo />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Colour picker</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The native <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">input type=&quot;color&quot;</code>{' '}
+                hands the whole job to the operating system — an opaque dialog you cannot style, place, theme, or animate,
+                and that looks different on every machine. This is that control rebuilt from the HSV maths up. State is
+                kept in hue, saturation, and value rather than hex, because a hex round-trip loses the hue the moment a
+                colour hits black or grey — so dragging into a corner and back never makes the plane jump. Drag the thumb
+                across the saturation and brightness plane, slide the rainbow hue rail beneath it, type a hex straight in,
+                or tap a preset; where the browser supports it, an eyedropper samples any pixel on your screen. The plane
+                and the rail are real <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">role=&quot;slider&quot;</code>{' '}
+                controls — focus either and the arrow keys drive it (Shift for bigger steps), each reading its live hex to
+                assistive tech — and the preview beside it spends the colour as a working accent so the value is felt, not
+                just read. Reduced motion drops the thumb&apos;s grab-swell and the gliding preset check for a plain,
+                equally usable picker.
               </p>
             </div>
           </div>
