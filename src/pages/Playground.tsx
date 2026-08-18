@@ -78,6 +78,7 @@ import { ElasticSlider } from '../components/ElasticSlider'
 import { Knob } from '../components/Knob'
 import { Switch } from '../components/Switch'
 import { Select, type SelectOption } from '../components/Select'
+import { Calendar } from '../components/Calendar'
 import { CodeInput } from '../components/CodeInput'
 import { DynamicIsland, type IslandActivity } from '../components/DynamicIsland'
 import { Sheet } from '../components/Sheet'
@@ -442,6 +443,33 @@ function SelectDemo() {
         style={{ fontFamily: SELECT_STACK[font] ?? SELECT_STACK.inter }}
       >
         The quick brown fox
+      </p>
+    </div>
+  )
+}
+
+// A Calendar showcase: a real, styled date picker. Picking a day updates a live
+// readout beneath it so the value is felt, not just read; the month slides and
+// the lime pill glides between days. Starts on today.
+const CAL_READOUT = new Intl.DateTimeFormat('en-GB', {
+  weekday: 'long',
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric',
+})
+function CalendarDemo() {
+  const [date, setDate] = useState<Date | null>(() => new Date())
+  return (
+    <div className="flex w-full flex-col items-center gap-6">
+      <Calendar value={date} onChange={setDate} />
+      <p className="text-center text-sm text-white/55">
+        {date ? (
+          <>
+            Selected <span className="font-medium text-white/85">{CAL_READOUT.format(date)}</span>
+          </>
+        ) : (
+          'No date chosen yet.'
+        )}
       </p>
     </div>
   )
@@ -2894,6 +2922,37 @@ export default function Playground() {
             </Experiment>
           </Reveal>
         </div>
+
+        {/* FULL-WIDTH CALENDAR */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="flex flex-col items-center gap-8 rounded-3xl border border-white/10 bg-white/[0.02] px-6 py-14 sm:px-10">
+              <div className="max-w-md text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Pick a day</span>
+                <p className="mx-auto mt-3 text-lg font-medium text-white/85 sm:text-xl">
+                  The hardest control there is, hand-built. Arrow around the grid; a month slides in when you cross its edge.
+                </p>
+              </div>
+              <CalendarDemo />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Date picker</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                A calendar is the control every design system ends up rebuilding, because the native one can't be styled
+                and it isn't a menu — it's a two-dimensional grid you navigate like a spreadsheet, with a month that has
+                to slide out from under you when you cross its edge. This is that control, built to the WAI-ARIA date-grid
+                contract: a real grid of weeks and gridcells with a single roving tabindex, so Tab lands on the grid once
+                and the arrows drive the rest — left and right a day, up and down a week, Home and End the week's ends,
+                PageUp and PageDown a month, hold Shift for a year — and crossing a boundary flips the month so you can
+                walk from one into the next without lifting your hands. On that honest foundation sits the motion the
+                native control can never have: the month slides in the direction you travelled, and the lime selection
+                pill glides from the old day to the new on a shared layoutId instead of blinking. Today wears a lime dot;
+                the chosen day, the pill. Reduced motion drops the slide and the glide for a plain, instant grid that is
+                exactly as usable.
+              </p>
+            </div>
+          </div>
+        </Reveal>
 
         {/* FULL-WIDTH DYNAMIC ISLAND */}
         <Reveal>
