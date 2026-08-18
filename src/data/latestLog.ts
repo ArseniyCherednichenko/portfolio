@@ -20,6 +20,7 @@ export interface LogHeadline {
 }
 
 export const LATEST_LOG: LogHeadline[] = [
+  { title: 'A hand-built date picker — the hardest native control, rebuilt as an accessible grid with a sliding month and a gliding lime pill', tag: 'Component' },
   { title: 'A double pendulum — a family of chaotic clones released from all-but-identical starts, fanning apart into chaos', tag: 'Component' },
   { title: 'A hand-built Select menu — the styled, animated, fully keyboard-driven listbox the native one can never be', tag: 'Component' },
   { title: 'A slime-mould colony that grows a vein network from thousands of agents, each with one instinct', tag: 'Component' },
