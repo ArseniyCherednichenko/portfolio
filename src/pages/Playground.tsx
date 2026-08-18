@@ -78,6 +78,7 @@ import { ElasticSlider } from '../components/ElasticSlider'
 import { Knob } from '../components/Knob'
 import { Switch } from '../components/Switch'
 import { Select, type SelectOption } from '../components/Select'
+import { Combobox, type ComboOption } from '../components/Combobox'
 import { Calendar } from '../components/Calendar'
 import { ColorField } from '../components/ColorField'
 import { CodeInput } from '../components/CodeInput'
@@ -444,6 +445,52 @@ function SelectDemo() {
         style={{ fontFamily: SELECT_STACK[font] ?? SELECT_STACK.inter }}
       >
         The quick brown fox
+      </p>
+    </div>
+  )
+}
+
+// A Combobox showcase: the select's editable twin. The list is long enough
+// that scanning it is slower than typing, which is the whole reason a combobox
+// exists — and the labels are multi-word so a subsequence query like "remo"
+// (Framer Motion) or "tywr" (Tailwind, roughly) lights up the exact matched
+// letters. Choosing one updates a live readout beneath, so the value is felt.
+const COMBO_TOOLS: ComboOption[] = [
+  { value: 'react', label: 'React', hint: 'The view layer' },
+  { value: 'typescript', label: 'TypeScript', hint: 'Types, strict' },
+  { value: 'vite', label: 'Vite', hint: 'Dev server and bundler' },
+  { value: 'tailwind', label: 'Tailwind CSS', hint: 'Utility styling' },
+  { value: 'framer', label: 'Framer Motion', hint: 'Animation' },
+  { value: 'router', label: 'React Router', hint: 'Client-side routing' },
+  { value: 'swiftui', label: 'SwiftUI', hint: 'Native iOS' },
+  { value: 'supabase', label: 'Supabase', hint: 'Backend and auth' },
+  { value: 'postgres', label: 'PostgreSQL', hint: 'The database' },
+  { value: 'figma', label: 'Figma', hint: 'Design' },
+  { value: 'node', label: 'Node.js', hint: 'The runtime' },
+  { value: 'git', label: 'Git', hint: 'Version control' },
+  { value: 'flutter', label: 'Flutter', hint: 'Not on this stack', disabled: true },
+]
+function ComboboxDemo() {
+  const [tool, setTool] = useState('framer')
+  const chosen = COMBO_TOOLS.find((t) => t.value === tool)
+  return (
+    <div className="flex w-full max-w-[300px] flex-col gap-5">
+      <Combobox
+        label="Find a tool"
+        options={COMBO_TOOLS}
+        value={tool}
+        onChange={setTool}
+        placeholder="Type to filter…"
+      />
+      <p className="text-sm text-white/55">
+        {chosen ? (
+          <>
+            Using <span className="font-medium text-white/85">{chosen.label}</span>
+            {chosen.hint ? <span className="text-white/40"> — {chosen.hint.toLowerCase()}</span> : null}
+          </>
+        ) : (
+          'Nothing selected yet.'
+        )}
       </p>
     </div>
   )
@@ -2950,6 +2997,15 @@ export default function Playground() {
               note="The one control every form leans on, hand-built because the native select can't be animated past its box. A real accessible listbox — the trigger keeps focus and drives the list through aria-activedescendant, so arrows, Home/End, Enter, Escape, and type-a-letter-to-jump all work. The panel springs open with a blur-and-rise, a single lime highlight glides between options instead of blinking, and the choice carries a check. Picking a face restyles the line below. Reduced motion drops the spring, blur, and glide for a plain, instant menu."
             >
               <SelectDemo />
+            </Experiment>
+          </Reveal>
+
+          <Reveal>
+            <Experiment
+              name="Combobox"
+              note="The select's editable twin: you don't open it and scan, you type into it and the list narrows on every keystroke. A real WAI-ARIA editable combobox — the text input owns focus and drives the filtered listbox through aria-activedescendant, a live region announces the result count, and arrows, Home/End, Enter, Tab-to-complete, and Escape all work. Matching is a subsequence, so 'remo' still finds Framer Motion, and each result underlines the exact letters you hit. The lime highlight glides between results instead of blinking; a clear button folds in when there's text. Reduced motion drops the spring, blur, and glide for a plain, instant field."
+            >
+              <ComboboxDemo />
             </Experiment>
           </Reveal>
 
