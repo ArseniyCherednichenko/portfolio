@@ -50,6 +50,7 @@ import { CurvedLoop } from '../components/CurvedLoop'
 import { LinkPreview } from '../components/LinkPreview'
 import { FuzzyText } from '../components/FuzzyText'
 import { GlitchText } from '../components/GlitchText'
+import { StrokeText } from '../components/StrokeText'
 import { Lens } from '../components/Lens'
 import { Lamp } from '../components/Lamp'
 import { Iridescence } from '../components/Iridescence'
@@ -1487,6 +1488,34 @@ export default function Playground() {
                 pixels toward the cursor as it moves. Distinct from the worded tooltip; the link
                 stays the real, focusable element and the card is decoration. Reduced motion drops
                 the tracking and blur for a plain, instant appearance.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH STROKE TEXT */}
+        <Reveal>
+          <div className="mt-12">
+            <div
+              data-cursor
+              className="relative flex min-h-[240px] items-center justify-center overflow-hidden rounded-3xl border border-white/10 bg-white/[0.02] px-6"
+            >
+              <StrokeText
+                text="OUTLINE"
+                className="h-[150px] w-full max-w-2xl font-display text-[86px] font-bold uppercase tracking-tight sm:text-[104px]"
+              />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Stroke-to-fill type</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The letters ink themselves in as thin outlines on arrival, then stay hollow —
+                two SVG text layers on one baseline, the top filled with the site&rsquo;s
+                lime-cyan-violet triad but shown only through a radial mask pinned to the pointer.
+                Sweep across it and the cursor paints in the letters it passes; the gradient slides
+                on a slow shimmer so the lit type is never a flat colour. Distinct from the gradient
+                clip and the variable-font lean elsewhere — here you paint an outline in.
+                Reduced motion drops the draw, the shimmer, and the mask, showing the word filled
+                and still.
               </p>
             </div>
           </div>
