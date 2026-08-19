@@ -20,6 +20,7 @@ export interface LogHeadline {
 }
 
 export const LATEST_LOG: LogHeadline[] = [
+  { title: 'A hand-built Tag input — the multi-value sibling of the Select and Combobox, where each committed value becomes a removable chip and the caret keeps writing the next', tag: 'Component' },
   { title: "A hand-built Combobox — the Select's editable twin, an accessible autocomplete that filters by subsequence and underlines the letters you matched", tag: 'Component' },
   { title: 'A hand-built HSV colour picker — the control the browser hides in an unstylable OS dialog, rebuilt with a drag plane, hue rail, editable hex, and screen eyedropper', tag: 'Component' },
   { title: 'A hand-built date picker — the hardest native control, rebuilt as an accessible grid with a sliding month and a gliding lime pill', tag: 'Component' },
@@ -39,5 +40,4 @@ export const LATEST_LOG: LogHeadline[] = [
   { title: "The site's first chart — an animated single-hue donut of the library", tag: 'Component' },
   { title: 'An inline link that floats a rich preview card on hover', tag: 'Component' },
   { title: "Conway's Game of Life as a phosphor field you seed by hand", tag: 'Component' },
-  { title: 'An iOS-style bottom sheet with drag-to-snap detents', tag: 'Component' },
 ]
