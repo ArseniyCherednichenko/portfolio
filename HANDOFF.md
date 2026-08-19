@@ -230,3 +230,20 @@ Make it look VERY good: crazy-good motion design, professional, cool. Build orig
 4. Build ONE substantial, coherent improvement (a new section/component, a real polish/a11y/responsive pass). Make it genuinely more impressive each run. Commit GRANULARLY.
 5. VERIFY: `npm install` if needed, then `npm run typecheck` AND `npm run build` — both must pass. If not fixable cleanly, STOP without pushing.
 6. `git push origin main` (rebase + retry if rejected). No PRs.
+
+### ⚠️ Push hazard — check this before pushing (a real incident happened)
+The container can start with **HEAD detached** and the local `refs/heads/main`
+branch pointing at a **stale/old commit** (behind the real `origin/main`). If
+you then do your work in detached HEAD (after `git rebase origin/main`) and run
+`git push origin main`, git pushes the **local `main` branch (the stale one)**,
+**not your HEAD** — and a `--force*` will **rewind public main and destroy recent
+work**. This actually happened once (main was briefly reverted 159→144, then
+recovered). **Before pushing, always:**
+- `git branch --show-current` — if **empty (detached)**, re-attach:
+  `git checkout -B main HEAD` so the `main` branch = your work.
+- Confirm `git rev-parse refs/heads/main` **equals** `git rev-parse HEAD`.
+- Confirm your base matches the live remote: `git ls-remote origin main` should
+  equal `git rev-parse origin/main` (proxy fetch can lag — trust `ls-remote`).
+- Prefer an **explicit** push of your commit: `git push origin HEAD:main`.
+- **Never** `--force`/`--force-with-lease` unless you have just proven the remote
+  tip is an ancestor of your HEAD (i.e. you are strictly ahead).
