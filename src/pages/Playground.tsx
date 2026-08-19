@@ -117,6 +117,7 @@ import { Chladni } from '../components/Chladni'
 import { Galton } from '../components/Galton'
 import { RippleTank } from '../components/RippleTank'
 import { Life } from '../components/Life'
+import { Maze } from '../components/Maze'
 import { Voronoi } from '../components/Voronoi'
 import { Sortable } from '../components/Sortable'
 import { Carousel, type CarouselSlide } from '../components/Carousel'
@@ -2691,6 +2692,38 @@ export default function Playground() {
                 checkerboard: a second heat field bleeds off where a cell just died, so life glows lime and leaves cooling
                 ghosts behind it, painted to a grid-sized buffer and smoothed up to full width. No wall clock and no
                 per-frame randomness; reduced motion steps a seeded board to a settled still and paints it once.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH MAZE — a perfect maze that carves itself with DFS, then solves itself with BFS */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="relative h-[440px] overflow-hidden rounded-3xl border border-white/10 bg-[#040404]">
+              <Maze />
+              <div className="pointer-events-none absolute inset-x-0 top-8 z-10 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Maze</span>
+                <p className="mx-auto mt-3 max-w-md px-6 text-lg font-medium text-white/90 sm:text-xl">
+                  Watch it carve. Watch it solve. Press to grow a new one.
+                </p>
+              </div>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Maze</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                Two classic algorithms running back to back on one grid, and the whole point is to watch the shape of
+                each. First a randomized depth-first search carves a perfect maze: it walks from a corner to a random
+                unvisited neighbour, knocking down the wall between, until it hits a dead end, then backtracks along its
+                own trail to the last cell with somewhere new to go and pushes on — the long sweeping corridors are the
+                signature of a search that commits hard to a direction before it ever comes back, and when the stack
+                empties there is exactly one path between any two cells. Then a breadth-first flood spreads from the
+                entrance one ring at a time, tinting every cell by its distance from the start, and because it reaches
+                each cell by the shortest route, following the recorded parents back from the exit hands you the single
+                shortest path for free — the one bright thread that lights and pulses through the maze. Press or drag to
+                abandon the current maze and grow a new one; the click point seeds the next layout. The grid is a byte of
+                wall bits per cell and a seeded PRNG places every choice, so it is deterministic and stable across
+                resizes; reduced motion carves and solves one maze instantly and paints it once.
               </p>
             </div>
           </div>
