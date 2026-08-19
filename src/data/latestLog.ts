@@ -20,6 +20,7 @@ export interface LogHeadline {
 }
 
 export const LATEST_LOG: LogHeadline[] = [
+  { title: 'A maze that carves itself with a depth-first search, then solves itself with a breadth-first flood that lights the one shortest path through it', tag: 'Component' },
   { title: 'A stroke-to-fill headline — letters that ink themselves in as thin outlines, then stay hollow until a cursor-tracked spotlight paints them with the accent triad', tag: 'Component' },
   { title: 'A hand-built Tag input — the multi-value sibling of the Select and Combobox, where each committed value becomes a removable chip and the caret keeps writing the next', tag: 'Component' },
   { title: "A hand-built Combobox — the Select's editable twin, an accessible autocomplete that filters by subsequence and underlines the letters you matched", tag: 'Component' },
@@ -39,5 +40,4 @@ export const LATEST_LOG: LogHeadline[] = [
   { title: 'An animated column chart comparing the build log by kind of work', tag: 'Component' },
   { title: 'An animated area curve charting the build growing, chapter by chapter', tag: 'Component' },
   { title: "The site's first chart — an animated single-hue donut of the library", tag: 'Component' },
-  { title: 'An inline link that floats a rich preview card on hover', tag: 'Component' },
 ]
