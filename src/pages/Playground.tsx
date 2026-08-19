@@ -79,6 +79,7 @@ import { Knob } from '../components/Knob'
 import { Switch } from '../components/Switch'
 import { Select, type SelectOption } from '../components/Select'
 import { Combobox, type ComboOption } from '../components/Combobox'
+import { TagInput } from '../components/TagInput'
 import { Calendar } from '../components/Calendar'
 import { ColorField } from '../components/ColorField'
 import { CodeInput } from '../components/CodeInput'
@@ -490,6 +491,41 @@ function ComboboxDemo() {
           </>
         ) : (
           'Nothing selected yet.'
+        )}
+      </p>
+    </div>
+  )
+}
+
+// A TagInput showcase: the multi-value sibling of the Select and Combobox.
+// Seeded with a couple of tags so the chip row reads at a glance; a real stack
+// of suggestions drives the autocomplete, and custom tags are allowed so a
+// value outside the list still commits. A live readout counts what's in the
+// field so the several-at-once value is felt, not just seen.
+const TAG_SUGGESTIONS = [
+  'React', 'TypeScript', 'Framer Motion', 'Tailwind CSS', 'SwiftUI',
+  'Supabase', 'Vite', 'Node.js', 'Figma', 'Accessibility',
+  'Motion design', 'Design systems', 'PostgreSQL', 'Prototyping',
+]
+function TagInputDemo() {
+  const [tags, setTags] = useState<string[]>(['Motion design', 'TypeScript'])
+  return (
+    <div className="flex w-full max-w-[340px] flex-col gap-5">
+      <TagInput
+        label="Tag this work"
+        value={tags}
+        onChange={setTags}
+        suggestions={TAG_SUGGESTIONS}
+        placeholder="Type, then Enter…"
+        max={8}
+      />
+      <p className="text-sm text-white/55">
+        {tags.length === 0 ? (
+          'No tags yet — type one and press Enter.'
+        ) : (
+          <>
+            <span className="font-medium text-white/85">{tags.length}</span> tag{tags.length === 1 ? '' : 's'} on this piece
+          </>
         )}
       </p>
     </div>
@@ -3006,6 +3042,15 @@ export default function Playground() {
               note="The select's editable twin: you don't open it and scan, you type into it and the list narrows on every keystroke. A real WAI-ARIA editable combobox — the text input owns focus and drives the filtered listbox through aria-activedescendant, a live region announces the result count, and arrows, Home/End, Enter, Tab-to-complete, and Escape all work. Matching is a subsequence, so 'remo' still finds Framer Motion, and each result underlines the exact letters you hit. The lime highlight glides between results instead of blinking; a clear button folds in when there's text. Reduced motion drops the spring, blur, and glide for a plain, instant field."
             >
               <ComboboxDemo />
+            </Experiment>
+          </Reveal>
+
+          <Reveal>
+            <Experiment
+              name="Tag input"
+              note="The Select picks one thing and the Combobox filters to one; this is the field where the answer is several. Each committed value becomes a chip that lives in the box while the caret keeps writing the next one after it. Enter or comma commits; Backspace on an empty field reaches back and lifts the last chip; every value is trimmed and de-duplicated so the same tag never lands twice, and a cap closes the field when it's full. The same WAI-ARIA combobox contract as its siblings drives the suggestion panel — arrows, Home/End, Enter, Escape, and a live region that narrates each add and remove — with subsequence matching, so 'frmr' still finds Framer Motion. Chips spring in and, on removal, fold out while the rest slide left to close the gap. Reduced motion drops the spring, the slide, the blur, and the glide."
+            >
+              <TagInputDemo />
             </Experiment>
           </Reveal>
 
