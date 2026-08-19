@@ -328,7 +328,7 @@ export function TagInput({
           spellCheck={false}
           disabled={disabled || isFull}
           value={query}
-          placeholder={tags.length === 0 ? placeholder : isFull ? '' : ''}
+          placeholder={tags.length === 0 ? placeholder : ''}
           onChange={(e) => {
             setQuery(e.target.value)
             setOpen(true)
