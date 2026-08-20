@@ -25,6 +25,16 @@ export interface Discipline {
   tools: readonly string[]
   /** Where to see it on the site. `to` is a real in-app route. */
   evidence: { readonly label: string; readonly to: string }
+  /** A per-discipline accent hex — a design token for the detail page's visual
+   * identity, not a fact about the work. The house lime stays the site accent;
+   * these only tint a discipline's own page. */
+  accent: string
+  /** The honest through-line for this discipline in a single line — a restated
+   * pull-quote drawn from the body, used as the detail page's opening statement. */
+  throughLine: string
+  /** Other discipline ids this one genuinely leans on, for cross-linking the
+   * detail pages. Honest structural relationships, not invented ones. */
+  related: readonly string[]
 }
 
 export const DISCIPLINES: readonly Discipline[] = [
@@ -42,6 +52,9 @@ export const DISCIPLINES: readonly Discipline[] = [
     ],
     tools: ['React', 'TypeScript', 'Tailwind', 'Framer Motion', 'Vite'],
     evidence: { label: 'See the Playground', to: '/playground' },
+    accent: '#DCF87C',
+    throughLine: 'Sweat the states nobody documents — the empty, the loading, the just-tapped.',
+    related: ['motion', 'backend'],
   },
   {
     id: 'ios',
@@ -57,6 +70,9 @@ export const DISCIPLINES: readonly Discipline[] = [
     ],
     tools: ['SwiftUI', 'Swift', 'Supabase'],
     evidence: { label: 'Read about Guided', to: '/work/guided' },
+    accent: '#8CC2FF',
+    throughLine: 'The platform conventions you only notice when they are missing.',
+    related: ['backend', 'frontend'],
   },
   {
     id: 'backend',
@@ -72,6 +88,9 @@ export const DISCIPLINES: readonly Discipline[] = [
     ],
     tools: ['Supabase', 'PostgreSQL', 'TypeScript'],
     evidence: { label: 'The full toolkit', to: '/toolkit' },
+    accent: '#7EE0C8',
+    throughLine: 'Invisible when it goes well — the difference between a demo and something people rely on.',
+    related: ['ios', 'ai'],
   },
   {
     id: 'ai',
@@ -87,6 +106,9 @@ export const DISCIPLINES: readonly Discipline[] = [
     ],
     tools: ['LLMs', 'Prompt design', 'TypeScript'],
     evidence: { label: 'Read about Guided', to: '/work/guided' },
+    accent: '#C4A5FF',
+    throughLine: 'Restraint as a feature — knowing when to withhold the answer so the understanding is earned.',
+    related: ['backend', 'frontend'],
   },
   {
     id: 'motion',
@@ -102,8 +124,21 @@ export const DISCIPLINES: readonly Discipline[] = [
     ],
     tools: ['Framer Motion', 'CSS', 'Canvas', 'SVG'],
     evidence: { label: 'The component library', to: '/library' },
+    accent: '#FF9FB2',
+    throughLine: 'The things people feel but cannot name — typography, timing, the spacing between things.',
+    related: ['frontend'],
   },
 ] as const
 
 /** Count for the little "N disciplines, one craft" line. */
 export const DISCIPLINE_COUNT = DISCIPLINES.length
+
+/** Look up a discipline and its position by id, for the /range/:id detail
+ * pages and their prev/next pager. Returns undefined for an unknown id. */
+export function getDiscipline(
+  id: string | undefined,
+): { discipline: Discipline; index: number } | undefined {
+  if (!id) return undefined
+  const index = DISCIPLINES.findIndex((d) => d.id === id)
+  return index === -1 ? undefined : { discipline: DISCIPLINES[index], index }
+}
