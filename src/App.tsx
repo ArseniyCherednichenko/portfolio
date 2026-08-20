@@ -10,6 +10,7 @@ import Home from './pages/Home'
 const About = lazy(() => import('./pages/About'))
 const Work = lazy(() => import('./pages/Work'))
 const Range = lazy(() => import('./pages/Range'))
+const RangeDetail = lazy(() => import('./pages/RangeDetail'))
 const Playground = lazy(() => import('./pages/Playground'))
 const Reel = lazy(() => import('./pages/Reel'))
 const Writing = lazy(() => import('./pages/Writing'))
@@ -42,6 +43,7 @@ export default function App() {
         <Route path="about" element={<About />} />
         <Route path="work" element={<Work />} />
         <Route path="range" element={<Range />} />
+        <Route path="range/:id" element={<RangeDetail />} />
         <Route path="playground" element={<Playground />} />
         <Route path="reel" element={<Reel />} />
         <Route path="writing" element={<Writing />} />
