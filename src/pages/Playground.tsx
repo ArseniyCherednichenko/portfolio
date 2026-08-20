@@ -2810,8 +2810,9 @@ export default function Playground() {
             <div className="mt-4 px-1">
               <h3 className="text-base font-semibold">Aggregate</h3>
               <p className="mt-1 text-sm leading-relaxed text-white/45">
-                A frost crystal that grows itself out of pure chance, and, like the slime mesh and the self-carving maze
-                it sits beside, the whole point is to watch a structure with no blueprint assemble itself. It runs
+                A frost crystal that grows itself out of pure chance, and, kin to the slime mesh and the self-carving
+                maze in this family of self-assembling fields, the whole point is to watch a structure with no blueprint
+                assemble itself. It runs
                 Diffusion-Limited Aggregation live: a single seed is frozen in the middle, then hundreds of walkers drift
                 across the field, each doing a pure random walk — one cell in a random direction every step, a drunkard
                 with no idea the crystal even exists — and the instant one brushes up against anything already frozen, it

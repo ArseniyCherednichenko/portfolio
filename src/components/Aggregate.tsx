@@ -2,9 +2,9 @@ import { useEffect, useRef } from 'react'
 import { useReducedMotion } from 'framer-motion'
 
 // Aggregate — a frost crystal that grows itself out of pure chance, one particle
-// at a time. It runs Diffusion-Limited Aggregation live, and, like the Slime
-// mesh and the self-carving Maze it sits beside, the whole point is to watch a
-// structure with no blueprint assemble itself:
+// at a time. It runs Diffusion-Limited Aggregation live, and, kin to the Slime
+// mesh and the self-carving Maze in this family of self-assembling fields, the
+// whole point is to watch a structure with no blueprint assemble itself:
 //
 //   1. A SEED is frozen in place — a single stuck cell (or a few, wherever you
 //      press).
