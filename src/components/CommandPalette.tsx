@@ -11,6 +11,7 @@ import {
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
 import { PROJECTS } from '../data/projects'
+import { DISCIPLINES } from '../data/disciplines'
 import { useContact } from './ContactDialog'
 import { useShortcuts } from './Keyboard'
 import { useToast } from './Toast'
@@ -23,7 +24,7 @@ import { useToast } from './Toast'
 type Command = {
   id: string
   label: string
-  group: 'Pages' | 'Projects' | 'Actions'
+  group: 'Pages' | 'Projects' | 'Disciplines' | 'Actions'
   hint?: string
   keywords?: string
   run: () => void
@@ -122,6 +123,15 @@ function Palette({ open, onClose }: { open: boolean; onClose: () => void }) {
       run: () => go(`/work/${p.slug}`),
     }))
 
+    const disciplines: Command[] = DISCIPLINES.map((d) => ({
+      id: `discipline-${d.id}`,
+      label: d.title,
+      group: 'Disciplines',
+      hint: d.tag,
+      keywords: `range discipline ${d.tag} ${d.lede} ${d.tools.join(' ')}`,
+      run: () => go(`/range/${d.id}`),
+    }))
+
     const actions: Command[] = [
       {
         id: 'contact',
@@ -170,7 +180,7 @@ function Palette({ open, onClose }: { open: boolean; onClose: () => void }) {
       },
     ]
 
-    return [...pages, ...projects, ...actions]
+    return [...pages, ...projects, ...disciplines, ...actions]
   }, [go, onClose, openContact, openShortcuts, toast])
 
   const filtered = useMemo(() => {

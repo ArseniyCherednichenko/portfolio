@@ -70,7 +70,14 @@ function DisciplineDetail({ index }: { index: number }) {
           </div>
         </div>
 
-        <div className="mt-auto pt-8">
+        <div className="mt-auto flex flex-wrap items-center gap-x-6 gap-y-3 pt-8">
+          <Link
+            to={`/range/${d.id}`}
+            className="inline-flex items-center gap-2 text-sm font-semibold text-white transition-opacity hover:opacity-80"
+          >
+            Open this discipline
+            <span aria-hidden>-&gt;</span>
+          </Link>
           <Link
             to={d.evidence.to}
             className="inline-flex items-center gap-2 text-sm font-semibold text-[#DCF87C] transition-opacity hover:opacity-80"
