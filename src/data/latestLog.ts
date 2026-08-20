@@ -20,6 +20,7 @@ export interface LogHeadline {
 }
 
 export const LATEST_LOG: LogHeadline[] = [
+  { title: 'A pipe network that assembles itself out of pure constraint — Wave Function Collapse run live, every cell a superposition of tiles until a decision ripples across the grid and forces it down to one', tag: 'Component' },
   { title: 'A maze that carves itself with a depth-first search, then solves itself with a breadth-first flood that lights the one shortest path through it', tag: 'Component' },
   { title: 'A stroke-to-fill headline — letters that ink themselves in as thin outlines, then stay hollow until a cursor-tracked spotlight paints them with the accent triad', tag: 'Component' },
   { title: 'A hand-built Tag input — the multi-value sibling of the Select and Combobox, where each committed value becomes a removable chip and the caret keeps writing the next', tag: 'Component' },
