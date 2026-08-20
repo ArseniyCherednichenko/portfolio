@@ -118,6 +118,7 @@ import { Galton } from '../components/Galton'
 import { RippleTank } from '../components/RippleTank'
 import { Life } from '../components/Life'
 import { Maze } from '../components/Maze'
+import { WaveCollapse } from '../components/WaveCollapse'
 import { Voronoi } from '../components/Voronoi'
 import { Sortable } from '../components/Sortable'
 import { Carousel, type CarouselSlide } from '../components/Carousel'
@@ -2724,6 +2725,39 @@ export default function Playground() {
                 abandon the current maze and grow a new one; the click point seeds the next layout. The grid is a byte of
                 wall bits per cell and a seeded PRNG places every choice, so it is deterministic and stable across
                 resizes; reduced motion carves and solves one maze instantly and paints it once.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH WAVE FUNCTION COLLAPSE — a pipe network that assembles itself out of constraint */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="relative h-[440px] overflow-hidden rounded-3xl border border-white/10 bg-[#040404]">
+              <WaveCollapse />
+              <div className="pointer-events-none absolute inset-x-0 top-8 z-10 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Wave function collapse</span>
+                <p className="mx-auto mt-3 max-w-md px-6 text-lg font-medium text-white/90 sm:text-xl">
+                  Every cell holds every tile at once, until it doesn't. Press to seed a new weave.
+                </p>
+              </div>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Wave function collapse</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                A pipe network that assembles itself out of pure constraint, and, like the maze above it, the whole point
+                is to watch the method work. Every cell begins in superposition — holding every tile at once, straights
+                and corners and tees and a cross and blank — and reads as a faint cloud until it is forced down to one.
+                Each step collapses the least-decided cell (the lowest entropy, the fewest options left) to a single
+                weighted tile, then propagates: because every tile edge is a socket a pipe either leaves or it doesn't,
+                and two neighbours may only touch where their shared sockets agree, one decision ripples outward, its
+                neighbours dropping every tile that no longer fits and theirs reacting in turn — a constraint wave
+                washing across the grid until it is consistent again. Off-grid sides were forbidden a socket from the
+                start, so no finished pipe ever runs into a wall. When a corner paints itself into a contradiction — a
+                cell with no legal tile left — the weave simply restarts under the next seed, honest to how the algorithm
+                behaves. Possibility sets are packed into one bitmask per cell so collapse is masking and propagation is
+                bit tests, a seeded PRNG places every choice, and reduced motion solves one weave instantly and paints it
+                once.
               </p>
             </div>
           </div>
