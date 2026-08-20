@@ -20,6 +20,7 @@ export interface LogHeadline {
 }
 
 export const LATEST_LOG: LogHeadline[] = [
+  { title: 'A frost crystal that grows itself out of pure chance — Diffusion-Limited Aggregation run live, drunk particles random-walking the field until one brushes the frost and freezes, and the tips catch everything so the lace reaches outward in fractal fingers', tag: 'Component' },
   { title: 'A pipe network that assembles itself out of pure constraint — Wave Function Collapse run live, every cell a superposition of tiles until a decision ripples across the grid and forces it down to one', tag: 'Component' },
   { title: 'A maze that carves itself with a depth-first search, then solves itself with a breadth-first flood that lights the one shortest path through it', tag: 'Component' },
   { title: 'A stroke-to-fill headline — letters that ink themselves in as thin outlines, then stay hollow until a cursor-tracked spotlight paints them with the accent triad', tag: 'Component' },
@@ -40,5 +41,4 @@ export const LATEST_LOG: LogHeadline[] = [
   { title: 'A radar chart drawing the shape of the whole site, section by section', tag: 'Component' },
   { title: 'An animated column chart comparing the build log by kind of work', tag: 'Component' },
   { title: 'An animated area curve charting the build growing, chapter by chapter', tag: 'Component' },
-  { title: "The site's first chart — an animated single-hue donut of the library", tag: 'Component' },
 ]
