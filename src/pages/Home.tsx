@@ -118,26 +118,31 @@ const RANGE: HPanel[] = [
     tag: 'Frontend',
     title: 'Interfaces that feel right',
     body: 'React and TypeScript, with motion that earns its place. The part people touch, and the part they feel.',
+    to: '/range/frontend',
   },
   {
     tag: 'Native iOS',
     title: 'At home on the device',
     body: 'SwiftUI apps that behave like they belong, sharing one backend with the web so nothing drifts.',
+    to: '/range/ios',
   },
   {
     tag: 'Backend and data',
     title: 'The part you never see',
     body: 'Supabase, auth, and the data model underneath, keeping web and native honest with each other.',
+    to: '/range/backend',
   },
   {
     tag: 'Applied AI',
     title: 'Building with models, not around them',
     body: 'AI woven into real products. With Guided that means asking the right question instead of handing over the answer.',
+    to: '/range/ai',
   },
   {
     tag: 'Motion and design',
     title: 'Craft in the small moments',
     body: 'The typography, the timing, the spacing between things. Hand-built, never templated, always reduced-motion aware.',
+    to: '/range/motion',
   },
 ]
 

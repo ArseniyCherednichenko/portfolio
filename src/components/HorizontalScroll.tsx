@@ -1,4 +1,5 @@
 import { useLayoutEffect, useRef, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { motion, useReducedMotion, useScroll, useSpring, useTransform } from 'framer-motion'
 
 export interface HPanel {
@@ -6,6 +7,9 @@ export interface HPanel {
   tag: string
   title: string
   body: string
+  /** Optional in-app route this panel leads to. When set, the panel becomes a
+   * link with a reveal-on-hover "Open" affordance; otherwise it stays static. */
+  to?: string
 }
 
 /**
@@ -88,8 +92,10 @@ export function HorizontalScroll({ panels, className }: { panels: HPanel[]; clas
 }
 
 function Panel({ panel, index }: { panel: HPanel; index: number }) {
-  return (
-    <article className="group relative flex h-[58vh] min-h-[360px] w-[80vw] max-w-[440px] shrink-0 snap-center flex-col justify-between overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-[#161616] to-[#0d0d0d] p-8 sm:w-[420px] sm:p-10">
+  const cardClass =
+    'group relative flex h-[58vh] min-h-[360px] w-[80vw] max-w-[440px] shrink-0 snap-center flex-col justify-between overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-[#161616] to-[#0d0d0d] p-8 sm:w-[420px] sm:p-10'
+  const inner = (
+    <>
       {/* drifting lime wash that warms on hover */}
       <div className="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full bg-[#DCF87C]/10 opacity-60 blur-3xl transition-opacity duration-500 group-hover:opacity-100" />
       <div className="relative flex items-center justify-between">
@@ -101,7 +107,26 @@ function Panel({ panel, index }: { panel: HPanel; index: number }) {
       <div className="relative">
         <h3 className="font-display text-2xl font-bold leading-tight tracking-tight sm:text-3xl">{panel.title}</h3>
         <p className="mt-4 leading-relaxed text-white/60">{panel.body}</p>
+        {panel.to && (
+          <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-[#DCF87C] opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+            Open <span aria-hidden>-&gt;</span>
+          </span>
+        )}
       </div>
-    </article>
+    </>
   )
+
+  if (panel.to) {
+    return (
+      <Link
+        to={panel.to}
+        className={`${cardClass} transition-colors hover:border-[#DCF87C]/30`}
+        aria-label={`${panel.tag}: ${panel.title}`}
+      >
+        {inner}
+      </Link>
+    )
+  }
+
+  return <article className={cardClass}>{inner}</article>
 }
