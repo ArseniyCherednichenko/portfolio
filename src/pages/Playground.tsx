@@ -120,6 +120,7 @@ import { Life } from '../components/Life'
 import { Maze } from '../components/Maze'
 import { WaveCollapse } from '../components/WaveCollapse'
 import { Voronoi } from '../components/Voronoi'
+import { Aggregate } from '../components/Aggregate'
 import { Sortable } from '../components/Sortable'
 import { Carousel, type CarouselSlide } from '../components/Carousel'
 import { HoverIndex, type HoverIndexItem } from '../components/HoverIndex'
@@ -2789,6 +2790,44 @@ export default function Playground() {
                 a soft core glows where the nearest distance falls to zero. Painted to a grid-sized buffer and smoothed up
                 to full width, so the hot loop weighs about twelve thousand cells against thirty seeds. No wall clock and
                 no per-frame randomness; reduced motion paints one settled arrangement and holds it still.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH AGGREGATE — a frost crystal that grows itself by diffusion-limited aggregation */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="relative h-[460px] overflow-hidden rounded-3xl border border-white/10 bg-[#040404]">
+              <Aggregate className="h-full w-full" />
+              <div className="pointer-events-none absolute inset-x-0 top-8 z-10 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Aggregate</span>
+                <p className="mx-auto mt-3 max-w-md px-6 text-lg font-medium text-white/90 sm:text-xl">
+                  Drunk particles, one rule: touch the frost and freeze. Press to seed a rival crystal.
+                </p>
+              </div>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Aggregate</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                A frost crystal that grows itself out of pure chance, and, like the slime mesh and the self-carving maze
+                it sits beside, the whole point is to watch a structure with no blueprint assemble itself. It runs
+                Diffusion-Limited Aggregation live: a single seed is frozen in the middle, then hundreds of walkers drift
+                across the field, each doing a pure random walk — one cell in a random direction every step, a drunkard
+                with no idea the crystal even exists — and the instant one brushes up against anything already frozen, it
+                freezes too, right where it stands, and a fresh walker is launched in behind it. That is the entire rule,
+                and out of it comes the branching, fern-like lace of real frost, because a walker approaching the cluster
+                is overwhelmingly likely to catch a tip long before it can drift into a sheltered inner bay — the tips
+                catch everything, the crevices starve, growth becomes its own shield, and the fractal reaches outward in
+                fingers rather than filling in, its dimension settling near 1.7 with nothing shaped by hand. Each cell is
+                tinted by when it froze, so the crystal reads as growth rings from a deep-teal core to a lime front, and
+                the live walkers are drawn as a faint drifting haze — the diffusion made visible. When the frost reaches
+                the edges it holds, dissolves, and a new seed starts over. Press or drag to freeze a nucleus under the
+                pointer and watch a second crystal race the first for the open field. Occupancy is one byte per cell and
+                the crystal accumulates straight into a single persistent buffer, so a freeze writes four bytes rather
+                than repainting; a fixed integer hash places every step and launch, so it never touches the wall clock
+                and grows the same lace each load. Reduced motion grows one crystal to completion in a single pass and
+                paints it once.
               </p>
             </div>
           </div>
