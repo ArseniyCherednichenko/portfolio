@@ -87,6 +87,7 @@ import { CodeInput } from '../components/CodeInput'
 import { DynamicIsland, type IslandActivity } from '../components/DynamicIsland'
 import { Sheet } from '../components/Sheet'
 import { Tooltip } from '../components/Tooltip'
+import { Popover } from '../components/Popover'
 import { useToast } from '../components/Toast'
 import { Stepper, type StepperStep } from '../components/Stepper'
 import { Dock, type DockItem } from '../components/Dock'
@@ -708,6 +709,131 @@ function ToastDemo() {
       >
         Stack three
       </button>
+    </div>
+  )
+}
+
+// The Popover: the click sibling of the hover Tooltip. Where the tooltip is a
+// passive text hint, this anchors a panel of *real controls* to its trigger. The
+// board shows all four placements, a rich action panel (the exact pattern the
+// footer's Share control uses), and an edge-hugging trigger whose panel flips to
+// stay on-screen.
+function PopoverDemo() {
+  const { toast } = useToast()
+  const placements = ['top', 'bottom', 'left', 'right'] as const
+
+  // A compact action row inside a demo panel — a labelled button with a hover
+  // wash. Closes the popover after it fires.
+  const Action = ({ label, hint, onClick }: { label: string; hint: string; onClick: () => void }) => (
+    <button
+      type="button"
+      onClick={onClick}
+      className="group/pa flex w-full items-center justify-between gap-4 rounded-xl px-3 py-2 text-left transition-colors hover:bg-white/[0.05] focus-visible:bg-white/[0.06] focus-visible:outline-none"
+    >
+      <span>
+        <span className="block text-sm font-medium text-white/85">{label}</span>
+        <span className="block text-xs text-white/40">{hint}</span>
+      </span>
+      <span aria-hidden className="text-[#DCF87C] opacity-0 transition-opacity group-hover/pa:opacity-100">
+        -&gt;
+      </span>
+    </button>
+  )
+
+  return (
+    <div className="flex flex-col items-center gap-8">
+      {/* Rich, interactive panel — links + buttons the pointer travels into. */}
+      <Popover
+        placement="bottom"
+        label="Quick actions"
+        panelClassName="w-[18rem] p-2.5"
+        trigger={
+          <button
+            type="button"
+            className="rounded-full bg-[#DCF87C] px-6 py-2.5 text-sm font-semibold text-black transition hover:brightness-105 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#DCF87C]/60"
+          >
+            Open a rich popover
+          </button>
+        }
+      >
+        {(close) => (
+          <div>
+            <p className="px-3 pb-2 pt-1 text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-white/35">
+              Quick actions
+            </p>
+            <Action
+              label="Copy a link"
+              hint="Fires a toast, then closes"
+              onClick={() => {
+                toast('Copied — this is what an action can do', { tone: 'success' })
+                close()
+              }}
+            />
+            <Action label="Do a thing" hint="Any real control fits here" onClick={close} />
+            <div className="mx-3 my-2 h-px bg-white/10" />
+            <a
+              href="#overlays"
+              onClick={close}
+              className="block rounded-xl px-3 py-2 text-sm font-medium text-white/70 transition-colors hover:bg-white/[0.05] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#DCF87C]/50"
+            >
+              A link works too
+            </a>
+          </div>
+        )}
+      </Popover>
+
+      {/* Four placements — each panel opens on the named side, flipping only if
+          the viewport would clip it. */}
+      <div className="flex flex-wrap items-center justify-center gap-3">
+        {placements.map((p) => (
+          <Popover
+            key={p}
+            placement={p}
+            label={`Opens on the ${p}`}
+            panelClassName="max-w-[13rem] px-3.5 py-2.5"
+            trigger={
+              <button
+                type="button"
+                className="rounded-full border border-white/15 bg-white/[0.04] px-4 py-2 text-sm capitalize text-white/80 transition hover:border-white/30 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#DCF87C]/60"
+              >
+                {p}
+              </button>
+            }
+          >
+            <p className="leading-relaxed text-white/70">
+              Anchored to the <span className="text-[#DCF87C]">{p}</span>. It flips to the opposite side
+              only if it would run off the screen.
+            </p>
+          </Popover>
+        ))}
+      </div>
+
+      {/* Edge case — a corner-hugging trigger whose preferred side would clip,
+          so it flips and clamps to stay fully visible. */}
+      <div className="relative h-24 w-full max-w-sm rounded-2xl border border-dashed border-white/12">
+        <span className="pointer-events-none absolute inset-0 flex items-center justify-center text-xs text-white/30">
+          preferred side flips near an edge
+        </span>
+        <div className="absolute right-2 top-2">
+          <Popover
+            placement="right"
+            label="Flips to stay visible"
+            panelClassName="max-w-[14rem] px-3.5 py-2.5"
+            trigger={
+              <button
+                type="button"
+                className="rounded-full border border-[#DCF87C]/40 bg-[#DCF87C]/10 px-3.5 py-1.5 text-xs font-semibold text-[#DCF87C] transition hover:bg-[#DCF87C]/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#DCF87C]/60"
+              >
+                Corner
+              </button>
+            }
+          >
+            <p className="leading-relaxed text-white/70">
+              Prefers the right, but there is no room — so it opens left and stays on-screen.
+            </p>
+          </Popover>
+        </div>
+      </div>
     </div>
   )
 }
@@ -4220,6 +4346,35 @@ export default function Playground() {
                 edge, with the arrow tracking the trigger's centre. The trigger carries aria-describedby, so assistive
                 tech announces the hint with the control. It backs the nav's terse buttons across the whole site. Under
                 reduced motion it just fades, no travel.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH POPOVER */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 py-14 sm:px-10">
+              <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Click</span>
+              <p className="mt-3 max-w-md text-lg font-medium text-white/85 sm:text-xl">
+                Open a popover — the click sibling of the hover tooltip. It anchors a panel of real controls to its
+                trigger, flips to stay on-screen, and hands focus back when it closes.
+              </p>
+              <div className="mt-10">
+                <PopoverDemo />
+              </div>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Popover</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The Overlays family's click-popover, and the counterpart to the tooltip: where that is a passive text
+                hint on hover, this opens on click and holds real, interactive content — links, buttons, a small action
+                list — that the pointer travels into and operates. It reuses the tooltip's portal positioning (fixed,
+                measured from the trigger, flips to the opposite side and clamps inside the viewport when the preferred
+                placement would clip, arrow tracking the trigger's centre), so it is never cut off by an overflow-hidden
+                parent. The trigger carries aria-haspopup and aria-expanded, the panel is a labelled role=dialog, focus
+                moves in on open and returns to the trigger on close, and it dismisses on Escape or an outside click. It
+                backs the footer's "Share this page" control. Under reduced motion it just fades, no travel.
               </p>
             </div>
           </div>
