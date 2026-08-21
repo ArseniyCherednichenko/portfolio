@@ -121,6 +121,7 @@ import { Maze } from '../components/Maze'
 import { WaveCollapse } from '../components/WaveCollapse'
 import { Voronoi } from '../components/Voronoi'
 import { Aggregate } from '../components/Aggregate'
+import { Cyclic } from '../components/Cyclic'
 import { Sortable } from '../components/Sortable'
 import { Carousel, type CarouselSlide } from '../components/Carousel'
 import { HoverIndex, type HoverIndexItem } from '../components/HoverIndex'
@@ -2829,6 +2830,47 @@ export default function Playground() {
                 than repainting; a fixed integer hash places every step and launch, so it never touches the wall clock
                 and grows the same lace each load. Reduced motion grows one crystal to completion in a single pass and
                 paints it once.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH CYCLIC — a cyclic cellular automaton that winds noise into rotating spirals */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="relative h-[460px] overflow-hidden rounded-3xl border border-white/10 bg-[#040404]">
+              <Cyclic className="h-full w-full" />
+              <div className="pointer-events-none absolute inset-x-0 top-8 z-10 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Cyclic</span>
+                <p className="mx-auto mt-3 max-w-md px-6 text-lg font-medium text-white/90 sm:text-xl">
+                  Every colour eats the one before it. Press to wind a fresh spiral; drag to stir in noise.
+                </p>
+              </div>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Cyclic</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                A cyclic cellular automaton — Griffeath's cyclic space — and the spiral-making cousin of the Game of
+                Life and the Gray-Scott coral in this family of self-organising fields: where Life makes gliders out of
+                birth and death and the reaction-diffusion field grows coral out of chemistry, this makes rotating
+                spirals out of one of the shortest rules there is. Every cell holds a state, a number from zero to nine,
+                and the states are wired in a loop so that nine advances back to zero. Each generation a cell asks a
+                single question of its eight neighbours — is any one of you the colour that comes right after mine? — and
+                if the answer is yes it advances to that next colour, and if no it waits. That is the entire program: a
+                cell can only ever be eaten by the state one step ahead of it, so colour k perpetually chases k-1 chases
+                k-2 around the ring, and the chase never ends because the ring never ends. Out of that comes a textbook
+                cascade: from pure noise the field boils, then defects where all ten colours meet pin themselves down and
+                begin to wind, each throwing off a rotating spiral wave; the waves collide and annihilate along shock
+                fronts, tight spirals overrun loose ones, and the whole plane locks into a lattice of interlocking
+                pinwheels that turn forever — nothing settles, because every cell keeps advancing on its turn. A cool
+                teal band tints each cell by its phase so the concentric rings are always faintly there, and a heat field
+                flares the instant a cell advances and cools over the next few steps, so the leading edge of each wave
+                glows lime-white and you watch bright arms sweep over dim rings. Press anywhere to stamp a pinwheel — a
+                disc of all ten phases wound round a point, a defect placed by hand that unfurls into a new spiral — or
+                drag to stir raw noise and watch fresh cores nucleate out of it. It is pure integer arithmetic with no
+                floats in the rule, so nothing can drift or blow up; one byte per cell painted to a grid-sized buffer and
+                smoothed up, a seeded PRNG for every placement so it never touches the wall clock. Reduced motion steps
+                one field until the spirals lock in and paints it once.
               </p>
             </div>
           </div>
