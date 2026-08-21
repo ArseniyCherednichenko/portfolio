@@ -78,6 +78,7 @@ export const CONTENTS: ContentSection[] = [
     label: 'Play',
     intro: 'The site turned inside out, for the curious.',
     entries: [
+      { to: '/wander', title: 'Wander', blurb: 'Lose the map — the site deals you one real page at a time.' },
       { to: '/atlas', title: 'Atlas', blurb: 'The whole site as a living map — every page a star, drag to rearrange.', chord: 'k' },
       { to: '/terminal', title: 'Terminal', blurb: 'Drive the whole site by typing, like a real shell.', chord: 's' },
       { to: '/changelog', title: 'Changelog', blurb: 'The build log, in honest chapters, filterable by kind.', chord: 'b' },
