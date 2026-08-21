@@ -21,6 +21,7 @@ const GROUPS: FooterGroup[] = [
     title: 'The making',
     links: [
       { to: '/work', label: 'Work' },
+      { to: '/range', label: 'The range' },
       { to: '/playground', label: 'Playground' },
       { to: '/reel', label: 'The reel' },
       { to: '/library', label: 'The library' },
@@ -38,6 +39,7 @@ const GROUPS: FooterGroup[] = [
       { to: '/craft', label: 'On motion' },
       { to: '/taste', label: 'Taste' },
       { to: '/design', label: 'Design language' },
+      { to: '/specimen', label: 'Type specimen' },
       { to: '/resume', label: 'Résumé' },
     ],
   },
@@ -48,6 +50,7 @@ const GROUPS: FooterGroup[] = [
       { to: '/changelog', label: 'Changelog' },
       { to: '/terminal', label: 'Terminal' },
       { to: '/atlas', label: 'Atlas' },
+      { to: '/wander', label: 'Wander' },
       { to: '/numbers', label: 'By the numbers' },
       { to: '/contents', label: 'Index' },
       { to: '/contact', label: 'Contact' },
