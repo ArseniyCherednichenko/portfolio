@@ -1,9 +1,12 @@
 import { motion, useReducedMotion } from 'framer-motion'
+import { type ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 import { GradientText } from './GradientText'
 import { MagneticButton } from './MagneticButton'
+import { Popover } from './Popover'
 import { useContact } from './ContactDialog'
 import { useShortcuts } from './Keyboard'
+import { useToast } from './Toast'
 import { useBerlinTime } from '../hooks/useBerlinTime'
 import { EMAIL, GITHUB_URL } from '../data/contact'
 import { COMPONENT_COUNT } from '../data/stats'
@@ -117,6 +120,7 @@ export function SiteFooter() {
             >
               GitHub
             </a>
+            <SharePopover />
           </div>
         </div>
 
@@ -180,6 +184,155 @@ export function SiteFooter() {
         </div>
       </div>
     </footer>
+  )
+}
+
+// One action row inside the share popover — a labelled control with a small
+// mark, a hover wash, and a lime hairline that draws in from the left.
+function ShareAction({
+  onClick,
+  href,
+  icon,
+  label,
+  hint,
+}: {
+  onClick?: () => void
+  href?: string
+  icon: ReactNode
+  label: string
+  hint: string
+}) {
+  const inner = (
+    <>
+      <span
+        aria-hidden
+        className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/[0.03] text-white/60 transition-colors group-hover/act:border-[#DCF87C]/40 group-hover/act:text-[#DCF87C]"
+      >
+        {icon}
+      </span>
+      <span className="min-w-0">
+        <span className="block text-sm font-medium text-white/85">{label}</span>
+        <span className="block truncate text-xs text-white/40">{hint}</span>
+      </span>
+    </>
+  )
+  const cls =
+    'group/act flex w-full items-center gap-3 rounded-xl px-2.5 py-2 text-left transition-colors hover:bg-white/[0.04] focus-visible:bg-white/[0.05] focus-visible:outline-none'
+  return href ? (
+    <a href={href} target="_blank" rel="noreferrer" className={cls} onClick={onClick}>
+      {inner}
+    </a>
+  ) : (
+    <button type="button" onClick={onClick} className={cls}>
+      {inner}
+    </button>
+  )
+}
+
+// The footer's "Share" affordance — a click-popover of real, useful actions for
+// the page you are on: copy its link, mail it, or open the source. Deliberately
+// distinct from the "Get in touch" dialog (which is about reaching Arseniy);
+// this is about passing the page along. Honest channels only.
+function SharePopover() {
+  const { toast } = useToast()
+
+  const pageUrl = () => (typeof window === 'undefined' ? '' : window.location.href)
+
+  const copyLink = (close: () => void) => {
+    const url = pageUrl()
+    navigator.clipboard
+      ?.writeText(url)
+      .then(() => toast('Link copied to clipboard', { tone: 'success' }))
+      .catch(() => toast('Could not copy — long-press the address bar instead', { tone: 'error' }))
+    close()
+  }
+
+  const mailHref = () => {
+    const url = pageUrl()
+    const subject = encodeURIComponent('From Arseniy Cherednichenko’s portfolio')
+    const body = encodeURIComponent(`Thought you might like this page:\n${url}\n`)
+    return `mailto:?subject=${subject}&body=${body}`
+  }
+
+  return (
+    <Popover
+      placement="top"
+      label="Share this page"
+      panelClassName="w-[17rem] p-2.5"
+      trigger={
+        <button
+          type="button"
+          className="inline-flex items-center gap-2 rounded-full border border-white/15 px-6 py-3 text-sm font-medium text-white/70 transition-colors hover:border-white/30 hover:text-white"
+        >
+          <ShareGlyph />
+          Share
+        </button>
+      }
+    >
+      {(close) => (
+        <div>
+          <p className="px-2.5 pb-2 pt-1 text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-white/35">
+            Share this page
+          </p>
+          <ShareAction
+            onClick={() => copyLink(close)}
+            icon={<LinkGlyph />}
+            label="Copy link"
+            hint="This page, to your clipboard"
+          />
+          <ShareAction
+            onClick={close}
+            href={mailHref()}
+            icon={<MailGlyph />}
+            label="Email a link"
+            hint="Open a message with the URL"
+          />
+          <ShareAction
+            onClick={close}
+            href={GITHUB_URL}
+            icon={<CodeGlyph />}
+            label="View the source"
+            hint="github.com/ArseniyCherednichenko"
+          />
+        </div>
+      )}
+    </Popover>
+  )
+}
+
+// Small, crisp line marks for the share actions — no emoji, matching the site's
+// restrained iconography (currentColor, 1.6 stroke).
+function ShareGlyph() {
+  return (
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+      <circle cx="18" cy="5" r="3" />
+      <circle cx="6" cy="12" r="3" />
+      <circle cx="18" cy="19" r="3" />
+      <path d="M8.6 10.5 15.4 6.5M8.6 13.5l6.8 4" />
+    </svg>
+  )
+}
+function LinkGlyph() {
+  return (
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+      <path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.5 1.5" />
+      <path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.5-1.5" />
+    </svg>
+  )
+}
+function MailGlyph() {
+  return (
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+      <rect x="3" y="5" width="18" height="14" rx="2" />
+      <path d="m3.5 7 8.5 6 8.5-6" />
+    </svg>
+  )
+}
+function CodeGlyph() {
+  return (
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+      <path d="m8 8-5 4 5 4M16 8l5 4-5 4M13.5 6l-3 12" />
+    </svg>
   )
 }
 
