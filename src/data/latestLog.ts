@@ -20,6 +20,7 @@ export interface LogHeadline {
 }
 
 export const LATEST_LOG: LogHeadline[] = [
+  { title: 'A Wander page that turns the site\'s depth into a game of chance — instead of a map, it deals you one real page at a time from a shuffled deck, so no single project is the whole story and the fastest way to feel the breadth is to be sent somewhere you would not have clicked', tag: 'Page' },
   { title: 'A cyclic cellular automaton — Griffeath\'s cyclic space — that winds pure noise into rotating spirals: every colour eats the one before it around a loop, defects pin down and throw off waves, and the plane locks into interlocking pinwheels that turn forever', tag: 'Component' },
   { title: 'A frost crystal that grows itself out of pure chance — Diffusion-Limited Aggregation run live, drunk particles random-walking the field until one brushes the frost and freezes, and the tips catch everything so the lace reaches outward in fractal fingers', tag: 'Component' },
   { title: 'A pipe network that assembles itself out of pure constraint — Wave Function Collapse run live, every cell a superposition of tiles until a decision ripples across the grid and forces it down to one', tag: 'Component' },
