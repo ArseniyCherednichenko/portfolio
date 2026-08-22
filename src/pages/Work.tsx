@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { ContextMenu, type ContextMenuItem } from '../components/ContextMenu'
 import { Reveal } from '../components/Reveal'
 import { Eyebrow } from '../components/Eyebrow'
 import { GradientText } from '../components/GradientText'
@@ -42,6 +43,7 @@ function WorkRow({
   onQuickLook: (p: Project) => void
 }) {
   const num = String(index + 1).padStart(2, '0')
+  const navigate = useNavigate()
 
   if (project.soon) {
     return (
@@ -60,7 +62,30 @@ function WorkRow({
     )
   }
 
+  const caseUrl = `/work/${project.slug}`
+  const menuItems: ContextMenuItem[] = [
+    { kind: 'label', id: 'l', label: project.title },
+    { id: 'quick', label: 'Quick look', shortcut: 'Q', onSelect: () => onQuickLook(project) },
+    { id: 'case', label: 'Read the case study', shortcut: 'Enter', onSelect: () => navigate(caseUrl) },
+    ...(project.href
+      ? [{ id: 'live', label: 'Visit the live site', href: project.href, newTab: true } as ContextMenuItem]
+      : []),
+    { kind: 'separator', id: 's1' },
+    {
+      id: 'copy',
+      label: 'Copy link to this work',
+      onSelect: () => {
+        try {
+          void navigator.clipboard?.writeText(`${window.location.origin}${caseUrl}`)
+        } catch {
+          /* clipboard blocked — silent, best-effort */
+        }
+      },
+    },
+  ]
+
   return (
+    <ContextMenu items={menuItems} label={`${project.title} actions`}>
     <div className="group relative border-t border-white/10 py-8 transition-colors hover:bg-white/[0.015] sm:py-10">
       {/* Lime edge that grows in on hover. */}
       <span
@@ -162,6 +187,7 @@ function WorkRow({
         </div>
       </div>
     </div>
+    </ContextMenu>
   )
 }
 
@@ -236,6 +262,9 @@ export default function Work() {
           ))}
         </ul>
         <div className="border-t border-white/10" />
+        <p className="mt-4 text-xs text-white/30">
+          Tip: right-click a project for quick actions.
+        </p>
       </section>
 
       {/* THE REST OF THE SITE */}
