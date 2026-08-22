@@ -57,6 +57,7 @@ import { Lamp } from '../components/Lamp'
 import { Iridescence } from '../components/Iridescence'
 import { TrueFocus } from '../components/TrueFocus'
 import { FlowingMenu } from '../components/FlowingMenu'
+import { RadialMenu } from '../components/RadialMenu'
 import { Threads } from '../components/Threads'
 import { Beams } from '../components/Beams'
 import { Meteors } from '../components/Meteors'
@@ -1209,6 +1210,27 @@ function GooeyTabsDemo() {
         </AnimatePresence>
       </div>
     </div>
+  )
+}
+
+// The radial menu, wired to the same toast the rest of the page uses so every
+// item does something real when it is chosen. A short glyph stands in for each
+// action's icon; the wheel names the highlighted one in its hub.
+function RadialMenuDemo() {
+  const { toast } = useToast()
+  const act = (label: string) => () => toast(`${label}`)
+  return (
+    <RadialMenu
+      label="Quick actions"
+      items={[
+        { label: 'Share', icon: '↗', onSelect: act('Shared') },
+        { label: 'Copy', icon: '⧉', onSelect: act('Copied') },
+        { label: 'Edit', icon: '✎', onSelect: act('Editing') },
+        { label: 'Save', icon: '★', onSelect: act('Saved') },
+        { label: 'Delete', icon: '⌫', onSelect: act('Deleted') },
+        { label: 'More', icon: '⋯', onSelect: act('More') },
+      ]}
+    />
   )
 }
 
@@ -4452,6 +4474,29 @@ export default function Playground() {
                 speed. The second column leans in 3D and drifts the other way. No per-item React state — the loop writes
                 the transform straight onto the track. Under reduced motion the loop is dropped entirely for a plain,
                 natively-scrollable column, fully legible.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH RADIAL MENU */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="flex min-h-[420px] items-center justify-center rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 py-14 sm:px-10">
+              <RadialMenuDemo />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Radial action menu</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                Press the hub and the actions don't drop into a list — they fan out on a wheel around it, each button
+                springing from the centre to its seat on a staggered delay while a thin spoke draws out behind it, so the
+                ring blooms open rather than appearing at once. The plus in the hub spins into a cross, and a live readout
+                names whichever action is under the cursor or the keyboard. It's a real menu, not a flourish:
+                aria-haspopup and aria-expanded on the trigger, a role=menu of menuitems, a single roving highlight the
+                arrow keys walk around the ring (Home and End to the ends), Enter or Space to fire, Escape or an outside
+                click to close, focus returning to the hub. A different primitive from the dock (a magnifying row) and the
+                sphere menu (an orbiting cloud): here the geometry is a wheel you steer. Reduced motion keeps every
+                affordance and drops the fan-out, the spoke draw, and the spin.
               </p>
             </div>
           </div>
