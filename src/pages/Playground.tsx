@@ -38,6 +38,7 @@ import { CardStack } from '../components/CardStack'
 import { ProfileCard } from '../components/ProfileCard'
 import { PixelTransition } from '../components/PixelTransition'
 import { FlipCard } from '../components/FlipCard'
+import { PinCard } from '../components/PinCard'
 import { ScratchReveal } from '../components/ScratchReveal'
 import { CompareSlider } from '../components/CompareSlider'
 import { Folder } from '../components/Folder'
@@ -1792,6 +1793,23 @@ export default function Playground() {
                   </div>
                 }
               />
+            </Experiment>
+          </Reveal>
+
+          <Reveal>
+            <Experiment
+              name="3D pin card"
+              note="A card pinned to a board: at rest it sits flat, but on hover or keyboard focus the whole face lies back on its perspective while a labelled pin rises out of it on a dropped line, haloed by expanding radar rings. Distinct from the tilt (which leans toward the cursor and stays flat-on) and the flip (a turn to a back face) — here the card tips away and the pin floats forward. Reduced motion drops the lie-back and the ring spin; the pin just fades in."
+            >
+              <div className="flex min-h-[240px] w-full items-center justify-center">
+                <PinCard title="Berlin · 52.52, 13.40" className="w-full max-w-[260px]">
+                  <div className="flex min-h-[196px] w-full flex-col justify-between p-6">
+                    <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[#DCF87C]">Pinned</span>
+                    <p className="font-display text-2xl font-bold leading-tight">Where the work is made.</p>
+                    <p className="text-sm text-white/50">Hover, or tab to it, to lift the pin.</p>
+                  </div>
+                </PinCard>
+              </div>
             </Experiment>
           </Reveal>
 
