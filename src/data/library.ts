@@ -77,6 +77,7 @@ export const LIBRARY: LibraryGroup[] = [
       { name: 'SpotlightReveal', note: 'Content uncovered under a moving spotlight mask.', tags: ['card', 'reveal', 'pointer'], to: '/playground', where: 'Playground' },
       { name: 'CardStack', note: 'An auto-advancing 3D deck of cards you can flick through.', tags: ['card', '3d', 'drag'], to: '/playground', where: 'Playground' },
       { name: 'FlipCard', note: 'A card that flips in 3D to reveal its back.', tags: ['card', '3d', 'flip'], to: '/playground', where: 'Playground' },
+      { name: 'PinCard', note: 'The 3D-pin card — at rest it sits flat, but on hover or focus the whole face lies back on its perspective while a labelled pin rises out of it on a dropped line, haloed by expanding radar rings. Works as a real link. Closes the Contact page with two pinned doorways.', tags: ['card', '3d', 'pin', 'hover'], to: '/contact', where: 'Contact' },
       { name: 'PixelTransition', note: 'A pixel-dissolve that reveals a second image on hover.', tags: ['card', 'pixel', 'hover'], to: '/work', where: 'Work' },
       { name: 'ScratchReveal', note: 'A scratch-off surface you rub away to reveal what is under it.', tags: ['card', 'reveal', 'pointer'], to: '/playground', where: 'Playground' },
       { name: 'CompareSlider', note: 'A draggable seam that wipes between a before and an after.', tags: ['card', 'drag', 'compare'], to: '/craft', where: 'On motion' },
