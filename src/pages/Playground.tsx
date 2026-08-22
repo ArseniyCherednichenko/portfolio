@@ -90,6 +90,7 @@ import { DynamicIsland, type IslandActivity } from '../components/DynamicIsland'
 import { Sheet } from '../components/Sheet'
 import { Tooltip } from '../components/Tooltip'
 import { Popover } from '../components/Popover'
+import { ContextMenu, type ContextMenuItem } from '../components/ContextMenu'
 import { useToast } from '../components/Toast'
 import { Stepper, type StepperStep } from '../components/Stepper'
 import { Dock, type DockItem } from '../components/Dock'
@@ -836,6 +837,42 @@ function PopoverDemo() {
           </Popover>
         </div>
       </div>
+    </div>
+  )
+}
+
+// The ContextMenu: the Overlays family's pointer-anchored member, opening at the
+// cursor on right-click over a defined surface (never a global hijack). The demo
+// is a dashed canvas whose menu carries a caption, actions with shortcut hints, a
+// separator, a real link, and a danger row — all wired to toasts so each choice
+// reports back, plus a note that the keyboard menu key works too.
+function ContextMenuDemo() {
+  const { toast } = useToast()
+  const items: ContextMenuItem[] = [
+    { kind: 'label', id: 'l', label: 'This surface' },
+    { id: 'a', label: 'Run an action', shortcut: 'A', onSelect: () => toast('Action fired', { tone: 'success' }) },
+    { id: 'c', label: 'Copy something', shortcut: 'C', onSelect: () => toast('Copied', { tone: 'success' }) },
+    { id: 'p', label: 'Open the playground index', href: '#index', onSelect: () => toast('A row can be a real link') },
+    { kind: 'separator', id: 's' },
+    { id: 'd', label: 'Reset (danger tint)', danger: true, onSelect: () => toast('Danger row chosen', { tone: 'error' }) },
+    { id: 'x', label: 'Disabled row', disabled: true },
+  ]
+  return (
+    <div className="w-full max-w-2xl">
+      <ContextMenu items={items} label="Surface actions">
+        <div className="grid min-h-[220px] place-items-center rounded-2xl border border-dashed border-white/15 bg-white/[0.015] text-center">
+          <div className="px-6">
+            <p className="text-lg font-medium text-white/85">Right-click anywhere in this panel</p>
+            <p className="mt-2 text-sm text-white/40">
+              The menu blooms from the corner facing your pointer, and stays on-screen near an edge. Focus lands on the
+              first row — arrow keys move it, Enter fires it, Escape closes.
+            </p>
+            <p className="mt-3 text-xs text-white/30">
+              The keyboard menu key (Shift+F10) opens it too, anchored to this panel.
+            </p>
+          </div>
+        </div>
+      </ContextMenu>
     </div>
   )
 }
@@ -4415,6 +4452,35 @@ export default function Playground() {
                 parent. The trigger carries aria-haspopup and aria-expanded, the panel is a labelled role=dialog, focus
                 moves in on open and returns to the trigger on close, and it dismisses on Escape or an outside click. It
                 backs the footer's "Share this page" control. Under reduced motion it just fades, no travel.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH CONTEXT MENU */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 py-14 sm:px-10">
+              <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Right-click</span>
+              <p className="mt-3 max-w-md text-lg font-medium text-white/85 sm:text-xl">
+                A context menu for a surface — the pointer-anchored sibling of the popover. It opens at the cursor,
+                blooms from the corner facing it, and clamps to stay on-screen, without hijacking the rest of the page.
+              </p>
+              <div className="mt-10 flex justify-center">
+                <ContextMenuDemo />
+              </div>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Context menu</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The Overlays family's pointer-anchored member. Right-clicking a wrapped surface suppresses the browser's
+                native menu only over that region and opens a portalled, fixed-position panel at the cursor — measured
+                after mount and clamped inside the viewport, flipping left of or above the pointer near an edge, with the
+                bloom growing from whichever corner faces it. It is fully keyboard-driven: role=menu with menuitem rows
+                (plus separator and caption kinds), a roving focus that Up/Down wraps and Home/End jumps, Enter or Space to
+                fire, Escape or Tab or an outside click to close, and focus returned to where it was. Rows can be real
+                anchors or callbacks, and the keyboard menu key opens it anchored to the surface. It powers the
+                right-click quick actions on every project in the Work ledger. Under reduced motion the panel just fades.
               </p>
             </div>
           </div>
