@@ -20,6 +20,7 @@ export interface LogHeadline {
 }
 
 export const LATEST_LOG: LogHeadline[] = [
+  { title: 'A RadialMenu — a pie menu that fans its actions onto a wheel around a hub: each button springs out from the centre on a staggered delay with a spoke drawing behind it, the plus in the hub spins to a cross, and a live readout names the highlighted action. A full role=menu with a roving highlight the arrow keys walk around the ring', tag: 'Component' },
   { title: 'A PinCard — the 3D-pin card: at rest it sits flat, but on hover or focus the whole face lies back on its perspective while a labelled pin rises out of it on a dropped line, haloed by expanding radar rings. It closes the Contact page with two pinned doorways to the work and the playground', tag: 'Component' },
   { title: 'A Popover — the click sibling of the hover tooltip: it anchors a panel of real controls to its trigger, flips to stay on-screen, and hands focus back on close. It powers a new footer Share affordance for passing along the page you are on', tag: 'Component' },
   { title: 'A Wander page that turns the site\'s depth into a game of chance — instead of a map, it deals you one real page at a time from a shuffled deck, so no single project is the whole story and the fastest way to feel the breadth is to be sent somewhere you would not have clicked', tag: 'Page' },
