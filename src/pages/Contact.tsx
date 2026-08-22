@@ -1,5 +1,4 @@
 import { motion, useReducedMotion } from 'framer-motion'
-import { Link } from 'react-router-dom'
 import { Reveal } from '../components/Reveal'
 import { Eyebrow } from '../components/Eyebrow'
 import { GradientText } from '../components/GradientText'
@@ -12,6 +11,7 @@ import { SpotlightCard } from '../components/SpotlightCard'
 import { SplitFlap } from '../components/SplitFlap'
 import { Clock } from '../components/Clock'
 import { ScratchReveal } from '../components/ScratchReveal'
+import { PinCard } from '../components/PinCard'
 import { Seo } from '../components/Seo'
 import { useBerlinTime } from '../hooks/useBerlinTime'
 
@@ -230,21 +230,47 @@ export default function Contact() {
         </Reveal>
       </section>
 
-      {/* CLOSING */}
-      <section className="mx-auto w-full max-w-4xl px-6 py-20 text-center">
+      {/* CLOSING — two pinned doorways out, so the last thing on the contact
+          page points to the breadth of the work rather than a single project.
+          Each lifts its pin on hover or focus and leads somewhere real. */}
+      <section className="mx-auto w-full max-w-4xl px-6 py-20">
         <Reveal>
-          <p className="font-display text-2xl font-medium leading-snug text-white/80 sm:text-3xl">
-            Prefer to look around first?{' '}
-            <Link to="/work" className="text-[#DCF87C] underline-offset-4 hover:underline">
-              See the work
-            </Link>{' '}
-            or wander the{' '}
-            <Link to="/playground" className="text-[#DCF87C] underline-offset-4 hover:underline">
-              playground
-            </Link>
-            .
+          <p className="text-center font-display text-2xl font-medium leading-snug text-white/80 sm:text-3xl">
+            Prefer to look around first?
           </p>
         </Reveal>
+        <div className="mx-auto mt-12 grid max-w-2xl gap-6 sm:grid-cols-2">
+          <Reveal>
+            <PinCard title="Every project, up close" to="/work" className="h-full">
+              <div className="flex min-h-[176px] w-full flex-col justify-between p-7">
+                <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[#DCF87C]">
+                  The work
+                </span>
+                <div>
+                  <p className="font-display text-2xl font-bold leading-tight">See the work</p>
+                  <p className="mt-2 text-sm text-white/50">
+                    The ledger of what I have built, each with its own case study.
+                  </p>
+                </div>
+              </div>
+            </PinCard>
+          </Reveal>
+          <Reveal delay={0.08}>
+            <PinCard title="Motion you can poke at" to="/playground" className="h-full">
+              <div className="flex min-h-[176px] w-full flex-col justify-between p-7">
+                <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[#DCF87C]">
+                  The playground
+                </span>
+                <div>
+                  <p className="font-display text-2xl font-bold leading-tight">Wander the playground</p>
+                  <p className="mt-2 text-sm text-white/50">
+                    A live gallery of hand-built motion, every piece interactive.
+                  </p>
+                </div>
+              </div>
+            </PinCard>
+          </Reveal>
+        </div>
       </section>
     </>
   )
