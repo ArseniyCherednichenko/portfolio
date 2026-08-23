@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { GradientText } from './GradientText'
 import { MagneticButton } from './MagneticButton'
 import { Popover } from './Popover'
+import { Signature } from './Signature'
 import { useContact } from './ContactDialog'
 import { useShortcuts } from './Keyboard'
 import { useToast } from './Toast'
@@ -133,6 +134,9 @@ export function SiteFooter() {
             <p className="mt-3 max-w-[24ch] text-sm leading-relaxed text-white/45">
               Co-founder of Guided. Building for the web in Berlin, one hand-made component at a time.
             </p>
+            {/* The name, signed — the site's personal mark, drawn by the pen as
+                it scrolls into the footer. Hover to see it written again. */}
+            <Signature height={58} className="mt-6 -ml-1 text-white/80" />
           </div>
           {GROUPS.map((group) => (
             <nav key={group.title} aria-label={group.title}>
