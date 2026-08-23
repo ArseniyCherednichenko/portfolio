@@ -243,6 +243,7 @@ export const LIBRARY: LibraryGroup[] = [
       { name: 'SiteFooter', note: 'The structured closing footer — CTA, site map, live clock.', tags: ['foundation', 'footer', 'sitewide'] },
       { name: 'Cursor', note: 'The custom lime cursor and its hover and press states.', tags: ['foundation', 'cursor', 'pointer'] },
       { name: 'ClickSpark', note: 'A burst of lime sparks on every click, anywhere.', tags: ['foundation', 'feedback', 'canvas'] },
+      { name: 'Confetti', note: 'Its celebratory sibling: a physics-based fountain of fluttering paper, kept in the site\'s own palette, thrown only for an earned moment (the whole site wandered). One canvas, running only while paper is in the air; a no-op under reduced motion.', tags: ['foundation', 'feedback', 'confetti', 'canvas', 'celebrate'], to: '/playground', where: 'Playground' },
       { name: 'Grain', note: 'The fine film-grain texture laid over the whole site.', tags: ['foundation', 'texture', 'sitewide', 'canvas'], to: '/playground#fields', where: 'Playground' },
       { name: 'ChannelList', note: 'The shared, honest list of ways to reach me.', tags: ['foundation', 'contact'], to: '/contact', where: 'Contact' },
       { name: 'ContactForm', note: 'A no-backend form that drafts a mailto for you to send.', tags: ['foundation', 'contact', 'form'], to: '/contact', where: 'Contact' },
