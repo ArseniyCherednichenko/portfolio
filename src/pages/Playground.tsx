@@ -1,6 +1,6 @@
 import { createRef, useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { Reveal } from '../components/Reveal'
 import { PlaygroundFinder, slugifyExperiment } from '../components/PlaygroundFinder'
 import { AnimatedBeam } from '../components/AnimatedBeam'
@@ -118,6 +118,7 @@ import { Phyllotaxis } from '../components/Phyllotaxis'
 import { Attractor } from '../components/Attractor'
 import { PendulumWave } from '../components/PendulumWave'
 import { Cradle } from '../components/Cradle'
+import { Confetti, type ConfettiHandle } from '../components/Confetti'
 import { Chladni } from '../components/Chladni'
 import { Galton } from '../components/Galton'
 import { RippleTank } from '../components/RippleTank'
@@ -1297,6 +1298,51 @@ function LampDemo() {
       >
         Switch off, then on
       </button>
+    </div>
+  )
+}
+
+// A "throw it" demo for the Confetti burst. The button fires from its own
+// centre so the paper fountains up around it; a fresh press restacks more paper
+// on top of what is still falling. Under reduced motion the burst is a no-op by
+// design, so the demo says so plainly instead of pretending to celebrate.
+function ConfettiDemo() {
+  const ref = useRef<ConfettiHandle>(null)
+  const btnRef = useRef<HTMLButtonElement>(null)
+  const wrapRef = useRef<HTMLDivElement>(null)
+  const reduce = useReducedMotion()
+
+  const fire = () => {
+    const wrap = wrapRef.current
+    const btn = btnRef.current
+    if (!wrap || !btn) return
+    const wr = wrap.getBoundingClientRect()
+    const br = btn.getBoundingClientRect()
+    ref.current?.fire({ x: br.left - wr.left + br.width / 2, y: br.top - wr.top + br.height / 2 })
+  }
+
+  return (
+    <div
+      ref={wrapRef}
+      className="relative flex min-h-[360px] flex-col items-center justify-center overflow-hidden px-6"
+    >
+      <Confetti ref={ref} />
+      <p className="max-w-sm text-center text-sm leading-relaxed text-white/55">
+        The celebratory sibling of the site-wide click spark, kept for the moments that earn it.
+      </p>
+      <button
+        ref={btnRef}
+        type="button"
+        onClick={fire}
+        className="relative z-10 mt-6 rounded-full bg-[#DCF87C] px-7 py-3.5 font-semibold text-black transition-transform hover:-translate-y-0.5 active:translate-y-0"
+      >
+        Celebrate
+      </button>
+      {reduce && (
+        <p className="mt-4 text-xs text-white/40">
+          Reduced motion is on, so the burst holds still — there is no calm way to throw confetti.
+        </p>
+      )}
     </div>
   )
 }
@@ -3900,6 +3946,35 @@ export default function Playground() {
                 touch, so the story is the handoff. Drag either end bob to lift it — the rest hang still under your hand —
                 and release to let it fall; a struck bob briefly sparks so the blow is easy to follow. Reduced motion
                 paints one bob caught mid-fall and holds it.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH CONFETTI */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-[#040404]">
+              <div className="pointer-events-none absolute inset-x-0 top-8 z-10 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Celebrate</span>
+                <p className="mx-auto mt-3 max-w-md px-6 text-lg font-medium text-white/90 sm:text-xl">
+                  Press it. A fountain of paper, kept in the site's own colours.
+                </p>
+              </div>
+              <ConfettiDemo />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Confetti</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The celebratory sibling of the site-wide click spark. Each piece is a real scrap of paper thrown
+                into an upward cone, then pulled back down by gravity against a touch of air drag, swaying on a
+                sine flutter and turning edge-on and back as it falls — the flip is a plain scaleY off its own
+                phase, so the paper reads as a rotating sheet, not a dot. It stays in the site's family — lime,
+                off-white, and two muted tones — so the flourish is a flourish and not a party. The whole thing is
+                one canvas and a single RAF loop that only runs while paper is still in the air, so it costs
+                nothing at rest, and it is meant for the rare, earned moment, not for decoration. Honest to the
+                "respect the still" ethos: under reduced motion the burst is a no-op — there is no calm way to
+                throw confetti, so the calm answer is to not.
               </p>
             </div>
           </div>
