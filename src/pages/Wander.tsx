@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { Reveal } from '../components/Reveal'
@@ -6,6 +6,7 @@ import { Eyebrow } from '../components/Eyebrow'
 import { GradientText } from '../components/GradientText'
 import { SplitText } from '../components/SplitText'
 import { Seo } from '../components/Seo'
+import { Confetti, type ConfettiHandle } from '../components/Confetti'
 import { CONTENTS } from '../data/contents'
 
 const EASE = [0.16, 1, 0.3, 1] as const
@@ -74,6 +75,14 @@ export default function Wander() {
     setDeck(shuffle(total))
     setPos(0)
   }, [total])
+
+  // Reaching the last card means the whole site has been wandered — an earned
+  // moment, so mark it with one confetti burst. The effect fires each time
+  // `atEnd` flips true, so a reshuffle-and-finish celebrates again.
+  const confettiRef = useRef<ConfettiHandle>(null)
+  useEffect(() => {
+    if (atEnd) confettiRef.current?.fire()
+  }, [atEnd])
 
   // Keyboard: space / right-arrow deals the next card, left-arrow / backspace
   // steps back, and `s` reshuffles. Bails whenever a field is focused or a
@@ -236,6 +245,8 @@ export default function Wander() {
               </motion.div>
             </AnimatePresence>
           </div>
+          {/* Fires once when the deck runs out — the whole site wandered. */}
+          <Confetti ref={confettiRef} className="z-30" />
         </div>
 
         {/* Progress rail. */}
