@@ -140,6 +140,7 @@ export const LIBRARY: LibraryGroup[] = [
       { name: 'ScrollProgress', note: 'A springed lime reading bar pinned to the top edge.', tags: ['scroll', 'progress', 'sitewide'] },
       { name: 'ScrollCue', note: 'A bobbing hint that there is more below the fold.', tags: ['scroll', 'hint'] },
       { name: 'DrawSVG', note: 'Line art that draws itself, one stroke at a time, by tracing the real path length.', tags: ['scroll', 'reveal', 'svg', 'draw'], to: '/about', where: 'About' },
+      { name: 'Signature', note: 'The name, signed. Not another primitive but a specific personal mark: hand-authored script strokes fed through the DrawSVG pen and laid down in writing order, so the name traces itself into being in ink rather than a shape assembling. Signs off the footer as you reach the bottom of any page; reduced motion shows it already written.', tags: ['scroll', 'reveal', 'svg', 'draw', 'personal'], to: '/playground', where: 'Playground' },
       { name: 'Timeline', note: 'A vertical timeline with lit nodes marking a path.', tags: ['scroll', 'timeline'], to: '/about', where: 'About' },
       { name: 'Stepper', note: 'A numbered pipeline that lights up stage by stage.', tags: ['scroll', 'steps', 'process'], to: '/colophon', where: 'Colophon' },
       { name: 'CircularGallery', note: 'A carousel of images bent around a curved arc.', tags: ['scroll', 'gallery', 'carousel'], to: '/playground', where: 'Playground' },
