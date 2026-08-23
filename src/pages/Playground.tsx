@@ -98,6 +98,7 @@ import { Timeline, type TimelineItem } from '../components/Timeline'
 import { HorizontalScroll, type HPanel } from '../components/HorizontalScroll'
 import { ScrollScene, type Scene } from '../components/ScrollScene'
 import { DrawSVG } from '../components/DrawSVG'
+import { Signature } from '../components/Signature'
 import { PillNav, type PillLink } from '../components/PillNav'
 import { CircularGallery, type GalleryItem } from '../components/CircularGallery'
 import { SphereMenu, type SphereItem } from '../components/SphereMenu'
@@ -3285,6 +3286,24 @@ export default function Playground() {
                 not by scaling a bar — so any hand-authored curve appears as if drawn by a pen, rounded caps and all. These
                 loop to show the trace; in the wild it fires once on scroll-in and re-traces on hover. Drives the swash
                 under the About page title. Reduced motion paints every stroke finished from the first frame.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH SIGNATURE — the pen writing the name itself */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="flex min-h-[220px] items-center justify-center rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/40 px-8 py-16">
+              <Signature height={110} trigger="loop" replayOnHover={false} className="text-white/85" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">The signature</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                Not another primitive but a specific personal mark: the name authored once as pen strokes and fed through
+                the same self-drawing engine, laid down in writing order so it reads as a hand signing rather than a shape
+                assembling. It signs off the footer, tracing in as you reach the bottom of any page. Reduced motion shows it
+                already written.
               </p>
             </div>
           </div>
