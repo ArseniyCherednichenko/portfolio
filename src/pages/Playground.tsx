@@ -58,6 +58,7 @@ import { Iridescence } from '../components/Iridescence'
 import { TrueFocus } from '../components/TrueFocus'
 import { FlowingMenu } from '../components/FlowingMenu'
 import { RadialMenu } from '../components/RadialMenu'
+import { Tour, type TourStep } from '../components/Tour'
 import { Threads } from '../components/Threads'
 import { Beams } from '../components/Beams'
 import { Meteors } from '../components/Meteors'
@@ -1270,6 +1271,117 @@ function RadialMenuDemo() {
         { label: 'More', icon: '⋯', onSelect: act('More') },
       ]}
     />
+  )
+}
+
+// A self-contained demo for the Tour: a small mock "editor" whose real controls
+// are the tour's targets. Pressing Start dims the panel and glides the spotlight
+// from the search field to the compose button to the avatar, a step card
+// explaining each — so the coachmark walkthrough is shown on live elements, not
+// a mockup image. Nothing here leaves the panel; it is purely a stage for the
+// overlay.
+function TourDemo() {
+  const [open, setOpen] = useState(false)
+  const [done, setDone] = useState(false)
+  const searchRef = useRef<HTMLInputElement>(null)
+  const composeRef = useRef<HTMLButtonElement>(null)
+  const avatarRef = useRef<HTMLDivElement>(null)
+  const railRef = useRef<HTMLDivElement>(null)
+
+  const steps: TourStep[] = [
+    {
+      target: searchRef,
+      title: 'Find anything, fast',
+      body: 'The spotlight cuts a hole around the real field and dims everything else, so your eye lands where the words point — nowhere to wander.',
+      side: 'bottom',
+    },
+    {
+      target: composeRef,
+      title: 'Start something new',
+      body: 'Move to the next step and the whole spotlight glides across on a spring, dim and ring travelling as one shape. The card re-seats on the side that fits.',
+      side: 'bottom',
+    },
+    {
+      target: railRef,
+      title: 'Your places live here',
+      body: 'A tour is for the second thing a person needs, not just the first. The rail is where saved work would sit.',
+      side: 'right',
+    },
+    {
+      target: avatarRef,
+      title: 'And this is you',
+      body: 'Last step — the button reads Done. Escape ends it any time, the arrow keys walk it, and focus is handed back to where you began.',
+      side: 'left',
+    },
+  ]
+
+  return (
+    <div className="w-full max-w-2xl">
+      {/* The mock app the tour walks through. */}
+      <div className="overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02]">
+        <div className="flex items-center gap-3 border-b border-white/10 px-4 py-3">
+          <input
+            ref={searchRef}
+            type="text"
+            readOnly
+            placeholder="Search"
+            aria-label="Search (demo)"
+            className="min-w-0 flex-1 rounded-lg border border-white/10 bg-black/30 px-3 py-1.5 text-sm text-white/70 placeholder:text-white/30 focus:outline-none"
+          />
+          <button
+            ref={composeRef}
+            type="button"
+            className="shrink-0 rounded-lg bg-[#DCF87C] px-3 py-1.5 text-sm font-semibold text-black"
+          >
+            Compose
+          </button>
+          <div
+            ref={avatarRef}
+            aria-hidden
+            className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-white/10 text-xs font-semibold text-white/70"
+          >
+            AC
+          </div>
+        </div>
+        <div className="flex gap-4 p-4">
+          <div ref={railRef} className="hidden w-32 shrink-0 flex-col gap-2 sm:flex">
+            {['Inbox', 'Saved', 'Drafts', 'Archive'].map((r, i) => (
+              <div
+                key={r}
+                className={`rounded-md px-2.5 py-1.5 text-sm ${i === 0 ? 'bg-white/[0.06] text-white/80' : 'text-white/40'}`}
+              >
+                {r}
+              </div>
+            ))}
+          </div>
+          <div className="grid flex-1 place-items-center rounded-xl border border-dashed border-white/10 py-10 text-center">
+            <p className="px-6 text-sm text-white/40">
+              {done
+                ? 'That is the tour. Restart it, or wire it to your own onboarding.'
+                : 'A little product, standing in for anything with a first-run to explain.'}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div className="mt-5 flex justify-center">
+        <button
+          type="button"
+          onClick={() => setOpen(true)}
+          className="rounded-full border border-[#DCF87C]/40 bg-[#DCF87C]/10 px-5 py-2 text-sm font-semibold text-[#DCF87C] transition-colors hover:bg-[#DCF87C]/20"
+        >
+          {done ? 'Take the tour again' : 'Take the tour'}
+        </button>
+      </div>
+
+      <Tour
+        steps={steps}
+        open={open}
+        onClose={() => setOpen(false)}
+        onFinish={() => setDone(true)}
+        label="Editor tour"
+      />
+    </div>
   )
 }
 
@@ -4657,6 +4769,38 @@ export default function Playground() {
                 click to close, focus returning to the hub. A different primitive from the dock (a magnifying row) and the
                 sphere menu (an orbiting cloud): here the geometry is a wheel you steer. Reduced motion keeps every
                 affordance and drops the fan-out, the spoke draw, and the spin.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH TOUR */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 py-14 sm:px-10">
+              <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Walk it</span>
+              <p className="mt-3 max-w-md text-lg font-medium text-white/85 sm:text-xl">
+                A guided tour that dims the page and cuts a spotlight around one real control at a time, gliding from
+                step to step while a card explains each — the onboarding the modals and popovers never covered.
+              </p>
+              <div className="mt-10 flex justify-center">
+                <TourDemo />
+              </div>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Guided tour</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The Overlays family's coachmark walkthrough, and its answer to a different problem from the others:
+                where a modal pulls the eye off the product and into a dialog, a tour keeps the product in view and
+                lights up its own elements in turn. The dim and the highlight are one element — a transparent rounded
+                cutout whose enormous spread box-shadow darkens the rest of the page — so animating that one rect glides
+                the hole, the accent ring, and the dim together on a spring from each target to the next. The step card
+                is measured and seated on whichever side fits, flipping and clamping inside the viewport with an arrow
+                tracking the target's centre, and it scrolls a target into view before lighting it. It is a real
+                dialog: aria-modal with focus moved onto the card and trapped there, Escape to end, the arrow keys and
+                Enter to walk the steps, a progress rail of dots, and focus handed back to where you began. The whole
+                surface blocks page interaction while open, so the only way through is the card. Under reduced motion
+                the spotlight jumps rather than glides and the card simply fades.
               </p>
             </div>
           </div>
