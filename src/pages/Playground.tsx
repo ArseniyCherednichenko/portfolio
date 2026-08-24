@@ -142,7 +142,9 @@ import { Seo } from '../components/Seo'
 import { GITHUB_URL } from '../data/contact'
 import { SKILLS } from '../data/toolkit'
 import { COMPONENT_COUNT } from '../data/stats'
+import { LIBRARY } from '../data/library'
 import { Gauge } from '../components/Gauge'
+import { Waffle } from '../components/Waffle'
 
 // Spare stroke icons for the dock — no emoji, currentColor so they warm to lime.
 const ic = (d: string) => (
@@ -449,6 +451,27 @@ function GaugeDemo() {
         value={level}
         onChange={setLevel}
         format={(v) => `${Math.round(v)}`}
+      />
+    </div>
+  )
+}
+
+// A Waffle showcase, driven off the real library so it never asserts a made-up
+// figure: one square per hand-built component, tiled family by family and shaded
+// so the largest family reads brightest. Hover a family in the legend and its
+// squares lift out of the field while the rest dim — the identity layer the
+// single-hue ramp deliberately leaves to text. Its full home is the Numbers page.
+const WAFFLE_SEGMENTS = LIBRARY.map((g) => ({ label: g.label, value: g.items.length })).sort(
+  (a, b) => b.value - a.value,
+)
+
+function WaffleDemo() {
+  return (
+    <div className="w-full">
+      <Waffle
+        segments={WAFFLE_SEGMENTS}
+        unit="components"
+        caption="Every hand-built component in this repo, one square, grouped by family — read live from the library."
       />
     </div>
   )
@@ -3517,6 +3540,17 @@ export default function Playground() {
               <GaugeDemo />
             </Experiment>
           </Reveal>
+
+          <div className="sm:col-span-2">
+            <Reveal>
+              <Experiment
+                name="Waffle"
+                note="A unit chart — one square per thing, not a proportion. The whole library counted out, tiled by family and shaded largest-brightest. Hover a family to lift it out of the field."
+              >
+                <WaffleDemo />
+              </Experiment>
+            </Reveal>
+          </div>
 
           <Reveal>
             <Experiment
