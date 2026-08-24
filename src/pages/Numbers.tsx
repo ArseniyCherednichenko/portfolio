@@ -11,6 +11,7 @@ import { AreaChart, type AreaDatum } from '../components/AreaChart'
 import { BarChart } from '../components/BarChart'
 import { RadarChart } from '../components/RadarChart'
 import { Gauge } from '../components/Gauge'
+import { Waffle } from '../components/Waffle'
 import { Contour } from '../components/Contour'
 import { Seo } from '../components/Seo'
 import { COMPONENT_COUNT, PAGE_COUNT } from '../data/stats'
@@ -138,6 +139,45 @@ export default function Numbers() {
             </Reveal>
           ))}
         </div>
+      </section>
+
+      {/* EVERY COMPONENT, ONE SQUARE — the count made literal before it is
+          abstracted. The headline says 171; this tiles 171 actual squares, one
+          per component, grouped and tinted by family, so the number reads as a
+          pile of real things you could sit and count, not an estimate. It is the
+          bridge from the raw figure to the charts that abstract it. */}
+      <section className="mx-auto mt-28 w-full max-w-4xl px-6">
+        <Reveal>
+          <Eyebrow>Counted out</Eyebrow>
+        </Reveal>
+        <Reveal delay={0.05}>
+          <h2 className="mt-4 font-display text-3xl font-bold leading-tight tracking-tight sm:text-4xl">
+            Every component, one square.
+          </h2>
+        </Reveal>
+        <Reveal delay={0.1}>
+          <p className="mt-4 max-w-xl text-base leading-relaxed text-white/50">
+            No rounding, no estimate. Each square below is exactly one hand-built component, tiled by
+            the family it belongs to and shaded so the largest family reads brightest. The charts
+            after this abstract the same library into proportions and curves; this is it counted out,
+            square by square. Hover a family to lift it out of the field.
+          </p>
+        </Reveal>
+        <Reveal delay={0.14}>
+          <div className="mt-10 rounded-3xl border border-white/10 bg-white/[0.02] p-6 sm:p-10">
+            <Waffle
+              segments={byCategory}
+              unit="components"
+              caption="One square per hand-built component in the repo, grouped by family and read live from the library."
+              ariaLabel={
+                `A waffle chart of ${COMPONENT_COUNT} hand-built components, one square each, ` +
+                `grouped by family: ` +
+                byCategory.map((d) => `${d.label}, ${d.value}`).join('; ') +
+                '.'
+              }
+            />
+          </div>
+        </Reveal>
       </section>
 
       {/* COMPONENTS BY CATEGORY — the centrepiece breakdown, drawn as the site's
