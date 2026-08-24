@@ -12,6 +12,7 @@ import { BarChart } from '../components/BarChart'
 import { RadarChart } from '../components/RadarChart'
 import { Gauge } from '../components/Gauge'
 import { Waffle } from '../components/Waffle'
+import { Heatmap, type HeatmapRow } from '../components/Heatmap'
 import { Contour } from '../components/Contour'
 import { Seo } from '../components/Seo'
 import { COMPONENT_COUNT, PAGE_COUNT } from '../data/stats'
@@ -73,6 +74,24 @@ export default function Numbers() {
         return { label: chapter.marker, value: running }
       })
   }, [])
+
+  // The build as a two-dimensional field: what kind of work went into each
+  // chapter of the changelog. Chapters run oldest-first across the columns
+  // (stored newest-first, so reverse); the rows are the kinds of work, and each
+  // cell is how many entries of that kind landed in that chapter. Read straight
+  // off the same CHAPTERS the changelog renders, so it can never drift.
+  const chapterOrder = useMemo(() => [...CHAPTERS].reverse(), [])
+  const buildColumns = useMemo(() => chapterOrder.map((c) => c.marker), [chapterOrder])
+  const buildRows = useMemo<HeatmapRow[]>(
+    () =>
+      KIND_ORDER.map((kind) => ({
+        label: KIND_META[kind].label,
+        values: chapterOrder.map(
+          (chapter) => chapter.items.filter((it) => it.kind === kind).length,
+        ),
+      })),
+    [chapterOrder],
+  )
 
   // The share of components that are actually on show somewhere reachable.
   const onShow = useMemo(() => {
@@ -308,6 +327,61 @@ export default function Numbers() {
               ariaLabel={
                 `Changelog entries by kind of work: ` +
                 byKind.map((d) => `${d.label}, ${d.value}`).join('; ') +
+                '.'
+              }
+            />
+          </div>
+        </Reveal>
+        <Reveal delay={0.1}>
+          <Link
+            to="/changelog"
+            className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-[#DCF87C] transition-opacity hover:opacity-80"
+          >
+            Read the changelog
+            <span aria-hidden>-&gt;</span>
+          </Link>
+        </Reveal>
+      </section>
+
+      {/* THE BUILD, AS A FIELD — the seventh chart, and the first in two
+          dimensions. The bar above stands the kinds of work up as heights; this
+          crosses that same tally with *when*, so the texture of the build reads
+          at a glance: which chapters were about new components, which were
+          motion or polish passes, where the making changed shape over time. */}
+      <section className="mx-auto mt-28 w-full max-w-4xl px-6">
+        <Reveal>
+          <Eyebrow>Where and when</Eyebrow>
+        </Reveal>
+        <Reveal delay={0.05}>
+          <h2 className="mt-4 font-display text-3xl font-bold leading-tight tracking-tight sm:text-4xl">
+            The build, as a field.
+          </h2>
+        </Reveal>
+        <Reveal delay={0.1}>
+          <p className="mt-4 max-w-xl text-base leading-relaxed text-white/50">
+            The bar above asks only how much of each kind of work there has been. This asks the
+            harder question the others cannot: how much of it, and <em>when</em>. Each cell is a kind
+            of work crossed with a chapter of the changelog, tinted by how busy that crossing was.
+            The texture is the story — where the building leaned into new components, where it turned
+            to motion and polish. Hover a cell to light its row and column.
+          </p>
+        </Reveal>
+        <Reveal delay={0.14}>
+          <div className="mt-10 rounded-3xl border border-white/10 bg-white/[0.02] p-6 sm:p-10">
+            <Heatmap
+              rows={buildRows}
+              columns={buildColumns}
+              unit="entries"
+              caption="Every changelog entry, placed by the kind of work it was and the chapter it landed in — read live from the changelog."
+              ariaLabel={
+                `A heatmap of the changelog: kinds of work by chapter. ` +
+                buildRows
+                  .map(
+                    (r) =>
+                      `${r.label} — ` +
+                      buildColumns.map((c, i) => `${c}, ${r.values[i]}`).join('; '),
+                  )
+                  .join('. ') +
                 '.'
               }
             />
