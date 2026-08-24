@@ -20,6 +20,7 @@ export interface LogHeadline {
 }
 
 export const LATEST_LOG: LogHeadline[] = [
+  { title: 'A Waffle — the unit chart the data-viz family could not draw. The donut, gauge, bar, radar, and area all abstract a quantity into an arc, a height, or a curve; this refuses to, and tiles it out as what it is: one square per thing. The whole library reads as a hundred and seventy-two actual squares you could sit and count, grouped by family and shaded largest-brightest, so colour never carries identity — the legend does, lifting a family\'s squares out of the field on hover. It opens the Numbers page, the raw count made literal before the other charts abstract it, and debuts full-width in the Playground, both driven off the live library', tag: 'Component' },
   { title: 'A Gauge — the dial the data-viz family was missing. The donut splits a whole, the area curve tracks a number over time, the bar compares heights, the radar draws a set\'s silhouette; this gives a single proportion a half-circle meter, its lime arc self-drawing to the value with a bead where the needle would sit. It closes the Numbers page on the honest share of components on show, and takes a live knob in the Playground', tag: 'Component' },
   { title: 'A Tour — the guided coachmark walkthrough the Overlays family never had. Every other overlay pulls the eye off the page and into itself; this one keeps the product in view and dims everything but one real control at a time, gliding a spotlight from step to step while an anchored card explains each. A real aria-modal dialog: focus trapped in the card, Escape to end, arrow keys to walk it, a progress rail, focus handed back on close', tag: 'Component' },
   { title: 'A Confetti burst — the celebratory sibling of the site-wide click spark. The site could flick a lime spark on every press but had no way to mark a real, earned moment, so this is a physics-based fountain of fluttering paper, kept in the site\'s own palette so the flourish stays restraint and not kitsch. It goes off once when you reach the end of the Wander deck, having wandered the whole site. A no-op under reduced motion, because there is no calm way to throw confetti', tag: 'Component' },
@@ -47,5 +48,4 @@ export const LATEST_LOG: LogHeadline[] = [
   { title: 'A Galton board where beads clatter through pegs and pile into the bell curve', tag: 'Component' },
   { title: 'A Chladni plate whose sand flees the shaking and settles on the still nodal lines', tag: 'Component' },
   { title: "A Newton's cradle with honest elastic-collision physics you drive by hand", tag: 'Component' },
-  { title: 'A living Voronoi tessellation you carry and re-seed with the pointer', tag: 'Component' },
 ]
