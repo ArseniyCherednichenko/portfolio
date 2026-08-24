@@ -142,6 +142,7 @@ import { Seo } from '../components/Seo'
 import { GITHUB_URL } from '../data/contact'
 import { SKILLS } from '../data/toolkit'
 import { COMPONENT_COUNT } from '../data/stats'
+import { Gauge } from '../components/Gauge'
 
 // Spare stroke icons for the dock — no emoji, currentColor so they warm to lime.
 const ic = (d: string) => (
@@ -421,6 +422,34 @@ function KnobDemo() {
           style={{ height: `${level}%` }}
         />
       </div>
+    </div>
+  )
+}
+
+// A Gauge showcase, driven live: turn the Knob and the half-circle meter sweeps
+// to match, the lime arc animating to the new fraction and the figure retelling
+// it in the well. One control feeding one readout — the input and the dial are
+// two separate hand-built components wired together.
+function GaugeDemo() {
+  const [level, setLevel] = useState(68)
+  return (
+    <div className="flex w-full flex-col items-center gap-8 sm:flex-row sm:justify-center sm:gap-12">
+      <Gauge
+        value={level}
+        max={100}
+        format={(v) => `${Math.round(v)}`}
+        unit="%"
+        caption="turn the dial"
+        size={240}
+      />
+      <Knob
+        label="Set"
+        min={0}
+        max={100}
+        value={level}
+        onChange={setLevel}
+        format={(v) => `${Math.round(v)}`}
+      />
     </div>
   )
 }
@@ -3477,6 +3506,15 @@ export default function Playground() {
               <MagneticButton href="#" className="rounded-full bg-[#DCF87C] px-8 py-4 text-lg font-semibold text-black">
                 Pull me
               </MagneticButton>
+            </Experiment>
+          </Reveal>
+
+          <Reveal>
+            <Experiment
+              name="Gauge"
+              note="A half-circle meter for one proportion. Turn the knob and the lime arc sweeps to match; the figure in the well retells it."
+            >
+              <GaugeDemo />
             </Experiment>
           </Reveal>
 
