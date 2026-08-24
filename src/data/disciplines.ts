@@ -115,9 +115,9 @@ export const DISCIPLINES: readonly Discipline[] = [
     tag: 'Motion and design',
     title: 'Craft in the small moments',
     lede: 'The things people feel but cannot name.',
-    body: 'Typography, timing, and the spacing between things. This site is my open workbench for it — a hundred-plus hand-built motion components, each one made from scratch and each one reduced-motion aware. If a technique lands here, I understand it well enough to reach for it in real work without a library doing the thinking.',
+    body: 'Typography, timing, and the spacing between things. This site is my open workbench for it — over a hundred and seventy hand-built motion components, each one made from scratch and each one reduced-motion aware. If a technique lands here, I understand it well enough to reach for it in real work without a library doing the thinking.',
     practices: [
-      'Over a hundred hand-built animation components',
+      'Over a hundred and seventy hand-built animation components',
       'A Fraunces-and-Inter type system, self-hosted',
       'Easing, spring, and stagger chosen by feel',
       'Every motion path with a reduced-motion fallback',

@@ -104,7 +104,7 @@ export const PROJECTS: Project[] = [
       },
       {
         area: 'Motion',
-        detail: 'Over a hundred hand-built animation components, each one reduced-motion aware.',
+        detail: 'Over a hundred and seventy hand-built animation components, each one reduced-motion aware.',
       },
       {
         area: 'Engineering',

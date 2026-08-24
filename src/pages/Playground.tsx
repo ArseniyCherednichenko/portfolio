@@ -141,6 +141,7 @@ import { GO_TARGETS, useShortcuts } from '../components/Keyboard'
 import { Seo } from '../components/Seo'
 import { GITHUB_URL } from '../data/contact'
 import { SKILLS } from '../data/toolkit'
+import { COMPONENT_COUNT } from '../data/stats'
 
 // Spare stroke icons for the dock — no emoji, currentColor so they warm to lime.
 const ic = (d: string) => (
@@ -890,7 +891,7 @@ type WallTile =
   | { id: string; kind: 'quote'; text: string }
 
 const WALL_BASE: WallTile[] = [
-  { id: 'w-count', kind: 'stat', value: '100', unit: '+', label: 'components, hand-built', accent: true },
+  { id: 'w-count', kind: 'stat', value: String(COMPONENT_COUNT), unit: '+', label: 'components, hand-built', accent: true },
   { id: 'w-motto', kind: 'quote', text: 'Build it well. Then make it move.' },
   {
     id: 'w-spring',

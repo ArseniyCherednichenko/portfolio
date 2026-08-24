@@ -40,7 +40,7 @@ export const NOW_ITEMS: readonly NowItem[] = [
   {
     label: 'Sharpening',
     title: 'Motion design, in public',
-    body: 'This site is my open workbench for interface animation, now past a hundred hand-built components — pinned scroll, magnetic controls, cursor fields, self-drawing line art. A new one most days. If it lands here, I understand it.',
+    body: 'This site is my open workbench for interface animation, now well over a hundred and seventy hand-built components — pinned scroll, magnetic controls, cursor fields, self-drawing line art. A new one most days. If it lands here, I understand it.',
   },
   {
     label: 'Thinking about',
