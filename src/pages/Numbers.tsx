@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 import { Link } from 'react-router-dom'
-import { motion, useReducedMotion } from 'framer-motion'
+import { useReducedMotion } from 'framer-motion'
 import { Reveal } from '../components/Reveal'
 import { Eyebrow } from '../components/Eyebrow'
 import { GradientText } from '../components/GradientText'
@@ -10,14 +10,13 @@ import { DonutChart } from '../components/DonutChart'
 import { AreaChart, type AreaDatum } from '../components/AreaChart'
 import { BarChart } from '../components/BarChart'
 import { RadarChart } from '../components/RadarChart'
+import { Gauge } from '../components/Gauge'
 import { Contour } from '../components/Contour'
 import { Seo } from '../components/Seo'
 import { COMPONENT_COUNT, PAGE_COUNT } from '../data/stats'
 import { LIBRARY, ALL_LIBRARY_ITEMS } from '../data/library'
 import { CONTENTS } from '../data/contents'
 import { CHAPTERS, KIND_META, KIND_ORDER, type EntryKind } from '../data/changelog'
-
-const EASE = [0.16, 1, 0.3, 1] as const
 
 // A single count derived from the site's own data. Nothing here is typed by
 // hand — every figure is read off the same files the rest of the site runs on,
@@ -80,6 +79,7 @@ export default function Numbers() {
     const homes = new Set(ALL_LIBRARY_ITEMS.map((i) => i.to).filter(Boolean)).size
     return { shown, homes, total: ALL_LIBRARY_ITEMS.length }
   }, [])
+  const onShowPct = onShow.total > 0 ? Math.round((onShow.shown / onShow.total) * 100) : 0
 
   const headline: { value: number; suffix?: string; label: string; detail: string }[] = [
     { value: COMPONENT_COUNT, label: 'Components', detail: 'Hand-built React components in the repo.' },
@@ -284,41 +284,47 @@ export default function Numbers() {
         </Reveal>
       </section>
 
-      {/* ON SHOW — a single honest proportion */}
+      {/* ON SHOW — a single honest proportion, given a dial. The Gauge reads the
+          same shown/total ratio the sentence states, so the meter and the words
+          can never disagree; both come off the library data live. */}
       <section className="mx-auto mt-28 w-full max-w-4xl px-6">
         <Reveal>
           <SpotlightCard className="w-full">
-            <div className="p-8 sm:p-10">
-              <Eyebrow>On show</Eyebrow>
-              <p className="mt-5 max-w-2xl font-display text-2xl font-medium leading-snug text-white/85 sm:text-3xl">
-                <span className="text-[#DCF87C]">
-                  {reduce ? onShow.shown : <AnimatedCounter value={onShow.shown} />}
-                </span>{' '}
-                of {onShow.total} components are on show somewhere you can reach, spread across{' '}
-                <span className="text-[#DCF87C]">
-                  {reduce ? onShow.homes : <AnimatedCounter value={onShow.homes} />}
-                </span>{' '}
-                different pages. The rest wait in the library, ready to be put to work.
-              </p>
-              <div className="relative mt-8 h-3 w-full overflow-hidden rounded-full bg-white/[0.05]">
-                <motion.div
-                  className="absolute inset-y-0 left-0 rounded-full bg-gradient-to-r from-[#DCF87C]/55 to-[#DCF87C]"
-                  initial={reduce ? false : { width: 0 }}
-                  whileInView={
-                    reduce ? undefined : { width: `${(onShow.shown / onShow.total) * 100}%` }
+            <div className="grid items-center gap-8 p-8 sm:p-10 lg:grid-cols-[auto_1fr] lg:gap-12">
+              <div className="justify-self-center lg:justify-self-start">
+                <Gauge
+                  value={onShow.shown}
+                  max={onShow.total}
+                  format={() => `${onShowPct}`}
+                  unit="%"
+                  caption="components on show"
+                  size={280}
+                  ariaLabel={
+                    `${onShow.shown} of ${onShow.total} hand-built components are on show ` +
+                    `somewhere reachable — ${onShowPct} percent — across ${onShow.homes} pages.`
                   }
-                  style={reduce ? { width: `${(onShow.shown / onShow.total) * 100}%` } : undefined}
-                  viewport={{ once: true, amount: 0.6 }}
-                  transition={{ duration: 1.1, ease: EASE }}
                 />
               </div>
-              <Link
-                to="/library"
-                className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-[#DCF87C] transition-opacity hover:opacity-80"
-              >
-                Browse the library
-                <span aria-hidden>-&gt;</span>
-              </Link>
+              <div>
+                <Eyebrow>On show</Eyebrow>
+                <p className="mt-5 max-w-2xl font-display text-2xl font-medium leading-snug text-white/85 sm:text-3xl">
+                  <span className="text-[#DCF87C]">
+                    {reduce ? onShow.shown : <AnimatedCounter value={onShow.shown} />}
+                  </span>{' '}
+                  of {onShow.total} components are on show somewhere you can reach, spread across{' '}
+                  <span className="text-[#DCF87C]">
+                    {reduce ? onShow.homes : <AnimatedCounter value={onShow.homes} />}
+                  </span>{' '}
+                  different pages. The rest wait in the library, ready to be put to work.
+                </p>
+                <Link
+                  to="/library"
+                  className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-[#DCF87C] transition-opacity hover:opacity-80"
+                >
+                  Browse the library
+                  <span aria-hidden>-&gt;</span>
+                </Link>
+              </div>
             </div>
           </SpotlightCard>
         </Reveal>
