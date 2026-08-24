@@ -143,8 +143,10 @@ import { GITHUB_URL } from '../data/contact'
 import { SKILLS } from '../data/toolkit'
 import { COMPONENT_COUNT } from '../data/stats'
 import { LIBRARY } from '../data/library'
+import { CHAPTERS, KIND_META, KIND_ORDER } from '../data/changelog'
 import { Gauge } from '../components/Gauge'
 import { Waffle } from '../components/Waffle'
+import { Heatmap, type HeatmapRow } from '../components/Heatmap'
 
 // Spare stroke icons for the dock — no emoji, currentColor so they warm to lime.
 const ic = (d: string) => (
@@ -472,6 +474,31 @@ function WaffleDemo() {
         segments={WAFFLE_SEGMENTS}
         unit="components"
         caption="Every hand-built component in this repo, one square, grouped by family — read live from the library."
+      />
+    </div>
+  )
+}
+
+// A Heatmap showcase, driven off the real changelog so it never asserts a
+// made-up figure: the kinds of work crossed with the chapters they landed in.
+// Each cell is tinted by how busy that crossing was; hovering one lights its
+// whole row and column so the crossing is unmistakable. The data-viz family's
+// first shape in two dimensions. Its full home is the Numbers page.
+const HEATMAP_ORDER = [...CHAPTERS].reverse()
+const HEATMAP_COLUMNS = HEATMAP_ORDER.map((c) => c.marker)
+const HEATMAP_ROWS: HeatmapRow[] = KIND_ORDER.map((kind) => ({
+  label: KIND_META[kind].label,
+  values: HEATMAP_ORDER.map((chapter) => chapter.items.filter((it) => it.kind === kind).length),
+}))
+
+function HeatmapDemo() {
+  return (
+    <div className="w-full">
+      <Heatmap
+        rows={HEATMAP_ROWS}
+        columns={HEATMAP_COLUMNS}
+        unit="entries"
+        caption="Every changelog entry, placed by the kind of work it was and the chapter it landed in — read live from the changelog."
       />
     </div>
   )
@@ -3548,6 +3575,17 @@ export default function Playground() {
                 note="A unit chart — one square per thing, not a proportion. The whole library counted out, tiled by family and shaded largest-brightest. Hover a family to lift it out of the field."
               >
                 <WaffleDemo />
+              </Experiment>
+            </Reveal>
+          </div>
+
+          <div className="sm:col-span-2">
+            <Reveal>
+              <Experiment
+                name="Heatmap"
+                note="A two-dimensional field — the chart the others cannot draw. The build log crossed with time: each kind of work by the chapter it landed in, tinted by how busy that crossing was. Hover a cell to light its row and column."
+              >
+                <HeatmapDemo />
               </Experiment>
             </Reveal>
           </div>
