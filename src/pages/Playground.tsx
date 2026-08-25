@@ -126,6 +126,7 @@ import { RippleTank } from '../components/RippleTank'
 import { Life } from '../components/Life'
 import { Sandbox } from '../components/Sandbox'
 import { Bezier } from '../components/Bezier'
+import { Sorter } from '../components/Sorter'
 import { Maze } from '../components/Maze'
 import { WaveCollapse } from '../components/WaveCollapse'
 import { Voronoi } from '../components/Voronoi'
@@ -3205,6 +3206,40 @@ export default function Playground() {
                 sweeps zero to one and back off the animation clock, and pauses on whichever handle you are holding so
                 the construction holds still where you are reading it. No wall clock; reduced motion parks the bead at
                 the midpoint and shows the construction there, still, while dragging keeps working.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH SORTER — six sorting algorithms drawn as they run, each compare and swap live */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="flex h-[480px] flex-col overflow-hidden rounded-3xl border border-white/10 bg-[#040404] px-6 py-8 sm:px-10">
+              <div className="text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Sorting</span>
+                <p className="mx-auto mt-3 max-w-md text-lg font-medium text-white/90 sm:text-xl">
+                  Pick an algorithm. Watch it order the bars, one compare at a time.
+                </p>
+              </div>
+              <div className="mt-6 min-h-0 flex-1">
+                <Sorter />
+              </div>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Sorting, visualised</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The other side of the drag-reorder list above: there you set the order by hand; here the machine does
+                the ordering and the whole point is to watch how. A row of bars, one per value, shuffled; pick one of
+                six classic algorithms and it puts them in order live, every comparison and every swap drawn as it
+                happens. Quick sort partitioning around a pivot, merge sort writing two sorted runs back into place,
+                heap sort draining a heap from the top, and the three quadratic ones — insertion, selection, bubble —
+                churning far longer before the field settles, so the difference between n log n and n squared reads as
+                how long the bars stay grey. Each algorithm is hand-instrumented to record its own work as a list of
+                frames, so no sort library drives the picture: the animation is the sort, played back off the animation
+                clock, and the live comparison and swap counters are the algorithm's real cost counted as it goes. When
+                a run finishes it holds on the ordered result for a beat, then reshuffles and runs again. No wall clock
+                and no per-frame randomness — a seeded shuffle feeds each run; reduced motion draws the field sorted and
+                still, and a Step control walks the chosen algorithm one comparison at a time.
               </p>
             </div>
           </div>
