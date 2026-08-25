@@ -125,6 +125,7 @@ import { Galton } from '../components/Galton'
 import { RippleTank } from '../components/RippleTank'
 import { Life } from '../components/Life'
 import { Sandbox } from '../components/Sandbox'
+import { Bezier } from '../components/Bezier'
 import { Maze } from '../components/Maze'
 import { WaveCollapse } from '../components/WaveCollapse'
 import { Voronoi } from '../components/Voronoi'
@@ -3171,6 +3172,39 @@ export default function Playground() {
                 scaled up with smoothing off; each grain keeps a fixed shade so a pour has grain and a pool has depth.
                 No wall clock and no per-frame randomness — a seeded coin breaks every tie; reduced motion settles a
                 poured field to a still heap and paints it once.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH BEZIER — a cubic curve taken apart while it draws, control points draggable */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="relative h-[440px] overflow-hidden rounded-3xl border border-white/10 bg-[#040404] px-6 py-10 sm:px-12">
+              <Bezier />
+              <div className="pointer-events-none absolute inset-x-0 top-8 z-10 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Bézier</span>
+                <p className="mx-auto mt-3 max-w-md px-6 text-lg font-medium text-white/90 sm:text-xl">
+                  Drag a control point. Reshape the curve. Watch it build itself.
+                </p>
+              </div>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Bézier</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                Every easing curve on this site is one of these underneath — the swing of a card into place, the settle
+                of a counter — so here the curve itself is the toy, taken apart while it draws. Four control points
+                define a cubic Bézier: the two ends it passes through and two handles it only leans toward. Drag any of
+                them and the curve reshapes live under the pointer. A bead rides along it, and around the bead the whole
+                de Casteljau construction is drawn out — the nested straight-line interpolations a Bézier actually is.
+                Three points slide along the control legs, two more slide along the line between those, and where the
+                last pair meet is the single point on the curve; watch three lerps collapse into two, then two into one,
+                and that one point trace the path. Nothing here samples a path or calls an easing library: the curve
+                point is computed the honest way, by repeated linear interpolation, which is the exact same maths the
+                construction lines show, so the picture and the algorithm are one object. The travelling parameter
+                sweeps zero to one and back off the animation clock, and pauses on whichever handle you are holding so
+                the construction holds still where you are reading it. No wall clock; reduced motion parks the bead at
+                the midpoint and shows the construction there, still, while dragging keeps working.
               </p>
             </div>
           </div>
