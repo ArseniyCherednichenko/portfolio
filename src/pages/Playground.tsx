@@ -124,6 +124,7 @@ import { Chladni } from '../components/Chladni'
 import { Galton } from '../components/Galton'
 import { RippleTank } from '../components/RippleTank'
 import { Life } from '../components/Life'
+import { Sandbox } from '../components/Sandbox'
 import { Maze } from '../components/Maze'
 import { WaveCollapse } from '../components/WaveCollapse'
 import { Voronoi } from '../components/Voronoi'
@@ -3137,6 +3138,39 @@ export default function Playground() {
                 checkerboard: a second heat field bleeds off where a cell just died, so life glows lime and leaves cooling
                 ghosts behind it, painted to a grid-sized buffer and smoothed up to full width. No wall clock and no
                 per-frame randomness; reduced motion steps a seeded board to a settled still and paints it once.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH SANDBOX — a falling-sand automaton: sand and water pour, heap, and flow */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="relative h-[440px] overflow-hidden rounded-3xl border border-white/10 bg-[#040404]">
+              <Sandbox />
+              <div className="pointer-events-none absolute inset-x-0 top-8 z-10 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Falling sand</span>
+                <p className="mx-auto mt-3 max-w-md px-6 text-lg font-medium text-white/90 sm:text-xl">
+                  Drag to paint walls. Watch the pour split, funnel, and flood.
+                </p>
+              </div>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Falling sand</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The granular cousin of the Game of Life above it. Where Life is cells flicking on and off by four
+                rules, this is matter with weight: a grid where every cell is empty, sand, water, or wall, and each
+                frame every grain tries to fall. No physics engine and no forces — just four local rules swept
+                bottom-up — and out of them come real heaps, real pours, and real flow. Sand falls straight down, or
+                slides down a diagonal when blocked, so it finds its angle of repose; it is denser than water, so it
+                sinks through it; water falls the same way but also spreads sideways, so it always seeks its own level
+                and pools flat. Two emitters at the top drip sand and water and a drain at the bottom centre pulls the
+                pile through, so the field pours in a slow closed loop and never sits still. Drag the pointer to paint
+                walls straight into the flow: build a ledge and the pour splits, funnel it and the stream narrows and
+                speeds up, dam the drain and the basin floods and levels off. Crisp grains at one pixel per cell,
+                scaled up with smoothing off; each grain keeps a fixed shade so a pour has grain and a pool has depth.
+                No wall clock and no per-frame randomness — a seeded coin breaks every tie; reduced motion settles a
+                poured field to a still heap and paints it once.
               </p>
             </div>
           </div>
