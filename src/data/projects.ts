@@ -137,7 +137,7 @@ export const PROJECTS: Project[] = [
         body: 'React and Vite with strict TypeScript, Tailwind v4 auto-detecting classes with no content config, and client-side routing across about thirty pages. The landing page ships eagerly; every other route is code-split into its own chunk and streamed in on navigation, so first paint stays lean no matter how much the site grows.',
       },
       {
-        heading: 'Motion, but never at anyone’s expense',
+        heading: 'Motion with restraint',
         body: 'Motion is everywhere, and all of it defers to prefers-reduced-motion: animations collapse to calm static states rather than being faked, focus states are real, and the interactive pieces stay reachable by keyboard. Alive is not the same as loud.',
       },
       {

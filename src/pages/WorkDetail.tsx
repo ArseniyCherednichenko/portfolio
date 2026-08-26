@@ -10,9 +10,18 @@ import { ProjectPoster } from '../components/ProjectPoster'
 import { GlareHover } from '../components/GlareHover'
 import { Lightbox } from '../components/Lightbox'
 import { Seo } from '../components/Seo'
+import { SectionNav, type SectionLink } from '../components/SectionNav'
 import { CASE_STUDIES, getProject } from '../data/projects'
 
 const EASE = [0.16, 1, 0.3, 1] as const
+
+// Stable DOM id from a section heading, so the contents rail can jump to it.
+function slugify(text: string): string {
+  return text
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+}
 
 export default function WorkDetail() {
   const { slug } = useParams()
@@ -53,8 +62,19 @@ export default function WorkDetail() {
     project.status ? { label: 'Status', value: project.status } : null,
   ].filter((r): r is { label: string; value: string } => r !== null)
 
+  // Contents rail stops, in scroll order, built from what this project actually
+  // carries — the top, the division of labour, then each narrative section.
+  // Shown only when there are enough stops to be worth a rail (lg screens).
+  const navSections: SectionLink[] = [
+    { id: 'overview', label: 'Overview' },
+    ...(project.contributions?.length ? [{ id: 'what-i-did', label: 'What I did' }] : []),
+    ...(project.sections?.map((s) => ({ id: slugify(s.heading), label: s.heading })) ?? []),
+  ]
+  const showNav = navSections.length >= 3
+
   return (
     <article className="mx-auto w-full max-w-3xl px-6 pb-28 pt-32">
+      {showNav && <SectionNav sections={navSections} />}
       <Seo title={project.title} description={project.blurb} />
       <motion.div
         initial={{ opacity: 0, y: 10 }}
@@ -70,7 +90,7 @@ export default function WorkDetail() {
       </motion.div>
 
       {/* Title block */}
-      <header className="mt-8 border-b border-white/10 pb-12">
+      <header id="overview" className="mt-8 scroll-mt-28 border-b border-white/10 pb-12">
         <motion.div
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
@@ -195,7 +215,7 @@ export default function WorkDetail() {
           view of the project: not what the product is, but what these hands
           made in it, area by area. */}
       {project.contributions && project.contributions.length > 0 && (
-        <Reveal className="mt-16">
+        <Reveal id="what-i-did" className="mt-16 scroll-mt-28">
           <Eyebrow>What I did</Eyebrow>
           <ul className="mt-6 space-y-px overflow-hidden rounded-3xl border border-white/10">
             {project.contributions.map((c, i) => (
@@ -226,7 +246,7 @@ export default function WorkDetail() {
       {project.sections && project.sections.length > 0 && (
         <div className="mt-16 space-y-14">
           {project.sections.map((section, i) => (
-            <Reveal key={section.heading} delay={reduce ? 0 : i * 0.04}>
+            <Reveal key={section.heading} id={slugify(section.heading)} delay={reduce ? 0 : i * 0.04} className="scroll-mt-28">
               <section className="grid gap-3 sm:grid-cols-[140px_1fr] sm:gap-8">
                 <h2 className="text-sm font-semibold uppercase tracking-[0.2em] text-white/40 sm:pt-1">
                   {section.heading}
