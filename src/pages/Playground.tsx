@@ -126,6 +126,7 @@ import { RippleTank } from '../components/RippleTank'
 import { Life } from '../components/Life'
 import { Sandbox } from '../components/Sandbox'
 import { Bezier } from '../components/Bezier'
+import { Fourier } from '../components/Fourier'
 import { Sorter } from '../components/Sorter'
 import { Maze } from '../components/Maze'
 import { WaveCollapse } from '../components/WaveCollapse'
@@ -3206,6 +3207,38 @@ export default function Playground() {
                 sweeps zero to one and back off the animation clock, and pauses on whichever handle you are holding so
                 the construction holds still where you are reading it. No wall clock; reduced motion parks the bead at
                 the midpoint and shows the construction there, still, while dragging keeps working.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH FOURIER — a drawn shape taken apart into rotating circles that redraw it */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="relative h-[440px] overflow-hidden rounded-3xl border border-white/10 bg-[#040404]">
+              <Fourier />
+              <div className="pointer-events-none absolute inset-x-0 top-8 z-10 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Fourier</span>
+                <p className="mx-auto mt-3 max-w-md px-6 text-lg font-medium text-white/90 sm:text-xl">
+                  Draw a closed shape. Watch a chain of circles redraw it.
+                </p>
+              </div>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Fourier</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The Bézier above is the curve every easing on the site is built from; this is the other half of the
+                same idea — that any closed outline is a sum of circular motions. Draw a shape with the pointer and on
+                release its discrete Fourier transform is computed: a chain of epicycles, each a circle turning at a
+                whole-number frequency, mounted tip to tip and rooted at the shape's centroid. Turn them all at once and
+                the end of the last arm traces the exact path you drew — the big circles lay down the gross form, the
+                small fast ones at the end of the chain chase the corners. Nothing here samples a path from a library:
+                the drawn stroke is resampled evenly around the closed loop, read as complex numbers, and put through
+                the plain double-sum transform once per redraw, and the reconstruction is that same sum run forward in
+                time. No wall clock and no randomness — the circles turn off the animation clock and the default outline
+                is a fixed five-point star, whose sharp points are exactly what force the outer circles to work. Reduced
+                motion holds the chain still at its start angle over the finished outline, and drawing a new shape still
+                recomputes and repaints it.
               </p>
             </div>
           </div>
