@@ -6,6 +6,7 @@ import { SplitText } from '../components/SplitText'
 import { MagneticButton } from '../components/MagneticButton'
 import { Seo } from '../components/Seo'
 import { useContact } from '../components/ContactDialog'
+import { DisciplineDemo } from '../components/DisciplineDemo'
 import { DISCIPLINES, getDiscipline } from '../data/disciplines'
 
 const EASE = [0.16, 1, 0.3, 1] as const
@@ -128,6 +129,15 @@ export default function RangeDetail() {
               {d.throughLine}
             </blockquote>
           </figure>
+        </Reveal>
+      </section>
+
+      {/* SEE IT — a live, discipline-specific demonstration. The pages state a
+          craft belief; this shows it, in a piece of interface tinted with the
+          discipline's own accent and honest about what it is. */}
+      <section className="mx-auto w-full max-w-4xl px-6 pb-20">
+        <Reveal>
+          <DisciplineDemo id={d.id} accent={d.accent} />
         </Reveal>
       </section>
 
