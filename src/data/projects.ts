@@ -93,42 +93,65 @@ export const PROJECTS: Project[] = [
     role: 'Design and build',
     platforms: ['Web'],
     status: 'Open source · in the open',
-    blurb: 'An open-source, motion-led portfolio.',
+    blurb: 'An open-source, motion-led portfolio, built in public.',
     detail:
-      'This portfolio. React, Vite, Tailwind v4, and Framer Motion. Every animation is a hand-built component: an aurora background, spotlight cards, magnetic buttons, an orbiting hero, a marquee, and more. Open source on GitHub.',
-    stack: ['React', 'Tailwind', 'Framer Motion', 'Vite'],
+      'This portfolio, and a working sample in its own right. React, Vite, strict TypeScript, Tailwind v4, and Framer Motion, with client-side routing across some thirty pages. Every animation is a component I built by hand: an aurora background, spotlight cards, magnetic buttons, an orbiting hero, a command palette, an interactive terminal, and well over a hundred and seventy more. It grows a little most days, in the open, so the commit history is part of the work.',
+    stack: ['React', 'TypeScript', 'Tailwind v4', 'Framer Motion', 'Vite'],
     contributions: [
       {
         area: 'Design',
-        detail: 'Every layout, the Fraunces-and-Inter type system, and the lime-on-ink palette.',
+        detail:
+          'The whole visual language: the lime-on-ink palette, the Fraunces-and-Inter type system, and the editorial layout that ties every page together.',
       },
       {
         area: 'Motion',
-        detail: 'Over a hundred and seventy hand-built animation components, each one reduced-motion aware.',
+        detail:
+          'Over a hundred and seventy hand-built animation components, from ambient backgrounds to scroll-driven scenes, each one reduced-motion aware.',
+      },
+      {
+        area: 'Architecture',
+        detail:
+          'Client-side routing over roughly thirty pages, code-split so first paint stays lean and each view streams in on navigation.',
       },
       {
         area: 'Engineering',
-        detail: 'React, Vite, strict TypeScript, Tailwind v4, and client-side routing.',
+        detail:
+          'React and Vite on strict TypeScript, Tailwind v4 with no config, and a canvas-and-RAF pattern that keeps the heavy pieces off the React render path.',
       },
     ],
     sections: [
       {
-        heading: 'Why build it from scratch',
-        body: 'A portfolio about craft should be made with craft. Nothing here is a template. Every motion component, the aurora, the spotlight cards, the magnetic buttons, the orbiting hero, is hand-built, so the site is itself a sample of the work.',
+        heading: 'The brief',
+        body: 'A portfolio about craft should be made with craft. So nothing here is a template or a page builder. The site is meant to be read as evidence: if it claims I care about motion, type, and the small moments, the site itself has to prove it in how it behaves.',
       },
       {
-        heading: 'How it is made',
-        body: 'React and Vite with strict TypeScript, Tailwind v4 for styling, Framer Motion for animation, and client-side routing for the pages and project views. Motion is everywhere but always respects prefers-reduced-motion.',
+        heading: 'The motion system',
+        body: 'Every effect is its own hand-built component rather than a library drop-in, from the aurora and spotlight cards to self-drawing line art and scroll-pinned scenes. The heavy ones run on a single canvas and one requestAnimationFrame loop, kept off the React render path, capped for device pixel ratio, and cleaned up on unmount. There is no motion the machine cannot afford.',
       },
       {
-        heading: 'Open source',
-        body: 'The whole thing is public on GitHub. It grows a little most days, one coherent improvement at a time, so the commit history is part of the story too.',
+        heading: 'Type and palette',
+        body: 'Two faces carry the whole site: Inter for body and UI, and Fraunces, a self-hosted variable serif, for display, so headlines have an editorial voice instead of a templated all-sans look. Lime on near-black is the only accent, used sparingly so it still means something when it appears.',
+      },
+      {
+        heading: 'Architecture',
+        body: 'React and Vite with strict TypeScript, Tailwind v4 auto-detecting classes with no content config, and client-side routing across about thirty pages. The landing page ships eagerly; every other route is code-split into its own chunk and streamed in on navigation, so first paint stays lean no matter how much the site grows.',
+      },
+      {
+        heading: 'Motion, but never at anyone’s expense',
+        body: 'Motion is everywhere, and all of it defers to prefers-reduced-motion: animations collapse to calm static states rather than being faked, focus states are real, and the interactive pieces stay reachable by keyboard. Alive is not the same as loud.',
+      },
+      {
+        heading: 'Built in the open',
+        body: 'The whole thing is public on GitHub and grows a little most days, one coherent, self-contained improvement at a time. The changelog and the commit history are honest by design, so the process is as visible as the result.',
       },
     ],
     highlights: [
-      'Hand-built motion components, no template',
-      'React, Vite, Tailwind v4, Framer Motion',
-      'Open source and updated continuously',
+      'Over 170 hand-built motion components, no template',
+      'React, Vite, strict TypeScript, Tailwind v4, Framer Motion',
+      'Reduced-motion aware, keyboard-reachable throughout',
+      'Code-split routing across roughly thirty pages',
+      'Self-hosted Fraunces variable serif for display type',
+      'Open source and updated continuously, in public',
     ],
   },
   {
