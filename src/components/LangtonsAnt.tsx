@@ -245,6 +245,8 @@ export function LangtonsAnt({ className = '' }: LangtonsAntProps) {
   }, [reduce, advance, drawHead, paintCell])
 
   // Size to the container and re-run whenever the box or the rule changes.
+  // `ruleIdx` is in the deps so switching a rule resets the board and rebuilds
+  // the palette for its state count (setup reads the current rule via a ref).
   useEffect(() => {
     setup()
     const wrap = wrapRef.current
@@ -252,7 +254,7 @@ export function LangtonsAnt({ className = '' }: LangtonsAntProps) {
     const ro = new ResizeObserver(() => setup())
     ro.observe(wrap)
     return () => ro.disconnect()
-  }, [setup])
+  }, [setup, ruleIdx])
 
   // Click (or tap) reseeds the ant at that cell on a clean board.
   const onPointer = useCallback(
