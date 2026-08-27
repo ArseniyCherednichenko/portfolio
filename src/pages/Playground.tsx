@@ -118,6 +118,7 @@ import { Truchet } from '../components/Truchet'
 import { Morphogen } from '../components/Morphogen'
 import { Phyllotaxis } from '../components/Phyllotaxis'
 import { Attractor } from '../components/Attractor'
+import { JuliaSet } from '../components/JuliaSet'
 import { PendulumWave } from '../components/PendulumWave'
 import { Cradle } from '../components/Cradle'
 import { Confetti, type ConfettiHandle } from '../components/Confetti'
@@ -3055,6 +3056,39 @@ export default function Playground() {
                 so the cursor morphs the family while an idle drift keeps all four breathing on slow, out-of-phase sines;
                 the shape endlessly re-forms whether or not you touch it. One canvas, one loop, a fixed seed and no
                 randomness. Reduced motion plots a single crisp attractor once, at rest.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH JULIA SET — the escape-time fractal whose constant follows the cursor */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="relative h-[440px] overflow-hidden rounded-3xl border border-white/10 bg-[#040404]">
+              <JuliaSet />
+              <div className="pointer-events-none absolute inset-x-0 top-8 z-10 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Julia set</span>
+                <p className="mx-auto mt-3 max-w-md px-6 text-lg font-medium text-white/90 sm:text-xl">
+                  Move across it. The point under the cursor becomes the constant that draws the fractal.
+                </p>
+              </div>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Julia set</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The companion to the strange attractor above, and the other famous escape-time fractal. Where the
+                attractor iterates one point forward forever, this iterates every point of the plane and asks a yes/no
+                question of each: feed the complex number into z' = z*z + c over and over — does the orbit fly off to
+                infinity, or stay bounded? Colour the plane by how fast the escaping ones escape, and the boundary
+                between staying and fleeing draws itself: an infinitely crinkled coastline of self-similar detail. That
+                single constant c is the whole instrument — nudge it and the entire set re-forms, from a fat connected
+                blob through spiralling seahorse valleys to a scatter of dust — so the point under the pointer becomes c
+                and the fractal it defines is drawn live underneath, its value shown in the corner. Leave, and c falls
+                back to an idle orbit around the classic family so the coastline keeps breathing. The maths runs off the
+                React render path — the whole grid iterated into a raw pixel buffer with smooth escape colouring through
+                a precomputed palette, into a small internal buffer that CSS softly upscales, idle repaints throttled so
+                the cost stays honest. No wall clock and no randomness. Reduced motion draws one crisp, fixed set and
+                holds it.
               </p>
             </div>
           </div>
