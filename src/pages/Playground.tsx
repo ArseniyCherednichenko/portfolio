@@ -119,6 +119,7 @@ import { Morphogen } from '../components/Morphogen'
 import { Phyllotaxis } from '../components/Phyllotaxis'
 import { Attractor } from '../components/Attractor'
 import { JuliaSet } from '../components/JuliaSet'
+import { LangtonsAnt } from '../components/LangtonsAnt'
 import { PendulumWave } from '../components/PendulumWave'
 import { Cradle } from '../components/Cradle'
 import { Confetti, type ConfettiHandle } from '../components/Confetti'
@@ -3089,6 +3090,38 @@ export default function Playground() {
                 a precomputed palette, into a small internal buffer that CSS softly upscales, idle repaints throttled so
                 the cost stays honest. No wall clock and no randomness. Reduced motion draws one crisp, fixed set and
                 holds it.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH LANGTON'S ANT — order emerging from a two-line rule */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="relative h-[440px] overflow-hidden rounded-3xl border border-white/10 bg-[#050505]">
+              <LangtonsAnt />
+              <div className="pointer-events-none absolute inset-x-0 top-8 z-10 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Langton's ant</span>
+                <p className="mx-auto mt-3 max-w-md px-6 text-lg font-medium text-white/90 sm:text-xl">
+                  One ant, one tiny rule. Switch the rule, or click to drop it somewhere new.
+                </p>
+              </div>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Langton's ant</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The smallest honest argument for emergence. One ant walks a grid under a rule you can hold in your head:
+                read the cell you stand on, turn a quarter turn (which way depends on the cell's state), flip the cell to
+                its next state, step forward one square. That is the whole machine. For the classic two-state rule it
+                scribbles shapeless noise for ten thousand steps and then, with nothing added, abruptly starts building a
+                "highway" — a straight diagonal corridor it lays down forever. This is the generalised ant: the rule is a
+                string of turns, L or R, and the cell cycles through as many states as the string is long, so longer
+                strings give filled chaos, mirror-symmetric growth, and spiral cardioids from the same machine. The chips
+                switch the rule; click the grid to reseed the ant on a clean board. It runs off the React render path — a
+                flat cell array, two integers for the ant, only the one changed cell painted each step through a
+                precomputed lime-to-white ramp — so thousands of steps a frame cost almost nothing. No wall clock and no
+                randomness: the same rule from the same cell always draws the same thing. Reduced motion runs it to a
+                settled figure once and holds it still.
               </p>
             </div>
           </div>
