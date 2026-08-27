@@ -109,6 +109,7 @@ import { Lanyard } from '../components/Lanyard'
 import { Turntable } from '../components/Turntable'
 import { Harmonograph } from '../components/Harmonograph'
 import { Abacus } from '../components/Abacus'
+import { EtchASketch } from '../components/EtchASketch'
 import { Ballpit } from '../components/Ballpit'
 import { Cloth } from '../components/Cloth'
 import { Kaleidoscope } from '../components/Kaleidoscope'
@@ -4563,6 +4564,35 @@ export default function Playground() {
                 way the real instrument works, or focus a rod and drive its digit straight from the arrow keys — each rod
                 is a real spinbutton that reads its value to a screen reader. Reduced motion drops the bead springs for a
                 clean snap; it stays a fully usable, fully labelled instrument.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH ETCH A SKETCH */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 py-12 sm:px-10">
+              <div className="text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Draw</span>
+                <p className="mx-auto mt-3 max-w-md text-lg font-medium text-white/85 sm:text-xl">
+                  One knob moves across, the other up and down. No lifting the pen.
+                </p>
+              </div>
+              <EtchASketch className="mt-10" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Etch A Sketch</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The aluminium-powder toy, and the odd one out even in this family: not a passive dial like the Clock, a
+                wheel with momentum like the Turntable, or a seeded plotter like the Harmonograph — this one you draw on,
+                and the constraint is the whole point. There is no lifting the pen. The left knob walks the stylus
+                horizontally and the right one vertically, so every picture is a single unbroken line and the game is
+                coaxing a curve out of two straight axes. The screen is a real canvas: the trace is kept as a polyline in
+                normalised coordinates so a resize repaints it crisply rather than stretching it, and only the newest
+                segment is inked each move, so the powder builds up instead of being cleared. Both knobs are the site's
+                own dial control, so the toy is keyboard-driven for free — focus a knob and the arrow keys draw. Shake to
+                erase. Reduced motion drops the wobble on the shake; the drawing, being direct manipulation, is unchanged.
               </p>
             </div>
           </div>
