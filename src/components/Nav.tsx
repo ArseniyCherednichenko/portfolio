@@ -3,6 +3,7 @@ import { Link, NavLink } from 'react-router-dom'
 import { useCommandPalette } from './CommandPalette'
 import { useContact } from './ContactDialog'
 import { MobileMenu } from './MobileMenu'
+import { NavMenu } from './NavMenu'
 import { Tooltip } from './Tooltip'
 
 // Floating translucent nav. Work, About, and Playground are real page links.
@@ -23,7 +24,7 @@ export function Nav() {
   }, [])
 
   return (
-    <nav className="fixed inset-x-0 top-4 z-50 mx-auto flex w-[min(92%,760px)] items-center justify-between rounded-full border border-white/10 bg-black/40 px-5 py-3 backdrop-blur-xl">
+    <nav className="fixed inset-x-0 top-4 z-50 mx-auto flex w-[min(94%,820px)] items-center justify-between rounded-full border border-white/10 bg-black/40 px-5 py-3 backdrop-blur-xl">
       <Tooltip content="Back to home" placement="bottom">
         <Link
           to="/"
@@ -33,7 +34,7 @@ export function Nav() {
           AC
         </Link>
       </Tooltip>
-      <div className="hidden gap-7 sm:flex">
+      <div className="hidden items-center gap-6 sm:flex">
         {PAGES.map(([label, to]) => (
           <NavLink
             key={to}
@@ -45,6 +46,7 @@ export function Nav() {
             {label}
           </NavLink>
         ))}
+        <NavMenu />
       </div>
       <div className="flex items-center gap-2">
         <Tooltip content={`Search & jump anywhere · ${mod} K`} placement="bottom">
