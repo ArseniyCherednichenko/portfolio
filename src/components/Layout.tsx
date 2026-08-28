@@ -15,6 +15,8 @@ import { ClickSpark } from './ClickSpark'
 import { Grain } from './Grain'
 import { Preloader } from './Preloader'
 import { SiteFooter } from './SiteFooter'
+import { SkipLink } from './SkipLink'
+import { StructuredData } from './StructuredData'
 
 const PAGE_EASE = [0.16, 1, 0.3, 1] as const
 
@@ -46,6 +48,11 @@ export function Layout() {
       <KeyboardProvider>
         <CommandPaletteProvider>
         <div id="top" className="relative min-h-screen bg-[#0A0A0A] text-white">
+          {/* First focusable element on the page — a keyboard jump past the
+              chrome, straight to the content. */}
+          <SkipLink />
+          {/* Machine-readable identity (JSON-LD) for search and social crawlers. */}
+          <StructuredData />
           <Aurora />
           <ScrollProgress />
           <ScrollManager />
@@ -53,6 +60,9 @@ export function Layout() {
           <AnimatePresence mode="wait" initial={false}>
             <motion.main
               key={location.pathname}
+              id="main-content"
+              tabIndex={-1}
+              className="outline-none"
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -12 }}
