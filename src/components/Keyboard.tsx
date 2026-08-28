@@ -9,7 +9,7 @@ import {
   type ReactNode,
 } from 'react'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { Modal } from './Modal'
 import { GradientText } from './GradientText'
 
@@ -244,6 +244,19 @@ function ShortcutsDialog({ open, onClose }: { open: boolean; onClose: () => void
           </div>
         ))}
       </div>
+
+      <Link
+        to="/keyboard"
+        onClick={onClose}
+        className="group mt-6 flex items-center justify-between gap-4 rounded-lg border border-white/10 bg-white/[0.02] px-3.5 py-3 transition-colors hover:border-[#DCF87C]/40 hover:bg-[#DCF87C]/[0.05]"
+      >
+        <span className="text-sm text-white/70 transition-colors group-hover:text-white">
+          See the whole keyboard, playable
+        </span>
+        <span aria-hidden className="text-[#DCF87C]/70 transition-transform duration-300 group-hover:translate-x-1">
+          &rarr;
+        </span>
+      </Link>
     </Modal>
   )
 }
