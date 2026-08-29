@@ -13,6 +13,7 @@ import { useNavigate } from 'react-router-dom'
 import { PROJECTS } from '../data/projects'
 import { DISCIPLINES } from '../data/disciplines'
 import { ALL_CONTENT_ENTRIES } from '../data/contents'
+import { fuzzyMatch, toRanges } from '../lib/fuzzy'
 import { useContact } from './ContactDialog'
 import { useShortcuts } from './Keyboard'
 import { useToast } from './Toast'
@@ -21,14 +22,46 @@ import { useToast } from './Toast'
 // projects, and quick actions, then jump with the keyboard. Accessible
 // (dialog + listbox semantics, focus trap on the input, escape to close)
 // and reduced-motion aware.
+//
+// Search is a subsequence fuzzy match (see ../lib/fuzzy): results rank by how
+// well the query hits each command — the letters that matched are highlighted —
+// and the last few commands you ran surface as "Recent" when the box is empty,
+// remembered across visits in localStorage.
+
+type CommandGroup = 'Recent' | 'Pages' | 'Projects' | 'Disciplines' | 'Actions'
 
 type Command = {
   id: string
   label: string
-  group: 'Pages' | 'Projects' | 'Disciplines' | 'Actions'
+  group: CommandGroup
   hint?: string
   keywords?: string
   run: () => void
+}
+
+// --- Recents: a small most-recently-used list persisted per browser. ---
+const RECENT_KEY = 'pf:cmdk:recent'
+const RECENT_MAX = 5
+
+function loadRecent(): string[] {
+  try {
+    const raw = localStorage.getItem(RECENT_KEY)
+    if (!raw) return []
+    const parsed = JSON.parse(raw)
+    return Array.isArray(parsed) ? parsed.filter((x): x is string => typeof x === 'string') : []
+  } catch {
+    return []
+  }
+}
+
+function pushRecent(id: string): string[] {
+  const next = [id, ...loadRecent().filter((x) => x !== id)].slice(0, RECENT_MAX)
+  try {
+    localStorage.setItem(RECENT_KEY, JSON.stringify(next))
+  } catch {
+    /* storage unavailable (private mode, blocked) — recents just won't persist */
+  }
+  return next
 }
 
 type Ctx = { open: () => void }
@@ -76,6 +109,7 @@ function Palette({ open, onClose }: { open: boolean; onClose: () => void }) {
   const [query, setQuery] = useState('')
   const [active, setActive] = useState(0)
   const [copied, setCopied] = useState(false)
+  const [recent, setRecent] = useState<string[]>([])
   const inputRef = useRef<HTMLInputElement>(null)
   const listRef = useRef<HTMLDivElement>(null)
 
@@ -86,6 +120,12 @@ function Palette({ open, onClose }: { open: boolean; onClose: () => void }) {
     },
     [navigate, onClose],
   )
+
+  // Run a command and remember it, so the last few surface under "Recent".
+  const runCommand = useCallback((c: Command) => {
+    setRecent(pushRecent(c.id))
+    c.run()
+  }, [])
 
   const commands = useMemo<Command[]>(() => {
     const pages: Command[] = [
@@ -114,6 +154,7 @@ function Palette({ open, onClose }: { open: boolean; onClose: () => void }) {
       { id: 'wander', label: 'Wander', group: 'Pages', hint: 'a random page, dealt', keywords: 'wander random shuffle surprise me serendipity discover explore roam lucky dip deck lose the map chance', run: () => go('/wander') },
       { id: 'library', label: 'The library', group: 'Pages', hint: 'every component, catalogued', keywords: 'library components catalogue catalog gallery parts made by hand ui kit built no template list showcase', run: () => go('/library') },
       { id: 'numbers', label: 'By the numbers', group: 'Pages', hint: 'the site, counted', keywords: 'numbers stats statistics metrics measured counts data dashboard breakdown charts bars components pages made by hand', run: () => go('/numbers') },
+      { id: 'keyboard', label: 'Keyboard', group: 'Pages', hint: 'the go-chords, playable', keywords: 'keyboard keys shortcuts chords hotkeys map press play typing navigation go to interactive', run: () => go('/keyboard') },
     ]
 
     const projects: Command[] = PROJECTS.filter((p) => !p.soon).map((p) => ({
@@ -197,13 +238,42 @@ function Palette({ open, onClose }: { open: boolean; onClose: () => void }) {
     return [...pages, ...projects, ...disciplines, ...actions]
   }, [go, onClose, openContact, openShortcuts, toast])
 
-  const filtered = useMemo(() => {
-    const q = query.trim().toLowerCase()
-    if (!q) return commands
-    return commands.filter((c) =>
-      `${c.label} ${c.hint ?? ''} ${c.keywords ?? ''} ${c.group}`.toLowerCase().includes(q),
-    )
-  }, [commands, query])
+  // A rendered row: a command plus the label indices to highlight (empty when
+  // the match came from keywords rather than the visible label).
+  type Row = Command & { indices: number[] }
+
+  // When the box is empty, show the recents first (if any) then the full,
+  // grouped catalogue. When there's a query, rank every command by fuzzy score
+  // and present one flat, sorted list.
+  const { rows, grouped } = useMemo<{ rows: Row[]; grouped: boolean }>(() => {
+    const q = query.trim()
+    if (!q) {
+      const recents: Row[] = recent
+        .map((id) => commands.find((c) => c.id === id))
+        .filter((c): c is Command => Boolean(c))
+        .map((c) => ({ ...c, group: 'Recent' as const, indices: [] }))
+      const rest: Row[] = commands.map((c) => ({ ...c, indices: [] }))
+      return { rows: [...recents, ...rest], grouped: true }
+    }
+
+    const scored = commands
+      .map((c) => {
+        const label = fuzzyMatch(q, c.label)
+        const hay = label.matched
+          ? label
+          : fuzzyMatch(q, `${c.label} ${c.hint ?? ''} ${c.keywords ?? ''} ${c.group}`)
+        if (!hay.matched) return null
+        // A hit on the visible label always outranks one buried in keywords.
+        const score = label.matched ? label.score + 25 : hay.score
+        return { cmd: c, score, indices: label.matched ? label.indices : [] }
+      })
+      .filter((x): x is { cmd: Command; score: number; indices: number[] } => x !== null)
+      .sort((a, b) => b.score - a.score)
+
+    return { rows: scored.map((s) => ({ ...s.cmd, indices: s.indices })), grouped: false }
+  }, [commands, query, recent])
+
+  const filtered = rows
 
   // Reset state whenever the palette opens, and focus the input.
   useEffect(() => {
@@ -211,6 +281,7 @@ function Palette({ open, onClose }: { open: boolean; onClose: () => void }) {
       setQuery('')
       setActive(0)
       setCopied(false)
+      setRecent(loadRecent())
       const id = window.setTimeout(() => inputRef.current?.focus(), 10)
       return () => window.clearTimeout(id)
     }
@@ -249,7 +320,8 @@ function Palette({ open, onClose }: { open: boolean; onClose: () => void }) {
       setActive((a) => (filtered.length ? (a - 1 + filtered.length) % filtered.length : 0))
     } else if (e.key === 'Enter') {
       e.preventDefault()
-      filtered[active]?.run()
+      const c = filtered[active]
+      if (c) runCommand(c)
     }
   }
 
@@ -302,11 +374,12 @@ function Palette({ open, onClose }: { open: boolean; onClose: () => void }) {
                 <p className="px-3 py-8 text-center text-sm text-white/40">No matches for "{query}".</p>
               )}
               {filtered.map((c, i) => {
-                const showGroup = c.group !== lastGroup
+                const showGroup = grouped && c.group !== lastGroup
                 lastGroup = c.group
                 const isActive = i === active
+                const isCopied = c.id === 'copy-email' && copied
                 return (
-                  <div key={c.id}>
+                  <div key={`${c.group}-${c.id}`}>
                     {showGroup && (
                       <p className="px-3 pb-1 pt-3 text-[11px] font-semibold uppercase tracking-wider text-white/30">
                         {c.group}
@@ -317,7 +390,7 @@ function Palette({ open, onClose }: { open: boolean; onClose: () => void }) {
                       data-index={i}
                       role="option"
                       aria-selected={isActive}
-                      onClick={() => c.run()}
+                      onClick={() => runCommand(c)}
                       onMouseMove={() => setActive(i)}
                       className={`relative flex w-full items-center justify-between gap-3 rounded-lg px-3 py-2.5 text-left transition-colors ${
                         isActive ? 'bg-white/[0.06]' : 'hover:bg-white/[0.03]'
@@ -330,10 +403,19 @@ function Palette({ open, onClose }: { open: boolean; onClose: () => void }) {
                           transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
                         />
                       )}
-                      <span className={`text-sm ${isActive ? 'text-white' : 'text-white/75'}`}>
-                        {c.id === 'copy-email' && copied ? 'Copied to clipboard' : c.label}
+                      <span className={`min-w-0 truncate text-sm ${isActive ? 'text-white' : 'text-white/75'}`}>
+                        {isCopied ? 'Copied to clipboard' : <Highlight text={c.label} indices={c.indices} />}
                       </span>
-                      {c.hint && <span className="shrink-0 text-xs text-white/30">{c.hint}</span>}
+                      <span className="flex shrink-0 items-center gap-2.5">
+                        {/* When ranking a flat search list, name each row's group
+                            so the context isn't lost with the headers gone. */}
+                        {!grouped && (
+                          <span className="hidden text-[10px] uppercase tracking-wider text-white/25 sm:inline">
+                            {c.group}
+                          </span>
+                        )}
+                        {c.hint && <span className="text-xs text-white/30">{c.hint}</span>}
+                      </span>
                     </button>
                   </div>
                 )
@@ -356,6 +438,25 @@ function Palette({ open, onClose }: { open: boolean; onClose: () => void }) {
       )}
     </AnimatePresence>
   )
+}
+
+// Render `text` with the fuzzy-matched character ranges lit in the accent.
+function Highlight({ text, indices }: { text: string; indices: number[] }) {
+  if (indices.length === 0) return <>{text}</>
+  const ranges = toRanges(indices)
+  const parts: ReactNode[] = []
+  let cursor = 0
+  ranges.forEach(([start, end], r) => {
+    if (start > cursor) parts.push(<span key={`p${r}`}>{text.slice(cursor, start)}</span>)
+    parts.push(
+      <span key={`m${r}`} className="text-[#DCF87C]">
+        {text.slice(start, end)}
+      </span>,
+    )
+    cursor = end
+  })
+  if (cursor < text.length) parts.push(<span key="rest">{text.slice(cursor)}</span>)
+  return <>{parts}</>
 }
 
 function Kbd({ children }: { children: ReactNode }) {
