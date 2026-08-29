@@ -47,6 +47,7 @@ import { ScrollReveal } from '../components/ScrollReveal'
 import { VariableProximity } from '../components/VariableProximity'
 import { SpotlightReveal } from '../components/SpotlightReveal'
 import { ASCIIText } from '../components/ASCIIText'
+import { ParticleText } from '../components/ParticleText'
 import { CurvedLoop } from '../components/CurvedLoop'
 import { LinkPreview } from '../components/LinkPreview'
 import { FuzzyText } from '../components/FuzzyText'
@@ -1850,6 +1851,32 @@ export default function Playground() {
                 of a letter it covers, then painted one monospace glyph at a time, picking a denser
                 character the brighter the cell. A slow shimmer keeps it breathing; the cursor is a
                 torch that lights the field as it passes. Reduced-motion paints one still frame.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH PARTICLE TEXT */}
+        <Reveal>
+          <div className="mt-12">
+            <div
+              data-cursor
+              data-experiment="Particle type"
+              id={slugifyExperiment('Particle type')}
+              className="group/exp relative h-[320px] w-full scroll-mt-32 overflow-hidden rounded-3xl border border-white/10 bg-black/40"
+            >
+              <ParticleText text="ARSENIY" gap={7} listen="canvas" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Particle type</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The word has no substance of its own — it is only the shape a free swarm is settling
+                into. Every cell the letters fill becomes a target, a cloud of particles is scattered
+                across the field, and a spring pulls each one home, so the name precipitates in from
+                noise. The pointer is a repulsor: sweep across it and the particles near your cursor
+                are blown outward and cool to grey, then spring back and warm to lime the instant you
+                leave, so the hole heals behind you. A text-seeded swarm, so it assembles the same way
+                each load. Reduced motion paints the settled word as a still field of points.
               </p>
             </div>
           </div>
