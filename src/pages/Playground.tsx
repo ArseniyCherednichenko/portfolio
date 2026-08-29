@@ -119,6 +119,7 @@ import { Morphogen } from '../components/Morphogen'
 import { Phyllotaxis } from '../components/Phyllotaxis'
 import { Attractor } from '../components/Attractor'
 import { JuliaSet } from '../components/JuliaSet'
+import { Mandelbrot } from '../components/Mandelbrot'
 import { LangtonsAnt } from '../components/LangtonsAnt'
 import { PendulumWave } from '../components/PendulumWave'
 import { Cradle } from '../components/Cradle'
@@ -3090,6 +3091,39 @@ export default function Playground() {
                 a precomputed palette, into a small internal buffer that CSS softly upscales, idle repaints throttled so
                 the cost stays honest. No wall clock and no randomness. Reduced motion draws one crisp, fixed set and
                 holds it.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH MANDELBROT — the map of every Julia set, dived into */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="relative h-[440px] overflow-hidden rounded-3xl border border-white/10 bg-[#040404]">
+              <Mandelbrot className="h-full w-full" />
+              <div className="pointer-events-none absolute inset-x-0 top-8 z-10 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Mandelbrot set</span>
+                <p className="mx-auto mt-3 max-w-md px-6 text-lg font-medium text-white/90 sm:text-xl">
+                  Click to fall in. Every point here is one whole Julia set, above, collapsed to a dot.
+                </p>
+              </div>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Mandelbrot set</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                Not a second copy of the Julia set above but its map. The Julia set asks, for one fixed constant c, which
+                starting points stay bounded under z' = z*z + c; the Mandelbrot set asks the mirror question — start
+                every point at zero and let c be the point of the plane itself, then ask for which c the orbit stays
+                bounded. So every pixel here is one whole Julia set collapsed to a yes/no dot, and the black body is
+                exactly the atlas of every c whose Julia set is connected: this is the index, the Julia set is a single
+                page from it. It is built to be fallen into — click, scroll, or press plus to dive toward a point and the
+                frame eases in, doubling the magnification, while the iteration budget grows with the zoom so the
+                coastline keeps resolving finer detail the deeper you go; arrow keys pan, double-click or zero falls back
+                out, and the corner reads the live centre and magnification. The maths runs off the React render path —
+                the whole grid iterated into a raw pixel buffer with smooth escape colouring through a precomputed
+                palette, into a small internal buffer that CSS upscales — and a frame repaints only while the view is
+                moving, so at rest it costs almost nothing. No wall clock and no randomness. Reduced motion draws one
+                crisp deep-zoom still and holds it, clicks jumping straight there rather than gliding.
               </p>
             </div>
           </div>
