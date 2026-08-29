@@ -86,6 +86,13 @@ export function Mandelbrot({
     let img: ImageData | null = null
     let raf = 0
     const LOG2 = Math.log(2)
+    // `settling` gates the eased loop below; declared up here (not beside the
+    // loop) so `settle()`, which the shared handlers call, is safe to invoke from
+    // the reduced-motion branch too, where the loop itself never runs.
+    let settling = true
+    function settle() {
+      settling = true
+    }
 
     // The live view and the frame it is easing toward. `half` is the half-width
     // of the plane shown, in complex units — smaller means deeper.
@@ -312,13 +319,9 @@ export function Mandelbrot({
       }
     }
 
-    // `settling` gates the loop: it repaints while the view is chasing the target
-    // and one final crisp frame when it arrives, then idles at near-zero cost.
-    let settling = true
+    // The loop repaints while the view is chasing the target and one final crisp
+    // frame when it arrives, then idles at near-zero cost.
     let lastReadout = 0
-    function settle() {
-      settling = true
-    }
 
     function frame(now: number) {
       if (settling) {
