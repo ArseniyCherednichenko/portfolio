@@ -27,6 +27,7 @@ export interface LogHeadline {
 }
 
 export const LATEST_LOG: LogHeadline[] = [
+  { title: 'A Waveform — the voice-memo transport as an interaction study: a seeded speech-shaped waveform that colours in from the left as the playhead sweeps, click or drag to seek, hover to read the time. A real role=slider, keyboard-driven; reduced motion drops only the flourish', tag: 'Component' },
   { title: 'Preferences — a site-wide motion switch, handed to the visitor. One MotionConfig above the whole tree drives all ~180 hand-built components at once; a small dialog offers System, Calm, or Full, remembered per browser and reachable from the nav, the command palette, and the mobile drawer', tag: 'Component' },
   { title: 'A ParticleText — a word with no body of its own, only the shape a free swarm settles into: particles spring home from noise, warm to lime, and scatter under the cursor before healing behind you', tag: 'Component' },
   { title: 'A Mandelbrot set — the map of every Julia set, built to be fallen into: click, scroll, or press to dive as the iteration budget grows with the zoom and the coastline keeps resolving', tag: 'Component' },
@@ -36,5 +37,4 @@ export const LATEST_LOG: LogHeadline[] = [
   { title: 'An Etch A Sketch — the aluminium-powder toy, drawn with two knobs and no lifting the pen, so every picture is a single unbroken line; shake to erase', tag: 'Component' },
   { title: 'A live demo for every discipline — the /range detail pages now show their craft through-line instead of only stating it, one component tinted five ways', tag: 'Motion' },
   { title: 'A Fourier — a drawn shape taken apart into rotating epicycles that redraw it, the companion to the Bézier and the other half of the same idea', tag: 'Component' },
-  { title: 'This site as a real case study — grown from three thin paragraphs into six honest sections, a strong second story so no single project carries the whole weight', tag: 'Polish' },
 ]
