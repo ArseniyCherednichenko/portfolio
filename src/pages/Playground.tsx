@@ -80,6 +80,7 @@ import { Masonry, type MasonryItem } from '../components/Masonry'
 import { Orb } from '../components/Orb'
 import { Accordion } from '../components/Accordion'
 import { ElasticSlider } from '../components/ElasticSlider'
+import { RangeSlider } from '../components/RangeSlider'
 import { Knob } from '../components/Knob'
 import { Switch } from '../components/Switch'
 import { Select, type SelectOption } from '../components/Select'
@@ -1555,6 +1556,7 @@ export default function Playground() {
   const [wifi, setWifi] = useState(true)
   const [reduce, setReduce] = useState(false)
   const [volume, setVolume] = useState(62)
+  const [priceRange, setPriceRange] = useState<[number, number]>([35, 80])
   const [island, setIsland] = useState<IslandActivity>('music')
   const [sheetOpen, setSheetOpen] = useState(false)
   const { openShortcuts } = useShortcuts()
@@ -3948,6 +3950,26 @@ export default function Playground() {
                       <path d="M18.5 5.5a9 9 0 0 1 0 13" />
                     </svg>
                   }
+                />
+              </div>
+            </Experiment>
+          </Reveal>
+
+          <Reveal>
+            <Experiment
+              name="Range slider"
+              note="The elastic slider's interval sibling: two thumbs bounding a lit span instead of one value. Drag either thumb, or click the rail to send the nearer one there — they never cross, held apart by a minimum gap. A value bubble springs above whichever thumb you hold or focus, and the held thumb swells. Two real role=slider handles, each keyboard-driven with the arrows, Page keys, and Home/End (which run a thumb up to its neighbour, not off the end). Reduced motion drops the swell and the bubble's spring."
+            >
+              <div className="w-full max-w-[320px]">
+                <RangeSlider
+                  label="Price"
+                  min={0}
+                  max={100}
+                  minGap={5}
+                  showTicks
+                  value={priceRange}
+                  onChange={setPriceRange}
+                  format={(v) => `$${Math.round(v)}`}
                 />
               </div>
             </Experiment>
