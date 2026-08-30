@@ -121,6 +121,7 @@ import { Phyllotaxis } from '../components/Phyllotaxis'
 import { Attractor } from '../components/Attractor'
 import { JuliaSet } from '../components/JuliaSet'
 import { Mandelbrot } from '../components/Mandelbrot'
+import { Waveform } from '../components/Waveform'
 import { LangtonsAnt } from '../components/LangtonsAnt'
 import { PendulumWave } from '../components/PendulumWave'
 import { Cradle } from '../components/Cradle'
@@ -3958,6 +3959,15 @@ export default function Playground() {
               note="A dial you turn like hardware: drag up or down to sweep the pointer around a 270° arc, spin the wheel for fine steps, or focus it and use the arrows. The pointer rides a spring so it settles with a little give. A real role=slider, keyboard-driven, and calm under reduced motion. Drives the spring tuner on the Design page."
             >
               <KnobDemo />
+            </Experiment>
+          </Reveal>
+
+          <Reveal>
+            <Experiment
+              name="Waveform scrubber"
+              note="The voice-memo transport, built as an interaction study. A deterministic waveform is drawn as a row of bars; the bars behind the playhead light in the accent and colour in from the left as it moves. Press play and the head sweeps at a steady pace, looping at the end; click or drag anywhere on the wave to seek, and hover to read the exact time under the pointer. While it plays the bars just behind the head give a small reactive kick — the one decoration, and the only thing reduced motion removes. A real role=slider, keyboard-driven with the arrows, Home/End, and Space. Nothing here plays audio; it demonstrates the transport, not a file."
+            >
+              <Waveform label="Voice memo" />
             </Experiment>
           </Reveal>
 
