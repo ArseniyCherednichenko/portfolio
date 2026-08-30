@@ -3,6 +3,7 @@ import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import { GO_TARGETS } from './Keyboard'
 import { useContact } from './ContactDialog'
+import { usePreferences } from './Preferences'
 import { EMAIL, GITHUB_URL } from '../data/contact'
 
 const PANEL_EASE = [0.16, 1, 0.3, 1] as const
@@ -39,6 +40,7 @@ export function MobileMenu() {
   const reduced = useReducedMotion() ?? false
   const [open, setOpen] = useState(false)
   const { open: openContact } = useContact()
+  const { open: openPrefs } = usePreferences()
   const { pathname } = useLocation()
 
   // Close on route change so tapping a link dismisses the drawer.
@@ -157,6 +159,16 @@ export function MobileMenu() {
                 className="w-full rounded-full bg-[#DCF87C] px-5 py-3 text-center text-sm font-semibold text-black transition hover:brightness-105"
               >
                 Get in touch
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setOpen(false)
+                  openPrefs()
+                }}
+                className="mt-3 w-full rounded-full border border-white/10 bg-white/[0.03] px-5 py-3 text-center text-sm font-medium text-white/60 transition hover:border-white/20 hover:text-white/90"
+              >
+                Preferences
               </button>
               <div className="mt-5 flex items-center justify-between text-sm text-white/45">
                 <a
