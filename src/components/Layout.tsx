@@ -8,6 +8,7 @@ import { CommandPaletteProvider } from './CommandPalette'
 import { ContactProvider } from './ContactDialog'
 import { KeyboardProvider } from './Keyboard'
 import { ToastProvider } from './Toast'
+import { PreferencesProvider } from './Preferences'
 import { ScrollProgress } from './ScrollProgress'
 import { BackToTop } from './BackToTop'
 import { Cursor } from './Cursor'
@@ -43,6 +44,7 @@ export function Layout() {
   // through its exit animation while the new one enters.
   const outlet = useOutlet()
   return (
+    <PreferencesProvider>
     <ToastProvider>
       <ContactProvider>
       <KeyboardProvider>
@@ -90,5 +92,6 @@ export function Layout() {
       </KeyboardProvider>
       </ContactProvider>
     </ToastProvider>
+    </PreferencesProvider>
   )
 }
