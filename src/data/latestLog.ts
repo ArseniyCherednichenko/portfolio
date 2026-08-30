@@ -27,6 +27,7 @@ export interface LogHeadline {
 }
 
 export const LATEST_LOG: LogHeadline[] = [
+  { title: 'A RangeSlider — the elastic slider\'s interval sibling: two thumbs bounding a lit span, never crossing, a value bubble springing above whichever you hold and each keyboard-driven on its own', tag: 'Component' },
   { title: 'A Waveform — the voice-memo transport as an interaction study: a seeded speech-shaped waveform that colours in from the left as the playhead sweeps, click or drag to seek, hover to read the time. A real role=slider, keyboard-driven; reduced motion drops only the flourish', tag: 'Component' },
   { title: 'Preferences — a site-wide motion switch, handed to the visitor. One MotionConfig above the whole tree drives all ~180 hand-built components at once; a small dialog offers System, Calm, or Full, remembered per browser and reachable from the nav, the command palette, and the mobile drawer', tag: 'Component' },
   { title: 'A ParticleText — a word with no body of its own, only the shape a free swarm settles into: particles spring home from noise, warm to lime, and scatter under the cursor before healing behind you', tag: 'Component' },
@@ -36,5 +37,4 @@ export const LATEST_LOG: LogHeadline[] = [
   { title: 'A Julia set — the escape-time fractal whose constant follows the cursor, its infinitely crinkled coastline re-forming live as the point under the pointer becomes c', tag: 'Component' },
   { title: 'An Etch A Sketch — the aluminium-powder toy, drawn with two knobs and no lifting the pen, so every picture is a single unbroken line; shake to erase', tag: 'Component' },
   { title: 'A live demo for every discipline — the /range detail pages now show their craft through-line instead of only stating it, one component tinted five ways', tag: 'Motion' },
-  { title: 'A Fourier — a drawn shape taken apart into rotating epicycles that redraw it, the companion to the Bézier and the other half of the same idea', tag: 'Component' },
 ]
