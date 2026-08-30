@@ -15,6 +15,7 @@ import { DISCIPLINES } from '../data/disciplines'
 import { ALL_CONTENT_ENTRIES } from '../data/contents'
 import { fuzzyMatch, toRanges } from '../lib/fuzzy'
 import { useContact } from './ContactDialog'
+import { usePreferences } from './Preferences'
 import { useShortcuts } from './Keyboard'
 import { useToast } from './Toast'
 
@@ -103,6 +104,7 @@ export function CommandPaletteProvider({ children }: { children: ReactNode }) {
 function Palette({ open, onClose }: { open: boolean; onClose: () => void }) {
   const navigate = useNavigate()
   const { open: openContact } = useContact()
+  const { open: openPrefs } = usePreferences()
   const { openShortcuts } = useShortcuts()
   const { toast } = useToast()
   const reduce = useReducedMotion()
@@ -212,6 +214,17 @@ function Palette({ open, onClose }: { open: boolean; onClose: () => void }) {
         },
       },
       {
+        id: 'preferences',
+        label: 'Preferences',
+        group: 'Actions',
+        hint: 'motion',
+        keywords: 'settings motion animation reduce calm accessibility prefers reduced motion tune',
+        run: () => {
+          onClose()
+          openPrefs()
+        },
+      },
+      {
         id: 'shortcuts',
         label: 'Keyboard shortcuts',
         group: 'Actions',
@@ -236,7 +249,7 @@ function Palette({ open, onClose }: { open: boolean; onClose: () => void }) {
     ]
 
     return [...pages, ...projects, ...disciplines, ...actions]
-  }, [go, onClose, openContact, openShortcuts, toast])
+  }, [go, onClose, openContact, openPrefs, openShortcuts, toast])
 
   // A rendered row: a command plus the label indices to highlight (empty when
   // the match came from keywords rather than the visible label).
