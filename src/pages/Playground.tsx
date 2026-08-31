@@ -140,6 +140,7 @@ import { WaveCollapse } from '../components/WaveCollapse'
 import { Voronoi } from '../components/Voronoi'
 import { Aggregate } from '../components/Aggregate'
 import { Cyclic } from '../components/Cyclic'
+import { Sandpile } from '../components/Sandpile'
 import { Sortable } from '../components/Sortable'
 import { Carousel, type CarouselSlide } from '../components/Carousel'
 import { HoverIndex, type HoverIndexItem } from '../components/HoverIndex'
@@ -3581,6 +3582,49 @@ export default function Playground() {
                 floats in the rule, so nothing can drift or blow up; one byte per cell painted to a grid-sized buffer and
                 smoothed up, a seeded PRNG for every placement so it never touches the wall clock. Reduced motion steps
                 one field until the spirals lock in and paints it once.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH SANDPILE — the Abelian sandpile toppling itself into avalanches */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="relative h-[460px] overflow-hidden rounded-3xl border border-white/10 bg-[#040404]">
+              <Sandpile className="h-full w-full" />
+              <div className="pointer-events-none absolute inset-x-0 top-8 z-10 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Sandpile</span>
+                <p className="mx-auto mt-3 max-w-md px-6 text-lg font-medium text-white/90 sm:text-xl">
+                  Grains pile up, a fourth tips the stack, and the collapse cascades. Press or drag to pour your own.
+                </p>
+              </div>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Sandpile</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The Abelian sandpile — the Bak-Tang-Wiesenfeld model of 1987, the original toy of self-organised
+                criticality, and the odd one out among the automata beside it: where the Game of Life makes gliders out
+                of birth and death, the Cyclic space winds spirals out of a chase, and the falling Sandbox pours grains
+                under gravity, this one has no gravity and no clock rule, only a single law of local balance — and out of
+                it falls a power law. Every cell holds a small pile of grains and is stable while it holds fewer than
+                four; the instant it reaches four it topples, shedding one grain to each of its four orthogonal
+                neighbours and keeping the rest. A neighbour tipped past four then topples in turn, so one added grain can
+                set off a chain — an avalanche — that ripples outward as an expanding front and shakes the whole pile
+                loose; grains that topple off the edge of the world are simply lost, so the sand sheds as fast as it is
+                fed and the field never blows up. The remarkable part is what the pile organises itself into: drip grains
+                onto one point forever and the surface climbs to a critical slope and then holds there, poised on the
+                edge of collapse everywhere at once, and from that state a single grain triggers an avalanche of no
+                typical size — most tiny, a few enormous, their frequency a straight line on a log-log plot. No parameter
+                is tuned to sit at that edge; the system walks itself there, which is the cleanest argument there is for
+                why the same scale-free statistics turn up in real avalanches, earthquakes, and forest fires. Because the
+                pile is abelian the order of topples never changes the stable result, so sweeping them all at once just
+                makes the front visible; a cool teal band tints each cell by how many grains it holds, so the terraced
+                slopes are always faintly there, and a heat field flares wherever a cell toppled this step and cools over
+                the next few, so the collapsing edge glows lime-white and you watch the wave travel. Press or drag to pour
+                a heap under the cursor and set off your own avalanche. Pure integer arithmetic, grains in one typed array
+                per cell painted to a grid-sized buffer and smoothed up, timing off the frame counter and the drip site
+                placed by a seeded PRNG, so it never touches the wall clock. Reduced motion drops one large heap on the
+                centre, stabilises it in full, and paints the deterministic four-colour fractal once.
               </p>
             </div>
           </div>
