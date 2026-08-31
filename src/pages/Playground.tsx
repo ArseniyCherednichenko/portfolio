@@ -81,6 +81,7 @@ import { Orb } from '../components/Orb'
 import { Accordion } from '../components/Accordion'
 import { ElasticSlider } from '../components/ElasticSlider'
 import { RangeSlider } from '../components/RangeSlider'
+import { Wheel } from '../components/Wheel'
 import { Knob } from '../components/Knob'
 import { Switch } from '../components/Switch'
 import { Select, type SelectOption } from '../components/Select'
@@ -1558,6 +1559,7 @@ export default function Playground() {
   const [reduce, setReduce] = useState(false)
   const [volume, setVolume] = useState(62)
   const [priceRange, setPriceRange] = useState<[number, number]>([35, 80])
+  const [wheelCity, setWheelCity] = useState('Berlin')
   const [island, setIsland] = useState<IslandActivity>('music')
   const [sheetOpen, setSheetOpen] = useState(false)
   const { openShortcuts } = useShortcuts()
@@ -4014,6 +4016,22 @@ export default function Playground() {
                   value={priceRange}
                   onChange={setPriceRange}
                   format={(v) => `$${Math.round(v)}`}
+                />
+              </div>
+            </Experiment>
+          </Reveal>
+
+          <Reveal>
+            <Experiment
+              name="Wheel picker"
+              note="The iOS date-picker wheel, built as its own control. Grab the barrel and spin it; it tracks your finger, then carries on a flick and snaps to the nearest row. The rows sit on a real cylinder — projected honestly, so the centre row is at natural size while its neighbours foreshorten and fade — framed by a lit selection window. Spin the mouse wheel to step, or focus it and use the arrows, Page keys, and Home/End. A true role=listbox with an aria-activedescendant and a selected option. Reduced motion drops the flick and the eased settle, so every change lands instantly on its row, while the barrel's shape stays."
+            >
+              <div className="w-full max-w-[280px]">
+                <Wheel
+                  label="City"
+                  options={['Berlin', 'London', 'Lisbon', 'Amsterdam', 'Copenhagen', 'Vienna', 'Zurich', 'Tallinn', 'Reykjavik', 'Tokyo']}
+                  value={wheelCity}
+                  onChange={setWheelCity}
                 />
               </div>
             </Experiment>
