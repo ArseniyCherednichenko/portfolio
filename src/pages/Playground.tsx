@@ -112,6 +112,7 @@ import { Lanyard } from '../components/Lanyard'
 import { Turntable } from '../components/Turntable'
 import { Harmonograph } from '../components/Harmonograph'
 import { Abacus } from '../components/Abacus'
+import { EuclidRing } from '../components/EuclidRing'
 import { EtchASketch } from '../components/EtchASketch'
 import { Ballpit } from '../components/Ballpit'
 import { Cloth } from '../components/Cloth'
@@ -4786,6 +4787,37 @@ export default function Playground() {
                 way the real instrument works, or focus a rod and drive its digit straight from the arrow keys — each rod
                 is a real spinbutton that reads its value to a screen reader. Reduced motion drops the bead springs for a
                 clean snap; it stays a fully usable, fully labelled instrument.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH EUCLIDEAN SEQUENCER */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 py-12 sm:px-10">
+              <div className="text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Keep time</span>
+                <p className="mx-auto mt-3 max-w-md text-lg font-medium text-white/85 sm:text-xl">
+                  Spread a few beats evenly around the circle. Press play and hear the pattern.
+                </p>
+              </div>
+              <EuclidRing className="mt-10" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Euclidean sequencer</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                A rhythm machine built on one small idea: to place a number of onsets as evenly as whole steps allow, put
+                a beat on step i whenever (i times the onset count) modulo the step count is less than the onset count.
+                That closed form is the Euclidean rhythm E(k, n), and it turns out to generate a startling share of the
+                world's traditional figures — the Cuban tresillo and cinquillo, the son clave, a Bulgarian
+                ruchenitza, the West African bembé — so the ring opens on real music, not an abstraction. Set how many
+                onsets to spread across how many steps and the pattern re-solves live; spin the rotation to walk the same
+                figure round the circle, or tap any step to bend it off the pure set by hand. Press play and a hand
+                sweeps the ring at the tempo you set, lighting each onset as it lands; turn on sound for a short blip per
+                beat, with the downbeat pitched up. Every step is a real toggle carrying its onset-or-rest state, the four
+                knobs are keyboard-driven spinbuttons, and a live region reads the current figure. Reduced motion snaps
+                the hand between steps and drops the flashes; the rhythm still plays and every state stays legible.
               </p>
             </div>
           </div>
