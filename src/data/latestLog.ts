@@ -27,6 +27,7 @@ export interface LogHeadline {
 }
 
 export const LATEST_LOG: LogHeadline[] = [
+  { title: 'A Wheel picker — the iOS date-picker wheel built as its own control: a barrel of options you spin, tracking your finger and carrying on a flick before snapping to the nearest row, the rows curving away on a real cylinder projected honestly. Drag, mouse-wheel, or keyboard; a true role=listbox, and reduced motion drops only the flick', tag: 'Component' },
   { title: 'A Sandpile — the Abelian sandpile of 1987, the original toy of self-organised criticality: grains pile up until a fourth tips the stack, and the collapse cascades outward as an avalanche of no typical size. Press or drag to pour your own; reduced motion paints the deterministic four-colour fractal', tag: 'Component' },
   { title: 'A RangeSlider — the elastic slider\'s interval sibling: two thumbs bounding a lit span, never crossing, a value bubble springing above whichever you hold and each keyboard-driven on its own', tag: 'Component' },
   { title: 'A Waveform — the voice-memo transport as an interaction study: a seeded speech-shaped waveform that colours in from the left as the playhead sweeps, click or drag to seek, hover to read the time. A real role=slider, keyboard-driven; reduced motion drops only the flourish', tag: 'Component' },
@@ -36,5 +37,4 @@ export const LATEST_LOG: LogHeadline[] = [
   { title: 'A keyboard page — the site\'s go-chords lifted out of a help dialog into a real, playable on-screen keyboard where every lit cap is a working link', tag: 'Page' },
   { title: 'A Langton\'s ant — the smallest honest argument for emergence, generalised to a turmite: one walker, a two-line rule, and order that simply arrives', tag: 'Component' },
   { title: 'A Julia set — the escape-time fractal whose constant follows the cursor, its infinitely crinkled coastline re-forming live as the point under the pointer becomes c', tag: 'Component' },
-  { title: 'An Etch A Sketch — the aluminium-powder toy, drawn with two knobs and no lifting the pen, so every picture is a single unbroken line; shake to erase', tag: 'Component' },
 ]
