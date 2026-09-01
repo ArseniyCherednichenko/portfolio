@@ -16,6 +16,7 @@ const Reel = lazy(() => import('./pages/Reel'))
 const Writing = lazy(() => import('./pages/Writing'))
 const WritingDetail = lazy(() => import('./pages/WritingDetail'))
 const Now = lazy(() => import('./pages/Now'))
+const Uses = lazy(() => import('./pages/Uses'))
 const Toolkit = lazy(() => import('./pages/Toolkit'))
 const WorkDetail = lazy(() => import('./pages/WorkDetail'))
 const Contact = lazy(() => import('./pages/Contact'))
@@ -51,6 +52,7 @@ export default function App() {
         <Route path="writing" element={<Writing />} />
         <Route path="writing/:slug" element={<WritingDetail />} />
         <Route path="now" element={<Now />} />
+        <Route path="uses" element={<Uses />} />
         <Route path="toolkit" element={<Toolkit />} />
         <Route path="work/:slug" element={<WorkDetail />} />
         <Route path="contact" element={<Contact />} />

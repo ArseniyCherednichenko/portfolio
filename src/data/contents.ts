@@ -31,6 +31,7 @@ export const CONTENTS: ContentSection[] = [
       { to: '/', title: 'Home', blurb: 'The landing page — the hero, the range, the work.', chord: 'h' },
       { to: '/about', title: 'About', blurb: 'The story, the path, the principles behind the work.', chord: 'a' },
       { to: '/now', title: 'Now', blurb: 'What I am focused on, learning, and building this season.', chord: 'n' },
+      { to: '/uses', title: 'Uses', blurb: 'The setup behind the work — the everyday stack and the desk it happens at.', chord: 'u' },
     ],
   },
   {
