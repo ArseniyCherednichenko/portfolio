@@ -27,6 +27,7 @@ export interface LogHeadline {
 }
 
 export const LATEST_LOG: LogHeadline[] = [
+  { title: 'A Halftone — the oldest trick in print made a cursor-lit pointer field. No photograph underneath, only a brightness field of a few soft lights drifting on their own paths, sampled onto a regular dot screen so each dot swells and warms toward the light and starves to a pinprick in the shadows between. The cursor is a light of its own, flaring on press; reduced motion screens one frozen still', tag: 'Component' },
   { title: 'A Uses page — "The setup", the lived-in companion to the now page and the uses.tech convention in the site\'s own voice: the everyday stack, the tools that make this exact site, and the desk it happens at. Distinct from the toolkit (the full stack, catalogued), honest throughout — the real drivers are named, the personal gear left as clearly-marked blanks rather than invented', tag: 'Page' },
   { title: 'A Euclidean sequencer — a rhythm machine drawn as a ring, built on one line of maths: to spread k beats as evenly as n steps allow, put an onset on step i whenever (i·k) mod n is under k. That closed form generates the tresillo, the son clave, a bembé; set onsets against steps, spin the rotation, press play and hear the pattern sweep. Every step a real toggle, every knob keyboard-driven', tag: 'Component' },
   { title: 'A Wheel picker — the iOS date-picker wheel built as its own control: a barrel of options you spin, tracking your finger and carrying on a flick before snapping to the nearest row, the rows curving away on a real cylinder projected honestly. Drag, mouse-wheel, or keyboard; a true role=listbox, and reduced motion drops only the flick', tag: 'Component' },
@@ -36,5 +37,4 @@ export const LATEST_LOG: LogHeadline[] = [
   { title: 'Preferences — a site-wide motion switch, handed to the visitor. One MotionConfig above the whole tree drives all ~180 hand-built components at once; a small dialog offers System, Calm, or Full, remembered per browser and reachable from the nav, the command palette, and the mobile drawer', tag: 'Component' },
   { title: 'A ParticleText — a word with no body of its own, only the shape a free swarm settles into: particles spring home from noise, warm to lime, and scatter under the cursor before healing behind you', tag: 'Component' },
   { title: 'A Mandelbrot set — the map of every Julia set, built to be fallen into: click, scroll, or press to dive as the iteration budget grows with the zoom and the coastline keeps resolving', tag: 'Component' },
-  { title: 'A keyboard page — the site\'s go-chords lifted out of a help dialog into a real, playable on-screen keyboard where every lit cap is a working link', tag: 'Page' },
 ]
