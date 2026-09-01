@@ -27,6 +27,7 @@ export interface LogHeadline {
 }
 
 export const LATEST_LOG: LogHeadline[] = [
+  { title: 'A Uses page — "The setup", the lived-in companion to the now page and the uses.tech convention in the site\'s own voice: the everyday stack, the tools that make this exact site, and the desk it happens at. Distinct from the toolkit (the full stack, catalogued), honest throughout — the real drivers are named, the personal gear left as clearly-marked blanks rather than invented', tag: 'Page' },
   { title: 'A Euclidean sequencer — a rhythm machine drawn as a ring, built on one line of maths: to spread k beats as evenly as n steps allow, put an onset on step i whenever (i·k) mod n is under k. That closed form generates the tresillo, the son clave, a bembé; set onsets against steps, spin the rotation, press play and hear the pattern sweep. Every step a real toggle, every knob keyboard-driven', tag: 'Component' },
   { title: 'A Wheel picker — the iOS date-picker wheel built as its own control: a barrel of options you spin, tracking your finger and carrying on a flick before snapping to the nearest row, the rows curving away on a real cylinder projected honestly. Drag, mouse-wheel, or keyboard; a true role=listbox, and reduced motion drops only the flick', tag: 'Component' },
   { title: 'A Sandpile — the Abelian sandpile of 1987, the original toy of self-organised criticality: grains pile up until a fourth tips the stack, and the collapse cascades outward as an avalanche of no typical size. Press or drag to pour your own; reduced motion paints the deterministic four-colour fractal', tag: 'Component' },
@@ -36,5 +37,4 @@ export const LATEST_LOG: LogHeadline[] = [
   { title: 'A ParticleText — a word with no body of its own, only the shape a free swarm settles into: particles spring home from noise, warm to lime, and scatter under the cursor before healing behind you', tag: 'Component' },
   { title: 'A Mandelbrot set — the map of every Julia set, built to be fallen into: click, scroll, or press to dive as the iteration budget grows with the zoom and the coastline keeps resolving', tag: 'Component' },
   { title: 'A keyboard page — the site\'s go-chords lifted out of a help dialog into a real, playable on-screen keyboard where every lit cap is a working link', tag: 'Page' },
-  { title: 'A Langton\'s ant — the smallest honest argument for emergence, generalised to a turmite: one walker, a two-line rule, and order that simply arrives', tag: 'Component' },
 ]
