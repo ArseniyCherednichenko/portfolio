@@ -118,6 +118,7 @@ import { Ballpit } from '../components/Ballpit'
 import { Cloth } from '../components/Cloth'
 import { Kaleidoscope } from '../components/Kaleidoscope'
 import { Contour } from '../components/Contour'
+import { Halftone } from '../components/Halftone'
 import { Truchet } from '../components/Truchet'
 import { Morphogen } from '../components/Morphogen'
 import { Phyllotaxis } from '../components/Phyllotaxis'
@@ -3064,6 +3065,34 @@ export default function Playground() {
                 cool white to lime. The pointer is a hill of its own, easing under the cursor and swelling while it hovers,
                 so a bright lime bullseye rises and the surrounding land bends around it. One canvas, one loop, no
                 per-line state. Reduced motion contours the frozen field once into a calm, still relief.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH HALFTONE — a print dot screen lit by the cursor */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="relative h-[440px] overflow-hidden rounded-3xl border border-white/10 bg-[#09090b]">
+              <Halftone />
+              <div className="pointer-events-none absolute inset-x-0 top-8 z-10 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Halftone screen</span>
+                <p className="mx-auto mt-3 max-w-md px-6 text-lg font-medium text-white/90 sm:text-xl">
+                  Move across the screen. The dots swell and warm toward the light you carry.
+                </p>
+              </div>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Halftone</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The oldest trick in print, made a pointer field. A photograph on a page holds no grey ink — it is a regular
+                lattice of solid dots that grow where the picture is light and shrink to nothing where it is dark, and the
+                eye fuses them back into tone. There is no photograph under this one, only a scalar brightness field of a
+                few soft lights drifting on their own slow paths, sampled onto the dot screen so each dot swells and warms
+                toward the light and starves to a pinprick in the shadows between. The pointer is a light of its own: it
+                eases under the cursor and flares when you press, opening a bright lime bloom the surrounding dots grow to
+                meet, the way a spotlight rakes across a printed screen. One canvas, one loop, no per-dot state. Reduced
+                motion screens the frozen field once into a calm, still tone.
               </p>
             </div>
           </div>
