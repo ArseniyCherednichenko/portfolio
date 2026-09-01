@@ -84,6 +84,7 @@ import { RangeSlider } from '../components/RangeSlider'
 import { Wheel } from '../components/Wheel'
 import { Knob } from '../components/Knob'
 import { Switch } from '../components/Switch'
+import { SegmentedControl } from '../components/SegmentedControl'
 import { Select, type SelectOption } from '../components/Select'
 import { Combobox, type ComboOption } from '../components/Combobox'
 import { TagInput } from '../components/TagInput'
@@ -1562,6 +1563,7 @@ export default function Playground() {
   const [volume, setVolume] = useState(62)
   const [priceRange, setPriceRange] = useState<[number, number]>([35, 80])
   const [wheelCity, setWheelCity] = useState('Berlin')
+  const [segView, setSegView] = useState('grid')
   const [island, setIsland] = useState<IslandActivity>('music')
   const [sheetOpen, setSheetOpen] = useState(false)
   const { openShortcuts } = useShortcuts()
@@ -4131,6 +4133,64 @@ export default function Playground() {
               note="The segmented passcode box the entry family was missing. Type and focus hands itself forward; Backspace clears and steps back; paste a whole code and it scatters across the empty cells. Each digit springs in, the focused cell blinks a lime caret while empty, and a full code lifts the row in a lime-lit stagger — then flips to a verified chip. A real per-cell input, arrow/Home/End navigable and autofill-ready. Reduced motion drops the pop and the blink."
             >
               <CodeInputDemo />
+            </Experiment>
+          </Reveal>
+
+          <Reveal>
+            <Experiment
+              name="Segmented control"
+              note="The picker the family was missing: not the Select or Combobox that hide their options until you open them, but the one where every choice stays on screen and you pick between a small, fixed few. One lime pill glides from the old segment to the new and morphs its width to fit each label — measured from the live buttons, so any length lines up — never blinking between them. A real role=radiogroup: one tab stop, the arrows and Home/End moving selection and focus together and wrapping at the ends, the way a native radio group does. Pick a layout and the preview below rearranges. Reduced motion drops the glide for an instant, legible move."
+            >
+              <div className="flex w-full max-w-[340px] flex-col items-center gap-6">
+                <SegmentedControl
+                  label="Layout"
+                  value={segView}
+                  onChange={setSegView}
+                  options={[
+                    {
+                      value: 'grid',
+                      label: 'Grid',
+                      icon: (
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                          <rect x="3" y="3" width="7" height="7" rx="1" /><rect x="14" y="3" width="7" height="7" rx="1" /><rect x="3" y="14" width="7" height="7" rx="1" /><rect x="14" y="14" width="7" height="7" rx="1" />
+                        </svg>
+                      ),
+                    },
+                    {
+                      value: 'list',
+                      label: 'List',
+                      icon: (
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                          <line x1="8" y1="6" x2="21" y2="6" /><line x1="8" y1="12" x2="21" y2="12" /><line x1="8" y1="18" x2="21" y2="18" /><line x1="3" y1="6" x2="3.01" y2="6" /><line x1="3" y1="12" x2="3.01" y2="12" /><line x1="3" y1="18" x2="3.01" y2="18" />
+                        </svg>
+                      ),
+                    },
+                    {
+                      value: 'columns',
+                      label: 'Columns',
+                      icon: (
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                          <rect x="4" y="3" width="6" height="18" rx="1" /><rect x="14" y="3" width="6" height="18" rx="1" />
+                        </svg>
+                      ),
+                    },
+                  ]}
+                />
+                <div
+                  className={`grid w-full gap-2 ${
+                    segView === 'grid' ? 'grid-cols-3' : segView === 'columns' ? 'grid-cols-2' : 'grid-cols-1'
+                  }`}
+                >
+                  {Array.from({ length: 6 }).map((_, i) => (
+                    <motion.div
+                      key={i}
+                      layout
+                      transition={{ type: 'spring', stiffness: 420, damping: 36 }}
+                      className={`rounded-lg border border-white/10 bg-white/[0.03] ${segView === 'list' ? 'h-7' : 'h-12'}`}
+                    />
+                  ))}
+                </div>
+              </div>
             </Experiment>
           </Reveal>
         </div>
