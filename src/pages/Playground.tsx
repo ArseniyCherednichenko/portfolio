@@ -112,6 +112,7 @@ import { InfiniteScroll, type InfiniteScrollItem } from '../components/InfiniteS
 import { Lanyard } from '../components/Lanyard'
 import { Turntable } from '../components/Turntable'
 import { Harmonograph } from '../components/Harmonograph'
+import { Spirograph } from '../components/Spirograph'
 import { Abacus } from '../components/Abacus'
 import { EuclidRing } from '../components/EuclidRing'
 import { EtchASketch } from '../components/EtchASketch'
@@ -4588,6 +4589,36 @@ export default function Playground() {
                 turntable next door: not an object with momentum but a deterministic plotter — the same seed always draws
                 the same plate. Click the plate or the button to hang new pendulums. Reduced motion lays the finished
                 figure down in one frame.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH SPIROGRAPH */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 py-12 sm:px-10">
+              <div className="text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Drive</span>
+                <p className="mx-auto mt-3 max-w-md text-lg font-medium text-white/85 sm:text-xl">
+                  Pick the gears, set the pen, and watch the wheel roll the figure out.
+                </p>
+              </div>
+              <Spirograph className="mt-10" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Spirograph</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The geared toy, kept honest to its maths. A wheel of radius r rolls without slipping around the inside of
+                a fixed ring R, and a pen at distance a from the wheel's centre traces a hypotrochoid —
+                x(θ) = (R−r)·cos θ + a·cos(((R−r)/r)·θ), y(θ) = (R−r)·sin θ − a·sin(((R−r)/r)·θ). With integer teeth the
+                curve closes exactly, after θ = 2π·r/gcd(R,r); the ratio R : r sets the lobe count and the pen offset sets
+                how sharp they are — so changing a control changes the figure for a reason, not at random. The kin of the
+                Harmonograph next door, but where that is a seeded plotter you can only reroll, this one you drive: choose
+                the gears and the pen and the same rule redraws. The path is pre-sampled once per change, then a rolling
+                wheel and its spoke lay it down, glowing where it crosses itself because the trace is composited additively.
+                One canvas, one loop, DPR-capped. Reduced motion draws the finished figure in a single frame, no rolling
+                wheel — and a control change simply redraws the new one whole.
               </p>
             </div>
           </div>
