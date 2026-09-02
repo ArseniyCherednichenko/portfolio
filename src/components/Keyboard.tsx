@@ -49,6 +49,7 @@ export const GO_TARGETS: GoTarget[] = [
   { key: 'f', to: '/taste', label: 'Taste' },
   { key: 'd', to: '/design', label: 'Design language' },
   { key: 'r', to: '/resume', label: 'Résumé' },
+  { key: 'o', to: '/bio', label: 'Bio' },
   { key: 's', to: '/terminal', label: 'Terminal' },
   { key: 'b', to: '/changelog', label: 'Changelog' },
   { key: 'i', to: '/contents', label: 'Index' },

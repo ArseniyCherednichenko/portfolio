@@ -46,6 +46,7 @@ const GROUPS: FooterGroup[] = [
       { to: '/design', label: 'Design language' },
       { to: '/specimen', label: 'Type specimen' },
       { to: '/resume', label: 'Résumé' },
+      { to: '/bio', label: 'Bio' },
     ],
   },
   {

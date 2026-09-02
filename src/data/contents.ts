@@ -73,6 +73,7 @@ export const CONTENTS: ContentSection[] = [
     entries: [
       { to: '/contact', title: 'Contact', blurb: 'Reach me — email, availability, and where else I am.', chord: 'c' },
       { to: '/resume', title: 'Résumé', blurb: 'A one-page CV, laid out to print cleanly.', chord: 'r' },
+      { to: '/bio', title: 'Bio', blurb: 'The short version — copyable bios and fast facts, for when someone needs to introduce me.', chord: 'o' },
     ],
   },
   {
