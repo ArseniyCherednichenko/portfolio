@@ -39,6 +39,7 @@ import { ProfileCard } from '../components/ProfileCard'
 import { PixelTransition } from '../components/PixelTransition'
 import { FlipCard } from '../components/FlipCard'
 import { PinCard } from '../components/PinCard'
+import { Ticket } from '../components/Ticket'
 import { ScratchReveal } from '../components/ScratchReveal'
 import { CompareSlider } from '../components/CompareSlider'
 import { Folder } from '../components/Folder'
@@ -2381,6 +2382,36 @@ export default function Playground() {
                 resize, so the wiring holds at any width; the travelling light is a single SVG gradient whose endpoints
                 sweep across, so no per-frame React state runs. Wires the About &ldquo;How it fits together&rdquo; hub.
                 Reduced motion holds every beam as a faint resting line.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH TICKET */}
+        <Reveal>
+          <div id="ticket" data-experiment="Ticket" className="mt-12 scroll-mt-32">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 py-12 sm:px-10">
+              <div className="text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Tear</span>
+                <p className="mx-auto mt-3 max-w-md text-lg font-medium text-white/85 sm:text-xl">
+                  Move across the pass to catch the foil, then tear the stub off along the perforation.
+                </p>
+              </div>
+              <Ticket className="mt-10" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Ticket</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                An event pass rebuilt in DOM and CSS, and the one detail that makes a ticket read as a ticket: the
+                perforation, and the tear. The two notches are punched clean through the card &mdash; a mask-image of two
+                radial gradients, so the page shows through the holes rather than a faked shadow &mdash; and a dashed seam
+                runs between them. The whole pass tilts toward the cursor with a holographic foil that sweeps as it moves,
+                soft-light blended so it reads as printed film, not a white flare. Press the stub and it springs off along
+                the seam and the body stamps &ldquo;admitted&rdquo;. Distinct from its neighbours in this family: the tilt
+                card leans, the glare card catches light, the flip card turns, the scratch card is rubbed away &mdash; this
+                one comes apart. The copy is a personal beat, not a client: admit one, hand-built in Berlin. The tear is a
+                real button with a live announcement, so it works by keyboard alone; reduced motion drops the tilt, the
+                foil drift and the arc, and the stub simply leaves and returns.
               </p>
             </div>
           </div>
