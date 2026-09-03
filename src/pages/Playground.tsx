@@ -147,6 +147,7 @@ import { Voronoi } from '../components/Voronoi'
 import { CirclePacking } from '../components/CirclePacking'
 import { Aggregate } from '../components/Aggregate'
 import { Superformula } from '../components/Superformula'
+import { TimesTable } from '../components/TimesTable'
 import { Cyclic } from '../components/Cyclic'
 import { Sandpile } from '../components/Sandpile'
 import { Sortable } from '../components/Sortable'
@@ -3685,6 +3686,47 @@ export default function Playground() {
                 resize-driven, each ring a few hundred sampled points against a smooth frame counter and no wall clock.
                 Reduced motion settles on one pleasing symmetry and paints a single still bloom, and the pointer does not
                 drive it.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH TIMES TABLE — modular multiplication on a circle, drawn as string art you drive */}
+        <Reveal>
+          <div id="times-table" data-experiment="Times table" className="mt-12 scroll-mt-32">
+            <div className="relative h-[460px] overflow-hidden rounded-3xl border border-white/10 bg-[#040404]">
+              <TimesTable className="h-full w-full" />
+              <div className="pointer-events-none absolute inset-x-0 top-8 z-10 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Times table</span>
+                <p className="mx-auto mt-3 max-w-md px-6 text-lg font-medium text-white/90 sm:text-xl">
+                  Thread every pin to its multiple. Drag across to set the multiplier, up and down to add pins.
+                </p>
+              </div>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Times table</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The single most surprising picture in elementary arithmetic, drawn as thread wound between pins. Space a
+                few hundred points evenly around a circle and number them zero, one, two, and so on; then, for a chosen
+                multiplier k, run a straight thread from every point i across to point i times k, wrapping past the end of
+                the ring — that is, modulo the number of pins. That is the whole recipe: no curve is ever drawn, only
+                straight chords. And yet the thread does not pile into a mess — it leaves a bright edge, an envelope, and
+                that envelope is a cardioid at k of two, a nephroid at three, and a chain of one-less-than-k cusps for
+                every whole number after, the very epicycloids a coin rolling around a coin would trace. Slide the
+                multiplier off the whole numbers and the cusps unstitch and re-stitch, so the figure is as alive between
+                the shapes as it is on them. It reads as string art because that is exactly what it is: nails round a
+                ring, one length of thread, a rule for where it goes next — the almost-free way people have drawn caustics
+                on board for a century. The thread is tinted cool teal near point zero and warms to the site's lime as it
+                travels round, so the winding order stays legible, and the chords are laid in additively so where many
+                cross they burn brighter and the envelope glows on its own. Left alone the multiplier climbs slowly
+                through the whole numbers and back, blooming one cusp then two then a whole rosette; take the pointer and
+                you drive it directly — across for the multiplier, up and down to add or thin the pins — and the caustic
+                re-stitches under your finger, easing back to its own slow climb when you let go. Kin to the Spirograph,
+                Harmonograph and Superformula elsewhere in this family, all of them one closed rule sampled densely — but
+                where those solve a smooth path, this draws nothing but line segments and lets their crossings do the
+                drawing. One canvas, one rAF loop, DPR-capped and resize-driven, a couple of hundred chords a frame
+                against a smooth frame counter and no wall clock. Reduced motion settles on one pleasing multiplier and
+                paints a single still figure, and the pointer does not drive it.
               </p>
             </div>
           </div>
