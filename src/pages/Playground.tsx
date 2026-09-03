@@ -144,6 +144,7 @@ import { Sorter } from '../components/Sorter'
 import { Maze } from '../components/Maze'
 import { WaveCollapse } from '../components/WaveCollapse'
 import { Voronoi } from '../components/Voronoi'
+import { CirclePacking } from '../components/CirclePacking'
 import { Aggregate } from '../components/Aggregate'
 import { Cyclic } from '../components/Cyclic'
 import { Sandpile } from '../components/Sandpile'
@@ -3568,6 +3569,44 @@ export default function Playground() {
                 a soft core glows where the nearest distance falls to zero. Painted to a grid-sized buffer and smoothed up
                 to full width, so the hot loop weighs about twelve thousand cells against thirty seeds. No wall clock and
                 no per-frame randomness; reduced motion paints one settled arrangement and holds it still.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH CIRCLE PACKING — greedy space-filling geometry you carve holes into */}
+        <Reveal>
+          <div id="circle-packing" data-experiment="Circle packing" className="mt-12 scroll-mt-32">
+            <div className="relative h-[460px] overflow-hidden rounded-3xl border border-white/10 bg-[#040404]">
+              <CirclePacking className="h-full w-full" />
+              <div className="pointer-events-none absolute inset-x-0 top-8 z-10 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Circle packing</span>
+                <p className="mx-auto mt-3 max-w-md px-6 text-lg font-medium text-white/90 sm:text-xl">
+                  Discs grow until they touch, then freeze. Press or drag to carve a hole and watch it heal.
+                </p>
+              </div>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Circle packing</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The other way to fill a plane, and the counterpart to the Voronoi above it: where that partitions space
+                into cells that share every edge, this one leaves the gaps and lets them fill themselves. One rule makes
+                the whole figure. A seed is dropped at a random point that falls clear of every circle already down, then
+                it grows outward a little each frame until its rim just kisses a neighbour or the wall, and there it
+                freezes; do that forever and the plane packs the way soap froth or a bag of oranges does — big discs where
+                there was room, a lace of ever-smaller ones crammed into the curved slivers between them, none of them
+                overlapping, ever. So the size distribution you see fall out — a few large, many middling, a dust of tiny
+                — is a property of the greedy rule, not anything tuned by hand, and it reads as a clear hierarchy because a
+                tint runs by radius: the smallest discs sit cool teal, the largest warm to lime, and a freshly frozen one
+                blooms in over a few frames rather than snapping on. Distinct from the Phyllotaxis spiral elsewhere in this
+                family, which lays equal dots on a golden-angle lattice — this one chooses its own scales. The cursor
+                carves: press or drag and the circles under the pointer are lifted out, and the seeder immediately notices
+                the new room and grows the packing back into the hole, smaller and denser than before, so you can draw slow
+                trails of froth that heal behind you. Growth is arrested by an all-pairs distance test over only the
+                handful of circles still growing, and seeds are placed by nearest-edge rejection, so the cost falls as the
+                field settles; one canvas, one rAF loop, DPR-capped, no per-circle React state and no wall clock. Reduced
+                motion computes a complete packing once, in full, and paints it still — and the cursor does not carve,
+                because there is no regrowth to answer it.
               </p>
             </div>
           </div>
