@@ -146,6 +146,7 @@ import { WaveCollapse } from '../components/WaveCollapse'
 import { Voronoi } from '../components/Voronoi'
 import { CirclePacking } from '../components/CirclePacking'
 import { Aggregate } from '../components/Aggregate'
+import { Superformula } from '../components/Superformula'
 import { Cyclic } from '../components/Cyclic'
 import { Sandpile } from '../components/Sandpile'
 import { Sortable } from '../components/Sortable'
@@ -3646,6 +3647,44 @@ export default function Playground() {
                 than repainting; a fixed integer hash places every step and launch, so it never touches the wall clock
                 and grows the same lace each load. Reduced motion grows one crystal to completion in a single pass and
                 paints it once.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH SUPERFORMULA — one equation, drawn as a living rose window you drive */}
+        <Reveal>
+          <div id="superformula" data-experiment="Superformula" className="mt-12 scroll-mt-32">
+            <div className="relative h-[460px] overflow-hidden rounded-3xl border border-white/10 bg-[#040404]">
+              <Superformula className="h-full w-full" />
+              <div className="pointer-events-none absolute inset-x-0 top-8 z-10 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Superformula</span>
+                <p className="mx-auto mt-3 max-w-md px-6 text-lg font-medium text-white/90 sm:text-xl">
+                  Drag across to set the symmetry, up and down to sharpen the petals. Let go and it breathes on its own.
+                </p>
+              </div>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Superformula</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                One equation, drawn over and over, that turns two numbers into every shape between a circle and a
+                starfish. Johan Gielis's superformula returns a radius for each angle, and that single line is the whole
+                generator: sweep the parameter m — the symmetry, how many lobes the figure has — from three to sixteen and
+                the outline walks unbroken through triangles, flowers, gears, stars and rosettes; push the other knob, n1,
+                and those lobes swell into soft petals or draw down to needle spikes. Two knobs, and out of them falls the
+                vocabulary of shapes that turns up everywhere in nature, from starfish to diatoms to flower heads, none of
+                it shaped by hand. Here it is drawn not once but as a bloom of nested rings — each a supershape at a
+                slightly turned phase and a slightly evolved symmetry, tinted teal at the core and warming to the site's
+                lime at the rim — so the figure reads as a living rose window rather than a single outline, the rings
+                counter-rotating so it is never still. Left alone the symmetry breathes slowly up and down on its own slow
+                cycle; take the pointer and you take the two knobs directly — move across to drive m, move up and down to
+                drive n1 — and the whole bloom morphs under your hand, easing toward wherever you point and drifting back
+                to its own breathing when you let go. Kin to the Phyllotaxis, Spirograph and Harmonograph elsewhere in this
+                family, all of them one closed form sampled densely — but where those trace a path that winds through the
+                plane, this one solves a radius per angle and closes a curve. One canvas, one rAF loop, DPR-capped and
+                resize-driven, each ring a few hundred sampled points against a smooth frame counter and no wall clock.
+                Reduced motion settles on one pleasing symmetry and paints a single still bloom, and the pointer does not
+                drive it.
               </p>
             </div>
           </div>
