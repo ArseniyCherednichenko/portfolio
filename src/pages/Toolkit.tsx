@@ -8,6 +8,7 @@ import { MagneticButton } from '../components/MagneticButton'
 import { AnimatedCounter } from '../components/AnimatedCounter'
 import { Beams } from '../components/Beams'
 import { Gravity } from '../components/Gravity'
+import { StackConstellation } from '../components/StackConstellation'
 import { Seo } from '../components/Seo'
 import { TOOLKIT, TOOL_COUNT, SKILLS, type Tool } from '../data/toolkit'
 
@@ -97,6 +98,29 @@ export default function Toolkit() {
         </motion.div>
         </div>
       </header>
+
+      {/* THE STACK, CONNECTED — a living overview map before the detail. The
+          disciplines sit on a slow ring; each tool is tethered to the one it
+          belongs to, so the picture is the shape of how the work connects, not a
+          flat wall of logos. The grouped notes below then read each tool in turn. */}
+      <section className="mx-auto w-full max-w-4xl px-6 pb-4">
+        <Reveal>
+          <div className="flex items-end justify-between gap-6">
+            <div>
+              <h2 className="font-display text-2xl font-bold tracking-tight sm:text-3xl">The stack, connected.</h2>
+              <p className="mt-3 max-w-md text-sm leading-relaxed text-white/45">
+                One person across the whole of it — language, interface, backend, craft. Move the pointer through the
+                map and the nearest tools lean in.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+        <Reveal delay={0.08}>
+          <div className="mt-6 overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30">
+            <StackConstellation className="h-[360px] sm:h-[440px]" />
+          </div>
+        </Reveal>
+      </section>
 
       {/* GROUPS */}
       <div className="mx-auto w-full max-w-4xl px-6 pb-8">
