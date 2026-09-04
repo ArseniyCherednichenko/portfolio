@@ -194,7 +194,7 @@ const SECTIONS: Section[] = [
 function ShortcutsDialog({ open, onClose }: { open: boolean; onClose: () => void }) {
   const reduce = useReducedMotion()
   return (
-    <Modal open={open} onClose={onClose}>
+    <Modal open={open} onClose={onClose} label="Keyboard shortcuts">
       <div className="pr-8">
         <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[#DCF87C]/80">
           Keyboard

@@ -41,7 +41,7 @@ export function ContactProvider({ children }: { children: ReactNode }) {
 
 function ContactBody({ open, onClose }: { open: boolean; onClose: () => void }) {
   return (
-    <Modal open={open} onClose={onClose}>
+    <Modal open={open} onClose={onClose} label="Get in touch">
       <Eyebrow>Get in touch</Eyebrow>
       <h2 className="mt-3 font-display text-3xl font-bold tracking-tight">Let us talk.</h2>
       <p className="mt-3 max-w-sm leading-relaxed text-white/60">

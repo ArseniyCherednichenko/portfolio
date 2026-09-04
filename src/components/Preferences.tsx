@@ -156,7 +156,7 @@ function PreferencesDialog({
         : 'All motion is on across the whole site.'
 
   return (
-    <Modal open={open} onClose={onClose}>
+    <Modal open={open} onClose={onClose} label="Preferences">
       <Eyebrow>Preferences</Eyebrow>
       <h2 className="mt-3 font-display text-3xl font-bold tracking-tight">Tune the motion.</h2>
       <p className="mt-3 max-w-sm leading-relaxed text-white/60">

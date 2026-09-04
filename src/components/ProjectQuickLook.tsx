@@ -41,7 +41,7 @@ export function ProjectQuickLook({
   })
 
   return (
-    <Modal open={open} onClose={onClose}>
+    <Modal open={open} onClose={onClose} label={p ? `${p.title} — quick look` : 'Project quick look'}>
       {p && (
         <div>
           <motion.div {...item(0)} className="overflow-hidden rounded-2xl">

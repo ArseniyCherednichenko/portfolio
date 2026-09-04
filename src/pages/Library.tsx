@@ -429,7 +429,11 @@ export default function Library() {
       </main>
 
       {/* QUICK-LOOK MODAL */}
-      <Modal open={activeEntry !== null} onClose={closeModal}>
+      <Modal
+        open={activeEntry !== null}
+        onClose={closeModal}
+        label={activeEntry ? `${activeEntry.item.name} — component detail` : 'Component detail'}
+      >
         {activeEntry && (
           <QuickLook
             entry={activeEntry}
