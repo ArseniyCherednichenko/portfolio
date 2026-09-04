@@ -95,7 +95,7 @@ export const PROJECTS: Project[] = [
     status: 'Open source · in the open',
     blurb: 'An open-source, motion-led portfolio, built in public.',
     detail:
-      'This portfolio, and a working sample in its own right. React, Vite, strict TypeScript, Tailwind v4, and Framer Motion, with client-side routing across some thirty pages. Every animation is a component I built by hand: an aurora background, spotlight cards, magnetic buttons, an orbiting hero, a command palette, an interactive terminal, and well over a hundred and seventy more. It grows a little most days, in the open, so the commit history is part of the work.',
+      'This portfolio, and a working sample in its own right. React, Vite, strict TypeScript, Tailwind v4, and Framer Motion, with client-side routing across some thirty pages. Every animation is a component I built by hand: an aurora background, spotlight cards, magnetic buttons, an orbiting hero, a command palette, an interactive terminal, and close to two hundred more. It grows a little most days, in the open, so the commit history is part of the work.',
     stack: ['React', 'TypeScript', 'Tailwind v4', 'Framer Motion', 'Vite'],
     contributions: [
       {
@@ -106,7 +106,7 @@ export const PROJECTS: Project[] = [
       {
         area: 'Motion',
         detail:
-          'Over a hundred and seventy hand-built animation components, from ambient backgrounds to scroll-driven scenes, each one reduced-motion aware.',
+          'Close to two hundred hand-built animation components, from ambient backgrounds to scroll-driven scenes, each one reduced-motion aware.',
       },
       {
         area: 'Architecture',
@@ -146,7 +146,7 @@ export const PROJECTS: Project[] = [
       },
     ],
     highlights: [
-      'Over 170 hand-built motion components, no template',
+      'Close to 200 hand-built motion components, no template',
       'React, Vite, strict TypeScript, Tailwind v4, Framer Motion',
       'Reduced-motion aware, keyboard-reachable throughout',
       'Code-split routing across roughly thirty pages',
