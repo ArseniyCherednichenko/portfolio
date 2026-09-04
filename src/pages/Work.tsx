@@ -199,7 +199,7 @@ export default function Work() {
     <>
       <Seo
         title="Work"
-        description="Selected work from Arseniy Cherednichenko — a ledger of the products and case studies he has shipped, led by Guided."
+        description="Selected work from Arseniy Cherednichenko — a ledger of the products and case studies he has designed and shipped, each with a full write-up."
       />
       {/* INTRO */}
       <header className="mx-auto w-full max-w-4xl px-6 pb-12 pt-36 sm:pt-44">
