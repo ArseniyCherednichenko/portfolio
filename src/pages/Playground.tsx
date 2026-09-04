@@ -148,6 +148,7 @@ import { CirclePacking } from '../components/CirclePacking'
 import { Aggregate } from '../components/Aggregate'
 import { Superformula } from '../components/Superformula'
 import { TimesTable } from '../components/TimesTable'
+import { StickerPeel } from '../components/StickerPeel'
 import { Cyclic } from '../components/Cyclic'
 import { Sandpile } from '../components/Sandpile'
 import { Sortable } from '../components/Sortable'
@@ -2415,6 +2416,38 @@ export default function Playground() {
                 one comes apart. The copy is a personal beat, not a client: admit one, hand-built in Berlin. The tear is a
                 real button with a live announcement, so it works by keyboard alone; reduced motion drops the tilt, the
                 foil drift and the arc, and the stub simply leaves and returns.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        <Reveal>
+          <div id="sticker-peel" data-experiment="Sticker peel" className="mt-12 scroll-mt-32">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 py-12 sm:px-10">
+              <div className="text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Peel</span>
+                <p className="mx-auto mt-3 max-w-md text-lg font-medium text-white/85 sm:text-xl">
+                  Grab the bottom-right corner and drag it in. Let go past halfway to leave it open, or short to snap it flat.
+                </p>
+              </div>
+              <StickerPeel className="mx-auto mt-10 h-[360px] w-full max-w-md" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Sticker peel</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                A lime sticker laid flush on the surface, and the one gesture that makes a sticker read as a sticker: the
+                dog-ear. Grab the bottom-right corner and drag it toward the middle and it folds back like real vinyl
+                &mdash; the flap shows its paper backface, a curl of light catches the crease, and the folded corner casts
+                a softening shadow onto the line printed underneath, which reads through the gap the peel opens. The whole
+                fold is a single number: the face is a pentagon clipped by a forty-five-degree corner cut that grows as you
+                pull, and the flap is the mirror-image triangle that corner folds onto, both just clip-paths driven off one
+                motion value so the geometry stays exact with no canvas and no layout pass. A drag sets it one-to-one for a
+                direct feel; let go and a spring decides &mdash; past halfway it settles open, short of it snaps flat and
+                re-adheres. Distinct from its neighbours in this family: the scratch card is rubbed away, the pixel card
+                flips a face behind a grid flash, the ticket tears &mdash; this one folds the surface out of the way. The
+                copy is a personal beat, not a client: built by hand in Berlin. Tap it or press Enter to peel hands-free;
+                the revealed line is a real, selectable element always in the DOM, and reduced motion drops the spring, the
+                breathing and the drag for a plain toggle that shows or hides the note at a calm resting fold.
               </p>
             </div>
           </div>
