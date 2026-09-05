@@ -149,6 +149,7 @@ import { Aggregate } from '../components/Aggregate'
 import { Superformula } from '../components/Superformula'
 import { TimesTable } from '../components/TimesTable'
 import { StickerPeel } from '../components/StickerPeel'
+import { ParallaxCard, ParallaxLayer } from '../components/ParallaxCard'
 import { Cyclic } from '../components/Cyclic'
 import { Sandpile } from '../components/Sandpile'
 import { Sortable } from '../components/Sortable'
@@ -2448,6 +2449,100 @@ export default function Playground() {
                 copy is a personal beat, not a client: built by hand in Berlin. Tap it or press Enter to peel hands-free;
                 the revealed line is a real, selectable element always in the DOM, and reduced motion drops the spring, the
                 breathing and the drag for a plain toggle that shows or hides the note at a calm resting fold.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        <Reveal>
+          <div id="parallax-card" data-experiment="Parallax diorama" className="mt-12 scroll-mt-32">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 py-12 sm:px-10">
+              <div className="text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Depth</span>
+                <p className="mx-auto mt-3 max-w-md text-lg font-medium text-white/85 sm:text-xl">
+                  Move across the scene. Each layer drifts at its own depth, so the box gains real inside.
+                </p>
+              </div>
+              <ParallaxCard className="mx-auto mt-10 h-[380px] w-full max-w-md">
+                {/* Deep sky — barely moves, sits furthest back. */}
+                <ParallaxLayer depth={-1.2}>
+                  <div className="absolute inset-0 bg-gradient-to-b from-[#141a2e] via-[#0d1120] to-[#060608]" />
+                  <div className="absolute inset-x-0 bottom-0 h-2/5 bg-[radial-gradient(120%_80%_at_50%_100%,rgba(220,248,124,0.14),transparent_70%)]" />
+                </ParallaxLayer>
+                {/* Stars — a faint field, drifts a touch. */}
+                <ParallaxLayer depth={0.6}>
+                  {[
+                    ['12%', '18%', 2],
+                    ['28%', '30%', 1],
+                    ['44%', '14%', 1],
+                    ['62%', '24%', 2],
+                    ['78%', '16%', 1],
+                    ['88%', '34%', 1],
+                    ['20%', '46%', 1],
+                    ['70%', '44%', 1],
+                  ].map(([left, top, s], i) => (
+                    <span
+                      key={i}
+                      aria-hidden
+                      className="absolute rounded-full bg-white/70"
+                      style={{ left, top, width: (s as number) * 2, height: (s as number) * 2 }}
+                    />
+                  ))}
+                </ParallaxLayer>
+                {/* Distant skyline band. */}
+                <ParallaxLayer depth={1.6}>
+                  <svg viewBox="0 0 400 120" preserveAspectRatio="none" className="absolute inset-x-0 bottom-0 h-1/3 w-full">
+                    <path
+                      d="M0 120 V70 h24 v-14 h18 v20 h20 V52 h16 v34 h22 V64 h30 v-10 h14 v40 h26 V58 h18 v44 h34 V72 h22 v-8 h16 v40 h28 V60 h20 v50 h26 V78 h30 V120 Z"
+                      className="fill-[#0a0d18]"
+                    />
+                  </svg>
+                </ParallaxLayer>
+                {/* The Fernsehturm — Berlin's landmark, closer and drifting more. */}
+                <ParallaxLayer depth={3.2}>
+                  <div className="absolute inset-x-0 bottom-0 flex justify-center">
+                    <svg viewBox="0 0 60 200" className="h-[72%] w-auto">
+                      {/* antenna */}
+                      <rect x="29" y="8" width="2" height="34" className="fill-[#11151f]" />
+                      {/* sphere */}
+                      <circle cx="30" cy="52" r="12" className="fill-[#0e1220]" />
+                      <circle cx="30" cy="52" r="12" className="fill-none stroke-[#DCF87C]/40" strokeWidth="1" />
+                      <circle cx="26" cy="49" r="3" className="fill-[#DCF87C]/80" />
+                      {/* shaft */}
+                      <path d="M27 64 L33 64 L31.5 200 L28.5 200 Z" className="fill-[#11151f]" />
+                    </svg>
+                  </div>
+                </ParallaxLayer>
+                {/* Foreground plate — the title, closest, drifts most. */}
+                <ParallaxLayer depth={5} className="flex flex-col justify-between p-6">
+                  <div className="flex items-start justify-between">
+                    <span className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Home base</span>
+                    <span className="font-mono text-[9px] leading-none text-white/40">52.52&deg; N &middot; 13.40&deg; E</span>
+                  </div>
+                  <div>
+                    <h4 className="font-display text-4xl font-bold leading-none tracking-tight text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)]">
+                      Berlin
+                    </h4>
+                    <p className="mt-2 max-w-[26ch] text-xs leading-relaxed text-white/55">
+                      Where I build. Three planes and a pointer, no photograph &mdash; just depth staged by hand.
+                    </p>
+                  </div>
+                </ParallaxLayer>
+              </ParallaxCard>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Parallax diorama</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                A card with real inside. Where the tilt card beside it rotates one flat plane toward the cursor, this
+                stages a scene in layers &mdash; a deep sky, a star field, a distant skyline, the Fernsehturm, and the
+                title plate closest of all &mdash; and lets each respond to the pointer at its own depth. The card reads
+                the cursor once, publishes the offset as two spring-smoothed values through context, and every layer
+                subscribes: nearer planes drift further and against the pointer, the sky barely stirs, and each sits a
+                little forward on the z-axis so the whole box separates and looks around itself as it tilts. No layer
+                touches the DOM or listens for its own events; the composition is honest, not a photo &mdash; three
+                planes and a pointer, staged by hand. Distinct from its neighbours: the tilt card rotates a plane, the
+                holographic card sweeps a foil, the pin card lifts on a single pin &mdash; this one holds a small world
+                and lets you look into it. Reduced motion collapses the tilt and the drift and rests the scene flat.
               </p>
             </div>
           </div>
