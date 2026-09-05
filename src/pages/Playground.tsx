@@ -150,6 +150,17 @@ import { Superformula } from '../components/Superformula'
 import { TimesTable } from '../components/TimesTable'
 import { StickerPeel } from '../components/StickerPeel'
 import { ParallaxCard, ParallaxLayer } from '../components/ParallaxCard'
+import { FanDeck, type FanCard } from '../components/FanDeck'
+
+// The hand FanDeck holds: five honest facets of the site and its maker, so the
+// card that comes forward is never a single project — it is the range.
+const FAN_CARDS: FanCard[] = [
+  { tag: 'Craft', title: 'Made, not assembled', body: 'Every piece here is written by hand — nothing pulled from a shelf.' },
+  { tag: 'Motion', title: 'It moves with reason', body: 'To guide the eye and give a moment weight, never just to show off.' },
+  { tag: 'Type', title: 'An editorial voice', body: 'Fraunces and Inter, set by hand, so the page reads like a page.' },
+  { tag: 'Range', title: 'Across the stack', body: 'Web, native, the data underneath, and AI woven into real products.' },
+  { tag: 'Open', title: 'Built in the open', body: 'The site grows most days, one commit at a time, all of it on GitHub.' },
+]
 import { StringPluck } from '../components/StringPluck'
 import { Cyclic } from '../components/Cyclic'
 import { Sandpile } from '../components/Sandpile'
@@ -2544,6 +2555,39 @@ export default function Playground() {
                 planes and a pointer, staged by hand. Distinct from its neighbours: the tilt card rotates a plane, the
                 holographic card sweeps a foil, the pin card lifts on a single pin &mdash; this one holds a small world
                 and lets you look into it. Reduced motion collapses the tilt and the drift and rests the scene flat.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        <Reveal>
+          <div id="fan-deck" data-experiment="Card fan" className="mt-12 scroll-mt-32">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 py-12 sm:px-10">
+              <div className="text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Hold</span>
+                <p className="mx-auto mt-3 max-w-md text-lg font-medium text-white/85 sm:text-xl">
+                  A hand of cards, held from below. Hover the fan to open it, then lift one out &mdash; or drive it with
+                  the arrow keys.
+                </p>
+              </div>
+              <FanDeck cards={FAN_CARDS} className="mt-10" label="Facets of the site, held as a hand of cards" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Card fan</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The tactile counterpart to the auto-advancing deck above: where CardStack recedes into a z-stack, this
+                spreads sideways into an arc, the way a card player holds a hand. Every card pivots around a single point
+                set well below the deck, so a shared rotation fans them from a common base &mdash; overlapping at the
+                bottom, spreading toward the top &mdash; with the later cards laid over the earlier ones. Hover anywhere
+                on the hand and the whole fan opens a few degrees wider and lifts; hover or focus one card and it climbs
+                out of the fan, straightens toward upright, scales up, and its body copy unfolds from a whisper to full
+                weight, the neighbours nudging aside to clear it. It is honest about what it holds: five facets of the
+                site &mdash; craft, motion, type, range, built-in-the-open &mdash; so the card that comes forward is
+                never a single project. Fully keyboard-driveable &mdash; one roving tab stop, the arrow keys walk the
+                hand and raise each card in turn, Home and End jump to the ends &mdash; and every move runs on one shared
+                spring so nothing snaps. Distinct from its neighbours: the stack recedes, the coverflow gallery rotates
+                in perspective, the carousel slides &mdash; this one you hold and spread. Reduced motion drops the fan
+                entirely for a calm, fully readable column with every card already open.
               </p>
             </div>
           </div>
