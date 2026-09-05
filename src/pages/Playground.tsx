@@ -150,6 +150,7 @@ import { Superformula } from '../components/Superformula'
 import { TimesTable } from '../components/TimesTable'
 import { StickerPeel } from '../components/StickerPeel'
 import { ParallaxCard, ParallaxLayer } from '../components/ParallaxCard'
+import { StringPluck } from '../components/StringPluck'
 import { Cyclic } from '../components/Cyclic'
 import { Sandpile } from '../components/Sandpile'
 import { Sortable } from '../components/Sortable'
@@ -4957,6 +4958,39 @@ export default function Playground() {
                 nothing at rest, and it is meant for the rare, earned moment, not for decoration. Honest to the
                 "respect the still" ethos: under reduced motion the burst is a no-op — there is no calm way to
                 throw confetti, so the calm answer is to not.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH STRING PLUCK */}
+        <Reveal>
+          <div id="string-pluck" data-experiment="Plucked string" className="mt-12 scroll-mt-32">
+            <div className="relative h-[360px] overflow-hidden rounded-3xl border border-white/10 bg-[#040404]">
+              <StringPluck />
+              <div className="pointer-events-none absolute inset-x-0 top-8 z-10 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Standing waves</span>
+                <p className="mx-auto mt-3 max-w-md px-6 text-lg font-medium text-white/90 sm:text-xl">
+                  Pull the string aside and let go. Watch the kink race to each end, reflect, and cross itself.
+                </p>
+              </div>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Plucked string</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                A guitar string, kept honest to its maths. Grab it anywhere and pull it aside and it bends into a clean
+                triangle &mdash; pinned at both ends, held under your finger &mdash; then let go and it rings: a wave
+                races out from the kink to each fixed end, reflects, inverts, and crosses back through itself. That is the
+                whole story, because a pluck is a triangle and a triangle is a sum of sine modes (Fourier), so what you
+                watch settle is the fundamental and its overtones beating against each other and damping out at their own
+                rates, the higher and brighter modes dying first, the slow fundamental last to fade. The string is a row
+                of nodes advanced by the textbook finite-difference solution of the 1-D wave equation &mdash; the leapfrog
+                stencil with a Courant number kept under one so it stays stable &mdash; run on a fixed-timestep
+                accumulator, so the pitch and the ring-down read the same on any monitor and survive a resize untouched.
+                The one-dimensional sibling of the Chladni plate below it: there the standing waves live on a
+                two-dimensional square and draw themselves in sand, here they live on a line you can pluck by hand. The
+                line warms to lime where it moves fastest, so the travelling kink glows. Press and drag to pull it aside,
+                or tap to pluck it for you; reduced motion holds the string in a single plucked triangle, still.
               </p>
             </div>
           </div>
