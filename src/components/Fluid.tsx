@@ -354,7 +354,10 @@ export function Fluid({
       last = now
       if (dt > 0.05) dt = 0.05 // clamp after a tab-away
       acc += dt
-      // Fixed-timestep: run whole steps so the flow is monitor-independent.
+      // Fixed-timestep: run whole steps so the flow reads the same on any
+      // refresh rate. dt is clamped to 0.05 above, so acc never asks for more
+      // than three sub-steps and always drains — no backlog, no extra steps on
+      // a high-refresh display.
       let guard = 0
       while (acc >= 1 / 60 && guard < 3) {
         t += 1 / 60
@@ -362,13 +365,6 @@ export function Fluid({
         step()
         acc -= 1 / 60
         guard++
-      }
-      if (guard === 0) {
-        // Slow display — still advance one step so it never stalls.
-        t += 1 / 60
-        inject()
-        step()
-        acc = 0
       }
       draw()
       raf = requestAnimationFrame(frame)
