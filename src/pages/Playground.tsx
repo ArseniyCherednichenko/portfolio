@@ -171,6 +171,7 @@ import { Gravity } from '../components/Gravity'
 import { WordSphere } from '../components/WordSphere'
 import { FractalTree } from '../components/FractalTree'
 import { Slime } from '../components/Slime'
+import { Fluid } from '../components/Fluid'
 import { DoublePendulum } from '../components/DoublePendulum'
 import { GO_TARGETS, useShortcuts } from '../components/Keyboard'
 import { Seo } from '../components/Seo'
@@ -5201,6 +5202,41 @@ export default function Playground() {
                 Math.random. The pointer is food — move across it and scent pools under your cursor so the veins reach
                 toward you and thicken; press to drop a richer bloom they race to colonise. Reduced motion steps the
                 colony to a settled network, draws it once, and holds it still.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH FLUID (STABLE FLUIDS) */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-[#040404]">
+              <div className="pointer-events-none absolute inset-x-0 top-8 z-10 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Stir</span>
+                <p className="mx-auto mt-3 max-w-md px-6 text-lg font-medium text-white/90 sm:text-xl">
+                  Real ink on a real fluid. Drag to stir it; press to bloom a puff.
+                </p>
+              </div>
+              <Fluid className="h-[520px] w-full" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Fluid</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The one continuous medium in the room. Everything else among the toys pushes discrete bodies around — the
+                Cloth's nodes, the Ballpit's spheres, the Cradle's bobs — or reads a fixed field like the Chladni plate;
+                this is a smoke that carries a swirl the way water carries a drop of dye. The maths is the honest one: Jos
+                Stam's stable fluids, the 1999 solver that made real-time fluid possible by staying stable at any
+                timestep. A velocity field and a dye field live on a coarse grid. Every frame the velocity is made
+                divergence-free — a fluid can't pile up or vanish, so a relaxation solves for the pressure whose gradient
+                cancels any net flow into a cell — and then both the velocity and the ink are advected: each cell traces
+                its flow backward to where its contents came from a moment ago and samples there, which is exactly what
+                keeps it stable no matter how hard you stir. The ink fades a touch each step so the picture keeps breathing
+                rather than silting up, and the grid is coarse and blitted up soft, so what you read is not cells but
+                smoke. Two emitters wander figure-eights and lay curling ink on their own, so it is always folding even
+                untouched; move across it and the ink is injected under your hand and pushed the way you are moving, so
+                fast strokes shear it into filaments; press to bloom a dense puff the flow runs away with. A fixed
+                timestep, so the flow reads the same on any monitor and survives a resize. Reduced motion simmers a few
+                drops and a swirl up front and holds the settled ink still.
               </p>
             </div>
           </div>
