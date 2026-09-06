@@ -151,6 +151,42 @@ import { TimesTable } from '../components/TimesTable'
 import { StickerPeel } from '../components/StickerPeel'
 import { ParallaxCard, ParallaxLayer } from '../components/ParallaxCard'
 import { FanDeck, type FanCard } from '../components/FanDeck'
+import { ExpandingPanels, type Panel } from '../components/ExpandingPanels'
+
+// The panels ExpandingPanels opens, one at a time: the five ideas the Playground
+// itself is built on, so the panel that spreads open is a principle, not a pitch.
+const PANEL_ITEMS: Panel[] = [
+  {
+    id: 'hand',
+    label: 'By hand',
+    title: 'Made, not assembled',
+    body: 'Every field, card, and cursor here is written from scratch — nothing pulled off a shelf.',
+  },
+  {
+    id: 'reason',
+    label: 'With reason',
+    title: 'Motion that means it',
+    body: 'It moves to guide the eye and give a moment weight, never just to show that it can.',
+  },
+  {
+    id: 'still',
+    label: 'The still',
+    title: 'Reduced motion is real',
+    body: 'Every piece has a calm, deliberate path for people who ask for less movement.',
+  },
+  {
+    id: 'detail',
+    label: 'Detail',
+    title: 'The small moments',
+    body: 'Most of the craft lives where no one looks — the timing, the spacing, the weight of a line.',
+  },
+  {
+    id: 'open',
+    label: 'In the open',
+    title: 'Built in public',
+    body: 'The site grows most days, one commit at a time, all of it on GitHub to read.',
+  },
+]
 
 // The hand FanDeck holds: five honest facets of the site and its maker, so the
 // card that comes forward is never a single project — it is the range.
@@ -2622,6 +2658,38 @@ export default function Playground() {
                 spring so nothing snaps. Distinct from its neighbours: the stack recedes, the coverflow gallery rotates
                 in perspective, the carousel slides &mdash; this one you hold and spread. Reduced motion drops the fan
                 entirely for a calm, fully readable column with every card already open.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        <Reveal>
+          <div id="expanding-panels" data-experiment="Expanding panels" className="mt-12 scroll-mt-32">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 py-12 sm:px-10">
+              <div className="mb-8 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Open</span>
+                <p className="mx-auto mt-3 max-w-md text-lg font-medium text-white/85 sm:text-xl">
+                  A row of panels, one open at a time. Hover or focus one and it spreads open; the rest fold to
+                  slim spines.
+                </p>
+              </div>
+              <ExpandingPanels panels={PANEL_ITEMS} />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Expanding panels</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The gallery pattern the surface family was missing: exactly one panel is open, and it grows to
+                take most of the width (a plain flex-grow transition, so the reflow reads as one continuous
+                motion) while its neighbours collapse to slim spines carrying a rotated label and an index. Where
+                CardStack recedes into depth, the card fan spreads into an arc, and the coverflow gallery rotates
+                in perspective, this one simply widens &mdash; the calmest way to hold several things and let you
+                pull one forward. Hover or focus a panel to open it and its title and body fade up under a lime
+                wash with a hairline rule down the leading edge; it is fully keyboard-driveable, with one roving
+                tab stop and the arrow keys walking the row (Home and End jump to the ends). The panels here name
+                the five ideas the Playground is built on, so the one that opens is a principle, not a pitch. On a
+                narrow screen the row becomes a column and the panels grow in height instead of width, so the
+                spines never crush to nothing. Reduced motion keeps the layout reflow (it is structure, not
+                decoration) but drops it to an instant swap with no travel.
               </p>
             </div>
           </div>
