@@ -181,6 +181,7 @@ import { COMPONENT_COUNT } from '../data/stats'
 import { LIBRARY } from '../data/library'
 import { CHAPTERS, KIND_META, KIND_ORDER } from '../data/changelog'
 import { Gauge } from '../components/Gauge'
+import { RingChart } from '../components/RingChart'
 import { Waffle } from '../components/Waffle'
 import { Heatmap, type HeatmapRow } from '../components/Heatmap'
 
@@ -490,6 +491,38 @@ function GaugeDemo() {
         onChange={setLevel}
         format={(v) => `${Math.round(v)}`}
       />
+    </div>
+  )
+}
+
+// A RingChart showcase. Where the Gauge above sweeps one proportion, this reads
+// several at once — three independent measures stacked as concentric lime rings,
+// distinguished by radius and named in the legend, not by a second colour. The
+// values here are illustrative (a component demo, not a claimed statistic);
+// "Shuffle" re-rolls them and bumps a key so every arc re-draws from zero, and
+// hovering a legend row lifts its ring and swaps the centre readout.
+const RING_LABELS = ['Design', 'Motion', 'Ship'] as const
+function RingChartDemo() {
+  const [rings, setRings] = useState(() => [82, 64, 47])
+  const [run, setRun] = useState(0)
+  function shuffle() {
+    setRings(RING_LABELS.map(() => 20 + Math.round(Math.random() * 78)))
+    setRun((n) => n + 1)
+  }
+  return (
+    <div className="flex w-full flex-col items-center gap-6">
+      <RingChart
+        key={run}
+        size={240}
+        rings={RING_LABELS.map((label, i) => ({ label, value: rings[i] }))}
+      />
+      <button
+        type="button"
+        onClick={shuffle}
+        className="rounded-full border border-white/15 px-4 py-1.5 text-sm font-semibold text-white/80 transition-colors hover:border-[#DCF87C]/50 hover:bg-white/[0.04] hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#DCF87C]/60"
+      >
+        Shuffle
+      </button>
     </div>
   )
 }
@@ -4237,6 +4270,15 @@ export default function Playground() {
               note="A half-circle meter for one proportion. Turn the knob and the lime arc sweeps to match; the figure in the well retells it."
             >
               <GaugeDemo />
+            </Experiment>
+          </Reveal>
+
+          <Reveal>
+            <Experiment
+              name="Ring chart"
+              note="Several independent proportions at once — each ring its own measure against its own max, stacked as concentric arcs. One lime stepped by rank; the legend names each ring so colour never has to. Shuffle to re-draw, hover a row to lift its ring."
+            >
+              <RingChartDemo />
             </Experiment>
           </Reveal>
 
