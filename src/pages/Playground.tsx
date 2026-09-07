@@ -219,6 +219,7 @@ import { CHAPTERS, KIND_META, KIND_ORDER } from '../data/changelog'
 import { Gauge } from '../components/Gauge'
 import { RingChart } from '../components/RingChart'
 import { ChordDiagram } from '../components/ChordDiagram'
+import { Treemap } from '../components/Treemap'
 import { Waffle } from '../components/Waffle'
 import { Heatmap, type HeatmapRow } from '../components/Heatmap'
 
@@ -640,6 +641,24 @@ function WaffleDemo() {
         unit="components"
         caption="Every hand-built component in this repo, one square, grouped by family — read live from the library."
       />
+    </div>
+  )
+}
+
+// A Treemap showcase, driven off the same live library as the waffle but read a
+// different way: where the waffle counts each component out as its own square,
+// this packs the families into one solid rectangle with no gap, each family a
+// tile whose *area* is its share, so the eye compares them by how much room each
+// takes. The space-filling counterpart to the unit chart, on the same honest
+// figures. Hover a tile or its legend row to lift it; its full home is here.
+const TREEMAP_CELLS = LIBRARY.map((g) => ({ label: g.label, value: g.items.length, unit: 'components' })).sort(
+  (a, b) => b.value - a.value,
+)
+
+function TreemapDemo() {
+  return (
+    <div className="w-full">
+      <Treemap cells={TREEMAP_CELLS} unit="components" />
     </div>
   )
 }
@@ -4439,6 +4458,17 @@ export default function Playground() {
                 note="The chart the others cannot draw — not how much or what share, but what runs between things. Five facets of building a product, each an arc on the rim sized by how connected it is, every tie a ribbon woven through the centre. One lime stepped by rank; the legend names each group. Shuffle to re-weave, hover a row to light the ties it carries."
               >
                 <ChordDiagramDemo />
+              </Experiment>
+            </Reveal>
+          </div>
+
+          <div className="sm:col-span-2">
+            <Reveal>
+              <Experiment
+                name="Treemap"
+                note="The space-filling part-to-whole — where the donut bends a share into an arc and the waffle counts it out one square at a time, this packs every share into one solid rectangle with no gap, each part a tile sized by area and labelled in place. The squarified layout, by hand. The same live library the waffle counts, read as relative weight. Hover a tile to lift it out of the pack."
+              >
+                <TreemapDemo />
               </Experiment>
             </Reveal>
           </div>
