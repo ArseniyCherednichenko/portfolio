@@ -293,8 +293,11 @@ function Palette({ open, onClose }: { open: boolean; onClose: () => void }) {
   const { rows, grouped } = useMemo<{ rows: Row[]; grouped: boolean }>(() => {
     const q = query.trim()
     if (!q) {
+      // Recents may include a component you jumped to, so resolve ids across
+      // both lists — but the empty-box catalogue below stays commands-only, so
+      // the two hundred components never flood the default view.
       const recents: Row[] = recent
-        .map((id) => commands.find((c) => c.id === id))
+        .map((id) => commands.find((c) => c.id === id) ?? componentCommands.find((c) => c.id === id))
         .filter((c): c is Command => Boolean(c))
         .map((c) => ({ ...c, group: 'Recent' as const, indices: [] }))
       const rest: Row[] = commands.map((c) => ({ ...c, indices: [] }))
