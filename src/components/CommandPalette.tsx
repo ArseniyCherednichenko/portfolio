@@ -38,6 +38,7 @@ import { useToast } from './Toast'
 type CommandGroup =
   | 'Recent'
   | 'Pages'
+  | 'Playground'
   | 'Projects'
   | 'Disciplines'
   | 'Components'
@@ -173,6 +174,18 @@ function Palette({ open, onClose }: { open: boolean; onClose: () => void }) {
       { id: 'keyboard', label: 'Keyboard', group: 'Pages', hint: 'the go-chords, playable', keywords: 'keyboard keys shortcuts chords hotkeys map press play typing navigation go to interactive', run: () => go('/keyboard') },
     ]
 
+    // The Playground's five families, each a jump straight to that section from
+    // anywhere on the site. The anchors are stable ids the Playground renders,
+    // so these deep links land in the right band and the section reads its own
+    // heading in view.
+    const sections: Command[] = [
+      { id: 'pg-type', label: 'Type & text', group: 'Playground', hint: 'experiments', keywords: 'playground type text letters words headline split blur glitch decode reveal section family', run: () => go('/playground#type') },
+      { id: 'pg-cards', label: 'Cards & surfaces', group: 'Playground', hint: 'experiments', keywords: 'playground cards surfaces tilt spotlight glow glass flip fold section family', run: () => go('/playground#cards') },
+      { id: 'pg-fields', label: 'Pointer fields', group: 'Playground', hint: 'experiments', keywords: 'playground fields canvas pointer particles dots needles metaballs ribbons section family', run: () => go('/playground#fields') },
+      { id: 'pg-scroll', label: 'Scroll-driven', group: 'Playground', hint: 'experiments', keywords: 'playground scroll pin stack draw counter travel section family', run: () => go('/playground#scroll') },
+      { id: 'pg-controls', label: 'Navigation & controls', group: 'Playground', hint: 'experiments', keywords: 'playground controls buttons menus switches tabs dock sliders keyboard section family', run: () => go('/playground#controls') },
+    ]
+
     const projects: Command[] = PROJECTS.filter((p) => !p.soon).map((p) => ({
       id: `project-${p.slug}`,
       label: p.title,
@@ -262,7 +275,7 @@ function Palette({ open, onClose }: { open: boolean; onClose: () => void }) {
       },
     ]
 
-    return [...pages, ...projects, ...disciplines, ...actions]
+    return [...pages, ...sections, ...projects, ...disciplines, ...actions]
   }, [go, onClose, openContact, openPrefs, openShortcuts, toast])
 
   // The component library, as commands — one per catalogued component that is
