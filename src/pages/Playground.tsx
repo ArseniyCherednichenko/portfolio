@@ -218,6 +218,7 @@ import { LIBRARY } from '../data/library'
 import { CHAPTERS, KIND_META, KIND_ORDER } from '../data/changelog'
 import { Gauge } from '../components/Gauge'
 import { RingChart } from '../components/RingChart'
+import { ChordDiagram } from '../components/ChordDiagram'
 import { Waffle } from '../components/Waffle'
 import { Heatmap, type HeatmapRow } from '../components/Heatmap'
 
@@ -551,6 +552,65 @@ function RingChartDemo() {
         key={run}
         size={240}
         rings={RING_LABELS.map((label, i) => ({ label, value: rings[i] }))}
+      />
+      <button
+        type="button"
+        onClick={shuffle}
+        className="rounded-full border border-white/15 px-4 py-1.5 text-sm font-semibold text-white/80 transition-colors hover:border-[#DCF87C]/50 hover:bg-white/[0.04] hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#DCF87C]/60"
+      >
+        Shuffle
+      </button>
+    </div>
+  )
+}
+
+// A ChordDiagram showcase. Where the ring and waffle measure things in isolation,
+// this measures what runs *between* them — how a set of groups tie to one another.
+// The values here are illustrative (a component demo, not a claimed statistic):
+// five facets of building a product and the sample strengths of the ties between
+// them. "Shuffle" re-rolls the matrix and bumps a key so every arc re-draws and
+// the ribbons re-weave; hovering a legend row lights the ties that group carries.
+const CHORD_NODES = [
+  { label: 'Product' },
+  { label: 'Design' },
+  { label: 'Frontend' },
+  { label: 'Native' },
+  { label: 'Backend' },
+] as const
+
+function randomSymmetric(n: number): number[][] {
+  const m = Array.from({ length: n }, () => new Array<number>(n).fill(0))
+  for (let i = 0; i < n; i++) {
+    for (let j = i + 1; j < n; j++) {
+      // Most pairs connect; a few stay quiet, so the weave is never a full mesh.
+      const v = Math.random() < 0.28 ? 0 : 2 + Math.round(Math.random() * 10)
+      m[i][j] = v
+      m[j][i] = v
+    }
+  }
+  return m
+}
+
+function ChordDiagramDemo() {
+  const [matrix, setMatrix] = useState<number[][]>(() => [
+    [0, 9, 7, 4, 5],
+    [9, 0, 8, 3, 2],
+    [7, 8, 0, 6, 7],
+    [4, 3, 6, 0, 5],
+    [5, 2, 7, 5, 0],
+  ])
+  const [run, setRun] = useState(0)
+  function shuffle() {
+    setMatrix(randomSymmetric(CHORD_NODES.length))
+    setRun((n) => n + 1)
+  }
+  return (
+    <div className="flex w-full flex-col items-center gap-6">
+      <ChordDiagram
+        key={run}
+        size={300}
+        nodes={CHORD_NODES.map((n) => ({ label: n.label }))}
+        matrix={matrix}
       />
       <button
         type="button"
@@ -4368,6 +4428,17 @@ export default function Playground() {
                 note="A two-dimensional field — the chart the others cannot draw. The build log crossed with time: each kind of work by the chapter it landed in, tinted by how busy that crossing was. Hover a cell to light its row and column."
               >
                 <HeatmapDemo />
+              </Experiment>
+            </Reveal>
+          </div>
+
+          <div className="sm:col-span-2">
+            <Reveal>
+              <Experiment
+                name="Chord diagram"
+                note="The chart the others cannot draw — not how much or what share, but what runs between things. Five facets of building a product, each an arc on the rim sized by how connected it is, every tie a ribbon woven through the centre. One lime stepped by rank; the legend names each group. Shuffle to re-weave, hover a row to light the ties it carries."
+              >
+                <ChordDiagramDemo />
               </Experiment>
             </Reveal>
           </div>
