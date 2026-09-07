@@ -13,6 +13,7 @@ import { useNavigate } from 'react-router-dom'
 import { PROJECTS } from '../data/projects'
 import { DISCIPLINES } from '../data/disciplines'
 import { ALL_CONTENT_ENTRIES } from '../data/contents'
+import { ALL_LIBRARY_ITEMS } from '../data/library'
 import { fuzzyMatch, toRanges } from '../lib/fuzzy'
 import { useContact } from './ContactDialog'
 import { usePreferences } from './Preferences'
@@ -29,7 +30,18 @@ import { useToast } from './Toast'
 // and the last few commands you ran surface as "Recent" when the box is empty,
 // remembered across visits in localStorage.
 
-type CommandGroup = 'Recent' | 'Pages' | 'Projects' | 'Disciplines' | 'Actions'
+// The whole hand-built component library is searchable too. It doesn't crowd
+// the empty-box catalogue — there are close to two hundred — but the moment you
+// type, every component that is on show somewhere becomes a result that jumps
+// to the page (or Playground section) where it lives. The library data is the
+// single source of truth, so this can never drift from what /library lists.
+type CommandGroup =
+  | 'Recent'
+  | 'Pages'
+  | 'Projects'
+  | 'Disciplines'
+  | 'Components'
+  | 'Actions'
 
 type Command = {
   id: string
@@ -253,6 +265,24 @@ function Palette({ open, onClose }: { open: boolean; onClose: () => void }) {
     return [...pages, ...projects, ...disciplines, ...actions]
   }, [go, onClose, openContact, openPrefs, openShortcuts, toast])
 
+  // The component library, as commands — one per catalogued component that is
+  // on show somewhere, jumping to its home (a page, or a Playground section).
+  // These are searchable but deliberately left out of the empty-box catalogue,
+  // so typing surfaces the whole hand-built set without flooding the default
+  // view with two hundred rows.
+  const componentCommands = useMemo<Command[]>(
+    () =>
+      ALL_LIBRARY_ITEMS.filter((item) => item.to).map((item) => ({
+        id: `component-${item.name}`,
+        label: item.name,
+        group: 'Components',
+        hint: item.where,
+        keywords: `component ${item.tags.join(' ')} ${item.note}`,
+        run: () => go(item.to as string),
+      })),
+    [go],
+  )
+
   // A rendered row: a command plus the label indices to highlight (empty when
   // the match came from keywords rather than the visible label).
   type Row = Command & { indices: number[] }
@@ -271,7 +301,9 @@ function Palette({ open, onClose }: { open: boolean; onClose: () => void }) {
       return { rows: [...recents, ...rest], grouped: true }
     }
 
-    const scored = commands
+    // Only when there's a query do the ~200 library components join the pool,
+    // so they enrich search without swamping the empty-box catalogue.
+    const scored = [...commands, ...componentCommands]
       .map((c) => {
         const label = fuzzyMatch(q, c.label)
         const hay = label.matched
@@ -286,7 +318,7 @@ function Palette({ open, onClose }: { open: boolean; onClose: () => void }) {
       .sort((a, b) => b.score - a.score)
 
     return { rows: scored.map((s) => ({ ...s.cmd, indices: s.indices })), grouped: false }
-  }, [commands, query, recent])
+  }, [commands, componentCommands, query, recent])
 
   const filtered = rows
 
@@ -372,7 +404,7 @@ function Palette({ open, onClose }: { open: boolean; onClose: () => void }) {
                 ref={inputRef}
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                placeholder="Search pages, projects, actions..."
+                placeholder="Search pages, components, actions..."
                 aria-label="Search commands"
                 role="combobox"
                 aria-expanded
