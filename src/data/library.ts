@@ -200,6 +200,7 @@ export const LIBRARY: LibraryGroup[] = [
       { name: 'Nav', note: 'The persistent top navigation bar and its active states.', tags: ['control', 'nav', 'sitewide'] },
       { name: 'MobileMenu', note: 'The full-screen mobile navigation overlay.', tags: ['control', 'nav', 'mobile'] },
       { name: 'Keyboard', note: 'The site-wide go-chords and the shortcut help dialog.', tags: ['control', 'keyboard', 'a11y'] },
+      { name: 'FileTree', note: "A collapsible directory tree, built to the WAI-ARIA tree contract rather than nested details/summary. A real role=tree with one roving tab stop: Tab lands on it once and the arrows drive the rest — Right opens a closed folder or steps into it, Left closes an open one or steps out to its parent, Up/Down walk the visible rows, Home/End jump to the ends, Enter or Space toggles a folder — and every row carries aria-level, aria-setsize, aria-posinset, with aria-expanded on the folders. Folders open with a chevron that rotates and the newly revealed rows fade and settle in on a shared layout, each nesting level stepped in by a fixed indent; a folder can badge its file count and each row can carry a dim aside. On the Colophon it renders the site's own repository, so the tree is honest content, not a placeholder. Reduced motion drops the chevron spin and the reveal for an instant, equally usable swap.", tags: ['control', 'tree', 'file tree', 'disclosure', 'a11y', 'keyboard', 'nav'], to: '/colophon', where: 'Colophon' },
     ],
   },
   {
