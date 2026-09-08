@@ -10,8 +10,10 @@ import { ScrollScene, type Scene } from '../components/ScrollScene'
 import { Lightning } from '../components/Lightning'
 import { Crosshair } from '../components/Crosshair'
 import { ASCIIText } from '../components/ASCIIText'
+import { FileTree } from '../components/FileTree'
 import { Seo } from '../components/Seo'
 import { GITHUB_URL } from '../data/contact'
+import { REPO_TREE } from '../data/repoTree'
 import { COMPONENT_COUNT, PAGE_COUNT } from '../data/stats'
 
 const EASE = [0.16, 1, 0.3, 1] as const
@@ -350,6 +352,45 @@ export default function Colophon() {
           renderStage={(active) => anatomyStage(active)}
           className="mt-12"
         />
+      </section>
+
+      {/* REPOSITORY — the site's own tree, browsable. A small proof that the
+          "made, not assembled" claim is literal: every node names a real file,
+          and the counts come from the same source the Library reads. */}
+      <section className="mx-auto w-full max-w-4xl px-6 py-16">
+        <Reveal>
+          <Eyebrow>Repository</Eyebrow>
+        </Reveal>
+        <Reveal delay={0.05}>
+          <h2 className="mt-6 font-display text-3xl font-bold tracking-tight sm:text-4xl">
+            The whole thing, as a tree.
+          </h2>
+        </Reveal>
+        <Reveal delay={0.08}>
+          <p className="mt-3 max-w-xl text-base leading-relaxed text-white/50">
+            Not a diagram of an idealised project — this repository. Open a folder and every node is a
+            file that genuinely ships; the counts are read from the same source the rest of the site
+            counts from. Click or use the arrow keys.
+          </p>
+        </Reveal>
+        <Reveal delay={0.12}>
+          <FileTree nodes={REPO_TREE} className="mt-8" label="This site's repository" />
+        </Reveal>
+        <Reveal delay={0.16}>
+          <p className="mt-5 text-sm text-white/40">
+            {COMPONENT_COUNT} components and {PAGE_COUNT} pages, and a dependency list you can read in a
+            breath.{' '}
+            <a
+              href={GITHUB_URL}
+              target="_blank"
+              rel="noreferrer"
+              className="font-semibold text-[#DCF87C] transition-opacity hover:opacity-80"
+            >
+              See it on GitHub
+              <span aria-hidden> -&gt;</span>
+            </a>
+          </p>
+        </Reveal>
       </section>
 
       {/* TYPE */}
