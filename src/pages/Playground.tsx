@@ -114,6 +114,7 @@ import { Lanyard } from '../components/Lanyard'
 import { Turntable } from '../components/Turntable'
 import { Harmonograph } from '../components/Harmonograph'
 import { Spirograph } from '../components/Spirograph'
+import { Gears } from '../components/Gears'
 import { Abacus } from '../components/Abacus'
 import { EuclidRing } from '../components/EuclidRing'
 import { EtchASketch } from '../components/EtchASketch'
@@ -5155,6 +5156,39 @@ export default function Playground() {
                 wheel and its spoke lay it down, glowing where it crosses itself because the trace is composited additively.
                 One canvas, one loop, DPR-capped. Reduced motion draws the finished figure in a single frame, no rolling
                 wheel — and a control change simply redraws the new one whole.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH GEARS */}
+        <Reveal>
+          <div id="gear-train" data-experiment="Gear train" className="mt-12 scroll-mt-32">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 py-12 sm:px-10">
+              <div className="mb-8 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Mesh</span>
+                <p className="mx-auto mt-3 max-w-md text-lg font-medium text-white/85 sm:text-xl">
+                  Drag any wheel. The whole train obeys the teeth.
+                </p>
+              </div>
+              <Gears className="mx-auto max-w-3xl" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Gear train</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                A rigid mechanism, kept honest to its mechanics — the odd one out among these toys, where every other
+                piece is a crowd of bodies colliding or particles reading a field. Each wheel's pitch radius is its tooth
+                count over two, so meshing wheels sit exactly a pitch radius apart and turn each other the only way they
+                can: the wrong way round, and in inverse proportion to the teeth — a fast little pinion whipping a heavy
+                wheel a fraction of a turn, the reduction you feel in a hand drill. The coupling is not scripted. A single
+                degree of freedom — the drive angle of the first wheel — fixes every other through the meshing law
+                Z<sub>a</sub>(θ<sub>a</sub>−φ) + Z<sub>b</sub>(θ<sub>b</sub>−φ−π) ≡ π, the statement that a tooth of one
+                always meets a gap of the next along their line of centres; differentiate it and the ratio
+                ω<sub>b</sub> = −(Z<sub>a</sub>/Z<sub>b</sub>)·ω<sub>a</sub> falls straight out, so the picture and the
+                physics are the same object. Each wheel's angle is therefore an affine function of the driver's,
+                precomputed once and just evaluated per frame. Grab any wheel and the train follows; the release hands it
+                a fly-wheel glide that coasts to rest. One canvas, one loop that sleeps when nothing turns, DPR-capped.
+                Reduced motion paints it once at rest and keeps the drag working.
               </p>
             </div>
           </div>
