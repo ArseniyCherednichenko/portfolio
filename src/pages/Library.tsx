@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 import { motion, useReducedMotion } from 'framer-motion'
 import { Reveal } from '../components/Reveal'
 import { Eyebrow } from '../components/Eyebrow'
@@ -8,6 +8,7 @@ import { SpotlightCard } from '../components/SpotlightCard'
 import { LetterGlitch } from '../components/LetterGlitch'
 import { AnimatedCounter } from '../components/AnimatedCounter'
 import { Modal } from '../components/Modal'
+import { FeaturedComponent } from '../components/FeaturedComponent'
 import { Seo } from '../components/Seo'
 import { LIBRARY, ALL_LIBRARY_ITEMS, type LibraryItem } from '../data/library'
 import { COMPONENT_COUNT } from './Colophon'
@@ -191,7 +192,27 @@ export default function Library() {
   const reduce = useReducedMotion()
   const [query, setQuery] = useState('')
   const [group, setGroup] = useState<string | null>(null)
-  const [activeName, setActiveName] = useState<string | null>(null)
+
+  // The open component lives in the URL (`?c=Name`), so a quick look is a real,
+  // shareable address — /library?c=Aurora opens Aurora's card straight away, and
+  // the Featured spotlight can deep-link into any of them. `replace` keeps paging
+  // and tag-jumps from flooding the back button.
+  const [searchParams, setSearchParams] = useSearchParams()
+  const activeName = searchParams.get('c')
+  const setActiveName = useCallback(
+    (name: string | null) => {
+      setSearchParams(
+        (prev) => {
+          const next = new URLSearchParams(prev)
+          if (name) next.set('c', name)
+          else next.delete('c')
+          return next
+        },
+        { replace: true },
+      )
+    },
+    [setSearchParams],
+  )
 
   const q = query.trim().toLowerCase()
 
@@ -222,19 +243,32 @@ export default function Library() {
 
   const activeIndex = activeName ? flat.findIndex((f) => f.item.name === activeName) : -1
 
-  // If the active component is filtered out from under the open modal, close it.
+  // If the active component is filtered out from under the open modal — or the
+  // URL names one that does not exist — drop it so the modal never opens empty.
   useEffect(() => {
     if (activeName && activeIndex === -1) setActiveName(null)
-  }, [activeName, activeIndex])
+  }, [activeName, activeIndex, setActiveName])
 
-  const closeModal = useCallback(() => setActiveName(null), [])
+  const closeModal = useCallback(() => setActiveName(null), [setActiveName])
   const step = useCallback(
     (dir: 1 | -1) => {
       if (flat.length === 0 || activeIndex === -1) return
       const next = (activeIndex + dir + flat.length) % flat.length
       setActiveName(flat[next].item.name)
     },
-    [flat, activeIndex],
+    [flat, activeIndex, setActiveName],
+  )
+
+  // Opening the day's featured pick clears any active filter first, so the
+  // target is always present in the set the modal pages through (otherwise the
+  // self-healing effect above would close it the moment it opened).
+  const openFeatured = useCallback(
+    (name: string) => {
+      setQuery('')
+      setGroup(null)
+      setActiveName(name)
+    },
+    [setActiveName],
   )
 
   const hitCount = filtered.reduce((n, g) => n + g.items.length, 0)
@@ -305,9 +339,18 @@ export default function Library() {
             </dl>
           </Reveal>
 
+          {/* FEATURED — one component lifted out and shown large, rotating daily.
+              A face on the catalogue before the wall of cards, and a live demo of
+              the deep-link: its button opens the same quick look as any card. */}
+          <Reveal delay={0.18}>
+            <div className="mt-12">
+              <FeaturedComponent onOpen={openFeatured} />
+            </div>
+          </Reveal>
+
           {/* FILTER */}
-          <Reveal delay={0.2}>
-            <div className="mt-10 max-w-md">
+          <Reveal delay={0.24}>
+            <div className="mt-12 max-w-md">
               <label htmlFor="library-filter" className="sr-only">
                 Filter the component library
               </label>
