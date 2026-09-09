@@ -108,6 +108,7 @@ export const LIBRARY: LibraryGroup[] = [
       { name: 'Beams', note: 'Sweeping volumetric beams of light.', tags: ['field', 'light'], to: '/playground', where: 'Playground' },
       { name: 'Meteors', note: 'A steady diagonal rain of light streaks, each fading from a bright head to nothing, warming toward lime near the pointer.', tags: ['field', 'canvas', 'light'], to: '/reel', where: 'The reel' },
       { name: 'Iridescence', note: 'A shifting, oil-slick iridescent sheen.', tags: ['field', 'shader', 'colour'], to: '/playground', where: 'Playground' },
+      { name: 'Plasma', note: 'The demoscene classic in the site’s single accent: four travelling sine surfaces sum into one field mapped through an ink-to-lime ramp, computed on a coarse buffer and upscaled soft. The cursor injects a ripple that distorts and warms the light where it passes.', tags: ['field', 'canvas', 'plasma', 'pointer'], to: '/playground', where: 'Playground' },
       { name: 'Ribbons', note: 'Flowing ribbons that trail after the cursor.', tags: ['field', 'ribbon', 'pointer'], to: '/playground', where: 'Playground' },
       { name: 'PixelTrail', note: 'A trail of pixels that light up under the moving pointer.', tags: ['field', 'pixel', 'pointer'], to: '/playground', where: 'Playground' },
       { name: 'FlowField', note: 'Motes streaming through an evolving vector field, curling into a lime eddy around the cursor.', tags: ['field', 'canvas', 'flow', 'pointer'], to: '/playground', where: 'Playground' },
