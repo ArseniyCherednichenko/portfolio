@@ -75,6 +75,7 @@ import { Globe } from '../components/Globe'
 import { GridMotion } from '../components/GridMotion'
 import { Grain } from '../components/Grain'
 import { MeshGradient } from '../components/MeshGradient'
+import { Plasma } from '../components/Plasma'
 import { BentoGrid, BentoCell } from '../components/BentoGrid'
 import { GlassSurface } from '../components/GlassSurface'
 import { Masonry, type MasonryItem } from '../components/Masonry'
@@ -3106,6 +3107,36 @@ export default function Playground() {
                 Soft vertical gradients drawn with additive blending on one tilted canvas, so overlaps glow like light
                 through blinds. The beams sway, and the ones nearest the pointer brighten and warm lime. Backs the
                 Toolkit page. Reduced-motion gets a single calm static frame.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH PLASMA */}
+        <Reveal>
+          <div id="plasma" data-experiment="Plasma" className="mt-12 scroll-mt-32">
+            <div className="relative h-[340px] overflow-hidden rounded-3xl border border-white/10 bg-[#08080b]">
+              <Plasma />
+              <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_45%,rgba(8,8,11,0.72)_100%)]" />
+              <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Plasma field</span>
+                <p className="mt-3 max-w-md px-6 text-xl font-medium text-white/85 sm:text-2xl">
+                  Move across it — a ripple follows your cursor and warms the light.
+                </p>
+              </div>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Interference-field plasma</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The demoscene classic, in the site's single accent. Four travelling sine surfaces — horizontal,
+                vertical, diagonal, and a radial ripple from the centre — sum into one scalar field that is mapped
+                through an ink -&gt; lime -&gt; near-white ramp, so the panel folds slow lime light instead of reading
+                as a flat gradient. It computes on a deliberately coarse offscreen buffer (one pixel per few screen
+                pixels) and upscales with smoothing, so the maths stays cheap while the result looks continuous; a
+                256-entry colour lookup keeps the inner loop to a single table index. The pointer injects a ripple
+                source that both distorts and brightens the field where it passes. Distinct from Iridescence's slow wash
+                and MeshGradient's blurred blobs — this is a computed interference pattern. Reduced motion paints one
+                still frame with no pointer.
               </p>
             </div>
           </div>
