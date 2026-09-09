@@ -92,6 +92,7 @@ import { TagInput } from '../components/TagInput'
 import { Calendar } from '../components/Calendar'
 import { ColorField } from '../components/ColorField'
 import { Dropzone } from '../components/Dropzone'
+import { NumberField } from '../components/NumberField'
 import { CodeInput } from '../components/CodeInput'
 import { DynamicIsland, type IslandActivity } from '../components/DynamicIsland'
 import { Sheet } from '../components/Sheet'
@@ -833,6 +834,66 @@ function CalendarDemo() {
           'No date chosen yet.'
         )}
       </p>
+    </div>
+  )
+}
+
+// A NumberField showcase: three fields — a count, a price, a rate — wired into
+// one live total, so the formatting (grouping, decimals, prefix, suffix) and
+// the clamping are felt through a real little calculation, not just read off a
+// single spinner. Try holding a stepper, dragging the grip, or typing straight.
+function NumberFieldDemo() {
+  const [qty, setQty] = useState(3)
+  const [price, setPrice] = useState(1200)
+  const [rate, setRate] = useState(10)
+  const total = qty * price * (1 - rate / 100)
+  const fmtTotal = total.toLocaleString('en-US', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  })
+  return (
+    <div className="flex w-full max-w-lg flex-col gap-6">
+      <div className="flex flex-col gap-4">
+        <label className="flex items-center justify-between gap-4">
+          <span className="text-sm text-white/60">Seats</span>
+          <NumberField value={qty} onChange={setQty} min={1} max={99} label="Seats" />
+        </label>
+        <label className="flex items-center justify-between gap-4">
+          <span className="text-sm text-white/60">Price each</span>
+          <NumberField
+            value={price}
+            onChange={setPrice}
+            min={0}
+            max={100000}
+            step={50}
+            bigStep={500}
+            group
+            prefix="$"
+            label="Price each"
+          />
+        </label>
+        <label className="flex items-center justify-between gap-4">
+          <span className="text-sm text-white/60">Discount</span>
+          <NumberField
+            value={rate}
+            onChange={setRate}
+            min={0}
+            max={100}
+            step={1}
+            precision={0}
+            suffix="%"
+            label="Discount"
+          />
+        </label>
+      </div>
+      <div className="flex items-baseline justify-between border-t border-white/10 pt-5">
+        <span className="text-xs font-semibold uppercase tracking-[0.24em] text-white/40">
+          Total
+        </span>
+        <span className="font-mono text-2xl tabular-nums text-[#DCF87C]">
+          ${fmtTotal}
+        </span>
+      </div>
     </div>
   )
 }
@@ -4828,6 +4889,39 @@ export default function Playground() {
                 springs in and folds out under an exit animation, and a single accent band sweeps a card as its file is
                 read. Reduced motion keeps every one of those as a plain, instant state change, and the control stays
                 fully usable from the keyboard.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH NUMBER FIELD */}
+        <Reveal>
+          <div id="numberfield" data-experiment="Number field" className="mt-12 scroll-mt-32">
+            <div className="flex flex-col items-center gap-8 rounded-3xl border border-white/10 bg-white/[0.02] px-6 py-14 sm:px-10">
+              <div className="max-w-md text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Nudge a number</span>
+                <p className="mx-auto mt-3 text-lg font-medium text-white/85 sm:text-xl">
+                  The spinner every form ships and no one can style, rebuilt: hold a stepper and it accelerates, drag the
+                  grip to scrub, or just type. Every value clamps, rounds, and formats itself.
+                </p>
+              </div>
+              <NumberFieldDemo />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Number field</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The native <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">input type=&quot;number&quot;</code>{' '}
+                is one of the platform&apos;s quiet disappointments: two tiny spinners you cannot restyle, that look
+                different in every browser, that only ever move by one, that jump the caret, and that have no
+                press-and-hold and no way to drag a value the way every real editor lets you. This is that control rebuilt
+                from the ground up — a field you type into freely (it only commits on blur or Enter, so a half-typed
+                number is never yanked out from under you), with proper accelerating steppers you can hold, a grip you drag
+                left and right to scrub, and full keyboard control: arrows step, Shift or Page keys take the big step, and
+                Home/End jump to the bounds. Every value is clamped to its range, snapped to the step grid, rounded to its
+                precision, and wrapped in a prefix and suffix, so the three fields above stay honest as they feed the live
+                total. It is a real <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">role=&quot;spinbutton&quot;</code>{' '}
+                that carries a spoken value, so a screen reader hears &quot;$1,200&quot;, not &quot;1200&quot;. Reduced
+                motion drops the button squash and the grip&apos;s warmth and leaves the control exactly as usable.
               </p>
             </div>
           </div>
