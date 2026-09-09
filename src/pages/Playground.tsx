@@ -91,6 +91,7 @@ import { Combobox, type ComboOption } from '../components/Combobox'
 import { TagInput } from '../components/TagInput'
 import { Calendar } from '../components/Calendar'
 import { ColorField } from '../components/ColorField'
+import { Dropzone } from '../components/Dropzone'
 import { CodeInput } from '../components/CodeInput'
 import { DynamicIsland, type IslandActivity } from '../components/DynamicIsland'
 import { Sheet } from '../components/Sheet'
@@ -4792,6 +4793,41 @@ export default function Playground() {
                 assistive tech — and the preview beside it spends the colour as a working accent so the value is felt, not
                 just read. Reduced motion drops the thumb&apos;s grab-swell and the gliding preset check for a plain,
                 equally usable picker.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH DROPZONE */}
+        <Reveal>
+          <div id="dropzone" data-experiment="File dropzone" className="mt-12 scroll-mt-32">
+            <div className="rounded-3xl border border-white/10 bg-white/[0.02] px-6 py-14 sm:px-10">
+              <div className="mx-auto mb-8 max-w-md text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Drop it in</span>
+                <p className="mx-auto mt-3 text-lg font-medium text-white/85 sm:text-xl">
+                  The clumsiest control the browser ships, rebuilt as a real drop target. Drag an image on, or click to
+                  browse — it previews locally and never leaves your machine.
+                </p>
+              </div>
+              <div className="mx-auto max-w-xl">
+                <Dropzone accept="image/*" maxFiles={6} label="Drop images here" />
+              </div>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">File dropzone</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The last control in the &quot;hard native thing, rebuilt&quot; thread, and the crudest one the platform
+                ships: <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">input type=&quot;file&quot;</code>{' '}
+                gives you an unstyleable button and a bare filename, no drag target, no preview, no way to take one file
+                back out. This is that control rebuilt as a real dropzone — a large, focusable target you can drag onto or
+                press Enter to browse, that reads each file in the browser, previews the images as thumbnails, and lets
+                you lift any one back off. It is deliberately an interaction study, the same honesty the contact form and
+                the waveform keep: nothing is uploaded and no backend exists, so files become object URLs on the page and
+                are revoked again the instant a thumbnail leaves or the demo unmounts. The motion carries the weight —
+                the dashed border and the whole surface lift and warm to the accent while a file hovers, each thumbnail
+                springs in and folds out under an exit animation, and a single accent band sweeps a card as its file is
+                read. Reduced motion keeps every one of those as a plain, instant state change, and the control stays
+                fully usable from the keyboard.
               </p>
             </div>
           </div>
