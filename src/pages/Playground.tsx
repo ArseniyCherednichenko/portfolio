@@ -132,6 +132,7 @@ import { Phyllotaxis } from '../components/Phyllotaxis'
 import { Attractor } from '../components/Attractor'
 import { JuliaSet } from '../components/JuliaSet'
 import { Mandelbrot } from '../components/Mandelbrot'
+import { Newton } from '../components/Newton'
 import { Waveform } from '../components/Waveform'
 import { LangtonsAnt } from '../components/LangtonsAnt'
 import { PendulumWave } from '../components/PendulumWave'
@@ -3672,6 +3673,42 @@ export default function Playground() {
                 palette, into a small internal buffer that CSS upscales — and a frame repaints only while the view is
                 moving, so at rest it costs almost nothing. No wall clock and no randomness. Reduced motion draws one
                 crisp deep-zoom still and holds it, clicks jumping straight there rather than gliding.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH NEWTON FRACTAL — the third escape-time question: not whether an orbit escapes, but which root it falls into */}
+        <Reveal>
+          <div id="newton" data-experiment="Newton" className="mt-12 scroll-mt-32">
+            <div className="relative h-[440px] overflow-hidden rounded-3xl border border-white/10 bg-[#040404]">
+              <Newton />
+              <div className="pointer-events-none absolute inset-x-0 top-8 z-10 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Newton fractal</span>
+                <p className="mx-auto mt-3 max-w-md px-6 text-lg font-medium text-white/90 sm:text-xl">
+                  Move across it. Each colour is a root the point falls into; the boundary between them never resolves.
+                </p>
+              </div>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Newton fractal</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The third member of the escape-time family, and the one that asks the opposite question. The Julia and
+                Mandelbrot sets above ask whether an orbit flies off to infinity; this one asks where an orbit lands.
+                Newton's method is the schoolbook way to find a root of an equation — stand at a guess, follow the
+                tangent down to where it crosses zero, and repeat — and for a well-chosen start it homes in within a few
+                steps. Run it on the whole complex plane for f(z) = z³ − a, which has three roots spaced evenly on a
+                circle, and colour every starting point by which of the three roots it converges to and how quickly it
+                gets there: the basins are three restrained tints — lime, a cool mint, a warm amber — shaded from ink
+                through the tint toward a white core where convergence is fastest. The catch, and the whole beauty, is
+                the border: the three basins never meet along a clean line — between any two lies a filigree of the
+                third, and between those, more, all the way down, a boundary that stays fractal at every scale. The
+                constant a rides a unit circle so the three roots slowly turn and the entire structure wheels and
+                re-folds; move across it and the pointer leans that phase, winding the fractal forward or back under the
+                cursor. Cheap by the same trick as the plasma — the iteration runs on a coarse offscreen buffer that CSS
+                upscales soft, the inner loop early-outs the moment a guess lands near a root. One canvas, one throttled
+                loop, no randomness. Reduced motion paints one already-formed phase and holds it, with no loop and no
+                pointer.
               </p>
             </div>
           </div>
