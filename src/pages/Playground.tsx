@@ -134,6 +134,7 @@ import { JuliaSet } from '../components/JuliaSet'
 import { Mandelbrot } from '../components/Mandelbrot'
 import { Newton } from '../components/Newton'
 import { Frost } from '../components/Frost'
+import { CodeBlock } from '../components/CodeBlock'
 import { Waveform } from '../components/Waveform'
 import { LangtonsAnt } from '../components/LangtonsAnt'
 import { PendulumWave } from '../components/PendulumWave'
@@ -312,6 +313,44 @@ const CATEGORIES: { id: string; num: string; label: string; title: string; blurb
 ]
 
 const NAV_LINKS: PillLink[] = CATEGORIES.map((c) => ({ id: c.id, label: c.label }))
+
+// The verbatim source of src/components/Reveal.tsx — the site's own scroll-into
+// -view workhorse — fed to the CodeBlock so the demo shows a real file from this
+// repository rather than a toy snippet. Kept in step with the file it quotes; if
+// Reveal ever changes, this string changes with it.
+const REVEAL_SOURCE = `import { motion } from 'framer-motion'
+import { type ReactNode } from 'react'
+
+const EASE = [0.16, 1, 0.3, 1] as const
+
+// Scroll-into-view reveal. Fades + lifts its children once. An optional \`id\`
+// passes straight through to the wrapper so a reveal can double as an anchor
+// target (e.g. for a scroll-spy contents rail) without an extra element.
+export function Reveal({
+  children,
+  className = '',
+  delay = 0,
+  id,
+}: {
+  children: ReactNode
+  className?: string
+  delay?: number
+  id?: string
+}) {
+  return (
+    <motion.div
+      id={id}
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-80px' }}
+      transition={{ duration: 0.6, ease: EASE, delay }}
+      className={className}
+    >
+      {children}
+    </motion.div>
+  )
+}
+`
 
 // Panels for the Carousel demo — honest beliefs about the craft, one line each,
 // deliberately about how the work is made rather than any single project.
@@ -6325,6 +6364,42 @@ export default function Playground() {
                 Enter to walk the steps, a progress rail of dots, and focus handed back to where you began. The whole
                 surface blocks page interaction while open, so the only way through is the card. Under reduced motion
                 the spotlight jumps rather than glides and the card simply fades.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH CODE BLOCK — the site showing its own source */}
+        <Reveal>
+          <div id="code-block" data-experiment="Code block" className="mt-12 scroll-mt-32">
+            <div className="grid items-center gap-8 lg:grid-cols-[0.85fr_1.15fr]">
+              <div className="px-1">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Its own source</span>
+                <p className="mt-3 max-w-md text-lg font-medium text-white/90 sm:text-xl">
+                  Every other panel here shows the site moving. This one shows how it is made — a real file from this
+                  repository, coloured on the page.
+                </p>
+                <p className="mt-4 max-w-md text-sm leading-relaxed text-white/45">
+                  This is <span className="font-mono text-white/70">Reveal.tsx</span> verbatim: the scroll-into-view
+                  wrapper most of the site is built on. The highlighter under it is hand-built too — a small
+                  single-pass TSX tokenizer, no Prism or Shiki — so even the code viewer keeps the &ldquo;made, not
+                  assembled&rdquo; thesis. Copy it and it hands over the exact source.
+                </p>
+              </div>
+              <CodeBlock code={REVEAL_SOURCE} filename="src/components/Reveal.tsx" highlightLines={[20, 21, 22]} />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Code block — the site&rsquo;s own source, highlighted</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The one panel that turns the camera on the workshop. It renders a real file from this repo, coloured by
+                a highlighter written for this purpose: a single left-to-right pass that knows comments, strings and
+                template literals, numbers, keywords, function calls, JSX tag names, and Capitalised type and component
+                names — deliberately a <em>light</em> highlighter, not a parser, which is enough to make real TSX read
+                clearly. The palette never leaves the site&rsquo;s world: lime carries the language, a warm sand the
+                strings, a cool teal the numbers, so a snippet reads as part of the page rather than a theme dropped in.
+                The real text lives in the spans, so a screen reader reads the code and find-in-page still hits it; the
+                gutter numbers are unselectable so a drag-copy takes clean lines, and the copy button hands over the
+                exact source. On scroll in the lines settle up in a short stagger; reduced motion paints them at rest.
               </p>
             </div>
           </div>
