@@ -133,6 +133,7 @@ import { Attractor } from '../components/Attractor'
 import { JuliaSet } from '../components/JuliaSet'
 import { Mandelbrot } from '../components/Mandelbrot'
 import { Newton } from '../components/Newton'
+import { Frost } from '../components/Frost'
 import { Waveform } from '../components/Waveform'
 import { LangtonsAnt } from '../components/LangtonsAnt'
 import { PendulumWave } from '../components/PendulumWave'
@@ -3709,6 +3710,42 @@ export default function Playground() {
                 upscales soft, the inner loop early-outs the moment a guess lands near a root. One canvas, one throttled
                 loop, no randomness. Reduced motion paints one already-formed phase and holds it, with no loop and no
                 pointer.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH FROST — a crystal grown by random walks that freeze on contact */}
+        <Reveal>
+          <div id="frost" data-experiment="Frost" className="mt-12 scroll-mt-32">
+            <div className="relative h-[440px] overflow-hidden rounded-3xl border border-white/10 bg-[#040506]">
+              <Frost />
+              <div className="pointer-events-none absolute inset-x-0 top-8 z-10 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Frost</span>
+                <p className="mx-auto mt-3 max-w-md px-6 text-lg font-medium text-white/90 sm:text-xl">
+                  Nothing draws the shape. It is only where the random walks happened to land. Move across it and the
+                  frost reaches toward your hand.
+                </p>
+              </div>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Frost — diffusion-limited aggregation</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The growth model none of the fields above it are. The Morphogen grows a pattern out of two reacting
+                chemicals, the Slime out of agents reading their own trail, the Sandpile out of toppling grains; this one
+                grows out of pure chance. A wall of seed sits along the bottom edge, and single walkers drift down from
+                above on a random walk. A walker that never touches the wall wanders off and is forgotten; one that
+                brushes a frozen cell freezes exactly where it stands. Nothing chooses the shape — it is only where the
+                random walks happened to land — and yet the result is the spiky, self-similar frost that actually climbs
+                a cold window. The reason is self-shadowing: a tip that pokes up is far likelier to catch the next walker
+                than a valley between two tips, so tips race ahead and branch, and branches grow their own tips, fractal
+                all the way down. It needs no rule beyond "stick on contact". Cheap by the same discipline as the
+                fractals — the aggregation lives on a coarse occupancy grid, walkers spawn just above the current front so
+                their walks stay short, and the plane wraps sideways so the frost is continuous across the full width;
+                every cell remembers the order it froze in, so the plane is painted ink at the old base up through lime to
+                a near-white spark at the newest tips. The pointer leans the walkers' drift, so the frost climbs a little
+                taller under the cursor; when the front nears the top it holds a beat, then thaws and begins again.
+                Reduced motion grows one full crystal off a seeded generator and holds it, with no loop and no pointer.
               </p>
             </div>
           </div>
