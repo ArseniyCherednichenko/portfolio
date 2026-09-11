@@ -120,6 +120,7 @@ import { Spirograph } from '../components/Spirograph'
 import { Gears } from '../components/Gears'
 import { Abacus } from '../components/Abacus'
 import { EuclidRing } from '../components/EuclidRing'
+import { Metronome } from '../components/Metronome'
 import { EtchASketch } from '../components/EtchASketch'
 import { Ballpit } from '../components/Ballpit'
 import { Cloth } from '../components/Cloth'
@@ -5850,6 +5851,40 @@ export default function Playground() {
                 beat, with the downbeat pitched up. Every step is a real toggle carrying its onset-or-rest state, the four
                 knobs are keyboard-driven spinbuttons, and a live region reads the current figure. Reduced motion snaps
                 the hand between steps and drops the flashes; the rhythm still plays and every state stays legible.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH METRONOME */}
+        <Reveal>
+          <div id="metronome" data-experiment="Metronome" className="mt-12 scroll-mt-32">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 py-10 sm:px-10">
+              <div className="text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Keep time</span>
+                <p className="mx-auto mt-3 max-w-md text-lg font-medium text-white/85 sm:text-xl">
+                  Slide the weight up the arm to slow it, down to speed it up. Or tap the tempo out by hand.
+                </p>
+              </div>
+              <Metronome className="mt-8" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Metronome</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The pyramid-bodied instrument, and the counterpart to the Euclidean ring above it: where that one composes
+                a pattern and sweeps a hand, this one does the single thing the wooden original does — hold a steady beat,
+                set by a weight you slide along an inverted pendulum. Higher on the arm swings slower, lower swings
+                faster, the same feel as thumbing the bob on a real Wittner. The swing is honest pendulum motion, not a
+                linear sweep: one phase accumulator counts beats off the frame delta, and the arm angle is the cosine of
+                that phase, so it eases to a stop at each extreme and runs fastest through the centre exactly as an
+                escapement does. Because tempo only changes how fast the phase advances, dragging the weight while it
+                runs never jerks the arm — it just speeds up or slows down from wherever it is, and there is no wall
+                clock, so a tab-away can't drift the count. Every way in works: drag the weight, press the steppers, hold
+                the arrow keys on the focused control, or tap the tempo pad and it takes the median of your last few taps.
+                A time signature sets the beats to a bar and accents each downbeat, brighter and pitched up if you turn on
+                sound, which is off by default. The weight is a real slider that speaks its value — "120 BPM, Allegro" —
+                and the tempo term is read out as it crosses into a new range. Reduced motion drops the sweep: the arm
+                snaps to the side of each beat and the lights step forward, so the tempo still reads at a glance.
               </p>
             </div>
           </div>
