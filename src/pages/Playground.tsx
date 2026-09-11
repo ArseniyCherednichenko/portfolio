@@ -117,6 +117,7 @@ import { Lanyard } from '../components/Lanyard'
 import { Turntable } from '../components/Turntable'
 import { Harmonograph } from '../components/Harmonograph'
 import { Spirograph } from '../components/Spirograph'
+import { Oscilloscope } from '../components/Oscilloscope'
 import { Tesseract } from '../components/Tesseract'
 import { Gears } from '../components/Gears'
 import { Abacus } from '../components/Abacus'
@@ -5432,6 +5433,40 @@ export default function Playground() {
                 wheel and its spoke lay it down, glowing where it crosses itself because the trace is composited additively.
                 One canvas, one loop, DPR-capped. Reduced motion draws the finished figure in a single frame, no rolling
                 wheel — and a control change simply redraws the new one whole.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH OSCILLOSCOPE */}
+        <Reveal>
+          <div id="oscilloscope" data-experiment="Oscilloscope" className="mt-12 scroll-mt-32">
+            <div className="relative h-[440px] overflow-hidden rounded-3xl border border-white/10 bg-[#040504]">
+              <Oscilloscope />
+              <div className="pointer-events-none absolute inset-x-0 top-8 z-10 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">XY mode</span>
+                <p className="mx-auto mt-3 max-w-md px-6 text-lg font-medium text-white/90 sm:text-xl">
+                  Move across it. Left to right walks the frequency ratio, up speeds the sweep.
+                </p>
+              </div>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Oscilloscope</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                A cathode-ray tube in XY mode, and the honest counterpart to the Harmonograph and the Spirograph beside
+                it &mdash; where those are pens that draw a figure and stop, this holds no line of its own. Feed the
+                horizontal plates x = sin(f<sub>x</sub>&middot;u + &delta;) and the vertical plates y = sin(f<sub>y</sub>&middot;u),
+                sweep the parameter u, and a single point traces a Lissajous figure whose whole shape is set by the
+                frequency ratio f<sub>x</sub>:f<sub>y</sub> &mdash; 1:1 an ellipse, 3:2 a trefoil, 5:4 a woven lattice. A
+                whole-number ratio stands still; nudge one oscillator a hair off and the figure never quite closes, so it
+                precesses &mdash; the drift you watch for on a bench scope when two signals fall out of lock. The glow is
+                real persistence, not a painted trail: nothing is cleared between frames, the whole face is dimmed a thin
+                wash each frame, and the fresh stretch of beam is added in <span className="whitespace-nowrap">&lsquo;lighter&rsquo;</span>
+                so passes that cross bloom toward white the way excited phosphor does &mdash; the tail is the literal sum of
+                how long ago each point was struck, brightest at the hot head still moving. The pointer drives the
+                oscillators: across walks the ratio, up sets the sweep speed and detune; it eases home to a slow trefoil
+                when you leave. One canvas, one loop off the frame delta, DPR-capped. Reduced motion draws one closed
+                figure as a steady line and holds it.
               </p>
             </div>
           </div>
