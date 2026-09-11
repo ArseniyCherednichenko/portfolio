@@ -117,6 +117,7 @@ import { Lanyard } from '../components/Lanyard'
 import { Turntable } from '../components/Turntable'
 import { Harmonograph } from '../components/Harmonograph'
 import { Spirograph } from '../components/Spirograph'
+import { Tesseract } from '../components/Tesseract'
 import { Gears } from '../components/Gears'
 import { Abacus } from '../components/Abacus'
 import { EuclidRing } from '../components/EuclidRing'
@@ -5464,6 +5465,40 @@ export default function Playground() {
                 precomputed once and just evaluated per frame. Grab any wheel and the train follows; the release hands it
                 a fly-wheel glide that coasts to rest. One canvas, one loop that sleeps when nothing turns, DPR-capped.
                 Reduced motion paints it once at rest and keeps the drag working.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH TESSERACT */}
+        <Reveal>
+          <div id="tesseract" data-experiment="Tesseract" className="mt-12 scroll-mt-32">
+            <div className="relative h-[440px] overflow-hidden rounded-3xl border border-white/10 bg-[#040404]">
+              <Tesseract />
+              <div className="pointer-events-none absolute inset-x-0 top-8 z-10 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Four dimensions</span>
+                <p className="mx-auto mt-3 max-w-md px-6 text-lg font-medium text-white/90 sm:text-xl">
+                  Move across it. The horizontal push spins it, the vertical tilts it.
+                </p>
+              </div>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Tesseract</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The four-dimensional cube, and the geometry family's honest oddity beside the Spirograph and the Gear
+                train — where those trace a closed curve or hold a rigid ratio in a plane you can see, this holds a shape
+                from a plane you cannot. The object is exact, not evoked: a tesseract has 16 vertices, every choice of
+                &plusmn;1 across four axes, and 32 edges, one joining each pair that differs in a single coordinate. What
+                moves is only the frame they are read in. Rotation in 4D happens in a plane, not about an axis, and this
+                turns three at once &mdash; the XW and ZW planes, the two that reach into the fourth dimension and make
+                the inner cell appear to swell out through the outer one and back, plus a gentle XY spin so the whole
+                figure also turns the familiar way. Then it is cast down twice: a perspective divide by distance in w
+                projects the 4-cube into 3D, and the same divide in z projects that into the plane, so nearness in either
+                hidden dimension reads as size and brightness &mdash; near edges thick and near-white, far edges thin and
+                dim, and the &ldquo;cube inside a cube&rdquo; you always see in a tesseract diagram is just the far cell
+                shrunk by that first divide. The pointer leans the tumble and eases back to a slow idle when it leaves.
+                One canvas, one loop off the frame delta, DPR-capped. Reduced motion projects it once at a flattering
+                angle and holds it still.
               </p>
             </div>
           </div>
