@@ -212,6 +212,7 @@ import { StringPluck } from '../components/StringPluck'
 import { Cyclic } from '../components/Cyclic'
 import { Sandpile } from '../components/Sandpile'
 import { Sortable } from '../components/Sortable'
+import { KanbanBoard } from '../components/KanbanBoard'
 import { Carousel, type CarouselSlide } from '../components/Carousel'
 import { HoverIndex, type HoverIndexItem } from '../components/HoverIndex'
 import { Gravity } from '../components/Gravity'
@@ -6208,6 +6209,39 @@ export default function Playground() {
                 rearrange, the state itself becoming the toy. Honest to a11y — each row is a real control with an
                 arrow-key travel and a polite live region that reads the new position, so it reorders exactly the same by
                 keyboard as by drag, and reduced motion swaps the glide for an instant jump.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH KANBAN BOARD */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 py-12 sm:px-10">
+              <div className="text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Move</span>
+                <p className="mx-auto mt-3 max-w-md text-lg font-medium text-white/85 sm:text-xl">
+                  Drag a card from one column into another. A dashed slot shows where it lands.
+                </p>
+              </div>
+              <div className="mx-auto mt-10 max-w-2xl">
+                <KanbanBoard />
+              </div>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Kanban board</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The companion to the Sortable list, and a genuinely harder problem: that one reorders a single column, so
+                the whole move is one index; this one carries a card between columns, which is two answers at once — a
+                target column and a target slot. The trick that keeps it robust is that the dragged card is lifted clean
+                out of the columns into a single floating clone that tracks the pointer, with a dashed placeholder marking
+                the exact slot it will drop into; because the columns never reparent the moving node, the pointer capture —
+                held on the board itself, not the card — never breaks as the card hops a column, which is where a naive
+                version drops the drag mid-air. Honest to a11y in the same way as its neighbour: every card is a real
+                control with a full arrow-key travel (up and down within a column, left and right across them) and a polite
+                live region that reads where it landed, so it moves exactly the same by keyboard as by hand. The board is a
+                demo way of working, not a task list — no real tickets or dates, just the shape of how a small thing gets
+                made. Under reduced motion the drag is off and the springs snap, but the keyboard board stays fully usable.
               </p>
             </div>
           </div>
