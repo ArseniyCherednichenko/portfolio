@@ -30,6 +30,7 @@ import { Eyebrow } from '../components/Eyebrow'
 import { SectionNav } from '../components/SectionNav'
 import { Odometer } from '../components/Odometer'
 import { AnimatedList, type AnimatedListItem } from '../components/AnimatedList'
+import { Glance } from '../components/Glance'
 import { useContact } from '../components/ContactDialog'
 import { Seo } from '../components/Seo'
 import { PROJECTS, SKILLS, type Project } from '../data/projects'
@@ -322,25 +323,32 @@ export default function Home() {
       </header>
 
       {/* ABOUT */}
-      <section id="about" className="mx-auto w-full max-w-4xl px-6 py-24">
-        <Reveal>
-          <Eyebrow>About</Eyebrow>
-        </Reveal>
-        <Reveal delay={0.05}>
-          <p className="mt-6 font-display text-3xl font-medium leading-snug text-white/85 sm:text-4xl">
-            I care about products that feel effortless. Real craft in the motion, the typography, and the small
-            moments, the things people feel but cannot name.
-          </p>
-        </Reveal>
+      <section id="about" className="mx-auto w-full max-w-5xl px-6 py-24">
+        <div className="mx-auto max-w-4xl">
+          <Reveal>
+            <Eyebrow>About</Eyebrow>
+          </Reveal>
+          <Reveal delay={0.05}>
+            <p className="mt-6 font-display text-3xl font-medium leading-snug text-white/85 sm:text-4xl">
+              I care about products that feel effortless. Real craft in the motion, the typography, and the small
+              moments, the things people feel but cannot name.
+            </p>
+          </Reveal>
+        </div>
         <Reveal delay={0.1}>
-          <Link
-            to="/about"
-            className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-[#DCF87C] transition-opacity hover:opacity-80"
-          >
-            More about me
-            <span aria-hidden>-&gt;</span>
-          </Link>
+          <Glance className="mt-12" />
         </Reveal>
+        <div className="mx-auto max-w-4xl">
+          <Reveal delay={0.14}>
+            <Link
+              to="/about"
+              className="mt-10 inline-flex items-center gap-2 text-sm font-semibold text-[#DCF87C] transition-opacity hover:opacity-80"
+            >
+              More about me
+              <span aria-hidden>-&gt;</span>
+            </Link>
+          </Reveal>
+        </div>
       </section>
 
       {/* RANGE */}
