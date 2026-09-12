@@ -137,6 +137,7 @@ import { JuliaSet } from '../components/JuliaSet'
 import { Mandelbrot } from '../components/Mandelbrot'
 import { Newton } from '../components/Newton'
 import { Frost } from '../components/Frost'
+import { ParticleLife } from '../components/ParticleLife'
 import { CodeBlock } from '../components/CodeBlock'
 import { Waveform } from '../components/Waveform'
 import { LangtonsAnt } from '../components/LangtonsAnt'
@@ -3788,6 +3789,44 @@ export default function Playground() {
                 a near-white spark at the newest tips. The pointer leans the walkers' drift, so the frost climbs a little
                 taller under the cursor; when the front nears the top it holds a beat, then thaws and begins again.
                 Reduced motion grows one full crystal off a seeded generator and holds it, with no loop and no pointer.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH PARTICLE LIFE — cells and chasers from an attraction table */}
+        <Reveal>
+          <div id="particle-life" data-experiment="Particle life" className="mt-12 scroll-mt-32">
+            <div className="relative h-[520px] overflow-hidden rounded-3xl border border-white/10 bg-[#050606]">
+              <ParticleLife />
+              <div className="pointer-events-none absolute inset-x-0 top-8 z-10 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Particle life</span>
+                <p className="mx-auto mt-3 max-w-md px-6 text-lg font-medium text-white/90 sm:text-xl">
+                  Four colours, one table of who is drawn to whom. Nothing draws a cell — the cells grow themselves.
+                  Move across it and the field leans toward your hand.
+                </p>
+              </div>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Particle life — emergence from an attraction table</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                Ventrella's "Clusters" (2010), and the most life the shelf gets from the least rule. The others each grow
+                structure out of a mechanism — the Morphogen out of two reacting chemicals, the Slime out of a shared
+                trail, the Frost out of pure chance, the Murmuration out of the three flocking rules. This grows it out of
+                a single small table: for each pair of colours, how strongly one is pulled toward the other. That table is
+                the whole program. Each particle looks at its neighbours within a radius and sums a force — below a short
+                inner radius it is a hard, universal repulsion, whatever the colours, so nothing can pass through anything
+                else and the field can never collapse to a point; beyond it, the pull is whatever the table says for that
+                pair, peaking mid-range and fading to nothing at the edge. The table is asymmetric on purpose: lime can
+                chase mint while mint flees lime, and that one asymmetry is what breeds the endlessly circling chasers and
+                the slow-breathing cells. Nothing in the table names a cell or a membrane — every structure is emergent,
+                and the surprise of the model is how much comes out of so little. Cheap by the shelf's discipline: an O(N)
+                uniform spatial hash means each particle only checks the handful of neighbours in its own cell and the
+                eight around it, not all the others; positions live in flat typed arrays off the React render path, and
+                the plane wraps toroidally so the field has no edges. The species table and the opening scatter are seeded,
+                so it always starts from the same known-good world, then never quite repeats. The pointer is a soft
+                attractor that leans the field toward your hand. Reduced motion runs the sim forward until the clusters
+                form, then holds one still frame.
               </p>
             </div>
           </div>
