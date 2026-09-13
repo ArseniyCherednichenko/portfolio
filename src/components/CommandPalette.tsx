@@ -145,6 +145,7 @@ function Palette({ open, onClose }: { open: boolean; onClose: () => void }) {
   const commands = useMemo<Command[]>(() => {
     const pages: Command[] = [
       { id: 'home', label: 'Home', group: 'Pages', hint: '/', keywords: 'start landing', run: () => go('/') },
+      { id: 'start', label: 'Start here', group: 'Pages', hint: 'where to begin', keywords: 'start here begin guide orientation new first time where to go paths hiring craft quick wander welcome introduction', run: () => go('/start') },
       { id: 'work', label: 'Work', group: 'Pages', hint: 'all projects', keywords: 'projects portfolio case studies', run: () => go('/work') },
       { id: 'range', label: 'The range', group: 'Pages', hint: 'disciplines I work across', keywords: 'range disciplines frontend ios backend applied ai motion skills capabilities multi disciplinary full stack breadth', run: () => go('/range') },
       { id: 'about', label: 'About', group: 'Pages', hint: 'story, path', keywords: 'bio story timeline principles', run: () => go('/about') },
