@@ -7,6 +7,7 @@ import { Layout } from './components/Layout'
 // and streamed in on navigation, so first paint stays lean. The Suspense
 // boundary that catches these lives in Layout.
 import Home from './pages/Home'
+const Start = lazy(() => import('./pages/Start'))
 const About = lazy(() => import('./pages/About'))
 const Work = lazy(() => import('./pages/Work'))
 const Range = lazy(() => import('./pages/Range'))
@@ -44,6 +45,7 @@ export default function App() {
     <Routes>
       <Route element={<Layout />}>
         <Route index element={<Home />} />
+        <Route path="start" element={<Start />} />
         <Route path="about" element={<About />} />
         <Route path="work" element={<Work />} />
         <Route path="range" element={<Range />} />
