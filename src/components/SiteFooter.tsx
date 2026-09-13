@@ -136,6 +136,13 @@ export function SiteFooter() {
             <p className="mt-3 max-w-[24ch] text-sm leading-relaxed text-white/45">
               Co-founder of Guided. Building for the web in Berlin, one hand-made component at a time.
             </p>
+            <Link
+              to="/start"
+              className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-[#DCF87C] transition-opacity hover:opacity-80"
+            >
+              New here? Start here
+              <span aria-hidden className="transition-transform duration-300 ease-out group-hover:translate-x-0.5">-&gt;</span>
+            </Link>
             {/* The name, signed — the site's personal mark, drawn by the pen as
                 it scrolls into the footer. Hover to see it written again. */}
             <Signature height={58} className="mt-6 -ml-1 text-white/80" />
