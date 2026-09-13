@@ -1,7 +1,6 @@
 import {
   useCallback,
   useEffect,
-  useId,
   useRef,
   useState,
   type KeyboardEvent as ReactKeyboardEvent,
@@ -169,7 +168,6 @@ class Voice {
  */
 export function ToneMatrix({ className = '' }: { className?: string }) {
   const reduce = useReducedMotion()
-  const baseId = useId()
 
   const [grid, setGrid] = useState<boolean[][]>(seedGrid)
   const [playing, setPlaying] = useState(false)
