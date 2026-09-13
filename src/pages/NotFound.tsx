@@ -64,12 +64,20 @@ export default function NotFound() {
         transition={{ duration: 0.7, delay: 0.18, ease: EASE }}
         className="mt-10 flex flex-col items-center gap-6"
       >
-        <Link
-          to="/"
-          className="rounded-full bg-[#DCF87C] px-7 py-3.5 font-semibold text-black transition hover:brightness-105"
-        >
-          Take me home
-        </Link>
+        <div className="flex flex-col items-center gap-3">
+          <Link
+            to="/"
+            className="rounded-full bg-[#DCF87C] px-7 py-3.5 font-semibold text-black transition hover:brightness-105"
+          >
+            Take me home
+          </Link>
+          <Link
+            to="/start"
+            className="text-sm font-medium text-white/45 underline-offset-4 transition-colors hover:text-[#DCF87C] hover:underline"
+          >
+            Or start from the beginning
+          </Link>
+        </div>
         <div className="w-full max-w-2xl text-left">
           <ChromaGrid items={ELSEWHERE} radius={200} />
         </div>
