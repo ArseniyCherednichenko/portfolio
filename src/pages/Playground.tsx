@@ -123,6 +123,7 @@ import { Gears } from '../components/Gears'
 import { Abacus } from '../components/Abacus'
 import { EuclidRing } from '../components/EuclidRing'
 import { Metronome } from '../components/Metronome'
+import { ToneMatrix } from '../components/ToneMatrix'
 import { EtchASketch } from '../components/EtchASketch'
 import { Ballpit } from '../components/Ballpit'
 import { Cloth } from '../components/Cloth'
@@ -5995,6 +5996,38 @@ export default function Playground() {
                 sound, which is off by default. The weight is a real slider that speaks its value — "120 BPM, Allegro" —
                 and the tempo term is read out as it crosses into a new range. Reduced motion drops the sweep: the arm
                 snaps to the side of each beat and the lights step forward, so the tempo still reads at a glance.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH TONE MATRIX */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 py-12 sm:px-10">
+              <div className="text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Compose</span>
+                <p className="mx-auto mt-3 max-w-md text-lg font-medium text-white/85 sm:text-xl">
+                  Paint notes on the grid. The playhead sweeps across and sounds each one.
+                </p>
+              </div>
+              <ToneMatrix className="mt-10" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Tone matrix</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                A grid instrument in the lineage of the Tenori-on and André Michelle's ToneMatrix, and the melodic
+                counterpart to the two rhythm pieces above it: the Euclidean ring spaces a single pulse and the metronome
+                counts a beat, but this one lets you actually write a line. Pitch climbs the rows, time runs across the
+                columns; paint any cells you like and a playhead sweeps the columns at the tempo you set, sounding every
+                lit cell as it lands. The rows are tuned to a pentatonic scale on purpose — a pentatonic has no semitone
+                clashes, so any set of cells you turn on stays in tune with any other, and scribbling at random still
+                comes out as music. Every column is an eighth note, so a sixteen-step loop is two bars and a melody has
+                room to breathe. The grid is a real keyboard field: arrow keys move a roving focus, Space or Enter toggles
+                a cell, and each cell names its note and step to a screen reader. Sound is optional and off by default —
+                one lazily-built audio context unlocked only on a tap — so the matrix is fully usable silent. Reduced
+                motion steps the playhead column to column with no sweep and drops the note flashes; it still plays, and
+                every state stays legible.
               </p>
             </div>
           </div>
