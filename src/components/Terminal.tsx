@@ -29,6 +29,7 @@ import { EMAIL, GITHUB_URL } from '../data/contact'
 // the `ls` listing, so this list stays the single source of truth here.
 const PAGES: { slug: string; to: string; blurb: string }[] = [
   { slug: 'home', to: '/', blurb: 'the landing page' },
+  { slug: 'start', to: '/start', blurb: 'where to begin, by what brought you' },
   { slug: 'about', to: '/about', blurb: 'who I am, how I work' },
   { slug: 'work', to: '/work', blurb: 'what I have shipped' },
   { slug: 'playground', to: '/playground', blurb: 'live motion experiments' },
