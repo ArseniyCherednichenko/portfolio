@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { Reveal } from '../components/Reveal'
@@ -6,6 +7,7 @@ import { GradientText } from '../components/GradientText'
 import { SpotlightCard } from '../components/SpotlightCard'
 import { ShinyText } from '../components/ShinyText'
 import { Ribbons } from '../components/Ribbons'
+import { Modal } from '../components/Modal'
 import { Seo } from '../components/Seo'
 import { useBerlinTime } from '../hooks/useBerlinTime'
 import { LAST_UPDATED, LOCATION, NOW_ITEMS } from '../data/now'
@@ -57,6 +59,11 @@ export default function Now() {
   // Computed at render, so the "how long ago" reads true whenever the page loads
   // — no library, no rebuild needed for it to keep counting up.
   const age = freshness(LAST_UPDATED, new Date())
+  // Which focus is opened into its detail dialog. Only items carrying `detail`
+  // are openable; the honest "to fill in" placeholder has nothing more to show,
+  // so it stays a plain card.
+  const [openIndex, setOpenIndex] = useState<number | null>(null)
+  const active = openIndex === null ? null : NOW_ITEMS[openIndex]
 
   return (
     <>
@@ -149,35 +156,106 @@ export default function Now() {
 
       {/* FOCUS GRID */}
       <section className="mx-auto grid w-full max-w-4xl gap-5 px-6 py-8 sm:grid-cols-2">
-        {NOW_ITEMS.map((item, i) => (
-          <Reveal key={item.label} delay={i * 0.05}>
-            <SpotlightCard className="h-full">
-              <div className="flex h-full flex-col p-6 sm:p-7">
-                <div className="flex items-center justify-between gap-3">
-                  <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[#DCF87C]">
-                    {item.label}
-                  </span>
-                  {item.placeholder && (
-                    <span className="rounded-full border border-white/10 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-[0.15em] text-white/35">
-                      To fill in
+        {NOW_ITEMS.map((item, i) => {
+          const openable = !!item.detail && !item.placeholder
+          return (
+            <Reveal key={item.label} delay={i * 0.05}>
+              <SpotlightCard className="h-full">
+                {/* Stretched-button overlay: the whole card opens the detail
+                    dialog. Kept as one control (no nested interactives inside
+                    the card) so the semantics stay clean. The placeholder and
+                    any link-less item render as a plain card. */}
+                {openable && (
+                  <button
+                    type="button"
+                    onClick={() => setOpenIndex(i)}
+                    aria-haspopup="dialog"
+                    aria-label={`${item.label}: ${item.title} — read more`}
+                    className="absolute inset-0 z-10 rounded-3xl focus:outline-none focus-visible:ring-2 focus-visible:ring-[#DCF87C]/60"
+                  />
+                )}
+                <div
+                  className={`flex h-full flex-col p-6 transition-transform duration-300 sm:p-7 ${
+                    openable && !reduce ? 'group-hover:-translate-y-0.5' : ''
+                  }`}
+                >
+                  <div className="flex items-center justify-between gap-3">
+                    <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[#DCF87C]">
+                      {item.label}
+                    </span>
+                    {item.placeholder ? (
+                      <span className="rounded-full border border-white/10 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-[0.15em] text-white/35">
+                        To fill in
+                      </span>
+                    ) : (
+                      <span className="font-display text-sm tabular-nums text-white/20">
+                        {String(i + 1).padStart(2, '0')}
+                      </span>
+                    )}
+                  </div>
+                  <h2 className="mt-4 font-display text-2xl font-semibold leading-tight tracking-tight">
+                    {item.title}
+                  </h2>
+                  <p
+                    className={`mt-3 text-[15px] leading-relaxed ${
+                      item.placeholder ? 'text-white/40' : 'text-white/60'
+                    }`}
+                  >
+                    {item.body}
+                  </p>
+                  {openable && (
+                    <span className="mt-5 inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.15em] text-white/35 transition-colors group-hover:text-[#DCF87C]">
+                      Read more
+                      <span
+                        aria-hidden
+                        className={`transition-transform duration-300 ${reduce ? '' : 'group-hover:translate-x-0.5'}`}
+                      >
+                        &rarr;
+                      </span>
                     </span>
                   )}
                 </div>
-                <h2 className="mt-4 font-display text-2xl font-semibold leading-tight tracking-tight">
-                  {item.title}
-                </h2>
-                <p
-                  className={`mt-3 text-[15px] leading-relaxed ${
-                    item.placeholder ? 'text-white/40' : 'text-white/60'
-                  }`}
-                >
-                  {item.body}
-                </p>
-              </div>
-            </SpotlightCard>
-          </Reveal>
-        ))}
+              </SpotlightCard>
+            </Reveal>
+          )
+        })}
       </section>
+
+      {/* FOCUS DETAIL DIALOG — an honest elaboration of the opened card, with a
+          route out into the rest of the site where one is relevant. */}
+      <Modal
+        open={active !== null}
+        onClose={() => setOpenIndex(null)}
+        label={active ? `${active.label}: ${active.title}` : 'Focus'}
+      >
+        {active && (
+          <div>
+            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[#DCF87C]">
+              {active.label}
+            </span>
+            <h2 className="mt-3 font-display text-3xl font-semibold leading-tight tracking-tight">
+              {active.title}
+            </h2>
+            <div className="mt-5 space-y-4 text-[15px] leading-relaxed text-white/65">
+              {(active.detail ?? [active.body]).map((para, i) => (
+                <p key={i}>{para}</p>
+              ))}
+            </div>
+            {active.to && (
+              <div className="mt-7">
+                <Link
+                  to={active.to}
+                  onClick={() => setOpenIndex(null)}
+                  className="inline-flex items-center gap-2 rounded-full bg-[#DCF87C] px-5 py-2.5 text-sm font-semibold text-black transition hover:brightness-105"
+                >
+                  {active.toLabel ?? 'See more'}
+                  <span aria-hidden>&rarr;</span>
+                </Link>
+              </div>
+            )}
+          </div>
+        )}
+      </Modal>
 
       {/* CLOSING */}
       <section className="mx-auto w-full max-w-4xl px-6 py-16">
