@@ -236,6 +236,7 @@ import { ChordDiagram } from '../components/ChordDiagram'
 import { Treemap } from '../components/Treemap'
 import { Waffle } from '../components/Waffle'
 import { Heatmap, type HeatmapRow } from '../components/Heatmap'
+import { Sankey, type SankeyNode, type SankeyLink } from '../components/Sankey'
 
 // Spare stroke icons for the dock — no emoji, currentColor so they warm to lime.
 const ic = (d: string) => (
@@ -671,6 +672,79 @@ function ChordDiagramDemo() {
         className="rounded-full border border-white/15 px-4 py-1.5 text-sm font-semibold text-white/80 transition-colors hover:border-[#DCF87C]/50 hover:bg-white/[0.04] hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#DCF87C]/60"
       >
         Shuffle
+      </button>
+    </div>
+  )
+}
+
+// A Sankey showcase. Where the chord measures what ties two things together but
+// not which way it runs, this measures movement itself: how a quantity splits,
+// travels, and re-gathers as it crosses from one stage to the next, every band
+// as wide as the amount it carries. The flow here is illustrative (a component
+// demo, not a claimed statistic) — how the effort on a typical build fans out
+// from an idea, through the disciplines, into what actually ships. "Reweight"
+// re-rolls the link values so the bands re-flow and the columns re-pack; hover a
+// node or its legend row to light everything running in or out of it.
+const SANKEY_NODES: SankeyNode[] = [
+  { label: 'Idea', id: 'idea' },
+  { label: 'Design', id: 'design' },
+  { label: 'Engineering', id: 'eng' },
+  { label: 'Motion', id: 'motion' },
+  { label: 'Web', id: 'web' },
+  { label: 'Native', id: 'native' },
+  { label: 'Shipped', id: 'shipped' },
+]
+
+// Fixed link topology; only the weights are re-rolled, so the shape stays honest
+// (an idea fans into three disciplines, which feed two surfaces, which ship).
+const SANKEY_EDGES: ReadonlyArray<readonly [string, string]> = [
+  ['idea', 'design'],
+  ['idea', 'eng'],
+  ['idea', 'motion'],
+  ['design', 'web'],
+  ['design', 'native'],
+  ['eng', 'web'],
+  ['eng', 'native'],
+  ['motion', 'web'],
+  ['web', 'shipped'],
+  ['native', 'shipped'],
+]
+
+function rollSankeyLinks(): SankeyLink[] {
+  return SANKEY_EDGES.map(([source, target]) => ({
+    source,
+    target,
+    value: 3 + Math.round(Math.random() * 9),
+  }))
+}
+
+function SankeyDemo() {
+  const [links, setLinks] = useState<SankeyLink[]>(() => [
+    { source: 'idea', target: 'design', value: 8 },
+    { source: 'idea', target: 'eng', value: 10 },
+    { source: 'idea', target: 'motion', value: 6 },
+    { source: 'design', target: 'web', value: 5 },
+    { source: 'design', target: 'native', value: 3 },
+    { source: 'eng', target: 'web', value: 6 },
+    { source: 'eng', target: 'native', value: 4 },
+    { source: 'motion', target: 'web', value: 6 },
+    { source: 'web', target: 'shipped', value: 17 },
+    { source: 'native', target: 'shipped', value: 7 },
+  ])
+  const [run, setRun] = useState(0)
+  function reweight() {
+    setLinks(rollSankeyLinks())
+    setRun((n) => n + 1)
+  }
+  return (
+    <div className="flex w-full flex-col items-center gap-6">
+      <Sankey key={run} nodes={SANKEY_NODES} links={links} unit="units" size={480} />
+      <button
+        type="button"
+        onClick={reweight}
+        className="rounded-full border border-white/15 px-4 py-1.5 text-sm font-semibold text-white/80 transition-colors hover:border-[#DCF87C]/50 hover:bg-white/[0.04] hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#DCF87C]/60"
+      >
+        Reweight
       </button>
     </div>
   )
@@ -4747,6 +4821,17 @@ export default function Playground() {
                 note="The chart the others cannot draw — not how much or what share, but what runs between things. Five facets of building a product, each an arc on the rim sized by how connected it is, every tie a ribbon woven through the centre. One lime stepped by rank; the legend names each group. Shuffle to re-weave, hover a row to light the ties it carries."
               >
                 <ChordDiagramDemo />
+              </Experiment>
+            </Reveal>
+          </div>
+
+          <div className="sm:col-span-2">
+            <Reveal>
+              <Experiment
+                name="Sankey"
+                note="The chart the others cannot draw — not how much or what share, but which way it runs. A quantity splits from one idea, fans through the disciplines, and re-gathers into what ships; every band is as wide as the amount it carries, conserved end to end. One lime stepped by rank; the legend names each stage. Reweight to re-flow, hover a node to light everything running through it."
+              >
+                <SankeyDemo />
               </Experiment>
             </Reveal>
           </div>
