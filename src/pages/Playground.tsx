@@ -237,6 +237,7 @@ import { Treemap } from '../components/Treemap'
 import { Waffle } from '../components/Waffle'
 import { Heatmap, type HeatmapRow } from '../components/Heatmap'
 import { Sankey, type SankeyNode, type SankeyLink } from '../components/Sankey'
+import { StreamGraph, type StreamSeries } from '../components/StreamGraph'
 
 // Spare stroke icons for the dock — no emoji, currentColor so they warm to lime.
 const ic = (d: string) => (
@@ -739,6 +740,55 @@ function SankeyDemo() {
   return (
     <div className="flex w-full flex-col items-center gap-6">
       <Sankey key={run} nodes={SANKEY_NODES} links={links} unit="units" size={480} />
+      <button
+        type="button"
+        onClick={reweight}
+        className="rounded-full border border-white/15 px-4 py-1.5 text-sm font-semibold text-white/80 transition-colors hover:border-[#DCF87C]/50 hover:bg-white/[0.04] hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#DCF87C]/60"
+      >
+        Reweight
+      </button>
+    </div>
+  )
+}
+
+// A StreamGraph showcase. Illustrative, not a claimed statistic: five kinds of
+// making — type, motion, charts, controls, toys — as bands whose height rises
+// and falls across six unnamed chapters, so the whole reads as one river of work
+// that shifts emphasis over time. A component demo, exactly like the Sankey's,
+// with a Reweight that re-rolls every value from a smooth walk so each band keeps
+// an organic, believable shape rather than jumping at random.
+const STREAM_LABELS = ['I', 'II', 'III', 'IV', 'V', 'VI']
+const STREAM_KINDS: { id: string; label: string }[] = [
+  { id: 'type', label: 'Type' },
+  { id: 'motion', label: 'Motion' },
+  { id: 'charts', label: 'Charts' },
+  { id: 'controls', label: 'Controls' },
+  { id: 'toys', label: 'Toys' },
+]
+
+// A gentle random walk per band: start somewhere sensible, then drift, so the
+// river breathes instead of spiking. Clamped to stay positive and on-scale.
+function rollStream(): StreamSeries[] {
+  return STREAM_KINDS.map((k) => {
+    let v = 4 + Math.random() * 6
+    const values = STREAM_LABELS.map(() => {
+      v = Math.max(1.5, Math.min(12, v + (Math.random() - 0.5) * 4))
+      return Math.round(v)
+    })
+    return { id: k.id, label: k.label, values }
+  })
+}
+
+function StreamGraphDemo() {
+  const [series, setSeries] = useState<StreamSeries[]>(() => rollStream())
+  const [run, setRun] = useState(0)
+  function reweight() {
+    setSeries(rollStream())
+    setRun((n) => n + 1)
+  }
+  return (
+    <div className="flex w-full flex-col items-center gap-6">
+      <StreamGraph key={run} series={series} labels={STREAM_LABELS} unit="units" />
       <button
         type="button"
         onClick={reweight}
@@ -4832,6 +4882,17 @@ export default function Playground() {
                 note="The chart the others cannot draw — not how much or what share, but which way it runs. A quantity splits from one idea, fans through the disciplines, and re-gathers into what ships; every band is as wide as the amount it carries, conserved end to end. One lime stepped by rank; the legend names each stage. Reweight to re-flow, hover a node to light everything running through it."
               >
                 <SankeyDemo />
+              </Experiment>
+            </Reveal>
+          </div>
+
+          <div className="sm:col-span-2">
+            <Reveal>
+              <Experiment
+                name="Stream graph"
+                note="The chart the others cannot draw — not one line rising from a floor, but many quantities moving together over time. Each band's height is its value; the whole stack floats on a wiggle-minimising baseline, so the river stays centred and every branch keeps its own shape. One lime stepped by total; the legend names each series. Reweight to re-flow, hover a band to lift it out of the current."
+              >
+                <StreamGraphDemo />
               </Experiment>
             </Reveal>
           </div>
