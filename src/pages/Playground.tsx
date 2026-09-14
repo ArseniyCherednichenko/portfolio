@@ -94,6 +94,7 @@ import { Calendar } from '../components/Calendar'
 import { ColorField } from '../components/ColorField'
 import { Dropzone } from '../components/Dropzone'
 import { NumberField } from '../components/NumberField'
+import { StarRating } from '../components/StarRating'
 import { CodeInput } from '../components/CodeInput'
 import { DynamicIsland, type IslandActivity } from '../components/DynamicIsland'
 import { Sheet } from '../components/Sheet'
@@ -941,6 +942,43 @@ function NumberFieldDemo() {
         <span className="font-mono text-2xl tabular-nums text-[#DCF87C]">
           ${fmtTotal}
         </span>
+      </div>
+    </div>
+  )
+}
+
+// A StarRating showcase: the interactive control with honest word labels above,
+// and a read-only strip below showing the same component displaying a fixed
+// half-star value — so both modes (input and output) are visible at once. The
+// words are plain descriptions of a rating value, not a claim about anyone.
+const RATING_WORDS = ['Poor', 'Fair', 'Good', 'Great', 'Loved it'] as const
+
+function StarRatingDemo() {
+  const [rating, setRating] = useState(0)
+  return (
+    <div className="flex w-full max-w-lg flex-col items-center gap-10">
+      <div className="flex flex-col items-center gap-4">
+        <span className="text-xs font-semibold uppercase tracking-[0.24em] text-white/40">
+          Rate this control
+        </span>
+        <StarRating
+          value={rating}
+          onChange={setRating}
+          size="lg"
+          labels={RATING_WORDS}
+          label="Rate this control"
+        />
+        <p className="h-4 text-center text-xs text-white/40">
+          {rating > 0
+            ? 'Hover, click, or focus it and use the arrow keys — half steps and all.'
+            : 'Click a star, or focus the strip and press a number or an arrow key.'}
+        </p>
+      </div>
+      <div className="flex w-full flex-col items-center gap-2 border-t border-white/10 pt-8">
+        <span className="text-xs font-semibold uppercase tracking-[0.24em] text-white/40">
+          Read-only display
+        </span>
+        <StarRating value={3.5} readOnly size="sm" label="Example rating: 3.5 out of 5" />
       </div>
     </div>
   )
@@ -5110,6 +5148,39 @@ export default function Playground() {
                 total. It is a real <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">role=&quot;spinbutton&quot;</code>{' '}
                 that carries a spoken value, so a screen reader hears &quot;$1,200&quot;, not &quot;1200&quot;. Reduced
                 motion drops the button squash and the grip&apos;s warmth and leaves the control exactly as usable.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH STAR RATING */}
+        <Reveal>
+          <div id="star-rating" data-experiment="Star rating" className="mt-12 scroll-mt-32">
+            <div className="flex flex-col items-center gap-8 rounded-3xl border border-white/10 bg-white/[0.02] px-6 py-14 sm:px-10">
+              <div className="max-w-md text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Give it a star</span>
+                <p className="mx-auto mt-3 text-lg font-medium text-white/85 sm:text-xl">
+                  A control the browser never shipped, so everyone rebuilds it — usually badly. This one has half steps,
+                  full keyboard control, a hover preview, and a little burst when it lands.
+                </p>
+              </div>
+              <StarRatingDemo />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Star rating</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                HTML has an input for a number, a colour, a date, a range — but never a rating, so every product
+                hand-rolls one, and most stop at &quot;click a whole star.&quot; This is the control done properly. It is
+                a real <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">role=&quot;slider&quot;</code> —
+                one tab stop for the whole strip, not five — so the arrow keys nudge it by half a star, Home and End jump
+                to the bounds, Page keys move a whole star, a number key sets that many, and 0 clears it; it carries a
+                spoken value (&quot;3.5 out of 5 — Great&quot;), so a screen reader hears the meaning rather than a bare
+                digit. The pointer previews as it moves, snapping to the near or far half of the star under the cursor,
+                and commits on click. The reward is the point: on commit the filled stars pop on a staggered spring and a
+                small ring of lime sparks bursts from the last one — the tiny moment of delight a rating earns. Under
+                reduced motion none of that plays; the fill simply lands, and the control stays exactly as usable. The
+                read-only strip below is the same component in its output mode, exposed as an image with its value in the
+                label.
               </p>
             </div>
           </div>
