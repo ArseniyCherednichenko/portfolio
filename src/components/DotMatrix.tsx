@@ -192,7 +192,13 @@ export function DotMatrix({
       drawnAt = colOffset
     }
 
-    const ro = new ResizeObserver(measure)
+    // On resize we re-measure (which resizes and so clears the canvas); when the
+    // loop is running its next frame repaints, but under reduced motion there is
+    // no loop, so measure-then-draw here keeps the still sign from blanking.
+    const ro = new ResizeObserver(() => {
+      measure()
+      if (reduce) draw()
+    })
     ro.observe(canvas)
     measure()
 
