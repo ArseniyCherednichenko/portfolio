@@ -313,8 +313,12 @@ branch pointing at a **stale/old commit** (behind the real `origin/main`). If
 you then do your work in detached HEAD (after `git rebase origin/main`) and run
 `git push origin main`, git pushes the **local `main` branch (the stale one)**,
 **not your HEAD** — and a `--force*` will **rewind public main and destroy recent
-work**. This actually happened once (main was briefly reverted 159→144, then
-recovered). **Before pushing, always:**
+work**. This has now happened **twice** (main was briefly reverted 159→144, and
+again 221→206, each recovered within a minute by force-pushing HEAD back). **The
+fix is to re-attach at the START of the run, before doing any work:** right after
+`git fetch origin`, run `git checkout -B main origin/main` so the `main` branch
+points at the live remote and every commit lands on it. Then a plain
+`git push origin main` fast-forwards. **Before pushing, always re-verify:**
 - `git branch --show-current` — if **empty (detached)**, re-attach:
   `git checkout -B main HEAD` so the `main` branch = your work.
 - Confirm `git rev-parse refs/heads/main` **equals** `git rev-parse HEAD`.
