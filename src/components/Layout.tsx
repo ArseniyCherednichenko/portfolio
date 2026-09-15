@@ -1,5 +1,5 @@
 import { Suspense, useEffect } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { useLocation, useOutlet } from 'react-router-dom'
 import { Aurora } from './Aurora'
 import { RouteFallback } from './RouteFallback'
@@ -22,19 +22,49 @@ import { StructuredData } from './StructuredData'
 const PAGE_EASE = [0.16, 1, 0.3, 1] as const
 
 // On every navigation: scroll to a hash target if present, else to the top.
-// Anchors (e.g. /#work) work from any page; plain page changes reset scroll.
+// Anchors (e.g. /#work, /playground#type) work from any page. The subtlety is
+// that most routes are code-split, so the target section isn't in the DOM the
+// instant the URL changes — the chunk still has to load and paint. A one-shot
+// querySelector therefore missed cross-page anchors and fell back to the top
+// (the Home -> Playground family links were quietly broken this way). So we
+// poll across a bounded window of animation frames until the target appears,
+// then scroll to it; smoothly, or instantly under reduced motion.
+const ANCHOR_TIMEOUT = 1600 // ms — long enough for a heavy lazy chunk to paint
+
 function ScrollManager() {
   const { pathname, hash } = useLocation()
+  const reduce = useReducedMotion()
   useEffect(() => {
-    if (hash) {
-      const el = document.querySelector(hash)
+    // A plain page change (no hash) resets to the top immediately.
+    if (!hash) {
+      window.scrollTo({ top: 0 })
+      return
+    }
+    let raf = 0
+    const start = performance.now()
+    const behavior: ScrollBehavior = reduce ? 'auto' : 'smooth'
+    const tryScroll = () => {
+      let el: Element | null = null
+      try {
+        el = document.querySelector(hash)
+      } catch {
+        el = null // a hash that isn't a valid CSS selector — nothing to target
+      }
       if (el) {
-        el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        el.scrollIntoView({ behavior, block: 'start' })
         return
       }
+      if (performance.now() - start < ANCHOR_TIMEOUT) {
+        raf = requestAnimationFrame(tryScroll)
+      } else {
+        // The anchor never rendered — land at the top rather than leaving the
+        // reader stranded at a stale scroll position from the previous page.
+        window.scrollTo({ top: 0 })
+      }
     }
-    window.scrollTo({ top: 0 })
-  }, [pathname, hash])
+    raf = requestAnimationFrame(tryScroll)
+    return () => cancelAnimationFrame(raf)
+  }, [pathname, hash, reduce])
   return null
 }
 
