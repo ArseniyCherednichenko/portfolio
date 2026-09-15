@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
 
 export type SectionLink = { id: string; label: string }
@@ -30,6 +30,32 @@ export function SectionNav({ sections }: { sections: SectionLink[] }) {
     els.forEach((el) => observer.observe(el))
     return () => observer.disconnect()
   }, [sections])
+
+  // Keep the URL hash in step with the section in view, so any point on a long
+  // page is a shareable deep link (and the browser's back/forward stays clean).
+  // Written with replaceState rather than router navigation on purpose: it must
+  // not re-fire the app's scroll-to-hash effect, and it should add no history
+  // entries. The first section clears the hash so the top of the page keeps a
+  // tidy URL. The initial value is skipped so an incoming anchor (arriving via
+  // /#work) is never stripped before the observer reports the section it points
+  // at.
+  const firstId = sections[0]?.id
+  const synced = useRef(false)
+  useEffect(() => {
+    if (!firstId) return
+    if (!synced.current) {
+      synced.current = true
+      return
+    }
+    const desired = active === firstId ? '' : `#${active}`
+    if (desired === window.location.hash) return
+    const url = desired || window.location.pathname + window.location.search
+    try {
+      window.history.replaceState(null, '', url)
+    } catch {
+      /* replaceState can throw in sandboxed frames — the rail still works */
+    }
+  }, [active, firstId])
 
   const go = (id: string) => {
     const el = document.getElementById(id)
