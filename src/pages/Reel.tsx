@@ -188,8 +188,8 @@ export default function Reel() {
   const goTo = useCallback((idx: number) => {
     const clamped = Math.max(0, Math.min(REEL.length - 1, idx))
     const el = sceneRefs.current[clamped]
-    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
-  }, [])
+    if (el) el.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' })
+  }, [reduce])
 
   // Keyboard: step through scenes without touching the wheel. Ignored while the
   // focus is in a field so the site's other shortcuts still behave.
