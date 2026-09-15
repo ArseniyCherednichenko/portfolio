@@ -96,6 +96,8 @@ import { Dropzone } from '../components/Dropzone'
 import { NumberField } from '../components/NumberField'
 import { StarRating } from '../components/StarRating'
 import { DotMatrix } from '../components/DotMatrix'
+import { SevenSegment } from '../components/SevenSegment'
+import { useBerlinTime } from '../hooks/useBerlinTime'
 import { CodeInput } from '../components/CodeInput'
 import { DynamicIsland, type IslandActivity } from '../components/DynamicIsland'
 import { Sheet } from '../components/Sheet'
@@ -1152,6 +1154,62 @@ function DotMatrixDemo() {
             className="w-full accent-[#DCF87C]"
           />
         </label>
+      </div>
+    </div>
+  )
+}
+
+// A SevenSegment showcase: the readout ticks the live Berlin time by default —
+// a working clock, so the cross-fade of segments is felt second by second — and
+// a field lets a visitor push their own value onto the module. The point being
+// demonstrated is the format's honest limit: type letters and you see which
+// words seven bars can and can't spell.
+const SEG_SAMPLES = ['HELLO', '80085', 'C0DE', '3.14159', '-40°', 'OFF']
+
+function SevenSegmentDemo() {
+  const { time } = useBerlinTime()
+  const [custom, setCustom] = useState('')
+  const shown = custom.trim() ? custom : time
+  return (
+    <div className="flex w-full max-w-2xl flex-col items-center gap-8">
+      <div className="w-full overflow-hidden rounded-2xl border border-white/10 bg-black/70 px-6 py-8 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)]">
+        <div className="flex min-h-[104px] items-center justify-center">
+          <SevenSegment value={shown} height={92} />
+        </div>
+      </div>
+      <div className="flex w-full flex-col gap-4">
+        <label className="w-full">
+          <span className="mb-1.5 block text-xs font-semibold uppercase tracking-[0.24em] text-white/40">
+            Drive the readout
+          </span>
+          <input
+            type="text"
+            value={custom}
+            maxLength={14}
+            onChange={(e) => setCustom(e.target.value)}
+            placeholder="Empty shows the live Berlin clock"
+            className="w-full rounded-xl border border-white/12 bg-white/[0.03] px-4 py-2.5 text-sm text-white/85 outline-none transition-colors placeholder:text-white/30 focus:border-[#DCF87C]/50"
+          />
+        </label>
+        <div className="flex flex-wrap gap-2">
+          {SEG_SAMPLES.map((s) => (
+            <button
+              key={s}
+              type="button"
+              onClick={() => setCustom(s)}
+              className="rounded-full border border-white/12 bg-white/[0.03] px-3 py-1.5 font-mono text-xs text-white/60 transition-colors hover:border-[#DCF87C]/40 hover:text-white/90"
+            >
+              {s}
+            </button>
+          ))}
+          <button
+            type="button"
+            onClick={() => setCustom('')}
+            className="rounded-full border border-transparent px-3 py-1.5 text-xs text-white/40 transition-colors hover:text-white/70"
+          >
+            Back to the clock
+          </button>
+        </div>
       </div>
     </div>
   )
@@ -2511,6 +2569,40 @@ export default function Playground() {
                 not sixty. The canvas is aria-hidden and the live message rides in the wrapper&rsquo;s label,
                 so a screen reader hears the words, not the hardware. Under reduced motion the loop never
                 starts: the board simply lights the message from its first column and holds it still.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH SEVEN-SEGMENT READOUT */}
+        <Reveal>
+          <div id="seven-segment" data-experiment="Seven-segment readout" className="mt-12 scroll-mt-32">
+            <div className="flex flex-col items-center gap-8 rounded-3xl border border-white/10 bg-white/[0.02] px-6 py-14 sm:px-10">
+              <div className="max-w-md text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Seven bars</span>
+                <p className="mx-auto mt-3 text-lg font-medium text-white/85 sm:text-xl">
+                  A calculator readout, keeping the live Berlin time. Seven fixed bars per cell, the unlit
+                  ones still faintly there. Push your own value and watch which words it can and can&rsquo;t spell.
+                </p>
+              </div>
+              <SevenSegmentDemo />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Seven-segment readout</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The other digital displays here each pick a different mechanism &mdash; the odometer rolls
+                number wheels, the split-flap drops Solari flaps, the dot-matrix lights a bitmap of round
+                lamps. This lights seven fixed bars per cell and nothing else, which is exactly what gives
+                it away as a real LED module: the segments are stubby, mitred parallelograms, not clean font
+                strokes, and every unlit bar is still faintly there &mdash; the ghost of the whole
+                figure-eight sitting behind a lone 1. That limit is also its character: it renders digits,
+                a colon and a decimal point exactly, and only the lopsided subset of letters the format can
+                honestly manage, unknown glyphs falling dark rather than faked. It is pure inline SVG &mdash;
+                every segment a hand-computed polygon, crisp at any size in both themes &mdash; and when a
+                cell&rsquo;s value changes its bars cross-fade, the little tick that makes the running clock
+                feel alive. The figure is aria-hidden; the string rides in the wrapper&rsquo;s label, so a
+                screen reader hears &ldquo;12:04&rdquo;, not seven bars. Under reduced motion the cross-fade
+                is off and values simply cut.
               </p>
             </div>
           </div>
