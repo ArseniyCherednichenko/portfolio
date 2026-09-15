@@ -95,6 +95,7 @@ import { ColorField } from '../components/ColorField'
 import { Dropzone } from '../components/Dropzone'
 import { NumberField } from '../components/NumberField'
 import { StarRating } from '../components/StarRating'
+import { DotMatrix } from '../components/DotMatrix'
 import { CodeInput } from '../components/CodeInput'
 import { DynamicIsland, type IslandActivity } from '../components/DynamicIsland'
 import { Sheet } from '../components/Sheet'
@@ -1103,6 +1104,54 @@ function StarRatingDemo() {
           Read-only display
         </span>
         <StarRating value={3.5} readOnly size="sm" label="Example rating: 3.5 out of 5" />
+      </div>
+    </div>
+  )
+}
+
+// A DotMatrix showcase: the sign runs an honest default line, and a field lets a
+// visitor light their own message on the board. The input is capped and its
+// value goes straight to the sign's aria-label, so what the lamps spell is what
+// a screen reader reads. A speed control lets the board crawl or race.
+const DOT_DEFAULT = 'ARSENIY CHEREDNICHENKO · BUILDING FROM BERLIN · REACT · TYPESCRIPT · SWIFTUI · MOTION · '
+
+function DotMatrixDemo() {
+  const [msg, setMsg] = useState('')
+  const [speed, setSpeed] = useState(22)
+  const shown = (msg.trim() ? `${msg.toUpperCase()} · ` : DOT_DEFAULT)
+  return (
+    <div className="flex w-full max-w-2xl flex-col items-center gap-8">
+      <div className="w-full overflow-hidden rounded-2xl border border-white/10 bg-black/60 px-4 py-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)]">
+        <DotMatrix text={shown} cell={11} speed={speed} className="h-[88px]" />
+      </div>
+      <div className="flex w-full flex-col gap-4 sm:flex-row sm:items-center">
+        <label className="flex-1">
+          <span className="mb-1.5 block text-xs font-semibold uppercase tracking-[0.24em] text-white/40">
+            Light your own message
+          </span>
+          <input
+            type="text"
+            value={msg}
+            maxLength={48}
+            onChange={(e) => setMsg(e.target.value)}
+            placeholder="Type up to 48 characters"
+            className="w-full rounded-xl border border-white/12 bg-white/[0.03] px-4 py-2.5 text-sm text-white/85 outline-none transition-colors placeholder:text-white/30 focus:border-[#DCF87C]/50"
+          />
+        </label>
+        <label className="sm:w-56">
+          <span className="mb-1.5 block text-xs font-semibold uppercase tracking-[0.24em] text-white/40">
+            Speed
+          </span>
+          <input
+            type="range"
+            min={8}
+            max={40}
+            value={speed}
+            onChange={(e) => setSpeed(Number(e.target.value))}
+            aria-label="Sign scroll speed"
+            className="w-full accent-[#DCF87C]"
+          />
+        </label>
       </div>
     </div>
   )
@@ -2431,6 +2480,37 @@ export default function Playground() {
                 clip and the variable-font lean elsewhere — here you paint an outline in.
                 Reduced motion drops the draw, the shimmer, and the mask, showing the word filled
                 and still.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH DOT-MATRIX SIGN */}
+        <Reveal>
+          <div id="dot-matrix" data-experiment="Dot-matrix sign" className="mt-12 scroll-mt-32">
+            <div className="flex flex-col items-center gap-8 rounded-3xl border border-white/10 bg-white/[0.02] px-6 py-14 sm:px-10">
+              <div className="max-w-md text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Lit, not typeset</span>
+                <p className="mx-auto mt-3 text-lg font-medium text-white/85 sm:text-xl">
+                  A train-platform sign. The words are not set in a font — they are lit one lamp at a
+                  time on a grid of dots, and the board steps sideways one column at a time. Type your own.
+                </p>
+              </div>
+              <DotMatrixDemo />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Dot-matrix sign</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The other type pieces here set glyphs in a real typeface and then move them; this one
+                has no typeface at all. Each character is a hand-authored 5&times;7 bitmap, and the sign
+                renders it the way a station board does — a fixed field of dim LEDs, the message lit dot
+                by dot over the top. The scroll is the tell: it advances one whole dot-column at a time,
+                never a sub-pixel slide, so it reads as lamps switching rather than text sliding, the way
+                the real thing looks. It runs on one canvas and a single animation loop that only repaints
+                when the column actually advances, so a slow, readable board costs a few paints a second,
+                not sixty. The canvas is aria-hidden and the live message rides in the wrapper&rsquo;s label,
+                so a screen reader hears the words, not the hardware. Under reduced motion the loop never
+                starts: the board simply lights the message from its first column and holds it still.
               </p>
             </div>
           </div>
