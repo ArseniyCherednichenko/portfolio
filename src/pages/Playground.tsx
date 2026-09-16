@@ -241,6 +241,7 @@ import { Waffle } from '../components/Waffle'
 import { Heatmap, type HeatmapRow } from '../components/Heatmap'
 import { Sankey, type SankeyNode, type SankeyLink } from '../components/Sankey'
 import { StreamGraph, type StreamSeries } from '../components/StreamGraph'
+import { Candlestick, type Candle } from '../components/Candlestick'
 
 // Spare stroke icons for the dock — no emoji, currentColor so they warm to lime.
 const ic = (d: string) => (
@@ -798,6 +799,53 @@ function StreamGraphDemo() {
         className="rounded-full border border-white/15 px-4 py-1.5 text-sm font-semibold text-white/80 transition-colors hover:border-[#DCF87C]/50 hover:bg-white/[0.04] hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#DCF87C]/60"
       >
         Reweight
+      </button>
+    </div>
+  )
+}
+
+// A Candlestick showcase. Illustrative, not a claimed figure: an unnamed series
+// walked over six sessions, so it reads as a shape — an open, a high, a low, a
+// close each period — rather than any real price. A component demo like the
+// Sankey's and the Stream graph's, with a Redraw that walks a fresh believable
+// series (each period opens near the last close, then drifts) so the candles
+// re-form into a new but organic run rather than jumping at random.
+const CANDLE_LABELS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+
+// A gentle random walk of OHLC bars: each period opens near the previous close,
+// drifts to a close, and pushes a high/low a little past the body, so the run
+// breathes like a real tape instead of spiking. Rounded to whole units and held
+// on-scale.
+function rollCandles(): Candle[] {
+  let prev = 40 + Math.random() * 20
+  return CANDLE_LABELS.map((label) => {
+    const open = Math.round(prev + (Math.random() - 0.5) * 4)
+    const close = Math.round(
+      Math.max(12, Math.min(88, open + (Math.random() - 0.48) * 12)),
+    )
+    const high = Math.round(Math.max(open, close) + Math.random() * 5)
+    const low = Math.round(Math.min(open, close) - Math.random() * 5)
+    prev = close
+    return { label, open, high, low, close }
+  })
+}
+
+function CandlestickDemo() {
+  const [data, setData] = useState<Candle[]>(() => rollCandles())
+  const [run, setRun] = useState(0)
+  function redraw() {
+    setData(rollCandles())
+    setRun((n) => n + 1)
+  }
+  return (
+    <div className="flex w-full flex-col items-center gap-6">
+      <Candlestick key={run} data={data} unit="index" />
+      <button
+        type="button"
+        onClick={redraw}
+        className="rounded-full border border-white/15 px-4 py-1.5 text-sm font-semibold text-white/80 transition-colors hover:border-[#DCF87C]/50 hover:bg-white/[0.04] hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#DCF87C]/60"
+      >
+        Redraw
       </button>
     </div>
   )
@@ -5065,6 +5113,17 @@ export default function Playground() {
                 note="The chart the others cannot draw — not one line rising from a floor, but many quantities moving together over time. Each band's height is its value; the whole stack floats on a wiggle-minimising baseline, so the river stays centred and every branch keeps its own shape. One lime stepped by total; the legend names each series. Reweight to re-flow, hover a band to lift it out of the current."
               >
                 <StreamGraphDemo />
+              </Experiment>
+            </Reveal>
+          </div>
+
+          <div className="sm:col-span-2">
+            <Reveal>
+              <Experiment
+                name="Candlestick"
+                note="The chart the others cannot draw — not one number per mark but four: where a period opened, closed, and the high and low it touched between. A solid body closed up, a hollow one closed down, so the site's single lime tells direction by fill instead of a second colour. An illustrative walk, not a real price. Redraw to walk a fresh series, hover a candle to read all four prices."
+              >
+                <CandlestickDemo />
               </Experiment>
             </Reveal>
           </div>
