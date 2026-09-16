@@ -243,6 +243,7 @@ import { Heatmap, type HeatmapRow } from '../components/Heatmap'
 import { Sankey, type SankeyNode, type SankeyLink } from '../components/Sankey'
 import { StreamGraph, type StreamSeries } from '../components/StreamGraph'
 import { Candlestick, type Candle } from '../components/Candlestick'
+import { ScatterPlot, type ScatterPoint } from '../components/ScatterPlot'
 
 // Spare stroke icons for the dock — no emoji, currentColor so they warm to lime.
 const ic = (d: string) => (
@@ -847,6 +848,56 @@ function CandlestickDemo() {
         className="rounded-full border border-white/15 px-4 py-1.5 text-sm font-semibold text-white/80 transition-colors hover:border-[#DCF87C]/50 hover:bg-white/[0.04] hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#DCF87C]/60"
       >
         Redraw
+      </button>
+    </div>
+  )
+}
+
+// A ScatterPlot showcase. Illustrative, not a claimed measurement: a cloud of
+// unnamed observations scattered around a rising line with real noise, so it
+// reads as a RELATIONSHIP — the more polish a screen gets, the more alive it
+// tends to feel — rather than any recorded data. A component demo like the other
+// charts', with a Reshuffle that re-rolls the cloud around a fresh hidden line so
+// the fit changes but the shape stays believable.
+function rollScatter(): ScatterPoint[] {
+  // A hidden line the cloud is scattered around, re-rolled each shuffle, plus a
+  // per-point noise term — so the trend is real but never a clean fit.
+  const slope = 0.7 + Math.random() * 0.9
+  const intercept = 1 + Math.random() * 2
+  const n = 14
+  const pts: ScatterPoint[] = []
+  for (let i = 0; i < n; i++) {
+    const x = Math.round((1 + Math.random() * 9) * 10) / 10
+    const noise = (Math.random() - 0.5) * 3.4
+    const y = Math.max(0.5, Math.min(10, slope * x + intercept + noise))
+    pts.push({ x, y: Math.round(y * 10) / 10 })
+  }
+  return pts
+}
+
+function ScatterPlotDemo() {
+  const [data, setData] = useState<ScatterPoint[]>(() => rollScatter())
+  const [run, setRun] = useState(0)
+  function reshuffle() {
+    setData(rollScatter())
+    setRun((n) => n + 1)
+  }
+  return (
+    <div className="flex w-full flex-col items-center gap-6">
+      <div className="w-full max-w-md">
+        <ScatterPlot
+          key={run}
+          data={data}
+          xLabel="Polish passes"
+          yLabel="How alive it feels"
+        />
+      </div>
+      <button
+        type="button"
+        onClick={reshuffle}
+        className="rounded-full border border-white/15 px-4 py-1.5 text-sm font-semibold text-white/80 transition-colors hover:border-[#DCF87C]/50 hover:bg-white/[0.04] hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#DCF87C]/60"
+      >
+        Reshuffle
       </button>
     </div>
   )
@@ -5137,6 +5188,17 @@ export default function Playground() {
                 note="The chart the others cannot draw — not one number per mark but four: where a period opened, closed, and the high and low it touched between. A solid body closed up, a hollow one closed down, so the site's single lime tells direction by fill instead of a second colour. An illustrative walk, not a real price. Redraw to walk a fresh series, hover a candle to read all four prices."
               >
                 <CandlestickDemo />
+              </Experiment>
+            </Reveal>
+          </div>
+
+          <div className="sm:col-span-2">
+            <Reveal>
+              <Experiment
+                name="Scatter plot"
+                note="The chart the others cannot draw — not one number per mark but two, an x and a y, with no order imposed: the shape the cloud makes is whether the pair moves together. So it earns a reading none of the others need — a hand-computed least-squares trend line and its r-squared, how tightly the points hug that line from 0 to 1 — drawn left-to-right once the cloud has landed. An illustrative cloud, not a real measurement. Reshuffle to re-scatter around a fresh line, hover a point to read both values."
+              >
+                <ScatterPlotDemo />
               </Experiment>
             </Reveal>
           </div>
