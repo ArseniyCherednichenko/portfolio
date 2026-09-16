@@ -158,6 +158,7 @@ import { Bezier } from '../components/Bezier'
 import { Fourier } from '../components/Fourier'
 import { Sorter } from '../components/Sorter'
 import { Maze } from '../components/Maze'
+import { Pathfinding } from '../components/Pathfinding'
 import { WaveCollapse } from '../components/WaveCollapse'
 import { Voronoi } from '../components/Voronoi'
 import { CirclePacking } from '../components/CirclePacking'
@@ -4496,6 +4497,18 @@ export default function Playground() {
                 resizes; reduced motion carves and solves one maze instantly and paints it once.
               </p>
             </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH PATHFINDING — A* vs Dijkstra on an open, editable grid, the heuristic made visible */}
+        <Reveal>
+          <div className="mt-12">
+            <Experiment
+              name="Pathfinding"
+              note="Where the maze has one route and nothing to choose, this is an open field with scattered walls and many ways across — so the interesting thing is which cells a search bothers to look at. Two real algorithms run on the same grid: Dijkstra spreads an even disc in every direction because it has no idea where the goal is, while A* adds the Manhattan distance to the goal and spends its effort in a tight cone leaning toward it — the same guaranteed-shortest path, a fraction of the cells explored. Switch strategies to watch the difference, and click or drag to draw walls and re-route the search live. Reduced motion sets the explored set and the path at once."
+            >
+              <Pathfinding />
+            </Experiment>
           </div>
         </Reveal>
 
