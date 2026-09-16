@@ -103,27 +103,32 @@ function makeWalls(seed: number): boolean[] {
   return walls
 }
 
-// A binary min-heap of cell indices, ordered by a score array the caller keeps.
-// Ties break toward a smaller heuristic (so A* commits to the goal-ward cell and
-// draws a crisp cone) and then toward insertion order (stable, deterministic).
+// A heap entry carries a SNAPSHOT of its priority at the moment it was queued.
+// Relaxing a cell pushes a fresh entry rather than mutating one already in the
+// heap, so the heap invariant is never violated under it; the stale entry is
+// simply skipped when popped (its cell is already closed). Ties break toward a
+// smaller heuristic (so A* commits to the goal-ward cell and draws a crisp cone)
+// and then toward insertion order (stable, deterministic).
+interface HeapNode {
+  cell: number
+  f: number
+  h: number
+  seq: number
+}
+
 class MinHeap {
-  private heap: number[] = []
-  constructor(
-    private f: Float64Array,
-    private h: Float64Array,
-    private seq: Float64Array,
-  ) {}
+  private heap: HeapNode[] = []
   get size() {
     return this.heap.length
   }
-  private less(a: number, b: number) {
-    if (this.f[a] !== this.f[b]) return this.f[a] < this.f[b]
-    if (this.h[a] !== this.h[b]) return this.h[a] < this.h[b]
-    return this.seq[a] < this.seq[b]
+  private less(a: HeapNode, b: HeapNode) {
+    if (a.f !== b.f) return a.f < b.f
+    if (a.h !== b.h) return a.h < b.h
+    return a.seq < b.seq
   }
-  push(cell: number) {
+  push(node: HeapNode) {
     const h = this.heap
-    h.push(cell)
+    h.push(node)
     let i = h.length - 1
     while (i > 0) {
       const p = (i - 1) >> 1
@@ -133,10 +138,10 @@ class MinHeap {
       } else break
     }
   }
-  pop(): number {
+  pop(): HeapNode {
     const h = this.heap
     const top = h[0]
-    const last = h.pop() as number
+    const last = h.pop() as HeapNode
     if (h.length > 0) {
       h[0] = last
       let i = 0
@@ -169,9 +174,6 @@ interface Solve {
 function solve(walls: boolean[], mode: Mode): Solve {
   const N = COLS * ROWS
   const g = new Float64Array(N).fill(Infinity)
-  const f = new Float64Array(N).fill(Infinity)
-  const h = new Float64Array(N).fill(0)
-  const seq = new Float64Array(N).fill(0)
   const came = new Int32Array(N).fill(-1)
   const closed = new Uint8Array(N)
 
@@ -182,19 +184,17 @@ function solve(walls: boolean[], mode: Mode): Solve {
     return Math.abs(c - GOAL.c) + Math.abs(r - GOAL.r)
   }
 
-  const heap = new MinHeap(f, h, seq)
+  const heap = new MinHeap()
   let counter = 0
   g[START_I] = 0
-  h[START_I] = heuristic(START_I)
-  f[START_I] = h[START_I]
-  seq[START_I] = counter++
-  heap.push(START_I)
+  const startH = heuristic(START_I)
+  heap.push({ cell: START_I, f: startH, h: startH, seq: counter++ })
 
   const order: number[] = []
   let reached = false
 
   while (heap.size > 0) {
-    const cur = heap.pop()
+    const cur = heap.pop().cell
     if (closed[cur]) continue
     closed[cur] = 1
     order.push(cur)
@@ -218,10 +218,8 @@ function solve(walls: boolean[], mode: Mode): Solve {
       if (tentative < g[ni]) {
         came[ni] = cur
         g[ni] = tentative
-        h[ni] = heuristic(ni)
-        f[ni] = tentative + h[ni]
-        seq[ni] = counter++
-        heap.push(ni)
+        const nh = heuristic(ni)
+        heap.push({ cell: ni, f: tentative + nh, h: nh, seq: counter++ })
       }
     }
   }
