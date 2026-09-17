@@ -163,6 +163,7 @@ import { WaveCollapse } from '../components/WaveCollapse'
 import { Voronoi } from '../components/Voronoi'
 import { CirclePacking } from '../components/CirclePacking'
 import { Aggregate } from '../components/Aggregate'
+import { ChaosGame } from '../components/ChaosGame'
 import { Superformula } from '../components/Superformula'
 import { TimesTable } from '../components/TimesTable'
 import { StickerPeel } from '../components/StickerPeel'
@@ -4699,6 +4700,41 @@ export default function Playground() {
                 than repainting; a fixed integer hash places every step and launch, so it never touches the wall clock
                 and grows the same lace each load. Reduced motion grows one crystal to completion in a single pass and
                 paints it once.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH CHAOS GAME — a fractal precipitated from a seeded random walk you drive */}
+        <Reveal>
+          <div id="chaos-game" data-experiment="Chaos game" className="mt-12 scroll-mt-32">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 py-12 sm:px-10">
+              <div className="text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Emergence</span>
+                <p className="mx-auto mt-3 max-w-md text-lg font-medium text-white/85 sm:text-xl">
+                  One fair coin, one rule, and a fractal no one drew falls out of the noise.
+                </p>
+              </div>
+              <ChaosGame className="mt-10" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Chaos game</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                A fractal precipitated out of pure chance, and the emergence toy this family was missing beside the
+                diffusion crystal and the slime mesh. The whole engine is one rule you can hold in your head: mark the
+                corners of a regular polygon, drop a point anywhere, then over and over pick a corner at random and jump a
+                fixed fraction of the way toward it, plotting where you land. Nothing in that rule mentions a shape and
+                every choice is a fair coin, yet with three corners and a half-way jump the landings refuse a dense middle
+                and pile only onto a self-similar lace of ever-smaller triangles — the Sierpinski gasket, drawn by a
+                process that has no idea it is drawing it. It is an instrument, not a fixed figure: the corner count and
+                the jump ratio are yours, and each pair grows a different attractor — a square with a half jump is only
+                noise, but forbid landing on the corner you just used and the same square grows a real fractal, so the
+                "no repeats" rule is a control too. The randomness is seeded, a fixed mulberry32, so the same settings
+                grow the same dust every load and it never touches Math.random or the wall clock; the picture is a real
+                density map, every landing added with lighter compositing so where the walk lingers sums from lime toward
+                white while the rare cells stay dark. The dust accumulates on its own persistent canvas over about a
+                second and a half while a bright point skitters the walk on an overlay above it. Reduced motion plots the
+                whole figure at once and holds it, with no skittering point.
               </p>
             </div>
           </div>
