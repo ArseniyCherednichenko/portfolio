@@ -217,6 +217,7 @@ const FAN_CARDS: FanCard[] = [
 ]
 import { StringPluck } from '../components/StringPluck'
 import { Cyclic } from '../components/Cyclic'
+import { ElementaryCA } from '../components/ElementaryCA'
 import { Sandpile } from '../components/Sandpile'
 import { Sortable } from '../components/Sortable'
 import { KanbanBoard } from '../components/KanbanBoard'
@@ -544,6 +545,33 @@ function BeamDemo() {
           gradientStopColor="#DCF87C"
         />
       ))}
+    </div>
+  )
+}
+
+// The elementary automaton, captioned live: the field cycles a curated tour of
+// rules and reports each one's label as it takes over, so the chip under the
+// canvas always names the rule you are watching — Rule 90's Sierpinski fractal,
+// Rule 30's chaos, Rule 110's Turing-complete gliders — the same three-bit
+// machine drawing a different world each time.
+function ElementaryCADemo() {
+  const [rule, setRule] = useState('Rule 90 — Sierpinski')
+  return (
+    <div className="relative h-[460px] overflow-hidden rounded-3xl border border-white/10 bg-[#040404]">
+      <ElementaryCA className="h-full w-full" onRule={setRule} />
+      <div className="pointer-events-none absolute inset-x-0 top-8 z-10 text-center">
+        <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">
+          Elementary automaton
+        </span>
+        <p className="mx-auto mt-3 max-w-md px-6 text-lg font-medium text-white/90 sm:text-xl">
+          Three bits in, one bit out — and the whole history stacks up. Press or drag to inject a signal.
+        </p>
+      </div>
+      <div className="pointer-events-none absolute bottom-5 left-1/2 z-10 -translate-x-1/2">
+        <span className="rounded-full border border-white/10 bg-black/40 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.28em] text-white/80 backdrop-blur">
+          {rule}
+        </span>
+      </div>
     </div>
   )
 }
@@ -4814,6 +4842,41 @@ export default function Playground() {
                 drawing. One canvas, one rAF loop, DPR-capped and resize-driven, a couple of hundred chords a frame
                 against a smooth frame counter and no wall clock. Reduced motion settles on one pleasing multiplier and
                 paints a single still figure, and the pointer does not drive it.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH ELEMENTARY CA — the Wolfram 1D automaton, its spacetime history rising as a phosphor field */}
+        <Reveal>
+          <div id="elementary-ca" data-experiment="Elementary automaton" className="mt-12 scroll-mt-32">
+            <ElementaryCADemo />
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Elementary automaton</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The elementary (Wolfram) cellular automaton — the one-dimensional root of the whole emergence family
+                and, being one dimension smaller, the odd one out among the fields beside it. Where the Game of Life,
+                the Cyclic space, and the Sandpile each run a rule across a two-dimensional plane and let you watch it
+                change in place, this runs the simplest rule there is on a single line of cells and stacks each new
+                generation under the last, so the second dimension on screen is not space but time. The picture is the
+                whole history of the line, oldest at the top, and the shapes in it are what one plain law drew as it
+                ran. The rule is as small as a rule gets: every cell is a zero or a one, and its next value is decided
+                only by itself and its two immediate neighbours — three bits, eight possible neighbourhoods — so a rule
+                is just the eight-bit table saying what each neighbourhood becomes. There are exactly 256 of them, and
+                Wolfram numbered them by reading that table as a binary number. That is the entire program: read left,
+                centre, right; index the byte; write the bit. The astonishing part, and the reason this belongs at the
+                head of the family, is how much falls out of so little. Rule 90 exclusive-ors its two neighbours and
+                draws the Sierpinski triangle — a fractal — from a single lit cell; Rule 30 is so thoroughly
+                unpredictable it was used as a random-number generator; Rule 110 was proved Turing-complete, meaning
+                that trivial three-bit lookup can, given the right starting line, compute anything any computer can.
+                None of that is put in — it is only where the rule went — so the field cycles a curated handful and the
+                chip names each one as it takes over. A live cell leaves teal ink that stays as its row scrolls up into
+                history while the newest few rows glow lime-white, so a bright advancing front lays down a teal record
+                above it; press or drag anywhere to inject live cells straight into that edge and watch your own signal
+                cascade up and evolve under the current rule. A single line evolves by integer lookups, the history is
+                scrolled with one copyWithin, and the render reads a grid-sized buffer the GPU smooths up, so the loop
+                touches a few thousand cells, not a million pixels; no wall clock and no per-frame randomness. Reduced
+                motion computes one rule's full triangle top-to-bottom and paints it once.
               </p>
             </div>
           </div>
