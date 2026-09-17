@@ -154,6 +154,7 @@ function Palette({ open, onClose }: { open: boolean; onClose: () => void }) {
       { id: 'toolkit', label: 'Toolkit', group: 'Pages', hint: 'tools and stack', keywords: 'tools stack skills tech react typescript swift supabase', run: () => go('/toolkit') },
       { id: 'playground', label: 'Playground', group: 'Pages', hint: 'experiments', keywords: 'motion experiments demos', run: () => go('/playground') },
       { id: 'reel', label: 'The reel', group: 'Pages', hint: 'a full-screen showreel', keywords: 'reel showreel scenes cinematic full screen motion manifesto craft point of view backdrops sequence', run: () => go('/reel') },
+      { id: 'studio', label: 'The studio', group: 'Pages', hint: 'make a generative poster', keywords: 'studio generative poster art canvas seed motif palette bloom flow rings download png export make create take away shareable seeded random', run: () => go('/studio') },
       { id: 'writing', label: 'Writing', group: 'Pages', hint: 'notes, in progress', keywords: 'writing notes blog essays journal articles thoughts', run: () => go('/writing') },
       { id: 'contact-page', label: 'Contact', group: 'Pages', hint: 'reach me', keywords: 'contact email hire reach availability', run: () => go('/contact') },
       { id: 'colophon', label: 'Colophon', group: 'Pages', hint: 'how it is built', keywords: 'colophon stack build source open source craft typography fonts', run: () => go('/colophon') },
