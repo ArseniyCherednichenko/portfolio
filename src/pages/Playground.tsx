@@ -240,6 +240,7 @@ import { Gauge } from '../components/Gauge'
 import { RingChart } from '../components/RingChart'
 import { ChordDiagram } from '../components/ChordDiagram'
 import { Treemap } from '../components/Treemap'
+import { Sunburst, type SunburstNode } from '../components/Sunburst'
 import { Waffle } from '../components/Waffle'
 import { Heatmap, type HeatmapRow } from '../components/Heatmap'
 import { Sankey, type SankeyNode, type SankeyLink } from '../components/Sankey'
@@ -967,6 +968,29 @@ function TreemapDemo() {
   return (
     <div className="w-full">
       <Treemap cells={TREEMAP_CELLS} unit="components" />
+    </div>
+  )
+}
+
+// A Sunburst showcase, on the same live library the waffle and treemap count,
+// but read as an actual tree rather than a flat set of shares: the centre is the
+// whole component set, the first ring its families, and the outer ring every
+// single component — one thin wedge each — so the whole catalogue reads as one
+// radial fingerprint. Where the treemap packs the families flat, this nests them
+// by depth and lets you drill in: click a family wedge and it becomes the centre,
+// its components re-fanning to fill the circle. Honest counts, no invented data.
+const SUNBURST_DATA: SunburstNode = {
+  label: 'Components',
+  children: LIBRARY.map((g) => ({
+    label: g.label,
+    children: g.items.map((it) => ({ label: it.name, value: 1, unit: 'component' })),
+  })),
+}
+
+function SunburstDemo() {
+  return (
+    <div className="flex w-full flex-col items-center">
+      <Sunburst data={SUNBURST_DATA} unit="components" />
     </div>
   )
 }
@@ -5309,6 +5333,17 @@ export default function Playground() {
                 note="The space-filling part-to-whole — where the donut bends a share into an arc and the waffle counts it out one square at a time, this packs every share into one solid rectangle with no gap, each part a tile sized by area and labelled in place. The squarified layout, by hand. The same live library the waffle counts, read as relative weight. Hover a tile to lift it out of the pack."
               >
                 <TreemapDemo />
+              </Experiment>
+            </Reveal>
+          </div>
+
+          <div className="sm:col-span-2">
+            <Reveal>
+              <Experiment
+                name="Sunburst"
+                note="The radial hierarchy — the one shape that reads a whole tree at once and reads it around. The centre is the whole set, the first ring its families, the outer ring every component as a thin wedge; angle carries the count, distance from the centre carries depth. And it zooms: click a family and it becomes the centre, its parts re-fanning to fill the circle, a breadcrumb tracing the way back. The same live library the treemap packs flat, nested instead. Hover a wedge to read its share."
+              >
+                <SunburstDemo />
               </Experiment>
             </Reveal>
           </div>
