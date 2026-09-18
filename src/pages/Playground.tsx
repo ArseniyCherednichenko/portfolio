@@ -99,6 +99,7 @@ import { DotMatrix } from '../components/DotMatrix'
 import { SevenSegment } from '../components/SevenSegment'
 import { useBerlinTime } from '../hooks/useBerlinTime'
 import { CodeInput } from '../components/CodeInput'
+import { PasswordStrength } from '../components/PasswordStrength'
 import { DynamicIsland, type IslandActivity } from '../components/DynamicIsland'
 import { Sheet } from '../components/Sheet'
 import { Tooltip } from '../components/Tooltip'
@@ -1466,6 +1467,40 @@ function CodeInputDemo() {
           className="rounded-full border border-white/15 px-4 py-1.5 text-sm text-white/70 transition-colors hover:border-[#DCF87C]/40 hover:text-[#DCF87C]"
         >
           Reset
+        </button>
+      </div>
+    </div>
+  )
+}
+
+// A PasswordStrength showcase. Nothing is submitted anywhere — it is a live
+// demonstration of the meter, so a couple of sample strings seed the field to
+// show the bands moving without asking a visitor to type a real secret. The
+// field is controlled so the sample chips and typing stay in step.
+function PasswordStrengthDemo() {
+  const [pw, setPw] = useState('')
+  const samples = ['password', 'Tr0ub4dour', 'correct horse battery staple']
+  return (
+    <div className="flex w-full flex-col items-center gap-5">
+      <PasswordStrength value={pw} onChange={setPw} />
+      <div className="flex flex-wrap items-center justify-center gap-2">
+        <span className="text-xs text-white/35">Try one:</span>
+        {samples.map((s) => (
+          <button
+            key={s}
+            type="button"
+            onClick={() => setPw(s)}
+            className="rounded-full border border-white/12 px-3 py-1 font-mono text-xs text-white/60 transition-colors hover:border-[#DCF87C]/40 hover:text-[#DCF87C]"
+          >
+            {s.length > 16 ? `${s.slice(0, 14)}…` : s}
+          </button>
+        ))}
+        <button
+          type="button"
+          onClick={() => setPw('')}
+          className="rounded-full border border-white/12 px-3 py-1 text-xs text-white/50 transition-colors hover:border-white/30 hover:text-white/80"
+        >
+          Clear
         </button>
       </div>
     </div>
@@ -5767,6 +5802,40 @@ export default function Playground() {
                 reduced motion none of that plays; the fill simply lands, and the control stays exactly as usable. The
                 read-only strip below is the same component in its output mode, exposed as an image with its value in the
                 label.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH PASSWORD STRENGTH */}
+        <Reveal>
+          <div id="password-strength" data-experiment="Password strength" className="mt-12 scroll-mt-32">
+            <div className="flex flex-col items-center gap-8 rounded-3xl border border-white/10 bg-white/[0.02] px-6 py-14 sm:px-10">
+              <div className="max-w-md text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Type and watch</span>
+                <p className="mx-auto mt-3 text-lg font-medium text-white/85 sm:text-xl">
+                  A password field that talks back — and does it honestly. The meter shows the real number it is reasoning
+                  from, and the checklist ticks over live as you type.
+                </p>
+              </div>
+              <PasswordStrengthDemo />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Password strength</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                Most strength meters are theatre: a coloured bar that turns green when you add a digit, backed by nothing
+                you can see. This one shows its working. The estimate is a small, transparent entropy model — it counts
+                which character classes are present to size the pool an attacker would have to search (26 + 26 + 10 + ~33),
+                takes{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">bits = length × log₂(pool)</code>, then
+                dampens that by how much of the string is actually distinct, so{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">aaaaaaaa</code> earns a fraction of what
+                its length alone would suggest. The bit figure is printed right there beside the word band — no hidden
+                score, no wordlist, no claim it cannot back. The five requirements tick over as they are met, each check
+                drawing itself in; the reveal toggle crossfades the value in and out. It is a plain labelled input with the
+                band mirrored to a polite live region and the toggle carrying its pressed state, so assistive tech hears
+                the same story the eye does. Reduced motion drops the staggered meter, the drawn checks, and the crossfade,
+                and leaves every reading exactly as legible.
               </p>
             </div>
           </div>
