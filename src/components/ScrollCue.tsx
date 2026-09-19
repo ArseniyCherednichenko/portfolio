@@ -1,7 +1,10 @@
-import { motion } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
 
 // "scroll" hint at the bottom of the hero so visitors know there's more below.
+// The arrow nudges downward on a loop to read as an invitation; under reduced
+// motion it simply holds still, the cue carried by the label alone.
 export function ScrollCue() {
+  const reduce = useReducedMotion()
   return (
     <motion.a
       href="#about"
@@ -12,7 +15,10 @@ export function ScrollCue() {
       transition={{ delay: 1, duration: 0.8 }}
     >
       <span>scroll</span>
-      <motion.span animate={{ y: [0, 5, 0] }} transition={{ duration: 1.4, repeat: Infinity, ease: 'easeInOut' }}>
+      <motion.span
+        animate={reduce ? undefined : { y: [0, 5, 0] }}
+        transition={reduce ? undefined : { duration: 1.4, repeat: Infinity, ease: 'easeInOut' }}
+      >
         &darr;
       </motion.span>
     </motion.a>
