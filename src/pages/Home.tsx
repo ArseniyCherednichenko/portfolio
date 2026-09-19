@@ -219,6 +219,7 @@ function HeroStatus() {
 export default function Home() {
   const [active, setActive] = useState<Project | null>(null)
   const { open: openContact } = useContact()
+  const reduce = useReducedMotion()
   return (
     <>
       <Seo />
@@ -314,8 +315,8 @@ export default function Home() {
               <motion.span
                 aria-hidden
                 className="block text-2xl leading-none"
-                animate={{ y: [0, 4, 0] }}
-                transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}
+                animate={reduce ? undefined : { y: [0, 4, 0] }}
+                transition={reduce ? undefined : { duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}
               >
                 &darr;
               </motion.span>
