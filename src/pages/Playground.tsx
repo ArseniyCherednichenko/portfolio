@@ -100,6 +100,7 @@ import { SevenSegment } from '../components/SevenSegment'
 import { useBerlinTime } from '../hooks/useBerlinTime'
 import { CodeInput } from '../components/CodeInput'
 import { PasswordStrength } from '../components/PasswordStrength'
+import { ProgressiveBlur } from '../components/ProgressiveBlur'
 import { DynamicIsland, type IslandActivity } from '../components/DynamicIsland'
 import { Sheet } from '../components/Sheet'
 import { Tooltip } from '../components/Tooltip'
@@ -1503,6 +1504,78 @@ function PasswordStrengthDemo() {
           Clear
         </button>
       </div>
+    </div>
+  )
+}
+
+// A ProgressiveBlur showcase. A real scroll container — a short reading list of
+// the site's own sections — with a progressive blur pinned to the top and
+// bottom edges so the copy dissolves into a soft haze as it slides under each
+// boundary instead of hitting a hard crop. Toggles flip the effect off (a plain
+// hard edge) and dial the ramp depth, so the difference between a true ramped
+// blur and no treatment at all is visible side by side. The blur radius and the
+// mask windows do the work; there is no animation, so reduced motion is a no-op.
+const BLUR_LINES: { head: string; body: string }[] = [
+  { head: 'Home', body: 'The hero, the range, the work — the first thing anyone lands on.' },
+  { head: 'About', body: 'The story, the path, and the principles behind the work.' },
+  { head: 'The range', body: 'Five disciplines, each its own deep-linkable page.' },
+  { head: 'Playground', body: 'Live motion experiments, every one hand-built and pokeable.' },
+  { head: 'On motion', body: 'Notes on animation craft, each one playable in place.' },
+  { head: 'The studio', body: 'Make a generative poster and take it away — motif, palette, seed.' },
+  { head: 'The library', body: 'Every hand-built component, catalogued and searchable.' },
+  { head: 'Now', body: 'What I am focused on, learning, and building this season.' },
+  { head: 'Contact', body: 'Email, availability, and where else I am.' },
+]
+
+function ProgressiveBlurDemo() {
+  const [on, setOn] = useState(true)
+  const [strong, setStrong] = useState(false)
+  return (
+    <div className="flex w-full max-w-[380px] flex-col items-center gap-5">
+      <div className="relative h-64 w-full overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02]">
+        <div className="h-full overflow-y-auto px-6 py-8 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <ul className="space-y-6">
+            {BLUR_LINES.map((l) => (
+              <li key={l.head}>
+                <p className="font-display text-lg font-bold tracking-tight text-white">{l.head}</p>
+                <p className="mt-1 text-sm leading-relaxed text-white/55">{l.body}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+        {on && (
+          <>
+            <ProgressiveBlur side="top" size="4.5rem" blur={strong ? 14 : 6} layers={6} />
+            <ProgressiveBlur side="bottom" size="4.5rem" blur={strong ? 14 : 6} layers={6} />
+          </>
+        )}
+      </div>
+      <div className="flex flex-wrap items-center justify-center gap-2">
+        <button
+          type="button"
+          onClick={() => setOn((v) => !v)}
+          aria-pressed={on}
+          className={`rounded-full border px-3 py-1 text-xs transition-colors ${
+            on ? 'border-[#DCF87C]/40 text-[#DCF87C]' : 'border-white/12 text-white/50 hover:text-white/80'
+          }`}
+        >
+          {on ? 'Blur on' : 'Blur off'}
+        </button>
+        <button
+          type="button"
+          onClick={() => setStrong((v) => !v)}
+          aria-pressed={strong}
+          disabled={!on}
+          className={`rounded-full border px-3 py-1 text-xs transition-colors disabled:opacity-40 ${
+            strong ? 'border-[#DCF87C]/40 text-[#DCF87C]' : 'border-white/12 text-white/50 hover:text-white/80'
+          }`}
+        >
+          {strong ? 'Deep ramp' : 'Soft ramp'}
+        </button>
+      </div>
+      <p className="max-w-[340px] text-center text-xs leading-relaxed text-white/35">
+        Scroll the list. With the blur off the copy is cropped hard at each edge; on, the blur radius itself climbs toward the boundary, so text melts rather than clips.
+      </p>
     </div>
   )
 }
@@ -5252,6 +5325,15 @@ export default function Playground() {
               </p>
             </div>
           </div>
+        </Reveal>
+
+        <Reveal>
+          <Experiment
+            name="Progressive blur"
+            note="The honest version of the edge fade every floating header and scroll container wants. Most sites fake it: one backdrop-blur under a fading gradient, which blurs everything by a single fixed amount and only fades that layer's opacity, so text at the soft end reads as a crisp ghost. A real progressive blur ramps the blur radius itself toward the edge — here a stack of masked layers, each a little blurrier than the last with its opaque window sliding one step further out, the radii doubling so the ramp reads even. Toggle it off to see the hard crop it replaces, or deepen the ramp. A passive, non-interactive overlay you drop into any scroll container; no animation, so reduced motion leaves it be."
+          >
+            <ProgressiveBlurDemo />
+          </Experiment>
         </Reveal>
       </Category>
 
