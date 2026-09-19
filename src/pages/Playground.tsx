@@ -249,6 +249,7 @@ import { Sankey, type SankeyNode, type SankeyLink } from '../components/Sankey'
 import { StreamGraph, type StreamSeries } from '../components/StreamGraph'
 import { Candlestick, type Candle } from '../components/Candlestick'
 import { ScatterPlot, type ScatterPoint } from '../components/ScatterPlot'
+import { ParallelCoords, type PCDimension, type PCRecord } from '../components/ParallelCoords'
 
 // Spare stroke icons for the dock — no emoji, currentColor so they warm to lime.
 const ic = (d: string) => (
@@ -987,6 +988,40 @@ const SUNBURST_DATA: SunburstNode = {
     label: g.label,
     children: g.items.map((it) => ({ label: it.name, value: 1, unit: 'component' })),
   })),
+}
+
+// A ParallelCoords showcase. Illustrative ratings, not a benchmark: eight motion
+// presets scored across five qualities in different units — four 0-to-10 traits
+// and a duration in milliseconds — exactly the many-columns-at-once table this
+// chart exists to read. The signature interaction is the point of the demo, so
+// there is no reshuffle: the data is fixed and honest, and brushing the axes is
+// how you read it. Try dragging low on Restraint and high on Play to isolate the
+// loud, springy presets, then brush Speed to keep only the quick ones.
+const PC_DIMS: PCDimension[] = [
+  { key: 'snap', label: 'Snap' },
+  { key: 'weight', label: 'Weight' },
+  { key: 'play', label: 'Play' },
+  { key: 'restraint', label: 'Restraint' },
+  { key: 'speed', label: 'Speed', unit: 'ms' },
+]
+
+const PC_DATA: PCRecord[] = [
+  { label: 'Ease-out', snap: 7, weight: 4, play: 3, restraint: 7, speed: 320 },
+  { label: 'Spring soft', snap: 5, weight: 6, play: 6, restraint: 5, speed: 520 },
+  { label: 'Spring stiff', snap: 9, weight: 3, play: 5, restraint: 6, speed: 260 },
+  { label: 'Linear', snap: 4, weight: 5, play: 2, restraint: 8, speed: 400 },
+  { label: 'Anticipate', snap: 6, weight: 5, play: 7, restraint: 4, speed: 460 },
+  { label: 'Overshoot', snap: 8, weight: 4, play: 8, restraint: 3, speed: 380 },
+  { label: 'Ease-in-out', snap: 5, weight: 6, play: 4, restraint: 8, speed: 440 },
+  { label: 'Bounce', snap: 7, weight: 7, play: 9, restraint: 2, speed: 600 },
+]
+
+function ParallelCoordsDemo() {
+  return (
+    <div className="w-full">
+      <ParallelCoords dimensions={PC_DIMS} data={PC_DATA} colorBy="play" />
+    </div>
+  )
 }
 
 function SunburstDemo() {
@@ -5461,6 +5496,17 @@ export default function Playground() {
                 note="The radial hierarchy — the one shape that reads a whole tree at once and reads it around. The centre is the whole set, the first ring its families, the outer ring every component as a thin wedge; angle carries the count, distance from the centre carries depth. And it zooms: click a family and it becomes the centre, its parts re-fanning to fill the circle, a breadcrumb tracing the way back. The same live library the treemap packs flat, nested instead. Hover a wedge to read its share."
               >
                 <SunburstDemo />
+              </Experiment>
+            </Reveal>
+          </div>
+
+          <div className="sm:col-span-2">
+            <Reveal>
+              <Experiment
+                name="Parallel coordinates"
+                note="The chart the others cannot draw — not one number per mark, or two, but as many as you give it: every dimension is its own vertical axis, and every record a single line crossing them all at its value. So a whole many-columned table reads at once, and the shape of the bundle is the answer — lines that run parallel agree, lines that cross between two axes trade off. Its signature is brushing: drag along any axis to keep only the records in that range, stack brushes across axes, and carve the bundle down to the ones that are high here and low there. Each axis carries its own scale because the dimensions are in different units, and one lime steps the lines by a single chosen quality. Illustrative motion-preset ratings, not a benchmark. Drag an axis to brush, click it to clear."
+              >
+                <ParallelCoordsDemo />
               </Experiment>
             </Reveal>
           </div>
