@@ -266,7 +266,8 @@ export default function Home() {
           transition={{ duration: 0.7, delay: 0.25, ease: EASE }}
           className="mt-6 max-w-xl text-lg leading-relaxed text-white/55"
         >
-          Co-founder of Guided, a Socratic AI tutor. I work mostly in React, TypeScript, and SwiftUI, with a lot of AI.
+          A Berlin-based developer and designer. I work across React, TypeScript, and SwiftUI, with a lot of applied
+          AI &mdash; and co-founded Guided, a Socratic AI tutor, along the way.
         </motion.p>
         <motion.div
           initial={{ opacity: 0, y: 24 }}
