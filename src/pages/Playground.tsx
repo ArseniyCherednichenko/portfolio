@@ -124,6 +124,7 @@ import { Turntable } from '../components/Turntable'
 import { Harmonograph } from '../components/Harmonograph'
 import { Spirograph } from '../components/Spirograph'
 import { Oscilloscope } from '../components/Oscilloscope'
+import { HilbertCurve } from '../components/HilbertCurve'
 import { Tesseract } from '../components/Tesseract'
 import { Gears } from '../components/Gears'
 import { Abacus } from '../components/Abacus'
@@ -6362,6 +6363,34 @@ export default function Playground() {
                 oscillators: across walks the ratio, up sets the sweep speed and detune; it eases home to a slow trefoil
                 when you leave. One canvas, one loop off the frame delta, DPR-capped. Reduced motion draws one closed
                 figure as a steady line and holds it.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH HILBERT CURVE */}
+        <Reveal>
+          <div id="hilbert-curve" data-experiment="Space-filling curve" className="mt-12 scroll-mt-32">
+            <HilbertCurve />
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Space-filling curve</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                A Hilbert curve &mdash; the one shape in this family with a paradox for a job: a single continuous
+                line, one-dimensional, that visits every cell of a two-dimensional grid without once crossing itself.
+                It is built by pure recursion &mdash; order 1 is a plain U through a 2&times;2 grid, and every order after
+                takes four copies of the one before, two of them rotated, and stitches them into the four quadrants, so
+                order 7 threads 16,384 cells with one unbroken path. Nothing is
+                drawn by hand; every point comes from the standard bit-twiddling map between a distance along the curve
+                and its cell. The reason it earns its place is <span className="text-white/65">locality</span>: because
+                the line folds back on itself at every scale instead of scanning row by row, two cells near each other on
+                the plane almost always sit near each other along the line too &mdash; which is exactly why Hilbert order
+                lays out images, databases and textures so that things close in space stay close in memory. The colour
+                reads the order of travel (a lime that lightens toward white as the distance grows), and hovering the
+                field maps the cell under the pointer back to its place along the line, so you can watch a small move in
+                space stay a small move along the curve. Two stacked canvases &mdash; one accumulating the path segment by
+                segment as it draws, one for the glowing head and the hover ring &mdash; no randomness, DPR-capped. Step
+                the order, or redraw. Reduced motion paints the whole curve at once and holds it, and the hover mapping
+                still works.
               </p>
             </div>
           </div>
