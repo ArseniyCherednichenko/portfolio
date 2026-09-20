@@ -125,6 +125,7 @@ import { Harmonograph } from '../components/Harmonograph'
 import { Spirograph } from '../components/Spirograph'
 import { Oscilloscope } from '../components/Oscilloscope'
 import { HilbertCurve } from '../components/HilbertCurve'
+import { Bifurcation } from '../components/Bifurcation'
 import { Tesseract } from '../components/Tesseract'
 import { Gears } from '../components/Gears'
 import { Abacus } from '../components/Abacus'
@@ -6391,6 +6392,36 @@ export default function Playground() {
                 segment as it draws, one for the glowing head and the hover ring &mdash; no randomness, DPR-capped. Step
                 the order, or redraw. Reduced motion paints the whole curve at once and holds it, and the hover mapping
                 still works.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH BIFURCATION */}
+        <Reveal>
+          <div id="bifurcation" data-experiment="Road to chaos" className="mt-12 scroll-mt-32">
+            <Bifurcation />
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Road to chaos</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The logistic map's bifurcation diagram &mdash; the one shape in this family that plots not a trajectory
+                but a <span className="text-white/65">destiny</span>: for every growth rate <em>r</em> along the
+                horizontal, the set of values the system finally settles into, stacked up the vertical. The rule is a
+                single line, x &rarr; r&middot;x&middot;(1&minus;x), a toy population that grows on what is free and is
+                culled by its own crowding. For small <em>r</em> it settles to one steady value; past r&nbsp;=&nbsp;3
+                that value splits in two, then four, then eight &mdash; the period-doubling cascade, each split arriving
+                faster than the last by Feigenbaum's constant (&asymp;&nbsp;4.669) until, near r&nbsp;=&nbsp;3.5699, the
+                doublings pile up into a continuum: chaos, an infinitely fine spray of values with no period at all. And
+                threaded through the chaos are sudden clear <span className="text-white/65">windows</span> &mdash; the
+                widest a clean period-3 orbit near r&nbsp;=&nbsp;3.83. Nothing is drawn by hand: each pixel column is one
+                growth rate, the map iterated from x&nbsp;=&nbsp;0.5 with the first few hundred steps thrown away so the
+                transient dies, the values it then keeps returning to plotted as it lands on them &mdash; brightest where
+                it dwells, so the sharp lines are stable orbits and the haze is genuine chaos. The payoff is
+                self-similarity: switch to the period-3 window and a whole miniature copy of the diagram appears inside
+                it, the same structure at every scale. Hover to read the growth rate and the exact period under the
+                pointer. Two stacked canvases &mdash; one accumulating the diagram column by column as it sweeps, one for
+                the guide line and the settled-orbit marks &mdash; no randomness, DPR-capped. Reduced motion paints the
+                whole diagram at once and holds it, and the hover readout still works.
               </p>
             </div>
           </div>
