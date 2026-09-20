@@ -126,6 +126,7 @@ import { Spirograph } from '../components/Spirograph'
 import { Oscilloscope } from '../components/Oscilloscope'
 import { HilbertCurve } from '../components/HilbertCurve'
 import { Bifurcation } from '../components/Bifurcation'
+import { Penrose } from '../components/Penrose'
 import { Tesseract } from '../components/Tesseract'
 import { Gears } from '../components/Gears'
 import { Abacus } from '../components/Abacus'
@@ -6422,6 +6423,37 @@ export default function Playground() {
                 pointer. Two stacked canvases &mdash; one accumulating the diagram column by column as it sweeps, one for
                 the guide line and the settled-orbit marks &mdash; no randomness, DPR-capped. Reduced motion paints the
                 whole diagram at once and holds it, and the hover readout still works.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH PENROSE */}
+        <Reveal>
+          <div id="penrose" data-experiment="Aperiodic tiling" className="mt-12 scroll-mt-32">
+            <Penrose />
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Aperiodic tiling</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                A Penrose tiling &mdash; the one shape in this family that fills the plane forever
+                without ever repeating. A normal tiling has a unit cell you could slide onto itself;
+                this one has none &mdash; shift it any distance in any direction and it never lines back
+                up, yet it still covers the plane completely, with just two tiles: a thick rhomb
+                (72&deg; and 108&deg;) and a thin one (36&deg; and 144&deg;). It is the picture behind
+                quasicrystals, the ordered-but-non-periodic matter that won the 2011 Nobel in
+                chemistry. Nothing is placed by hand: the tiling is grown by{' '}
+                <span className="text-white/65">deflation</span> &mdash; start with a wheel of ten
+                Robinson triangles meeting at the centre, then subdivide every triangle into smaller
+                ones by the golden ratio, over and over. A subdivision that respects the matching rules
+                can only ever grow the one legal tiling, so the aperiodic order falls straight out of a
+                rule you can hold in your head. And the golden ratio is not just in the construction, it
+                is the payoff you can read off the finished tiling: the number of thick rhombs divided
+                by the number of thin ones closes on &phi;&nbsp;&asymp;&nbsp;1.618 as it grows &mdash;
+                hover to watch the live tally climb toward it. Two stacked canvases &mdash; one
+                accumulating the tiles as they bloom outward from the centre, one for the growth ring
+                and the hovered rhomb &mdash; no randomness, DPR-capped. Step the depth, or redraw.
+                Reduced motion paints the whole tiling at once and holds it, and the hover readout still
+                works.
               </p>
             </div>
           </div>
