@@ -100,6 +100,7 @@ import { SevenSegment } from '../components/SevenSegment'
 import { useBerlinTime } from '../hooks/useBerlinTime'
 import { CodeInput } from '../components/CodeInput'
 import { PasswordStrength } from '../components/PasswordStrength'
+import { HoldConfirm } from '../components/HoldConfirm'
 import { ProgressiveBlur } from '../components/ProgressiveBlur'
 import { DynamicIsland, type IslandActivity } from '../components/DynamicIsland'
 import { Sheet } from '../components/Sheet'
@@ -1576,6 +1577,65 @@ function PasswordStrengthDemo() {
           Clear
         </button>
       </div>
+    </div>
+  )
+}
+
+// A HoldConfirm showcase. Nothing is actually deleted — it is a demonstration
+// of the interaction, so a committed hold just clears a mock draft and raises a
+// toast, and a button resets the state so it can be tried again. Two lengths
+// sit side by side so the difference between a quick and a deliberate hold is
+// felt, and the whole thing is honest about being a demo.
+function HoldConfirmDemo() {
+  const { toast } = useToast()
+  const [cleared, setCleared] = useState(false)
+  return (
+    <div className="flex w-full flex-col items-center gap-8">
+      <div
+        className={`w-full max-w-sm rounded-2xl border p-5 text-sm transition-colors ${
+          cleared ? 'border-white/10 bg-white/[0.015] text-white/35' : 'border-white/12 bg-white/[0.03] text-white/70'
+        }`}
+      >
+        <div className="flex items-center justify-between">
+          <span className="font-semibold text-white/80">Draft note</span>
+          <span className="text-xs uppercase tracking-[0.2em] text-white/30">{cleared ? 'Empty' : 'Unsaved'}</span>
+        </div>
+        <p className="mt-2 leading-relaxed">
+          {cleared
+            ? 'The draft was cleared. Nothing left an accident could take back.'
+            : 'A stand-in for something you would not want a stray click to wipe — the kind of one-way action a hold is for.'}
+        </p>
+      </div>
+      <div className="flex flex-wrap items-start justify-center gap-x-10 gap-y-6">
+        <HoldConfirm
+          label="Hold to clear draft"
+          holdingLabel="Clearing"
+          confirmedLabel="Cleared"
+          ariaLabel="Hold to clear the draft note"
+          disabled={cleared}
+          onConfirm={() => {
+            setCleared(true)
+            toast('Draft cleared — a demo action, nothing real was deleted.', { tone: 'success' })
+          }}
+        />
+        <HoldConfirm
+          label="Hold longer"
+          holdingLabel="Almost"
+          confirmedLabel="Done"
+          duration={2200}
+          ariaLabel="A longer hold to confirm"
+          onConfirm={() => toast('Confirmed — a longer hold, the extra weight is the point.', { tone: 'success' })}
+        />
+      </div>
+      {cleared && (
+        <button
+          type="button"
+          onClick={() => setCleared(false)}
+          className="text-sm font-semibold text-[#DCF87C] transition-opacity hover:opacity-80"
+        >
+          Restore the draft
+        </button>
+      )}
     </div>
   )
 }
@@ -6045,6 +6105,39 @@ export default function Playground() {
                 band mirrored to a polite live region and the toggle carrying its pressed state, so assistive tech hears
                 the same story the eye does. Reduced motion drops the staggered meter, the drawn checks, and the crossfade,
                 and leaves every reading exactly as legible.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH HOLD TO CONFIRM */}
+        <Reveal>
+          <div id="hold-confirm" data-experiment="Hold to confirm" className="mt-12 scroll-mt-32">
+            <div className="flex flex-col items-center gap-8 rounded-3xl border border-white/10 bg-white/[0.02] px-6 py-14 sm:px-10">
+              <div className="max-w-md text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Mean it</span>
+                <p className="mx-auto mt-3 text-lg font-medium text-white/85 sm:text-xl">
+                  The confirm for the actions you cannot take back. Hold to fill; let go early and it rewinds. No dialog,
+                  no accidental click.
+                </p>
+              </div>
+              <HoldConfirmDemo />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Hold to confirm</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                Some actions are one twitchy click away from a mistake you cannot undo — delete the account, wipe the
+                draft, publish to everyone. A plain button fires the instant it is pressed; a confirm dialog is a whole
+                extra screen for a single yes. The hold is the middle path most products never build properly: press and
+                keep pressing, and it commits only once you have held long enough to prove you meant it. The craft is in
+                the two things a lazy version skips. The fill is one Framer Motion value animated over real elapsed time,
+                so the same value drives the sweep and rewinds it — release before the end and the progress eases back to
+                zero instead of snapping, and a second press resumes from where it got to. And it is a real hold on the
+                keyboard too: Space or Enter held down fills, the keyup cancels, and auto-repeat is ignored so a held key
+                is one press rather than a fresh one each frame. Under{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code>, with no
+                fill to watch, it becomes a deliberate two-tap confirm that disarms itself if you look away — the same
+                protection with no motion at all. Nothing here is real: a committed hold just clears a mock draft.
               </p>
             </div>
           </div>
