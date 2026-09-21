@@ -128,6 +128,7 @@ import { Oscilloscope } from '../components/Oscilloscope'
 import { HilbertCurve } from '../components/HilbertCurve'
 import { Bifurcation } from '../components/Bifurcation'
 import { Penrose } from '../components/Penrose'
+import { Collatz } from '../components/Collatz'
 import { Tesseract } from '../components/Tesseract'
 import { Gears } from '../components/Gears'
 import { Abacus } from '../components/Abacus'
@@ -6625,6 +6626,35 @@ export default function Playground() {
                 and the hovered rhomb &mdash; no randomness, DPR-capped. Step the depth, or redraw.
                 Reduced motion paints the whole tiling at once and holds it, and the hover readout still
                 works.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH COLLATZ */}
+        <Reveal>
+          <div id="collatz" data-experiment="Collatz coral" className="mt-12 scroll-mt-32">
+            <Collatz />
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Collatz coral</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                Grown from the 3n+1 conjecture &mdash; a rule simple enough to explain in a sentence
+                and stubborn enough that no one has ever proved it. Take any whole number: if it is
+                even, halve it; if it is odd, triple it and add one; repeat. Lothar Collatz proposed
+                in 1937 that every starting number, however wild its detour, eventually falls to 1,
+                and it is still an open problem. This is not a plot of those numbers but a drawing of
+                the journeys: every path down to 1 is reversed so all of them begin at the same root,
+                then walked as a line that bends one way on an even number and the other on an odd one.
+                Because thousands of sequences share the same ending &mdash;{' '}
+                <span className="font-mono text-white/60">&hellip; 16, 8, 4, 2, 1</span> &mdash; those
+                shared tails overlap into one thick trunk near the root, and the paths only fan apart
+                as they climb toward their distinct starting values, so the accumulation grows an
+                organic, branching coral. Nothing is random: the same count always grows the same
+                coral. Each strand is coloured only in lightness by its stopping time &mdash; deep lime
+                for the quick journeys, paling toward white for the long climbers. Change the count or
+                the turn style, or redraw. Hover a strand tip to follow one number all the way home
+                &mdash; try 27, the famous one that climbs past nine thousand before it falls. Reduced
+                motion paints the whole coral at once and holds it, and the hover readout still works.
               </p>
             </div>
           </div>
