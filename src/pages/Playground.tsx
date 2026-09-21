@@ -175,6 +175,7 @@ import { StickerPeel } from '../components/StickerPeel'
 import { ParallaxCard, ParallaxLayer } from '../components/ParallaxCard'
 import { FanDeck, type FanCard } from '../components/FanDeck'
 import { ExpandingPanels, type Panel } from '../components/ExpandingPanels'
+import { DirectionAwareHover } from '../components/DirectionAwareHover'
 
 // The panels ExpandingPanels opens, one at a time: the five ideas the Playground
 // itself is built on, so the panel that spreads open is a principle, not a pitch.
@@ -208,6 +209,39 @@ const PANEL_ITEMS: Panel[] = [
     label: 'In the open',
     title: 'Built in public',
     body: 'The site grows most days, one commit at a time, all of it on GitHub to read.',
+  },
+]
+
+// The direction-aware hover deck: three facets of the work, so the cover that
+// slides in is a discipline, never a single project. Front face is a plain word
+// and glyph; the cover carries the honest line.
+const DIRECTION_CARDS: ReadonlyArray<{
+  front: string
+  glyph: string
+  label: string
+  title: string
+  body: string
+}> = [
+  {
+    front: 'Motion',
+    glyph: '↝',
+    label: 'Craft',
+    title: 'Interfaces that move',
+    body: 'Hand-built animation, tuned frame by frame, and always a calm path for reduced motion.',
+  },
+  {
+    front: 'Range',
+    glyph: '⌘',
+    label: 'Across the stack',
+    title: 'Web, native, and data',
+    body: 'React and TypeScript on the web, SwiftUI on iOS, and the backend that keeps them honest.',
+  },
+  {
+    front: 'Open',
+    glyph: '⎇',
+    label: 'In the open',
+    title: 'Built in public',
+    body: 'The whole site is on GitHub and grows most days, one coherent commit at a time.',
   },
 ]
 
@@ -3513,6 +3547,50 @@ export default function Playground() {
                 narrow screen the row becomes a column and the panels grow in height instead of width, so the
                 spines never crush to nothing. Reduced motion keeps the layout reflow (it is structure, not
                 decoration) but drops it to an instant swap with no travel.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH DIRECTION-AWARE HOVER */}
+        <Reveal>
+          <div id="direction-aware" data-experiment="Direction-aware hover" className="mt-12 scroll-mt-32">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 py-12 sm:px-10">
+              <div className="mb-8 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Enter</span>
+                <p className="mx-auto mt-3 max-w-md text-lg font-medium text-white/85 sm:text-xl">
+                  Sweep a card from any edge. The cover slides in from exactly the side you crossed.
+                </p>
+              </div>
+              <div className="grid gap-5 sm:grid-cols-3">
+                {DIRECTION_CARDS.map((c) => (
+                  <DirectionAwareHover key={c.front} label={c.label} title={c.title} body={c.body}>
+                    <span aria-hidden className="text-4xl leading-none text-white/30">
+                      {c.glyph}
+                    </span>
+                    <span className="mt-3 font-display text-2xl font-semibold tracking-tight text-white">
+                      {c.front}
+                    </span>
+                    <span className="mt-1 text-xs uppercase tracking-[0.2em] text-white/35">Hover to open</span>
+                  </DirectionAwareHover>
+                ))}
+              </div>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Direction-aware hover</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The hover the surface family was still missing: a cover that knows{' '}
+                <span className="text-white/65">where the cursor came from</span>. Where the glare card sweeps one
+                fixed diagonal, the spotlight card glows under the pointer, and the flip card turns on a hinge, this
+                reads the edge the pointer actually crossed &mdash; top, right, bottom, or left &mdash; and slides its
+                cover in from that side, then pushes it back out toward the edge you leave by, so the panel reads as
+                shoved by the cursor rather than merely appearing. The direction is one cheap calculation, not a wall
+                of listeners: on enter and on leave the pointer's offset from the card centre is read with{' '}
+                <em>atan2</em>, quantised to the four sides, and that index picks the offset the cover travels from,
+                a single spring carrying it so nothing snaps. The cover copy is a real, always-rendered element, so it
+                is selectable and reachable; keyboard focus slides it up from the bottom and blur sends it back, and
+                the three cards name disciplines rather than one project. Reduced motion drops the travel entirely for
+                a plain cross-fade that stays fully legible.
               </p>
             </div>
           </div>
