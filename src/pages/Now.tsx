@@ -7,6 +7,7 @@ import { GradientText } from '../components/GradientText'
 import { SpotlightCard } from '../components/SpotlightCard'
 import { ShinyText } from '../components/ShinyText'
 import { Ribbons } from '../components/Ribbons'
+import { DayArc } from '../components/DayArc'
 import { Modal } from '../components/Modal'
 import { Seo } from '../components/Seo'
 import { useBerlinTime } from '../hooks/useBerlinTime'
@@ -73,7 +74,7 @@ export default function Now() {
       />
 
       {/* HEADER */}
-      <header className="relative isolate mx-auto w-full max-w-4xl overflow-hidden px-6 pb-10 pt-36 sm:pt-44">
+      <header className="relative isolate mx-auto w-full max-w-5xl overflow-hidden px-6 pb-10 pt-36 sm:pt-44">
         {/* Ambient ribbon field: flowing trails that drift, and chase the cursor
             when it moves. pointer-events-none + window listener so the copy stays
             selectable; radial-masked to the top-right so it never fights the
@@ -81,6 +82,8 @@ export default function Now() {
         <div className="pointer-events-none absolute inset-0 -z-10 opacity-60 [mask-image:radial-gradient(115%_85%_at_78%_18%,#000_0%,transparent_68%)]">
           <Ribbons listen="window" count={4} />
         </div>
+        <div className="lg:grid lg:grid-cols-[1fr_20rem] lg:items-center lg:gap-12">
+          <div>
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
@@ -152,6 +155,18 @@ export default function Now() {
             )}
           </span>
         </motion.div>
+          </div>
+          {/* PRESENCE DIAL — a day-rhythm at a glance, so the page opens feeling
+              present. Below the intro on small screens, beside it on large. */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.35, ease: EASE }}
+            className="mt-12 lg:mt-0"
+          >
+            <DayArc />
+          </motion.div>
+        </div>
       </header>
 
       {/* FOCUS GRID */}
