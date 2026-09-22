@@ -178,6 +178,7 @@ import { ParallaxCard, ParallaxLayer } from '../components/ParallaxCard'
 import { FanDeck, type FanCard } from '../components/FanDeck'
 import { ExpandingPanels, type Panel } from '../components/ExpandingPanels'
 import { DirectionAwareHover } from '../components/DirectionAwareHover'
+import { Polaroid } from '../components/Polaroid'
 
 // The panels ExpandingPanels opens, one at a time: the five ideas the Playground
 // itself is built on, so the panel that spreads open is a principle, not a pitch.
@@ -3652,6 +3653,45 @@ export default function Playground() {
                 is selectable and reachable; keyboard focus slides it up from the bottom and blur sends it back, and
                 the three cards name disciplines rather than one project. Reduced motion drops the travel entirely for
                 a plain cross-fade that stays fully legible.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH POLAROID */}
+        <Reveal>
+          <div id="polaroid" data-experiment="Instant photo" className="mt-12 scroll-mt-32">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 py-12 sm:px-10">
+              <div className="mb-8 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Wait for it</span>
+                <p className="mx-auto mt-3 max-w-md text-lg font-medium text-white/85 sm:text-xl">
+                  The picture is not there yet. Grab it and shake to bring it up faster.
+                </p>
+              </div>
+              <div className="flex flex-wrap items-start justify-center gap-10">
+                <Polaroid seed={41} caption="Dusk, generated" />
+                <Polaroid seed={128} caption="Made in Berlin, by hand" duration={5.5} />
+              </div>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Instant photo</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The gesture the surface family was missing: a picture that{' '}
+                <span className="text-white/65">is not there yet</span>. Where the flip card turns, the scratch card is
+                rubbed away, the sticker peels and the ticket tears, this one <em>develops</em> &mdash; it mounts as a
+                near-blank, over-exposed square and, over a few seconds, the image swims up out of the emulsion the way a
+                real instant photo does: the contrast climbs, the colour floods back, the fog burns off, the print
+                settles. Nothing is faked in post &mdash; the whole develop is a single number from zero to one driving
+                CSS filters over one canvas the scene is drawn to exactly once. The photo itself is a{' '}
+                <span className="text-white/65">seeded generative dusk</span> &mdash; a graded sky, a low sun, layered
+                hills and film grain from a mulberry32 PRNG &mdash; so it is abstract art that redraws identically each
+                load, never a claim to be a photograph of a real place. And it carries the gesture people actually reach
+                for: grab the print and <span className="text-white/65">shake</span> it &mdash; every hard reversal
+                agitates the emulsion, a burst of develop plus a wobble of the whole frame, so an impatient shake
+                genuinely brings the picture up faster. Re-expose (click, or Enter once it is done) and it reseeds a
+                brand-new one-of-a-kind frame; while it is still developing, Enter/Space agitates instead. The frame
+                tilts toward the cursor under a sliding gloss. Reduced motion drops all of it &mdash; the finished photo
+                is simply there.
               </p>
             </div>
           </div>
