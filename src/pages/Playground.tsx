@@ -101,6 +101,7 @@ import { useBerlinTime } from '../hooks/useBerlinTime'
 import { CodeInput } from '../components/CodeInput'
 import { PasswordStrength } from '../components/PasswordStrength'
 import { HoldConfirm } from '../components/HoldConfirm'
+import { SwipeToReveal, type SwipeAction } from '../components/SwipeToReveal'
 import { ProgressiveBlur } from '../components/ProgressiveBlur'
 import { DynamicIsland, type IslandActivity } from '../components/DynamicIsland'
 import { Sheet } from '../components/Sheet'
@@ -1638,6 +1639,96 @@ function HoldConfirmDemo() {
           Restore the draft
         </button>
       )}
+    </div>
+  )
+}
+
+// A SwipeToReveal showcase — a small mock inbox, the pattern's native habitat.
+// Each row swipes left for Mute + Delete (delete is the primary a full swipe
+// commits, so the row slides clean off), and right to Pin. Nothing here is real
+// mail; delete just drops the row from a local list and Restore brings the set
+// back, so the interaction can be tried over and over.
+const SWIPE_SEED = [
+  { id: 's1', from: 'Guided', subject: 'Weekly build digest', preview: 'Five commits landed, all green. The changelog is up to date.' },
+  { id: 's2', from: 'Vercel', subject: 'Deployment ready', preview: 'Production is live at the latest commit. Preview links inside.' },
+  { id: 's3', from: 'GitHub', subject: 'A star on portfolio', preview: 'Someone starred the repo. The build log is public, as always.' },
+]
+
+function PinGlyph() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+      <path d="M9 4h6l-1 6 3 3v2H7v-2l3-3-1-6z" />
+      <path d="M12 15v5" />
+    </svg>
+  )
+}
+function MuteGlyph() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+      <path d="M11 5 6 9H3v6h3l5 4V5z" />
+      <path d="M22 9l-6 6M16 9l6 6" />
+    </svg>
+  )
+}
+function TrashGlyph() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+      <path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14" />
+    </svg>
+  )
+}
+
+function SwipeToRevealDemo() {
+  const { toast } = useToast()
+  const [items, setItems] = useState(SWIPE_SEED)
+
+  return (
+    <div className="flex w-full max-w-md flex-col gap-3">
+      {items.map((item) => {
+        const leadingActions: SwipeAction[] = [
+          { id: 'pin', label: 'Pin', tone: 'accent', icon: <PinGlyph />, onAction: () => toast(`Pinned "${item.subject}" — a demo, nothing real changed.`) },
+        ]
+        const actions: SwipeAction[] = [
+          { id: 'mute', label: 'Mute', tone: 'default', icon: <MuteGlyph />, onAction: () => toast(`Muted "${item.from}" — a demo, nothing real changed.`) },
+          {
+            id: 'delete',
+            label: 'Delete',
+            tone: 'danger',
+            icon: <TrashGlyph />,
+            onAction: () => {
+              setItems((prev) => prev.filter((r) => r.id !== item.id))
+              toast(`Deleted "${item.subject}" — a demo, nothing was really removed.`, { tone: 'success' })
+            },
+          },
+        ]
+        return (
+          <SwipeToReveal key={item.id} ariaLabel={`Message from ${item.from}: ${item.subject}`} actions={actions} leadingActions={leadingActions}>
+            <div className="flex items-start gap-3">
+              <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white/10 text-sm font-semibold text-white/80">
+                {item.from.slice(0, 1)}
+              </span>
+              <div className="min-w-0">
+                <div className="flex items-baseline justify-between gap-3">
+                  <span className="truncate text-sm font-semibold text-white/90">{item.from}</span>
+                  <span className="shrink-0 text-[0.7rem] uppercase tracking-[0.18em] text-white/30">now</span>
+                </div>
+                <p className="truncate text-sm text-white/70">{item.subject}</p>
+                <p className="truncate text-xs text-white/40">{item.preview}</p>
+              </div>
+            </div>
+          </SwipeToReveal>
+        )
+      })}
+      {items.length < SWIPE_SEED.length && (
+        <button
+          type="button"
+          onClick={() => setItems(SWIPE_SEED)}
+          className="self-center pt-1 text-sm font-semibold text-[#DCF87C] transition-opacity hover:opacity-80"
+        >
+          Restore the inbox
+        </button>
+      )}
+      {items.length === 0 && <p className="pt-2 text-center text-sm text-white/40">Inbox zero. Restore to try again.</p>}
     </div>
   )
 }
@@ -6179,6 +6270,44 @@ export default function Playground() {
                 <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code>, with no
                 fill to watch, it becomes a deliberate two-tap confirm that disarms itself if you look away — the same
                 protection with no motion at all. Nothing here is real: a committed hold just clears a mock draft.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH SWIPE TO REVEAL */}
+        <Reveal>
+          <div id="swipe-to-reveal" data-experiment="Swipe to reveal" className="mt-12 scroll-mt-32">
+            <div className="flex flex-col items-center gap-8 rounded-3xl border border-white/10 bg-white/[0.02] px-6 py-14 sm:px-10">
+              <div className="max-w-md text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Drag a row</span>
+                <p className="mx-auto mt-3 text-lg font-medium text-white/85 sm:text-xl">
+                  The swipeable list row from every phone, built honestly for the web. Drag left for Mute and Delete,
+                  right to Pin — or shove past the edge and let go.
+                </p>
+              </div>
+              <SwipeToRevealDemo />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Swipe to reveal</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                Every phone owner knows this one in their thumb — drag a row of mail sideways and a tray of actions slides
+                out from under it, and shove it far enough and the outermost action fires on its own. On the web it is
+                almost always faked with a button that toggles a panel, which loses the whole feel. This is the honest
+                version: the row&apos;s position is one Framer Motion value the drag writes directly, so the tray under it
+                is never out of sync with the finger. Where it lands on release is decided from both how far it travelled
+                and how fast — a slow drag settles by position, a quick flick opens or closes against the way it was
+                barely moving. Pull past the tray&apos;s own width and an elastic constraint lets it stretch; cross the
+                threshold and the primary action arms (its panel brightens to say &ldquo;let go and I fire&rdquo;) and a
+                release there slides the whole row off and commits, exactly like Mail&apos;s delete. It is a real keyboard
+                control too: the row is focusable, ArrowLeft reveals the trailing tray and ArrowRight the leading one,
+                focus jumps straight onto the revealed actions, and Escape closes and hands focus back — the buttons are
+                real{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">&lt;button&gt;</code>s the whole time,
+                hidden from tab only while their tray is closed, with a polite live region naming what opened. Under{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code> the drag
+                gives way to a plain visible toolbar of the same actions, so nothing is lost. Nothing here is real mail;
+                delete just drops a row from a local list.
               </p>
             </div>
           </div>
