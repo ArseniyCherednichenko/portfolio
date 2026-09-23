@@ -102,6 +102,7 @@ import { CodeInput } from '../components/CodeInput'
 import { PasswordStrength } from '../components/PasswordStrength'
 import { HoldConfirm } from '../components/HoldConfirm'
 import { SwipeToReveal, type SwipeAction } from '../components/SwipeToReveal'
+import { PullToRefresh } from '../components/PullToRefresh'
 import { ProgressiveBlur } from '../components/ProgressiveBlur'
 import { DynamicIsland, type IslandActivity } from '../components/DynamicIsland'
 import { Sheet } from '../components/Sheet'
@@ -1729,6 +1730,44 @@ function SwipeToRevealDemo() {
         </button>
       )}
       {items.length === 0 && <p className="pt-2 text-center text-sm text-white/40">Inbox zero. Restore to try again.</p>}
+    </div>
+  )
+}
+
+// A PullToRefresh showcase — the swipe row's sibling gesture, in its own native
+// habitat: a short scrollable feed you drag down from the top to reload. Refresh
+// prepends a fresh mock item with a live timestamp, so the pull visibly does
+// something each time; the onRefresh resolves after a short faked delay so the
+// spinner is felt. Nothing here is real — the items are placeholder cards.
+const PULL_SEED = [
+  { id: 0, title: 'Everything is up to date', body: 'No new activity since you last looked. Pull to check again.' },
+]
+function PullToRefreshDemo() {
+  const [items, setItems] = useState(PULL_SEED)
+  const nextId = useRef(1)
+  const load = () =>
+    new Promise<void>((resolve) => {
+      window.setTimeout(() => {
+        const id = nextId.current++
+        const stamp = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })
+        setItems((prev) =>
+          [{ id, title: `New activity · ${stamp}`, body: 'A fresh card, prepended by the refresh. Pull again for another.' }, ...prev].slice(0, 8),
+        )
+        resolve()
+      }, 700)
+    })
+  return (
+    <div className="w-full max-w-md">
+      <PullToRefresh onRefresh={load} maxHeight={300}>
+        <ul className="divide-y divide-white/8">
+          {items.map((it) => (
+            <li key={it.id} className="px-4 py-3.5">
+              <p className="text-sm font-semibold text-white/90">{it.title}</p>
+              <p className="mt-0.5 text-xs leading-relaxed text-white/50">{it.body}</p>
+            </li>
+          ))}
+        </ul>
+      </PullToRefresh>
     </div>
   )
 }
@@ -6308,6 +6347,43 @@ export default function Playground() {
                 <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code> the drag
                 gives way to a plain visible toolbar of the same actions, so nothing is lost. Nothing here is real mail;
                 delete just drops a row from a local list.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH PULL TO REFRESH */}
+        <Reveal>
+          <div id="pull-to-refresh" data-experiment="Pull to refresh" className="mt-12 scroll-mt-32">
+            <div className="flex flex-col items-center gap-8 rounded-3xl border border-white/10 bg-white/[0.02] px-6 py-14 sm:px-10">
+              <div className="max-w-md text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Drag the top down</span>
+                <p className="mx-auto mt-3 text-lg font-medium text-white/85 sm:text-xl">
+                  The other gesture every phone taught your thumb — pull the top of the feed down past the threshold and
+                  let go to reload. Or, on a keyboard, hit Reload.
+                </p>
+              </div>
+              <PullToRefreshDemo />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Pull to refresh</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The swipe row&apos;s sibling, and the other platform gesture the web never shipped: haul a list down from
+                its very top and it rubber-bands open, an indicator hauls into the gap, and past a threshold it arms —
+                the arrow flips to say &ldquo;release to refresh&rdquo;. Let go there and the list settles onto a spinner
+                while the work runs, then snaps home. The pull distance is one Framer Motion value the gesture writes
+                directly, so the content, the indicator, and the arrow&apos;s flip never fall out of sync with the
+                finger, and the resistance is a real rubber band — a diminishing-returns curve that approaches a ceiling,
+                so the list gives easily at first and then refuses to be dragged to the floor. It only engages from the
+                very top of the scroll — pull anywhere else and the list just scrolls, exactly like the platform. Touch
+                drives it through non-passive handlers so a committed pull can cancel the browser&apos;s own scroll;
+                mouse gets its own drag path with no native scroll to fight; and a real focusable{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">Reload</code> control keeps the
+                keyboard in, with a polite live region naming each state. There is a floor on the visible refresh, so an
+                instant promise still reads as work done rather than a flicker. Under{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code> the drag
+                is dropped for that Reload control alone — the same behaviour with none of the movement. Refresh just
+                prepends a placeholder card; nothing here is real.
               </p>
             </div>
           </div>
