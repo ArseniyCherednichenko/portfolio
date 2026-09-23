@@ -104,6 +104,7 @@ import { HoldConfirm } from '../components/HoldConfirm'
 import { SwipeToReveal, type SwipeAction } from '../components/SwipeToReveal'
 import { PullToRefresh } from '../components/PullToRefresh'
 import { MoodSlider } from '../components/MoodSlider'
+import { CombinationLock } from '../components/CombinationLock'
 import { ProgressiveBlur } from '../components/ProgressiveBlur'
 import { DynamicIsland, type IslandActivity } from '../components/DynamicIsland'
 import { Sheet } from '../components/Sheet'
@@ -6421,6 +6422,42 @@ export default function Playground() {
                 <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code> the
                 springs give way to instant, exact states: the face still reads the value perfectly, just without the
                 in-between travel.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH COMBINATION LOCK */}
+        <Reveal>
+          <div id="combination-lock" data-experiment="Combination lock" className="mt-12 scroll-mt-32">
+            <div className="flex flex-col items-center gap-8 rounded-3xl border border-white/10 bg-white/[0.02] px-6 py-14 sm:px-10">
+              <div className="max-w-md text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Spin it open</span>
+                <p className="mx-auto mt-3 text-lg font-medium text-white/85 sm:text-xl">
+                  A briefcase lock with three real reels. Drag a reel, scroll over it, or arrow it to a digit &mdash; hit
+                  the combination and the shackle springs open.
+                </p>
+              </div>
+              <CombinationLock />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Combination lock</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                A tactile little machine rather than a form field. Three number reels sit in a milled lock body, and each
+                one is a real{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">spinbutton</code>: drag it vertically,
+                roll the wheel over it, or focus it and tick with the arrow keys, Home and End. The digit you turn to
+                slides in from the direction the wheel moved &mdash; up from below when you count up &mdash; over two
+                faint neighbours behind an edge fade, so the slot reads like a physical reel instead of a number swapping.
+                Land all three on the combination and the shackle lifts and swings clear on its hinge, a spring with real
+                overshoot; spin any reel away and it re-seats at once. The code is shown as an honest hint so the lock is
+                actually openable, and a{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">Scramble</code> spins the reels to a
+                fresh set that is guaranteed not to be the answer. Under{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code> the
+                shackle and the reels snap to their exact states with no travel, the whole thing stays keyboard-operable,
+                and a live region announces locked and open. Nothing here secures anything &mdash; it is a toy about the
+                feel of a lock.
               </p>
             </div>
           </div>
