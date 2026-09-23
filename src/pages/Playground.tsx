@@ -103,6 +103,7 @@ import { PasswordStrength } from '../components/PasswordStrength'
 import { HoldConfirm } from '../components/HoldConfirm'
 import { SwipeToReveal, type SwipeAction } from '../components/SwipeToReveal'
 import { PullToRefresh } from '../components/PullToRefresh'
+import { MoodSlider } from '../components/MoodSlider'
 import { ProgressiveBlur } from '../components/ProgressiveBlur'
 import { DynamicIsland, type IslandActivity } from '../components/DynamicIsland'
 import { Sheet } from '../components/Sheet'
@@ -6384,6 +6385,42 @@ export default function Playground() {
                 <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code> the drag
                 is dropped for that Reload control alone — the same behaviour with none of the movement. Refresh just
                 prepends a placeholder card; nothing here is real.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH MOOD SLIDER */}
+        <Reveal>
+          <div id="mood-slider" data-experiment="Mood slider" className="mt-12 scroll-mt-32">
+            <div className="flex flex-col items-center gap-8 rounded-3xl border border-white/10 bg-white/[0.02] px-6 py-14 sm:px-10">
+              <div className="max-w-md text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Drag to feel it</span>
+                <p className="mx-auto mt-3 text-lg font-medium text-white/85 sm:text-xl">
+                  A slider whose readout is a face. Drag the track, or arrow the thumb, and the whole expression
+                  morphs with the value instead of a number ticking past.
+                </p>
+              </div>
+              <MoodSlider />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Mood slider</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The value is a mood, so the control shows one. As you move the thumb a hand-drawn face morphs
+                continuously: the mouth swings from a frown through a flat line to a broad smile, the brows unknit and
+                lift, the eyes brighten, the head tilts up, cheeks warm at the top of the range, and the face colour
+                travels from a cool slate to the site&apos;s lime. Every one of those is a Framer motion target, so the
+                morph springs between states rather than snapping frame to frame with the finger. The track underneath is
+                a real{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">ElasticSlider</code> — the same
+                tactile, pointer- and keyboard-driven control used elsewhere in this family — reused wholesale rather
+                than rebuilt, so the face is a controlled skin over something that already handles focus, arrow and
+                Home/End keys, and the rubber-band pull at the ends. Its readout and{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">aria-valuetext</code> speak in words —
+                Rough, Low, Okay, Good, Great — not a bare percentage. Under{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code> the
+                springs give way to instant, exact states: the face still reads the value perfectly, just without the
+                in-between travel.
               </p>
             </div>
           </div>
