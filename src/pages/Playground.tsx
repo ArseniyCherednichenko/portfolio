@@ -107,6 +107,7 @@ import { MoodSlider } from '../components/MoodSlider'
 import { CombinationLock } from '../components/CombinationLock'
 import { SplitPane } from '../components/SplitPane'
 import { BubbleLevel } from '../components/BubbleLevel'
+import { RotaryDial } from '../components/RotaryDial'
 import { ProgressiveBlur } from '../components/ProgressiveBlur'
 import { DynamicIsland, type IslandActivity } from '../components/DynamicIsland'
 import { Sheet } from '../components/Sheet'
@@ -6587,6 +6588,41 @@ export default function Playground() {
                 spring settle, End pins it to the limit. Under{' '}
                 <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code> the
                 bubble and the reset both cut straight to their exact positions, the reading still perfectly true.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH ROTARY DIAL */}
+        <Reveal>
+          <div id="rotary-dial" data-experiment="Rotary dial" className="mt-12 scroll-mt-32">
+            <div className="flex flex-col items-center gap-8 rounded-3xl border border-white/10 bg-white/[0.02] px-6 py-14 sm:px-10">
+              <div className="max-w-md text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Dial a number</span>
+                <p className="mx-auto mt-3 text-lg font-medium text-white/85 sm:text-xl">
+                  A rotary phone dial you actually turn. Drag a hole clockwise to the metal stop and let go &mdash; the
+                  wheel unwinds at its own governed pace and the digit lands on the line.
+                </p>
+              </div>
+              <RotaryDial />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Rotary dial</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                A rotary telephone dial rebuilt as a real control rather than a picture of one. Put the pointer in a
+                numbered hole and drag it clockwise to the finger stop, then release: the wheel unwinds under a governed
+                spring at a constant tick rate and the digit lands in the readout as the hole passes home. Because the
+                pull is metered in equal steps, dialling{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">1</code> is a flick and dialling{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">0</code> is very nearly a full turn
+                &mdash; the encoding the mechanism actually used. The drag tracks the pointer&apos;s angle one-to-one and
+                cannot be pulled past the stop, the way a finger meeting the metal tab cannot; a pull that never reaches
+                the stop winds back with nothing dialled. You can also click a hole or type{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">0</code>&ndash;
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">9</code> to dial it, Backspace to rub
+                out the last digit, and Escape to clear the line. Under{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code> the wheel
+                never spins &mdash; a dialled digit simply appears &mdash; so it stays fully usable with no rotation at all.
               </p>
             </div>
           </div>
