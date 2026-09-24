@@ -105,6 +105,7 @@ import { SwipeToReveal, type SwipeAction } from '../components/SwipeToReveal'
 import { PullToRefresh } from '../components/PullToRefresh'
 import { MoodSlider } from '../components/MoodSlider'
 import { CombinationLock } from '../components/CombinationLock'
+import { SplitPane } from '../components/SplitPane'
 import { ProgressiveBlur } from '../components/ProgressiveBlur'
 import { DynamicIsland, type IslandActivity } from '../components/DynamicIsland'
 import { Sheet } from '../components/Sheet'
@@ -1770,6 +1771,65 @@ function PullToRefreshDemo() {
           ))}
         </ul>
       </PullToRefresh>
+    </div>
+  )
+}
+
+// A SplitPane showcase. A real resizable split — drag the divider (or focus it
+// and use the arrow keys) and the two panes trade space one-to-one. The first
+// pane wears a live percentage so the drag visibly does something, and a toggle
+// flips the split between side-by-side and stacked so both orientations of the
+// same control are on show. No animation of its own beyond the eased keyboard
+// nudge, so reduced motion needs nothing special here.
+function SplitPaneDemo() {
+  const [orientation, setOrientation] = useState<'horizontal' | 'vertical'>('horizontal')
+  const [pct, setPct] = useState(52)
+  return (
+    <div className="flex w-full max-w-2xl flex-col items-center gap-5">
+      <div className="flex items-center gap-2 rounded-full bg-white/[0.04] p-1">
+        {(['horizontal', 'vertical'] as const).map((o) => (
+          <button
+            key={o}
+            type="button"
+            onClick={() => setOrientation(o)}
+            aria-pressed={orientation === o}
+            className={`rounded-full px-4 py-1.5 text-sm font-medium capitalize transition-colors ${
+              orientation === o ? 'bg-[#DCF87C] text-black' : 'text-white/60 hover:bg-white/10 hover:text-white/85'
+            }`}
+          >
+            {o === 'horizontal' ? 'Side by side' : 'Stacked'}
+          </button>
+        ))}
+      </div>
+      <SplitPane
+        orientation={orientation}
+        defaultSplit={52}
+        onSplitChange={setPct}
+        label="Resize the preview and notes panes"
+        className="h-72 w-full"
+        first={
+          <div className="flex h-full w-full flex-col justify-between bg-gradient-to-br from-[#DCF87C]/20 via-[#DCF87C]/[0.06] to-transparent p-5">
+            <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Preview</span>
+            <div>
+              <p className="font-display text-5xl font-bold tabular-nums tracking-tight text-white">{pct}%</p>
+              <p className="mt-1 text-sm text-white/60">of the space is this pane. Drag the seam to trade it.</p>
+            </div>
+          </div>
+        }
+        second={
+          <div className="flex h-full w-full flex-col justify-between p-5">
+            <span className="text-xs font-semibold uppercase tracking-[0.3em] text-white/40">Notes</span>
+            <p className="text-sm leading-relaxed text-white/60">
+              The divider is a real <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">separator</code>:
+              click into it and the arrow keys nudge it, Shift jumps in tens, Home and End slam it to the limits, and
+              Enter (or a double-click) snaps it back to the middle.
+            </p>
+          </div>
+        }
+      />
+      <p className="text-xs text-white/35">
+        Tip: focus the divider and hold Shift with the arrow keys, or double-click it to reset.
+      </p>
     </div>
   )
 }
@@ -6458,6 +6518,41 @@ export default function Playground() {
                 shackle and the reels snap to their exact states with no travel, the whole thing stays keyboard-operable,
                 and a live region announces locked and open. Nothing here secures anything &mdash; it is a toy about the
                 feel of a lock.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH SPLIT PANE */}
+        <Reveal>
+          <div id="split-pane" data-experiment="Split pane" className="mt-12 scroll-mt-32">
+            <div className="flex flex-col items-center gap-8 rounded-3xl border border-white/10 bg-white/[0.02] px-6 py-14 sm:px-10">
+              <div className="max-w-md text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Drag the seam</span>
+                <p className="mx-auto mt-3 text-lg font-medium text-white/85 sm:text-xl">
+                  Two panes that trade space. Drag the divider, or focus it and drive it with the keyboard &mdash; the
+                  control every editor has and the web never shipped.
+                </p>
+              </div>
+              <SplitPaneDemo />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Split pane</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The resizable split from every code editor, mail client, and file manager, rebuilt honestly &mdash; HTML
+                never shipped one. The divider is a real{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">role=&quot;separator&quot;</code> that
+                carries <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">aria-orientation</code> and a
+                live <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">aria-valuenow</code> (the first
+                pane&apos;s percentage), so a screen reader hears &quot;separator, 52 percent&quot; and the whole thing is
+                drivable without a mouse: the arrow keys nudge it, Shift and Page keys jump in bigger steps, Home and End
+                slam it to the limits, and Enter or a double-click resets it. The whole split is one number &mdash; the
+                first pane&apos;s <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">flex-basis</code> as a
+                percent of the container &mdash; so nothing is measured per frame and the two panes can never disagree.
+                The drag stays strictly one-to-one with the finger; only a keyboard nudge or a reset eases the basis, and
+                it works both side by side and stacked. Under{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code> the
+                layout still resizes &mdash; it just cuts rather than glides.
               </p>
             </div>
           </div>

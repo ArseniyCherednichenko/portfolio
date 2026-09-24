@@ -34,6 +34,7 @@ export function SplitPane({
   step = 2,
   bigStep = 10,
   label = 'Resize the two panes',
+  onSplitChange,
   className = '',
 }: {
   /** Content of the first pane (left, or top when vertical). */
@@ -53,6 +54,8 @@ export function SplitPane({
   bigStep?: number
   /** Accessible name for the divider. */
   label?: string
+  /** Notified with the first pane's rounded percentage whenever it changes. */
+  onSplitChange?: (percent: number) => void
   className?: string
 }) {
   const reduce = useReducedMotion()
@@ -159,6 +162,9 @@ export function SplitPane({
   )
 
   const rounded = Math.round(split)
+  useEffect(() => {
+    onSplitChange?.(rounded)
+  }, [rounded, onSplitChange])
   // A drag must be instant; a keyboard nudge or reset eases, unless motion is off.
   const eased = !dragging && !reduce
   const basisTransition = eased ? 'flex-basis 220ms cubic-bezier(0.16,1,0.3,1)' : 'none'
