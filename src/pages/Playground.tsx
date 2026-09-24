@@ -106,6 +106,7 @@ import { PullToRefresh } from '../components/PullToRefresh'
 import { MoodSlider } from '../components/MoodSlider'
 import { CombinationLock } from '../components/CombinationLock'
 import { SplitPane } from '../components/SplitPane'
+import { BubbleLevel } from '../components/BubbleLevel'
 import { ProgressiveBlur } from '../components/ProgressiveBlur'
 import { DynamicIsland, type IslandActivity } from '../components/DynamicIsland'
 import { Sheet } from '../components/Sheet'
@@ -6553,6 +6554,39 @@ export default function Playground() {
                 it works both side by side and stacked. Under{' '}
                 <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code> the
                 layout still resizes &mdash; it just cuts rather than glides.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH BUBBLE LEVEL */}
+        <Reveal>
+          <div id="bubble-level" data-experiment="Bubble level" className="mt-12 scroll-mt-32">
+            <div className="flex flex-col items-center gap-8 rounded-3xl border border-white/10 bg-white/[0.02] px-6 py-14 sm:px-10">
+              <div className="max-w-md text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Find the level</span>
+                <p className="mx-auto mt-3 text-lg font-medium text-white/85 sm:text-xl">
+                  A spirit level you can hold. Drag the body to tilt it &mdash; the trapped bubble slides toward the high
+                  end, and locks to lime the instant you read true.
+                </p>
+              </div>
+              <BubbleLevel />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Bubble level</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                A carpenter&apos;s spirit level, rebuilt as an instrument rather than a graphic. Drag the milled body and
+                it rotates rigidly under your hand &mdash; a tool you are holding should not feel elastic &mdash; while
+                the bubble inside the glass vial lags behind on a spring, sliding toward the high end exactly as trapped
+                air would. Bring it within a third of a degree of flat and the vial locks to lime, the bubble settling
+                dead-centre between the two gauge lines, and a live region announces{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">Level</code>. A monospace readout shows
+                the pitch to a tenth of a degree and names the low side. It is a real{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">role=&quot;slider&quot;</code>: focus
+                it and the arrow keys nudge the tilt (Shift for a whole degree), Home or Enter levels it with a short
+                spring settle, End pins it to the limit. Under{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code> the
+                bubble and the reset both cut straight to their exact positions, the reading still perfectly true.
               </p>
             </div>
           </div>
