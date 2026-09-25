@@ -139,6 +139,7 @@ import { Collatz } from '../components/Collatz'
 import { Tesseract } from '../components/Tesseract'
 import { Gears } from '../components/Gears'
 import { Abacus } from '../components/Abacus'
+import { SlidePuzzle } from '../components/SlidePuzzle'
 import { EuclidRing } from '../components/EuclidRing'
 import { Metronome } from '../components/Metronome'
 import { ToneMatrix } from '../components/ToneMatrix'
@@ -7562,6 +7563,37 @@ export default function Playground() {
                 way the real instrument works, or focus a rod and drive its digit straight from the arrow keys — each rod
                 is a real spinbutton that reads its value to a screen reader. Reduced motion drops the bead springs for a
                 clean snap; it stays a fully usable, fully labelled instrument.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH SLIDING PUZZLE */}
+        <Reveal>
+          <div id="slide-puzzle" className="mt-12 scroll-mt-32">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 py-12 sm:px-10">
+              <div className="text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Slide</span>
+                <p className="mx-auto mt-3 max-w-md text-lg font-medium text-white/85 sm:text-xl">
+                  One tile at a time, into the gap. Put one to fifteen back in order.
+                </p>
+              </div>
+              <SlidePuzzle className="mt-10" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Sliding puzzle</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The fifteen-puzzle rebuilt as a real object rather than a graphic: fifteen numbered tiles and one gap in a
+                square frame, where the only legal move is to slide a tile that shares an edge with the gap into it. Click
+                such a tile, or drive the whole board from the arrow keys — each arrow pulls the tile on that side of the
+                gap in, the way a thumb nudges the board, not "moving the hole". Every shuffle is a long random walk of
+                legal slides out from the solved board, so the scramble is always solvable and never a trivial one- or
+                two-move mess. The tiles are the state — one array of sixteen values where zero is the gap — and each tile
+                springs from its old cell to its new one, so a move reads as the tile travelling rather than blinking
+                across; a counter tallies your slides and the whole board locks to lime the instant the numbers fall back
+                into reading order. Honest to a screen reader as a labelled grid whose gap is a live status line, and
+                under reduced motion the tiles cut straight to their cells with no glide — the puzzle every bit as
+                playable, just without the travel.
               </p>
             </div>
           </div>
