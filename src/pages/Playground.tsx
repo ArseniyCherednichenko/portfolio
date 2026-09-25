@@ -108,6 +108,7 @@ import { CombinationLock } from '../components/CombinationLock'
 import { SplitPane } from '../components/SplitPane'
 import { BubbleLevel } from '../components/BubbleLevel'
 import { RotaryDial } from '../components/RotaryDial'
+import { VernierCaliper } from '../components/VernierCaliper'
 import { ProgressiveBlur } from '../components/ProgressiveBlur'
 import { DynamicIsland, type IslandActivity } from '../components/DynamicIsland'
 import { Sheet } from '../components/Sheet'
@@ -6624,6 +6625,44 @@ export default function Playground() {
                 out the last digit, and Escape to clear the line. Under{' '}
                 <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code> the wheel
                 never spins &mdash; a dialled digit simply appears &mdash; so it stays fully usable with no rotation at all.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH VERNIER CALIPER */}
+        <Reveal>
+          <div id="vernier-caliper" data-experiment="Vernier caliper" className="mt-12 scroll-mt-32">
+            <div className="flex flex-col items-center gap-8 rounded-3xl border border-white/10 bg-white/[0.02] px-6 py-14 sm:px-10">
+              <div className="max-w-md text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Measure it</span>
+                <p className="mx-auto mt-3 text-lg font-medium text-white/85 sm:text-xl">
+                  A precision caliper you actually read. Slide the jaw to open them &mdash; whole millimetres off the
+                  beam, tenths off the one vernier line that lines up.
+                </p>
+              </div>
+              <VernierCaliper />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Vernier caliper</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                A metric vernier caliper rebuilt as a working instrument rather than a picture of one, and the
+                controls family&apos;s companion to the Bubble level: another tool you read rather than a value you set.
+                Drag the sliding jaw along the beam &mdash; or focus it and tick with the arrow keys &mdash; and the
+                jaws open around a workpiece whose width is the reading. It is read the way the real tool is: the whole
+                millimetres come from where the vernier&apos;s zero sits on the fixed scale, and the tenths from which
+                of the ten vernier divisions lines up with a main-scale tick. That one coinciding division is lit lime
+                on both scales at once, so the vernier principle is on screen and not merely asserted. The vernier is
+                ten divisions spanning nine millimetres &mdash; each{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">0.9</code> mm, stepping{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">0.1</code> mm out of phase per tick
+                &mdash; so a tenth of a millimetre is the resolution, and the whole state is one integer count of
+                tenths, so the coincidence is always exact. A real{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">role=slider</code>: the arrow keys
+                nudge a tenth, Shift a whole millimetre, Home closes the jaws and End opens them to the limit, and a live
+                region reads the measurement. The jaw tracks the pointer one to one; only a keyboard nudge eases, and
+                under <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code>{' '}
+                even that cuts straight to the value.
               </p>
             </div>
           </div>
