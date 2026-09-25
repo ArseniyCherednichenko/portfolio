@@ -109,6 +109,7 @@ import { SplitPane } from '../components/SplitPane'
 import { BubbleLevel } from '../components/BubbleLevel'
 import { RotaryDial } from '../components/RotaryDial'
 import { VernierCaliper } from '../components/VernierCaliper'
+import { SlideRule } from '../components/SlideRule'
 import { ProgressiveBlur } from '../components/ProgressiveBlur'
 import { DynamicIsland, type IslandActivity } from '../components/DynamicIsland'
 import { Sheet } from '../components/Sheet'
@@ -6662,6 +6663,48 @@ export default function Playground() {
                 nudge a tenth, Shift a whole millimetre, Home closes the jaws and End opens them to the limit, and a live
                 region reads the measurement. The jaw tracks the pointer one to one; only a keyboard nudge eases, and
                 under <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code>{' '}
+                even that cuts straight to the value.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH SLIDE RULE */}
+        <Reveal>
+          <div id="slide-rule" data-experiment="Slide rule" className="mt-12 scroll-mt-32">
+            <div className="flex flex-col items-center gap-8 rounded-3xl border border-white/10 bg-white/[0.02] px-6 py-14 sm:px-10">
+              <div className="max-w-md text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Compute it</span>
+                <p className="mx-auto mt-3 text-lg font-medium text-white/85 sm:text-xl">
+                  A slide rule that actually multiplies. Slide the C index over one number, run the cursor
+                  to another, and read the product off D.
+                </p>
+              </div>
+              <SlideRule />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Slide rule</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                A slide rule rebuilt as a working instrument rather than a picture of one, and the controls
+                family&apos;s companion to the Vernier caliper: another tool you read a value off rather than one
+                you set. It multiplies the way the real thing does &mdash; by adding lengths on two logarithmic
+                scales. Slide the centre strip so the C scale&apos;s index (its{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">1</code>) sits over one
+                number on the fixed D scale, then drag the cursor hairline to a second number on C, and the
+                hairline crosses their product on D. Because a value sits at a distance proportional to its{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">log</code>, sliding one
+                scale along the other adds those distances &mdash; and adding logarithms multiplies the
+                numbers. Both moving parts are real{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">role=slider</code>s: the
+                slide sets the multiplicand, the cursor picks the multiplier and reads the product, and the
+                two aligned readings are lit lime on the fixed D scale at once, so the principle is on screen
+                and not merely asserted. The product is read straight off the geometry rather than stored, so
+                the number can never disagree with where the lines fall. Arrow keys nudge a tenth, Shift a
+                whole unit, Home and End jump to the reachable ends, and a live region narrates the product;
+                the whole thing is kept to one decade, so a product that would leave the scale simply stops
+                at the far index. The parts track the pointer one to one and ease only on a keyboard nudge,
+                and under{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code>{' '}
                 even that cuts straight to the value.
               </p>
             </div>
