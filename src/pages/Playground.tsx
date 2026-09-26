@@ -111,6 +111,7 @@ import { RotaryDial } from '../components/RotaryDial'
 import { VernierCaliper } from '../components/VernierCaliper'
 import { SlideRule } from '../components/SlideRule'
 import { Protractor } from '../components/Protractor'
+import { Micrometer } from '../components/Micrometer'
 import { ProgressiveBlur } from '../components/ProgressiveBlur'
 import { DynamicIsland, type IslandActivity } from '../components/DynamicIsland'
 import { Sheet } from '../components/Sheet'
@@ -6743,6 +6744,48 @@ export default function Playground() {
                 degree, Shift ten, Home and End take the ends, Enter squares it to ninety, and a live region reads
                 both scales. The arm tracks the pointer one to one and eases only on a keyboard nudge or the reset,
                 and under{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code> even
+                that cuts straight to the value.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH MICROMETER */}
+        <Reveal>
+          <div id="micrometer" data-experiment="Micrometer" className="mt-12 scroll-mt-32">
+            <div className="flex flex-col items-center gap-8 rounded-3xl border border-white/10 bg-white/[0.02] px-6 py-14 sm:px-10">
+              <div className="max-w-md text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Measure it</span>
+                <p className="mx-auto mt-3 text-lg font-medium text-white/85 sm:text-xl">
+                  A micrometer that actually reads to a hundredth. Turn the thimble down the sleeve and take the
+                  reading off both scales &mdash; the sleeve and the rim, summed.
+                </p>
+              </div>
+              <Micrometer />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Micrometer</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                A metric micrometer screw gauge rebuilt as a working instrument, and the finest measurer of the
+                family: where the Vernier caliper reads a length to a tenth by an aligned division, this one reads to
+                a hundredth by a precision screw. Drag the thimble along the sleeve &mdash; or focus it and tick with
+                the arrow keys &mdash; and the spindle closes onto a workpiece whose width is the reading, taken the
+                way the tool actually is with both halves on screen at once: the whole-and-half millimetres from the
+                last sleeve graduation the thimble edge has uncovered, and the hundredths from the one rim division
+                sitting on the sleeve datum line. That division is lit lime and the sleeve graduation it belongs to is
+                lit to match, so the{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">sleeve + thimble</code> of a
+                micrometer reading is a thing you can see, not a rule you are told. The mechanism is the screw: the
+                thimble turns on a{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">0.5 mm</code> pitch, so a full turn
+                advances the spindle exactly half a millimetre and the fifty-division rim resolves that half to a
+                hundredth. The whole state is one integer count of hundredths, so sleeve plus thimble is always
+                exactly the reading. A real{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">role=slider</code>: arrows nudge a
+                hundredth, Shift a tenth, PageUp and PageDown a full turn, Home closes the spindle and End opens it,
+                with a live region reading the measurement. The thimble tracks the pointer one to one and eases only
+                on a keyboard nudge, and under{' '}
                 <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code> even
                 that cuts straight to the value.
               </p>
