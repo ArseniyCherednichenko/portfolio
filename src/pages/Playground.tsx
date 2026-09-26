@@ -112,6 +112,7 @@ import { VernierCaliper } from '../components/VernierCaliper'
 import { SlideRule } from '../components/SlideRule'
 import { Protractor } from '../components/Protractor'
 import { Micrometer } from '../components/Micrometer'
+import { Zoetrope } from '../components/Zoetrope'
 import { ProgressiveBlur } from '../components/ProgressiveBlur'
 import { DynamicIsland, type IslandActivity } from '../components/DynamicIsland'
 import { Sheet } from '../components/Sheet'
@@ -7758,6 +7759,47 @@ export default function Playground() {
                 into reading order. Honest to a screen reader as a labelled grid whose gap is a live status line, and
                 under reduced motion the tiles cut straight to their cells with no glide — the puzzle every bit as
                 playable, just without the travel.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH ZOETROPE */}
+        <Reveal>
+          <div id="zoetrope" data-experiment="Zoetrope" className="mt-12 scroll-mt-32">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 py-12 sm:px-10">
+              <div className="text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Spin it</span>
+                <p className="mx-auto mt-3 max-w-md text-lg font-medium text-white/85 sm:text-xl">
+                  Twelve stills of a bouncing ball around a disc. Spin it and look through the slit, and
+                  the ball comes to life.
+                </p>
+              </div>
+              <Zoetrope className="mt-10" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Zoetrope</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The oldest moving picture there is, rebuilt so the trick itself is on screen. A disc carries
+                a ring of twelve drawn frames &mdash; the twelve poses of one bounce of a ball &mdash; with a
+                radial slit between each pair, and glancing through the slit at the top window the eye stitches
+                the passing frames into a single animation: the ball bounces in place. The disc&rsquo;s{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">rotation</code> is the only
+                state, and the frame at the window &mdash; and so the pose the big viewer reconstructs &mdash; is
+                derived from it and nothing else, so the picture can never drift from where the disc actually is.
+                The viewer and the twelve disc cells are all drawn by one{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">ballPose</code> function, so
+                what the slit reveals is provably the same drawing that rides the disc. Drag the disc to spin it
+                and it coasts on momentum, bleeding speed to friction the way a spun wheel does; press Spin for a
+                shove, toggle{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">Look through the slit</code> to
+                darken all but the top wedge and watch the strobe do the work, or focus the disc and tick one
+                frame at a time with the arrow keys. A real{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">role=slider</code> over the
+                twelve frames with a live region, and under{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code>{' '}
+                there is no free coast &mdash; a drag tracks the finger and stops on release, and Spin and the
+                arrows step frame by frame.
               </p>
             </div>
           </div>
