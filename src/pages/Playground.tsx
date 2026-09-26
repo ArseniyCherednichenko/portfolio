@@ -110,6 +110,7 @@ import { BubbleLevel } from '../components/BubbleLevel'
 import { RotaryDial } from '../components/RotaryDial'
 import { VernierCaliper } from '../components/VernierCaliper'
 import { SlideRule } from '../components/SlideRule'
+import { Protractor } from '../components/Protractor'
 import { ProgressiveBlur } from '../components/ProgressiveBlur'
 import { DynamicIsland, type IslandActivity } from '../components/DynamicIsland'
 import { Sheet } from '../components/Sheet'
@@ -6706,6 +6707,44 @@ export default function Playground() {
                 and under{' '}
                 <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code>{' '}
                 even that cuts straight to the value.
+              </p>
+            </div>
+          </div>
+
+          {/* PROTRACTOR — the angle instrument beside the caliper (length) and
+              the bubble level (level): three tools of the same family, each one
+              read off the marks on the tool itself. */}
+          <div id="protractor" data-experiment="Protractor" className="mt-12 scroll-mt-32">
+            <div className="flex flex-col items-center gap-8 rounded-3xl border border-white/10 bg-white/[0.02] px-6 py-14 sm:px-10">
+              <div className="max-w-md text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Measure it</span>
+                <p className="mx-auto mt-3 text-lg font-medium text-white/85 sm:text-xl">
+                  A protractor you actually read. Swing the arm around the dial and take the angle off the two
+                  scales &mdash; either edge, and they always sum to 180.
+                </p>
+              </div>
+              <Protractor />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Protractor</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                A half-circle protractor rebuilt as a working instrument, and the third of a small family with the
+                Vernier caliper (length) and the Bubble level (level): the tool for angle, and like its siblings a
+                thing you read a value off rather than one you merely set. Drag the arm around the dial &mdash; or
+                focus it and tick with the arrow keys &mdash; and it reads the angle the way the real tool is read,
+                off the double scale printed on it: an outer run{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">0&ndash;180</code> measured from
+                the right base, and an inner run the other way, so a line can be read from either edge and the two
+                readings always sum to 180. The one major division the arm sits nearest is lit lime on both scales
+                at once, so the dual-scale principle is on screen and not merely asserted. The angle is the single
+                piece of state and the arm, the lit division, and both readouts all derive from it, so the reading
+                can never disagree with the geometry. A real{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">role=slider</code>: arrows nudge a
+                degree, Shift ten, Home and End take the ends, Enter squares it to ninety, and a live region reads
+                both scales. The arm tracks the pointer one to one and eases only on a keyboard nudge or the reset,
+                and under{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code> even
+                that cuts straight to the value.
               </p>
             </div>
           </div>
