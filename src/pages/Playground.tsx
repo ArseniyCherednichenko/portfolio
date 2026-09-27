@@ -113,6 +113,7 @@ import { SlideRule } from '../components/SlideRule'
 import { Protractor } from '../components/Protractor'
 import { Micrometer } from '../components/Micrometer'
 import { Zoetrope } from '../components/Zoetrope'
+import { Chronograph } from '../components/Chronograph'
 import { ProgressiveBlur } from '../components/ProgressiveBlur'
 import { DynamicIsland, type IslandActivity } from '../components/DynamicIsland'
 import { Sheet } from '../components/Sheet'
@@ -7800,6 +7801,46 @@ export default function Playground() {
                 <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code>{' '}
                 there is no free coast &mdash; a drag tracks the finger and stops on release, and Spin and the
                 arrows step frame by frame.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH CHRONOGRAPH */}
+        <Reveal>
+          <div id="chronograph" data-experiment="Chronograph" className="mt-12 scroll-mt-32">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 py-12 sm:px-10">
+              <div className="text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Time it</span>
+                <p className="mx-auto mt-3 max-w-md text-lg font-medium text-white/85 sm:text-xl">
+                  Start the sweep, take a lap on the fly, and read the same time off the hands and the
+                  digits at once.
+                </p>
+              </div>
+              <Chronograph className="mt-10" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Chronograph</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                A two-pusher mechanical stopwatch, rebuilt as an object you operate rather than a picture of
+                one. The top pusher starts and stops the sweep; the bottom takes a lap while it runs and
+                zeroes it once it is stopped, the way the lower pusher on a real chronograph does both jobs.
+                The honest part is the state: the only thing stored is{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">elapsed</code>{' '}
+                milliseconds, and the accent sweep hand, the minute totalizer, the fast tenths subdial, and
+                the{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">MM:SS.CC</code> digital
+                readout are all derived from that one number, so the three hands and the digits can never
+                disagree &mdash; there is no separate seconds and minutes to drift apart. Time is measured off{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">performance.now()</code>{' '}
+                rather than the wall clock, so a tab-away can&rsquo;t skew the count and a resize leaves it
+                untouched, and it runs the movement on a frame loop only while it is actually going. A real{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">role=timer</code> from the
+                keyboard: Space starts and stops, Enter laps or resets, R clears, with a live region reading
+                the time. Under{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code>{' '}
+                the sweep drops to a quartz whole-second tick and the fast hand is stilled, but the digital
+                reading &mdash; the thing you are actually here to read &mdash; still runs to the hundredth.
               </p>
             </div>
           </div>
