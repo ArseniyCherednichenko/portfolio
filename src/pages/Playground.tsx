@@ -114,6 +114,7 @@ import { Protractor } from '../components/Protractor'
 import { Micrometer } from '../components/Micrometer'
 import { Zoetrope } from '../components/Zoetrope'
 import { Chronograph } from '../components/Chronograph'
+import { Compass } from '../components/Compass'
 import { ProgressiveBlur } from '../components/ProgressiveBlur'
 import { DynamicIsland, type IslandActivity } from '../components/DynamicIsland'
 import { Sheet } from '../components/Sheet'
@@ -7841,6 +7842,45 @@ export default function Playground() {
                 <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code>{' '}
                 the sweep drops to a quartz whole-second tick and the fast hand is stilled, but the digital
                 reading &mdash; the thing you are actually here to read &mdash; still runs to the hundredth.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH COMPASS */}
+        <Reveal>
+          <div id="compass" data-experiment="Compass" className="mt-12 scroll-mt-32">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 py-12 sm:px-10">
+              <div className="text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Steer it</span>
+                <p className="mx-auto mt-3 max-w-md text-lg font-medium text-white/85 sm:text-xl">
+                  Turn the ship and watch the card swing the other way. The number under the bow is your
+                  heading.
+                </p>
+              </div>
+              <Compass className="mt-10" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Compass</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                A marine card compass, rebuilt as an object you steer rather than a picture of one. On a real
+                card compass the graduated disc floats on a pivot and its magnet holds the card&rsquo;s north
+                toward magnetic north, while the bowl you read through is fixed to the vessel &mdash; so as the
+                ship swings, the card appears to turn the other way, and the graduation sitting under the fixed
+                lubber line at the bow is the heading you are steering. The honest part is the state: the only
+                thing stored is the{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">heading</code>, kept
+                unbounded so a spring can settle across the 0/360 seam without a jump, and the card&rsquo;s
+                rotation, the three-figure readout, and the sixteen-point rose name are all derived from that
+                one number, so the card and the figure can never disagree. Dragging turns the card one to one
+                with the pointer, because a wheel you are turning by hand should not feel elastic; only a
+                keyboard nudge or a come-to button eases to its target on a short spring. A real{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">role=slider</code> from the
+                keyboard: the arrows nudge a degree, Shift ten, Home comes to north by the short way, and End
+                takes the reciprocal &mdash; the back-bearing a navigator reads to check a fix &mdash; with a
+                live region reading the heading and its point. Under{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code>{' '}
+                the eased moves land straight on the value.
               </p>
             </div>
           </div>
