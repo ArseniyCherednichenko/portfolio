@@ -145,6 +145,7 @@ import { Penrose } from '../components/Penrose'
 import { Collatz } from '../components/Collatz'
 import { Tesseract } from '../components/Tesseract'
 import { Gears } from '../components/Gears'
+import { FourBar } from '../components/FourBar'
 import { Abacus } from '../components/Abacus'
 import { SlidePuzzle } from '../components/SlidePuzzle'
 import { EuclidRing } from '../components/EuclidRing'
@@ -7340,6 +7341,47 @@ export default function Playground() {
                 precomputed once and just evaluated per frame. Grab any wheel and the train follows; the release hands it
                 a fly-wheel glide that coasts to rest. One canvas, one loop that sleeps when nothing turns, DPR-capped.
                 Reduced motion paints it once at rest and keeps the drag working.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH FOUR-BAR LINKAGE */}
+        <Reveal>
+          <div id="four-bar" data-experiment="Four-bar linkage" className="mt-12 scroll-mt-32">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 py-12 sm:px-10">
+              <div className="mb-8 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Turn the crank</span>
+                <p className="mx-auto mt-3 max-w-md text-lg font-medium text-white/85 sm:text-xl">
+                  Drive the short bar and watch the far corner draw a curve no one joint could.
+                </p>
+              </div>
+              <FourBar className="mx-auto" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Four-bar linkage</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The gear train&rsquo;s neighbour in the rigid-mechanism corner: where that one holds a ratio through
+                meshing teeth, this holds a whole motion through four bars pinned in a loop. It is the smallest closed
+                chain that does anything interesting &mdash; a fixed ground bar between the two bolted pivots, a short{' '}
+                <em>crank</em> you drive off one, a <em>rocker</em> swinging off the other, and the <em>coupler</em>
+                joining their free ends. This one is a Grashof crank-rocker: the crank is the shortest link and it is
+                grounded, so it turns full circle while the rocker only rocks, and the linkage never locks or tears. The
+                honest part is the state. The only thing stored is the crank angle; every other point is derived by real
+                kinematics each frame &mdash; the crank tip comes off the angle, and the rocker tip is the{' '}
+                <em>intersection of two circles</em>, one of the coupler&rsquo;s length about the crank tip and one of
+                the rocker&rsquo;s length about its pivot, taken on the elbow-up branch so it can never flip to the other
+                solution. Because that free joint is solved from the driven one, the bars can never stretch and the pen
+                &mdash; a point fixed to the coupler and carried in its own turning frame &mdash; can never leave the one
+                curve the geometry allows. That coupler curve is drawn from the very same solver, a faint ghost loop with
+                a lit arc that fills as the crank comes round, so the path and the mechanism are the same object. Drag
+                the crank one to one, or set it running on a five-second turn. A real{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">role=slider</code> from the keyboard:
+                arrows nudge a degree, Shift ten, Space runs or stops, Home returns to the top and End to half a turn,
+                with a live region reading the angle. Under{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code> there is
+                no continuous sweep &mdash; Run completes the revolution in one step and the loop inks at once, and every
+                state stays legible.
               </p>
             </div>
           </div>
