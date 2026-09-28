@@ -146,6 +146,7 @@ import { Collatz } from '../components/Collatz'
 import { Tesseract } from '../components/Tesseract'
 import { Gears } from '../components/Gears'
 import { FourBar } from '../components/FourBar'
+import { Peaucellier } from '../components/Peaucellier'
 import { Abacus } from '../components/Abacus'
 import { SlidePuzzle } from '../components/SlidePuzzle'
 import { EuclidRing } from '../components/EuclidRing'
@@ -7382,6 +7383,48 @@ export default function Playground() {
                 <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code> there is
                 no continuous sweep &mdash; Run completes the revolution in one step and the loop inks at once, and every
                 state stays legible.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH PEAUCELLIER-LIPKIN LINKAGE */}
+        <Reveal>
+          <div id="peaucellier" data-experiment="Peaucellier-Lipkin linkage" className="mt-12 scroll-mt-32">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 py-12 sm:px-10">
+              <div className="mb-8 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Round into straight</span>
+                <p className="mx-auto mt-3 max-w-md text-lg font-medium text-white/85 sm:text-xl">
+                  Swing the crank in a circle and the pen draws a perfectly straight line.
+                </p>
+              </div>
+              <Peaucellier className="mx-auto" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Peaucellier-Lipkin linkage</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The four-bar&rsquo;s celebrated cousin, and the deeper trick in the rigid-mechanism corner: not a curve but
+                a <em>perfectly straight line</em>, drawn by rigid bars alone. Turning rotary motion into exact straight
+                motion was an open problem for a century &mdash; James Watt&rsquo;s famous linkage only{' '}
+                <em>approximates</em> a straight line &mdash; until Charles-Nicolas Peaucellier solved it in 1864 with a
+                mechanical <em>inversor</em>. Two long equal bars run from the fixed fulcrum out to a rhombus of four
+                equal short bars, and that arrangement forces three joints &mdash; the fulcrum, the driven point, and the
+                pen &mdash; to stay collinear while their distances from the fulcrum multiply to a constant:
+                |OB|&middot;|OP| = m&sup2; &minus; n&sup2;. The pen is the geometric <em>inverse</em> of the driven point
+                in a circle about the fulcrum. Drive that point around a circle threaded through the fulcrum &mdash; a
+                crank whose length equals its offset &mdash; and because inversion carries any circle through its centre to
+                a straight line, the pen traces one <em>exactly</em>. The honest part is the state: the only thing stored
+                is the crank angle, and every joint is derived each frame by real geometry &mdash; the driven point off
+                the angle, the pen by the exact inversion, the rhombus corners as the same two-circle intersection the
+                four-bar uses &mdash; so the bars can never stretch and the pen can never leave the one vertical it is
+                allowed. The readout makes the proof visible: the pen&rsquo;s x-coordinate is <em>locked</em>, unmoving to
+                the decimal as the crank swings. Drag the crank one to one, or set it rocking on a five-second sweep. A
+                real <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">role=slider</code> from the
+                keyboard: arrows nudge a degree, Shift ten, Space runs or stops, Home centres the crank and End takes it to
+                the extreme, with a live region reading the angle. Under{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code> there is
+                no sweep &mdash; Run inks the whole reachable line in one step and rests the crank &mdash; and every state
+                stays legible.
               </p>
             </div>
           </div>
