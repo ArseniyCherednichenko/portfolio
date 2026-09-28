@@ -9,6 +9,7 @@ import { TrueFocus } from '../components/TrueFocus'
 import { SpotlightCard } from '../components/SpotlightCard'
 import { MagneticButton } from '../components/MagneticButton'
 import { AnimatedCounter } from '../components/AnimatedCounter'
+import { DisciplineWeb } from '../components/DisciplineWeb'
 import { Aurora } from '../components/Aurora'
 import { useContact } from '../components/ContactDialog'
 import { Seo } from '../components/Seo'
@@ -216,6 +217,41 @@ export default function Range() {
           <SpotlightCard className="min-h-[34rem]">
             <DisciplineDetail index={active} />
           </SpotlightCard>
+        </div>
+      </section>
+
+      {/* THE WEB — the same disciplines, drawn as the connected thing they are.
+          Shares the explorer's active selection: pick a node here and the panel
+          above follows, and vice versa. */}
+      <section className="mx-auto w-full max-w-6xl px-6 pb-24">
+        <div className="grid items-center gap-10 lg:grid-cols-[1fr_minmax(0,26rem)]">
+          <div>
+            <Reveal>
+              <Eyebrow>Not five things</Eyebrow>
+            </Reveal>
+            <Reveal delay={0.05}>
+              <h2 className="mt-5 font-display text-3xl font-bold leading-[1.1] tracking-tight sm:text-4xl">
+                One connected way of working
+              </h2>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <p className="mt-5 max-w-lg text-base leading-relaxed text-white/55">
+                These are not five separate skills sitting in five separate folders. The backend feeds
+                the native app, motion lives inside the frontend, and applied AI leans on both the data
+                and the surface. Touch a node to see what it is wired to — the lit links are the honest
+                ones the rest of the site already claims.
+              </p>
+            </Reveal>
+            <Reveal delay={0.15}>
+              <p className="mt-6 text-sm font-medium text-white/45">
+                Showing:{' '}
+                <span className="font-semibold text-white/80">{DISCIPLINES[active].tag}</span>
+              </p>
+            </Reveal>
+          </div>
+          <Reveal delay={0.1}>
+            <DisciplineWeb disciplines={DISCIPLINES} active={active} onSelect={setActive} />
+          </Reveal>
         </div>
       </section>
 
