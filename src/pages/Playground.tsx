@@ -131,6 +131,7 @@ import { DrawSVG } from '../components/DrawSVG'
 import { Signature } from '../components/Signature'
 import { PillNav, type PillLink } from '../components/PillNav'
 import { CircularGallery, type GalleryItem } from '../components/CircularGallery'
+import { RollingGallery, type RollingItem } from '../components/RollingGallery'
 import { SphereMenu, type SphereItem } from '../components/SphereMenu'
 import { AnimatedList } from '../components/AnimatedList'
 import { InfiniteScroll, type InfiniteScrollItem } from '../components/InfiniteScroll'
@@ -2346,6 +2347,18 @@ const COVERFLOW_CARDS: GalleryItem[] = [
   { tag: 'Interpolated', title: 'Follows your finger', body: 'The same transform curve is evaluated at fractional offsets mid-drag, so cards glide rather than jump.' },
   { tag: 'Steerable', title: 'Many ways in', body: 'Drag, wheel, arrow keys, the prev/next buttons, the dots, or a click on a side card to bring it forward.' },
   { tag: 'Fallback', title: 'Calm without motion', body: 'Under reduced motion it drops the perspective and becomes a plain, fully readable snap-scroll row.' },
+]
+
+// The drum panels — the range, one facet per face, seated around the cylinder so
+// no single discipline is the front. Each links to where that thread is on show,
+// so the drum doubles as a way into the site rather than a decoration.
+const ROLLING_CARDS: RollingItem[] = [
+  { tag: 'Frontend', title: 'React & TypeScript', body: 'The web surface — components, state, and the seams kept invisible.', to: '/range', cta: 'See the range' },
+  { tag: 'Native', title: 'iOS in SwiftUI', body: 'A native app built by hand on a shared backend, not a web view in a shell.', to: '/range' },
+  { tag: 'Motion', title: 'Framer Motion', body: 'Entrances, springs, and scroll scenes — the whole feel of this site.', to: '/craft', cta: 'On motion' },
+  { tag: 'Applied AI', title: 'Building with LLMs', body: 'AI woven into real products, asking the right question instead of answering.', to: '/toolkit' },
+  { tag: 'Design', title: 'Type & palette', body: 'Fraunces and Inter, lime on ink — the language, not just the code.', to: '/design', cta: 'Design language' },
+  { tag: 'Open', title: 'Built in public', body: 'The site grows most days, one commit at a time, all of it on GitHub.', href: 'https://github.com/ArseniyCherednichenko/portfolio', cta: 'Source' },
 ]
 
 // The whole site, orbiting — every destination as a link on the sphere, so no
@@ -6903,6 +6916,27 @@ export default function Playground() {
                 A draggable 3D coverflow. Cards fan out in perspective around an upright active card; drag, wheel, arrow
                 keys, the arrows, the dots, or a click on a side card all drive it, and it snaps to the nearest on
                 release. Drives the Home Playground section. Reduced-motion becomes a plain snap-scroll row.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH ROLLING DRUM */}
+        <Reveal>
+          <div id="rolling-drum" data-experiment="Rolling drum" className="mt-12 scroll-mt-32">
+            <div className="rounded-3xl border border-white/10 bg-white/[0.02] px-6 py-10 sm:px-10">
+              <RollingGallery items={ROLLING_CARDS} />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Rolling drum</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The coverflow's round cousin: instead of fanning cards sideways in a plane, this seats them around the
+                face of a cylinder that turns on a vertical axis, so off-centre faces curve away into real depth and the
+                back of the drum is genuinely behind. A single unbounded rotation is the whole state; every face's angle
+                and the active card are derived from it each frame off one animation loop. It drifts on its own, grabs to
+                spin, and coasts on real momentum after a fling before the drift takes back over; arrow keys step it one
+                face at a time and the front card alone is a live link. Reduced motion drops the drum for a plain
+                snap-scroll row.
               </p>
             </div>
           </div>
