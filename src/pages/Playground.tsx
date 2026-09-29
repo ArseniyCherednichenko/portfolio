@@ -149,6 +149,7 @@ import { Tesseract } from '../components/Tesseract'
 import { Gears } from '../components/Gears'
 import { FourBar } from '../components/FourBar'
 import { Peaucellier } from '../components/Peaucellier'
+import { GenevaDrive } from '../components/GenevaDrive'
 import { Abacus } from '../components/Abacus'
 import { SlidePuzzle } from '../components/SlidePuzzle'
 import { EuclidRing } from '../components/EuclidRing'
@@ -7477,6 +7478,49 @@ export default function Playground() {
                 <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code> there is
                 no sweep &mdash; Run inks the whole reachable line in one step and rests the crank &mdash; and every state
                 stays legible.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH GENEVA DRIVE */}
+        <Reveal>
+          <div id="geneva-drive" data-experiment="Geneva drive" className="mt-12 scroll-mt-32">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 py-12 sm:px-10">
+              <div className="mb-8 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Smooth into stepped</span>
+                <p className="mx-auto mt-3 max-w-md text-lg font-medium text-white/85 sm:text-xl">
+                  Turn the crank steadily and the star wheel answers in exact steps: move, hold, move, hold.
+                </p>
+              </div>
+              <GenevaDrive className="mx-auto" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Geneva drive</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The third character in the rigid-mechanism corner, and the one that answers a different question. The
+                four-bar turns rotation into a <em>curve</em>; the Peaucellier turns it into a <em>straight line</em>; the
+                Geneva turns <em>continuous</em> rotation into <em>intermittent</em> rotation. A pin on the driving crank
+                enters a radial slot in the star wheel, carries it round by exactly one station, then slides out &mdash;
+                and between steps a locking disc on the driver cradles a concave scallop of the wheel so it cannot drift.
+                This is the movement that ran film projectors, parking one frame in the gate per turn while the shutter was
+                closed, and that indexed the tables of automatic machine tools. The honest part is the state: the only
+                thing stored is the crank angle, and the wheel angle is derived from it by the exact geometry of the
+                mechanism &mdash; the pin&rsquo;s position sets the slot direction, the wheel follows while the pin is
+                inside, then holds &mdash; not an easing curve pretending to be a machine. Everything is tied to one
+                choice, the slot count: the crank pin radius is the centre distance times{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">sin(&pi;/n)</code>, so the pin enters
+                and leaves each slot tangentially with no shock, the wheel moves for exactly{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">2&middot;(90&minus;180/n)</code>{' '}
+                degrees of crank rotation and is locked the rest of the turn, and in that window it advances by exactly one
+                station. Being an external drive, it also turns <em>against</em> the crank &mdash; as it does here for
+                real. Switch between a four- and six-slot wheel and the whole drawing rebuilds to true geometry, not a
+                second hand-tuned picture. Drag the crank one to one, or set it running. A real{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">role=slider</code> from the keyboard:
+                arrows nudge a degree, Shift ten, Space runs or stops, Home returns to top-dead-centre and End indexes one
+                station, with a live region reading the crank angle, the lock state and the station. Under{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code> there is
+                no sweep &mdash; Run indexes one station in a single step &mdash; and every state stays legible.
               </p>
             </div>
           </div>
