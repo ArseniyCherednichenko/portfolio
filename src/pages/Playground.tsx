@@ -156,6 +156,7 @@ import { EuclidRing } from '../components/EuclidRing'
 import { Metronome } from '../components/Metronome'
 import { ToneMatrix } from '../components/ToneMatrix'
 import { EtchASketch } from '../components/EtchASketch'
+import { BubbleWrap } from '../components/BubbleWrap'
 import { Ballpit } from '../components/Ballpit'
 import { Cloth } from '../components/Cloth'
 import { Kaleidoscope } from '../components/Kaleidoscope'
@@ -8188,6 +8189,35 @@ export default function Playground() {
                 segment is inked each move, so the powder builds up instead of being cleared. Both knobs are the site's
                 own dial control, so the toy is keyboard-driven for free — focus a knob and the arrow keys draw. Shake to
                 erase. Reduced motion drops the wobble on the shake; the drawing, being direct manipulation, is unchanged.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH BUBBLE WRAP */}
+        <Reveal>
+          <div id="bubble-wrap" data-experiment="Bubble wrap" className="mt-12 scroll-mt-32">
+            <div className="text-center">
+              <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Pop</span>
+              <p className="mx-auto mt-3 max-w-md text-lg font-medium text-white/85 sm:text-xl">
+                Press a bubble, or drag across a whole row. No score, no reward — just the pop.
+              </p>
+            </div>
+            <BubbleWrap className="mt-8" />
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Bubble wrap</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The most honest toy on the shelf: no simulation, no mechanism, no plotter — just the small, universal good
+                feeling of a dome giving way under a fingertip. The whole craft is in the single pop. The single source of
+                truth is one boolean per bubble, popped or not, and everything else — the count, the progress bar, the
+                "whole sheet" line — is read straight off that array, so nothing on screen can ever disagree. Popping is
+                geometry, not per-bubble handlers: the sheet captures the pointer on press and maps every move directly to
+                a row and column from its own rect, which is what lets a drag pop a clean swath, on touch as much as with a
+                mouse, without the capture tearing off as the finger crosses between bubbles. The keyboard gets the same
+                sheet as a real grid — one tab stop, the arrow keys walking a roving focus, Enter or Space popping the
+                bubble under it, and a live region calling the count. The column count fits itself to the width. Reduced
+                motion keeps every pop — it is direct manipulation, not decoration — but drops the springy collapse and the
+                expanding ring for an instant, quiet state change.
               </p>
             </div>
           </div>
