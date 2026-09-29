@@ -35,6 +35,7 @@ import { SplitFlap } from '../components/SplitFlap'
 import { Clock } from '../components/Clock'
 import { WordClock } from '../components/WordClock'
 import { CardStack } from '../components/CardStack'
+import { CardSwap } from '../components/CardSwap'
 import { ProfileCard } from '../components/ProfileCard'
 import { PixelTransition } from '../components/PixelTransition'
 import { FlipCard } from '../components/FlipCard'
@@ -3291,6 +3292,23 @@ export default function Playground() {
                   { tag: 'Depth', title: 'Cards behind peek out', body: 'Each layer is offset, scaled, and tilted for a real sense of stack.' },
                   { tag: 'Springs', title: 'Every move is eased', body: 'The recede-to-back transition runs on a shared motion curve.' },
                   { tag: 'Control', title: 'Yours to drive', body: 'Click, tab to focus, or use the dots. It pauses while you do.' },
+                ]}
+              />
+            </Experiment>
+          </Reveal>
+
+          <Reveal delay={0.05}>
+            <Experiment
+              name="Dealing card deck"
+              note="A 3D deck where the front card drops down and out along an arc, then tucks in at the back while the rest promote forward. Tap the top card to deal by hand; hover to hold. The cards carry how I actually think about building."
+            >
+              <CardSwap
+                className="my-6"
+                cards={[
+                  { tag: 'Made', title: 'Made, not assembled', body: 'Every card, cursor, and field here is written by hand. Nothing pulled off a shelf.' },
+                  { tag: 'Reason', title: 'Motion with a reason', body: 'It moves to guide the eye and weight a moment, never just to show off.' },
+                  { tag: 'Still', title: 'Respect the still', body: 'Reduced motion is a designed path through all of it, not an afterthought.' },
+                  { tag: 'Feel', title: 'The details you feel', body: 'The craft lives in small moments people sense long before they can name them.' },
                 ]}
               />
             </Experiment>
