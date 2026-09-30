@@ -151,6 +151,7 @@ import { Gears } from '../components/Gears'
 import { FourBar } from '../components/FourBar'
 import { Peaucellier } from '../components/Peaucellier'
 import { GenevaDrive } from '../components/GenevaDrive'
+import { Orrery } from '../components/Orrery'
 import { Abacus } from '../components/Abacus'
 import { SlidePuzzle } from '../components/SlidePuzzle'
 import { EuclidRing } from '../components/EuclidRing'
@@ -7660,6 +7661,44 @@ export default function Playground() {
                 station, with a live region reading the crank angle, the lock state and the station. Under{' '}
                 <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code> there is
                 no sweep &mdash; Run indexes one station in a single step &mdash; and every state stays legible.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH ORRERY */}
+        <Reveal>
+          <div id="orrery" data-experiment="Orrery" className="mt-12 scroll-mt-32">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/40 px-6 py-12 sm:px-10">
+              <div className="mb-8 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">One clock, many orbits</span>
+                <p className="mx-auto mt-3 max-w-md text-lg font-medium text-white/85 sm:text-xl">
+                  Set it running, or drag around the Sun to scrub time. A full turn is one Earth year.
+                </p>
+              </div>
+              <Orrery className="mx-auto" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Orrery</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                A mechanical model of the solar system in the spirit of the brass grand orreries of the 1700s &mdash; the
+                Sun at the centre and the planets out to Saturn wheeling around it, the reach a classical orrery actually
+                carried. It belongs beside the four-bar, the Peaucellier and the Geneva drive because it is the same idea
+                taken to the sky: one input turned, by fixed geometry, into many honest motions at once. The single stored
+                value is a day count, and every body&rsquo;s angle is derived from it by its <em>real</em> sidereal
+                period &mdash; Mercury&rsquo;s 88 days, Earth&rsquo;s 365, Saturn&rsquo;s 29-and-a-half years &mdash; so
+                the relative speeds are true even though the orbit radii are spaced for legibility (Saturn really sits some
+                twenty-four times further out than Mercury and would not fit on a dial) and the starting angles are
+                illustrative, not an ephemeris. Because there is nothing on screen but that one clock read six ways,
+                nothing can drift out of step: Mercury laps the Sun four times while Earth goes round once, and the Moon
+                rides Earth&rsquo;s position on its own 27-day month. Drag anywhere around the Sun and you scrub the clock
+                &mdash; a full turn of your hand is exactly one Earth year, so Earth tracks the pointer one to one while
+                every other planet moves at its own rate against it. Pick a planet to read its real orbit and count the
+                turns it has made. A real <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">role=slider</code>{' '}
+                from the keyboard: arrows step a day, Shift ten, Page Up and Page Down a year, Home returns to the start,
+                Space runs or stops. Under{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code> the free
+                run is gated off &mdash; the model holds a still frame and steps a month at a time on demand.
               </p>
             </div>
           </div>
