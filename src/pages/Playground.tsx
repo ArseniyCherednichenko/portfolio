@@ -32,6 +32,7 @@ import { SplitText } from '../components/SplitText'
 import { BlurText } from '../components/BlurText'
 import { Highlighter } from '../components/Highlighter'
 import { SplitFlap } from '../components/SplitFlap'
+import { Nixie } from '../components/Nixie'
 import { Clock } from '../components/Clock'
 import { WordClock } from '../components/WordClock'
 import { CardStack } from '../components/CardStack'
@@ -1451,6 +1452,62 @@ function SevenSegmentDemo() {
               type="button"
               onClick={() => setCustom(s)}
               className="rounded-full border border-white/12 bg-white/[0.03] px-3 py-1.5 font-mono text-xs text-white/60 transition-colors hover:border-[#DCF87C]/40 hover:text-white/90"
+            >
+              {s}
+            </button>
+          ))}
+          <button
+            type="button"
+            onClick={() => setCustom('')}
+            className="rounded-full border border-transparent px-3 py-1.5 text-xs text-white/40 transition-colors hover:text-white/70"
+          >
+            Back to the clock
+          </button>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+const NIXIE_SAMPLES = ['1969', '3 141 59', '00:00', '42', '2026']
+
+// A Nixie showcase: the live Berlin clock glowing in a row of neon tubes, with a
+// numeric field to drive it by hand. The tube only knows digits, a colon, and a
+// space, so the input is filtered to those — anything else falls to a dark gap
+// rather than a faked glyph.
+function NixieDemo() {
+  const { time } = useBerlinTime()
+  const [custom, setCustom] = useState('')
+  const shown = custom.trim() ? custom : time
+  return (
+    <div className="flex w-full max-w-2xl flex-col items-center gap-8">
+      <div className="w-full overflow-hidden rounded-2xl border border-white/10 bg-[radial-gradient(120%_100%_at_50%_0%,rgba(255,120,26,0.08),rgba(0,0,0,0.85))] px-6 py-10 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)]">
+        <div className="flex min-h-[140px] items-center justify-center">
+          <Nixie value={shown} height={128} />
+        </div>
+      </div>
+      <div className="flex w-full flex-col gap-4">
+        <label className="w-full">
+          <span className="mb-1.5 block text-xs font-semibold uppercase tracking-[0.24em] text-white/40">
+            Drive the tubes
+          </span>
+          <input
+            type="text"
+            value={custom}
+            maxLength={12}
+            inputMode="numeric"
+            onChange={(e) => setCustom(e.target.value.replace(/[^0-9: ]/g, ''))}
+            placeholder="Empty shows the live Berlin clock"
+            className="w-full rounded-xl border border-white/12 bg-white/[0.03] px-4 py-2.5 text-sm text-white/85 outline-none transition-colors placeholder:text-white/30 focus:border-[#ff7a1a]/50"
+          />
+        </label>
+        <div className="flex flex-wrap gap-2">
+          {NIXIE_SAMPLES.map((s) => (
+            <button
+              key={s}
+              type="button"
+              onClick={() => setCustom(s)}
+              className="rounded-full border border-white/12 bg-white/[0.03] px-3 py-1.5 font-mono text-xs text-white/60 transition-colors hover:border-[#ff7a1a]/40 hover:text-white/90"
             >
               {s}
             </button>
@@ -3322,6 +3379,40 @@ export default function Playground() {
                 feel alive. The figure is aria-hidden; the string rides in the wrapper&rsquo;s label, so a
                 screen reader hears &ldquo;12:04&rdquo;, not seven bars. Under reduced motion the cross-fade
                 is off and values simply cut.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH NIXIE TUBE DISPLAY */}
+        <Reveal>
+          <div id="nixie" data-experiment="Nixie tubes" className="mt-12 scroll-mt-32">
+            <div className="flex flex-col items-center gap-8 rounded-3xl border border-white/10 bg-white/[0.02] px-6 py-14 sm:px-10">
+              <div className="max-w-md text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#ff7a1a]">Glass and gas</span>
+                <p className="mx-auto mt-3 text-lg font-medium text-white/85 sm:text-xl">
+                  A row of cold-cathode neon tubes, glowing the live Berlin time. The switched-off numerals
+                  sit behind the lit one, fanned back into the glass. Drive it by hand.
+                </p>
+              </div>
+              <NixieDemo />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Nixie tubes</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The other digital displays here are cool and flat and lime &mdash; the odometer rolls wheels,
+                the split-flap drops flaps, the dot-matrix lights round lamps, the seven-segment lights seven
+                bars. A Nixie is neither cool nor flat. Each glyph is its own wire cathode shaped like a whole
+                numeral, and the ten of them are stacked front-to-back inside one glass envelope; the chosen
+                one is set glowing in warm neon while the other nine stay unlit as a wire cage behind it. So
+                the tell is <em>depth</em> &mdash; you can see the numbers that are off, fanned into the glass
+                &mdash; and <em>warmth</em>: this is deliberately the one display on the site that is not lime,
+                because a lime Nixie would not be a Nixie. It is pure inline SVG: the envelope, the anode mesh
+                in front of the cathodes, the reflection and the pinned base are all drawn, and when a tube&rsquo;s
+                digit changes the old cathode&rsquo;s glow eases out as the new one rises &mdash; the warm-up
+                flicker that makes a running clock feel like glass rather than pixels. The figure is
+                aria-hidden and the value rides in the wrapper&rsquo;s label, so a screen reader hears the time,
+                not the hardware. Under reduced motion the crossfade and the bloom are dropped and digits cut.
               </p>
             </div>
           </div>
