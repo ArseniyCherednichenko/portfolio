@@ -75,6 +75,39 @@ body.cursor-none * {
   }
 }
 
+/* Skeleton — the specular highlight that sweeps across a loading placeholder.
+   The bar starts fully to the left of its block and travels off the right edge,
+   so a whole surface of placeholders reads as one object catching the light.
+   The animation is applied by name from the component, so every skeleton on
+   screen runs against the same document timeline and stays in phase — the
+   "single clock" that keeps the sweep from turning into a dozen bars blinking
+   out of step. The global reduced-motion guard below collapses this to one
+   instant iteration, leaving the highlight parked off-screen and the block a
+   plain static tint — a calm, still placeholder rather than a moving one. */
+@keyframes skeleton-sweep {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Skeleton hand-off — the loaded content fades and lifts into the space the
+   placeholder was holding. Runs once. Reduced-motion users never mount it (the
+   component swaps the animation for a plain appearance), and the global guard
+   would collapse it in any case. */
+@keyframes skeleton-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 /* GlassSurface — a specular band of light that glides across the pane. The
    translate is a multiple of the band's own width so it sweeps fully across
    the surface and off the far edge. Reduced-motion users get it stilled by the
