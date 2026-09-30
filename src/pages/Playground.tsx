@@ -101,6 +101,7 @@ import { SevenSegment } from '../components/SevenSegment'
 import { useBerlinTime } from '../hooks/useBerlinTime'
 import { CodeInput } from '../components/CodeInput'
 import { PasswordStrength } from '../components/PasswordStrength'
+import { Skeleton, SkeletonSwap } from '../components/Skeleton'
 import { HoldConfirm } from '../components/HoldConfirm'
 import { SwipeToReveal, type SwipeAction } from '../components/SwipeToReveal'
 import { PullToRefresh } from '../components/PullToRefresh'
@@ -1598,6 +1599,108 @@ function PasswordStrengthDemo() {
           className="rounded-full border border-white/12 px-3 py-1 text-xs text-white/50 transition-colors hover:border-white/30 hover:text-white/80"
         >
           Clear
+        </button>
+      </div>
+    </div>
+  )
+}
+
+// A Skeleton showcase. Nothing is fetched anywhere — the wait itself is the
+// demo, so "Reload" drops the card back to its loading state and a short timer
+// brings the (honest, static) content back, letting a visitor watch the shared
+// sweep and the hand-off as many times as they like. A toggle holds the
+// skeleton open so its shapes can be studied at leisure. The skeleton mirrors
+// the card's real footprint, so when the content arrives nothing jumps.
+function SkeletonDemo() {
+  const [loading, setLoading] = useState(true)
+  const [held, setHeld] = useState(false)
+  const timer = useRef<number | null>(null)
+
+  // On mount, run one load cycle so the hand-off plays on arrival.
+  useEffect(() => {
+    timer.current = window.setTimeout(() => setLoading(false), 1600)
+    return () => {
+      if (timer.current) window.clearTimeout(timer.current)
+    }
+  }, [])
+
+  function reload() {
+    if (timer.current) window.clearTimeout(timer.current)
+    setHeld(false)
+    setLoading(true)
+    timer.current = window.setTimeout(() => setLoading(false), 1600)
+  }
+
+  const busy = loading || held
+
+  const skeleton = (
+    <div className="flex flex-col gap-5">
+      <div className="flex items-center gap-3">
+        <Skeleton variant="circle" width={44} />
+        <div className="flex-1">
+          <Skeleton variant="text" lines={2} lastLineWidth="45%" />
+        </div>
+      </div>
+      <Skeleton variant="block" height={132} radius={14} />
+      <Skeleton variant="text" lines={3} lastLineWidth="60%" />
+      <div className="flex gap-2">
+        <Skeleton variant="block" width={132} height={30} radius={999} />
+        <Skeleton variant="block" width={116} height={30} radius={999} />
+      </div>
+    </div>
+  )
+
+  const card = (
+    <div className="flex flex-col gap-5">
+      <div className="flex items-center gap-3">
+        <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-[#DCF87C]/15 font-display text-sm font-semibold text-[#DCF87C]">
+          AC
+        </span>
+        <div className="min-w-0">
+          <p className="truncate font-display text-base font-semibold text-white/90">Arseniy Cherednichenko</p>
+          <p className="truncate text-sm text-white/45">Design and build, Berlin</p>
+        </div>
+      </div>
+      <div className="relative grid h-[132px] place-items-center overflow-hidden rounded-[14px] border border-white/10 bg-gradient-to-br from-[#DCF87C]/15 via-white/[0.04] to-transparent">
+        <span className="text-xs font-semibold uppercase tracking-[0.3em] text-white/40">Demo surface</span>
+      </div>
+      <p className="text-sm leading-relaxed text-white/60">
+        A moment ago this card was a skeleton. Nothing was fetched — the wait is the demo. When the content lands it
+        takes the exact space the placeholder was holding, so the layout never jumps.
+      </p>
+      <div className="flex flex-wrap gap-2">
+        <span className="rounded-full border border-white/12 px-3 py-1 text-xs text-white/50">aria-busy while waiting</span>
+        <span className="rounded-full border border-white/12 px-3 py-1 text-xs text-white/50">announced when ready</span>
+      </div>
+    </div>
+  )
+
+  return (
+    <div className="flex w-full flex-col items-center gap-6">
+      <div className="w-full max-w-md rounded-2xl border border-white/10 bg-white/[0.02] p-5">
+        <SkeletonSwap loading={busy} skeleton={skeleton}>
+          {card}
+        </SkeletonSwap>
+      </div>
+      <div className="flex flex-wrap items-center justify-center gap-2">
+        <button
+          type="button"
+          onClick={reload}
+          className="rounded-full border border-white/12 px-4 py-1.5 text-xs font-medium text-white/70 transition-colors hover:border-[#DCF87C]/40 hover:text-[#DCF87C]"
+        >
+          Reload
+        </button>
+        <button
+          type="button"
+          onClick={() => setHeld((h) => !h)}
+          aria-pressed={held}
+          className={`rounded-full border px-4 py-1.5 text-xs font-medium transition-colors ${
+            held
+              ? 'border-[#DCF87C]/50 bg-[#DCF87C]/10 text-[#DCF87C]'
+              : 'border-white/12 text-white/55 hover:border-white/30 hover:text-white/80'
+          }`}
+        >
+          {held ? 'Holding the skeleton' : 'Hold the skeleton'}
         </button>
       </div>
     </div>
@@ -3929,6 +4032,41 @@ export default function Playground() {
                 brand-new one-of-a-kind frame; while it is still developing, Enter/Space agitates instead. The frame
                 tilts toward the cursor under a sliding gloss. Reduced motion drops all of it &mdash; the finished photo
                 is simply there.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* SKELETON — LOADING STATES */}
+        <Reveal>
+          <div id="skeleton" data-experiment="Loading skeleton" className="mt-12 scroll-mt-32">
+            <div className="rounded-3xl border border-white/10 bg-white/[0.02] px-6 py-12 sm:px-10">
+              <div className="mx-auto mb-8 max-w-md text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">The moment before</span>
+                <p className="mx-auto mt-3 text-lg font-medium text-white/85 sm:text-xl">
+                  The interface every product has and few build with care: the wait before the content arrives. Reload
+                  it, or hold the skeleton open to study the shapes.
+                </p>
+              </div>
+              <SkeletonDemo />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Loading skeleton</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                A skeleton is honesty about time. It stands in for the real layout at the{' '}
+                <span className="text-white/65">real size</span>, so nothing jumps when the data lands, and it says
+                &ldquo;this is coming&rdquo; without a spinner&rsquo;s empty promise that something is happening
+                somewhere. Three things carry the craft. One{' '}
+                <span className="text-white/65">shared clock</span>: the specular sweep is a single CSS animation
+                applied by name, so every placeholder on the surface runs against the one document timeline and moves in
+                phase &mdash; one object catching the light, not a dozen bars blinking out of step. Shapes that are{' '}
+                <span className="text-white/65">real</span>: ragged text lines with a shorter last one the way a
+                paragraph ends, a true circle for the avatar, a sized block for the thumbnail, all mirroring the card&rsquo;s
+                footprint so the swap is seamless. And an <span className="text-white/65">honest hand-off</span>: the
+                region is marked <code className="text-white/55">aria-busy</code> while it waits and announced politely
+                the moment the content takes over, so assistive tech is told the truth the sweep only implies. Reduced
+                motion is the designed path, not a fallback &mdash; the sweep parks off-screen and the block becomes a
+                calm static tint that still reserves the exact space.
               </p>
             </div>
           </div>
