@@ -156,6 +156,7 @@ import { Orrery } from '../components/Orrery'
 import { MoonPhase } from '../components/MoonPhase'
 import { Sundial } from '../components/Sundial'
 import { Abacus } from '../components/Abacus'
+import { Dice } from '../components/Dice'
 import { SlidePuzzle } from '../components/SlidePuzzle'
 import { EuclidRing } from '../components/EuclidRing'
 import { Metronome } from '../components/Metronome'
@@ -8265,6 +8266,35 @@ export default function Playground() {
                 way the real instrument works, or focus a rod and drive its digit straight from the arrow keys — each rod
                 is a real spinbutton that reads its value to a screen reader. Reduced motion drops the bead springs for a
                 clean snap; it stays a fully usable, fully labelled instrument.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH DICE */}
+        <Reveal>
+          <div id="dice" className="mt-12 scroll-mt-32">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 py-12 sm:px-10">
+              <div className="text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Throw</span>
+                <p className="mx-auto mt-3 max-w-md text-lg font-medium text-white/85 sm:text-xl">
+                  Press the die. Whatever face it lands on is the roll.
+                </p>
+              </div>
+              <Dice className="mt-10" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Dice</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                A die you throw, built the way a real one reads: six pip faces in pure CSS 3D, no canvas and no WebGL, so
+                it stays crisp at any size. Press it and the cube tumbles through a few whole turns on both axes and
+                settles onto a face — and the number it lands on is the honest roll, one random draw in one to six,
+                nothing weighted. A different kind of object from the toys around it: not a wheel with momentum like the
+                Turntable or a seeded plotter like the Harmonograph, but a throw with a settled result. The trick that
+                keeps the resting face honest is that every orientation leaves one axis at a whole turn, so the order the
+                two rotations compose in never changes which face shows, and the tumble only ever adds full turns.
+                Reduced motion drops the tumble and lands the die on its face at once; the die is a real button and the
+                rolled value is announced to a screen reader.
               </p>
             </div>
           </div>
