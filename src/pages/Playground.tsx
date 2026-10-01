@@ -153,6 +153,7 @@ import { FourBar } from '../components/FourBar'
 import { Peaucellier } from '../components/Peaucellier'
 import { GenevaDrive } from '../components/GenevaDrive'
 import { Orrery } from '../components/Orrery'
+import { MoonPhase } from '../components/MoonPhase'
 import { Abacus } from '../components/Abacus'
 import { SlidePuzzle } from '../components/SlidePuzzle'
 import { EuclidRing } from '../components/EuclidRing'
@@ -7790,6 +7791,46 @@ export default function Playground() {
                 Space runs or stops. Under{' '}
                 <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code> the free
                 run is gated off &mdash; the model holds a still frame and steps a month at a time on demand.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* MOON PHASE — the Orrery's small sibling */}
+        <Reveal>
+          <div id="moon" data-experiment="Moon phase" className="mt-12 scroll-mt-32">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/50 px-6 py-12 sm:px-10">
+              <div className="mb-8 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">One age, one sliver</span>
+                <p className="mx-auto mt-3 max-w-md text-lg font-medium text-white/85 sm:text-xl">
+                  The Moon as it stands tonight. Drag across it to walk the whole month.
+                </p>
+              </div>
+              <MoonPhase className="mx-auto" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Moon phase</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The small sibling of the Orrery, and the same discipline turned on the sky&rsquo;s nearest body: one
+                stored number read a single way. Where the orrery keeps a day-count and derives six orbits from it, this
+                keeps the Moon&rsquo;s <em>age in the current lunation</em> &mdash; the days since the last new moon,
+                measured from a known one in January 2000 by the mean synodic month of 29.53 days &mdash; and derives
+                everything on screen from it. The illuminated fraction is{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">(1 &minus; cos&nbsp;θ) / 2</code> for
+                the phase angle θ; the terminator, the curved edge between light and dark, is a half-ellipse whose width
+                is the cosine of that same angle, so it bulges one way for a crescent, flattens to a straight line at the
+                quarters, and bulges back for a gibbous Moon; and the eight classical names fall out of where the age
+                sits. It opens on tonight&rsquo;s real phase and ticks itself forward; drag left or right and you scrub
+                the lunation, new to full to new, the lit limb growing and shrinking under your hand. Honest about its
+                limits, like the orrery: this is a <em>mean</em> month, not an almanac, so it can sit a few hours off a
+                real ephemeris; it is the geocentric fraction, with no libration or distance; and it is drawn
+                Northern-hemisphere up, lit on the right as it waxes. The disc is cream, never lime &mdash; a lime Moon
+                would not be a Moon. A real{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">role=slider</code> from the keyboard:
+                arrows step a day, Shift a tenth, Page Up and Page Down a quarter month, Home jumps to the new moon, End
+                to the full, Space returns to tonight. Under{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code> the halo
+                stops breathing and the Moon simply holds the phase it is on.
               </p>
             </div>
           </div>
