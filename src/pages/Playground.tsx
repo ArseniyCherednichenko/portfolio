@@ -154,6 +154,7 @@ import { Peaucellier } from '../components/Peaucellier'
 import { GenevaDrive } from '../components/GenevaDrive'
 import { Orrery } from '../components/Orrery'
 import { MoonPhase } from '../components/MoonPhase'
+import { Sundial } from '../components/Sundial'
 import { Abacus } from '../components/Abacus'
 import { SlidePuzzle } from '../components/SlidePuzzle'
 import { EuclidRing } from '../components/EuclidRing'
@@ -7831,6 +7832,49 @@ export default function Playground() {
                 to the full, Space returns to tonight. Under{' '}
                 <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code> the halo
                 stops breathing and the Moon simply holds the phase it is on.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* SUNDIAL — the Sun's turn in the sky/time thread */}
+        <Reveal>
+          <div id="sundial" data-experiment="Sundial" className="mt-12 scroll-mt-32">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/50 px-6 py-12 sm:px-10">
+              <div className="mb-8 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">One time, one shadow</span>
+                <p className="mx-auto mt-3 max-w-md text-lg font-medium text-white/85 sm:text-xl">
+                  The shadow Berlin&rsquo;s Sun throws right now. Drag across the day to turn it.
+                </p>
+              </div>
+              <Sundial className="mx-auto" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Sundial</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The third in the thread the Orrery began and the Moon joined, and the same discipline turned on the Sun:
+                one stored number read a single way. Where the orrery keeps a day-count and the Moon an age-in-the-month,
+                this keeps the <em>apparent solar time</em> &mdash; the hour of the day the Sun actually marks, 12 being
+                solar noon with the Sun due south &mdash; and derives everything on screen from it. The hour angle is{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">(t &minus; 12) &times; 15&deg;</code>;
+                the shadow&rsquo;s bearing, measured clockwise from north, is{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">
+                  atan2(sin&nbsp;&phi;&nbsp;&middot;&nbsp;sin&nbsp;H, cos&nbsp;H)
+                </code>{' '}
+                for Berlin&rsquo;s latitude &phi; of 52.52&deg; north, so a polar-pointing style throws its shadow west
+                through the morning, due north at noon, and east through the afternoon &mdash; and the hour lines are cut
+                at exactly those bearings, the way a real horizontal dial is engraved. It opens on the live local time and
+                ticks itself forward; drag left or right and you scrub the whole day, the shadow sweeping the fan under
+                your hand. Honest about its limits, like the orrery and the Moon: a real sundial reads apparent time,
+                which is mean time plus the equation of time, up to a quarter-hour either way across the year, so the live
+                reading &mdash; seeded from mean time &mdash; can sit that far off a true dial by season; the plate is cut
+                for one latitude, and it only reads while the Sun is in the southern sky, roughly 6 to 18 in solar time.
+                The style is lime, but the Sun is drawn amber, never lime &mdash; a lime Sun would not be the Sun. A real{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">role=slider</code> from the keyboard:
+                arrows step an hour, Shift ten minutes, Page Up and Page Down three hours, Home and End jump to the
+                dial&rsquo;s morning and evening edges, Space returns to now. Under{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code> the Sun
+                stops pulsing and the shadow simply holds the hour it is on.
               </p>
             </div>
           </div>
