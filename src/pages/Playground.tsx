@@ -157,6 +157,7 @@ import { MoonPhase } from '../components/MoonPhase'
 import { Sundial } from '../components/Sundial'
 import { Abacus } from '../components/Abacus'
 import { Dice } from '../components/Dice'
+import { ReceiptPrinter } from '../components/ReceiptPrinter'
 import { SlidePuzzle } from '../components/SlidePuzzle'
 import { EuclidRing } from '../components/EuclidRing'
 import { Metronome } from '../components/Metronome'
@@ -302,7 +303,7 @@ import { GO_TARGETS, useShortcuts } from '../components/Keyboard'
 import { Seo } from '../components/Seo'
 import { GITHUB_URL } from '../data/contact'
 import { SKILLS } from '../data/toolkit'
-import { COMPONENT_COUNT } from '../data/stats'
+import { COMPONENT_COUNT, PAGE_COUNT } from '../data/stats'
 import { LIBRARY } from '../data/library'
 import { CHAPTERS, KIND_META, KIND_ORDER } from '../data/changelog'
 import { Gauge } from '../components/Gauge'
@@ -8295,6 +8296,38 @@ export default function Playground() {
                 two rotations compose in never changes which face shows, and the tumble only ever adds full turns.
                 Reduced motion drops the tumble and lands the die on its face at once; the die is a real button and the
                 rolled value is announced to a screen reader.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH RECEIPT PRINTER */}
+        <Reveal>
+          <div id="receipt" className="mt-12 scroll-mt-32">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 py-12 sm:px-10">
+              <div className="text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Print</span>
+                <p className="mx-auto mt-3 max-w-md text-lg font-medium text-white/85 sm:text-xl">
+                  Press print. The paper feeds out line by line. Tear it off when it is done.
+                </p>
+              </div>
+              <ReceiptPrinter className="mt-10" componentCount={COMPONENT_COUNT} pageCount={PAGE_COUNT} />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Receipt printer</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                A thermal receipt printer, rebuilt as an object you operate. Press print and the paper feeds out of the
+                slot one line at a time, each line burning in out of a soft blur the way a thermal head lays down heat,
+                the whole strip growing downward as it feeds; press tear and it comes away at the perforation and leaves a
+                fresh roll ready. A different gesture from the paper pieces around it — the ticket comes apart, the
+                Polaroid develops, the folder opens; this one prints and feeds. No canvas: the slip is real, selectable
+                text, so a cursor and a screen reader both get the words. And it is honest about what it prints — not a
+                gag total but a true summary of this site, Berlin and Guided and student and open source, with the live
+                component and page counts passed straight from the site's own stats so the numbers can never drift from
+                the catalogue. The barcode is decorative and hidden from assistive tech; the timestamp is the real local
+                time it printed. Reduced motion drops the feed, the per-line burn-in and the tear arc — the whole slip
+                appears at once and the tear resets instantly — and the state runs a small idle to printing to done to
+                torn machine so the buttons and the live announcements can never disagree with the paper.
               </p>
             </div>
           </div>
