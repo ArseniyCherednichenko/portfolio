@@ -162,6 +162,7 @@ import { Hourglass } from '../components/Hourglass'
 import { SlidePuzzle } from '../components/SlidePuzzle'
 import { EuclidRing } from '../components/EuclidRing'
 import { Metronome } from '../components/Metronome'
+import { MusicBox } from '../components/MusicBox'
 import { ToneMatrix } from '../components/ToneMatrix'
 import { EtchASketch } from '../components/EtchASketch'
 import { BubbleWrap } from '../components/BubbleWrap'
@@ -8609,6 +8610,45 @@ export default function Playground() {
                 one lazily-built audio context unlocked only on a tap — so the matrix is fully usable silent. Reduced
                 motion steps the playhead column to column with no sweep and drops the note flashes; it still plays, and
                 every state stays legible.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH MUSIC BOX */}
+        <Reveal>
+          <div id="music-box" data-experiment="Music box" className="mt-12 scroll-mt-32">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 py-12 sm:px-10">
+              <div className="text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Wind it up</span>
+                <p className="mx-auto mt-3 max-w-md text-lg font-medium text-white/85 sm:text-xl">
+                  A pinned cylinder turns, and each pin plucks a tuned tooth as it comes round. Press play and listen.
+                </p>
+              </div>
+              <MusicBox className="mt-10" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Music box</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The first object here that is a mechanism and an instrument at once — kin to the Geneva drive and the
+                four-bar in the rigid-mechanism corner, and to the metronome and the plucked string in the sound family.
+                One number is the whole truth: the cylinder's rotation angle, advanced from performance.now() across the
+                running segments rather than accumulated per frame, so a tab-away lands on the true angle instead of
+                drifting. The tune is laid out as pins at fixed angles around the drum, one per note at the angle for its
+                moment in the bar, and a pin plucks its tooth at the instant the angle sweeps past it — there is no second
+                note clock to fall out of step with the picture. The drum is drawn developed flat, its surface unrolled
+                into the strip you read right-to-left, with a small end-cap disc turning in lock-step as the cylinder seen
+                end-on. The comb is tuned the way a real one is: pitch falls as a cantilever tooth gets longer, by f
+                proportional to one over length squared, so each tooth's drawn length is one over the square root of its
+                frequency and the length you see is the pitch you hear — the low notes are the long teeth. A plucked tooth
+                rings as a damped sine whose visible buzz tracks its real pitch, zero at the clamped base and largest at
+                the free tip. The sound is synthesised on the Web Audio clock, a triangle at the true equal-tempered
+                frequency with a sine an octave up for the tinkle, under a fast attack and an exponential decay, and it
+                only ever starts from a real gesture. Two public-domain airs are bundled — Beethoven's Ode to Joy and the
+                1761 tune better known as Twinkle — and a tempo slider sets the turn. The canvas is decorative and
+                aria-hidden; the controls are real buttons and a live region narrates the box. Under prefers-reduced-motion
+                the free run is gated off: the drum holds still and a Step control advances it to the next pin and plucks
+                that one tooth, so the box still plays its tune, one deliberate note at a time, with no continuous travel.
               </p>
             </div>
           </div>
