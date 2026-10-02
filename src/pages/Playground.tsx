@@ -158,6 +158,7 @@ import { Sundial } from '../components/Sundial'
 import { Abacus } from '../components/Abacus'
 import { Dice } from '../components/Dice'
 import { ReceiptPrinter } from '../components/ReceiptPrinter'
+import { Hourglass } from '../components/Hourglass'
 import { SlidePuzzle } from '../components/SlidePuzzle'
 import { EuclidRing } from '../components/EuclidRing'
 import { Metronome } from '../components/Metronome'
@@ -8328,6 +8329,38 @@ export default function Playground() {
                 time it printed. Reduced motion drops the feed, the per-line burn-in and the tear arc — the whole slip
                 appears at once and the tear resets instantly — and the state runs a small idle to printing to done to
                 torn machine so the buttons and the live announcements can never disagree with the paper.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH HOURGLASS */}
+        <Reveal>
+          <div id="hourglass" className="mt-12 scroll-mt-32">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 py-12 sm:px-10">
+              <div className="text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#e8c478]">Run</span>
+                <p className="mx-auto mt-3 max-w-md text-lg font-medium text-white/85 sm:text-xl">
+                  Start it and watch the sand fall. Flip it to run the length again.
+                </p>
+              </div>
+              <Hourglass className="mt-10" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Hourglass</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                A working sand timer, and the quiet instrument this family was missing beside the Sundial and the Clock —
+                where those read the time out there, this one measures a length of it you set. One elapsed-time clock is
+                the only source of truth, and both bulbs are drawn from it, so the glass can never show a level that
+                disagrees with the time left. The sand is volume-honest: a bulb is a funnel, so equal spans of time do
+                not empty equal spans of height — the surface drops fast while the bulb is wide and crawls as it narrows,
+                because each surface is placed so the sand area equals the time, solving the quadratic the linear funnel
+                wall makes. The fallen sand fills the lower bulb as a level rather than heaping into a cone — an honest
+                simplification. The clock reads from performance.now() across running segments, so tabbing away and back
+                lands on the true remaining time rather than drifting, and the animation loop only ever redraws. The sand
+                is amber because sand is amber, a deliberate break from the lime in the company of the Nixie and Sundial.
+                Reduced motion drops the falling grains and the flip's turn and steps the levels once a second — a
+                precise, legible, fully operable timer with no continuous travel.
               </p>
             </div>
           </div>
