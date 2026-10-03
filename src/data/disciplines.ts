@@ -7,7 +7,11 @@
 //
 // HONESTY: every practice line is something actually done, not aspirational.
 // Tools are the real stack. Evidence links point at pages that already exist
-// and genuinely demonstrate the discipline — no invented proof.
+// and genuinely demonstrate the discipline — no invented proof. The hand-built
+// count is read live from stats.ts so the Motion discipline can never claim a
+// figure the library has already outgrown.
+
+import { COMPONENT_COUNT } from './stats'
 
 export interface Discipline {
   id: string
@@ -115,9 +119,9 @@ export const DISCIPLINES: readonly Discipline[] = [
     tag: 'Motion and design',
     title: 'Craft in the small moments',
     lede: 'The things people feel but cannot name.',
-    body: 'Typography, timing, and the spacing between things. This site is my open workbench for it — close to two hundred hand-built motion components, each one made from scratch and each one reduced-motion aware. If a technique lands here, I understand it well enough to reach for it in real work without a library doing the thinking.',
+    body: `Typography, timing, and the spacing between things. This site is my open workbench for it — ${COMPONENT_COUNT} hand-built motion components, each one made from scratch and each one reduced-motion aware. If a technique lands here, I understand it well enough to reach for it in real work without a library doing the thinking.`,
     practices: [
-      'Close to two hundred hand-built animation components',
+      `${COMPONENT_COUNT}+ hand-built animation components`,
       'A Fraunces-and-Inter type system, self-hosted',
       'Easing, spring, and stagger chosen by feel',
       'Every motion path with a reduced-motion fallback',
