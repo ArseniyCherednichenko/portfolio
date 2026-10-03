@@ -8,9 +8,15 @@
 // Keep everything here true. Entries marked `placeholder: true` render with a
 // visible "to fill in" treatment — they are honest prompts, not claims, and
 // should be replaced with real detail (or removed) rather than left forever.
+//
+// The hand-built count is read from the single source of truth in stats.ts and
+// interpolated below, so the "open workbench" line can never quietly fall behind
+// the real number as the library grows — the thing it is measuring.
+
+import { COMPONENT_COUNT } from './stats'
 
 /** ISO date (YYYY-MM-DD) the entries below were last revised. */
-export const LAST_UPDATED = '2026-09-26'
+export const LAST_UPDATED = '2026-10-03'
 
 /** Where Arseniy is, for the little dateline under the title. */
 export const LOCATION = 'Berlin'
@@ -61,7 +67,7 @@ export const NOW_ITEMS: readonly NowItem[] = [
   {
     label: 'Sharpening',
     title: 'Motion design, in public',
-    body: 'This site is my open workbench for interface animation, now past two hundred and fifty hand-built components — pinned scroll, magnetic controls, cursor fields, self-drawing line art. A new one most days. If it lands here, I understand it.',
+    body: `This site is my open workbench for interface animation, now ${COMPONENT_COUNT} hand-built components — pinned scroll, magnetic controls, cursor fields, self-drawing line art. A new one most days. If it lands here, I understand it.`,
     detail: [
       'The playground is not a portfolio of finished things so much as a practice done in the open. Something new most days, built from scratch, no UI kit underneath — the rule is that it only ships here once I actually understand how it works.',
       'It is the honest version of "sharpening": you can watch the range grow commit by commit rather than take my word for it.',
