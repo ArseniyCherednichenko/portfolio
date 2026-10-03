@@ -31,6 +31,7 @@ const Resume = lazy(() => import('./pages/Resume'))
 const Bio = lazy(() => import('./pages/Bio'))
 const TerminalPage = lazy(() => import('./pages/Terminal'))
 const Changelog = lazy(() => import('./pages/Changelog'))
+const Thanks = lazy(() => import('./pages/Thanks'))
 const Contents = lazy(() => import('./pages/Contents'))
 const Library = lazy(() => import('./pages/Library'))
 const Atlas = lazy(() => import('./pages/Atlas'))
@@ -70,6 +71,7 @@ export default function App() {
         <Route path="bio" element={<Bio />} />
         <Route path="terminal" element={<TerminalPage />} />
         <Route path="changelog" element={<Changelog />} />
+        <Route path="thanks" element={<Thanks />} />
         <Route path="contents" element={<Contents />} />
         <Route path="library" element={<Library />} />
         <Route path="atlas" element={<Atlas />} />
