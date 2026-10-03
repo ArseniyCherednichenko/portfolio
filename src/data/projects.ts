@@ -1,3 +1,7 @@
+// The live hand-built count comes from the single source of truth in stats.ts,
+// so a case-study figure can never drift behind the real library as it grows.
+import { COMPONENT_COUNT } from './stats'
+
 export interface CaseStudySection {
   heading: string
   body: string
@@ -95,7 +99,7 @@ export const PROJECTS: Project[] = [
     status: 'Open source · in the open',
     blurb: 'An open-source, motion-led portfolio, built in public.',
     detail:
-      'This portfolio, and a working sample in its own right. React, Vite, strict TypeScript, Tailwind v4, and Framer Motion, with client-side routing across some thirty pages. Every animation is a component I built by hand: an aurora background, spotlight cards, magnetic buttons, an orbiting hero, a command palette, an interactive terminal, and close to two hundred more. It grows a little most days, in the open, so the commit history is part of the work.',
+      `This portfolio, and a working sample in its own right. React, Vite, strict TypeScript, Tailwind v4, and Framer Motion, with client-side routing across some thirty pages. Every animation is a component I built by hand: an aurora background, spotlight cards, magnetic buttons, an orbiting hero, a command palette, an interactive terminal, and ${COMPONENT_COUNT} in all. It grows a little most days, in the open, so the commit history is part of the work.`,
     stack: ['React', 'TypeScript', 'Tailwind v4', 'Framer Motion', 'Vite'],
     contributions: [
       {
@@ -106,7 +110,7 @@ export const PROJECTS: Project[] = [
       {
         area: 'Motion',
         detail:
-          'Close to two hundred hand-built animation components, from ambient backgrounds to scroll-driven scenes, each one reduced-motion aware.',
+          `${COMPONENT_COUNT}+ hand-built animation components, from ambient backgrounds to scroll-driven scenes, each one reduced-motion aware.`,
       },
       {
         area: 'Architecture',
