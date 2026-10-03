@@ -163,6 +163,7 @@ import { SlidePuzzle } from '../components/SlidePuzzle'
 import { EuclidRing } from '../components/EuclidRing'
 import { Metronome } from '../components/Metronome'
 import { MusicBox } from '../components/MusicBox'
+import { Theremin } from '../components/Theremin'
 import { ToneMatrix } from '../components/ToneMatrix'
 import { EtchASketch } from '../components/EtchASketch'
 import { BubbleWrap } from '../components/BubbleWrap'
@@ -8649,6 +8650,45 @@ export default function Playground() {
                 aria-hidden; the controls are real buttons and a live region narrates the box. Under prefers-reduced-motion
                 the free run is gated off: the drum holds still and a Step control advances it to the next pin and plucks
                 that one tooth, so the box still plays its tune, one deliberate note at a time, with no continuous travel.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH THEREMIN */}
+        <Reveal>
+          <div id="theremin" data-experiment="Theremin" className="mt-12 scroll-mt-32">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 py-12 sm:px-10">
+              <div className="text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Play the air</span>
+                <p className="mx-auto mt-3 max-w-md text-lg font-medium text-white/85 sm:text-xl">
+                  Power it on and move across the field. Right for pitch, up for volume. Never touch a thing.
+                </p>
+              </div>
+              <Theremin className="mt-10" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Theremin</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The odd one out in the sound family, and on purpose: every other voice here sounds discrete notes — the
+                string is plucked, the matrix lights a cell, the music box drops a pin — but Leon Theremin's 1920
+                invention is pure continuous pitch, the instrument you conduct through the air without touching. So this
+                one is one honest oscillator held behind a single lazily-built audio context, not a bank of pre-baked
+                notes, and the whole character is in the unbroken glide. Horizontal position maps to frequency on a
+                logarithmic law — f equals fmin times two to the x times three octaves — because pitch is geometric, an
+                octave is a doubling, so equal travel across the field is always equal musical distance and the swoop
+                sounds even end to end. The swoop itself is a true portamento: the frequency is steered with
+                setTargetAtTime toward wherever the cursor is, so the tone chases the pointer on a smooth time constant
+                rather than stepping, exactly the gliding voice a theremin has. Vertical position is the volume, raised to
+                swell and dropped to hush, on the same kind of time constant so there are no clicks at the edges — a
+                flattening of the real instrument, whose pitch rod and volume loop sit at right angles, into one field you
+                can read at a glance. Nothing sounds until you power it on, the gesture that unlocks Web Audio, and even
+                then the tone only speaks while the cursor is in the field. A real theremin is unquantised, so the default
+                is free continuous pitch; scale lock is an optional training wheel that snaps the tone to the nearest
+                equal-tempered semitone, and a timbre switch picks the wave. The field is a real slider: focus it and the
+                arrow keys walk a playhead, Space powers it, a live region speaks the note. Under prefers-reduced-motion
+                the ring sweep never runs — the crosshair carries the state and the tone still plays, since that is direct
+                manipulation, not animation.
               </p>
             </div>
           </div>
