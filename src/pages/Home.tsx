@@ -459,21 +459,48 @@ export default function Home() {
           </Reveal>
         </div>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {SITE_STATS.map((stat, idx) => (
-            <Reveal key={stat.label} delay={idx * 0.06}>
-              <SpotlightCard className="h-full">
-                <div className="flex h-full flex-col p-6">
-                  <Odometer
-                    value={stat.value}
-                    suffix={stat.suffix}
-                    className="font-display text-5xl font-bold leading-none tracking-tight text-[#DCF87C]"
-                  />
-                  <h3 className="mt-4 text-sm font-semibold text-white/85">{stat.label}</h3>
-                  <p className="mt-1.5 text-sm leading-relaxed text-white/45">{stat.detail}</p>
-                </div>
-              </SpotlightCard>
-            </Reveal>
-          ))}
+          {SITE_STATS.map((stat, idx) => {
+            // The figure and its colour are the same whether or not the tile
+            // links somewhere; a stat that has a page proving it becomes a
+            // doorway into that proof, so the number stops being a bare claim.
+            const body = (
+              <div className="flex h-full flex-col p-6">
+                <Odometer
+                  value={stat.value}
+                  suffix={stat.suffix}
+                  className="font-display text-5xl font-bold leading-none tracking-tight text-[#DCF87C]"
+                />
+                <h3 className="mt-4 text-sm font-semibold text-white/85">{stat.label}</h3>
+                <p className="mt-1.5 text-sm leading-relaxed text-white/45">{stat.detail}</p>
+                {stat.to && stat.toLabel && (
+                  <span className="mt-4 inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-[0.15em] text-white/35 transition-colors group-hover:text-[#DCF87C]">
+                    {stat.toLabel}
+                    <span aria-hidden className="transition-transform duration-300 group-hover:translate-x-0.5">
+                      -&gt;
+                    </span>
+                  </span>
+                )}
+              </div>
+            )
+            return (
+              <Reveal key={stat.label} delay={idx * 0.06}>
+                <SpotlightCard className="h-full">
+                  {stat.to ? (
+                    <Link
+                      to={stat.to}
+                      data-cursor
+                      aria-label={`${stat.value}${stat.suffix ?? ''} ${stat.label} — ${stat.toLabel}`}
+                      className="block h-full rounded-3xl focus:outline-none focus-visible:ring-2 focus-visible:ring-[#DCF87C]/60"
+                    >
+                      {body}
+                    </Link>
+                  ) : (
+                    body
+                  )}
+                </SpotlightCard>
+              </Reveal>
+            )
+          })}
         </div>
       </section>
 
