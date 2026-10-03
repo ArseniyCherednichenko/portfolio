@@ -24,6 +24,12 @@ export interface SiteStat {
   label: string
   /** One honest line under the figure. */
   detail: string
+  /** An internal route to the page that *is* the proof of this figure, if one
+   * exists — so the number can double as a way in rather than a bare claim.
+   * Only set where the destination genuinely backs the count. */
+  to?: string
+  /** Short label for that doorway, e.g. "Browse the library". */
+  toLabel?: string
 }
 
 // The workbench, stated in numbers. Every figure here is literally true of this
@@ -35,11 +41,15 @@ export const SITE_STATS: SiteStat[] = [
     suffix: '+',
     label: 'Hand-built components',
     detail: 'The aurora, the cursor, every card — written here, not installed.',
+    to: '/library',
+    toLabel: 'Browse the library',
   },
   {
     value: PAGE_COUNT,
     label: 'Pages, each its own',
     detail: 'Real routes and custom layouts, every one deep-linkable.',
+    to: '/contents',
+    toLabel: 'See every page',
   },
   {
     value: 0,
