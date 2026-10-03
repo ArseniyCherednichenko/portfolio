@@ -379,7 +379,11 @@ export default function Colophon() {
         <Reveal delay={0.16}>
           <p className="mt-5 text-sm text-white/40">
             {COMPONENT_COUNT} components and {PAGE_COUNT} pages, and a dependency list you can read in a
-            breath.{' '}
+            breath &mdash; the open-source shoulders it stands on are credited{' '}
+            <Link to="/thanks" className="font-semibold text-[#DCF87C] transition-opacity hover:opacity-80">
+              with thanks
+            </Link>
+            .{' '}
             <a
               href={GITHUB_URL}
               target="_blank"
