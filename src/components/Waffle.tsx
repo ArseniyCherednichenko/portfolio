@@ -6,10 +6,11 @@ import { motion, useReducedMotion, type Variants } from 'framer-motion'
 // dial, the bar compares magnitudes by height, the radar draws a set's
 // silhouette, the area curve moves one number over time. None of them shows a
 // countable quantity as what it actually is: a pile of individual things. This
-// does — one square per unit, so a hundred and seventy-one hand-built
-// components read as a hundred and seventy-one squares you could sit and count,
-// grouped into their families and tinted by family. "Made, not assembled" made
-// literal: every square is one thing that was made.
+// does — one square per unit, so every hand-built component reads as one square
+// you could sit and count, grouped into its family and tinted by family (the
+// instance on /numbers is driven off the live library, so the count is always
+// whatever the repo actually holds). "Made, not assembled" made literal: every
+// square is one thing that was made.
 //
 // Same thesis as the rest of the site's charts, and the same restraint: a
 // single lime, stepped darker by the family's rank so the largest family is

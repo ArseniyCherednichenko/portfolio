@@ -31,7 +31,7 @@ import { useToast } from './Toast'
 // remembered across visits in localStorage.
 
 // The whole hand-built component library is searchable too. It doesn't crowd
-// the empty-box catalogue — there are close to two hundred — but the moment you
+// the empty-box catalogue — there are a few hundred — but the moment you
 // type, every component that is on show somewhere becomes a result that jumps
 // to the page (or Playground section) where it lives. The library data is the
 // single source of truth, so this can never drift from what /library lists.
@@ -284,7 +284,7 @@ function Palette({ open, onClose }: { open: boolean; onClose: () => void }) {
   // on show somewhere, jumping to its home (a page, or a Playground section).
   // These are searchable but deliberately left out of the empty-box catalogue,
   // so typing surfaces the whole hand-built set without flooding the default
-  // view with two hundred rows.
+  // view with the entire catalogue of rows.
   const componentCommands = useMemo<Command[]>(
     () =>
       ALL_LIBRARY_ITEMS.filter((item) => item.to).map((item) => ({
@@ -310,7 +310,7 @@ function Palette({ open, onClose }: { open: boolean; onClose: () => void }) {
     if (!q) {
       // Recents may include a component you jumped to, so resolve ids across
       // both lists — but the empty-box catalogue below stays commands-only, so
-      // the two hundred components never flood the default view.
+      // the hundreds of components never flood the default view.
       const recents: Row[] = recent
         .map((id) => commands.find((c) => c.id === id) ?? componentCommands.find((c) => c.id === id))
         .filter((c): c is Command => Boolean(c))
