@@ -150,7 +150,7 @@ export const PROJECTS: Project[] = [
       },
     ],
     highlights: [
-      'Close to 200 hand-built motion components, no template',
+      `${COMPONENT_COUNT} hand-built motion components, no template`,
       'React, Vite, strict TypeScript, Tailwind v4, Framer Motion',
       'Reduced-motion aware, keyboard-reachable throughout',
       'Code-split routing across roughly thirty pages',
