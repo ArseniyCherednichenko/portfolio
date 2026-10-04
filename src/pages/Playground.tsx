@@ -145,6 +145,7 @@ import { Spirograph } from '../components/Spirograph'
 import { Oscilloscope } from '../components/Oscilloscope'
 import { CrtScreen } from '../components/CrtScreen'
 import { LavaLamp } from '../components/LavaLamp'
+import { Meadow } from '../components/Meadow'
 import { HilbertCurve } from '../components/HilbertCurve'
 import { Bifurcation } from '../components/Bifurcation'
 import { Penrose } from '../components/Penrose'
@@ -981,6 +982,44 @@ function LavaLampDemo() {
           onChange={(e) => setWarmth(Number(e.target.value))}
           aria-label="Lava lamp warmth"
           className="h-1.5 w-full cursor-pointer appearance-none rounded-full bg-white/15 accent-[#ff7a2f] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#ff7a2f]/60"
+        />
+      </label>
+    </div>
+  )
+}
+
+// A Meadow showcase. The field ripples on its own; the one control is an honest,
+// accessible breeze slider wired to its `wind` prop — turn it down and the grass
+// barely stirs, turn it up and the gusts sweep hard across the field. A native
+// range input carries the keyboard and screen-reader semantics; the meadow's
+// canvas is decorative and aria-hidden, so the slider is the operable part. Move
+// the cursor over the grass to part it.
+function MeadowDemo() {
+  const [breeze, setBreeze] = useState(55)
+  return (
+    <div className="flex w-full flex-col gap-5">
+      <div className="relative h-[360px] w-full overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-[#0b1308] to-[#060a05]">
+        <Meadow className="absolute inset-0" wind={breeze / 100} />
+        <div className="pointer-events-none absolute inset-x-0 top-7 z-10 text-center">
+          <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Rooted field</span>
+          <p className="mx-auto mt-3 max-w-md px-6 text-xl font-medium text-white/80 sm:text-2xl">
+            Move through the grass. It parts, then settles.
+          </p>
+        </div>
+      </div>
+      <label className="flex w-full max-w-[18rem] flex-col gap-2">
+        <span className="flex items-center justify-between text-xs font-semibold uppercase tracking-[0.18em] text-white/50">
+          <span>Breeze</span>
+          <span className="tabular-nums text-white/70">{breeze}%</span>
+        </span>
+        <input
+          type="range"
+          min={0}
+          max={100}
+          value={breeze}
+          onChange={(e) => setBreeze(Number(e.target.value))}
+          aria-label="Meadow breeze strength"
+          className="h-1.5 w-full cursor-pointer appearance-none rounded-full bg-white/15 accent-[#6f9e46] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#6f9e46]/60"
         />
       </label>
     </div>
@@ -4423,6 +4462,30 @@ export default function Playground() {
                 neighbourhood. Hover and they lean toward you; press and you become a hawk and they scatter. One canvas,
                 one loop, the flock in flat typed arrays, forces read from the last frame so it turns in lockstep.
                 Reduced motion never starts the loop — the flock is settled into one composed still instead.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH MEADOW */}
+        <Reveal>
+          <div id="meadow" data-experiment="Meadow" className="mt-12 scroll-mt-32">
+            <MeadowDemo />
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Meadow</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The other living fields here are a flock, a trail network, a drift of particles &mdash; all free to
+                roam. This one is rooted. Every blade is anchored to the floor and can only lean, so what moves through
+                it is wind, not the grass: the lean is the sum of two slow sines whose phase is offset by each blade&rsquo;s
+                position, so a crest of bend sweeps across the field and the whole meadow ripples in coherent waves
+                rather than per-blade jitter. The cursor adds a local push &mdash; blades within a radius lean away from
+                the pointer, hardest nearest it, each carried on a little spring so they bend as the hand arrives and
+                ease back to the wind&rsquo;s rest once it leaves, never snapping &mdash; and near the pointer they warm
+                from sage toward lime, the field language the rest of the page shares. Depth is faked by a sort: back
+                blades drawn first, shorter and darker; front blades taller and lighter, so it reads layered. Slide the
+                breeze: down and the grass barely stirs, up and the gusts sweep hard. One canvas, one loop off the frame
+                delta, DPR-capped, the blade state off the React render path. Reduced motion drops the loop, the wind and
+                the cursor and paints one still frame &mdash; every blade at its base lean with the gust frozen at t=0.
               </p>
             </div>
           </div>
