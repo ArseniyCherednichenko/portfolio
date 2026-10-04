@@ -45,6 +45,7 @@ const SECTIONS = [
   { id: 'range', label: 'Range' },
   { id: 'process', label: 'Process' },
   { id: 'ethos', label: 'Ethos' },
+  { id: 'numbers', label: 'By the numbers' },
   { id: 'work', label: 'Work' },
   { id: 'playground', label: 'Playground' },
   { id: 'toolkit', label: 'Toolkit' },
