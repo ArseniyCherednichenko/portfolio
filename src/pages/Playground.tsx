@@ -144,6 +144,7 @@ import { Harmonograph } from '../components/Harmonograph'
 import { Spirograph } from '../components/Spirograph'
 import { Oscilloscope } from '../components/Oscilloscope'
 import { CrtScreen } from '../components/CrtScreen'
+import { LavaLamp } from '../components/LavaLamp'
 import { HilbertCurve } from '../components/HilbertCurve'
 import { Bifurcation } from '../components/Bifurcation'
 import { Penrose } from '../components/Penrose'
@@ -951,6 +952,37 @@ function CrtDemo() {
       >
         Power cycle
       </button>
+    </div>
+  )
+}
+
+// A LavaLamp showcase. The lamp runs on its own; the one control is an honest,
+// accessible warmth slider wired to its `heat` prop — turn it down and the wax
+// barely stirs, turn it up and the lamp churns and runs tall. A native range
+// input carries the keyboard and screen-reader semantics for free; the lamp's
+// canvas is decorative and aria-hidden, so the slider is the operable part.
+function LavaLampDemo() {
+  const [warmth, setWarmth] = useState(60)
+  return (
+    <div className="flex w-full flex-col items-center gap-6">
+      <div className="w-full max-w-[18rem] overflow-hidden rounded-[2rem] border border-white/10 bg-black/40">
+        <LavaLamp className="aspect-[1/2] w-full" heat={warmth / 100} />
+      </div>
+      <label className="flex w-full max-w-[18rem] flex-col gap-2">
+        <span className="flex items-center justify-between text-xs font-semibold uppercase tracking-[0.18em] text-white/50">
+          <span>Warmth</span>
+          <span className="tabular-nums text-white/70">{warmth}%</span>
+        </span>
+        <input
+          type="range"
+          min={0}
+          max={100}
+          value={warmth}
+          onChange={(e) => setWarmth(Number(e.target.value))}
+          aria-label="Lava lamp warmth"
+          className="h-1.5 w-full cursor-pointer appearance-none rounded-full bg-white/15 accent-[#ff7a2f] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#ff7a2f]/60"
+        />
+      </label>
     </div>
   )
 }
@@ -7553,6 +7585,36 @@ export default function Playground() {
                 per-frame loop, and all of it defers to reduced motion &mdash; the still version keeps
                 the scanlines, the bloom and the vignette, the look and not the loop, and simply
                 holds. Hit power cycle to watch it strike again.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH LAVA LAMP */}
+        <Reveal>
+          <div id="lava-lamp" data-experiment="Lava lamp" className="mt-12 scroll-mt-32">
+            <LavaLampDemo />
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Lava lamp</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                A thing on a shelf, warming up &mdash; the counterpart to the MetaBalls field in the
+                field thread. That one is a full-bleed gooey surface that chases the cursor and fuses
+                its blobs with a hard SVG threshold; this is a single lamp in a tapered glass vessel,
+                lit from the floor, whose wax rises and sinks on its own. The look is backlit molten
+                glow, not a crisp silhouette: each blob is a warm radial gradient drawn in the{' '}
+                <span className="whitespace-nowrap">&lsquo;lighter&rsquo;</span> blend over a dark
+                vessel, so overlapping wax sums its light and reads as one glowing mass that necks
+                and parts as it drifts &mdash; the honest picture of translucent, backlit wax, and
+                cheap enough to run every frame with no per-pixel field. The motion is physics, not a
+                scripted path: each blob carries a <em>temperature</em> that eases toward a target set
+                by its height, hot at the floor and cool at the neck, so warm wax floats and cool wax
+                sinks &mdash; a blob heats low, rises, cools high and falls, and the whole cycle falls
+                out of that one rule. The honest simplification: the wax does not conserve volume by
+                truly merging and pinching off, which would want a fluid solve; the blobs pass through
+                one another and the additive glow does the merging by eye. Slide the warmth: down and
+                the wax barely stirs, up and the lamp churns and runs tall. One canvas, one loop off
+                the frame delta, DPR-capped. Reduced motion drops the loop and the heat cycle and
+                paints one composed still, the wax rested at a spread of heights.
               </p>
             </div>
           </div>
