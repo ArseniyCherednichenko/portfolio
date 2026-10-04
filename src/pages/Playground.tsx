@@ -143,6 +143,7 @@ import { Turntable } from '../components/Turntable'
 import { Harmonograph } from '../components/Harmonograph'
 import { Spirograph } from '../components/Spirograph'
 import { Oscilloscope } from '../components/Oscilloscope'
+import { CrtScreen } from '../components/CrtScreen'
 import { HilbertCurve } from '../components/HilbertCurve'
 import { Bifurcation } from '../components/Bifurcation'
 import { Penrose } from '../components/Penrose'
@@ -905,6 +906,50 @@ function StreamGraphDemo() {
         className="rounded-full border border-white/15 px-4 py-1.5 text-sm font-semibold text-white/80 transition-colors hover:border-[#DCF87C]/50 hover:bg-white/[0.04] hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#DCF87C]/60"
       >
         Reweight
+      </button>
+    </div>
+  )
+}
+
+// A CrtScreen showcase. The component frames arbitrary content, so the demo
+// feeds it a short retro readout — honest facts, the live Berlin time, a caret
+// — rather than any invented data, and a Power button re-runs the warm-up snap
+// so a visitor can watch the tube strike. The caret blink is CSS; under reduced
+// motion the screen holds its scanlines and bloom but drops the roll, flicker
+// and warm-up, and the caret stops winking.
+function CrtDemo() {
+  const { time } = useBerlinTime()
+  const reduce = useReducedMotion()
+  // `power` remounts the screen (via key) so the warm-up plays again on tap.
+  const [power, setPower] = useState(0)
+  return (
+    <div className="flex w-full flex-col items-center gap-6">
+      <CrtScreen key={power} className="aspect-[4/3] w-full max-w-xl" power>
+        <div className="flex h-full w-full flex-col justify-center gap-2 p-8 font-mono text-sm leading-relaxed sm:p-12 sm:text-base">
+          <p className="opacity-70">CRT-1 phosphor display &mdash; online</p>
+          <p className="opacity-70">loading profile&hellip; ok</p>
+          <p className="mt-4 text-lg font-bold tracking-wide sm:text-2xl">ARSENIY CHEREDNICHENKO</p>
+          <p className="uppercase tracking-[0.2em] opacity-80">Berlin &middot; builder &middot; founder</p>
+          <p className="mt-3 tabular-nums opacity-80">
+            local time {time}
+          </p>
+          <p className="mt-4 flex items-center gap-1">
+            <span className="opacity-70">&gt; ready</span>
+            <span
+              aria-hidden
+              className={`inline-block h-4 w-[0.6em] translate-y-[1px] bg-current ${
+                reduce ? '' : 'animate-pulse'
+              }`}
+            />
+          </p>
+        </div>
+      </CrtScreen>
+      <button
+        type="button"
+        onClick={() => setPower((n) => n + 1)}
+        className="rounded-full border border-white/15 px-4 py-1.5 text-sm font-semibold text-white/80 transition-colors hover:border-[#DCF87C]/50 hover:bg-white/[0.04] hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#DCF87C]/60"
+      >
+        Power cycle
       </button>
     </div>
   )
@@ -7482,6 +7527,32 @@ export default function Playground() {
                 oscillators: across walks the ratio, up sets the sweep speed and detune; it eases home to a slow trefoil
                 when you leave. One canvas, one loop off the frame delta, DPR-capped. Reduced motion draws one closed
                 figure as a steady line and holds it.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH CRT SCREEN */}
+        <Reveal>
+          <div id="crt-screen" data-experiment="CRT screen" className="mt-12 scroll-mt-32">
+            <CrtDemo />
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">CRT screen</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The display the Oscilloscope and the Nixie would have lived behind, and the odd one
+                out in the screen thread &mdash; every neighbour draws its own figure, this one holds
+                nothing of its own and simply dresses whatever content you hand it as phosphor on
+                glass. Each layer is a real artefact of the tube, stacked over the content and
+                aria-hidden so a reader hears only the words: a fixed comb of <em>scanlines</em>, the
+                raster rows a shadow mask never lit; a soft <em>roll bar</em> drifting down the face,
+                the frame that never quite syncs; a <em>bloom and vignette</em> that let the glow
+                spill past its edges and fall dark into the corners, so the glass reads as curved;
+                a <em>flicker</em> breathing a hair of brightness, the mains hum you see more than
+                hear; and on load a <em>warm-up</em> that snaps the picture open from a single white
+                line and settles, the way a tube strikes. All of it is CSS and transform only, no
+                per-frame loop, and all of it defers to reduced motion &mdash; the still version keeps
+                the scanlines, the bloom and the vignette, the look and not the loop, and simply
+                holds. Hit power cycle to watch it strike again.
               </p>
             </div>
           </div>
