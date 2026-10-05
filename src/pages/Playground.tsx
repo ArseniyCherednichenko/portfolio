@@ -144,6 +144,7 @@ import { Harmonograph } from '../components/Harmonograph'
 import { Spirograph } from '../components/Spirograph'
 import { Oscilloscope } from '../components/Oscilloscope'
 import { CrtScreen } from '../components/CrtScreen'
+import { CurveStitch } from '../components/CurveStitch'
 import { LavaLamp } from '../components/LavaLamp'
 import { Meadow } from '../components/Meadow'
 import { HilbertCurve } from '../components/HilbertCurve'
@@ -1020,6 +1021,44 @@ function MeadowDemo() {
           onChange={(e) => setBreeze(Number(e.target.value))}
           aria-label="Meadow breeze strength"
           className="h-1.5 w-full cursor-pointer appearance-none rounded-full bg-white/15 accent-[#6f9e46] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#6f9e46]/60"
+        />
+      </label>
+    </div>
+  )
+}
+
+// A CurveStitch showcase. The rose turns and glows on its own; the one control
+// is an accessible symmetry slider wired to its `sides` prop — drop it to a
+// triangle's three sharp parabolas, raise it toward a circle's caustic. A
+// native range input carries the keyboard and screen-reader semantics; the
+// canvas is decorative and aria-hidden. Move the cursor across the threads to
+// warm the ones it passes toward lime.
+function CurveStitchDemo() {
+  const [sides, setSides] = useState(6)
+  return (
+    <div className="flex w-full flex-col gap-5">
+      <div className="relative h-[460px] w-full overflow-hidden rounded-3xl border border-white/10 bg-[#040404]">
+        <CurveStitch className="h-full w-full" sides={sides} />
+        <div className="pointer-events-none absolute inset-x-0 top-8 z-10 text-center">
+          <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Curve stitching</span>
+          <p className="mx-auto mt-3 max-w-md px-6 text-lg font-medium text-white/90 sm:text-xl">
+            Every thread is straight. The curves are only where they cross.
+          </p>
+        </div>
+      </div>
+      <label className="flex w-full max-w-[18rem] flex-col gap-2">
+        <span className="flex items-center justify-between text-xs font-semibold uppercase tracking-[0.18em] text-white/50">
+          <span>Symmetry</span>
+          <span className="tabular-nums text-white/70">{sides} corners</span>
+        </span>
+        <input
+          type="range"
+          min={3}
+          max={14}
+          value={sides}
+          onChange={(e) => setSides(Number(e.target.value))}
+          aria-label="Curve stitch symmetry — number of stitched corners"
+          className="h-1.5 w-full cursor-pointer appearance-none rounded-full bg-white/15 accent-[#DCF87C] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#DCF87C]/60"
         />
       </label>
     </div>
@@ -5805,6 +5844,36 @@ export default function Playground() {
                 drawing. One canvas, one rAF loop, DPR-capped and resize-driven, a couple of hundred chords a frame
                 against a smooth frame counter and no wall clock. Reduced motion settles on one pleasing multiplier and
                 paints a single still figure, and the pointer does not drive it.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH CURVE STITCH — the linear parabola construction, repeated with rotational symmetry */}
+        <Reveal>
+          <div id="curve-stitch" data-experiment="Curve stitching" className="mt-12 scroll-mt-32">
+            <CurveStitchDemo />
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Curve stitching</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The oldest proof that a curve can be built from nothing but straight lines. Take a corner &mdash; two
+                rays meeting at a point &mdash; mark the same number of evenly spaced points up each ray, then thread the
+                nearest point on one to the farthest on the other: first to last, second to second-last, and on down.
+                Every thread is dead straight, yet their crossings leave a bright edge, an envelope, and that envelope is
+                a parabola tangent to both rays. No curve is ever drawn; the eye assembles it from the gaps the straight
+                threads leave. It is the curve-of-pursuit a child stitches through holes in card, and the same trick that
+                rounds off the square corner of a modernist building into a swoop. Here the corner is multiplied: the
+                vertices of a regular polygon each stitch the two edges meeting there, so a ring of parabolas blooms
+                inward and the whole figure reads as a rose window strung on a loom. Slide the symmetry up and the rose
+                gains petals; the polygon approaches a circle and its parabolas close toward a caustic. It is the kin of
+                the Times table above &mdash; both are honest string art, pins and one rule and thread &mdash; but the
+                opposite method: that one winds modular chords around a single ring, this repeats the linear corner
+                construction with rotational symmetry. Threads are tinted cool teal at the vertex and warm to the
+                site&rsquo;s lime toward the rim, laid in additively so crossings burn brighter and the envelope glows on
+                its own; move the cursor across them and the threads it passes near warm toward lime, the field language
+                the rest of the page shares. One canvas, one rAF loop, DPR-capped and resize-driven, a modest thread
+                count a frame against a smooth frame counter and no wall clock. Reduced motion settles one still rose at
+                the chosen symmetry and the pointer does not drive it.
               </p>
             </div>
           </div>
