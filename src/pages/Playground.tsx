@@ -157,6 +157,7 @@ import { Gears } from '../components/Gears'
 import { FourBar } from '../components/FourBar'
 import { Peaucellier } from '../components/Peaucellier'
 import { GenevaDrive } from '../components/GenevaDrive'
+import { Strandbeest } from '../components/Strandbeest'
 import { Orrery } from '../components/Orrery'
 import { MoonPhase } from '../components/MoonPhase'
 import { Sundial } from '../components/Sundial'
@@ -8057,6 +8058,51 @@ export default function Playground() {
                 station, with a live region reading the crank angle, the lock state and the station. Under{' '}
                 <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code> there is
                 no sweep &mdash; Run indexes one station in a single step &mdash; and every state stays legible.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH STRANDBEEST — the fourth in the rigid-mechanism corner */}
+        <Reveal>
+          <div id="strandbeest" data-experiment="Strandbeest" className="mt-12 scroll-mt-32">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 py-12 sm:px-10">
+              <div className="mb-8 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Turn into a stride</span>
+                <p className="mx-auto mt-3 max-w-md text-lg font-medium text-white/85 sm:text-xl">
+                  Turn one crank and a foot walks: flat along the ground, then a high arc back over.
+                </p>
+              </div>
+              <Strandbeest className="mx-auto" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Strandbeest</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The fourth character in the rigid-mechanism corner, and the one that walks. The four-bar turns rotation
+                into a <em>curve</em>, the Peaucellier into a <em>straight line</em>, the Geneva into <em>steps</em>;
+                Theo Jansen turned it into a <em>gait</em>. His beach creatures, the <em>Strandbeesten</em>, stride on
+                legs driven by nothing but a turning crankshaft, and the whole trick lives in eleven link lengths he
+                tuned over years and calls the <em>holy numbers</em> &mdash; the same on every machine he has built
+                since. They are chosen so the foot follows the one path a walker needs: a long <em>flat</em> sweep along
+                the ground to push the body forward, then a high arc up and over to swing clear for the next step. The
+                mechanism is three four-bar loops sharing one frame. Two points are bolted to the body and never move
+                &mdash; the crank axle and a fixed pivot, set an <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">a</code>-by-
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">l</code> offset apart. The crank
+                throw swings one pin around the axle; from there <em>every</em> remaining joint is the same two-circle
+                intersection the four-bar uses &mdash; one circle of each adjoining bar&rsquo;s length &mdash; taken on
+                a fixed branch so the leg assembles the same way all the way round and the foot can never leave the curve
+                the geometry allows. That foot curve, Jansen&rsquo;s flat-bottomed D, is drawn once from the very same
+                solver as a faint ghost beneath the feet. Two legs share the crank <em>half a turn apart</em> &mdash;
+                the iconic pair &mdash; so while one foot is flat and driving, the other is lifted and reaching, and there
+                is always a foot down. The ground scrolls to stand in for the forward travel each stance stroke earns.
+                The honest part is the state: the only thing stored is the crank angle, and the entire pose derives from
+                it by real kinematics each frame, not an easing curve pretending to be a machine. Drag anywhere to turn
+                the crank one to one, or set it walking. A real{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">role=slider</code> from the keyboard:
+                arrows nudge the crank, Shift a bigger step, Space walks or stops, Home returns it to the top, with a live
+                region reading the angle. Under{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code> there is
+                no continuous walk &mdash; the pair holds mid-stride and steps on a station at a time on demand.
               </p>
             </div>
           </div>
