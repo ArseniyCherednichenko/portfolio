@@ -141,6 +141,7 @@ import { InfiniteScroll, type InfiniteScrollItem } from '../components/InfiniteS
 import { Lanyard } from '../components/Lanyard'
 import { Turntable } from '../components/Turntable'
 import { Harmonograph } from '../components/Harmonograph'
+import { Mobile } from '../components/Mobile'
 import { Spirograph } from '../components/Spirograph'
 import { Oscilloscope } from '../components/Oscilloscope'
 import { CrtScreen } from '../components/CrtScreen'
@@ -7627,6 +7628,38 @@ export default function Playground() {
                 turntable next door: not an object with momentum but a deterministic plotter — the same seed always draws
                 the same plate. Click the plate or the button to hang new pendulums. Reduced motion lays the finished
                 figure down in one frame.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH MOBILE */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30">
+              <div id="mobile" data-experiment="Mobile" className="relative h-[520px] w-full scroll-mt-32">
+                <Mobile className="h-full w-full" />
+                <div className="pointer-events-none absolute inset-x-0 top-8 z-10 text-center">
+                  <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Balance</span>
+                  <p className="mx-auto mt-3 max-w-md px-6 text-lg font-medium text-white/90 sm:text-xl">
+                    Every rod hangs level because the masses below it balance. Then the breeze gets in.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Mobile</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                A hanging sculpture in the spirit of Calder. The quiet marvel of a real mobile is that it balances: a
+                heavy shape close to a pivot holds a light shape far out, because what a rod carries on each side is mass
+                times distance, and the two torques match. Here every pivot is placed from the real masses of the shapes
+                hanging below it, so the tree hangs level at rest. Then each rod becomes a lightly damped pendulum nudged
+                by a slow, detuned breeze, and a rod's tilt swings the strings it carries, so motion ripples down the
+                tree and never quite repeats. Nothing accumulates rotation — each shape's string hangs straight down from
+                the moving end above it, so the shapes stay upright however the arms lean. A different kind of object from
+                the Lanyard and the Turntable next door: not one weight on a string or a wheel with momentum, but a whole
+                structure in balance you can stir. Sweep the cursor near a shape to warm it and nudge its rod; press
+                Breeze to shove the whole thing and watch it ring back. Reduced motion hangs it level and still.
               </p>
             </div>
           </div>
