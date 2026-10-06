@@ -159,6 +159,7 @@ import { Peaucellier } from '../components/Peaucellier'
 import { GenevaDrive } from '../components/GenevaDrive'
 import { Strandbeest } from '../components/Strandbeest'
 import { Escapement } from '../components/Escapement'
+import { Brachistochrone } from '../components/Brachistochrone'
 import { Orrery } from '../components/Orrery'
 import { MoonPhase } from '../components/MoonPhase'
 import { Sundial } from '../components/Sundial'
@@ -8427,6 +8428,47 @@ export default function Playground() {
                 of real modes, easing the numbers between figures so the lines re-thread rather than snap; move the
                 pointer to tune it by hand, or press to strike the plate and toss the settled sand back up. One canvas,
                 one loop, every grain held in flat typed arrays. Reduced motion settles one figure up front and holds it.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH BRACHISTOCHRONE — gravity's fastest curve, beside Galton's chance */}
+        <Reveal>
+          <div id="brachistochrone" data-experiment="Brachistochrone" className="mt-12 scroll-mt-32">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/40 px-6 py-12 sm:px-10">
+              <div className="mb-8 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Fastest descent</span>
+                <p className="mx-auto mt-3 max-w-md text-lg font-medium text-white/85 sm:text-xl">
+                  Three beads, same start, same finish. Release them &mdash; the shortest path loses.
+                </p>
+              </div>
+              <Brachistochrone className="mx-auto" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Brachistochrone</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The sibling of the Galton board below, and its opposite in spirit: where that lets chance precipitate a
+                bell curve out of thousands of random nudges, this is pure determinism &mdash; one honest answer, and a
+                surprising one. In 1696 Johann Bernoulli posed a challenge to the mathematicians of Europe: given two
+                points at different heights, what shape of frictionless track carries a bead between them in the{' '}
+                <em>least time</em>? The intuitive answer is the straight line &mdash; the shortest road. It is wrong.
+                The winner is a <em>cycloid</em>, the curve a point on a rolling wheel traces, and it wins because it
+                dives steeply at the start, buying speed early and spending a longer road to do it. Newton is said to
+                have solved it overnight. Here all three tracks drop from the same corner to the same one: a straight
+                line, a gentle arc, and the cycloid. The motion is real physics, not a scripted finish &mdash; each bead
+                is a point mass on a wire whose tangential acceleration is{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">g&middot;(dy/ds)</code>, the downhill
+                pull of gravity along the track, integrated on a fixed timestep. Nothing is tuned to rig the race; the
+                cycloid wins because the mathematics says it must, and at the finish every bead&rsquo;s speed matches the
+                energy-conservation value <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">&radic;(2g&middot;h)</code> to
+                two decimals. The cycloid&rsquo;s own end angle is solved from the start-and-finish condition at mount,
+                so the track is the true brachistochrone for these two points, not an eyeballed arc. Release them and
+                watch; slow it down to study the spread; the straight line arrives about a fifth later than the cycloid,
+                and even the reasonable-looking arc loses. Under{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code> there
+                is no travel &mdash; it freezes the instant the winner arrives, the cycloid already home while the others
+                still lag, the whole story in one still frame, with a Step to walk it forward.
               </p>
             </div>
           </div>
