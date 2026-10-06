@@ -160,6 +160,7 @@ import { GenevaDrive } from '../components/GenevaDrive'
 import { Strandbeest } from '../components/Strandbeest'
 import { Escapement } from '../components/Escapement'
 import { Brachistochrone } from '../components/Brachistochrone'
+import { Catenary } from '../components/Catenary'
 import { Orrery } from '../components/Orrery'
 import { MoonPhase } from '../components/MoonPhase'
 import { Sundial } from '../components/Sundial'
@@ -8428,6 +8429,45 @@ export default function Playground() {
                 of real modes, easing the numbers between figures so the lines re-thread rather than snap; move the
                 pointer to tune it by hand, or press to strike the plate and toss the settled sand back up. One canvas,
                 one loop, every grain held in flat typed arrays. Reduced motion settles one figure up front and holds it.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH CATENARY — the chain's own curve, the Brachistochrone's sibling */}
+        <Reveal>
+          <div id="catenary" data-experiment="Catenary" className="mt-12 scroll-mt-32">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/40 px-6 py-12 sm:px-10">
+              <div className="mb-8 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Hanging curve</span>
+                <p className="mx-auto mt-3 max-w-md text-lg font-medium text-white/85 sm:text-xl">
+                  Drag an anchor, or pay out more chain. It always settles into the same curve.
+                </p>
+              </div>
+              <Catenary className="mx-auto" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Catenary</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The Brachistochrone&rsquo;s quiet sibling &mdash; another famous curve, but where that one is the answer
+                to a race against the clock, this is the shape a chain works out for itself with no clock running. Pin a
+                chain of fixed length between two points and let gravity settle it and it never falls into a parabola or a
+                circle: it finds the <em>catenary</em>,{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">y = a&middot;cosh(x/a)</code>. Galileo
+                guessed a parabola and was wrong; Huygens, Leibniz, and Johann Bernoulli settled the true answer in 1691,
+                and the name comes from <em>catena</em>, Latin for chain. The curve here is solved, not drawn. Given the
+                two anchors and a fixed length, the shape is the unique catenary that both passes through the anchors{' '}
+                <em>and</em> has arc length exactly equal to the chain &mdash; and there is no closed form for that, so it
+                is found numerically: an outer search on the curvature{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">a</code> wrapped around an inner one
+                that slides the low point until the curve meets both ends, the pair converging on the single chain whose
+                measured length comes out right. Drag an anchor and it re-hangs; pull the two apart past the chain&rsquo;s
+                length and it snaps taut, because a chain cannot stretch. Nothing about the sag is faked &mdash; it is the
+                maths of a hanging rope, resolved on every move, which is why a looser chain pools into a deeper, rounder
+                belly and a shorter one pulls up tight. The dashed line is the straight chord it refuses to take. It is
+                fully keyboard-drivable: focus an anchor and nudge it with the arrow keys, and the chain-length slider
+                works for everyone. Reduced motion changes nothing here &mdash; the curve is analytic and only ever moves
+                when you ask it to, so there is no ambient animation to still.
               </p>
             </div>
           </div>
