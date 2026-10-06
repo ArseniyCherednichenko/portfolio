@@ -158,6 +158,7 @@ import { FourBar } from '../components/FourBar'
 import { Peaucellier } from '../components/Peaucellier'
 import { GenevaDrive } from '../components/GenevaDrive'
 import { Strandbeest } from '../components/Strandbeest'
+import { Escapement } from '../components/Escapement'
 import { Orrery } from '../components/Orrery'
 import { MoonPhase } from '../components/MoonPhase'
 import { Sundial } from '../components/Sundial'
@@ -8103,6 +8104,49 @@ export default function Playground() {
                 region reading the angle. Under{' '}
                 <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code> there is
                 no continuous walk &mdash; the pair holds mid-stride and steps on a station at a time on demand.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH ESCAPEMENT — the fifth in the rigid-mechanism corner */}
+        <Reveal>
+          <div id="escapement" data-experiment="Escapement" className="mt-12 scroll-mt-32">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 py-12 sm:px-10">
+              <div className="mb-8 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Turn into a beat</span>
+                <p className="mx-auto mt-3 max-w-md text-lg font-medium text-white/85 sm:text-xl">
+                  A pendulum lets the wheel out one tooth at a time. Run it and it keeps a seconds-beat.
+                </p>
+              </div>
+              <Escapement className="mx-auto" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Escapement</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The fifth character in the rigid-mechanism corner, and the one that keeps time. The four-bar turns
+                rotation into a <em>curve</em>, the Peaucellier into a <em>straight line</em>, the Geneva into{' '}
+                <em>steps</em>, the Strandbeest into a <em>gait</em>; the escapement turns a swing into a{' '}
+                <em>beat</em>. Every pendulum clock has to solve one problem: a falling weight wants to run the gear
+                train away all at once, and a pendulum keeps its own stubborn time. The escapement marries the two. An
+                anchor rides on the pendulum and rocks with it, and at each end of the swing one of its two pallets lifts
+                off a tooth of the escape wheel and lets it turn &mdash; but only until the next tooth drops onto the
+                other pallet and stops it dead. The wheel never runs; it ticks, handed forward exactly one tooth per
+                swing. This is the <em>deadbeat</em> form George Graham cut around 1715: the locking faces are arcs
+                struck from the anchor&rsquo;s own pivot, so while a tooth rests on one there is no sideways push at all
+                &mdash; the wheel sits perfectly still, none of the backward recoil the older anchor escapement suffered.
+                Dead, then beat. The honest part is the timing, not the draughtsman&rsquo;s detail of the pallet faces:
+                the only thing stored is the pendulum&rsquo;s phase, the bob swings a true{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">sin</code> of it, and the wheel angle
+                is <em>derived</em> &mdash; held exactly still through the swing, advanced one whole tooth in the quick
+                drop just after each extreme, never an easing curve dressed up as a machine. Thirty teeth, one a second,
+                so a full turn is half a minute. Drag the bob to swing it by hand and watch it tick as you cross each
+                end, or set it running. A real{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">role=slider</code> from the keyboard:
+                arrows nudge the swing, Shift a bigger step, Space runs or stops, Home returns it to rest, with a live
+                region reading the angle and the count. Under{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code> there is
+                no free run &mdash; the clock holds a frame and ticks on a swing at a time on demand.
               </p>
             </div>
           </div>
