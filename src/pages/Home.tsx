@@ -77,6 +77,7 @@ const LOG_ITEMS: AnimatedListItem[] = LATEST_LOG.map((entry, i) => ({
 const EXPLORE: FlowingItem[] = [
   { label: 'Work', to: '/work', hint: 'Case studies' },
   { label: 'About', to: '/about', hint: 'Who I am' },
+  { label: 'From Berlin', to: '/berlin', hint: 'Where the work is made' },
   { label: 'Playground', to: '/playground', hint: 'Live motion' },
   { label: 'Studio', to: '/studio', hint: 'Make a poster' },
   { label: 'On motion', to: '/craft', hint: 'Craft, playable' },

@@ -12,10 +12,10 @@
 /** Hand-built components in `src/components`. Nothing off the shelf. This is
  * the literal count of files there, catalogued one by one on the /library
  * page (LIBRARY in src/data/library.ts) — keep the two in step. */
-export const COMPONENT_COUNT = 280
+export const COMPONENT_COUNT = 281
 
 /** Distinct routed pages the site serves. */
-export const PAGE_COUNT = 33
+export const PAGE_COUNT = 34
 
 export interface SiteStat {
   value: number
