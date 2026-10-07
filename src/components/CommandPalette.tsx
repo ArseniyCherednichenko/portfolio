@@ -150,6 +150,7 @@ function Palette({ open, onClose }: { open: boolean; onClose: () => void }) {
       { id: 'range', label: 'The range', group: 'Pages', hint: 'disciplines I work across', keywords: 'range disciplines frontend ios backend applied ai motion skills capabilities multi disciplinary full stack breadth', run: () => go('/range') },
       { id: 'about', label: 'About', group: 'Pages', hint: 'story, path', keywords: 'bio story timeline principles', run: () => go('/about') },
       { id: 'now', label: 'Now', group: 'Pages', hint: 'current focus', keywords: 'now current focus building learning today snapshot status', run: () => go('/now') },
+      { id: 'berlin', label: 'From Berlin', group: 'Pages', hint: 'the place, live', keywords: 'berlin germany location where city home place local time clock sky skyline night day timezone cet from desk map', run: () => go('/berlin') },
       { id: 'uses', label: 'Uses', group: 'Pages', hint: 'the setup', keywords: 'uses setup gear tools daily drivers desk machine editor terminal browser stack environment what i use dev setup', run: () => go('/uses') },
       { id: 'toolkit', label: 'Toolkit', group: 'Pages', hint: 'tools and stack', keywords: 'tools stack skills tech react typescript swift supabase', run: () => go('/toolkit') },
       { id: 'playground', label: 'Playground', group: 'Pages', hint: 'experiments', keywords: 'motion experiments demos', run: () => go('/playground') },
