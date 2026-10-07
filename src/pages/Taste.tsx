@@ -1,4 +1,4 @@
-import { useMemo, useState, type ReactNode } from 'react'
+import { useEffect, useMemo, useState, type ReactNode } from 'react'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { Seo } from '../components/Seo'
@@ -269,6 +269,51 @@ function ConsideredField() {
   )
 }
 
+// --- Demo 5: the toggle -----------------------------------------------------
+
+function PlainToggle() {
+  const [on, setOn] = useState(true)
+  return (
+    <label className="flex cursor-pointer items-center gap-2 text-sm text-white/70">
+      <input
+        type="checkbox"
+        checked={on}
+        onChange={(e) => setOn(e.target.checked)}
+        className="h-4 w-4 accent-white/60"
+      />
+      Email notifications
+    </label>
+  )
+}
+
+function ConsideredToggle({ reduce }: { reduce: boolean | null }) {
+  const [on, setOn] = useState(true)
+  return (
+    <div className="flex items-center gap-3">
+      <button
+        type="button"
+        role="switch"
+        aria-checked={on}
+        aria-label="Email notifications"
+        onClick={() => setOn((v) => !v)}
+        className={`relative inline-flex h-7 w-12 shrink-0 items-center rounded-full p-0.5 outline-none transition-colors focus-visible:ring-2 focus-visible:ring-[#DCF87C]/60 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0A0A0A] ${
+          on ? 'bg-[#DCF87C]' : 'bg-white/12'
+        }`}
+      >
+        <motion.span
+          layout={!reduce}
+          transition={{ type: 'spring', stiffness: 520, damping: 34 }}
+          className={`h-6 w-6 rounded-full bg-white shadow-sm ${on ? 'ml-auto' : ''}`}
+        />
+      </button>
+      <div className="text-left">
+        <p className="text-sm font-medium text-white/90">Email notifications</p>
+        <p className="text-xs text-white/40">{on ? 'On — we will email you' : 'Off — quiet for now'}</p>
+      </div>
+    </div>
+  )
+}
+
 export default function Taste() {
   const reduce = useReducedMotion()
   const { open: openContact } = useContact()
@@ -320,7 +365,7 @@ export default function Taste() {
           <div className="flex flex-col gap-4 rounded-3xl border border-white/10 bg-white/[0.015] p-6 sm:flex-row sm:items-center sm:justify-between sm:p-7">
             <div>
               <p className="font-display text-lg font-semibold tracking-tight text-white/90">
-                One switch, four demos.
+                One switch, five demos.
               </p>
               <p className="mt-1 text-sm leading-relaxed text-white/50">
                 Same components, two levels of care. The delta between them is the whole craft.
@@ -368,6 +413,15 @@ export default function Taste() {
           reduce={reduce}
           plain={<PlainField />}
           considered={<ConsideredField />}
+        />
+        <DemoCard
+          index={4}
+          title="The toggle"
+          changed="A bare checkbox tells you nothing about what it did. A switch that springs over, colours to the accent, and says in words what is now on turns a setting into a small moment of certainty."
+          mode={mode}
+          reduce={reduce}
+          plain={<PlainToggle />}
+          considered={<ConsideredToggle reduce={reduce} />}
         />
       </section>
 
