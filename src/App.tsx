@@ -40,6 +40,7 @@ const Principles = lazy(() => import('./pages/Principles'))
 const Taste = lazy(() => import('./pages/Taste'))
 const Wander = lazy(() => import('./pages/Wander'))
 const Keys = lazy(() => import('./pages/Keys'))
+const Berlin = lazy(() => import('./pages/Berlin'))
 const NotFound = lazy(() => import('./pages/NotFound'))
 
 export default function App() {
@@ -80,6 +81,7 @@ export default function App() {
         <Route path="taste" element={<Taste />} />
         <Route path="wander" element={<Wander />} />
         <Route path="keyboard" element={<Keys />} />
+        <Route path="berlin" element={<Berlin />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
