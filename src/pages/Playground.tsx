@@ -89,6 +89,7 @@ import { Wheel } from '../components/Wheel'
 import { Knob } from '../components/Knob'
 import { Switch } from '../components/Switch'
 import { SegmentedControl } from '../components/SegmentedControl'
+import { Pagination } from '../components/Pagination'
 import { Select, type SelectOption } from '../components/Select'
 import { Combobox, type ComboOption } from '../components/Combobox'
 import { TagInput } from '../components/TagInput'
@@ -1323,6 +1324,62 @@ function SelectDemo() {
       >
         The quick brown fox
       </p>
+    </div>
+  )
+}
+
+// A Pagination showcase: the one control that moves through a *set* of pages
+// rather than picking a value. A deterministic list of thirty tiles is sliced
+// three to a page, so stepping the pager swaps the visible slice (cross-faded,
+// keyed on the page) and a live "Showing X-Y of N" readout tracks it — the pager
+// is driving real content, not sitting inert. Thirty items over ten pages is
+// enough to show the ellipsis truncation and the first/last edge arrows; the
+// lime pill glides to each chosen page.
+const PAGINATION_TOTAL = 30
+const PAGINATION_PER_PAGE = 3
+function PaginationDemo() {
+  const reduce = useReducedMotion()
+  const [page, setPage] = useState(1)
+  const pageCount = Math.ceil(PAGINATION_TOTAL / PAGINATION_PER_PAGE)
+  const start = (page - 1) * PAGINATION_PER_PAGE
+  const end = Math.min(start + PAGINATION_PER_PAGE, PAGINATION_TOTAL)
+  const slice = Array.from({ length: end - start }, (_, i) => start + i)
+  return (
+    <div className="flex w-full max-w-[22rem] flex-col items-center gap-6">
+      <div className="min-h-[7.5rem] w-full">
+        <AnimatePresence mode="wait" initial={false}>
+          <motion.ul
+            key={page}
+            initial={reduce ? false : { opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={reduce ? { opacity: 0 } : { opacity: 0, y: -8 }}
+            transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+            className="grid gap-2"
+          >
+            {slice.map((n) => (
+              <li
+                key={n}
+                className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3"
+              >
+                <span className="grid h-8 w-8 place-items-center rounded-lg bg-[#DCF87C]/10 font-display text-sm font-semibold tabular-nums text-[#DCF87C]">
+                  {String(n + 1).padStart(2, '0')}
+                </span>
+                <span className="h-2 flex-1 rounded-full bg-white/10" aria-hidden />
+              </li>
+            ))}
+          </motion.ul>
+        </AnimatePresence>
+      </div>
+      <p className="text-xs font-semibold uppercase tracking-[0.15em] text-white/40">
+        Showing {start + 1}&#8211;{end} of {PAGINATION_TOTAL}
+      </p>
+      <Pagination
+        count={pageCount}
+        page={page}
+        onChange={setPage}
+        showEdges
+        label="Demo results"
+      />
     </div>
   )
 }
@@ -6538,6 +6595,15 @@ export default function Playground() {
               note="The one control every form leans on, hand-built because the native select can't be animated past its box. A real accessible listbox — the trigger keeps focus and drives the list through aria-activedescendant, so arrows, Home/End, Enter, Escape, and type-a-letter-to-jump all work. The panel springs open with a blur-and-rise, a single lime highlight glides between options instead of blinking, and the choice carries a check. Picking a face restyles the line below. Reduced motion drops the spring, blur, and glide for a plain, instant menu."
             >
               <SelectDemo />
+            </Experiment>
+          </Reveal>
+
+          <Reveal>
+            <Experiment
+              name="Pagination"
+              note="The one control that moves through a set of pages rather than picking a value — the primitive every long list or table leans on. A deterministic set of thirty tiles is sliced three to a page; stepping the pager cross-fades the visible slice while a live 'Showing X-Y of N' readout tracks it, so the control is driving real content, not sitting inert. The number range truncates the way a hundred pages should — a boundary page each end, a window around the current one, an ellipsis bridging the gap — so the row never reflows as you walk it. The single lime pill glides between pages on a shared layout rather than blinking. A labelled nav of real buttons with aria-current on the active page, the arrows disabled at the ends, the nav's own Left/Right and Home/End stepping it, and a live region narrating each move. Reduced motion drops the glide for an instant swap."
+            >
+              <PaginationDemo />
             </Experiment>
           </Reveal>
 
