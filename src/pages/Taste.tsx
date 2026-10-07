@@ -314,6 +314,126 @@ function ConsideredToggle({ reduce }: { reduce: boolean | null }) {
   )
 }
 
+// --- Demo 6: the loading state ----------------------------------------------
+
+function PlainLoading() {
+  return <p className="text-sm text-white/45">Loading...</p>
+}
+
+function ConsideredLoading({ reduce }: { reduce: boolean | null }) {
+  // A skeleton shaped like the content it stands in for, with a light sweep so
+  // the wait reads as motion rather than a frozen screen. Held still, and
+  // dimmed to a plain pulse, under reduced motion.
+  const bar = 'relative overflow-hidden rounded-md bg-white/[0.06]'
+  const sweep = reduce ? (
+    <span className="absolute inset-0 animate-pulse bg-white/[0.04]" />
+  ) : (
+    <motion.span
+      aria-hidden
+      className="absolute inset-y-0 -left-full w-full bg-gradient-to-r from-transparent via-white/[0.09] to-transparent"
+      animate={{ x: ['0%', '200%'] }}
+      transition={{ duration: 1.3, repeat: Infinity, ease: 'easeInOut' }}
+    />
+  )
+  return (
+    <div
+      role="status"
+      aria-label="Loading"
+      className="flex w-full max-w-xs items-center gap-4 rounded-2xl border border-white/10 bg-white/[0.02] p-4"
+    >
+      <div className={`h-11 w-11 shrink-0 rounded-full ${bar}`}>{sweep}</div>
+      <div className="flex-1 space-y-2.5">
+        <div className={`h-3 w-3/4 ${bar}`}>{sweep}</div>
+        <div className={`h-3 w-1/2 ${bar}`}>{sweep}</div>
+      </div>
+    </div>
+  )
+}
+
+// --- Demo 7: progress -------------------------------------------------------
+
+function PlainProgress() {
+  return <p className="text-sm text-white/55">Uploading: 68%</p>
+}
+
+function ConsideredProgress({ reduce }: { reduce: boolean | null }) {
+  const target = 68
+  const [value, setValue] = useState(reduce ? target : 0)
+  useEffect(() => {
+    if (reduce) {
+      setValue(target)
+      return
+    }
+    // Ease the bar up to its real value once on mount, so the number is felt
+    // arriving rather than stamped down. Counts in step with the fill.
+    const start = performance.now()
+    const dur = 1100
+    let raf = 0
+    const tick = (now: number) => {
+      const t = Math.min(1, (now - start) / dur)
+      const eased = 1 - Math.pow(1 - t, 3)
+      setValue(Math.round(eased * target))
+      if (t < 1) raf = requestAnimationFrame(tick)
+    }
+    raf = requestAnimationFrame(tick)
+    return () => cancelAnimationFrame(raf)
+  }, [reduce])
+  return (
+    <div className="w-full max-w-xs text-left">
+      <div className="flex items-baseline justify-between">
+        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-white/50">Uploading</p>
+        <p className="font-display text-sm font-semibold tabular-nums text-white/85">{value}%</p>
+      </div>
+      <div className="mt-2.5 h-2 w-full overflow-hidden rounded-full bg-white/[0.07]">
+        <motion.div
+          className="h-full rounded-full bg-[#DCF87C]"
+          initial={false}
+          animate={{ width: `${value}%` }}
+          transition={{ duration: 0 }}
+        />
+      </div>
+      <p className="mt-2 text-xs text-white/40">portfolio-final-v3.zip</p>
+    </div>
+  )
+}
+
+// --- Demo 8: the timestamp --------------------------------------------------
+
+function PlainDate() {
+  return <p className="text-sm text-white/55">2026-10-07T12:32:00Z</p>
+}
+
+function ConsideredDate() {
+  // The same instant, read the way a person actually parses it: a relative
+  // phrase for the glance, the exact time kept underneath for when it matters.
+  const when = useMemo(() => new Date(Date.now() - 2 * 60 * 60 * 1000 - 14 * 60 * 1000), [])
+  const relative = useMemo(() => {
+    const mins = Math.round((Date.now() - when.getTime()) / 60000)
+    if (mins < 60) return `${mins} min ago`
+    const hrs = Math.round(mins / 60)
+    return `${hrs} ${hrs === 1 ? 'hour' : 'hours'} ago`
+  }, [when])
+  const absolute = useMemo(
+    () =>
+      when.toLocaleString('en-GB', {
+        day: 'numeric',
+        month: 'short',
+        hour: '2-digit',
+        minute: '2-digit',
+      }),
+    [when],
+  )
+  return (
+    <div className="text-center">
+      <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-white/40">Last saved</p>
+      <p className="mt-2 font-display text-2xl font-semibold tracking-tight text-white/90">{relative}</p>
+      <p className="mt-1.5 text-xs tabular-nums text-white/40" title={when.toISOString()}>
+        {absolute}
+      </p>
+    </div>
+  )
+}
+
 export default function Taste() {
   const reduce = useReducedMotion()
   const { open: openContact } = useContact()
@@ -365,7 +485,7 @@ export default function Taste() {
           <div className="flex flex-col gap-4 rounded-3xl border border-white/10 bg-white/[0.015] p-6 sm:flex-row sm:items-center sm:justify-between sm:p-7">
             <div>
               <p className="font-display text-lg font-semibold tracking-tight text-white/90">
-                One switch, five demos.
+                One switch, eight demos.
               </p>
               <p className="mt-1 text-sm leading-relaxed text-white/50">
                 Same components, two levels of care. The delta between them is the whole craft.
@@ -422,6 +542,33 @@ export default function Taste() {
           reduce={reduce}
           plain={<PlainToggle />}
           considered={<ConsideredToggle reduce={reduce} />}
+        />
+        <DemoCard
+          index={5}
+          title="The loading state"
+          changed="A dead word hangs there telling you nothing. A skeleton shaped like the thing that is coming, with a light moving across it, promises the wait is short and the layout will not jump when it lands."
+          mode={mode}
+          reduce={reduce}
+          plain={<PlainLoading />}
+          considered={<ConsideredLoading reduce={reduce} />}
+        />
+        <DemoCard
+          index={6}
+          title="Progress"
+          changed="A bare percentage is a fact with no feeling. A labelled bar that eases up to its value, with tabular digits that hold still and the file named underneath, tells you what is happening and that it is moving."
+          mode={mode}
+          reduce={reduce}
+          plain={<PlainProgress />}
+          considered={<ConsideredProgress reduce={reduce} />}
+        />
+        <DemoCard
+          index={7}
+          title="The timestamp"
+          changed="A machine timestamp makes a person do the arithmetic. 'Two hours ago' is read at a glance, with the exact time kept right beneath it for the moment precision actually matters."
+          mode={mode}
+          reduce={reduce}
+          plain={<PlainDate />}
+          considered={<ConsideredDate />}
         />
       </section>
 
