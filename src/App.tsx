@@ -41,6 +41,7 @@ const Taste = lazy(() => import('./pages/Taste'))
 const Wander = lazy(() => import('./pages/Wander'))
 const Keys = lazy(() => import('./pages/Keys'))
 const Berlin = lazy(() => import('./pages/Berlin'))
+const Journey = lazy(() => import('./pages/Journey'))
 const NotFound = lazy(() => import('./pages/NotFound'))
 
 export default function App() {
@@ -82,6 +83,7 @@ export default function App() {
         <Route path="wander" element={<Wander />} />
         <Route path="keyboard" element={<Keys />} />
         <Route path="berlin" element={<Berlin />} />
+        <Route path="journey" element={<Journey />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
