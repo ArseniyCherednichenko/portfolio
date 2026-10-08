@@ -90,6 +90,7 @@ import { Knob } from '../components/Knob'
 import { Switch } from '../components/Switch'
 import { SegmentedControl } from '../components/SegmentedControl'
 import { Pagination } from '../components/Pagination'
+import { DataTable, type Column } from '../components/DataTable'
 import { Select, type SelectOption } from '../components/Select'
 import { Combobox, type ComboOption } from '../components/Combobox'
 import { TagInput } from '../components/TagInput'
@@ -1379,6 +1380,63 @@ function PaginationDemo() {
         onChange={setPage}
         showEdges
         label="Demo results"
+      />
+    </div>
+  )
+}
+
+// A DataTable showcase: the primitive every dashboard and admin list is built
+// on, and the natural next step after the Pagination that would page it. The
+// rows are the real stack this site is made with — each tool, the year it first
+// shipped (a public fact, not a claim about me), what kind of thing it is, and
+// where I reach for it — so sorting is meaningful and the content is honest.
+// Sort by any column and the rows spring to their new order instead of jumping,
+// while a lime underline glides to the column the table is now ordered by.
+interface StackRow {
+  tool: string
+  since: number
+  kind: string
+  role: string
+}
+const STACK_ROWS: StackRow[] = [
+  { tool: 'TypeScript', since: 2012, kind: 'Language', role: 'Everywhere' },
+  { tool: 'React', since: 2013, kind: 'Library', role: 'Frontend' },
+  { tool: 'Tailwind CSS', since: 2017, kind: 'Framework', role: 'Styling' },
+  { tool: 'Framer Motion', since: 2018, kind: 'Library', role: 'Motion' },
+  { tool: 'SwiftUI', since: 2019, kind: 'Framework', role: 'Native iOS' },
+  { tool: 'Vite', since: 2020, kind: 'Build tool', role: 'Tooling' },
+  { tool: 'Supabase', since: 2020, kind: 'Platform', role: 'Backend' },
+  { tool: 'PostgreSQL', since: 1996, kind: 'Database', role: 'Backend' },
+]
+const STACK_COLUMNS: Column<StackRow>[] = [
+  {
+    key: 'tool',
+    header: 'Tool',
+    sortValue: (r) => r.tool,
+    render: (r) => <span className="font-medium">{r.tool}</span>,
+  },
+  { key: 'since', header: 'Since', align: 'right', sortValue: (r) => r.since, width: '5.5rem' },
+  { key: 'kind', header: 'Kind', sortValue: (r) => r.kind },
+  {
+    key: 'role',
+    header: 'Role',
+    sortValue: (r) => r.role,
+    render: (r) => (
+      <span className="rounded-full border border-white/12 px-2.5 py-0.5 text-xs text-white/60">
+        {r.role}
+      </span>
+    ),
+  },
+]
+function DataTableDemo() {
+  return (
+    <div className="w-full max-w-[32rem]">
+      <DataTable
+        columns={STACK_COLUMNS}
+        rows={STACK_ROWS}
+        rowKey={(r) => r.tool}
+        initialSort={{ key: 'since', dir: 'asc' }}
+        caption="The stack this site is built with, sortable by tool, year, kind, or role."
       />
     </div>
   )
@@ -6604,6 +6662,15 @@ export default function Playground() {
               note="The one control that moves through a set of pages rather than picking a value — the primitive every long list or table leans on. A deterministic set of thirty tiles is sliced three to a page; stepping the pager cross-fades the visible slice while a live 'Showing X-Y of N' readout tracks it, so the control is driving real content, not sitting inert. The number range truncates the way a hundred pages should — a boundary page each end, a window around the current one, an ellipsis bridging the gap — so the row never reflows as you walk it. The single lime pill glides between pages on a shared layout rather than blinking. A labelled nav of real buttons with aria-current on the active page, the arrows disabled at the ends, the nav's own Left/Right and Home/End stepping it, and a live region narrating each move. Reduced motion drops the glide for an instant swap."
             >
               <PaginationDemo />
+            </Experiment>
+          </Reveal>
+
+          <Reveal>
+            <Experiment
+              name="Data table"
+              note="The primitive every dashboard, admin panel and settings list is built on, and the natural partner to the Pagination beside it. Click a column header to sort by it, click again to reverse, a third time to return to the natural order — and the rows do not blink into place, they glide to it, the same signature the Select highlight and the Pagination pill speak, here applied to data. A lime underline travels between headers on a shared layout so the eye follows which column the table is ordered by. The rows are this site's real stack — each tool, the public year it first shipped, its kind and where I reach for it — so the sorting means something. A real table with a caption, scope headers and live aria-sort; the sort toggles are keyboard-operable buttons. Reduced motion keeps the exact ordering and drops only the gliding."
+            >
+              <DataTableDemo />
             </Experiment>
           </Reveal>
 
