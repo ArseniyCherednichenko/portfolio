@@ -31,6 +31,7 @@ const GROUPS: FooterGroup[] = [
       { to: '/library', label: 'The library' },
       { to: '/toolkit', label: 'Toolkit' },
       { to: '/about', label: 'About' },
+      { to: '/journey', label: 'The way here' },
       { to: '/now', label: 'Now' },
       { to: '/berlin', label: 'From Berlin' },
       { to: '/uses', label: 'Uses' },

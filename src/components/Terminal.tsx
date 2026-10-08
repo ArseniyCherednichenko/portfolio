@@ -41,6 +41,7 @@ const PAGES: { slug: string; to: string; blurb: string }[] = [
   { slug: 'writing', to: '/writing', blurb: 'thinking in the open' },
   { slug: 'now', to: '/now', blurb: 'what I am on right now' },
   { slug: 'berlin', to: '/berlin', blurb: 'the place the work is made from' },
+  { slug: 'journey', to: '/journey', blurb: 'the way here, as a path' },
   { slug: 'uses', to: '/uses', blurb: 'the setup behind the work' },
   { slug: 'principles', to: '/principles', blurb: 'the manifesto, eight beliefs' },
   { slug: 'answers', to: '/answers', blurb: 'questions people ask' },

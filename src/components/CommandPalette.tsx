@@ -149,6 +149,7 @@ function Palette({ open, onClose }: { open: boolean; onClose: () => void }) {
       { id: 'work', label: 'Work', group: 'Pages', hint: 'all projects', keywords: 'projects portfolio case studies', run: () => go('/work') },
       { id: 'range', label: 'The range', group: 'Pages', hint: 'disciplines I work across', keywords: 'range disciplines frontend ios backend applied ai motion skills capabilities multi disciplinary full stack breadth', run: () => go('/range') },
       { id: 'about', label: 'About', group: 'Pages', hint: 'story, path', keywords: 'bio story timeline principles', run: () => go('/about') },
+      { id: 'journey', label: 'The way here', group: 'Pages', hint: 'the path, not a resume', keywords: 'journey path way here story arc through line how i got here biography timeline waypoints milestones learning building berlin guided student in the open career trajectory', run: () => go('/journey') },
       { id: 'now', label: 'Now', group: 'Pages', hint: 'current focus', keywords: 'now current focus building learning today snapshot status', run: () => go('/now') },
       { id: 'berlin', label: 'From Berlin', group: 'Pages', hint: 'the place, live', keywords: 'berlin germany location where city home place local time clock sky skyline night day timezone cet from desk map', run: () => go('/berlin') },
       { id: 'uses', label: 'Uses', group: 'Pages', hint: 'the setup', keywords: 'uses setup gear tools daily drivers desk machine editor terminal browser stack environment what i use dev setup', run: () => go('/uses') },
