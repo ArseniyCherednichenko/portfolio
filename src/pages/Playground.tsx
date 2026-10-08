@@ -161,6 +161,7 @@ import { Peaucellier } from '../components/Peaucellier'
 import { GenevaDrive } from '../components/GenevaDrive'
 import { Strandbeest } from '../components/Strandbeest'
 import { Escapement } from '../components/Escapement'
+import { ScotchYoke } from '../components/ScotchYoke'
 import { Brachistochrone } from '../components/Brachistochrone'
 import { Catenary } from '../components/Catenary'
 import { Orrery } from '../components/Orrery'
@@ -8282,6 +8283,47 @@ export default function Playground() {
                 region reading the angle and the count. Under{' '}
                 <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code> there is
                 no free run &mdash; the clock holds a frame and ticks on a swing at a time on demand.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH SCOTCH YOKE — the sixth in the rigid-mechanism corner */}
+        <Reveal>
+          <div id="scotch-yoke" data-experiment="Scotch yoke" className="mt-12 scroll-mt-32">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 py-12 sm:px-10">
+              <div className="mb-8 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Rotation into a sine</span>
+                <p className="mx-auto mt-3 max-w-md text-lg font-medium text-white/85 sm:text-xl">
+                  Turn the crank at a steady rate and the yoke slides in a true cosine &mdash; quick through the middle,
+                  dead still at each end.
+                </p>
+              </div>
+              <ScotchYoke className="mx-auto" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Scotch yoke</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The sixth character in the rigid-mechanism corner, and the one that draws its answer as you watch. The
+                four-bar turns rotation into a <em>curve</em>; the Peaucellier into a <em>straight line</em>; the Geneva
+                into <em>steps</em>; the Strandbeest into a <em>gait</em>; the escapement meters a <em>swing</em>; the
+                Scotch yoke turns rotation into a <em>perfect sine</em>. A pin on the crank rides a vertical slot in a bar
+                that can only slide sideways, so the pin&rsquo;s up-and-down is swallowed by the slot and only its
+                side-to-side carries through. That leaves the output at{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">r&middot;cos&thinsp;&theta;</code>{' '}
+                &mdash; exactly, with no approximation. That exactness is the quiet thing that sets it apart from the
+                slider-crank it is so often mistaken for: a slider-crank carries a connecting-rod error term that grows as
+                the rod shortens, so its travel is lopsided, quicker to one end than the other. The yoke has no rod, so it
+                has no error &mdash; the trace it sweeps below is a true, symmetric cosine, the same curve a point on a
+                spinning wheel casts onto a wall. The honest part is the state: the only thing stored is the crank angle,
+                and the pin, the yoke, and the swept curve are all derived from it, so none of them can drift out of
+                agreement &mdash; the plumb line drops from the yoke&rsquo;s centre straight onto the live point because
+                they are, by construction, the same number. Drag the crank one to one, or set it running. A real{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">role=slider</code> from the keyboard:
+                arrows nudge a degree, Shift ten, Space runs or stops, Home returns to zero and End jumps a quarter turn,
+                with a live region reading the crank angle and the yoke&rsquo;s displacement. Under{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code> there is
+                no sweep &mdash; Step jumps a quarter turn to the next dead point &mdash; and every state stays legible.
               </p>
             </div>
           </div>
