@@ -162,6 +162,7 @@ import { GenevaDrive } from '../components/GenevaDrive'
 import { Strandbeest } from '../components/Strandbeest'
 import { Escapement } from '../components/Escapement'
 import { ScotchYoke } from '../components/ScotchYoke'
+import { Trammel } from '../components/Trammel'
 import { Brachistochrone } from '../components/Brachistochrone'
 import { Catenary } from '../components/Catenary'
 import { Orrery } from '../components/Orrery'
@@ -8324,6 +8325,61 @@ export default function Playground() {
                 with a live region reading the crank angle and the yoke&rsquo;s displacement. Under{' '}
                 <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code> there is
                 no sweep &mdash; Step jumps a quarter turn to the next dead point &mdash; and every state stays legible.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH TRAMMEL — the seventh in the rigid-mechanism corner */}
+        <Reveal>
+          <div id="trammel" data-experiment="Trammel of Archimedes" className="mt-12 scroll-mt-32">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 py-12 sm:px-10">
+              <div className="mb-8 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Rotation into an ellipse</span>
+                <p className="mx-auto mt-3 max-w-md text-lg font-medium text-white/85 sm:text-xl">
+                  Turn the rod and the pen draws a true ellipse. Slide the pen to the middle and it closes into a
+                  perfect circle.
+                </p>
+              </div>
+              <Trammel className="mx-auto" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Trammel of Archimedes</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The seventh character in the rigid-mechanism corner, and the one that sits right beside the Scotch yoke.
+                The four-bar turns rotation into a <em>curve</em>; the Peaucellier into a <em>straight line</em>; the
+                Geneva into <em>steps</em>; the Strandbeest into a <em>gait</em>; the escapement meters a{' '}
+                <em>swing</em>; the Scotch yoke turns rotation into a single <em>sine</em>. The trammel turns it into{' '}
+                <em>two sines at once, a quarter-turn apart</em> &mdash; which is exactly what an ellipse is. It is the
+                &ldquo;do-nothing machine&rdquo; sold as a desk fidget, and the honest ancestor of the drawn ellipse:
+                before plotters, this is how a draughtsman set one out true. One rigid rod carries two sliders, each
+                trapped in a slot cut at right angles to the other &mdash; one may only go up and down, the other only
+                left and right. Because the rod never changes length, if it makes an angle{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">&theta;</code> the sliders sit at{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">(d&middot;cos&thinsp;&theta;, 0)</code>{' '}
+                and{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">(0, &minus;d&middot;sin&thinsp;&theta;)</code>
+                , a separation of exactly <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">d</code>{' '}
+                for every angle &mdash; which is the whole reason the rod can stay rigid. A pen pinned a fraction{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">s</code> of the way along it then
+                rides{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">
+                  (d(1&minus;s)&middot;cos&thinsp;&theta;, &minus;d&middot;s&middot;sin&thinsp;&theta;)
+                </code>{' '}
+                &mdash; the parametric equation of an ellipse with semi-axes{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">d(1&minus;s)</code> and{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">d&middot;s</code>, with no
+                approximation. Pin it to the exact middle and the two reaches are equal, so the ellipse closes up into a
+                true circle. The only stored state is the rod angle and where the pen is pinned; the two sliders, the rod
+                and the swept curve are all derived from them, so none can drift out of agreement. Drag to turn the rod
+                one to one, or set it running; drag the bright pen bead along the rod to morph the ellipse from wide to
+                tall through the circle at the middle. A real{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">role=slider</code> from the keyboard:
+                left and right nudge the angle a degree, Shift ten, up and down move where the pen is pinned, Space runs
+                or stops, Home returns to zero and End jumps a quarter turn, with a live region reading the angle and the
+                shape being swept. Under{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code> there is
+                no sweep &mdash; Step jumps a quarter turn &mdash; and every state stays legible.
               </p>
             </div>
           </div>
