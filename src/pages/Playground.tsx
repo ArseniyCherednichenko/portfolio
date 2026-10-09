@@ -85,6 +85,7 @@ import { Orb } from '../components/Orb'
 import { Accordion } from '../components/Accordion'
 import { ElasticSlider } from '../components/ElasticSlider'
 import { RangeSlider } from '../components/RangeSlider'
+import { Scrubber } from '../components/Scrubber'
 import { Wheel } from '../components/Wheel'
 import { Knob } from '../components/Knob'
 import { Switch } from '../components/Switch'
@@ -6612,6 +6613,16 @@ export default function Playground() {
                   onChange={setPriceRange}
                   format={(v) => `$${Math.round(v)}`}
                 />
+              </div>
+            </Experiment>
+          </Reveal>
+
+          <Reveal>
+            <Experiment
+              name="Media scrubber"
+              note="Not the value slider or its interval sibling, but the timeline a player rides on — the three things that make it one rather than a bar with a dot. The playhead moves on its own: press play and a real rAF loop advances it in time, pausing itself at the end, where the button becomes replay. A dimmer buffered layer runs ahead of it the way a stream loads ahead of what you are watching — the honest two-track no plain slider has — and only ever grows. And hover the track: a timecode bubble floats to the pointer, previewing the moment you would land on before you commit. Grab the playhead or click to seek; the advance holds while you scrub and resumes on release, the way a transport does. A real role=slider with a timecode aria-valuetext, driven by the arrows (±5s), Page keys (±10s), Home/End, and space to play; the transport is a labelled toggle. Reduced motion drops the thumb's spring and the bubble, and the fills jump rather than ease — the playhead still advances, because its position is information, not decoration.">
+              <div className="w-full max-w-[340px]">
+                <Scrubber duration={214} label="Playback position" title="Untitled demo track" />
               </div>
             </Experiment>
           </Reveal>
