@@ -163,6 +163,7 @@ import { Strandbeest } from '../components/Strandbeest'
 import { Escapement } from '../components/Escapement'
 import { ScotchYoke } from '../components/ScotchYoke'
 import { Trammel } from '../components/Trammel'
+import { Chebyshev } from '../components/Chebyshev'
 import { Brachistochrone } from '../components/Brachistochrone'
 import { Catenary } from '../components/Catenary'
 import { Orrery } from '../components/Orrery'
@@ -8380,6 +8381,51 @@ export default function Playground() {
                 shape being swept. Under{' '}
                 <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code> there is
                 no sweep &mdash; Step jumps a quarter turn &mdash; and every state stays legible.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH CHEBYSHEV — the eighth in the rigid-mechanism corner */}
+        <Reveal>
+          <div id="chebyshev" data-experiment="Chebyshev linkage" className="mt-12 scroll-mt-32">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 py-12 sm:px-10">
+              <div className="mb-8 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Four bars, a straight line</span>
+                <p className="mx-auto mt-3 max-w-md text-lg font-medium text-white/85 sm:text-xl">
+                  Swing the crank and a point on the floating bar walks a straight line &mdash; no slot, no rail, just the
+                  bars holding it there.
+                </p>
+              </div>
+              <Chebyshev className="mx-auto" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Chebyshev linkage</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The eighth character in the rigid-mechanism corner, and the deliberate reply to the Peaucellier beside it.
+                The Peaucellier draws a line that is straight <em>exactly</em>, and pays for it with eight links and a cell
+                of four equal bars. Pafnuty Chebyshev asked the cheaper question &mdash; how straight can{' '}
+                <em>four</em> bars get? &mdash; and this is his answer. Two equal legs of length{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">5</code> swing from two ground pivots{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">4</code> apart; a short coupler of
+                length <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">2</code> bridges their tips, the
+                legs crossing as they rise. Track the <em>midpoint</em> of that coupler and it holds a flat line across the
+                top of its swing to within about{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">0.4%</code> &mdash; four parts in a
+                thousand &mdash; of the distance it travels. Not exact, and that honesty is the whole reason it stands next
+                to the Peaucellier, but closer than the eye can catch, bought with half the bars. The only stored value is
+                the angle of the left leg; the right leg, the crossed coupler, the tracked point and the rail it rides are
+                all solved from that one number each frame by intersecting two circles, so no two parts can drift out of
+                agreement. The faint rule behind the trace is the mathematical straight line the point is <em>trying</em>{' '}
+                to be; the bright path is where it actually goes &mdash; they sit all but on top of each other, which is
+                the marvel: a straight edge with no straight part anywhere in it. Drag to swing the leg one to one, or set
+                it rocking. A real{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">role=slider</code> from the keyboard:
+                left and right nudge the leg, Shift for a larger step, Space runs or stops, Home centres it and End jumps
+                to the far end, with a live region reading the leg angle, how far along the rail the pen sits, and how far
+                off true it strays. Under{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code> there is
+                no sweep &mdash; Step jumps end to end &mdash; and every state stays legible.
               </p>
             </div>
           </div>
