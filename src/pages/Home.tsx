@@ -74,7 +74,9 @@ const LOG_ITEMS: AnimatedListItem[] = LATEST_LOG.map((entry, i) => ({
     </span>
   ),
   meta: (
-    <span className="rounded-full border border-white/12 px-2.5 py-0.5 text-[0.7rem] font-semibold uppercase tracking-[0.15em] text-white/45">
+    // Lime-tinted to match the KindChip on /changelog, so the teaser reads as
+    // the same build log it opens into rather than a separate style.
+    <span className="rounded-full border border-[#DCF87C]/25 bg-[#DCF87C]/[0.06] px-2.5 py-0.5 text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-[#DCF87C]/80">
       {entry.tag}
     </span>
   ),
