@@ -34,6 +34,11 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'A day over Berlin, wound by hand',
+    summary: 'The /berlin skyline now scrubs through the whole day — drag from midnight through dawn, golden hour and back.',
+    tag: 'Motion',
+  },
+  {
     title: 'A media scrubber with a real buffer',
     summary: 'The flat player timeline every streaming app rides on — a dim layer loads ahead of the playhead, even while paused.',
     tag: 'Component',
@@ -76,11 +81,6 @@ export const LATEST_LOG: LogHeadline[] = [
   {
     title: 'A pagination control',
     summary: 'A lime pill glides between pages, with the proven boundary-and-window number truncation.',
-    tag: 'Component',
-  },
-  {
-    title: 'A hanging catenary',
-    summary: 'A chain that solves its own curve — the shape gravity finds, computed, never a faked parabola.',
     tag: 'Component',
   },
 ]
