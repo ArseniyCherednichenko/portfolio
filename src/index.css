@@ -354,6 +354,69 @@ body.cursor-none * {
   }
 }
 
+/* The "scrub the day" control on /berlin — a native range input dressed to
+   match the site: a thin lime-tinted track and a lime thumb with a soft halo.
+   Styled for both engines (WebKit/Blink via ::-webkit-slider-thumb, Firefox via
+   ::-moz-range-thumb). The native input keeps full keyboard support for free. */
+.skyline-range {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 28px;
+  background: transparent;
+  cursor: pointer;
+}
+.skyline-range:focus {
+  outline: none;
+}
+.skyline-range::-webkit-slider-runnable-track {
+  height: 4px;
+  border-radius: 999px;
+  background: linear-gradient(
+    to right,
+    rgba(220, 248, 124, 0.55),
+    rgba(255, 255, 255, 0.14)
+  );
+}
+.skyline-range::-moz-range-track {
+  height: 4px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.14);
+}
+.skyline-range::-moz-range-progress {
+  height: 4px;
+  border-radius: 999px;
+  background: rgba(220, 248, 124, 0.55);
+}
+.skyline-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  margin-top: -8px;
+  height: 20px;
+  width: 20px;
+  border-radius: 999px;
+  background: #dcf87c;
+  border: 3px solid #0a0a0a;
+  box-shadow: 0 0 0 1px rgba(220, 248, 124, 0.5), 0 0 14px rgba(220, 248, 124, 0.45);
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+.skyline-range::-moz-range-thumb {
+  height: 20px;
+  width: 20px;
+  border-radius: 999px;
+  background: #dcf87c;
+  border: 3px solid #0a0a0a;
+  box-shadow: 0 0 0 1px rgba(220, 248, 124, 0.5), 0 0 14px rgba(220, 248, 124, 0.45);
+}
+.skyline-range:hover::-webkit-slider-thumb,
+.skyline-range:focus-visible::-webkit-slider-thumb {
+  transform: scale(1.12);
+  box-shadow: 0 0 0 1px rgba(220, 248, 124, 0.7), 0 0 20px rgba(220, 248, 124, 0.6);
+}
+.skyline-range:focus-visible::-moz-range-thumb {
+  box-shadow: 0 0 0 1px rgba(220, 248, 124, 0.7), 0 0 20px rgba(220, 248, 124, 0.6);
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
