@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { Reveal } from '../components/Reveal'
@@ -33,6 +34,144 @@ const FACTS: { label: string; value: string }[] = [
   { label: 'Coordinates', value: '52.52° N, 13.40° E' },
   { label: 'Timezone', value: 'Europe/Berlin (CET / CEST)' },
 ]
+
+// Minutes-of-day → an "HH:MM" label, zero-padded, 24-hour.
+function fmtMinutes(min: number): string {
+  const h = Math.floor(min / 60)
+  const m = min % 60
+  return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`
+}
+
+// A handful of landmark hours to jump straight to — the moments the phase copy
+// names, so a visitor can reach golden hour without hunting for it on the track.
+const DAY_MARKS: { label: string; min: number }[] = [
+  { label: 'Dawn', min: 6 * 60 },
+  { label: 'Midday', min: 12 * 60 + 30 },
+  { label: 'Golden hour', min: 18 * 60 + 30 },
+  { label: 'Night', min: 22 * 60 + 30 },
+]
+
+// "A day over the city" — the playful capstone of the page. The hero scene above
+// follows the real local hour; this lets a visitor run the whole day by hand,
+// scrubbing a second SkylineScene through dawn, day, golden hour and dusk. It
+// reuses the same component (no duplication), so the illustration they wind is
+// exactly the one that tracks the clock upstairs. Default opens at golden hour so
+// the first paint is a warm, inviting sky rather than the current (possibly
+// midday-flat) one, with a "Jump to now" that reconnects it to the live clock.
+function DayScrubber() {
+  const reduce = useReducedMotion()
+  const { time: liveTime, hour: liveHour } = useBerlinTime()
+  const [scrub, setScrub] = useState(18 * 60 + 30)
+  const scrubHour = scrub / 60
+  const phase = phaseOf(Math.floor(scrubHour))
+  const label = fmtMinutes(scrub)
+  const nowMin = liveHour * 60 + (Number(liveTime.slice(3, 5)) || 0)
+
+  return (
+    <section className="mx-auto w-full max-w-5xl px-6 pb-24 sm:pb-32">
+      <Reveal>
+        <Eyebrow>A day over the city</Eyebrow>
+      </Reveal>
+      <Reveal delay={0.05}>
+        <h2 className="mt-4 max-w-2xl font-display text-3xl font-bold tracking-tight sm:text-4xl">
+          You do not have to wait for the <GradientText>light to change</GradientText>.
+        </h2>
+      </Reveal>
+      <Reveal delay={0.1}>
+        <p className="mt-5 max-w-xl text-lg leading-relaxed text-white/55">
+          The scene at the top follows the real local hour. Here you can run the day yourself — from
+          midnight through first light, the long working middle, golden hour, and back into the dark.
+        </p>
+      </Reveal>
+
+      <Reveal delay={0.14}>
+        <div className="mt-10 overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.02]">
+          {/* The scene, wound by the scrubbed hour — the same component as the hero. */}
+          <div className="relative aspect-[16/9] w-full">
+            <div className="absolute inset-0">
+              <SkylineScene hour={scrubHour} />
+            </div>
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent" />
+            <div className="pointer-events-none absolute inset-x-0 bottom-0 flex flex-wrap items-end justify-between gap-4 p-5 sm:p-7">
+              <div className="font-display text-4xl font-semibold tabular-nums tracking-tight text-white sm:text-6xl">
+                {label}
+              </div>
+              <div className="max-w-xs text-right">
+                <div className="text-xs font-semibold uppercase tracking-[0.2em] text-[#DCF87C] sm:text-sm">
+                  {phase.label}
+                </div>
+                <p className="mt-1 text-sm leading-snug text-white/70">{phase.line}</p>
+              </div>
+            </div>
+          </div>
+
+          {/* The track + quick jumps. A native range input keeps full keyboard
+              support (arrows, Home/End, Page keys) for free. */}
+          <div className="border-t border-white/10 p-5 sm:p-7">
+            <input
+              type="range"
+              min={0}
+              max={1439}
+              step={1}
+              value={scrub}
+              onChange={(e) => setScrub(Number(e.target.value))}
+              className="skyline-range"
+              aria-label="Hour of the day over Berlin"
+              aria-valuetext={`${label}, ${phase.label.toLowerCase()}`}
+            />
+            <div className="mt-2 flex justify-between text-xs font-medium tabular-nums tracking-wide text-white/35">
+              <span>00:00</span>
+              <span className="hidden sm:inline">06:00</span>
+              <span>12:00</span>
+              <span className="hidden sm:inline">18:00</span>
+              <span>24:00</span>
+            </div>
+
+            <div className="mt-6 flex flex-wrap items-center gap-2">
+              {DAY_MARKS.map((m) => {
+                const active = Math.abs(scrub - m.min) < 1
+                return (
+                  <button
+                    key={m.label}
+                    type="button"
+                    onClick={() => setScrub(m.min)}
+                    aria-pressed={active}
+                    className={`rounded-full border px-4 py-1.5 text-sm font-semibold transition ${
+                      active
+                        ? 'border-[#DCF87C]/60 bg-[#DCF87C]/10 text-[#DCF87C]'
+                        : 'border-white/15 text-white/70 hover:border-[#DCF87C]/40 hover:text-white'
+                    }`}
+                  >
+                    {m.label}
+                  </button>
+                )
+              })}
+              <button
+                type="button"
+                onClick={() => setScrub(nowMin)}
+                className="ml-auto inline-flex items-center gap-1.5 rounded-full border border-white/15 px-4 py-1.5 text-sm font-semibold text-white/70 transition hover:border-[#DCF87C]/40 hover:text-white"
+              >
+                <span className="relative flex h-1.5 w-1.5" aria-hidden>
+                  {!reduce && (
+                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#DCF87C]/70" />
+                  )}
+                  <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#DCF87C]" />
+                </span>
+                Jump to now
+              </button>
+            </div>
+
+            <p className="mt-4 text-sm leading-relaxed text-white/40">
+              {reduce
+                ? 'Motion is turned down, so the scene steps between settled frames as you move the slider rather than animating through them.'
+                : 'The same hand-drawn scene as the hero, wound by hand. Drag the track, tap an hour, or use the arrow keys.'}
+            </p>
+          </div>
+        </div>
+      </Reveal>
+    </section>
+  )
+}
 
 // The /berlin page — the most human corner of the site. Not about a project or a
 // skill, just the place the work is made from, rendered as a living illustration
@@ -183,6 +322,9 @@ export default function Berlin() {
           </Reveal>
         </div>
       </section>
+
+      {/* A DAY OVER THE CITY — run the whole day by hand */}
+      <DayScrubber />
     </>
   )
 }
