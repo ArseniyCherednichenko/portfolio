@@ -54,15 +54,23 @@ const SECTIONS = [
   { id: 'contact', label: 'Contact' },
 ]
 
-// The latest entries from the real build log, as a compact list. The site is
+// The latest entries from the real build log, as a compact feed. The site is
 // open source and grows most days; surfacing the recent work keeps that honest
-// and de-centres any one project. Each row links through to the full log.
+// and de-centres any one project. Each row is a glanceable headline plus one
+// line of context, and links through to the full log. The title is clamped to a
+// single line and the summary to two, so a row stays premium no matter how the
+// source copy changes — the landing page can never sprawl into paragraphs.
 const LOG_ITEMS: AnimatedListItem[] = LATEST_LOG.map((entry, i) => ({
   id: `log-${i}`,
   to: '/changelog',
   content: (
-    <span className="font-display text-lg font-medium tracking-tight text-white/85 sm:text-xl">
-      {entry.title}
+    <span className="block min-w-0">
+      <span className="block truncate font-display text-lg font-medium tracking-tight text-white/85 sm:text-xl">
+        {entry.title}
+      </span>
+      <span className="mt-1 block text-sm leading-snug text-white/45 line-clamp-2">
+        {entry.summary}
+      </span>
     </span>
   ),
   meta: (
