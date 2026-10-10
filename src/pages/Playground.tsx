@@ -201,6 +201,7 @@ import { Waveform } from '../components/Waveform'
 import { LangtonsAnt } from '../components/LangtonsAnt'
 import { PendulumWave } from '../components/PendulumWave'
 import { Cradle } from '../components/Cradle'
+import { SnowGlobe } from '../components/SnowGlobe'
 import { Confetti, type ConfettiHandle } from '../components/Confetti'
 import { Chladni } from '../components/Chladni'
 import { Galton } from '../components/Galton'
@@ -8622,6 +8623,40 @@ export default function Playground() {
                 touch, so the story is the handoff. Drag either end bob to lift it — the rest hang still under your hand —
                 and release to let it fall; a struck bob briefly sparks so the blow is easy to follow. Reduced motion
                 paints one bob caught mid-fall and holds it.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH SNOW GLOBE */}
+        <Reveal>
+          <div id="snow-globe" data-experiment="Snow globe" className="mt-12 scroll-mt-32">
+            <div className="relative h-[460px] overflow-hidden rounded-3xl border border-white/10 bg-[#040404]">
+              <SnowGlobe className="mx-auto h-full w-full max-w-[460px]" />
+              <div className="pointer-events-none absolute inset-x-0 top-8 z-10 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Settle</span>
+                <p className="mx-auto mt-3 max-w-md px-6 text-lg font-medium text-white/90 sm:text-xl">
+                  Shake it, or tap the glass. Then watch Berlin&rsquo;s snow fall slowly back down.
+                </p>
+              </div>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Snow globe</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                A thing you shake and then watch, which is what sets it apart from the objects beside it &mdash; the
+                Lava lamp runs its own cycle forever and the Newton&rsquo;s cradle hands a single blow down a line, but
+                this one does nothing until you disturb it. The whole piece is the decay: a shake throws the snow up in
+                a swirl and sets a turbulence value to full, and from there it is only gravity and drag putting every
+                flake back down. The drift is deliberately slow because a real globe is full of glycerol water, not air,
+                so the snow is suspended &mdash; that viscosity is a single drag term in the loop. Each flake carries a
+                depth, so the far ones are small, dim, and sluggish and the near ones large, bright, and quick, and
+                they are drawn on both sides of the skyline so the glass reads as a volume rather than a decal. The
+                scene under the dome is a small Berlin at night, the city the rest of this site is made from: the
+                Fernsehturm with its lit sphere and antenna, a church spire, a low row of rooftops, and a bank of snow
+                settling over their feet. One canvas, one loop off the frame delta, DPR-capped, with a seeded start so
+                the snow begins the same way every time. Reduced motion holds a single still &mdash; snow caught
+                mid-drift over a fuller bank &mdash; and a shake just reshuffles that still and repaints once, so the
+                toy stays usable with nothing moving on its own.
               </p>
             </div>
           </div>
