@@ -8,33 +8,79 @@
 // into the initial bundle, undoing the code split. This file imports nothing
 // heavy, so the headlines cost almost nothing up front.
 //
-// It mirrors the top of `CHAPTERS[0]` in `changelog.ts` — keep the two in step
-// (the daily routine edits the log each run anyway). The full sentences, the
-// kinds, and the filter all still live on `/changelog`.
+// CONTRACT — keep this list tight and glanceable, because every string here
+// ships in the eager landing bundle and renders as a headline on the home page:
+//   • `title`   — a short, scannable name for the thing that shipped. Keep it
+//                 under ~56 characters. NOT a paragraph. NOT the full changelog
+//                 sentence. The full prose lives on /changelog.
+//   • `summary` — one honest line of context, under ~120 characters.
+//   • `tag`     — the kind chip, matching a KIND_META label in changelog.ts
+//                 ('Page' | 'Component' | 'Motion' | 'Polish' | 'Infra').
 //
-// Kept to the ~10 most recent, as short one-line headlines: the Home section is
-// a teaser ("the most recent of them") with a "Read the full build log" link,
-// and every title here ships in the eager bundle — so this stays a tight,
-// glanceable list, not the whole archive re-stated in full paragraphs. When you
-// prepend a new entry each run, drop the oldest so the list does not grow
-// unbounded and the landing page stays premium.
+// Newest first, kept to the ~10 most recent. When you prepend a new entry each
+// run, drop the oldest so the list never grows unbounded and the landing page
+// stays premium. If you catch yourself pasting a long changelog paragraph in
+// here, stop: that belongs in `changelog.ts`, and a glanceable headline belongs
+// here.
 
 export interface LogHeadline {
-  /** The short name of the thing that shipped. */
+  /** The short name of the thing that shipped. Under ~56 chars, never prose. */
   title: string
+  /** One honest line of context. Under ~120 chars. */
+  summary: string
   /** The kind label shown as a chip, matching KIND_META in changelog.ts. */
   tag: string
 }
 
 export const LATEST_LOG: LogHeadline[] = [
-  { title: "Media scrubber — after a long run in the rigid-mechanism corner, a turn back to product-grade interface craft. The controls family had two sliders, a wheel and a segmented picker, and one transport already: the Waveform voice-memo study. But the Waveform leaves out the one thing a real player's timeline is built around, so this turn adds its plainer sibling to carry it — the buffer. The flat media timeline every video and streaming app rides on: a dimmer layer runs ahead of the playhead the way a stream loads ahead of what you are watching, only ever growing, and it keeps loading even while playback is paused, the honest two-layer track no plain slider has. The playhead moves on its own off a single rAF loop, advancing in real time and pausing itself at the end, where play becomes replay. Hover the track and a timecode bubble floats to the pointer, previewing the moment you would seek to before you commit; seek forward past what has loaded and the buffer is pulled along. Grab the head or click to seek — the advance holds while you scrub and resumes the instant you let go, the way a transport does rather than a value slider. A real role=slider with a spoken timecode, driven by the arrows (±5s), the Page keys (±10s), Home/End, and the space bar to play; the transport is a labelled toggle. Nothing plays audio — it demonstrates the transport, not a file. Reduced motion drops the playhead's spring and the preview bubble and the fills jump rather than ease, while the playhead still advances, because its position is information and not decoration. The component count moves to 287.", tag: 'Component' },
-  { title: "Chebyshev linkage — the rigid-mechanism corner already held the Peaucellier, which draws a line that is straight exactly, so the honest next question was how straight you can get with far less, and this turn answers it with the linkage Pafnuty Chebyshev built to do just that. The Peaucellier pays for its exactness with eight links and a cell of four equal bars; Chebyshev asked whether four would do and traded a sliver of exactness for half the mechanism. Two equal legs of length 5 swing from two ground pivots 4 apart, and a short coupler of length 2 bridges their tips, the legs crossing as they rise. Track the midpoint of that coupler and it keeps to a flat line across the top of its swing to within about four parts in a thousand of the distance it travels — not exact, which is the whole reason it stands next to the Peaucellier, but closer than the eye can catch and bought with half the bars. The only stored value is the angle of the left leg; the right leg, the crossed coupler, the tracked midpoint and the rail it rides are all solved from that one number each frame by intersecting two circles, so no two parts can drift out of agreement. The faint rule behind the trace is the straight line the point is trying to be, the bright path is where it actually goes, and they sit all but on top of each other — a straight edge with no straight part anywhere in it. Drag to swing the leg one to one or set it rocking; a real role=slider runs it from the keyboard, and under reduced motion Step jumps end to end. The component count moves to 286.", tag: 'Component' },
-  { title: "Trammel of Archimedes — the rigid-mechanism corner had just gained the Scotch yoke, which turns a crank into a single clean sine, so the next question was what turns one into two sines at once, and this turn answers it: the trammel, which draws a true ellipse, and a true circle when you set it right. It is the little brass 'do-nothing machine' sold as a desk fidget, and the honest ancestor of the drawn ellipse. One rigid rod carries two sliders trapped in slots cut at right angles, so one may only go up and down and the other only left and right. Because the rod never changes length, if it makes angle θ the sliders must sit at (d·cos θ, 0) and (0, −d·sin θ) — a separation of exactly d for every angle, which is the whole reason the rod can be rigid. A pen pinned a fraction s along it then rides (d(1−s)·cos θ, −d·s·sin θ): an ellipse with semi-axes d(1−s) and d·s, no approximation, which closes into a true circle when the pen sits at the exact middle. The only stored state is the rod angle and where the pen is pinned; the sliders, the rod and the swept arc are all derived from them, and the curve inks behind the pen as it goes. Drag to turn the rod, drag the bright bead to morph the ellipse from wide through the circle to tall, or set it running; a real role=slider runs it from the keyboard, and under reduced motion Step jumps a quarter turn. The component count moves to 285.", tag: 'Component' },
-  { title: "Scotch yoke — the rigid-mechanism corner could turn a crank into a curve, a straight line, steps, a gait and a metered swing, but nothing that turned rotation into a clean sine, so this turn adds the mechanism that does exactly that and draws its own answer as it runs. A pin on the crank rides a vertical slot in a bar that can only slide sideways, so the pin's up-and-down is swallowed by the slot and only its side-to-side carries through — which leaves the yoke's displacement at r·cos θ, exactly, with no approximation. That exactness is what sets it apart from the slider-crank it is so often mistaken for: a slider-crank carries a connecting-rod error term and travels lopsided, quicker to one end than the other; the yoke has no rod, so it has no error, and the trace it sweeps is a true, symmetric cosine — the curve a point on a spinning wheel casts onto a wall. The only stored state is the crank angle, and the pin, the yoke and the swept curve are all derived from it, so a plumb line can drop from the yoke's centre straight onto the live point on the trace: by construction they are the same number, drawn at the mechanism's own scale. Drag the crank one to one or set it running; a real role=slider runs it from the keyboard, and under reduced motion Step jumps a quarter turn to the next dead point. The component count moves to 284.", tag: 'Component' },
-  { title: "The way here — the site had grown wide on the work and the craft, but nothing told the plain through-line of how the work actually gets made, so this turn adds /journey: a path, not a résumé. No titles, no dates, no invented history, just the honest arc in six waypoints: learned by building, works across the whole stack, co-founded Guided (deliberately one node among several, not the headline), builds from a desk in Berlin, is still a student and glad of it, and ships in the open where the commit history is part of the work. It is drawn, not listed — a new JourneyPath component runs a faint rail down the section with a lime fill that grows as you scroll past, so the line appears to draw itself under you, and each waypoint sits on a node that lights as it crosses the middle of the view, so the dot you are looking at is the one that glows and the path reads as walked rather than flipped on all at once. The whole point is to de-centre Guided: it is one waypoint of six. Reduced motion holds the fill complete, lights every node, and animates nothing. The component count moves to 283 and the page count to 35.", tag: 'Page' },
-  { title: "Data table — the controls family had every way to pick a value and, lately, the Pagination that moves through a set of pages, but not the thing those pages would hold: a table you can sort, the primitive every dashboard, admin panel and settings list is built on. After a long run leaning into the Playground's maths and physics, this turn returns to product-grade interface craft. It is done in the house language: click a column header to order by it, again to reverse, a third time to return to the natural order, and the rows do not blink into place, they glide to it on a shared layout — the same signature the Select highlight and the Pagination pill speak, here applied to data, so a re-sort reads as the same rows travelling, not a fresh list snapping in. A lime underline moves between the headers so the eye follows which column the table is ordered by. The rows are honest — this site's own stack, each tool, the public year it first shipped, its kind and where I reach for it — so the sorting means something and nothing is a made-up metric. Honest to assistive tech too: a real table with a caption, scope=col headers, live aria-sort on the active column, and sort toggles that are keyboard-operable buttons. Generic over its row type, with per-column render, alignment and sort-value accessors — a real reusable table, not a one-off. Reduced motion keeps the exact ordering and drops only the gliding. The component count moves to 282.", tag: 'Component' },
-  { title: "From Berlin — the site had grown wide on the work, but never had a page about where the work actually comes from, so this turn adds /berlin, the most human corner of the site: not a project or a skill, just the person and the place. It opens on a generative city drawn in the browser under a sky that follows the real local hour in Berlin — the whole scene reads off one number, the current hour, drifting through deep night, dawn, day, golden hour and dusk, the stars fading up as it darkens, the windows coming on across the skyline, and a sun or a gibbous moon riding a shallow arc overhead. It is honest about being an illustration that tracks the clock, not an observatory, and the live time is read straight from the browser's timezone database. A glass readout floats the local time and a plain phrase for what the day is doing, over a short note (a desk in Berlin, building in the open) and the few verifiable facts: the city, its coordinates, the timezone. The scene is a new seeded canvas component, SkylineScene, one rAF loop with no React state on the hot path, painted once and held still under reduced motion. The component count moves to 281 and the page count to 34.", tag: 'Page' },
-  { title: "Taste, doubled — the /taste page shows the site's standing claim rather than restating it: the same ordinary piece of interface built twice, Plain and Considered, with one switch flipping every demo at once so the care reads as the delta. It had four — a button, an empty state, a number, a field. After a long run spent on the Playground's maths and physics, this turn returns to the page that is purely about his judgement and doubles it to eight, each new pair teaching a lesson the first four did not. The toggle: a bare checkbox versus a switch that springs over and says in words what is now on — feedback on a state change. The loading state: a dead 'Loading…' versus a skeleton shaped like the content that is coming with a light sweeping across it — perceived performance. Progress: a naked percentage versus a labelled bar that eases up to its value with tabular digits — honest status. The timestamp: a raw machine string versus 'two hours ago' with the exact time kept beneath it — human time over arithmetic. Every Considered side is a live, accessible component — a real role=switch, a role=status skeleton, a bar that announces its value — and each defers its motion to prefers-reduced-motion. It invents nothing and names no project; the subject is the taste itself, now stated on eight plain surfaces.", tag: 'Polish' },
-  { title: "Pagination — the controls family had grown a full set of ways to pick a value: a Select, a Combobox, a Tag input, a Wheel, a Calendar, a colour field, sliders and a switch. But it had no way to move through a set of pages, the one navigation primitive every long list or table leans on, so this turn fills that gap. A single lime pill glides between pages on a shared layout rather than blinking from one to the next, so the eye follows the current page as it travels, the same language the Select and Calendar already speak. The number range truncates the proven way — a boundary page at each end, a window of pages around the current one, and an ellipsis bridging the gap — so a hundred pages still fit one tidy row that never reflows as you walk across it, and a gap of exactly one hidden page shows that page rather than an ellipsis that would hide a single number. It is honest to assistive tech: a labelled nav of real buttons, aria-current on the active page, the prev/next and optional first/last arrows disabled at the ends, the nav's own arrow keys and Home/End stepping it, and a live region narrating each move. In the Playground it drives a live slice of thirty tiles, three to a page, so the control is moving real content rather than sitting inert. Reduced motion drops the gliding pill for an instant swap. The component count moves to 280.", tag: 'Component' },
-  { title: "Catenary — the Playground had the Brachistochrone, a famous curve that is the answer to a race against the clock, but nothing that showed the other kind of famous curve: the one a thing finds for itself with no clock running. So this turn is a hanging chain. Pin a chain of fixed length between two points and let gravity settle it and it never falls into a parabola or a circle — it finds the catenary, y = a·cosh(x/a). Galileo guessed a parabola and was wrong; Huygens, Leibniz and Johann Bernoulli settled the true answer in 1691, and the name is from catena, Latin for chain. The curve here is solved, not drawn: given the two anchors and a fixed length, the shape is the unique catenary that both passes through the anchors and has arc length exactly equal to the chain, and there is no closed form for that, so it is found numerically — an outer search on the curvature wrapped around an inner one that slides the low point until the curve meets both ends, converging on the single chain whose measured length comes out right. Drag an anchor and it re-hangs; pull the two apart past the chain's length and it snaps taut, because a chain cannot stretch, so a looser chain pools into a deeper belly and a shorter one pulls up tight. The dashed line is the straight chord it refuses to take. Focus an anchor and nudge it with the arrow keys, and the length slider works for everyone. Reduced motion changes nothing — the curve is analytic and only moves when you ask it to, so there is no ambient animation to still. The component count moves to 279.", tag: 'Component' },
+  {
+    title: 'A media scrubber with a real buffer',
+    summary: 'The flat player timeline every streaming app rides on — a dim layer loads ahead of the playhead, even while paused.',
+    tag: 'Component',
+  },
+  {
+    title: 'The Chebyshev straight-line linkage',
+    summary: 'Four bars that trace a line straight to about four parts in a thousand — the Peaucellier’s cheaper reply.',
+    tag: 'Component',
+  },
+  {
+    title: 'A Trammel of Archimedes',
+    summary: 'One rigid rod, two slots at right angles, a pen that draws a true ellipse — and a circle at its midpoint.',
+    tag: 'Component',
+  },
+  {
+    title: 'The Scotch yoke',
+    summary: 'A crank turned into an exact cosine, the yoke’s travel plumbed straight onto the sine it sweeps.',
+    tag: 'Component',
+  },
+  {
+    title: 'The way here',
+    summary: 'A new /journey page — the honest through-line of how the work gets made, with Guided one waypoint of six.',
+    tag: 'Page',
+  },
+  {
+    title: 'A sortable data table',
+    summary: 'The primitive every dashboard is built on — rows that glide to their new order instead of snapping to it.',
+    tag: 'Component',
+  },
+  {
+    title: 'From Berlin',
+    summary: 'A new /berlin page: a generative skyline under a sky that follows the real local hour.',
+    tag: 'Page',
+  },
+  {
+    title: 'Taste, doubled',
+    summary: 'The /taste page’s plain-versus-considered demos grow from four pairs to eight.',
+    tag: 'Polish',
+  },
+  {
+    title: 'A pagination control',
+    summary: 'A lime pill glides between pages, with the proven boundary-and-window number truncation.',
+    tag: 'Component',
+  },
+  {
+    title: 'A hanging catenary',
+    summary: 'A chain that solves its own curve — the shape gravity finds, computed, never a faked parabola.',
+    tag: 'Component',
+  },
 ]
