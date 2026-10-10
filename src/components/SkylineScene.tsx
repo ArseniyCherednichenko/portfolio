@@ -337,7 +337,14 @@ export function SkylineScene({
       ro.disconnect()
       cancelAnimationFrame(raf)
     }
-  }, [reduce, accent])
+    // Under full motion the RAF loop reads `hour` live off `hourRef`, so it is
+    // deliberately NOT a dependency (the loop must not tear down on each tick).
+    // Under reduced motion the loop never runs and only `resize()` repaints, so
+    // a changed `hour` would otherwise be invisible — we re-run the setup (which
+    // repaints) when it moves, bucketed to the half-hour so a live clock stays
+    // effectively still and a scrub stays cheap.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [reduce, accent, reduce ? Math.round(hour * 2) : -1])
 
   return (
     <canvas
