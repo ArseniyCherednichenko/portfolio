@@ -34,6 +34,11 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'The Playground comes alive as you reach it',
+    summary: 'Experiments now mount only as they near the viewport, so the flagship page no longer spins up hundreds of loops at once.',
+    tag: 'Infra',
+  },
+  {
     title: 'A pin screen that holds its relief',
     summary: 'The desk toy of sliding pins — press the cursor across it and the pins stand where you pushed and stay.',
     tag: 'Component',
@@ -77,10 +82,5 @@ export const LATEST_LOG: LogHeadline[] = [
     title: 'A sortable data table',
     summary: 'The primitive every dashboard is built on — rows that glide to their new order instead of snapping to it.',
     tag: 'Component',
-  },
-  {
-    title: 'From Berlin',
-    summary: 'A new /berlin page: a generative skyline under a sky that follows the real local hour.',
-    tag: 'Page',
   },
 ]
