@@ -202,6 +202,7 @@ import { LangtonsAnt } from '../components/LangtonsAnt'
 import { PendulumWave } from '../components/PendulumWave'
 import { Cradle } from '../components/Cradle'
 import { SnowGlobe } from '../components/SnowGlobe'
+import { PinScreen } from '../components/PinScreen'
 import { Confetti, type ConfettiHandle } from '../components/Confetti'
 import { Chladni } from '../components/Chladni'
 import { Galton } from '../components/Galton'
@@ -8657,6 +8658,41 @@ export default function Playground() {
                 the snow begins the same way every time. Reduced motion holds a single still &mdash; snow caught
                 mid-drift over a fuller bank &mdash; and a shake just reshuffles that still and repaints once, so the
                 toy stays usable with nothing moving on its own.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH PIN SCREEN */}
+        <Reveal>
+          <div id="pin-screen" data-experiment="Pin screen" className="mt-12 scroll-mt-32">
+            <div className="relative h-[460px] overflow-hidden rounded-3xl border border-white/10 bg-[#040404]">
+              <PinScreen className="h-full w-full" />
+              <div className="pointer-events-none absolute inset-x-0 top-8 z-10 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Impression</span>
+                <p className="mx-auto mt-3 max-w-md px-6 text-lg font-medium text-white/90 sm:text-xl">
+                  Press the cursor across it. The pins stand where you pushed and stay there.
+                </p>
+              </div>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Pin screen</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The desk toy that is a bed of sliding pins: press a hand against the back and the pins it pushed
+                stand proud on the front, holding the relief of whatever touched them. That holding is the whole
+                point, and it is the honest opposite of every pointer field already here &mdash; the metaballs, the
+                magnetic needle grid, the heat-trail all chase the cursor and then relax the instant it leaves. This
+                one never relaxes: a pin you raise stays raised until you clear the board, so moving the cursor draws
+                a permanent relief instead of a fading wake. The toy is the memory, not the motion. It is drawn, not
+                simulated &mdash; each pin is a little extruded column, a dim hole on the bed and, once raised, a
+                shaft and a bright head slid up toward a top-left light, so a pressed region reads as a glowing 3D
+                relief that warms to the house lime the prouder it stands while the untouched bed stays a cool grid
+                of dark dots. Heads are painted top-left to bottom-right so near pins overlap their neighbours and
+                the board reads as a forest of pins, not a flat heightmap. One canvas, one loop off the frame delta,
+                DPR-capped, and the loop idles the instant every pin has settled &mdash; a finished drawing costs
+                nothing. The bed is a focusable region: arrow keys walk a presser across it and Delete clears. Under
+                reduced motion there is no spring &mdash; a press sets its pins to full height at once and Clear
+                flattens them, so the same relief arrives without the ease.
               </p>
             </div>
           </div>
