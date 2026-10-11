@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { Reveal } from '../components/Reveal'
 import { PlaygroundFinder, slugifyExperiment } from '../components/PlaygroundFinder'
+import { Defer } from '../components/Defer'
 import { AnimatedBeam } from '../components/AnimatedBeam'
 import { ChromaGrid } from '../components/ChromaGrid'
 import { GooeyTabs } from '../components/GooeyTabs'
@@ -537,9 +538,18 @@ function Experiment({
   }
   return (
     <div id={id} data-experiment={name} className="group/exp flex scroll-mt-32 flex-col">
-      <div className="flex min-h-[220px] flex-1 items-center justify-center rounded-3xl border border-white/10 bg-white/[0.02] p-8">
-        {children}
-      </div>
+      {/* The demo frame mounts on approach (see Defer). The outer anchor div and
+          the caption below stay in the tree always, so a deep link to #id still
+          lands and the label is readable before the piece spins up. */}
+      <Defer
+        minHeight={220}
+        className="flex flex-1"
+        placeholderClassName="rounded-3xl border border-white/10 bg-white/[0.02]"
+      >
+        <div className="flex min-h-[220px] flex-1 items-center justify-center rounded-3xl border border-white/10 bg-white/[0.02] p-8">
+          {children}
+        </div>
+      </Defer>
       <div className="mt-4 flex items-start justify-between gap-3 px-1">
         <div>
           <h3 className="text-base font-semibold">{name}</h3>
