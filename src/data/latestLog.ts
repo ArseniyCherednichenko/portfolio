@@ -34,6 +34,11 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'A pin screen that holds its relief',
+    summary: 'The desk toy of sliding pins — press the cursor across it and the pins stand where you pushed and stay.',
+    tag: 'Component',
+  },
+  {
     title: 'A Berlin snow globe',
     summary: 'Shake it and the city’s snow swirls up, then falls slowly back down through glycerol-slow drag.',
     tag: 'Component',
@@ -77,10 +82,5 @@ export const LATEST_LOG: LogHeadline[] = [
     title: 'From Berlin',
     summary: 'A new /berlin page: a generative skyline under a sky that follows the real local hour.',
     tag: 'Page',
-  },
-  {
-    title: 'Taste, doubled',
-    summary: 'The /taste page’s plain-versus-considered demos grow from four pairs to eight.',
-    tag: 'Polish',
   },
 ]
