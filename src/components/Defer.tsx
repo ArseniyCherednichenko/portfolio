@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react'
-import { useReducedMotion } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
+
+const EASE = [0.16, 1, 0.3, 1] as const
 
 // Mount-on-approach. A thin wrapper that keeps its children OUT of the React
 // tree until the box is about to scroll into view, then mounts them for good.
@@ -72,7 +74,18 @@ export function Defer({
   return (
     <div ref={ref} className={className} style={shown ? undefined : { minHeight }}>
       {shown ? (
-        children
+        // Gently materialise on first mount, so an experiment reads as spinning
+        // to life as you reach it rather than popping in. The wrapper carries
+        // the caller's flex intent (flex flex-1) so the demo frame still fills
+        // the card. Under reduced motion it simply appears, no transition.
+        <motion.div
+          className="flex flex-1"
+          initial={reduce ? false : { opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: EASE }}
+        >
+          {children}
+        </motion.div>
       ) : (
         <div
           aria-hidden
