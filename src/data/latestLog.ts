@@ -34,6 +34,11 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'A domino run that only falls one way',
+    summary: 'A line of tiles that topple and stay down — the irreversible counterpart to the Newton’s cradle that springs back.',
+    tag: 'Component',
+  },
+  {
     title: 'The Playground comes alive as you reach it',
     summary: 'Experiments now mount only as they near the viewport, so the flagship page no longer spins up hundreds of loops at once.',
     tag: 'Infra',
@@ -77,10 +82,5 @@ export const LATEST_LOG: LogHeadline[] = [
     title: 'The way here',
     summary: 'A new /journey page — the honest through-line of how the work gets made, with Guided one waypoint of six.',
     tag: 'Page',
-  },
-  {
-    title: 'A sortable data table',
-    summary: 'The primitive every dashboard is built on — rows that glide to their new order instead of snapping to it.',
-    tag: 'Component',
   },
 ]
