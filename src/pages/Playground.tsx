@@ -202,6 +202,7 @@ import { Waveform } from '../components/Waveform'
 import { LangtonsAnt } from '../components/LangtonsAnt'
 import { PendulumWave } from '../components/PendulumWave'
 import { Cradle } from '../components/Cradle'
+import { Domino } from '../components/Domino'
 import { SnowGlobe } from '../components/SnowGlobe'
 import { PinScreen } from '../components/PinScreen'
 import { Confetti, type ConfettiHandle } from '../components/Confetti'
@@ -8634,6 +8635,43 @@ export default function Playground() {
                 touch, so the story is the handoff. Drag either end bob to lift it — the rest hang still under your hand —
                 and release to let it fall; a struck bob briefly sparks so the blow is easy to follow. Reduced motion
                 paints one bob caught mid-fall and holds it.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH DOMINO RUN */}
+        <Reveal>
+          <div id="domino-run" data-experiment="Domino run" className="mt-12 scroll-mt-32">
+            <div className="relative h-[360px] overflow-hidden rounded-3xl border border-white/10 bg-[#040404]">
+              <Domino className="mx-auto h-full w-full max-w-[640px]" />
+              <div className="pointer-events-none absolute inset-x-0 top-8 z-10 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Cascade</span>
+                <p className="mx-auto mt-3 max-w-md px-6 text-lg font-medium text-white/90 sm:text-xl">
+                  Tap the row to tip the first tile. Tap again to stand them back up.
+                </p>
+              </div>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Domino run</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The deliberate counterpart to the Newton&rsquo;s cradle above it, and its opposite on both counts
+                that matter. The cradle is elastic and reversible: a single blow bounces back and forth down a line
+                of equal masses that spring straight back up, so the toy never ends. The dominoes are the other
+                thing entirely &mdash; the cascade is one-way and it finishes. Gravity tips each tile past the point
+                of no return and it stays down, the way the Pin screen holds its relief; the lesson here is the
+                irreversibility, not the bounce. The physics is honest: each tile is a rigid rod pivoting about its
+                base, integrated by semi-implicit Euler at a fixed substep, with gravity&rsquo;s torque
+                (&alpha;&nbsp;=&nbsp;k&middot;sin&thinsp;&theta;) that is exactly zero while a tile stands perfectly
+                upright &mdash; which is why a standing row is a line of unstable equilibria that does nothing until
+                something tips it. A falling tile hands its momentum on the moment its face reaches the next, and the
+                contact angle falls straight out of the spacing (asin&thinsp;spacing/height); each one then comes to
+                rest at acos&thinsp;thickness/spacing, the angle where a leaning tile lies flush against the parallel
+                back of the next, so the toppled row stacks like fallen books rather than clipping through itself,
+                while the last tile, with nothing to lean on, falls flat. One canvas, one loop off the frame delta,
+                DPR-capped, and the loop idles the instant every tile has settled &mdash; a finished run costs
+                nothing. Reduced motion never starts the loop: the run is painted frozen mid-cascade, and a tap
+                toggles the standing and toppled stills in a single repaint.
               </p>
             </div>
           </div>
