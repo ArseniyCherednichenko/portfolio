@@ -11,6 +11,7 @@ import { GlareHover } from '../components/GlareHover'
 import { Lightbox } from '../components/Lightbox'
 import { Seo } from '../components/Seo'
 import { SectionNav, type SectionLink } from '../components/SectionNav'
+import { Breadcrumbs } from '../components/Breadcrumbs'
 import { CASE_STUDIES, getProject } from '../data/projects'
 
 const EASE = [0.16, 1, 0.3, 1] as const
@@ -76,18 +77,7 @@ export default function WorkDetail() {
     <article className="mx-auto w-full max-w-3xl px-6 pb-28 pt-32">
       {showNav && <SectionNav sections={navSections} />}
       <Seo title={project.title} description={project.blurb} />
-      <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, ease: EASE }}
-      >
-        <Link
-          to="/work"
-          className="inline-flex items-center gap-2 text-sm font-semibold text-white/45 transition-colors hover:text-white"
-        >
-          <span aria-hidden>&lt;-</span> All work
-        </Link>
-      </motion.div>
+      <Breadcrumbs items={[{ label: 'Work', to: '/work' }, { label: project.title }]} />
 
       {/* Title block */}
       <header id="overview" className="mt-8 scroll-mt-28 border-b border-white/10 pb-12">
