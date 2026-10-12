@@ -5,6 +5,7 @@ import { Reveal } from '../components/Reveal'
 import { SplitText } from '../components/SplitText'
 import { MagneticButton } from '../components/MagneticButton'
 import { Seo } from '../components/Seo'
+import { Breadcrumbs } from '../components/Breadcrumbs'
 import { useContact } from '../components/ContactDialog'
 import { DisciplineDemo } from '../components/DisciplineDemo'
 import { DISCIPLINES, getDiscipline } from '../data/disciplines'
@@ -73,22 +74,10 @@ export default function RangeDetail() {
       <header className="relative isolate overflow-hidden pb-16 pt-36 sm:pt-44">
         <AccentField accent={d.accent} />
         <div className="mx-auto w-full max-w-4xl px-6">
-          <motion.div
-            initial={reduce ? { opacity: 0 } : { opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, ease: EASE }}
-            className="flex items-center gap-3 text-sm"
-          >
-            <Link to="/range" className="text-white/40 transition-colors hover:text-white/70">
-              Range
-            </Link>
-            <span aria-hidden className="text-white/20">
-              /
-            </span>
-            <span style={{ color: d.accent }} className="font-semibold">
-              {d.tag}
-            </span>
-          </motion.div>
+          <Breadcrumbs
+            items={[{ label: 'Range', to: '/range' }, { label: d.tag }]}
+            accent={d.accent}
+          />
 
           <div className="mt-8 flex items-baseline gap-4">
             <span
