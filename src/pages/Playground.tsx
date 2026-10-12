@@ -41,6 +41,7 @@ import { CardSwap } from '../components/CardSwap'
 import { ProfileCard } from '../components/ProfileCard'
 import { PixelTransition } from '../components/PixelTransition'
 import { FlipCard } from '../components/FlipCard'
+import { ExpandableCards, type ExpandableCardItem } from '../components/ExpandableCards'
 import { PinCard } from '../components/PinCard'
 import { Ticket } from '../components/Ticket'
 import { ScratchReveal } from '../components/ScratchReveal'
@@ -263,6 +264,91 @@ const PANEL_ITEMS: Panel[] = [
     label: 'In the open',
     title: 'Built in public',
     body: 'The site grows most days, one commit at a time, all of it on GitHub to read.',
+  },
+]
+
+// The expandable-card grid shows the range, not a single project: the
+// disciplines Arseniy works across, each a card that morphs open into its own
+// account. Honest copy — the same five the /range page is built on — with real
+// tools and a way through to the evidence already on the site.
+const RANGE_CARDS: readonly ExpandableCardItem[] = [
+  {
+    id: 'frontend',
+    kicker: 'Frontend',
+    title: 'Interfaces that feel right',
+    blurb: 'The part people touch, and the part they feel.',
+    body: (
+      <p>
+        React and TypeScript, held to a high bar for how it feels rather than only how it looks. Strict
+        types, composable components, and motion that earns its place instead of decorating. Most of what
+        ships is the surface a person reaches for, so the states nobody documents — the empty, the
+        loading, the just-tapped — get sweated too.
+      </p>
+    ),
+    tags: ['React', 'TypeScript', 'Tailwind', 'Framer Motion', 'Vite'],
+    action: { label: 'See the Playground', to: '/playground' },
+  },
+  {
+    id: 'native',
+    kicker: 'Native iOS',
+    title: 'At home on the platform',
+    blurb: 'Apps that behave the way the phone does.',
+    body: (
+      <p>
+        SwiftUI on real devices, sharing one backend with the web. Gestures, haptics, and transitions that
+        match what the system already taught a person to expect, so the app feels native rather than a web
+        view in a wrapper. The iOS side of Guided runs on exactly this.
+      </p>
+    ),
+    tags: ['Swift', 'SwiftUI', 'Xcode'],
+    action: { label: 'Read about Guided', to: '/work/guided' },
+  },
+  {
+    id: 'backend',
+    kicker: 'Backend',
+    title: 'The layer underneath',
+    blurb: 'Data models and the plumbing that keeps clients honest.',
+    body: (
+      <p>
+        Supabase and Postgres — schemas, auth, and the APIs that keep a web app and a native app looking at
+        the same truth. Holding the data layer is what lets the seams between surfaces stay invisible: one
+        source, two clients, no drift.
+      </p>
+    ),
+    tags: ['Supabase', 'Postgres', 'SQL', 'REST'],
+    action: { label: 'See the range', to: '/range' },
+  },
+  {
+    id: 'ai',
+    kicker: 'Applied AI',
+    title: 'Models in the service of people',
+    blurb: 'The hard part is the product around the model.',
+    body: (
+      <p>
+        The interesting work is rarely the model — it is the product wrapped around it. Guided is a
+        Socratic tutor that asks rather than answers, which only works when the prompting, the guardrails,
+        and the interface all pull the same way. Applied AI here means making a model feel trustworthy and
+        useful, not magic.
+      </p>
+    ),
+    tags: ['LLMs', 'Prompt design', 'Product sense'],
+    action: { label: 'Read about Guided', to: '/work/guided' },
+  },
+  {
+    id: 'motion',
+    kicker: 'Motion',
+    title: 'Making the interface move',
+    blurb: 'Where this whole site spends its evidence.',
+    body: (
+      <p>
+        Interface motion built by hand, reduced-motion-aware by default. This Playground is the proof — a
+        library of animation components, each written from scratch, from ambient fields to scroll-driven
+        scenes. Alive is not the same as loud, and every effect here has a calm path for people who ask for
+        less.
+      </p>
+    ),
+    tags: ['Framer Motion', 'Canvas', 'SVG', 'CSS'],
+    action: { label: 'On motion', to: '/craft' },
   },
 ]
 
@@ -4532,6 +4618,42 @@ export default function Playground() {
                 the moment the content takes over, so assistive tech is told the truth the sweep only implies. Reduced
                 motion is the designed path, not a fallback &mdash; the sweep parks off-screen and the block becomes a
                 calm static tint that still reserves the exact space.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH EXPANDABLE CARDS — shared-element morph */}
+        <Reveal>
+          <div id="expandable-cards" data-experiment="Expandable cards" className="mt-12 scroll-mt-32">
+            <div className="rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 py-12 sm:px-10">
+              <div className="mx-auto mb-8 max-w-md text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Tap to open</span>
+                <p className="mx-auto mt-3 text-lg font-medium text-white/85 sm:text-xl">
+                  Each card grows from where it sits into its own panel, then folds back into the grid. The
+                  five here are the disciplines, not one project.
+                </p>
+              </div>
+              <ExpandableCards items={RANGE_CARDS} label="The disciplines, expandable" className="mx-auto max-w-5xl" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Expandable cards</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The <span className="text-white/65">shared-element</span> opener the surface family was
+                missing. Where the modal fades a fixed dialog in from nowhere, the flip card turns on a
+                hinge, the pixel card dissolves one face into another, and the expanding panels widen a spine
+                in a row, this one makes the collapsed card and the open panel{' '}
+                <span className="text-white/65">one object</span>: click a card and it morphs — grows from
+                exactly where it sat into a larger panel over a dimmed backdrop, via a Framer shared-layout
+                animation on a matched <em>layoutId</em> — then collapses back into the same card on close.
+                It is the motion a photo grid uses when a thumbnail blows up to full screen, built honestly:
+                each card is a real <code className="text-white/55">button</code> carrying{' '}
+                <code className="text-white/55">aria-expanded</code>, the panel a{' '}
+                <code className="text-white/55">role=&quot;dialog&quot;</code> with a focus trap, Escape,
+                focus handed in and returned to the triggering card, and the page scroll locked without a
+                sideways jump. The content is deliberate too — the panels name the five disciplines the work
+                spans, so what opens is the range, never a pitch. Reduced motion drops the morph for a plain
+                centred cross-fade; everything still opens, reads, and closes the same.
               </p>
             </div>
           </div>
