@@ -235,8 +235,7 @@ export function Vfd({
   // the look of a vacuum-fluorescent tube lit from behind a grid.
   const panelStyle = panel
     ? {
-        background:
-          'radial-gradient(130% 120% at 50% 0%, rgba(67,232,201,0.07), rgba(2,10,10,0.92) 60%, rgba(0,0,0,0.95))',
+        backgroundColor: 'rgba(2,10,10,0.92)',
         backgroundImage:
           'repeating-linear-gradient(0deg, rgba(67,232,201,0.05) 0px, rgba(67,232,201,0.05) 1px, transparent 1px, transparent 4px), radial-gradient(130% 120% at 50% 0%, rgba(67,232,201,0.07), rgba(2,10,10,0.92) 60%, rgba(0,0,0,0.95))',
         boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.05), inset 0 0 40px rgba(0,0,0,0.6)',
