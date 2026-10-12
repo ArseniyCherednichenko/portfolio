@@ -92,6 +92,7 @@ import { Knob } from '../components/Knob'
 import { Switch } from '../components/Switch'
 import { SegmentedControl } from '../components/SegmentedControl'
 import { Pagination } from '../components/Pagination'
+import { Breadcrumbs } from '../components/Breadcrumbs'
 import { DataTable, type Column } from '../components/DataTable'
 import { Select, type SelectOption } from '../components/Select'
 import { Combobox, type ComboOption } from '../components/Combobox'
@@ -1398,6 +1399,79 @@ function PaginationDemo() {
         showEdges
         label="Demo results"
       />
+    </div>
+  )
+}
+
+// A Breadcrumbs showcase: the wayfinding trail the site's deep routes were
+// missing, now wired into every detail page. The demo lets you pick which real
+// trail to show — each example is a live path (its crumbs are the actual routes
+// they name), and the Range example passes a discipline accent so the current
+// crumb's tint is visible. Switching re-mounts the trail so the stagger and the
+// hover hairline replay; a line underneath points at where it genuinely lives.
+const BREADCRUMB_EXAMPLES = [
+  {
+    id: 'range',
+    label: 'A discipline',
+    accent: '#DCF87C',
+    items: [
+      { label: 'Range', to: '/range' },
+      { label: 'Motion' },
+    ],
+  },
+  {
+    id: 'work',
+    label: 'A project',
+    accent: '#DCF87C',
+    items: [
+      { label: 'Work', to: '/work' },
+      { label: 'Guided' },
+    ],
+  },
+  {
+    id: 'writing',
+    label: 'A note',
+    accent: '#DCF87C',
+    items: [
+      { label: 'Writing', to: '/writing' },
+      { label: 'Motion that earns its place' },
+    ],
+  },
+] as const
+function BreadcrumbsDemo() {
+  const [which, setWhich] = useState(0)
+  const example = BREADCRUMB_EXAMPLES[which]
+  return (
+    <div className="flex w-full max-w-[28rem] flex-col items-center gap-7">
+      <div role="tablist" aria-label="Example trail" className="flex flex-wrap justify-center gap-2">
+        {BREADCRUMB_EXAMPLES.map((e, i) => {
+          const active = i === which
+          return (
+            <button
+              key={e.id}
+              role="tab"
+              type="button"
+              aria-selected={active}
+              onClick={() => setWhich(i)}
+              className={`rounded-full border px-3.5 py-1.5 text-xs font-semibold transition-colors ${
+                active
+                  ? 'border-[#DCF87C]/40 bg-[#DCF87C]/10 text-[#DCF87C]'
+                  : 'border-white/10 bg-white/[0.02] text-white/55 hover:text-white/80'
+              }`}
+            >
+              {e.label}
+            </button>
+          )
+        })}
+      </div>
+      <div className="flex min-h-[2.5rem] w-full items-center justify-center rounded-xl border border-white/10 bg-white/[0.02] px-5 py-4">
+        {/* keyed on the example so the trail re-staggers and the hairline resets */}
+        <Breadcrumbs key={example.id} items={[...example.items]} accent={example.accent} />
+      </div>
+      <p className="max-w-sm text-center text-xs leading-relaxed text-white/40">
+        Hover or tab a crumb to draw its hairline. Every crumb is a live route &mdash; this same
+        trail sits atop each detail page on the site.
+      </p>
     </div>
   )
 }
@@ -6689,6 +6763,15 @@ export default function Playground() {
               note="The one control that moves through a set of pages rather than picking a value — the primitive every long list or table leans on. A deterministic set of thirty tiles is sliced three to a page; stepping the pager cross-fades the visible slice while a live 'Showing X-Y of N' readout tracks it, so the control is driving real content, not sitting inert. The number range truncates the way a hundred pages should — a boundary page each end, a window around the current one, an ellipsis bridging the gap — so the row never reflows as you walk it. The single lime pill glides between pages on a shared layout rather than blinking. A labelled nav of real buttons with aria-current on the active page, the arrows disabled at the ends, the nav's own Left/Right and Home/End stepping it, and a live region narrating each move. Reduced motion drops the glide for an instant swap."
             >
               <PaginationDemo />
+            </Experiment>
+          </Reveal>
+
+          <Reveal>
+            <Experiment
+              name="Breadcrumbs"
+              note="The wayfinding trail the site's deep routes were missing, and pure navigation infrastructure rather than a toy — so wiring it in is about the whole site, not any one page. A real nav of an ordered list: every crumb before the last is a live route back toward the root, and the last is the current page, marked aria-current. The house signature, applied to a trail — a lime hairline draws in from the left on hover or focus, the whole trail staggers in from the left, and the current crumb is tinted with the page's own accent (a discipline colour on a range page, lime elsewhere) so the eye lands on where you are. Each example here is a live path; the same component now sits atop every project, discipline, and writing detail page, replacing the one-off back links they used to hand-roll. Reduced motion drops the stagger and the drawing hairline — wayfinding is information, not decoration."
+            >
+              <BreadcrumbsDemo />
             </Experiment>
           </Reveal>
 
