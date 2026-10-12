@@ -34,6 +34,11 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'A breadcrumb trail on every detail page',
+    summary: 'A reusable wayfinding nav — a lime hairline draws under each crumb on hover, the current one tinted with the page accent.',
+    tag: 'Component',
+  },
+  {
     title: 'A domino run that only falls one way',
     summary: 'A line of tiles that topple and stay down — the irreversible counterpart to the Newton’s cradle that springs back.',
     tag: 'Component',
@@ -77,10 +82,5 @@ export const LATEST_LOG: LogHeadline[] = [
     title: 'The Scotch yoke',
     summary: 'A crank turned into an exact cosine, the yoke’s travel plumbed straight onto the sine it sweeps.',
     tag: 'Component',
-  },
-  {
-    title: 'The way here',
-    summary: 'A new /journey page — the honest through-line of how the work gets made, with Guided one waypoint of six.',
-    tag: 'Page',
   },
 ]
