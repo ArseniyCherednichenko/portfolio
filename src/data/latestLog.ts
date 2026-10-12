@@ -34,6 +34,11 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'Cards that morph open into a panel',
+    summary: 'A grid whose cards grow from where they sit into a full panel via shared layout — carrying the five disciplines, not one project.',
+    tag: 'Component',
+  },
+  {
     title: 'A breadcrumb trail on every detail page',
     summary: 'A reusable wayfinding nav — a lime hairline draws under each crumb on hover, the current one tinted with the page accent.',
     tag: 'Component',
@@ -76,11 +81,6 @@ export const LATEST_LOG: LogHeadline[] = [
   {
     title: 'A Trammel of Archimedes',
     summary: 'One rigid rod, two slots at right angles, a pen that draws a true ellipse — and a circle at its midpoint.',
-    tag: 'Component',
-  },
-  {
-    title: 'The Scotch yoke',
-    summary: 'A crank turned into an exact cosine, the yoke’s travel plumbed straight onto the sine it sweeps.',
     tag: 'Component',
   },
 ]
