@@ -34,6 +34,11 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'A display that spells the whole alphabet',
+    summary: 'A fourteen-segment vacuum-fluorescent panel, glowing teal — the one readout here with the geometry for real M, W, X and V.',
+    tag: 'Component',
+  },
+  {
     title: 'Cards that morph open into a panel',
     summary: 'A grid whose cards grow from where they sit into a full panel via shared layout — carrying the five disciplines, not one project.',
     tag: 'Component',
@@ -76,11 +81,6 @@ export const LATEST_LOG: LogHeadline[] = [
   {
     title: 'The Chebyshev straight-line linkage',
     summary: 'Four bars that trace a line straight to about four parts in a thousand — the Peaucellier’s cheaper reply.',
-    tag: 'Component',
-  },
-  {
-    title: 'A Trammel of Archimedes',
-    summary: 'One rigid rod, two slots at right angles, a pen that draws a true ellipse — and a circle at its midpoint.',
     tag: 'Component',
   },
 ]
