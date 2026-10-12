@@ -4,6 +4,7 @@ import { Reveal } from '../components/Reveal'
 import { Eyebrow } from '../components/Eyebrow'
 import { GradientText } from '../components/GradientText'
 import { Seo } from '../components/Seo'
+import { Breadcrumbs } from '../components/Breadcrumbs'
 import { getNote, nextNote, relatedNotes } from '../data/notes'
 
 const EASE = [0.16, 1, 0.3, 1] as const
@@ -60,19 +61,8 @@ export default function WritingDetail() {
     <article className="mx-auto w-full max-w-3xl px-6 pb-28 pt-32">
       <Seo title={note.title} description={note.summary} />
 
-      {/* Back link */}
-      <motion.div
-        initial={reduce ? false : { opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, ease: EASE }}
-      >
-        <Link
-          to="/writing"
-          className="inline-flex items-center gap-2 text-sm font-semibold text-white/45 transition-colors hover:text-white"
-        >
-          <span aria-hidden>&lt;-</span> All writing
-        </Link>
-      </motion.div>
+      {/* Trail */}
+      <Breadcrumbs items={[{ label: 'Writing', to: '/writing' }, { label: note.title }]} />
 
       {/* HEADER */}
       <header className="mt-10">
