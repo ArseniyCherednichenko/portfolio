@@ -105,6 +105,7 @@ import { NumberField } from '../components/NumberField'
 import { StarRating } from '../components/StarRating'
 import { DotMatrix } from '../components/DotMatrix'
 import { SevenSegment } from '../components/SevenSegment'
+import { Vfd } from '../components/Vfd'
 import { useBerlinTime } from '../hooks/useBerlinTime'
 import { CodeInput } from '../components/CodeInput'
 import { PasswordStrength } from '../components/PasswordStrength'
@@ -1911,6 +1912,59 @@ function SevenSegmentDemo() {
               type="button"
               onClick={() => setCustom(s)}
               className="rounded-full border border-white/12 bg-white/[0.03] px-3 py-1.5 font-mono text-xs text-white/60 transition-colors hover:border-[#DCF87C]/40 hover:text-white/90"
+            >
+              {s}
+            </button>
+          ))}
+          <button
+            type="button"
+            onClick={() => setCustom('')}
+            className="rounded-full border border-transparent px-3 py-1.5 text-xs text-white/40 transition-colors hover:text-white/70"
+          >
+            Back to the clock
+          </button>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+// A Vfd showcase: unlike the seven-segment beside it, a fourteen-segment cell
+// can spell, so the samples are words — the display's own thesis set in its own
+// glowing teal phosphor. The field is open to any text, since there is nothing
+// here it has to fake or drop.
+const VFD_SAMPLES = ['MADE NOT ASSEMBLED', 'BERLIN', 'MOTION', 'HAND BUILT', '16:00']
+
+function VfdDemo() {
+  const { time } = useBerlinTime()
+  const [custom, setCustom] = useState('')
+  const shown = custom.trim() ? custom : time
+  return (
+    <div className="flex w-full max-w-2xl flex-col items-center gap-8">
+      <div className="flex min-h-[132px] w-full items-center justify-center overflow-x-auto">
+        <Vfd value={shown} height={76} />
+      </div>
+      <div className="flex w-full flex-col gap-4">
+        <label className="w-full">
+          <span className="mb-1.5 block text-xs font-semibold uppercase tracking-[0.24em] text-white/40">
+            Drive the panel
+          </span>
+          <input
+            type="text"
+            value={custom}
+            maxLength={22}
+            onChange={(e) => setCustom(e.target.value)}
+            placeholder="Empty shows the live Berlin clock"
+            className="w-full rounded-xl border border-white/12 bg-white/[0.03] px-4 py-2.5 text-sm text-white/85 outline-none transition-colors placeholder:text-white/30 focus:border-[#43e8c9]/50"
+          />
+        </label>
+        <div className="flex flex-wrap gap-2">
+          {VFD_SAMPLES.map((s) => (
+            <button
+              key={s}
+              type="button"
+              onClick={() => setCustom(s)}
+              className="rounded-full border border-white/12 bg-white/[0.03] px-3 py-1.5 font-mono text-xs text-white/60 transition-colors hover:border-[#43e8c9]/40 hover:text-white/90"
             >
               {s}
             </button>
@@ -3872,6 +3926,42 @@ export default function Playground() {
                 flicker that makes a running clock feel like glass rather than pixels. The figure is
                 aria-hidden and the value rides in the wrapper&rsquo;s label, so a screen reader hears the time,
                 not the hardware. Under reduced motion the crossfade and the bloom are dropped and digits cut.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH VACUUM-FLUORESCENT DISPLAY */}
+        <Reveal>
+          <div id="vfd" data-experiment="Vacuum-fluorescent display" className="mt-12 scroll-mt-32">
+            <div className="flex flex-col items-center gap-8 rounded-3xl border border-white/10 bg-white/[0.02] px-6 py-14 sm:px-10">
+              <div className="max-w-md text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#43e8c9]">Phosphor teal</span>
+                <p className="mx-auto mt-3 text-lg font-medium text-white/85 sm:text-xl">
+                  The glowing panel of an old hi-fi, built as a fourteen-segment starburst &mdash; the one
+                  display here that can spell the whole alphabet. Type a word and watch it form.
+                </p>
+              </div>
+              <VfdDemo />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Vacuum-fluorescent display</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                This is the display the family was missing. Its neighbours all stop short of real words
+                &mdash; the seven-segment lights seven bars, the odometer rolls wheels, the split-flap drops
+                flaps, the dot-matrix lights round lamps, the Nixie stacks wire cathodes. A fourteen-segment
+                cell splits the middle bar in two and adds four diagonals and two centre verticals, and that
+                is exactly enough geometry to form the <em>real</em> M, W, X, K, V and Z that seven bars can
+                only fake or drop &mdash; so it spells the whole alphabet honestly. Two things make it read as
+                a VFD and not just more segments: the colour, a blue-green phosphor, so it is deliberately the
+                one display on the site that is teal rather than lime, the way the Nixie is deliberately warm;
+                and the glass, where the lit segments bloom through a faint dark anode mesh while the unlit
+                ones stay present as the ghost of the full starburst. It is pure inline SVG &mdash; every
+                segment, bars and diagonals alike, a hand-computed mitred hexagon, crisp at any size in both
+                themes &mdash; and when a cell&rsquo;s value changes its segments cross-fade, the tick that
+                keeps the running clock alive. The figure is aria-hidden; the string rides in the
+                wrapper&rsquo;s label, so a screen reader hears the word, not fourteen segments. Under reduced
+                motion the cross-fade and the bloom are dropped and values cut.
               </p>
             </div>
           </div>
