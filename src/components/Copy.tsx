@@ -21,6 +21,10 @@ interface CopyProps {
   onCopied?: (ok: boolean) => void
   /** How long the copied flag stays up, in ms. */
   resetMs?: number
+  /** Stroke colour of the success check. Defaults to the house lime, which pops
+   * on the dark ghost button; pass `currentColor` (or any value) when the
+   * button sits on a coloured ground where lime would vanish. */
+  checkColor?: string
   className?: string
 }
 
@@ -42,6 +46,7 @@ export function Copy({
   srLabel,
   onCopied,
   resetMs,
+  checkColor = '#DCF87C',
   className,
 }: CopyProps) {
   const [copied, copy] = useCopied(resetMs)
@@ -62,7 +67,7 @@ export function Copy({
       aria-label={srLabel ?? `${copied ? copiedLabel : label}: ${value}`}
       className={className ?? base}
     >
-      <Glyph copied={copied} reduce={!!reduce} />
+      <Glyph copied={copied} reduce={!!reduce} checkColor={checkColor} />
       {showLabel && (
         <span className="relative inline-grid">
           {/* Both labels share the same grid cell so the button never changes
@@ -93,7 +98,15 @@ export function Copy({
 
 // The morphing mark: a clipboard outline that cross-fades to a checkmark whose
 // stroke draws on. Fixed 1rem box so the button height never jumps on the swap.
-function Glyph({ copied, reduce }: { copied: boolean; reduce: boolean }): ReactNode {
+function Glyph({
+  copied,
+  reduce,
+  checkColor,
+}: {
+  copied: boolean
+  reduce: boolean
+  checkColor: string
+}): ReactNode {
   return (
     <span aria-hidden className="relative inline-flex h-4 w-4 shrink-0 items-center justify-center">
       <AnimatePresence mode="wait" initial={false}>
@@ -102,7 +115,7 @@ function Glyph({ copied, reduce }: { copied: boolean; reduce: boolean }): ReactN
             key="check"
             viewBox="0 0 24 24"
             fill="none"
-            stroke="#DCF87C"
+            stroke={checkColor}
             strokeWidth="2.4"
             strokeLinecap="round"
             strokeLinejoin="round"
