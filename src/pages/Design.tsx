@@ -8,6 +8,7 @@ import { SpotlightCard } from '../components/SpotlightCard'
 import { DotGrid } from '../components/DotGrid'
 import { Knob } from '../components/Knob'
 import { Seo } from '../components/Seo'
+import { useCopied } from '../lib/clipboard'
 import {
   CORE_COLORS,
   MOTION,
@@ -21,36 +22,9 @@ import {
 
 const EASE = [0.16, 1, 0.3, 1] as const
 
-// Copy a string to the clipboard, best-effort. Returns whether it landed, so
-// the caller can flash a confirmation without assuming success on locked-down
-// browsers where the API is unavailable.
-async function copy(text: string): Promise<boolean> {
-  try {
-    await navigator.clipboard.writeText(text)
-    return true
-  } catch {
-    return false
-  }
-}
-
-// A hook that gives a token a short-lived "Copied" state after a successful
-// copy, then resets itself. One timer per instance, cleaned up on unmount.
-function useCopied(): [boolean, (text: string) => void] {
-  const [done, setDone] = useState(false)
-  const timer = useRef<ReturnType<typeof setTimeout> | null>(null)
-  const fire = (text: string) => {
-    void copy(text).then((ok) => {
-      if (!ok) return
-      setDone(true)
-      if (timer.current) clearTimeout(timer.current)
-      timer.current = setTimeout(() => setDone(false), 1100)
-    })
-  }
-  useEffect(() => () => {
-    if (timer.current) clearTimeout(timer.current)
-  }, [])
-  return [done, fire]
-}
+// Clipboard copy and the short-lived "Copied" flag come from the shared
+// `useCopied` hook in src/lib/clipboard — the same best-effort write and timer
+// every copy affordance on the site uses.
 
 // One colour chip. The whole chip is a button: press it to copy the value.
 // The near-black ground gets a hairline so it separates from the page; the
