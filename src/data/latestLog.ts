@@ -34,6 +34,11 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'A border that trembles like live current',
+    summary: 'The border beam’s opposite — instead of one comet orbiting a still ring, the whole edge wavers, a turbulence-displaced stroke under a glow.',
+    tag: 'Component',
+  },
+  {
     title: 'A governor that holds its own speed',
     summary: 'Watt’s flyball governor — the balls fly out, lift a sleeve, throttle the drive, and it settles on a governed speed, hunting a new balance as the load shifts.',
     tag: 'Component',
@@ -77,10 +82,5 @@ export const LATEST_LOG: LogHeadline[] = [
     title: 'A day over Berlin, wound by hand',
     summary: 'The /berlin skyline now scrubs through the whole day — drag from midnight through dawn, golden hour and back.',
     tag: 'Motion',
-  },
-  {
-    title: 'A media scrubber with a real buffer',
-    summary: 'The flat player timeline every streaming app rides on — a dim layer loads ahead of the playhead, even while paused.',
-    tag: 'Component',
   },
 ]
