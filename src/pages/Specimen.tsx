@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useState } from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { Reveal } from '../components/Reveal'
@@ -6,6 +6,7 @@ import { Eyebrow } from '../components/Eyebrow'
 import { GradientText } from '../components/GradientText'
 import { Seo } from '../components/Seo'
 import { TYPE_SCALE } from '../data/design'
+import { useCopied } from '../lib/clipboard'
 
 const EASE = [0.16, 1, 0.3, 1] as const
 
@@ -23,36 +24,8 @@ const SAMPLES = [
   'Handset, not templated',
 ] as const
 
-// Best-effort clipboard copy, matching the Design page's helper.
-async function copy(text: string): Promise<boolean> {
-  try {
-    await navigator.clipboard.writeText(text)
-    return true
-  } catch {
-    return false
-  }
-}
-
-// Short-lived "Copied" flag after a successful copy.
-function useCopied(): [boolean, (text: string) => void] {
-  const [done, setDone] = useState(false)
-  const timer = useRef<ReturnType<typeof setTimeout> | null>(null)
-  const fire = (text: string) => {
-    void copy(text).then((ok) => {
-      if (!ok) return
-      setDone(true)
-      if (timer.current) clearTimeout(timer.current)
-      timer.current = setTimeout(() => setDone(false), 1100)
-    })
-  }
-  useEffect(
-    () => () => {
-      if (timer.current) clearTimeout(timer.current)
-    },
-    [],
-  )
-  return [done, fire]
-}
+// Clipboard copy and its short-lived "Copied" flag come from the shared
+// `useCopied` hook in src/lib/clipboard — the same idiom the whole site uses.
 
 // One labelled axis slider. Native range, lime accent, live numeric readout.
 function AxisSlider({
