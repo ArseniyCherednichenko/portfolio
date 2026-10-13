@@ -206,6 +206,7 @@ import { LangtonsAnt } from '../components/LangtonsAnt'
 import { PendulumWave } from '../components/PendulumWave'
 import { Cradle } from '../components/Cradle'
 import { Domino } from '../components/Domino'
+import { Governor } from '../components/Governor'
 import { SnowGlobe } from '../components/SnowGlobe'
 import { PinScreen } from '../components/PinScreen'
 import { Confetti, type ConfettiHandle } from '../components/Confetti'
@@ -8745,6 +8746,55 @@ export default function Playground() {
                 off true it strays. Under{' '}
                 <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code> there is
                 no sweep &mdash; Step jumps end to end &mdash; and every state stays legible.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH GOVERNOR — the ninth in the rigid-mechanism corner */}
+        <Reveal>
+          <div id="governor" data-experiment="Centrifugal governor" className="mt-12 scroll-mt-32">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 py-12 sm:px-10">
+              <div className="mb-8 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Speed into its own control</span>
+                <p className="mx-auto mt-3 max-w-md text-lg font-medium text-white/85 sm:text-xl">
+                  Set it running and the balls fly out, lift the sleeve, and throttle the drive until it holds a speed.
+                  Change the load and watch it find a new balance.
+                </p>
+              </div>
+              <Governor className="mx-auto" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Centrifugal governor</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The ninth character in the rigid-mechanism corner, and the one that watches itself. The four-bar turns
+                rotation into a <em>curve</em>; the Peaucellier and the Chebyshev into a <em>straight line</em>; the
+                Geneva into <em>steps</em>; the Strandbeest into a <em>gait</em>; the escapement meters a <em>swing</em>;
+                the Scotch yoke and the trammel cast <em>sines</em>. This one does something none of them do: it closes a
+                loop on its own speed. James Watt and Matthew Boulton fitted it to their steam engines around 1788, and it
+                is reckoned the first widely used feedback device of the industrial age &mdash; iron doing, a century
+                early, what a control equation would later describe. Two heavy balls hang from arms hinged at the top of a
+                spinning spindle; spin faster and they fly outward and rise, and through a pair of lower links that lift
+                drags a sleeve up the spindle, and the sleeve is tied to the throttle. So faster closes the throttle and
+                slower opens it: the engine holds its own speed, and settles on a new balance whenever the load shifts.
+                The honest part is the balance and the loop. Each ball is a mass on an arm making a cone half-angle{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">&theta;</code> with the spindle, and at
+                speed it obeys the conical-pendulum law{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">cos&thinsp;&theta; = G / &omega;&sup2;</code>{' '}
+                &mdash; the same relation that fixes an orbit&rsquo;s height, here written in brass. Drag a ball out or in
+                and the readout shows the exact spindle speed that cone angle balances at. Set it running and a real loop
+                takes over &mdash;{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">&omega;&prime; = Q(1 &minus; s) &minus; &mu;&omega;</code>,
+                the drive <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">Q</code> throttled back as the
+                sleeve fraction <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">s</code> rises &mdash;
+                so it hunts a moment and settles on a governed speed. The sleeve height is nothing scripted: it is the
+                exact length of the lower link resolved to the spindle axis each frame, so the picture and the mechanism
+                are one object. A real{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">role=slider</code> from the keyboard:
+                arrows raise or lower the load and it rebalances, Shift for a bigger step, Space runs or stops, Home
+                resets, with a live region reading the cone angle, the speed, and the load. Under{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code> it never
+                free-runs &mdash; Settle snaps to the governed state for the current load and the drag still works.
               </p>
             </div>
           </div>
