@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useMemo, useState } from 'react'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { Reveal } from '../components/Reveal'
@@ -7,44 +7,19 @@ import { GradientText } from '../components/GradientText'
 import { SpotlightCard } from '../components/SpotlightCard'
 import { SegmentedControl } from '../components/SegmentedControl'
 import { Threads } from '../components/Threads'
+import { Copy } from '../components/Copy'
 import { HoverIndex, type HoverIndexItem } from '../components/HoverIndex'
 import { useToast } from '../components/Toast'
 import { useBerlinTime } from '../hooks/useBerlinTime'
 import { Seo } from '../components/Seo'
+import { useCopied } from '../lib/clipboard'
 import { BIO_VARIANTS, FAST_FACTS, NAME_NOTE, type FastFact } from '../data/bio'
 
 const EASE = [0.16, 1, 0.3, 1] as const
 
-// Best-effort clipboard write. Returns whether it landed so callers can flash a
-// confirmation without assuming success on locked-down browsers.
-async function copy(text: string): Promise<boolean> {
-  try {
-    await navigator.clipboard.writeText(text)
-    return true
-  } catch {
-    return false
-  }
-}
-
-// A short-lived "Copied" state after a successful copy, self-resetting. One
-// timer per instance, cleaned up on unmount. Mirrors the idiom on /design.
-function useCopied(): [boolean, (text: string) => Promise<boolean>] {
-  const [done, setDone] = useState(false)
-  const timer = useRef<ReturnType<typeof setTimeout> | null>(null)
-  const fire = async (text: string) => {
-    const ok = await copy(text)
-    if (ok) {
-      setDone(true)
-      if (timer.current) clearTimeout(timer.current)
-      timer.current = setTimeout(() => setDone(false), 1400)
-    }
-    return ok
-  }
-  useEffect(() => () => {
-    if (timer.current) clearTimeout(timer.current)
-  }, [])
-  return [done, fire]
-}
+// Clipboard copy and the short-lived "Copied" flag come from the shared
+// `useCopied` hook in src/lib/clipboard; the prominent "Copy this bio" button
+// uses the reusable <Copy> component, which draws its own checkmark on success.
 
 // Count words honestly — collapse whitespace, ignore empties. Used to put a
 // real, live number under each bio rather than an invented metric.
@@ -117,14 +92,6 @@ export default function Bio() {
   )
   const words = wordCount(variant.text)
   const chars = variant.text.length
-
-  const copyBio = async () => {
-    const ok = await copy(variant.text)
-    toast(
-      ok ? `Copied the ${variant.label.toLowerCase()} bio` : 'Copy blocked — select and copy by hand',
-      { tone: ok ? 'success' : 'error' },
-    )
-  }
 
   return (
     <>
@@ -233,14 +200,22 @@ export default function Bio() {
                 <span className="text-xs tabular-nums text-white/35">
                   {words} words · {chars} characters
                 </span>
-                <button
-                  type="button"
-                  onClick={() => void copyBio()}
+                <Copy
+                  value={variant.text}
+                  label="Copy this bio"
+                  copiedLabel="Copied"
+                  srLabel={`Copy the ${variant.label.toLowerCase()} bio`}
+                  checkColor="currentColor"
                   className="inline-flex items-center gap-2 rounded-full bg-[#DCF87C] px-5 py-2.5 text-sm font-semibold text-black transition-transform duration-200 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#DCF87C]/60 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
-                >
-                  <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-black/70" />
-                  Copy this bio
-                </button>
+                  onCopied={(ok) =>
+                    toast(
+                      ok
+                        ? `Copied the ${variant.label.toLowerCase()} bio`
+                        : 'Copy blocked — select and copy by hand',
+                      { tone: ok ? 'success' : 'error' },
+                    )
+                  }
+                />
               </div>
             </div>
           </SpotlightCard>
