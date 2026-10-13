@@ -35,7 +35,14 @@ import { useReducedMotion } from 'framer-motion'
 // Scaled dynamics constants (not SI — tuned so the governed speed sits mid-cone
 // across the whole load range and the hunting reads without the eye losing it).
 const G = 40 // gravity-over-arm-length; critical speed is omega = sqrt(G)
-const DAMP = 2.0 // arm damping — sets how much it hunts before settling
+// A centrifugal governor is famously prone to hunting — the instability James
+// Clerk Maxwell analysed in his 1868 paper "On Governors" — so a real one is
+// fitted with a dashpot to damp the arms. DAMP is that dashpot: enough that the
+// loop overshoots once and settles in a couple of seconds rather than cycling
+// for ever. SPIN_INERTIA (a flywheel on the spindle) slows omega's response so
+// the loop is gentler still; neither touches the steady state, only the path.
+const DAMP = 22 // dashpot on the arms
+const SPIN_INERTIA = 2 // spindle inertia J, dividing omega'
 const FRICTION = 6 // spindle bearing friction, the mu in omega'
 const Q_MIN = 40
 const Q_MAX = 240
@@ -95,7 +102,7 @@ function settle(q: number): { theta: number; omega: number } {
     thetaV += acc * dt
     theta = clamp(theta + thetaV * dt, THETA_MIN, THETA_MAX)
     if (theta === THETA_MIN || theta === THETA_MAX) thetaV = 0
-    omega = Math.max(0, omega + (q * (1 - s) - FRICTION * omega) * dt)
+    omega = Math.max(0, omega + ((q * (1 - s) - FRICTION * omega) / SPIN_INERTIA) * dt)
   }
   return { theta, omega }
 }
@@ -142,7 +149,7 @@ export function Governor({ className = '' }: { className?: string }) {
           next = THETA_MAX
           if (thetaV.current > 0) thetaV.current = 0
         }
-        const wNext = Math.max(0, w + (qRef.current * (1 - s) - FRICTION * w) * dt)
+        const wNext = Math.max(0, w + ((qRef.current * (1 - s) - FRICTION * w) / SPIN_INERTIA) * dt)
         omegaRef.current = wNext
         setOmega(wNext)
         return next
