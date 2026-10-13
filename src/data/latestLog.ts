@@ -34,6 +34,11 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'A copy button that draws its own check',
+    summary: 'A reusable copy button, now shared across the bio, design and type pages; its checkmark draws itself on when a copy lands.',
+    tag: 'Component',
+  },
+  {
     title: 'A border that trembles like live current',
     summary: 'The border beam’s opposite — instead of one comet orbiting a still ring, the whole edge wavers, a turbulence-displaced stroke under a glow.',
     tag: 'Component',
@@ -77,10 +82,5 @@ export const LATEST_LOG: LogHeadline[] = [
     title: 'A Berlin snow globe',
     summary: 'Shake it and the city’s snow swirls up, then falls slowly back down through glycerol-slow drag.',
     tag: 'Component',
-  },
-  {
-    title: 'A day over Berlin, wound by hand',
-    summary: 'The /berlin skyline now scrubs through the whole day — drag from midnight through dawn, golden hour and back.',
-    tag: 'Motion',
   },
 ]
