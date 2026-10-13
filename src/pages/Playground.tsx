@@ -41,6 +41,7 @@ import { CardSwap } from '../components/CardSwap'
 import { ProfileCard } from '../components/ProfileCard'
 import { PixelTransition } from '../components/PixelTransition'
 import { FlipCard } from '../components/FlipCard'
+import { ElectricBorder } from '../components/ElectricBorder'
 import { ExpandableCards, type ExpandableCardItem } from '../components/ExpandableCards'
 import { PinCard } from '../components/PinCard'
 import { Ticket } from '../components/Ticket'
@@ -4023,6 +4024,22 @@ export default function Playground() {
                   <p className="text-sm text-white/50">The light traces the corners on a loop.</p>
                 </div>
                 <BorderBeam />
+              </div>
+            </Experiment>
+          </Reveal>
+
+          <Reveal delay={0.05}>
+            <Experiment
+              name="Electric border"
+              note="The border-beam's opposite: instead of one comet orbiting a still ring, the whole edge is alive and trembling, like a live electric filament. An SVG rounded-rect stroke is run through a turbulence-displacement filter so the crisp line is pushed into a wavering arc, its frequency breathing on a seamless loop, with a blurred copy behind it for the glow. Reduced motion stills it to a calm, lit double-stroke."
+            >
+              <div className="relative w-full max-w-[260px] rounded-3xl border border-white/10 bg-white/[0.03]">
+                <div className="flex flex-col gap-2 p-7">
+                  <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[#DCF87C]">Current</span>
+                  <p className="text-2xl font-bold leading-tight">Live wire</p>
+                  <p className="text-sm text-white/50">The whole edge wavers, not a travelling point.</p>
+                </div>
+                <ElectricBorder radius={24} />
               </div>
             </Experiment>
           </Reveal>
