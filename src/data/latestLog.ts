@@ -34,6 +34,11 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'A governor that holds its own speed',
+    summary: 'Watt’s flyball governor — the balls fly out, lift a sleeve, throttle the drive, and it settles on a governed speed, hunting a new balance as the load shifts.',
+    tag: 'Component',
+  },
+  {
     title: 'A display that spells the whole alphabet',
     summary: 'A fourteen-segment vacuum-fluorescent panel, glowing teal — the one readout here with the geometry for real M, W, X and V.',
     tag: 'Component',
@@ -76,11 +81,6 @@ export const LATEST_LOG: LogHeadline[] = [
   {
     title: 'A media scrubber with a real buffer',
     summary: 'The flat player timeline every streaming app rides on — a dim layer loads ahead of the playhead, even while paused.',
-    tag: 'Component',
-  },
-  {
-    title: 'The Chebyshev straight-line linkage',
-    summary: 'Four bars that trace a line straight to about four parts in a thousand — the Peaucellier’s cheaper reply.',
     tag: 'Component',
   },
 ]
