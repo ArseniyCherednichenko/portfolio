@@ -105,6 +105,7 @@ import { Dropzone } from '../components/Dropzone'
 import { NumberField } from '../components/NumberField'
 import { StarRating } from '../components/StarRating'
 import { DotMatrix } from '../components/DotMatrix'
+import { FlipDot } from '../components/FlipDot'
 import { SevenSegment } from '../components/SevenSegment'
 import { Vfd } from '../components/Vfd'
 import { useBerlinTime } from '../hooks/useBerlinTime'
@@ -1977,6 +1978,63 @@ function DotMatrixDemo() {
             className="w-full accent-[#DCF87C]"
           />
         </label>
+      </div>
+    </div>
+  )
+}
+
+// A FlipDot showcase: the electromechanical cousin of the dot-matrix sign. The
+// flip only fires on a *change*, so the cascade is the thing to watch — type a
+// new word or hit a preset and the discs roll over, both on and off, left to
+// right. Repaint remounts the board so it prints the current word in again from
+// all-black. The input is capped and feeds the board's aria-label, so what the
+// discs spell is what a screen reader reads.
+const FLIPDOT_PRESETS = ['HELLO', 'BERLIN', 'FLIP DOT', 'ARSENIY', 'MADE HERE']
+
+function FlipDotDemo() {
+  const [msg, setMsg] = useState('BERLIN')
+  const [nonce, setNonce] = useState(0)
+  const shown = (msg.trim() ? msg : 'BERLIN').toUpperCase().slice(0, 14)
+  return (
+    <div className="flex w-full max-w-2xl flex-col items-center gap-8">
+      <div className="w-full overflow-x-auto rounded-2xl border border-white/10 bg-black/70 px-6 py-8 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)]">
+        <div className="flex min-h-[112px] items-center justify-center">
+          <FlipDot key={nonce} text={shown} cell={14} />
+        </div>
+      </div>
+      <div className="flex w-full flex-col gap-4">
+        <label className="w-full">
+          <span className="mb-1.5 block text-xs font-semibold uppercase tracking-[0.24em] text-white/40">
+            Roll your own word
+          </span>
+          <input
+            type="text"
+            value={msg}
+            maxLength={14}
+            onChange={(e) => setMsg(e.target.value)}
+            placeholder="Up to 14 characters"
+            className="w-full rounded-xl border border-white/12 bg-white/[0.03] px-4 py-2.5 text-sm text-white/85 outline-none transition-colors placeholder:text-white/30 focus:border-[#DCF87C]/50"
+          />
+        </label>
+        <div className="flex flex-wrap items-center gap-2">
+          {FLIPDOT_PRESETS.map((w) => (
+            <button
+              key={w}
+              type="button"
+              onClick={() => setMsg(w)}
+              className="rounded-full border border-white/12 bg-white/[0.03] px-3 py-1.5 text-xs font-medium text-white/70 transition-colors hover:border-[#DCF87C]/50 hover:text-white"
+            >
+              {w}
+            </button>
+          ))}
+          <button
+            type="button"
+            onClick={() => setNonce((n) => n + 1)}
+            className="rounded-full border border-[#DCF87C]/30 bg-[#DCF87C]/10 px-3 py-1.5 text-xs font-medium text-[#DCF87C] transition-colors hover:bg-[#DCF87C]/20"
+          >
+            Repaint
+          </button>
+        </div>
       </div>
     </div>
   )
@@ -3967,6 +4025,39 @@ export default function Playground() {
                 not sixty. The canvas is aria-hidden and the live message rides in the wrapper&rsquo;s label,
                 so a screen reader hears the words, not the hardware. Under reduced motion the loop never
                 starts: the board simply lights the message from its first column and holds it still.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH FLIP-DOT BOARD */}
+        <Reveal>
+          <div id="flip-dot" data-experiment="Flip-dot board" className="mt-12 scroll-mt-32">
+            <div className="flex flex-col items-center gap-8 rounded-3xl border border-white/10 bg-white/[0.02] px-6 py-14 sm:px-10">
+              <div className="max-w-md text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Flipped, not lit</span>
+                <p className="mx-auto mt-3 text-lg font-medium text-white/85 sm:text-xl">
+                  The board off the front of a bus. Same alphabet as the dot-matrix sign, but every dot is
+                  a physical disc that turns over to change — so a new word rolls across in a cascade of
+                  flips. Type one, or hit repaint.
+                </p>
+              </div>
+              <FlipDotDemo />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Flip-dot board</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                Its neighbour the dot-matrix sign is light &mdash; a lamp is on or off and nothing moves.
+                A flip-dot board is the opposite: mechanical. Every cell is a real disc, matte black on one
+                face and bright on the other, pivoting on an axle, and a coil pulse flips it over to change
+                the pixel. So repainting the board is a visible cascade of discs turning edge-on and landing
+                on their other side, each with the faint overshoot of a hinge settling against its stop. It
+                reads the same 5&times;7 alphabet as the LED sign &mdash; the two share one hand-authored
+                bitmap font &mdash; but renders it as hardware doing work rather than as signal. One canvas,
+                one animation loop that runs only while a change is in flight and then stops, so a board at
+                rest costs nothing; the canvas is aria-hidden and the message rides in the wrapper&rsquo;s
+                label. Under reduced motion there is no flipping &mdash; the board simply shows the word,
+                every disc already landed.
               </p>
             </div>
           </div>
