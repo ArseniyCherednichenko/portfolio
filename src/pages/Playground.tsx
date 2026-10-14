@@ -430,6 +430,7 @@ import { StreamGraph, type StreamSeries } from '../components/StreamGraph'
 import { Candlestick, type Candle } from '../components/Candlestick'
 import { ScatterPlot, type ScatterPoint } from '../components/ScatterPlot'
 import { ParallelCoords, type PCDimension, type PCRecord } from '../components/ParallelCoords'
+import { Stat, type DeltaMode } from '../components/Stat'
 
 // Spare stroke icons for the dock — no emoji, currentColor so they warm to lime.
 const ic = (d: string) => (
@@ -1368,6 +1369,112 @@ function SunburstDemo() {
   return (
     <div className="flex w-full flex-col items-center">
       <Sunburst data={SUNBURST_DATA} unit="components" />
+    </div>
+  )
+}
+
+// A Stat showcase — the compact KPI member of the chart family, shown the way
+// it is actually used: a little row of tiles, a dashboard header. Illustrative
+// figures, not real analytics (the labels are deliberately playful so no one
+// reads them as a claim); the point is the SHAPE of the thing — a label, one
+// big counted-up number, a trend chip whose direction is told by an arrow (not
+// a second colour), and a sparkline small enough to live inside the card. A
+// believable random walk per tile, re-rolled by Reshuffle so the numbers,
+// trends and curves all change together but stay plausible.
+interface StatSpec {
+  label: string
+  series: number[]
+  value: number
+  unit?: string
+  prefix?: string
+  decimals?: number
+  deltaMode: DeltaMode
+  caption?: string
+}
+
+// A smooth-ish random walk of `n` points with a gentle drift, rounded to the
+// given decimals and floored at `min` so a sparkline never dips below zero.
+function walk(start: number, n: number, drift: number, jitter: number, decimals = 0, min = 0): number[] {
+  const out: number[] = []
+  let v = start
+  const factor = Math.pow(10, decimals)
+  for (let i = 0; i < n; i++) {
+    v = Math.max(min, v + drift + (Math.random() - 0.5) * jitter)
+    out.push(Math.round(v * factor) / factor)
+  }
+  return out
+}
+
+function rollStats(): StatSpec[] {
+  const commits = walk(3 + Math.random() * 3, 12, 0.4, 3.2)
+  const coffee = walk(10 + Math.random() * 4, 12, 0.2, 4)
+  const focus = walk(4 + Math.random() * 1.5, 12, -0.08, 1.4, 1, 1)
+  const pixels = walk(120 + Math.random() * 80, 12, 14, 70)
+  return [
+    {
+      label: 'Commits today',
+      series: commits,
+      value: commits[commits.length - 1],
+      deltaMode: 'percent',
+      caption: 'Small, frequent, green.',
+    },
+    {
+      label: 'Cups of coffee',
+      series: coffee,
+      value: coffee[coffee.length - 1],
+      deltaMode: 'absolute',
+      caption: 'The real build dependency.',
+    },
+    {
+      label: 'Focus hours',
+      series: focus,
+      value: focus[focus.length - 1],
+      unit: 'h',
+      decimals: 1,
+      deltaMode: 'percent',
+      caption: 'Deep work, measured kindly.',
+    },
+    {
+      label: 'Pixels nudged',
+      series: pixels,
+      value: pixels[pixels.length - 1],
+      deltaMode: 'absolute',
+      caption: 'Half of design is the last 2px.',
+    },
+  ]
+}
+
+function StatRowDemo() {
+  const [specs, setSpecs] = useState<StatSpec[]>(() => rollStats())
+  const [run, setRun] = useState(0)
+  function reshuffle() {
+    setSpecs(rollStats())
+    setRun((n) => n + 1)
+  }
+  return (
+    <div className="flex w-full flex-col items-stretch gap-6">
+      <div className="grid w-full gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {specs.map((s) => (
+          <Stat
+            key={`${run}-${s.label}`}
+            label={s.label}
+            series={s.series}
+            value={s.value}
+            unit={s.unit}
+            prefix={s.prefix}
+            decimals={s.decimals}
+            deltaMode={s.deltaMode}
+            caption={s.caption}
+          />
+        ))}
+      </div>
+      <button
+        type="button"
+        onClick={reshuffle}
+        className="self-center rounded-full border border-white/15 px-4 py-1.5 text-sm font-semibold text-white/80 transition-colors hover:border-[#DCF87C]/50 hover:bg-white/[0.04] hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#DCF87C]/60"
+      >
+        Reshuffle
+      </button>
     </div>
   )
 }
@@ -6813,6 +6920,17 @@ export default function Playground() {
                 note="The chart the others cannot draw — not one number per mark, or two, but as many as you give it: every dimension is its own vertical axis, and every record a single line crossing them all at its value. So a whole many-columned table reads at once, and the shape of the bundle is the answer — lines that run parallel agree, lines that cross between two axes trade off. Its signature is brushing: drag along any axis to keep only the records in that range, stack brushes across axes, and carve the bundle down to the ones that are high here and low there. Each axis carries its own scale because the dimensions are in different units, and one lime steps the lines by a single chosen quality. Illustrative motion-preset ratings, not a benchmark. Drag an axis to brush, click it to clear."
               >
                 <ParallelCoordsDemo />
+              </Experiment>
+            </Reveal>
+          </div>
+
+          <div className="sm:col-span-2">
+            <Reveal>
+              <Experiment
+                name="Stat tiles"
+                note="The chart family's compact member, and the one none of the others is — not a full-width figure that owns a section but the KPI tile a real dashboard lays a row of: a label, one big number counted up, a trend chip, and a sparkline small enough to sit inside the card. It keeps the family's rules — no plotting library, one lime, one reveal — and borrows the candlestick's trick so the single hue carries direction: up or down is an arrow and a fill, never a second colour. Illustrative figures, not real analytics. Reshuffle to re-walk every tile; the numbers, trends and curves all move together."
+              >
+                <StatRowDemo />
               </Experiment>
             </Reveal>
           </div>
