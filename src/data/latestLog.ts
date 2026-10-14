@@ -34,6 +34,11 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'A stat tile that counts itself up',
+    summary: 'The chart family’s compact member — a dashboard KPI tile: a big counted-up number, a trend arrow, and a sparkline that draws itself inside the card.',
+    tag: 'Component',
+  },
+  {
     title: 'Every section is now a shareable link',
     summary: 'A chain glyph beside each section label copies a deep link to that exact spot — it reveals on hover, and leaves the page still.',
     tag: 'Infra',
@@ -77,10 +82,5 @@ export const LATEST_LOG: LogHeadline[] = [
     title: 'The Playground comes alive as you reach it',
     summary: 'Experiments now mount only as they near the viewport, so the flagship page no longer spins up hundreds of loops at once.',
     tag: 'Infra',
-  },
-  {
-    title: 'A pin screen that holds its relief',
-    summary: 'The desk toy of sliding pins — press the cursor across it and the pins stand where you pushed and stay.',
-    tag: 'Component',
   },
 ]
