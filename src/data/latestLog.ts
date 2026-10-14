@@ -34,6 +34,11 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'A flip-dot board that rolls words over',
+    summary: 'The dot-matrix sign’s mechanical twin — real discs flipping on and off in a cascade, sharing one 5x7 font with the LED sign.',
+    tag: 'Component',
+  },
+  {
     title: 'A stat tile that counts itself up',
     summary: 'The chart family’s compact member — a dashboard KPI tile: a big counted-up number, a trend arrow, and a sparkline that draws itself inside the card.',
     tag: 'Component',
@@ -77,10 +82,5 @@ export const LATEST_LOG: LogHeadline[] = [
     title: 'A domino run that only falls one way',
     summary: 'A line of tiles that topple and stay down — the irreversible counterpart to the Newton’s cradle that springs back.',
     tag: 'Component',
-  },
-  {
-    title: 'The Playground comes alive as you reach it',
-    summary: 'Experiments now mount only as they near the viewport, so the flagship page no longer spins up hundreds of loops at once.',
-    tag: 'Infra',
   },
 ]
