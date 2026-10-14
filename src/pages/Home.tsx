@@ -342,7 +342,7 @@ export default function Home() {
       <section id="about" className="mx-auto w-full max-w-5xl px-6 py-24">
         <div className="mx-auto max-w-4xl">
           <Reveal>
-            <Eyebrow>About</Eyebrow>
+            <Eyebrow id="about">About</Eyebrow>
           </Reveal>
           <Reveal delay={0.05}>
             <p className="mt-6 font-display text-3xl font-medium leading-snug text-white/85 sm:text-4xl">
@@ -371,7 +371,7 @@ export default function Home() {
       <section id="range" className="py-24">
         <div className="mx-auto w-full max-w-4xl px-6">
           <Reveal>
-            <Eyebrow>Range</Eyebrow>
+            <Eyebrow id="range">Range</Eyebrow>
           </Reveal>
           <h2 className="mt-6 font-display text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl">
             <BlurText as="span" text="More than" />{' '}
@@ -423,7 +423,7 @@ export default function Home() {
       <section id="process" className="mx-auto w-full max-w-4xl px-6 py-24">
         <div className="mb-10">
           <Reveal>
-            <Eyebrow>How I build</Eyebrow>
+            <Eyebrow id="process">How I build</Eyebrow>
           </Reveal>
           <Reveal delay={0.05}>
             <h2 className="mt-6 font-display text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl">
@@ -443,7 +443,7 @@ export default function Home() {
       <section id="ethos" className="relative isolate overflow-hidden py-32">
         <div className="mx-auto w-full max-w-4xl px-6">
           <Reveal>
-            <Eyebrow>Ethos</Eyebrow>
+            <Eyebrow id="ethos">Ethos</Eyebrow>
           </Reveal>
           <SpotlightReveal
             text="Good software should feel like someone cared. So I sweat the motion, the type, and the small moments no one notices, but everyone feels."
@@ -458,7 +458,7 @@ export default function Home() {
       <section id="numbers" className="mx-auto w-full max-w-4xl px-6 py-24">
         <div className="mb-10">
           <Reveal>
-            <Eyebrow>By the numbers</Eyebrow>
+            <Eyebrow id="numbers">By the numbers</Eyebrow>
           </Reveal>
           <Reveal delay={0.05}>
             <h2 className="mt-6 font-display text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl">
@@ -521,7 +521,7 @@ export default function Home() {
       <section id="work" className="mx-auto w-full max-w-4xl px-6 py-24">
         <Reveal>
           <div className="flex items-baseline justify-between gap-4">
-            <Eyebrow>Selected work</Eyebrow>
+            <Eyebrow id="work">Selected work</Eyebrow>
             <Link
               to="/work"
               className="text-sm font-semibold text-[#DCF87C] transition-opacity hover:opacity-80"
@@ -566,7 +566,7 @@ export default function Home() {
       <section id="playground" className="mx-auto w-full max-w-5xl overflow-hidden px-6 py-24">
         <div className="mx-auto mb-12 max-w-2xl text-center">
           <Reveal>
-            <Eyebrow>Playground</Eyebrow>
+            <Eyebrow id="playground">Playground</Eyebrow>
           </Reveal>
           <Reveal delay={0.05}>
             <h2 className="mt-6 font-display text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl">
@@ -600,7 +600,7 @@ export default function Home() {
         <div className="mx-auto mb-9 w-full max-w-4xl px-6">
           <Reveal>
             <div className="flex items-baseline justify-between gap-4">
-              <Eyebrow>Toolkit</Eyebrow>
+              <Eyebrow id="toolkit">Toolkit</Eyebrow>
               <Link
                 to="/toolkit"
                 className="text-sm font-semibold text-[#DCF87C] transition-opacity hover:opacity-80"
@@ -623,7 +623,7 @@ export default function Home() {
       <section id="explore" className="mx-auto w-full max-w-4xl px-6 py-24">
         <div className="mb-9">
           <Reveal>
-            <Eyebrow>Explore</Eyebrow>
+            <Eyebrow id="explore">Explore</Eyebrow>
           </Reveal>
           <Reveal delay={0.05}>
             <h2 className="mt-6 font-display text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl">
@@ -645,7 +645,7 @@ export default function Home() {
       <section id="log" className="mx-auto w-full max-w-4xl px-6 py-24">
         <div className="mb-9">
           <Reveal>
-            <Eyebrow>In the open</Eyebrow>
+            <Eyebrow id="log">In the open</Eyebrow>
           </Reveal>
           <Reveal delay={0.05}>
             <h2 className="mt-6 font-display text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl">
