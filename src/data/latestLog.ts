@@ -34,6 +34,11 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'Every section is now a shareable link',
+    summary: 'A chain glyph beside each section label copies a deep link to that exact spot — it reveals on hover, and leaves the page still.',
+    tag: 'Infra',
+  },
+  {
     title: 'A copy button that draws its own check',
     summary: 'A reusable copy button, now shared across the bio, design and type pages; its checkmark draws itself on when a copy lands.',
     tag: 'Component',
@@ -76,11 +81,6 @@ export const LATEST_LOG: LogHeadline[] = [
   {
     title: 'A pin screen that holds its relief',
     summary: 'The desk toy of sliding pins — press the cursor across it and the pins stand where you pushed and stay.',
-    tag: 'Component',
-  },
-  {
-    title: 'A Berlin snow globe',
-    summary: 'Shake it and the city’s snow swirls up, then falls slowly back down through glycerol-slow drag.',
     tag: 'Component',
   },
 ]
