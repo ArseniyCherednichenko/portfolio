@@ -34,6 +34,11 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'A braille display read by touch, not light',
+    summary: 'The third display in the thread — six pins per cell rising and sinking through a face, spelling standard Grade-1 braille.',
+    tag: 'Component',
+  },
+  {
     title: 'A flip-dot board that rolls words over',
     summary: 'The dot-matrix sign’s mechanical twin — real discs flipping on and off in a cascade, sharing one 5x7 font with the LED sign.',
     tag: 'Component',
@@ -76,11 +81,6 @@ export const LATEST_LOG: LogHeadline[] = [
   {
     title: 'A breadcrumb trail on every detail page',
     summary: 'A reusable wayfinding nav — a lime hairline draws under each crumb on hover, the current one tinted with the page accent.',
-    tag: 'Component',
-  },
-  {
-    title: 'A domino run that only falls one way',
-    summary: 'A line of tiles that topple and stay down — the irreversible counterpart to the Newton’s cradle that springs back.',
     tag: 'Component',
   },
 ]
