@@ -210,6 +210,7 @@ import { PendulumWave } from '../components/PendulumWave'
 import { Cradle } from '../components/Cradle'
 import { Domino } from '../components/Domino'
 import { Governor } from '../components/Governor'
+import { CamFollower } from '../components/CamFollower'
 import { SnowGlobe } from '../components/SnowGlobe'
 import { PinScreen } from '../components/PinScreen'
 import { Confetti, type ConfettiHandle } from '../components/Confetti'
@@ -9117,6 +9118,54 @@ export default function Playground() {
                 resets, with a live region reading the cone angle, the speed, and the load. Under{' '}
                 <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code> it never
                 free-runs &mdash; Settle snaps to the governed state for the current load and the drag still works.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH CAM AND FOLLOWER — the tenth in the rigid-mechanism corner */}
+        <Reveal>
+          <div id="cam-follower" data-experiment="Cam and follower" className="mt-12 scroll-mt-32">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 py-12 sm:px-10">
+              <div className="mb-8 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">A shape that is a program</span>
+                <p className="mx-auto mt-3 max-w-md text-lg font-medium text-white/85 sm:text-xl">
+                  Turn the disc and the follower obeys a motion written into its edge: rise, hold, fall, hold &mdash; once
+                  a turn, exactly on cue.
+                </p>
+              </div>
+              <CamFollower className="mx-auto" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Cam and follower</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The tenth character in the rigid-mechanism corner, and the deliberate reply to the Scotch yoke a few
+                places back. The four-bar turns rotation into a <em>curve</em>; the Peaucellier and the Chebyshev into a{' '}
+                <em>straight line</em>; the Geneva into <em>steps</em>; the Strandbeest into a <em>gait</em>; the
+                escapement meters a <em>swing</em>; the Scotch yoke and the trammel cast <em>sines</em>; the governor
+                closes a loop on its own speed. A cam does the thing none of them can: it casts{' '}
+                <em>whatever you like</em>. Where the yoke&rsquo;s output is fixed forever by its one shape &mdash;{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">r&middot;cos&thinsp;&theta;</code>, a
+                cosine and nothing else &mdash; a cam&rsquo;s output is drawn straight into the edge of the disc, so the
+                same mechanism can dwell, crawl, snap or leap exactly where the engine wants it to. It is how a camshaft
+                works a valve: held shut through most of a turn, lifted on cue, held open, set back down. The honest part
+                is that the picture and the number are one object. The lift law &mdash; a cycloidal rise, a dwell at the
+                top, a cycloidal fall, a dwell at the base &mdash; is written once, and the disc&rsquo;s edge is that
+                same law in polar form, radius ={' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">R&#8320; + s(&alpha;)</code> at every
+                angle, so the profile is not a decoration laid over a scripted motion: it <em>is</em> the motion. The only
+                stored value is the shaft angle; the disc is rotated by it and the follower&rsquo;s height is read from
+                the same law at the same angle, so the profile point under the foot and the foot are, by construction, the
+                same point and can never drift out of agreement &mdash; the diagram on the right is that law drawn as a
+                cam engineer would, its live marker riding the curve the follower is on. The cycloidal segments are
+                chosen for a reason a cam designer would know: they begin and end at zero velocity <em>and</em> zero
+                acceleration, so the follower is never jerked and the shaft takes no shock. Drag the disc to turn it one
+                to one, or set it running. A real{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">role=slider</code> from the keyboard:
+                arrows nudge the shaft, Shift a bigger step, Space runs or stops, Home returns to zero and End jumps to
+                the next phase change, with a live region reading the angle, the phase and the lift. Under{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code> it never
+                free-runs &mdash; Step jumps to the next phase so every dwell and transition stays legible.
               </p>
             </div>
           </div>
