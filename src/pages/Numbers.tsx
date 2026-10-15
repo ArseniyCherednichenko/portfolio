@@ -165,9 +165,9 @@ export default function Numbers() {
           per component, grouped and tinted by family, so the number reads as a
           pile of real things you could sit and count, not an estimate. It is the
           bridge from the raw figure to the charts that abstract it. */}
-      <section className="mx-auto mt-28 w-full max-w-4xl px-6">
+      <section id="counted-out" className="mx-auto mt-28 w-full max-w-4xl px-6">
         <Reveal>
-          <Eyebrow>Counted out</Eyebrow>
+          <Eyebrow id="counted-out">Counted out</Eyebrow>
         </Reveal>
         <Reveal delay={0.05}>
           <h2 className="mt-4 font-display text-3xl font-bold leading-tight tracking-tight sm:text-4xl">
@@ -201,9 +201,9 @@ export default function Numbers() {
 
       {/* COMPONENTS BY CATEGORY — the centrepiece breakdown, drawn as the site's
           first chart: an animated donut whose legend doubles as the readout. */}
-      <section className="mx-auto mt-28 w-full max-w-4xl px-6">
+      <section id="the-library" className="mx-auto mt-28 w-full max-w-4xl px-6">
         <Reveal>
-          <Eyebrow>The library</Eyebrow>
+          <Eyebrow id="the-library">The library</Eyebrow>
         </Reveal>
         <Reveal delay={0.05}>
           <h2 className="mt-4 font-display text-3xl font-bold leading-tight tracking-tight sm:text-4xl">
@@ -226,9 +226,9 @@ export default function Numbers() {
       {/* THE BUILD, OVER TIME — the second chart. Where the donut holds a single
           instant, this shows one number moving: the component library growing
           chapter over chapter, drawn as an area curve that wipes itself in. */}
-      <section className="mx-auto mt-28 w-full max-w-4xl px-6">
+      <section id="over-time" className="mx-auto mt-28 w-full max-w-4xl px-6">
         <Reveal>
-          <Eyebrow>Over time</Eyebrow>
+          <Eyebrow id="over-time">Over time</Eyebrow>
         </Reveal>
         <Reveal delay={0.05}>
           <h2 className="mt-4 font-display text-3xl font-bold leading-tight tracking-tight sm:text-4xl">
@@ -259,9 +259,9 @@ export default function Numbers() {
           site's shape as a publication — where it runs deep, where it is spare —
           reads at a glance. Its subject is the breadth of the whole site, not any
           one project. */}
-      <section className="mx-auto mt-28 w-full max-w-4xl px-6">
+      <section id="the-map" className="mx-auto mt-28 w-full max-w-4xl px-6">
         <Reveal>
-          <Eyebrow>The map</Eyebrow>
+          <Eyebrow id="the-map">The map</Eyebrow>
         </Reveal>
         <Reveal delay={0.05}>
           <h2 className="mt-4 font-display text-3xl font-bold leading-tight tracking-tight sm:text-4xl">
@@ -304,9 +304,9 @@ export default function Numbers() {
           lays its bars out flat to be read like a list, this stands the same
           shape of question up as columns, so the kinds of work can be compared
           by height at a glance. */}
-      <section className="mx-auto mt-28 w-full max-w-4xl px-6">
+      <section id="in-the-open" className="mx-auto mt-28 w-full max-w-4xl px-6">
         <Reveal>
-          <Eyebrow>In the open</Eyebrow>
+          <Eyebrow id="in-the-open">In the open</Eyebrow>
         </Reveal>
         <Reveal delay={0.05}>
           <h2 className="mt-4 font-display text-3xl font-bold leading-tight tracking-tight sm:text-4xl">
@@ -348,9 +348,9 @@ export default function Numbers() {
           crosses that same tally with *when*, so the texture of the build reads
           at a glance: which chapters were about new components, which were
           motion or polish passes, where the making changed shape over time. */}
-      <section className="mx-auto mt-28 w-full max-w-4xl px-6">
+      <section id="where-and-when" className="mx-auto mt-28 w-full max-w-4xl px-6">
         <Reveal>
-          <Eyebrow>Where and when</Eyebrow>
+          <Eyebrow id="where-and-when">Where and when</Eyebrow>
         </Reveal>
         <Reveal delay={0.05}>
           <h2 className="mt-4 font-display text-3xl font-bold leading-tight tracking-tight sm:text-4xl">
@@ -401,7 +401,7 @@ export default function Numbers() {
       {/* ON SHOW — a single honest proportion, given a dial. The Gauge reads the
           same shown/total ratio the sentence states, so the meter and the words
           can never disagree; both come off the library data live. */}
-      <section className="mx-auto mt-28 w-full max-w-4xl px-6">
+      <section id="on-show" className="mx-auto mt-28 w-full max-w-4xl px-6">
         <Reveal>
           <SpotlightCard className="w-full">
             <div className="grid items-center gap-8 p-8 sm:p-10 lg:grid-cols-[auto_1fr] lg:gap-12">
@@ -420,7 +420,7 @@ export default function Numbers() {
                 />
               </div>
               <div>
-                <Eyebrow>On show</Eyebrow>
+                <Eyebrow id="on-show">On show</Eyebrow>
                 <p className="mt-5 max-w-2xl font-display text-2xl font-medium leading-snug text-white/85 sm:text-3xl">
                   <span className="text-[#DCF87C]">
                     {reduce ? onShow.shown : <AnimatedCounter value={onShow.shown} />}
