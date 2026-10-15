@@ -34,6 +34,11 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'Deep links now reach four more pages',
+    summary: 'The section permalinks thread through About, Numbers, Colophon and Design too — deep-linkable section by section, not just Home.',
+    tag: 'Infra',
+  },
+  {
     title: 'A cam whose edge is a program of motion',
     summary: 'The tenth mechanism — a shaped disc turns and the follower obeys a motion drawn into its edge: rise, dwell, fall, dwell, once a turn.',
     tag: 'Component',
@@ -76,11 +81,6 @@ export const LATEST_LOG: LogHeadline[] = [
   {
     title: 'A display that spells the whole alphabet',
     summary: 'A fourteen-segment vacuum-fluorescent panel, glowing teal — the one readout here with the geometry for real M, W, X and V.',
-    tag: 'Component',
-  },
-  {
-    title: 'Cards that morph open into a panel',
-    summary: 'A grid whose cards grow from where they sit into a full panel via shared layout — carrying the five disciplines, not one project.',
     tag: 'Component',
   },
 ]
