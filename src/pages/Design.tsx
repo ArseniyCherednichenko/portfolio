@@ -271,9 +271,9 @@ export default function Design() {
 
       <div className="mx-auto w-full max-w-4xl px-6 pb-28">
         {/* COLOUR */}
-        <section className="border-t border-white/10 py-16">
+        <section id="colour" className="border-t border-white/10 py-16">
           <Reveal>
-            <Eyebrow>Colour</Eyebrow>
+            <Eyebrow id="colour">Colour</Eyebrow>
             <h2 className="mt-4 font-display text-3xl font-bold tracking-tight">{CORE_COLORS.label}</h2>
             <p className="mt-3 max-w-xl text-white/55">{CORE_COLORS.blurb}</p>
           </Reveal>
@@ -319,9 +319,9 @@ export default function Design() {
         </section>
 
         {/* TYPE */}
-        <section className="border-t border-white/10 py-16">
+        <section id="type" className="border-t border-white/10 py-16">
           <Reveal>
-            <Eyebrow>Type</Eyebrow>
+            <Eyebrow id="type">Type</Eyebrow>
             <h2 className="mt-4 font-display text-3xl font-bold tracking-tight">Two faces, clear jobs</h2>
             <p className="mt-3 max-w-xl text-white/55">
               A variable serif for the display voice, a neutral sans for everything people read and touch.
@@ -370,9 +370,9 @@ export default function Design() {
         </section>
 
         {/* MOTION */}
-        <section className="border-t border-white/10 py-16">
+        <section id="motion" className="border-t border-white/10 py-16">
           <Reveal>
-            <Eyebrow>Motion</Eyebrow>
+            <Eyebrow id="motion">Motion</Eyebrow>
             <h2 className="mt-4 font-display text-3xl font-bold tracking-tight">One curve, mostly</h2>
             <p className="mt-3 max-w-xl text-white/55">
               Almost every entrance rides a single expo-out curve. Springs are held back for the things
