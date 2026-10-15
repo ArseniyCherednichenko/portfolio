@@ -135,9 +135,9 @@ function StackWeb() {
   const mid = (STACK_NODES.length - 1) / 2
 
   return (
-    <section className="mx-auto w-full max-w-4xl px-6 pb-16 sm:pb-24">
+    <section id="how-it-fits" className="mx-auto w-full max-w-4xl px-6 pb-16 sm:pb-24">
       <Reveal>
-        <Eyebrow>How it fits together</Eyebrow>
+        <Eyebrow id="how-it-fits">How it fits together</Eyebrow>
       </Reveal>
       <Reveal delay={0.05}>
         <h2 className="mt-4 max-w-xl font-display text-2xl font-semibold leading-snug tracking-tight text-white sm:text-3xl">
@@ -262,9 +262,9 @@ function Snapshot() {
   const reduce = useReducedMotion()
   const { time, awake } = useBerlinTime()
   return (
-    <section className="mx-auto w-full max-w-4xl px-6 py-16">
+    <section id="at-a-glance" className="mx-auto w-full max-w-4xl px-6 py-16">
       <Reveal>
-        <Eyebrow>At a glance</Eyebrow>
+        <Eyebrow id="at-a-glance">At a glance</Eyebrow>
       </Reveal>
       <Reveal delay={0.05}>
         <h2 className="mt-4 max-w-xl text-lg leading-relaxed text-white/50">
@@ -447,10 +447,10 @@ export default function About() {
       </header>
 
       {/* STATEMENT */}
-      <section className="mx-auto w-full max-w-5xl px-6 py-20 sm:py-28">
+      <section id="statement" className="mx-auto w-full max-w-5xl px-6 py-20 sm:py-28">
         <MeshGradient className="rounded-[2rem] border border-white/10 p-8 sm:p-14">
           <Reveal>
-            <Eyebrow>What I am about</Eyebrow>
+            <Eyebrow id="statement">What I am about</Eyebrow>
           </Reveal>
           <ScrollReveal
             className="mt-8 font-display text-3xl font-semibold leading-[1.25] tracking-tight text-white sm:text-5xl sm:leading-[1.2]"
@@ -465,9 +465,9 @@ export default function About() {
       </section>
 
       {/* THE SHORT VERSION — the intro, cut into glanceable auto-running frames */}
-      <section className="mx-auto w-full max-w-4xl px-6 py-16">
+      <section id="short-version" className="mx-auto w-full max-w-4xl px-6 py-16">
         <Reveal>
-          <Eyebrow>The short version</Eyebrow>
+          <Eyebrow id="short-version">The short version</Eyebrow>
         </Reveal>
         <Reveal delay={0.05}>
           <p className="mt-6 max-w-2xl text-2xl font-medium leading-snug text-white/85 sm:text-3xl">
@@ -512,10 +512,10 @@ export default function About() {
       <Snapshot />
 
       {/* NOW */}
-      <section className="mx-auto w-full max-w-4xl px-6 py-16">
+      <section id="now" className="mx-auto w-full max-w-4xl px-6 py-16">
         <Reveal>
           <div className="flex items-baseline justify-between gap-4">
-            <Eyebrow>Now</Eyebrow>
+            <Eyebrow id="now">Now</Eyebrow>
             <Link
               to="/now"
               className="text-sm text-white/40 underline-offset-4 transition-colors hover:text-[#DCF87C] hover:underline"
@@ -539,9 +539,9 @@ export default function About() {
       </section>
 
       {/* PRINCIPLES */}
-      <section className="mx-auto w-full max-w-4xl px-6 py-16">
+      <section id="how-i-work" className="mx-auto w-full max-w-4xl px-6 py-16">
         <Reveal>
-          <Eyebrow>How I work</Eyebrow>
+          <Eyebrow id="how-i-work">How I work</Eyebrow>
         </Reveal>
         <Reveal delay={0.05}>
           <p className="mt-6 max-w-2xl text-2xl font-medium leading-snug text-white/85 sm:text-3xl">
@@ -576,9 +576,9 @@ export default function About() {
       </section>
 
       {/* PATH */}
-      <section className="mx-auto w-full max-w-4xl px-6 py-16">
+      <section id="path" className="mx-auto w-full max-w-4xl px-6 py-16">
         <Reveal>
-          <Eyebrow>Path</Eyebrow>
+          <Eyebrow id="path">Path</Eyebrow>
         </Reveal>
         <Reveal delay={0.05}>
           <Timeline items={PATH} className="mt-10" />
@@ -586,11 +586,11 @@ export default function About() {
       </section>
 
       {/* MORE OF ME — a folder that opens to the other facets of the site */}
-      <section className="mx-auto w-full max-w-4xl px-6 py-16">
+      <section id="more-of-me" className="mx-auto w-full max-w-4xl px-6 py-16">
         <div className="grid items-center gap-10 sm:grid-cols-[1fr_auto] sm:gap-14">
           <div>
             <Reveal>
-              <Eyebrow>More of me</Eyebrow>
+              <Eyebrow id="more-of-me">More of me</Eyebrow>
             </Reveal>
             <Reveal delay={0.05}>
               <h2 className="mt-6 font-display text-3xl font-bold leading-[1.1] tracking-tight sm:text-4xl">
@@ -613,9 +613,9 @@ export default function About() {
       </section>
 
       {/* QUESTIONS */}
-      <section className="mx-auto w-full max-w-4xl px-6 py-16">
+      <section id="questions" className="mx-auto w-full max-w-4xl px-6 py-16">
         <Reveal>
-          <Eyebrow>Questions</Eyebrow>
+          <Eyebrow id="questions">Questions</Eyebrow>
         </Reveal>
         <Reveal delay={0.05}>
           <p className="mt-6 max-w-2xl text-2xl font-medium leading-snug text-white/85 sm:text-3xl">
