@@ -106,6 +106,7 @@ import { NumberField } from '../components/NumberField'
 import { StarRating } from '../components/StarRating'
 import { DotMatrix } from '../components/DotMatrix'
 import { FlipDot } from '../components/FlipDot'
+import { Braille } from '../components/Braille'
 import { SevenSegment } from '../components/SevenSegment'
 import { Vfd } from '../components/Vfd'
 import { useBerlinTime } from '../hooks/useBerlinTime'
@@ -2035,6 +2036,67 @@ function FlipDotDemo() {
             Repaint
           </button>
         </div>
+      </div>
+    </div>
+  )
+}
+
+// A Braille showcase: the third display and the one that is read by touch, not
+// light. The refresh is the thing to watch — type a word or hit a preset and
+// the pins rise and sink cell by cell left to right. Refresh remounts the line
+// so it rises again from a blank face. The field keeps its own case, so a
+// capital shows its capital-sign prefix cell, and the input feeds the line's
+// aria-label, so what the pins spell is what a screen reader reads.
+const BRAILLE_PRESETS = ['hello', 'Berlin', 'read me', 'made by hand', '2026']
+
+function BrailleDemo() {
+  const [msg, setMsg] = useState('Berlin')
+  const [nonce, setNonce] = useState(0)
+  const shown = (msg.trim() ? msg : 'Berlin').slice(0, 16)
+  return (
+    <div className="flex w-full max-w-2xl flex-col items-center gap-8">
+      <div className="w-full overflow-x-auto rounded-2xl border border-white/10 bg-black/70 px-6 py-8 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)]">
+        <div className="flex min-h-[96px] items-center justify-center">
+          <Braille key={nonce} text={shown} dot={13} />
+        </div>
+      </div>
+      <div className="flex w-full flex-col gap-4">
+        <label className="w-full">
+          <span className="mb-1.5 block text-xs font-semibold uppercase tracking-[0.24em] text-white/40">
+            Emboss your own line
+          </span>
+          <input
+            type="text"
+            value={msg}
+            maxLength={16}
+            onChange={(e) => setMsg(e.target.value)}
+            placeholder="Up to 16 characters"
+            className="w-full rounded-xl border border-white/12 bg-white/[0.03] px-4 py-2.5 text-sm text-white/85 outline-none transition-colors placeholder:text-white/30 focus:border-[#DCF87C]/50"
+          />
+        </label>
+        <div className="flex flex-wrap items-center gap-2">
+          {BRAILLE_PRESETS.map((w) => (
+            <button
+              key={w}
+              type="button"
+              onClick={() => setMsg(w)}
+              className="rounded-full border border-white/12 bg-white/[0.03] px-3 py-1.5 text-xs font-medium text-white/70 transition-colors hover:border-[#DCF87C]/50 hover:text-white"
+            >
+              {w}
+            </button>
+          ))}
+          <button
+            type="button"
+            onClick={() => setNonce((k) => k + 1)}
+            className="rounded-full border border-[#DCF87C]/30 bg-[#DCF87C]/10 px-3 py-1.5 text-xs font-medium text-[#DCF87C] transition-colors hover:bg-[#DCF87C]/20"
+          >
+            Refresh
+          </button>
+        </div>
+        <p className="text-xs leading-relaxed text-white/40">
+          Grade-1 English Braille: a six-dot cell per character, with the capital sign before a capital
+          and the number sign before digits, the way a reader expects them.
+        </p>
       </div>
     </div>
   )
@@ -4058,6 +4120,40 @@ export default function Playground() {
                 rest costs nothing; the canvas is aria-hidden and the message rides in the wrapper&rsquo;s
                 label. Under reduced motion there is no flipping &mdash; the board simply shows the word,
                 every disc already landed.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH BRAILLE DISPLAY */}
+        <Reveal>
+          <div id="braille" data-experiment="Braille display" className="mt-12 scroll-mt-32">
+            <div className="flex flex-col items-center gap-8 rounded-3xl border border-white/10 bg-white/[0.02] px-6 py-14 sm:px-10">
+              <div className="max-w-md text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Read by touch</span>
+                <p className="mx-auto mt-3 text-lg font-medium text-white/85 sm:text-xl">
+                  The display that uses no light at all. Six pins per cell driven up and down through a
+                  plastic face, spelling standard braille. Type a line and watch the pins rise, cell by
+                  cell, left to right.
+                </p>
+              </div>
+              <BrailleDemo />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Braille display</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                Where its neighbours trade in light &mdash; lamps switching, discs flipping &mdash; a
+                refreshable braille cell is tactile: six rounded pins driven up and down through holes in a
+                face, read by the fingertips. The honest signature is that rise &mdash; when the line
+                changes, pins that are needed pop up with the small overshoot of a solenoid hitting its
+                stop, pins that are not sink flush, and both sweep across cell by cell the way a real cell
+                array refreshes. The text runs through a shared Grade-1 English Braille encoder, so what the
+                pins spell is standard braille &mdash; the capital sign appears before a capital, the number
+                sign before digits &mdash; not an invented mapping. One canvas, one animation loop that runs
+                only while a refresh is in flight and then stops, so a line at rest costs nothing; the canvas
+                is aria-hidden and the plain text rides in the wrapper&rsquo;s label, the one audience a
+                braille line and a screen reader share. Under reduced motion there is no rise &mdash; the
+                pins are simply shown already up or already down.
               </p>
             </div>
           </div>
