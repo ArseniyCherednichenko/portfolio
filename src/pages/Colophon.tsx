@@ -267,9 +267,9 @@ export default function Colophon() {
       </section>
 
       {/* STACK */}
-      <section className="mx-auto w-full max-w-4xl px-6 py-16">
+      <section id="the-stack" className="mx-auto w-full max-w-4xl px-6 py-16">
         <Reveal>
-          <Eyebrow>The stack</Eyebrow>
+          <Eyebrow id="the-stack">The stack</Eyebrow>
         </Reveal>
         <Reveal delay={0.05}>
           <h2 className="mt-6 font-display text-3xl font-bold tracking-tight sm:text-4xl">
@@ -291,9 +291,9 @@ export default function Colophon() {
       </section>
 
       {/* PRINCIPLES */}
-      <section className="mx-auto w-full max-w-4xl px-6 py-16">
+      <section id="how-it-is-made" className="mx-auto w-full max-w-4xl px-6 py-16">
         <Reveal>
-          <Eyebrow>How it is made</Eyebrow>
+          <Eyebrow id="how-it-is-made">How it is made</Eyebrow>
         </Reveal>
         <div className="mt-10 grid gap-px overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] sm:grid-cols-2">
           {PRINCIPLES.map((item, i) => (
@@ -309,9 +309,9 @@ export default function Colophon() {
       </section>
 
       {/* PIPELINE */}
-      <section className="mx-auto w-full max-w-4xl px-6 py-16">
+      <section id="from-idea-to-live" className="mx-auto w-full max-w-4xl px-6 py-16">
         <Reveal>
-          <Eyebrow>From idea to live</Eyebrow>
+          <Eyebrow id="from-idea-to-live">From idea to live</Eyebrow>
         </Reveal>
         <Reveal delay={0.05}>
           <h2 className="mt-6 font-display text-3xl font-bold tracking-tight sm:text-4xl">
@@ -332,9 +332,9 @@ export default function Colophon() {
 
       {/* ANATOMY — a scrollytelling of how a single screen is composed. The
           pinned stage assembles the real layers as the steps scroll past. */}
-      <section className="mx-auto w-full max-w-5xl px-6 py-16">
+      <section id="anatomy" className="mx-auto w-full max-w-5xl px-6 py-16">
         <Reveal>
-          <Eyebrow>Anatomy</Eyebrow>
+          <Eyebrow id="anatomy">Anatomy</Eyebrow>
         </Reveal>
         <Reveal delay={0.05}>
           <h2 className="mt-6 font-display text-3xl font-bold tracking-tight sm:text-4xl">
@@ -357,9 +357,9 @@ export default function Colophon() {
       {/* REPOSITORY — the site's own tree, browsable. A small proof that the
           "made, not assembled" claim is literal: every node names a real file,
           and the counts come from the same source the Library reads. */}
-      <section className="mx-auto w-full max-w-4xl px-6 py-16">
+      <section id="repository" className="mx-auto w-full max-w-4xl px-6 py-16">
         <Reveal>
-          <Eyebrow>Repository</Eyebrow>
+          <Eyebrow id="repository">Repository</Eyebrow>
         </Reveal>
         <Reveal delay={0.05}>
           <h2 className="mt-6 font-display text-3xl font-bold tracking-tight sm:text-4xl">
@@ -398,9 +398,9 @@ export default function Colophon() {
       </section>
 
       {/* TYPE */}
-      <section className="mx-auto w-full max-w-4xl px-6 py-16">
+      <section id="type" className="mx-auto w-full max-w-4xl px-6 py-16">
         <Reveal>
-          <Eyebrow>Type</Eyebrow>
+          <Eyebrow id="type">Type</Eyebrow>
         </Reveal>
         <div className="mt-10 grid items-center gap-10 md:grid-cols-2">
           <Reveal>
@@ -439,9 +439,9 @@ export default function Colophon() {
       {/* SIGNATURE — the name itself, sampled into a live ASCII field. Every
           glyph here is drawn from the word's own coverage; sweep the cursor to
           light it. A small proof that even the type on this page is hand-made. */}
-      <section className="mx-auto w-full max-w-5xl px-6 py-16">
+      <section id="signed" className="mx-auto w-full max-w-5xl px-6 py-16">
         <Reveal>
-          <Eyebrow>Signed</Eyebrow>
+          <Eyebrow id="signed">Signed</Eyebrow>
         </Reveal>
         <Reveal delay={0.05}>
           <h2 className="mt-6 font-display text-3xl font-bold tracking-tight sm:text-4xl">
