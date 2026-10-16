@@ -27,6 +27,7 @@ import { Squares } from '../components/Squares'
 import { Cubes } from '../components/Cubes'
 import { FlowField } from '../components/FlowField'
 import { Murmuration } from '../components/Murmuration'
+import { Fireflies } from '../components/Fireflies'
 import { Crosshair } from '../components/Crosshair'
 import { ScrollVelocity } from '../components/ScrollVelocity'
 import { DecryptedText } from '../components/DecryptedText'
@@ -5273,6 +5274,37 @@ export default function Playground() {
                 neighbourhood. Hover and they lean toward you; press and you become a hawk and they scatter. One canvas,
                 one loop, the flock in flat typed arrays, forces read from the last frame so it turns in lockstep.
                 Reduced motion never starts the loop — the flock is settled into one composed still instead.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH FIREFLIES */}
+        <Reveal>
+          <div id="fireflies" data-experiment="Fireflies" className="mt-12 scroll-mt-32">
+            <div className="relative h-[420px] overflow-hidden rounded-3xl border border-white/10 bg-[#070b06]">
+              <Fireflies className="absolute inset-0" />
+              <div className="pointer-events-none absolute inset-x-0 top-8 z-10 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Emergent sync</span>
+                <p className="mx-auto mt-3 max-w-md px-6 text-xl font-medium text-white/80 sm:text-2xl">
+                  Watch them fall into step. Hover to gather a pocket; press to set the beat.
+                </p>
+              </div>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Fireflies</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The Murmuration is emergence in space &mdash; where the birds go. This is emergence in time &mdash; when
+                the lights blink. Each firefly is a clock running at its own slightly different rhythm, and the only rule
+                is the one real fireflies use: see a neighbour flash and nudge your own clock a touch toward theirs. That
+                single coupling &mdash; the Kuramoto model, the genuine mechanism behind the Southeast-Asian fireflies that
+                pulse a whole riverbank in unison &mdash; is enough. The field opens as random sparkle and, over a few
+                seconds, condenses into one slow collective beat that nobody conducts; it falls out of a hundred clocks
+                each watching only its nearest neighbours. The cursor is a lantern: hover and the nearby flies drift in
+                and couple harder, so a pocket locks up around you first; press and you flash, your steady pulse becoming
+                a driver the neighbours chase. One canvas, one loop, the phases in flat typed arrays, each clock advanced
+                from the last frame so the field couples in lockstep. Reduced motion never starts the loop &mdash; the
+                meadow is advanced to one half-synchronised moment and drawn still.
               </p>
             </div>
           </div>
