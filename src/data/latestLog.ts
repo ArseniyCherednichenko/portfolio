@@ -34,6 +34,11 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'A meadow of fireflies that blink into unison',
+    summary: 'The Murmuration’s counterpart in time, not space — each a clock nudged toward its neighbours, random sparkle condensing into one collective beat.',
+    tag: 'Component',
+  },
+  {
     title: 'A linkage that copies a drawing, twice the size',
     summary: 'The eleventh mechanism — trace a small figure with the stylus and a pen draws a true 2x copy, pole, stylus and pen on one line the whole way.',
     tag: 'Component',
@@ -76,11 +81,6 @@ export const LATEST_LOG: LogHeadline[] = [
   {
     title: 'A copy button that draws its own check',
     summary: 'A reusable copy button, now shared across the bio, design and type pages; its checkmark draws itself on when a copy lands.',
-    tag: 'Component',
-  },
-  {
-    title: 'A border that trembles like live current',
-    summary: 'The border beam’s opposite — instead of one comet orbiting a still ring, the whole edge wavers, a turbulence-displaced stroke under a glow.',
     tag: 'Component',
   },
 ]
