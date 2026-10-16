@@ -34,6 +34,11 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'A reply that streams in, word by word',
+    summary: 'The message-arrival choreography every chat rides on — your line snaps in, three dots hold the beat, then the reply precipitates in a few words at a time.',
+    tag: 'Component',
+  },
+  {
     title: 'Deep links now reach four more pages',
     summary: 'The section permalinks thread through About, Numbers, Colophon and Design too — deep-linkable section by section, not just Home.',
     tag: 'Infra',
@@ -76,11 +81,6 @@ export const LATEST_LOG: LogHeadline[] = [
   {
     title: 'A governor that holds its own speed',
     summary: 'Watt’s flyball governor — the balls fly out, lift a sleeve, throttle the drive, and it settles on a governed speed, hunting a new balance as the load shifts.',
-    tag: 'Component',
-  },
-  {
-    title: 'A display that spells the whole alphabet',
-    summary: 'A fourteen-segment vacuum-fluorescent panel, glowing teal — the one readout here with the geometry for real M, W, X and V.',
     tag: 'Component',
   },
 ]
