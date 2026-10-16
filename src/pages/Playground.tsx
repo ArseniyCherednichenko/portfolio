@@ -212,6 +212,7 @@ import { Cradle } from '../components/Cradle'
 import { Domino } from '../components/Domino'
 import { Governor } from '../components/Governor'
 import { CamFollower } from '../components/CamFollower'
+import { Pantograph } from '../components/Pantograph'
 import { SnowGlobe } from '../components/SnowGlobe'
 import { PinScreen } from '../components/PinScreen'
 import { Confetti, type ConfettiHandle } from '../components/Confetti'
@@ -9201,6 +9202,53 @@ export default function Playground() {
                 the next phase change, with a live region reading the angle, the phase and the lift. Under{' '}
                 <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code> it never
                 free-runs &mdash; Step jumps to the next phase so every dwell and transition stays legible.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH PANTOGRAPH */}
+        <Reveal>
+          <div id="pantograph" data-experiment="Pantograph" className="mt-12 scroll-mt-32">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 py-12 sm:px-10">
+              <div className="mb-8 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">A machine that copies</span>
+                <p className="mx-auto mt-3 max-w-md text-lg font-medium text-white/85 sm:text-xl">
+                  Trace the small figure with the stylus and the pen draws the same thing, twice the size &mdash; pole,
+                  stylus and pen on one line the whole way.
+                </p>
+              </div>
+              <Pantograph className="mx-auto" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Pantograph</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The eleventh character in the rigid-mechanism corner, and the one that does a thing none of the others
+                do: it <em>copies</em>. The four-bar turns rotation into a <em>curve</em>; the Peaucellier and the
+                Chebyshev into a <em>straight line</em>; the Geneva into <em>steps</em>; the Strandbeest into a{' '}
+                <em>gait</em>; the escapement meters a <em>swing</em>; the Scotch yoke and the trammel cast{' '}
+                <em>sines</em>; the cam casts a <em>programmed lift</em>; the governor closes a loop on its own speed. A
+                pantograph takes a motion that already exists and hands back a scaled duplicate of it &mdash; the
+                mechanical ancestor of copy-and-enlarge, used for centuries to scale maps and engrave coins, and the
+                direct forebear of the engraver&rsquo;s and the milling machine&rsquo;s reducing linkages. The honest
+                part is the collinearity, and it is forced by the geometry rather than drawn by hand. The linkage is a
+                chain of four rigid bars of equal length whose equal-and-parallel pairs mean that, for the fixed pole and
+                the stylus at a point, the pen always lands at exactly{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">W = O + 2&middot;(T &minus; O)</code>{' '}
+                &mdash; twice the distance, on the same ray. The only stored value is where the stylus sits on the figure
+                it is tracing. The elbow of the arm is solved from the pole and the stylus each frame as the apex of an
+                isosceles triangle on the segment between them &mdash; always taken on the same branch, so the arm can
+                never flip &mdash; and the two remaining joints are then fixed by the parallel constraints, so the pen is
+                pinned to the one point the bars allow and can never leave it; the faint straight ray through the three
+                points is drawn from those same three points, so the line the mechanism rides and the line the eye checks
+                it against are the same line. Drag along the small figure to move the stylus and the pen copies it at
+                twice the size, or set it drawing. A real{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">role=slider</code> from the keyboard:
+                arrows move the stylus around the figure, Shift a bigger step, Space draws it or stops, Home returns to
+                the start and End completes the drawing, with a live region reading how far around the figure the stylus
+                has travelled. Under{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code> it never
+                free-runs &mdash; Draw completes the copy in one step so the whole figure is legible at once.
               </p>
             </div>
           </div>
