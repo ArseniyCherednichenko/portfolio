@@ -10,6 +10,7 @@ import { GooeyTabs } from '../components/GooeyTabs'
 import { GradientText } from '../components/GradientText'
 import { GooeyText } from '../components/GooeyText'
 import { TextType } from '../components/TextType'
+import { TypingThread } from '../components/TypingThread'
 import { RotatingWord } from '../components/RotatingWord'
 import { SpotlightCard } from '../components/SpotlightCard'
 import { TiltCard } from '../components/TiltCard'
@@ -4259,6 +4260,40 @@ export default function Playground() {
                 keeps the running clock alive. The figure is aria-hidden; the string rides in the
                 wrapper&rsquo;s label, so a screen reader hears the word, not fourteen segments. Under reduced
                 motion the cross-fade and the bloom are dropped and values cut.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH TYPING THREAD — a message arriving */}
+        <Reveal>
+          <div id="typing-thread" data-experiment="Typing thread" className="mt-12 scroll-mt-32">
+            <div className="flex flex-col items-center gap-8 rounded-3xl border border-white/10 bg-white/[0.02] px-6 py-14 sm:px-10">
+              <div className="max-w-md text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">
+                  Turn-taking
+                </span>
+                <p className="mx-auto mt-3 text-lg font-medium text-white/85 sm:text-xl">
+                  The choreography every chat rides on &mdash; your line snaps in whole, three dots
+                  hold the beat, and the reply streams back a few words at a time.
+                </p>
+              </div>
+              <TypingThread />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Typing thread</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The one piece of text motion that is really about <em>timing</em> rather than a single
+                string. It is deliberately not the typewriter (which types one fixed line character by
+                character and erases it) or the decode (which resolves glyphs out of noise): the subject
+                here is the turn &mdash; your message springing in all at once, the composing pause the
+                three-dot indicator fills, then the other side&rsquo;s reply precipitating in word by
+                word behind a caret while the thread scrolls to keep the newest line in view. One
+                self-rescheduling timeout drives a tiny state machine (your turn settles at once; their
+                turn goes typing, then streaming, then settled); the streamed internals are aria-hidden
+                and the whole surface carries one honest label calling it a demo of the interaction, not
+                a transcript of anything real. Under reduced motion the machine never starts &mdash; the
+                exchange is simply shown in full, no dots, no streaming, no caret.
               </p>
             </div>
           </div>
