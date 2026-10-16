@@ -34,6 +34,11 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'A linkage that copies a drawing, twice the size',
+    summary: 'The eleventh mechanism — trace a small figure with the stylus and a pen draws a true 2x copy, pole, stylus and pen on one line the whole way.',
+    tag: 'Component',
+  },
+  {
     title: 'A reply that streams in, word by word',
     summary: 'The message-arrival choreography every chat rides on — your line snaps in, three dots hold the beat, then the reply precipitates in a few words at a time.',
     tag: 'Component',
@@ -76,11 +81,6 @@ export const LATEST_LOG: LogHeadline[] = [
   {
     title: 'A border that trembles like live current',
     summary: 'The border beam’s opposite — instead of one comet orbiting a still ring, the whole edge wavers, a turbulence-displaced stroke under a glow.',
-    tag: 'Component',
-  },
-  {
-    title: 'A governor that holds its own speed',
-    summary: 'Watt’s flyball governor — the balls fly out, lift a sleeve, throttle the drive, and it settles on a governed speed, hunting a new balance as the load shifts.',
     tag: 'Component',
   },
 ]
