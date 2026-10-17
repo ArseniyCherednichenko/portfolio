@@ -34,6 +34,11 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'A field you edit in place, and that survives a failed save',
+    summary: 'The click-to-edit control the platform never shipped — text that becomes a field, auto-sizes to its content, commits optimistically, and rolls back if the save is rejected.',
+    tag: 'Component',
+  },
+  {
     title: 'A like button with a volume knob',
     summary: 'The Medium clap, rebuilt by hand — hold to pour appreciation in on a steady cadence, each add a deterministic spark burst, up to a cap.',
     tag: 'Component',
@@ -77,10 +82,5 @@ export const LATEST_LOG: LogHeadline[] = [
     title: 'A stat tile that counts itself up',
     summary: 'The chart family’s compact member — a dashboard KPI tile: a big counted-up number, a trend arrow, and a sparkline that draws itself inside the card.',
     tag: 'Component',
-  },
-  {
-    title: 'Every section is now a shareable link',
-    summary: 'A chain glyph beside each section label copies a deep link to that exact spot — it reveals on hover, and leaves the page still.',
-    tag: 'Infra',
   },
 ]
