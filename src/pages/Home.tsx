@@ -89,6 +89,7 @@ const EXPLORE: FlowingItem[] = [
   { label: 'About', to: '/about', hint: 'Who I am' },
   { label: 'The way here', to: '/journey', hint: 'The path, not a resume' },
   { label: 'From Berlin', to: '/berlin', hint: 'Where the work is made' },
+  { label: 'Status', to: '/status', hint: 'The live state of things' },
   { label: 'Playground', to: '/playground', hint: 'Live motion' },
   { label: 'Studio', to: '/studio', hint: 'Make a poster' },
   { label: 'On motion', to: '/craft', hint: 'Craft, playable' },
