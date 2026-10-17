@@ -116,6 +116,7 @@ import { CodeInput } from '../components/CodeInput'
 import { PasswordStrength } from '../components/PasswordStrength'
 import { Skeleton, SkeletonSwap } from '../components/Skeleton'
 import { HoldConfirm } from '../components/HoldConfirm'
+import { Appreciate } from '../components/Appreciate'
 import { SwipeToReveal, type SwipeAction } from '../components/SwipeToReveal'
 import { PullToRefresh } from '../components/PullToRefresh'
 import { MoodSlider } from '../components/MoodSlider'
@@ -7714,6 +7715,42 @@ export default function Playground() {
                 <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code>, with no
                 fill to watch, it becomes a deliberate two-tap confirm that disarms itself if you look away — the same
                 protection with no motion at all. Nothing here is real: a committed hold just clears a mock draft.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH APPRECIATE */}
+        <Reveal>
+          <div id="appreciate" data-experiment="Appreciate" className="mt-12 scroll-mt-32">
+            <div className="flex flex-col items-center gap-8 rounded-3xl border border-white/10 bg-white/[0.02] px-6 py-14 sm:px-10">
+              <div className="max-w-md text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Hold to pour it in</span>
+                <p className="mx-auto mt-3 text-lg font-medium text-white/85 sm:text-xl">
+                  A like button with a volume knob — the Medium clap, rebuilt by hand. Tap once, or hold and let it climb.
+                </p>
+              </div>
+              <Appreciate />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Appreciate</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                A plain like is binary — it throws away <em>how much</em> someone liked a thing. Medium&rsquo;s clap
+                solved that by letting you keep tapping, each tap worth one, up to a cap, so appreciation gets a volume
+                knob instead of an on/off switch. That one idea carries more interaction craft than it looks. It is a
+                real <em>hold-to-repeat</em> gesture, not just a click: press and keep pressing and the count climbs on a
+                steady cadence of our choosing, the same by pointer and by a held Space or Enter — with the key&rsquo;s
+                own auto-repeat ignored so the rhythm is ours, not the OS&rsquo;s. Every add throws a short burst of
+                sparks from the centre, laid out on a{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">deterministic</code> ring (no
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">Math.random</code>, so a burst is
+                reproducible and never flashes a stray outlier), a combo bubble rises and re-pops while you are
+                mid-streak, and a ring fills toward the cap before the control settles into a calm maxed state rather
+                than silently eating presses. It is one tab stop with a polite live region spoken as the running total.
+                Under <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code>{' '}
+                the sparks, the pop, the ring sweep, and the combo rise all drop away and the number simply updates — the
+                gesture stays exactly as usable. The tally lives only in this tab and resets on reload; it is the
+                gesture, demonstrated, not a signal wired to anything.
               </p>
             </div>
           </div>
