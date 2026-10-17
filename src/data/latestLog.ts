@@ -34,6 +34,11 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'A live status board for the person, not a project',
+    summary: 'Berlin time on a cold-cathode clock, a soft presence state flipping on a split-flap, and the real library count rolling up — all live, all honest.',
+    tag: 'Page',
+  },
+  {
     title: 'A field you edit in place, and that survives a failed save',
     summary: 'The click-to-edit control the platform never shipped — text that becomes a field, auto-sizes to its content, commits optimistically, and rolls back if the save is rejected.',
     tag: 'Component',
@@ -76,11 +81,6 @@ export const LATEST_LOG: LogHeadline[] = [
   {
     title: 'A flip-dot board that rolls words over',
     summary: 'The dot-matrix sign’s mechanical twin — real discs flipping on and off in a cascade, sharing one 5x7 font with the LED sign.',
-    tag: 'Component',
-  },
-  {
-    title: 'A stat tile that counts itself up',
-    summary: 'The chart family’s compact member — a dashboard KPI tile: a big counted-up number, a trend arrow, and a sparkline that draws itself inside the card.',
     tag: 'Component',
   },
 ]
