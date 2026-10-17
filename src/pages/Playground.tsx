@@ -117,6 +117,7 @@ import { PasswordStrength } from '../components/PasswordStrength'
 import { Skeleton, SkeletonSwap } from '../components/Skeleton'
 import { HoldConfirm } from '../components/HoldConfirm'
 import { Appreciate } from '../components/Appreciate'
+import { InlineEdit } from '../components/InlineEdit'
 import { SwipeToReveal, type SwipeAction } from '../components/SwipeToReveal'
 import { PullToRefresh } from '../components/PullToRefresh'
 import { MoodSlider } from '../components/MoodSlider'
@@ -791,6 +792,55 @@ function KnobDemo() {
           style={{ height: `${level}%` }}
         />
       </div>
+    </div>
+  )
+}
+
+// An InlineEdit showcase in the setting it belongs to — a little profile card
+// whose fields read as plain text until you click them. onCommit here is a
+// simulated save (a short latency, local state), and the checkbox forces that
+// save to reject so the optimistic value visibly rolls back: the one behaviour
+// that separates a real inline edit from a styled input. Nothing leaves the tab.
+function InlineEditDemo() {
+  const [name, setName] = useState('Arseniy Cherednichenko')
+  const [role, setRole] = useState('Co-founder, Guided')
+  const [fail, setFail] = useState(false)
+  const save = (set: (v: string) => void) => (v: string) =>
+    new Promise<void>((resolve, reject) => {
+      window.setTimeout(() => {
+        if (fail) {
+          reject(new Error('simulated save failure'))
+          return
+        }
+        set(v)
+        resolve()
+      }, 650)
+    })
+  return (
+    <div className="flex w-full flex-col gap-7">
+      <div className="flex flex-col gap-6 sm:flex-row sm:gap-14">
+        <div>
+          <span className="block text-xs font-semibold uppercase tracking-[0.25em] text-white/40">Display name</span>
+          <div className="mt-1.5">
+            <InlineEdit label="Display name" value={name} onCommit={save(setName)} maxLength={48} />
+          </div>
+        </div>
+        <div>
+          <span className="block text-xs font-semibold uppercase tracking-[0.25em] text-white/40">Headline</span>
+          <div className="mt-1.5">
+            <InlineEdit label="Headline" value={role} onCommit={save(setRole)} maxLength={60} />
+          </div>
+        </div>
+      </div>
+      <label className="inline-flex cursor-pointer select-none items-center gap-2.5 text-sm text-white/55">
+        <input
+          type="checkbox"
+          checked={fail}
+          onChange={(e) => setFail(e.target.checked)}
+          className="h-4 w-4 accent-[#DCF87C]"
+        />
+        Simulate a failed save — commit an edit and watch the value roll back
+      </label>
     </div>
   )
 }
@@ -7751,6 +7801,48 @@ export default function Playground() {
                 the sparks, the pop, the ring sweep, and the combo rise all drop away and the number simply updates — the
                 gesture stays exactly as usable. The tally lives only in this tab and resets on reload; it is the
                 gesture, demonstrated, not a signal wired to anything.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH INLINE EDIT */}
+        <Reveal>
+          <div id="inline-edit" data-experiment="Inline edit" className="mt-12 scroll-mt-32">
+            <div className="flex flex-col items-center gap-8 rounded-3xl border border-white/10 bg-white/[0.02] px-6 py-14 sm:px-10">
+              <div className="max-w-md text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Click the text</span>
+                <p className="mx-auto mt-3 text-lg font-medium text-white/85 sm:text-xl">
+                  A value that reads as plain text until you click it, turns into a field, and settles back once you are
+                  done. Edit a field, then flip the switch and watch a failed save roll it back.
+                </p>
+              </div>
+              <div className="w-full max-w-lg">
+                <InlineEditDemo />
+              </div>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Inline edit</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                HTML hands you a label that cannot change and an input that is always open, but never the thing every
+                settings screen, table cell, and profile field actually needs: a value you edit <em>in place</em>.
+                Products rebuild this constantly and most of them skip the hard parts. The round trip and its focus are
+                the first: clicking the value (or pressing{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">Enter</code>/
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">F2</code> on it) swaps in an input
+                that mounts already focused with its text selected, so you can retype at once;{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">Esc</code> reverts the draft and hands
+                focus back to the trigger, and both Enter and a click away commit — focus never falls to the body between
+                the two states. The field is exactly as wide as its text, measured off a hidden mirror that carries the
+                same font, so entering edit mode never blows a short name out to a full-width box and the field grows as
+                you type. The last and most-skipped part is the save that might not land: a real inline edit is{' '}
+                <em>optimistic</em> — it shows the new value immediately and saves in the background — so this commits at
+                once, runs the save, and, if that rejects, rolls the value back to what it was, shakes, and says so
+                assertively. An inline edit that cannot survive a failed save is a styled input, not a control. Under{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code> the
+                width snaps, the save underline and the shake drop away, and the swap stays instant and just as usable.
+                The save here is simulated and the values live only in this tab — the pattern demonstrated, not a form
+                wired to anything.
               </p>
             </div>
           </div>
