@@ -33,6 +33,7 @@ export const CONTENTS: ContentSection[] = [
       { to: '/about', title: 'About', blurb: 'The story, the path, the principles behind the work.', chord: 'a' },
       { to: '/journey', title: 'The way here', blurb: 'The through-line of how the work gets made, drawn as a path you walk by scrolling.' },
       { to: '/now', title: 'Now', blurb: 'What I am focused on, learning, and building this season.', chord: 'n' },
+      { to: '/status', title: 'Status', blurb: 'A live instrument panel — the local hour, a soft sense of whether I am around, and the growing shape of the work.' },
       { to: '/berlin', title: 'From Berlin', blurb: 'The place the work is made from — a living scene that follows the real local hour.' },
       { to: '/uses', title: 'Uses', blurb: 'The setup behind the work — the everyday stack and the desk it happens at.', chord: 'u' },
     ],
