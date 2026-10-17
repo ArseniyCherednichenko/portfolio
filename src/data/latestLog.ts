@@ -34,6 +34,11 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'A like button with a volume knob',
+    summary: 'The Medium clap, rebuilt by hand — hold to pour appreciation in on a steady cadence, each add a deterministic spark burst, up to a cap.',
+    tag: 'Component',
+  },
+  {
     title: 'A meadow of fireflies that blink into unison',
     summary: 'The Murmuration’s counterpart in time, not space — each a clock nudged toward its neighbours, random sparkle condensing into one collective beat.',
     tag: 'Component',
@@ -77,10 +82,5 @@ export const LATEST_LOG: LogHeadline[] = [
     title: 'Every section is now a shareable link',
     summary: 'A chain glyph beside each section label copies a deep link to that exact spot — it reveals on hover, and leaves the page still.',
     tag: 'Infra',
-  },
-  {
-    title: 'A copy button that draws its own check',
-    summary: 'A reusable copy button, now shared across the bio, design and type pages; its checkmark draws itself on when a copy lands.',
-    tag: 'Component',
   },
 ]
