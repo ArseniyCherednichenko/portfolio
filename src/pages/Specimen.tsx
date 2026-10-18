@@ -4,11 +4,21 @@ import { Link } from 'react-router-dom'
 import { Reveal } from '../components/Reveal'
 import { Eyebrow } from '../components/Eyebrow'
 import { GradientText } from '../components/GradientText'
+import { SectionNav, type SectionLink } from '../components/SectionNav'
 import { Seo } from '../components/Seo'
 import { TYPE_SCALE } from '../data/design'
 import { useCopied } from '../lib/clipboard'
 
 const EASE = [0.16, 1, 0.3, 1] as const
+
+// The specimen's four parts, in scroll order, for the right-side rail — so a
+// long type page becomes navigable and every part is a shareable deep link.
+const SECTIONS: SectionLink[] = [
+  { id: 'axes', label: 'Axes' },
+  { id: 'scale', label: 'Scale' },
+  { id: 'characters', label: 'Characters' },
+  { id: 'pairing', label: 'Pairing' },
+]
 
 // The two variable axes the self-hosted Fraunces actually carries. Both are
 // real — the site's headlines ride opsz automatically via font-optical-sizing.
@@ -227,6 +237,7 @@ export default function Specimen() {
         title="Type specimen"
         description="An interactive specimen of the type this site is set in — drive the variable Fraunces axes by hand, test your own words, and read the scale. Built by Arseniy Cherednichenko."
       />
+      <SectionNav sections={SECTIONS} />
 
       {/* Header */}
       <motion.header
@@ -247,9 +258,9 @@ export default function Specimen() {
       </motion.header>
 
       {/* The variable axis tester */}
-      <Reveal className="mt-14">
+      <Reveal id="axes" className="mt-14 scroll-mt-28">
         <div className="flex items-end justify-between gap-4">
-          <Eyebrow>Drive the axes</Eyebrow>
+          <Eyebrow id="axes">Drive the axes</Eyebrow>
           <span className="hidden font-mono text-xs text-white/30 sm:inline">Fraunces · opsz 9–144 · wght 300–700</span>
         </div>
         <p className="mt-4 max-w-xl text-sm leading-relaxed text-white/50">
@@ -263,8 +274,8 @@ export default function Specimen() {
       </Reveal>
 
       {/* The scale */}
-      <Reveal className="mt-20">
-        <Eyebrow>The scale</Eyebrow>
+      <Reveal id="scale" className="mt-20 scroll-mt-28">
+        <Eyebrow id="scale">The scale</Eyebrow>
         <p className="mt-4 max-w-xl text-sm leading-relaxed text-white/50">
           Seven steps, in rem, exactly as the pages step through them. The display sizes are set in Fraunces;
           the reading sizes in Inter.
@@ -297,8 +308,8 @@ export default function Specimen() {
       </Reveal>
 
       {/* Glyphs */}
-      <Reveal className="mt-20">
-        <Eyebrow>The character set</Eyebrow>
+      <Reveal id="characters" className="mt-20 scroll-mt-28">
+        <Eyebrow id="characters">The character set</Eyebrow>
         <p className="mt-4 max-w-xl text-sm leading-relaxed text-white/50">
           Fraunces at display contrast. Hover a glyph to lift it.
         </p>
@@ -310,8 +321,8 @@ export default function Specimen() {
       </Reveal>
 
       {/* The pairing */}
-      <Reveal className="mt-20">
-        <Eyebrow>The pairing</Eyebrow>
+      <Reveal id="pairing" className="mt-20 scroll-mt-28">
+        <Eyebrow id="pairing">The pairing</Eyebrow>
         <div className="mt-6 rounded-3xl border border-white/10 bg-white/[0.02] px-6 py-10 sm:px-10 sm:py-12">
           <h2 className="font-display text-3xl font-semibold leading-[1.1] tracking-tight text-white sm:text-4xl">
             A serif to say it, a sans to carry it.
