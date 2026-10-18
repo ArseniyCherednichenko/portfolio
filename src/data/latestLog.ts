@@ -34,6 +34,11 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'A contents rail on the long inner pages',
+    summary: 'Craft, the specimen and thanks gain a right-side rail and per-section deep links — navigable section by section, every part shareable.',
+    tag: 'Infra',
+  },
+  {
     title: 'A button that carries its own work',
     summary: 'The action button, done right — idle, running, landed or failed as one object: the width morphs per word, it cannot double-fire, and a failure shakes and announces instead of going quiet.',
     tag: 'Component',
@@ -77,10 +82,5 @@ export const LATEST_LOG: LogHeadline[] = [
     title: 'Deep links now reach four more pages',
     summary: 'The section permalinks thread through About, Numbers, Colophon and Design too — deep-linkable section by section, not just Home.',
     tag: 'Infra',
-  },
-  {
-    title: 'A cam whose edge is a program of motion',
-    summary: 'The tenth mechanism — a shaped disc turns and the follower obeys a motion drawn into its edge: rise, dwell, fall, dwell, once a turn.',
-    tag: 'Component',
   },
 ]
