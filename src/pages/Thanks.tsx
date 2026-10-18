@@ -7,11 +7,34 @@ import { SplitText } from '../components/SplitText'
 import { SpotlightCard } from '../components/SpotlightCard'
 import { AnimatedCounter } from '../components/AnimatedCounter'
 import { Squares } from '../components/Squares'
+import { SectionNav, type SectionLink } from '../components/SectionNav'
 import { Seo } from '../components/Seo'
 import { CREDITS, ALL_CREDITS, type Credit } from '../data/thanks'
 
 const EASE = [0.16, 1, 0.3, 1] as const
 const GITHUB_URL = 'https://github.com/ArseniyCherednichenko/portfolio'
+
+// A stable DOM id from a group label, so each credit group is a deep-link
+// target and a stop on the orientation rail.
+function slugify(text: string): string {
+  return text
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+}
+
+// A compact rail label — the first real word of a group's heading ("The stack
+// it runs on" -> "Stack"), so the right-side nav stays tidy.
+function shortLabel(text: string): string {
+  const word = text.replace(/^the\s+/i, '').split(' ')[0] ?? text
+  return word.charAt(0).toUpperCase() + word.slice(1)
+}
+
+// The credit groups, in order, for the right-side orientation rail.
+const SECTIONS: SectionLink[] = CREDITS.map((g) => ({
+  id: slugify(g.label),
+  label: shortLabel(g.label),
+}))
 
 // One credit as a row inside a group card: the name, an honest line on what it
 // does here, a licence/nature chip, and an arrow that slides out to its real
@@ -59,6 +82,7 @@ export default function Thanks() {
         title="With thanks"
         description="No one builds alone. The open-source software, type, and public galleries that Arseniy Cherednichenko's portfolio stands on and learns from — credited honestly."
       />
+      <SectionNav sections={SECTIONS} />
 
       {/* HEADER */}
       <header className="relative isolate mx-auto w-full max-w-5xl overflow-hidden px-6 pb-12 pt-36 sm:pt-44">
@@ -94,9 +118,9 @@ export default function Thanks() {
 
       {/* THE GROUPS */}
       {CREDITS.map((group, gi) => (
-        <section key={group.label} className="mx-auto w-full max-w-5xl px-6 py-10">
+        <section key={group.label} id={slugify(group.label)} className="mx-auto w-full max-w-5xl scroll-mt-28 px-6 py-10">
           <Reveal>
-            <Eyebrow>{group.label}</Eyebrow>
+            <Eyebrow id={slugify(group.label)}>{group.label}</Eyebrow>
           </Reveal>
           <Reveal delay={0.05}>
             <p className="mt-5 max-w-xl text-base leading-relaxed text-white/55">{group.intro}</p>
