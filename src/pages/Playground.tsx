@@ -211,6 +211,7 @@ import { CodeBlock } from '../components/CodeBlock'
 import { Waveform } from '../components/Waveform'
 import { LangtonsAnt } from '../components/LangtonsAnt'
 import { PendulumWave } from '../components/PendulumWave'
+import { Foucault } from '../components/Foucault'
 import { Cradle } from '../components/Cradle'
 import { Domino } from '../components/Domino'
 import { Governor } from '../components/Governor'
@@ -6210,6 +6211,46 @@ export default function Playground() {
                 is a pure cosine of a frame-driven phase, no integration and no randomness; press anywhere and the phase
                 eases back to zero so the wave re-forms from a clean line under your hand. Reduced motion paints one
                 graceful wave, at rest.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FOUCAULT PENDULUM — the swing plane turning at sin(latitude), seen from above */}
+        <Reveal>
+          <div id="foucault" data-experiment="Foucault" className="mt-12 scroll-mt-32">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/40 px-6 py-12 sm:px-10">
+              <div className="mb-8 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">The floor turns underneath</span>
+                <p className="mx-auto mt-3 max-w-md text-lg font-medium text-white/85 sm:text-xl">
+                  A bob swinging along one line, seen from above. Slide the latitude and watch the plane turn faster or
+                  stall &mdash; it knocks the pegs down as it goes.
+                </p>
+              </div>
+              <Foucault className="mx-auto" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Foucault pendulum</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The pendulum wave&rsquo;s quieter relative, and the one with a twist in the physics. Left swinging long
+                enough, a pendulum&rsquo;s plane of swing slowly turns &mdash; not because anything pushes it, but because
+                the Earth rotates underneath it, the plainest proof you can watch that the ground is not still. Leon
+                Foucault hung one from the Panth&eacute;on dome in 1851 and let it knock over a ring of pegs to make the
+                turning countable, which is exactly what happens here, seen from directly above. The one honest number is
+                the rate: the plane comes full circle in a sidereal day divided by the{' '}
+                <em>sine of the latitude</em> &mdash; a full turn a day at the poles, and, the part that always
+                surprises, no turning at all on the equator, where the sine is zero. So latitude is the control, and it
+                starts at Berlin&rsquo;s 52.5&deg;, the city this site is built from, where the real plane takes about
+                thirty hours to come round. The animation speeds that to seconds to be watchable but keeps the{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">sin(latitude)</code> law exactly:
+                drag toward the equator and the precession stalls, toward the pole and the pegs fall faster. Nothing is
+                integrated and nothing drifts &mdash; the swing is a pure cosine and the plane&rsquo;s turn a single
+                accumulated angle, so a peg falls the instant the plane has swept past its bearing, opposite pegs
+                together. The slider and the arrow keys set the latitude, with a live region reading the real-world
+                period it implies; under{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code> it
+                never free-runs, painting the bob at rest and a faint fan of later swing lines so the idea of a turning
+                plane still reads at a glance.
               </p>
             </div>
           </div>
