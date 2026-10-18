@@ -34,6 +34,11 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'A button that carries its own work',
+    summary: 'The action button, done right — idle, running, landed or failed as one object: the width morphs per word, it cannot double-fire, and a failure shakes and announces instead of going quiet.',
+    tag: 'Component',
+  },
+  {
     title: 'A pendulum that proves the Earth turns',
     summary: 'A Foucault pendulum seen from above — slide the latitude and its swing plane turns at sin(latitude), knocking down a ring of pegs. Starts at Berlin.',
     tag: 'Component',
@@ -76,11 +81,6 @@ export const LATEST_LOG: LogHeadline[] = [
   {
     title: 'A cam whose edge is a program of motion',
     summary: 'The tenth mechanism — a shaped disc turns and the follower obeys a motion drawn into its edge: rise, dwell, fall, dwell, once a turn.',
-    tag: 'Component',
-  },
-  {
-    title: 'A braille display read by touch, not light',
-    summary: 'The third display in the thread — six pins per cell rising and sinking through a face, spelling standard Grade-1 braille.',
     tag: 'Component',
   },
 ]
