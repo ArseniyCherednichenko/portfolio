@@ -6,6 +6,7 @@ import { Eyebrow } from '../components/Eyebrow'
 import { GradientText } from '../components/GradientText'
 import { SplitText } from '../components/SplitText'
 import { ScrollReveal } from '../components/ScrollReveal'
+import { Permalink } from '../components/Permalink'
 import { Seo } from '../components/Seo'
 import { PRINCIPLES, PRINCIPLE_COUNT } from '../data/principles'
 
@@ -108,8 +109,12 @@ function PrincipleBlock({ index }: { index: number }) {
         {p.n}
       </span>
       <div className="relative max-w-2xl">
-        <span className="text-sm font-semibold uppercase tracking-[0.24em] text-[#DCF87C]/70">
+        {/* The number doubles as the section label, so it carries the copy-link
+            glyph the rest of the site's sections do — each principle is already
+            an anchor (the sticky spine jumps to it); now it is shareable too. */}
+        <span className="group inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.24em] text-[#DCF87C]/70">
           {p.n}
+          <Permalink id={p.id} label={p.title} />
         </span>
         <h2 className="mt-4 font-display text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl">
           <SplitText as="span" text={p.title} gradient />
