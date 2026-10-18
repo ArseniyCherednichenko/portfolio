@@ -6,10 +6,24 @@ import { Eyebrow } from '../components/Eyebrow'
 import { GradientText } from '../components/GradientText'
 import { Iridescence } from '../components/Iridescence'
 import { CompareSlider } from '../components/CompareSlider'
+import { Permalink } from '../components/Permalink'
+import { SectionNav, type SectionLink } from '../components/SectionNav'
 import { Seo } from '../components/Seo'
 
 const EASE = [0.16, 1, 0.3, 1] as const
 const LIME = '#DCF87C'
+
+// The five beliefs, in order, as a right-side orientation rail. Each id is the
+// stable DOM anchor a Demo carries, so the rail jumps to a demo and the address
+// bar earns a shareable deep link to it — the page becomes navigable the way the
+// long inner pages already are, de-centering nothing in particular.
+const SECTIONS: SectionLink[] = [
+  { id: 'easing', label: 'Easing' },
+  { id: 'springs', label: 'Spring' },
+  { id: 'stagger', label: 'Stagger' },
+  { id: 'reduced-motion', label: 'Reduced' },
+  { id: 'structure', label: 'Structure' },
+]
 
 // A small segmented toggle used across the demos so every control on the page
 // reads the same. Purely presentational — the parent owns the state.
@@ -74,12 +88,14 @@ function Replay({ onClick }: { onClick: () => void }) {
 // The frame every demo sits in: a title, a one-line reading of what to notice,
 // the controls, and the stage. Keeps the four demos visually consistent.
 function Demo({
+  id,
   n,
   title,
   claim,
   controls,
   children,
 }: {
+  id: string
   n: string
   title: string
   claim: string
@@ -87,12 +103,18 @@ function Demo({
   children: React.ReactNode
 }) {
   return (
-    <Reveal>
+    <Reveal id={id} className="scroll-mt-28">
       <section className="rounded-3xl border border-white/10 bg-white/[0.02] p-7 sm:p-9">
         <div className="flex flex-wrap items-baseline justify-between gap-3">
-          <div>
-            <span className="font-mono text-xs text-[#DCF87C]">{n}</span>
-            <h2 className="mt-2 font-display text-2xl font-bold tracking-tight sm:text-3xl">{title}</h2>
+          {/* The title is its own deep-link waypoint — a chain glyph reveals on
+              hover/focus and copies the link to this belief, the same idiom the
+              section eyebrows use elsewhere on the site. */}
+          <div className="group flex items-start gap-2">
+            <div>
+              <span className="font-mono text-xs text-[#DCF87C]">{n}</span>
+              <h2 className="mt-2 font-display text-2xl font-bold tracking-tight sm:text-3xl">{title}</h2>
+            </div>
+            <Permalink id={id} label={title} className="mt-1.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-md text-[#DCF87C]/70 opacity-0 outline-none transition-[opacity,color] duration-200 hover:text-[#DCF87C] focus-visible:opacity-100 focus-visible:ring-2 focus-visible:ring-[#DCF87C]/60 group-hover:opacity-100 group-focus-within:opacity-100 max-md:opacity-70" />
           </div>
           {controls}
         </div>
@@ -386,6 +408,7 @@ export default function Craft() {
         title="On motion"
         description="Notes on interface motion — five small, playable demonstrations of the craft behind the animation on this site: easing, springs, stagger, respecting reduced motion, and structure before surface."
       />
+      <SectionNav sections={SECTIONS} />
       <div className="mx-auto w-full max-w-4xl px-6 py-24 sm:py-32">
         {/* HEADER */}
         <header className="relative isolate max-w-2xl">
@@ -418,6 +441,7 @@ export default function Craft() {
         {/* DEMOS */}
         <div className="mt-16 space-y-8">
           <Demo
+            id="easing"
             n="01"
             title="Easing has a voice"
             claim="Linear motion is a machine moving a thing from A to B. A good curve makes the same travel feel intentional — quick to commit, slow to settle. Watch the dot, then read the curve it followed."
@@ -427,6 +451,7 @@ export default function Craft() {
           </Demo>
 
           <Demo
+            id="springs"
             n="02"
             title="Spring, not snap"
             claim="Real things have weight. When an element returns to rest, a spring carries a little of that physics — it overshoots and settles — where a fixed tween just arrives. Drag the tile and feel both."
@@ -436,6 +461,7 @@ export default function Craft() {
           </Demo>
 
           <Demo
+            id="stagger"
             n="03"
             title="Stagger guides the eye"
             claim="When a group of things appears all at once, the eye has nowhere to land. Offset each one by a beat and you hand the viewer an order to read them in. The group stops feeling dumped and starts feeling composed."
@@ -445,6 +471,7 @@ export default function Craft() {
           </Demo>
 
           <Demo
+            id="reduced-motion"
             n="04"
             title="Respect the still"
             claim="Motion is a choice, and not everyone wants it. Every effect on this site has a calm path for anyone who asks their system to reduce motion — nothing essential lives in the animation. You can stand in both here."
@@ -454,6 +481,7 @@ export default function Craft() {
           </Demo>
 
           <Demo
+            id="structure"
             n="05"
             title="Structure, then surface"
             claim="Nothing here is styled into existence. The layout is right first — the frame, the order, the spacing — and only then does the finish go on: type, colour, a little motion. Slide the seam and trade one for the other; the bones underneath are the same."
