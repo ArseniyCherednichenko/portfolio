@@ -118,6 +118,7 @@ import { Skeleton, SkeletonSwap } from '../components/Skeleton'
 import { HoldConfirm } from '../components/HoldConfirm'
 import { Appreciate } from '../components/Appreciate'
 import { InlineEdit } from '../components/InlineEdit'
+import { AsyncButton } from '../components/AsyncButton'
 import { SwipeToReveal, type SwipeAction } from '../components/SwipeToReveal'
 import { PullToRefresh } from '../components/PullToRefresh'
 import { MoodSlider } from '../components/MoodSlider'
@@ -841,6 +842,61 @@ function InlineEditDemo() {
           className="h-4 w-4 accent-[#DCF87C]"
         />
         Simulate a failed save — commit an edit and watch the value roll back
+      </label>
+    </div>
+  )
+}
+
+// An AsyncButton showcase — three buttons wired to simulated work, in the
+// settings-bar shape they live in. Each onAction waits a beat then resolves,
+// except when the "make the next action fail" switch is on, which rejects it so
+// the shake-and-recover error path is reachable on demand. Nothing leaves the
+// tab; the latency and the failure are both faked.
+function AsyncButtonDemo() {
+  const [fail, setFail] = useState(false)
+  const work = (ms: number) => () =>
+    new Promise<void>((resolve, reject) => {
+      window.setTimeout(() => {
+        if (fail) {
+          setFail(false)
+          reject(new Error('simulated failure'))
+          return
+        }
+        resolve()
+      }, ms)
+    })
+  return (
+    <div className="flex w-full max-w-lg flex-col items-center gap-8">
+      <div className="flex flex-wrap items-center justify-center gap-4">
+        <AsyncButton
+          label="Save changes"
+          loadingLabel="Saving"
+          successLabel="Saved"
+          onAction={work(900)}
+        />
+        <AsyncButton
+          label="Deploy"
+          loadingLabel="Deploying"
+          successLabel="Shipped"
+          variant="ghost"
+          onAction={work(1300)}
+        />
+        <AsyncButton
+          label="Sign in"
+          loadingLabel="Checking"
+          successLabel="Welcome"
+          variant="ghost"
+          onAction={work(700)}
+        />
+      </div>
+      <label className="inline-flex cursor-pointer select-none items-center gap-2.5 text-sm text-white/55">
+        <input
+          type="checkbox"
+          checked={fail}
+          onChange={(e) => setFail(e.target.checked)}
+          className="h-4 w-4 accent-[#DCF87C]"
+        />
+        Make the next action fail — press a button and watch it shake and recover
       </label>
     </div>
   )
@@ -7884,6 +7940,43 @@ export default function Playground() {
                 width snaps, the save underline and the shake drop away, and the swap stays instant and just as usable.
                 The save here is simulated and the values live only in this tab — the pattern demonstrated, not a form
                 wired to anything.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH ASYNC BUTTON */}
+        <Reveal>
+          <div id="async-button" data-experiment="Async button" className="mt-12 scroll-mt-32">
+            <div className="flex flex-col items-center gap-8 rounded-3xl border border-white/10 bg-white/[0.02] px-6 py-14 sm:px-10">
+              <div className="max-w-md text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Press one</span>
+                <p className="mx-auto mt-3 text-lg font-medium text-white/85 sm:text-xl">
+                  The action button that carries its own work — idle, running, landed, or failed — as one object that
+                  cannot double-fire or go quiet on a failure.
+                </p>
+              </div>
+              <AsyncButtonDemo />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Async button</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                A plain <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">onClick</code> fires and
+                forgets, but the work it starts &mdash; a save, a deploy, a sign-in &mdash; takes real time and can fail,
+                and the button says nothing about either. So products bolt on a separate spinner, a toast, a disabled
+                flag, and a success message: four pieces that drift out of sync, and in the gap a user double-submits or
+                never learns the thing failed. This folds the whole lifecycle into the button itself. The width never
+                jumps &mdash; <em>Save</em>, <em>Saving</em>, and <em>Saved</em> are different lengths, so it measures
+                each label off a hidden mirror and springs its width while the label cross-fades, growing around its word
+                rather than reserving a wide, empty box. Double-submit is impossible: a press is honoured only from idle,
+                and while the work runs the button is genuinely disabled and marked{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">aria-busy</code>. Success is calm
+                &mdash; a check draws itself and a polite live region speaks it &mdash; and failure is loud: an X draws,
+                the button shakes, re-enables itself so the label can read <em>Try again</em>, and announces{' '}
+                <em>assertively</em>, because a silent failure is the one outcome a user must never be left to guess at.
+                Under <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code> the
+                width snaps, the spinner holds still, the check and X appear already drawn, and the shake is gone &mdash;
+                the control is identical to use. The latency and the failures here are simulated; nothing leaves the tab.
               </p>
             </div>
           </div>
