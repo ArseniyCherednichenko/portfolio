@@ -34,6 +34,11 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'A pendulum that proves the Earth turns',
+    summary: 'A Foucault pendulum seen from above — slide the latitude and its swing plane turns at sin(latitude), knocking down a ring of pegs. Starts at Berlin.',
+    tag: 'Component',
+  },
+  {
     title: 'A live status board for the person, not a project',
     summary: 'Berlin time on a cold-cathode clock, a soft presence state flipping on a split-flap, and the real library count rolling up — all live, all honest.',
     tag: 'Page',
@@ -76,11 +81,6 @@ export const LATEST_LOG: LogHeadline[] = [
   {
     title: 'A braille display read by touch, not light',
     summary: 'The third display in the thread — six pins per cell rising and sinking through a face, spelling standard Grade-1 braille.',
-    tag: 'Component',
-  },
-  {
-    title: 'A flip-dot board that rolls words over',
-    summary: 'The dot-matrix sign’s mechanical twin — real discs flipping on and off in a cascade, sharing one 5x7 font with the LED sign.',
     tag: 'Component',
   },
 ]
