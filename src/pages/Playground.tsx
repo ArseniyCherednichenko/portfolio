@@ -220,6 +220,7 @@ import { Domino } from '../components/Domino'
 import { Governor } from '../components/Governor'
 import { CamFollower } from '../components/CamFollower'
 import { Pantograph } from '../components/Pantograph'
+import { Oldham } from '../components/Oldham'
 import { SnowGlobe } from '../components/SnowGlobe'
 import { PinScreen } from '../components/PinScreen'
 import { Confetti, type ConfettiHandle } from '../components/Confetti'
@@ -9676,6 +9677,51 @@ export default function Playground() {
                 has travelled. Under{' '}
                 <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code> it never
                 free-runs &mdash; Draw completes the copy in one step so the whole figure is legible at once.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* OLDHAM COUPLING — rotation passed straight through an offset gap */}
+        <Reveal>
+          <div id="oldham" data-experiment="Oldham coupling" className="mt-12 scroll-mt-32">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 py-12 sm:px-10">
+              <div className="mb-8 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Rotation across a gap</span>
+                <p className="mx-auto mt-3 max-w-md text-lg font-medium text-white/85 sm:text-xl">
+                  Two shafts that don&rsquo;t line up, turning as one. Drag to crank it and watch the floating disc slide
+                  in its slots to swallow the offset.
+                </p>
+              </div>
+              <Oldham className="mx-auto" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Oldham coupling</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The twelfth character in the rigid-mechanism corner, and the one that does the quietest thing of all: it
+                passes rotation straight through, unchanged, across a gap it is not allowed to bridge directly. The
+                four-bar turns rotation into a <em>curve</em>; the Peaucellier into a <em>straight line</em>; the Geneva
+                into <em>steps</em>; the Scotch yoke casts a <em>sine</em>; the cam a <em>programmed lift</em>; the
+                pantograph a <em>scaled copy</em>. An Oldham coupling joins two shafts whose axes are parallel but
+                don&rsquo;t line up &mdash; a real problem on any machine where a motor and the thing it drives were
+                bolted down a hair out of true &mdash; and carries the turn from one to the other with no lead and no
+                lag, a constant-velocity joint made of nothing but two slots cut at right angles. The trick is a floating
+                disc in the middle with a tongue on each face, ninety degrees apart, each riding a diametral slot in its
+                flange. The honest part is the arithmetic, and it is prettier than it has any right to be: with the axes
+                at <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">&plusmn;e</code> the floating
+                centre is the one point lying in both slots at once, and that intersection collapses to{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">C = e&middot;(cos&nbsp;2&theta;, sin&nbsp;2&theta;)</code>{' '}
+                &mdash; so the centre runs a little circle whose diameter is exactly the offset, at <em>twice</em> the
+                shaft speed, while the two shafts themselves stay locked at one and the same angle. The only stored value
+                is that shaft angle; both flanges, the sliding tongues and the orbiting centre are all derived from it,
+                so the input and output can never drift out of agreement &mdash; the two rim markers always point the same
+                way, which is the whole point of the device. Drag to crank the input, or set it running. A real{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">role=slider</code> from the keyboard:
+                arrows nudge the angle, Shift a bigger step, Space runs or stops, Home returns to zero and End jumps a
+                quarter turn, with a live region reading the locked shaft angles and the centre&rsquo;s place on its
+                orbit. Under{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code> it never
+                free-runs &mdash; Step advances a quarter turn at a time so the slide of the tongues stays legible.
               </p>
             </div>
           </div>
