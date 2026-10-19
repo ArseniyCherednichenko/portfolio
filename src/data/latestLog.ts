@@ -34,6 +34,11 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'A checkbox that keeps its third state',
+    summary: 'The plain checkbox, built tri-state on a real native input — check some of a list and the parent reads the mixed dash; the mark draws in and the lime fill springs up.',
+    tag: 'Component',
+  },
+  {
     title: 'A contents rail on the long inner pages',
     summary: 'Craft, the specimen and thanks gain a right-side rail and per-section deep links — navigable section by section, every part shareable.',
     tag: 'Infra',
@@ -77,10 +82,5 @@ export const LATEST_LOG: LogHeadline[] = [
     title: 'A reply that streams in, word by word',
     summary: 'The message-arrival choreography every chat rides on — your line snaps in, three dots hold the beat, then the reply precipitates in a few words at a time.',
     tag: 'Component',
-  },
-  {
-    title: 'Deep links now reach four more pages',
-    summary: 'The section permalinks thread through About, Numbers, Colophon and Design too — deep-linkable section by section, not just Home.',
-    tag: 'Infra',
   },
 ]
