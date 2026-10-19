@@ -34,6 +34,11 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'A coupling that turns two misaligned shafts as one',
+    summary: 'The twelfth mechanism — an Oldham coupling passing rotation across an offset gap with zero phase error, its floating disc orbiting at twice the rate to swallow the offset.',
+    tag: 'Component',
+  },
+  {
     title: 'A grid that draws every harmonic ratio at once',
     summary: 'A Lissajous table on one canvas — each cell the figure two sine waves trace, a lime pen riding every curve. Drag or let the phase drift, and watch each one open and close.',
     tag: 'Component',
@@ -76,11 +81,6 @@ export const LATEST_LOG: LogHeadline[] = [
   {
     title: 'A meadow of fireflies that blink into unison',
     summary: 'The Murmuration’s counterpart in time, not space — each a clock nudged toward its neighbours, random sparkle condensing into one collective beat.',
-    tag: 'Component',
-  },
-  {
-    title: 'A linkage that copies a drawing, twice the size',
-    summary: 'The eleventh mechanism — trace a small figure with the stylus and a pen draws a true 2x copy, pole, stylus and pen on one line the whole way.',
     tag: 'Component',
   },
 ]
