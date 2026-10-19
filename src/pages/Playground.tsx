@@ -119,6 +119,7 @@ import { HoldConfirm } from '../components/HoldConfirm'
 import { Appreciate } from '../components/Appreciate'
 import { InlineEdit } from '../components/InlineEdit'
 import { AsyncButton } from '../components/AsyncButton'
+import { Checkbox } from '../components/Checkbox'
 import { SwipeToReveal, type SwipeAction } from '../components/SwipeToReveal'
 import { PullToRefresh } from '../components/PullToRefresh'
 import { MoodSlider } from '../components/MoodSlider'
@@ -843,6 +844,57 @@ function InlineEditDemo() {
         />
         Simulate a failed save — commit an edit and watch the value roll back
       </label>
+    </div>
+  )
+}
+
+// A Checkbox showcase in the one place it earns its third state — a parent
+// that governs a list of children. The parent reads the children: all on and
+// it is checked, all off and it is unchecked, some on and it is indeterminate
+// (the "mixed" dash). Toggling the parent sets the whole set at once, and the
+// last row is disabled to show that state too. Nothing leaves the tab.
+function CheckboxDemo() {
+  const ITEMS = [
+    { id: 'product', label: 'Product updates', desc: 'New features and changes, roughly monthly.' },
+    { id: 'changelog', label: 'Changelog', desc: 'A note each time the site grows a piece.' },
+    { id: 'digest', label: 'Weekly digest', desc: 'One quiet summary on Sundays.' },
+  ]
+  const [on, setOn] = useState<Record<string, boolean>>({ product: true, changelog: false, digest: true })
+  const values = ITEMS.map((i) => !!on[i.id])
+  const allOn = values.every(Boolean)
+  const noneOn = values.every((v) => !v)
+  const toggleAll = () => {
+    const next = !allOn
+    setOn(Object.fromEntries(ITEMS.map((i) => [i.id, next])))
+  }
+  return (
+    <div className="w-full max-w-md">
+      <div className="rounded-2xl border border-white/10 bg-white/[0.02] p-5 sm:p-6">
+        <Checkbox
+          checked={allOn}
+          indeterminate={!allOn && !noneOn}
+          onChange={toggleAll}
+          label="All email"
+          description="One switch for the whole set — half-on shows the mixed dash."
+        />
+        <div className="mt-4 flex flex-col gap-4 border-t border-white/10 pt-4 pl-[30px]">
+          {ITEMS.map((i) => (
+            <Checkbox
+              key={i.id}
+              checked={!!on[i.id]}
+              onChange={(c) => setOn((s) => ({ ...s, [i.id]: c }))}
+              label={i.label}
+              description={i.desc}
+            />
+          ))}
+          <Checkbox
+            checked
+            disabled
+            label="Security alerts"
+            description="Sign-in and account notices — always on."
+          />
+        </div>
+      </div>
     </div>
   )
 }
@@ -7977,6 +8029,44 @@ export default function Playground() {
                 Under <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code> the
                 width snaps, the spinner holds still, the check and X appear already drawn, and the shake is gone &mdash;
                 the control is identical to use. The latency and the failures here are simulated; nothing leaves the tab.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH CHECKBOX */}
+        <Reveal>
+          <div id="checkbox" data-experiment="Checkbox" className="mt-12 scroll-mt-32">
+            <div className="flex flex-col items-center gap-8 rounded-3xl border border-white/10 bg-white/[0.02] px-6 py-14 sm:px-10">
+              <div className="max-w-md text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Toggle a few</span>
+                <p className="mx-auto mt-3 text-lg font-medium text-white/85 sm:text-xl">
+                  The plain checkbox, kept tri-state. Turn some of the list on and the parent reads the half-on
+                  <em> mixed</em> dash; toggle it and the whole set moves at once.
+                </p>
+              </div>
+              <CheckboxDemo />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Checkbox</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The library had every picker that chooses <em>between</em> options &mdash; a radiogroup of segments, a
+                listbox that opens, a wheel that barrels &mdash; but nothing for the plainer, commoner question: a set of
+                independent yes/no choices, each on or off on its own. And a checkbox is not binary, it is{' '}
+                <em>tri-state</em>: a parent that governs a list is neither checked nor unchecked when only <em>some</em> of
+                its children are on &mdash; it is <em>indeterminate</em>, the dash every &ldquo;select all&rdquo; row shows.
+                The native element models that with a property you can only set from script (
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">el.indeterminate</code>), which a
+                hand-rolled <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">&lt;div&gt;</code> almost
+                always drops, along with the Space-to-toggle, the tab stop, and the click-anywhere-on-the-label that a real{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">&lt;input&gt;</code> gives for free. So
+                this keeps the real native input &mdash; visually hidden but fully focusable and operable, the source of
+                truth for state, focus, keyboard, and assistive tech &mdash; and draws the box beside it as the input&apos;s
+                peer, so the box reads the input&apos;s own focus ring without a line of JavaScript. The mark draws itself in
+                (a check for on, a dash for mixed) and the lime fill springs up behind it. Under{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code> the fill
+                snaps and the mark appears already drawn; the control is identical to use. The preferences here live only in
+                this tab.
               </p>
             </div>
           </div>
