@@ -214,6 +214,7 @@ import { Waveform } from '../components/Waveform'
 import { LangtonsAnt } from '../components/LangtonsAnt'
 import { PendulumWave } from '../components/PendulumWave'
 import { Foucault } from '../components/Foucault'
+import { LissajousTable } from '../components/LissajousTable'
 import { Cradle } from '../components/Cradle'
 import { Domino } from '../components/Domino'
 import { Governor } from '../components/Governor'
@@ -6359,6 +6360,47 @@ export default function Playground() {
                 <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code> it
                 never free-runs, painting the bob at rest and a faint fan of later swing lines so the idea of a turning
                 plane still reads at a glance.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* LISSAJOUS TABLE — the harmonic grid, every ratio traced at once, the phase scrubbable */}
+        <Reveal>
+          <div id="lissajous" data-experiment="Lissajous" className="mt-12 scroll-mt-32">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/40 px-6 py-12 sm:px-10">
+              <div className="mb-8 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Two waves at right angles</span>
+                <p className="mx-auto mt-3 max-w-md text-lg font-medium text-white/85 sm:text-xl">
+                  A grid of every integer ratio at once. Drag across it, or let the phase drift, and watch each figure
+                  open and close.
+                </p>
+              </div>
+              <LissajousTable className="mx-auto" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Lissajous table</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The shape a point draws when two sine waves push it sideways and up and down at once &mdash; the figure
+                you get on an oscilloscope with one tone on each axis, and the one Jules-Antoine Lissajous first drew in
+                1857 with a mirror on a pair of tuning forks. The ratio of the two frequencies decides the knot, so the
+                grid lays the integer ratios out as a table: horizontal frequency fixed down each column, vertical fixed
+                along each row. The first row and column, driven by one wave against a single back-and-forth, are plain
+                lines; the diagonal, where the two frequencies match, collapses to a single loop that is a leaning
+                ellipse at most phases and a true circle at the quarter turn; every cell off the diagonal ties into a
+                pretzel, a bow or a cage whose number of lobes counts out the ratio. The one thing moving between them is
+                the{' '}
+                <em>phase</em> &mdash; how far ahead one wave runs the other &mdash; and sliding it breathes the whole
+                table at once: a 1:1 cell opens from a diagonal line, through the ellipse, to the circle, and closes
+                again over a quarter turn. The maths is exact, x&nbsp;=&nbsp;sin(fx&middot;t&nbsp;+&nbsp;&delta;) against
+                y&nbsp;=&nbsp;sin(fy&middot;t); only the drawing is tuned for watching. The whole grid is one canvas and
+                one requestAnimationFrame loop, kept off the React render path and capped for device pixel ratio, with a
+                lime pen riding each curve so the table reads as something drawn rather than a chart. Drag across it to
+                scrub the phase by hand, or let it drift; the slider and arrow keys do the same with a live readout.
+                Under{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code> the
+                loop never starts &mdash; it paints the figures once at the quarter turn, where every ratio shows its
+                fullest shape.
               </p>
             </div>
           </div>
