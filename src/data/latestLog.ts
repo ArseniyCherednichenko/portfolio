@@ -34,6 +34,11 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'A grid that draws every harmonic ratio at once',
+    summary: 'A Lissajous table on one canvas — each cell the figure two sine waves trace, a lime pen riding every curve. Drag or let the phase drift, and watch each one open and close.',
+    tag: 'Component',
+  },
+  {
     title: 'A checkbox that keeps its third state',
     summary: 'The plain checkbox, built tri-state on a real native input — check some of a list and the parent reads the mixed dash; the mark draws in and the lime fill springs up.',
     tag: 'Component',
@@ -76,11 +81,6 @@ export const LATEST_LOG: LogHeadline[] = [
   {
     title: 'A linkage that copies a drawing, twice the size',
     summary: 'The eleventh mechanism — trace a small figure with the stylus and a pen draws a true 2x copy, pole, stylus and pen on one line the whole way.',
-    tag: 'Component',
-  },
-  {
-    title: 'A reply that streams in, word by word',
-    summary: 'The message-arrival choreography every chat rides on — your line snaps in, three dots hold the beat, then the reply precipitates in a few words at a time.',
     tag: 'Component',
   },
 ]
