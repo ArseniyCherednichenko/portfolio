@@ -178,6 +178,7 @@ import { Escapement } from '../components/Escapement'
 import { ScotchYoke } from '../components/ScotchYoke'
 import { Trammel } from '../components/Trammel'
 import { Chebyshev } from '../components/Chebyshev'
+import { Watt } from '../components/Watt'
 import { Brachistochrone } from '../components/Brachistochrone'
 import { Catenary } from '../components/Catenary'
 import { Orrery } from '../components/Orrery'
@@ -9532,6 +9533,57 @@ export default function Playground() {
                 left and right nudge the leg, Shift for a larger step, Space runs or stops, Home centres it and End jumps
                 to the far end, with a live region reading the leg angle, how far along the rail the pen sits, and how far
                 off true it strays. Under{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code> there is
+                no sweep &mdash; Step jumps end to end &mdash; and every state stays legible.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH WATT — the oldest straight-line linkage, beside the Chebyshev */}
+        <Reveal>
+          <div id="watt" data-experiment="Watt's linkage" className="mt-12 scroll-mt-32">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 py-12 sm:px-10">
+              <div className="mb-8 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Three bars, close enough</span>
+                <p className="mx-auto mt-3 max-w-md text-lg font-medium text-white/85 sm:text-xl">
+                  Swing the rocker and a point on the coupler rides the straight crossing of a figure-eight &mdash; the
+                  trick that guided a steam engine&rsquo;s piston before anyone drew a line exactly.
+                </p>
+              </div>
+              <Watt className="mx-auto" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Watt&rsquo;s linkage</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The oldest of the three straight-line characters, and the one that came first by eighty years. The
+                Peaucellier draws a line that is straight <em>exactly</em>, with eight links; Chebyshev got within four
+                parts in a thousand on four bars. James Watt asked the question first, in{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">1784</code>, and the cruder one:
+                can <em>three</em> bars get close enough that a steam engine will not care? He needed to guide the piston
+                rod of his double-acting engine straight up and down, and a rigid straight slide would have jammed and
+                worn; a linkage that only <em>approximately</em> ran straight, but ran free, was worth more than an exact
+                one that seized. His answer is a figure-eight &mdash; a lemniscate &mdash; and the marvel is that right
+                across the crossing of the eight the curve is so nearly straight the engine never knew the difference.
+                Two equal rockers of length{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">2.4</code> swing from pivots thrown
+                diagonally across the centre, one high and one low, so the whole linkage has a half-turn symmetry about
+                the middle; a coupler of the same length bridges their tips, and that symmetry forces its{' '}
+                <em>midpoint</em> through the centre, where the two opposing bends of the eight cancel to leave a straight
+                run. Track it across that central stroke and it holds the line to within about{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">1.9%</code> of the distance it travels
+                &mdash; honestly rougher than the Chebyshev beside it, which is the whole reason it stands here: it is the
+                first attempt, not the best. The only stored value is the angle of the left rocker; the right rocker, the
+                coupler, the tracked midpoint and the line it rides are all solved from that one number each frame by
+                intersecting two circles, so no two parts can drift out of agreement. The faint loop behind the trace is
+                the <em>whole</em> figure-eight this linkage draws; the bright path is the central stroke the pen actually
+                rides; the dashed rule is the true straight line it approximates. The straightness figure on the chip is
+                not a claim &mdash; it is <em>measured</em> off the drawn geometry, as the largest the trace strays from
+                that line across the stroke. Drag anywhere to swing the rocker one to one, or set it rocking. A real{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">role=slider</code> from the keyboard:
+                up and down nudge the rocker, Shift for a larger step, Space runs or stops, Home centres it and End jumps
+                to the far end, with a live region reading the rocker angle, how far along the stroke the pen sits, and
+                how far off true it strays. Under{' '}
                 <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code> there is
                 no sweep &mdash; Step jumps end to end &mdash; and every state stays legible.
               </p>
