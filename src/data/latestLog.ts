@@ -34,6 +34,11 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'A mechanism that cuts slow and returns fast',
+    summary: 'The thirteenth mechanism — a Whitworth quick-return turning one steady crank into a ram that crawls out on the working stroke and snaps back, the ratio measured off the geometry.',
+    tag: 'Component',
+  },
+  {
     title: 'A coupling that turns two misaligned shafts as one',
     summary: 'The twelfth mechanism — an Oldham coupling passing rotation across an offset gap with zero phase error, its floating disc orbiting at twice the rate to swallow the offset.',
     tag: 'Component',
@@ -76,11 +81,6 @@ export const LATEST_LOG: LogHeadline[] = [
   {
     title: 'A like button with a volume knob',
     summary: 'The Medium clap, rebuilt by hand — hold to pour appreciation in on a steady cadence, each add a deterministic spark burst, up to a cap.',
-    tag: 'Component',
-  },
-  {
-    title: 'A meadow of fireflies that blink into unison',
-    summary: 'The Murmuration’s counterpart in time, not space — each a clock nudged toward its neighbours, random sparkle condensing into one collective beat.',
     tag: 'Component',
   },
 ]
