@@ -34,6 +34,11 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'The framework stops re-downloading every day',
+    summary: 'React, the router and Framer Motion now sit in their own cached chunks, so a daily content deploy no longer re-hashes 295KB of code that never changed.',
+    tag: 'Infra',
+  },
+  {
     title: 'The oldest trick for drawing a straight line',
     summary: 'The fourteenth mechanism — Watt’s 1784 linkage, three bars whose coupler midpoint rides the straight crossing of a figure-eight, within 1.9% of true, the roughest of the straight-line trio by design.',
     tag: 'Component',
@@ -77,10 +82,5 @@ export const LATEST_LOG: LogHeadline[] = [
     title: 'A live status board for the person, not a project',
     summary: 'Berlin time on a cold-cathode clock, a soft presence state flipping on a split-flap, and the real library count rolling up — all live, all honest.',
     tag: 'Page',
-  },
-  {
-    title: 'A field you edit in place, and that survives a failed save',
-    summary: 'The click-to-edit control the platform never shipped — text that becomes a field, auto-sizes to its content, commits optimistically, and rolls back if the save is rejected.',
-    tag: 'Component',
   },
 ]
