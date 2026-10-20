@@ -34,6 +34,11 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'The oldest trick for drawing a straight line',
+    summary: 'The fourteenth mechanism — Watt’s 1784 linkage, three bars whose coupler midpoint rides the straight crossing of a figure-eight, within 1.9% of true, the roughest of the straight-line trio by design.',
+    tag: 'Component',
+  },
+  {
     title: 'A mechanism that cuts slow and returns fast',
     summary: 'The thirteenth mechanism — a Whitworth quick-return turning one steady crank into a ram that crawls out on the working stroke and snaps back, the ratio measured off the geometry.',
     tag: 'Component',
@@ -76,11 +81,6 @@ export const LATEST_LOG: LogHeadline[] = [
   {
     title: 'A field you edit in place, and that survives a failed save',
     summary: 'The click-to-edit control the platform never shipped — text that becomes a field, auto-sizes to its content, commits optimistically, and rolls back if the save is rejected.',
-    tag: 'Component',
-  },
-  {
-    title: 'A like button with a volume knob',
-    summary: 'The Medium clap, rebuilt by hand — hold to pour appreciation in on a steady cadence, each add a deterministic spark burst, up to a cap.',
     tag: 'Component',
   },
 ]
