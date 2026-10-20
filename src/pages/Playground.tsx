@@ -221,6 +221,7 @@ import { Governor } from '../components/Governor'
 import { CamFollower } from '../components/CamFollower'
 import { Pantograph } from '../components/Pantograph'
 import { Oldham } from '../components/Oldham'
+import { Whitworth } from '../components/Whitworth'
 import { SnowGlobe } from '../components/SnowGlobe'
 import { PinScreen } from '../components/PinScreen'
 import { Confetti, type ConfettiHandle } from '../components/Confetti'
@@ -9722,6 +9723,55 @@ export default function Playground() {
                 orbit. Under{' '}
                 <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code> it never
                 free-runs &mdash; Step advances a quarter turn at a time so the slide of the tongues stays legible.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* WHITWORTH QUICK-RETURN — steady rotation into unequal reciprocation */}
+        <Reveal>
+          <div id="whitworth" data-experiment="Whitworth quick-return" className="mt-12 scroll-mt-32">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 py-12 sm:px-10">
+              <div className="mb-8 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Slow out, fast back</span>
+                <p className="mx-auto mt-3 max-w-md text-lg font-medium text-white/85 sm:text-xl">
+                  One crank turning at a dead-steady rate, and a ram that crawls out on its working stroke and snaps
+                  straight back. Drag to crank it, or set it running.
+                </p>
+              </div>
+              <Whitworth className="mx-auto" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Whitworth quick-return</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The thirteenth character in the rigid-mechanism corner, and the one with a temper. The others are all
+                even-handed: the four-bar turns rotation into a <em>curve</em>, the Scotch yoke into a <em>perfectly
+                symmetric</em> sine, the Geneva into even <em>steps</em>, the Oldham passes it <em>straight through</em>.
+                The Whitworth does something deliberately lopsided &mdash; it turns one steady input into a reciprocation
+                that is slow one way and fast the other. That is not a flaw; it is the entire reason the mechanism
+                exists. A shaping machine cuts metal on the push and does no work on the way back, so the push wants to be
+                slow and strong and the return wants to waste no time, and this linkage buys exactly that from a motor
+                that never changes speed. The trick is to drive a slotted link from a crank whose centre sits a little
+                off the link&rsquo;s pivot. With the crank centre a distance{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">d</code> above the pivot and a crank
+                radius <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">r &gt; d</code>, the pin&rsquo;s
+                circle swallows the pivot, so the link makes full turns &mdash; but not at a steady rate. The pin is{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">P = A + r&middot;(cos&nbsp;&phi;, sin&nbsp;&phi;)</code>,
+                the link points along <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">O&rarr;P</code>,
+                and because the pin sits far out through one half-turn and whips close past the pivot through the other,
+                the link dawdles then races. A connecting rod off the far end turns that uneven swing into the ram&rsquo;s
+                two strokes: same distance each way, unequal time. The single stored value is the crank angle; the pin,
+                the slot, the link, the rod and the ram are all derived from it, so nothing can drift. The quick-return
+                ratio on the chip is not a claim &mdash; it is <em>measured</em> off the drawn geometry, by sweeping the
+                crank once to find the two dead centres where the ram reverses and comparing the crank angle each stroke
+                costs. The ram lights while it is on the slow working stroke. Drag anywhere around the crank centre to
+                turn it, or set it running to watch a constant input come out unequal. A real{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">role=slider</code> from the keyboard:
+                arrows nudge the crank, Shift a bigger step, Space runs or stops, Home returns to a dead centre and End
+                jumps to the next one, with a live region reading the crank angle, the stroke in progress and the ratio.
+                Under <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code> it
+                never free-runs &mdash; Step jumps dead centre to dead centre so the two strokes stay legible without the
+                sweep between.
               </p>
             </div>
           </div>
