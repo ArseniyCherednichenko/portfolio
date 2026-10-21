@@ -120,6 +120,7 @@ import { Appreciate } from '../components/Appreciate'
 import { InlineEdit } from '../components/InlineEdit'
 import { AsyncButton } from '../components/AsyncButton'
 import { Checkbox } from '../components/Checkbox'
+import { StepForm, type WizardStep } from '../components/StepForm'
 import { SwipeToReveal, type SwipeAction } from '../components/SwipeToReveal'
 import { PullToRefresh } from '../components/PullToRefresh'
 import { MoodSlider } from '../components/MoodSlider'
@@ -956,6 +957,140 @@ function AsyncButtonDemo() {
         Make the next action fail — press a button and watch it shake and recover
       </label>
     </div>
+  )
+}
+
+// A StepForm showcase — a believable three-step onboarding wired to the shell.
+// The demo owns every field and its validation; StepForm owns the choreography.
+// Nothing is submitted anywhere — the final step waits a beat then resolves, and
+// the values live only in this tab.
+function StepFormDemo() {
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [role, setRole] = useState<'design' | 'engineering' | 'both' | null>(null)
+  const [news, setNews] = useState(true)
+
+  const ROLES: ReadonlyArray<{ id: 'design' | 'engineering' | 'both'; label: string }> = [
+    { id: 'design', label: 'Design' },
+    { id: 'engineering', label: 'Engineering' },
+    { id: 'both', label: 'A bit of both' },
+  ]
+  const roleLabel = ROLES.find((r) => r.id === role)?.label ?? ''
+
+  const field =
+    'w-full rounded-xl border border-white/12 bg-white/[0.03] px-3.5 py-2.5 text-sm text-white placeholder:text-white/30 outline-none transition-colors focus:border-[#DCF87C]/60 focus:bg-white/[0.05]'
+
+  const steps: WizardStep[] = [
+    {
+      id: 'details',
+      title: 'Your details',
+      hint: 'How we would address you. Nothing leaves this tab.',
+      validate: () => {
+        if (!name.trim()) return 'Enter your name to continue.'
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) return 'Enter a valid email address.'
+        return null
+      },
+      body: (
+        <div className="space-y-3 text-left">
+          <label className="block">
+            <span className="mb-1.5 block text-xs font-medium uppercase tracking-wider text-white/45">Name</span>
+            <input className={field} value={name} onChange={(e) => setName(e.target.value)} placeholder="Ada Lovelace" />
+          </label>
+          <label className="block">
+            <span className="mb-1.5 block text-xs font-medium uppercase tracking-wider text-white/45">Email</span>
+            <input
+              type="email"
+              className={field}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="ada@example.com"
+            />
+          </label>
+        </div>
+      ),
+    },
+    {
+      id: 'role',
+      title: 'What you do',
+      hint: 'Pick the one that fits best.',
+      validate: () => (role ? null : 'Pick one to continue.'),
+      body: (
+        <div className="space-y-5 text-left">
+          <div className="flex flex-wrap gap-2">
+            {ROLES.map((r) => (
+              <button
+                key={r.id}
+                type="button"
+                aria-pressed={role === r.id}
+                onClick={() => setRole(r.id)}
+                className={`rounded-full border px-4 py-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#DCF87C]/60 focus-visible:ring-offset-2 focus-visible:ring-offset-black ${
+                  role === r.id
+                    ? 'border-[#DCF87C] bg-[#DCF87C] text-black'
+                    : 'border-white/15 text-white/70 hover:border-white/30 hover:text-white'
+                }`}
+              >
+                {r.label}
+              </button>
+            ))}
+          </div>
+          <label className="inline-flex cursor-pointer select-none items-center gap-2.5 text-sm text-white/60">
+            <input
+              type="checkbox"
+              checked={news}
+              onChange={(e) => setNews(e.target.checked)}
+              className="h-4 w-4 accent-[#DCF87C]"
+            />
+            Send me the occasional note
+          </label>
+        </div>
+      ),
+    },
+    {
+      id: 'review',
+      title: 'Looks right?',
+      hint: 'A last glance before you finish.',
+      body: (
+        <dl className="divide-y divide-white/8 text-left text-sm">
+          {[
+            ['Name', name.trim() || '—'],
+            ['Email', email.trim() || '—'],
+            ['Focus', roleLabel || '—'],
+            ['Notes', news ? 'Yes, please' : 'No thanks'],
+          ].map(([k, v]) => (
+            <div key={k} className="flex items-center justify-between gap-4 py-2.5">
+              <dt className="text-white/45">{k}</dt>
+              <dd className="truncate font-medium text-white/85">{v}</dd>
+            </div>
+          ))}
+        </dl>
+      ),
+    },
+  ]
+
+  const reset = () => {
+    setName('')
+    setEmail('')
+    setRole(null)
+    setNews(true)
+  }
+
+  return (
+    <StepForm
+      steps={steps}
+      finishLabel="Finish setup"
+      onComplete={() => new Promise<void>((resolve) => window.setTimeout(resolve, 900))}
+      onReset={reset}
+      done={
+        <div>
+          <p className="font-display text-xl font-semibold text-white">
+            {name.trim() ? `You are all set, ${name.trim().split(' ')[0]}.` : 'You are all set.'}
+          </p>
+          <p className="mx-auto mt-2 max-w-xs text-sm leading-relaxed text-white/55">
+            That is the whole flow — nothing was sent anywhere. Start over to run it again.
+          </p>
+        </div>
+      }
+    />
   )
 }
 
@@ -8113,6 +8248,45 @@ export default function Playground() {
                 <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code> the fill
                 snaps and the mark appears already drawn; the control is identical to use. The preferences here live only in
                 this tab.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH STEP FORM */}
+        <Reveal>
+          <div id="step-form" data-experiment="Multi-step form" className="mt-12 scroll-mt-32">
+            <div className="flex flex-col items-center gap-8 rounded-3xl border border-white/10 bg-white/[0.02] px-6 py-14 sm:px-10">
+              <div className="max-w-md text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Walk it through</span>
+                <p className="mx-auto mt-3 text-lg font-medium text-white/85 sm:text-xl">
+                  The onboarding flow, done as a shell: steps arrive from the way you are travelling, a half-filled step
+                  will not let you leave, and the card glides to each step&apos;s height.
+                </p>
+              </div>
+              <StepFormDemo />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Multi-step form</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The onboarding wizard, the checkout, the setup flow &mdash; the shape every product ships and almost
+                nobody builds with care. The lazy version is a stack of hidden{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">&lt;div&gt;</code>s toggled by an
+                index, and it drops every part that makes the pattern humane. This is the shell done properly, and only
+                the shell: the caller owns the fields, so it stays a reusable flow rather than one bound to a single
+                form. Steps arrive from the direction you are travelling &mdash; <em>Next</em> slides the new step in
+                from the right, <em>Back</em> reverses it &mdash; so motion carries a sense of place rather than a
+                generic fade. A step cannot be left half-done: <em>Next</em> runs the step&apos;s own validation, and a
+                failure blocks the advance, shows inline, shakes the card, and is announced <em>assertively</em>, because
+                a stop you did not expect is the one thing a user must never be left to guess at. Focus follows the flow
+                &mdash; every step change moves focus onto the new step&apos;s heading, so the next Tab lands on its first
+                field and a screen reader hears <em>&ldquo;Step 2 of 3&rdquo;</em>. And the card&apos;s height glides:
+                each step is a different size, so the panel measures the mounted step and springs its own height to match,
+                growing and shrinking around its content instead of reserving the tallest step&apos;s box for all of them.
+                Under <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code>{' '}
+                the slide becomes a cross-fade in place, the height snaps, and the spinner and completion check hold still
+                &mdash; the flow is identical to use. The fields and the final submit are simulated; nothing leaves the
+                tab.
               </p>
             </div>
           </div>
