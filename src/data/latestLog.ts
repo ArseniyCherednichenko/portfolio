@@ -34,6 +34,11 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'A radar scope that lights what the sweep finds',
+    summary: 'A plan-position sonar — a bearing line rotates and strikes each contact to a phosphor glow that fades before the next lap. Click the face to drop your own.',
+    tag: 'Component',
+  },
+  {
     title: 'The framework stops re-downloading every day',
     summary: 'React, the router and Framer Motion now sit in their own cached chunks, so a daily content deploy no longer re-hashes 295KB of code that never changed.',
     tag: 'Infra',
@@ -77,10 +82,5 @@ export const LATEST_LOG: LogHeadline[] = [
     title: 'A pendulum that proves the Earth turns',
     summary: 'A Foucault pendulum seen from above — slide the latitude and its swing plane turns at sin(latitude), knocking down a ring of pegs. Starts at Berlin.',
     tag: 'Component',
-  },
-  {
-    title: 'A live status board for the person, not a project',
-    summary: 'Berlin time on a cold-cathode clock, a soft presence state flipping on a split-flap, and the real library count rolling up — all live, all honest.',
-    tag: 'Page',
   },
 ]
