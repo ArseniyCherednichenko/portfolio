@@ -34,6 +34,11 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'The same two things, built with care and without',
+    summary: 'Taste gains a ninth and tenth demo — a destructive action and a save — each shown as the bare default and the considered version, one switch flipping all ten at once.',
+    tag: 'Polish',
+  },
+  {
     title: 'An onboarding flow that will not let you skip ahead',
     summary: 'A multi-step form, done as a reusable shell — steps slide in from the way you travel, a half-filled step blocks the advance, focus follows into each one, and the card glides to its height.',
     tag: 'Component',
@@ -77,10 +82,5 @@ export const LATEST_LOG: LogHeadline[] = [
     title: 'A contents rail on the long inner pages',
     summary: 'Craft, the specimen and thanks gain a right-side rail and per-section deep links — navigable section by section, every part shareable.',
     tag: 'Infra',
-  },
-  {
-    title: 'A button that carries its own work',
-    summary: 'The action button, done right — idle, running, landed or failed as one object: the width morphs per word, it cannot double-fire, and a failure shakes and announces instead of going quiet.',
-    tag: 'Component',
   },
 ]
