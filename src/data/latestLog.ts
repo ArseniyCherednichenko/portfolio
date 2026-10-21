@@ -34,6 +34,11 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'An onboarding flow that will not let you skip ahead',
+    summary: 'A multi-step form, done as a reusable shell — steps slide in from the way you travel, a half-filled step blocks the advance, focus follows into each one, and the card glides to its height.',
+    tag: 'Component',
+  },
+  {
     title: 'A radar scope that lights what the sweep finds',
     summary: 'A plan-position sonar — a bearing line rotates and strikes each contact to a phosphor glow that fades before the next lap. Click the face to drop your own.',
     tag: 'Component',
@@ -76,11 +81,6 @@ export const LATEST_LOG: LogHeadline[] = [
   {
     title: 'A button that carries its own work',
     summary: 'The action button, done right — idle, running, landed or failed as one object: the width morphs per word, it cannot double-fire, and a failure shakes and announces instead of going quiet.',
-    tag: 'Component',
-  },
-  {
-    title: 'A pendulum that proves the Earth turns',
-    summary: 'A Foucault pendulum seen from above — slide the latitude and its swing plane turns at sin(latitude), knocking down a ring of pegs. Starts at Berlin.',
     tag: 'Component',
   },
 ]
