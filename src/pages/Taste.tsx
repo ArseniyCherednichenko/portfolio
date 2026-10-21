@@ -434,6 +434,121 @@ function ConsideredDate() {
   )
 }
 
+// --- Demo 9: the destructive action -----------------------------------------
+
+function PlainConfirm() {
+  // A bare, unguarded delete. One slip and the account is gone, with no moment
+  // to catch the mistake — the honest default nobody should ship.
+  return (
+    <button
+      type="button"
+      className="border border-white/25 bg-transparent px-3 py-1.5 text-sm text-white/70"
+    >
+      Delete account
+    </button>
+  )
+}
+
+function CheckGlyph() {
+  return (
+    <svg
+      viewBox="0 0 16 16"
+      aria-hidden
+      className="h-3.5 w-3.5"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={2}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M3 8.5 6.5 12 13 4.5" />
+    </svg>
+  )
+}
+
+function ConsideredConfirm({ reduce }: { reduce: boolean | null }) {
+  type Stage = 'idle' | 'confirm' | 'done'
+  const [stage, setStage] = useState<Stage>('idle')
+
+  // After the delete lands, hold the confirmation briefly, then reset so the
+  // demo stays replayable without a reload.
+  useEffect(() => {
+    if (stage !== 'done') return
+    const t = setTimeout(() => setStage('idle'), 1900)
+    return () => clearTimeout(t)
+  }, [stage])
+
+  const t = { duration: reduce ? 0 : 0.26, ease: EASE }
+
+  return (
+    <div className="flex min-h-[112px] w-full max-w-xs items-center justify-center">
+      <AnimatePresence mode="wait" initial={false}>
+        {stage === 'idle' && (
+          <motion.button
+            key="idle"
+            type="button"
+            onClick={() => setStage('confirm')}
+            initial={reduce ? false : { opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={t}
+            className="rounded-full border border-[#F0877A]/35 px-5 py-2.5 text-sm font-semibold text-[#F0877A]/90 outline-none transition-colors hover:border-[#F0877A]/60 hover:text-[#F0877A] focus-visible:ring-2 focus-visible:ring-[#F0877A]/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0A0A0A]"
+          >
+            Delete account
+          </motion.button>
+        )}
+        {stage === 'confirm' && (
+          <motion.div
+            key="confirm"
+            initial={reduce ? false : { opacity: 0, y: 6 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={reduce ? { opacity: 0 } : { opacity: 0, y: -6 }}
+            transition={t}
+            className="w-full rounded-2xl border border-[#F0877A]/25 bg-[#F0877A]/[0.05] p-4 text-center"
+          >
+            <p className="text-sm font-medium text-white/90">Delete your account?</p>
+            <p className="mt-1 text-xs leading-relaxed text-white/45">
+              Everything goes with it. This cannot be undone.
+            </p>
+            <div className="mt-3.5 flex justify-center gap-2">
+              <button
+                type="button"
+                onClick={() => setStage('idle')}
+                className="rounded-full border border-white/15 px-4 py-1.5 text-xs font-semibold text-white/75 outline-none transition-colors hover:border-white/30 hover:text-white focus-visible:ring-2 focus-visible:ring-white/30"
+              >
+                Keep it
+              </button>
+              <button
+                type="button"
+                onClick={() => setStage('done')}
+                className="rounded-full bg-[#F0877A] px-4 py-1.5 text-xs font-semibold text-black outline-none transition hover:brightness-105 focus-visible:ring-2 focus-visible:ring-[#F0877A]/60 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0A0A0A]"
+              >
+                Yes, delete
+              </button>
+            </div>
+          </motion.div>
+        )}
+        {stage === 'done' && (
+          <motion.div
+            key="done"
+            role="status"
+            initial={reduce ? false : { opacity: 0, scale: 0.96 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0 }}
+            transition={t}
+            className="flex items-center gap-2 text-sm text-white/65"
+          >
+            <span className="flex h-6 w-6 items-center justify-center rounded-full border border-white/20 text-white/55">
+              <CheckGlyph />
+            </span>
+            Account deleted
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  )
+}
+
 export default function Taste() {
   const reduce = useReducedMotion()
   const { open: openContact } = useContact()
@@ -485,7 +600,7 @@ export default function Taste() {
           <div className="flex flex-col gap-4 rounded-3xl border border-white/10 bg-white/[0.015] p-6 sm:flex-row sm:items-center sm:justify-between sm:p-7">
             <div>
               <p className="font-display text-lg font-semibold tracking-tight text-white/90">
-                One switch, eight demos.
+                One switch, nine demos.
               </p>
               <p className="mt-1 text-sm leading-relaxed text-white/50">
                 Same components, two levels of care. The delta between them is the whole craft.
@@ -569,6 +684,15 @@ export default function Taste() {
           reduce={reduce}
           plain={<PlainDate />}
           considered={<ConsideredDate />}
+        />
+        <DemoCard
+          index={8}
+          title="The destructive action"
+          changed="A bare Delete is one slip from gone. The considered version adds the one moment of friction that matters: it asks, names exactly what is at stake, and puts the safe choice first — so the undo is never needed."
+          mode={mode}
+          reduce={reduce}
+          plain={<PlainConfirm />}
+          considered={<ConsideredConfirm reduce={reduce} />}
         />
       </section>
 
