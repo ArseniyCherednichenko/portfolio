@@ -549,6 +549,107 @@ function ConsideredConfirm({ reduce }: { reduce: boolean | null }) {
   )
 }
 
+// --- Demo 10: the save confirmation -----------------------------------------
+
+function PlainSave() {
+  // The work is done, but the screen barely admits it — a flat word that never
+  // leaves, with no way back out of the change.
+  const [saved, setSaved] = useState(false)
+  return (
+    <div className="flex flex-col items-center gap-2">
+      <button
+        type="button"
+        onClick={() => setSaved(true)}
+        className="border border-white/25 bg-transparent px-3 py-1.5 text-sm text-white/70"
+      >
+        Save changes
+      </button>
+      {saved && <p className="text-sm text-white/45">Saved.</p>}
+    </div>
+  )
+}
+
+function ConsideredSave({ reduce }: { reduce: boolean | null }) {
+  const [toast, setToast] = useState(false)
+  const [undone, setUndone] = useState(false)
+
+  // A toast steps in to confirm, then steps back out on its own once it has
+  // been read. Undo cancels both the timer and the save.
+  useEffect(() => {
+    if (!toast) return
+    const t = setTimeout(() => setToast(false), 4000)
+    return () => clearTimeout(t)
+  }, [toast])
+
+  return (
+    <div className="flex w-full max-w-xs flex-col items-center gap-3">
+      <button
+        type="button"
+        onClick={() => {
+          setUndone(false)
+          setToast(true)
+        }}
+        className="rounded-full bg-[#DCF87C] px-6 py-2.5 text-sm font-semibold text-black outline-none transition hover:brightness-105 focus-visible:ring-2 focus-visible:ring-[#DCF87C]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0A0A0A]"
+      >
+        Save changes
+      </button>
+
+      <div className="flex h-[56px] w-full items-start justify-center">
+        <AnimatePresence mode="wait">
+          {toast ? (
+            <motion.div
+              key="toast"
+              role="status"
+              initial={reduce ? { opacity: 0 } : { opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={reduce ? { opacity: 0 } : { opacity: 0, y: 10 }}
+              transition={{ duration: reduce ? 0 : 0.3, ease: EASE }}
+              className="relative flex w-full items-center gap-3 overflow-hidden rounded-2xl border border-white/12 bg-[#141414] px-4 py-3 shadow-[0_18px_40px_-20px_rgba(0,0,0,0.9)]"
+            >
+              <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#DCF87C]/15 text-[#DCF87C]">
+                <CheckGlyph />
+              </span>
+              <p className="flex-1 text-sm text-white/85">Changes saved</p>
+              <button
+                type="button"
+                onClick={() => {
+                  setUndone(true)
+                  setToast(false)
+                }}
+                className="rounded-full px-2.5 py-1 text-xs font-semibold text-[#DCF87C] outline-none transition-colors hover:bg-[#DCF87C]/10 focus-visible:ring-2 focus-visible:ring-[#DCF87C]/50"
+              >
+                Undo
+              </button>
+              {/* The countdown rail — a quiet promise the toast will leave on
+                  its own, so it never has to be dismissed by hand. */}
+              {!reduce && (
+                <motion.span
+                  aria-hidden
+                  className="absolute inset-x-0 bottom-0 h-0.5 origin-left bg-[#DCF87C]/40"
+                  initial={{ scaleX: 1 }}
+                  animate={{ scaleX: 0 }}
+                  transition={{ duration: 4, ease: 'linear' }}
+                />
+              )}
+            </motion.div>
+          ) : undone ? (
+            <motion.p
+              key="undone"
+              initial={reduce ? false : { opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: reduce ? 0 : 0.25, ease: EASE }}
+              className="pt-2 text-xs text-white/40"
+            >
+              Change reverted.
+            </motion.p>
+          ) : null}
+        </AnimatePresence>
+      </div>
+    </div>
+  )
+}
+
 export default function Taste() {
   const reduce = useReducedMotion()
   const { open: openContact } = useContact()
@@ -600,7 +701,7 @@ export default function Taste() {
           <div className="flex flex-col gap-4 rounded-3xl border border-white/10 bg-white/[0.015] p-6 sm:flex-row sm:items-center sm:justify-between sm:p-7">
             <div>
               <p className="font-display text-lg font-semibold tracking-tight text-white/90">
-                One switch, nine demos.
+                One switch, ten demos.
               </p>
               <p className="mt-1 text-sm leading-relaxed text-white/50">
                 Same components, two levels of care. The delta between them is the whole craft.
@@ -693,6 +794,15 @@ export default function Taste() {
           reduce={reduce}
           plain={<PlainConfirm />}
           considered={<ConsideredConfirm reduce={reduce} />}
+        />
+        <DemoCard
+          index={9}
+          title="The save confirmation"
+          changed="A flat word that never leaves tells you almost nothing. The considered version confirms with a toast that steps in, keeps an Undo within reach, and steps back out on its own once it has been read — feedback that respects both your attention and your mistakes."
+          mode={mode}
+          reduce={reduce}
+          plain={<PlainSave />}
+          considered={<ConsideredSave reduce={reduce} />}
         />
       </section>
 
