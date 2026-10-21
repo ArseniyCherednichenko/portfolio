@@ -160,6 +160,7 @@ import { Harmonograph } from '../components/Harmonograph'
 import { Mobile } from '../components/Mobile'
 import { Spirograph } from '../components/Spirograph'
 import { Oscilloscope } from '../components/Oscilloscope'
+import { Sonar } from '../components/Sonar'
 import { CrtScreen } from '../components/CrtScreen'
 import { CurveStitch } from '../components/CurveStitch'
 import { LavaLamp } from '../components/LavaLamp'
@@ -8973,6 +8974,44 @@ export default function Playground() {
                 oscillators: across walks the ratio, up sets the sweep speed and detune; it eases home to a slow trefoil
                 when you leave. One canvas, one loop off the frame delta, DPR-capped. Reduced motion draws one closed
                 figure as a steady line and holds it.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH SONAR */}
+        <Reveal>
+          <div id="sonar" data-experiment="Sonar" className="mt-12 scroll-mt-32">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/40 px-6 py-12 sm:px-10">
+              <div className="text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Plan position</span>
+                <p className="mx-auto mt-3 max-w-md text-lg font-medium text-white/85 sm:text-xl">
+                  Watch the line come round. Click the face to drop a contact where the pointer is.
+                </p>
+              </div>
+              <div className="mt-10 flex justify-center">
+                <Sonar />
+              </div>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Sonar</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                A plan-position radar scope, and the one display in this corner that sweeps rather than draws. Its
+                neighbours each hold a figure of their own &mdash; the Oscilloscope traces a Lissajous on a CRT, the
+                Harmonograph lays a seeded curve, the RadarChart spokes a silhouette out from a centre &mdash; but a PPI
+                scope holds nothing. A single bearing line rotates around the dial at a steady rate, trailing a wedge of
+                fading phosphor behind it, and the only things on the face are contacts: points at a bearing and a range
+                that sit dark until the sweep crosses their bearing, flash bright, then cool on the afterglow the tube&rsquo;s
+                phosphor would give them &mdash; so what you watch for is what a real operator does, a blip lighting as
+                the line passes and fading before the next lap brings it back. The geometry is honest to an instrument:
+                bearing is clockwise from north at the top, range runs from the centre out to the rim, the rings are
+                range gates and the ticks around the edge are the compass card, a contact at bearing b and range fraction
+                f sitting at (c + f&middot;R&middot;sin b, c &minus; f&middot;R&middot;cos b). Click anywhere on the face
+                to drop a contact where the pointer is, so the sweep has something new to find on its next pass; Scatter
+                drops a handful at random and Clear wipes the face. One canvas, one loop off the frame delta with the
+                contacts and their decaying glow held in a ref rather than on the render path, DPR-capped and
+                ResizeObserver-driven. Under reduced motion the loop never starts &mdash; the rings and card are drawn
+                once and every contact is shown already lit and still.
               </p>
             </div>
           </div>
