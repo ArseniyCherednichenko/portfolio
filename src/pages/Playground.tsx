@@ -251,6 +251,7 @@ import { StickerPeel } from '../components/StickerPeel'
 import { ParallaxCard, ParallaxLayer } from '../components/ParallaxCard'
 import { FanDeck, type FanCard } from '../components/FanDeck'
 import { ExpandingPanels, type Panel } from '../components/ExpandingPanels'
+import { Flipbook } from '../components/Flipbook'
 import { DirectionAwareHover } from '../components/DirectionAwareHover'
 import { Polaroid } from '../components/Polaroid'
 
@@ -436,6 +437,7 @@ import { GITHUB_URL } from '../data/contact'
 import { SKILLS } from '../data/toolkit'
 import { COMPONENT_COUNT, PAGE_COUNT } from '../data/stats'
 import { LIBRARY } from '../data/library'
+import { PRINCIPLES } from '../data/principles'
 import { CHAPTERS, KIND_META, KIND_ORDER } from '../data/changelog'
 import { Gauge } from '../components/Gauge'
 import { RingChart } from '../components/RingChart'
@@ -450,6 +452,68 @@ import { Candlestick, type Candle } from '../components/Candlestick'
 import { ScatterPlot, type ScatterPoint } from '../components/ScatterPlot'
 import { ParallelCoords, type PCDimension, type PCRecord } from '../components/ParallelCoords'
 import { Stat, type DeltaMode } from '../components/Stat'
+
+// The pages the Flipbook turns: a cover, the eight working beliefs read from
+// the real principles data (so the book de-centres any one project and stays
+// honest — every belief links to a route where it holds up), and a closing
+// leaf. Each page is a plain node; the book paginates and turns them.
+const BOOK_PAGES = [
+  <div key="cover" className="flex h-full flex-col justify-between p-7 sm:p-9">
+    <span className="text-[0.7rem] font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">
+      A working belief set
+    </span>
+    <div>
+      <h3 className="font-display text-3xl leading-tight text-white sm:text-4xl">
+        A few things
+        <br />I build by.
+      </h3>
+      <p className="mt-4 max-w-xs text-sm leading-relaxed text-white/55">
+        Eight beliefs, each one already holding up somewhere on this site. Turn the
+        page &mdash; drag a corner, or use the arrows.
+      </p>
+    </div>
+    <span className="text-xs text-white/40">Arseniy Cherednichenko &middot; Berlin</span>
+  </div>,
+  ...PRINCIPLES.map((p) => (
+    <div key={p.id} className="flex h-full flex-col justify-between p-7 sm:p-9">
+      <div className="flex items-baseline justify-between">
+        <span className="font-display text-4xl text-white/15">{p.n}</span>
+        <span className="text-[0.7rem] uppercase tracking-[0.25em] text-white/30">
+          of {String(PRINCIPLES.length).padStart(2, '0')}
+        </span>
+      </div>
+      <div>
+        <h3 className="font-display text-2xl leading-snug text-white sm:text-[1.7rem]">
+          {p.title}
+        </h3>
+        <p className="mt-2 text-sm font-medium text-[#DCF87C]/90">{p.lede}</p>
+        <p className="mt-4 text-sm leading-relaxed text-white/55">{p.body}</p>
+      </div>
+      <Link
+        to={p.evidence.to}
+        className="inline-flex w-fit items-center gap-1.5 text-sm text-white/70 underline-offset-4 transition hover:text-[#DCF87C] hover:underline"
+      >
+        {p.evidence.label}
+        <span aria-hidden>&rarr;</span>
+      </Link>
+    </div>
+  )),
+  <div key="end" className="flex h-full flex-col justify-between p-7 sm:p-9">
+    <span className="text-[0.7rem] font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">
+      That&rsquo;s the set
+    </span>
+    <p className="font-display text-2xl leading-snug text-white sm:text-[1.7rem]">
+      None of it is a slogan &mdash; every page here is a working proof.
+    </p>
+    <Link
+      to="/principles"
+      className="inline-flex w-fit items-center gap-1.5 text-sm text-white/70 underline-offset-4 transition hover:text-[#DCF87C] hover:underline"
+    >
+      Read the principles in full
+      <span aria-hidden>&rarr;</span>
+    </Link>
+  </div>,
+]
 
 // Spare stroke icons for the dock — no emoji, currentColor so they warm to lime.
 const ic = (d: string) => (
@@ -5398,6 +5462,43 @@ export default function Playground() {
                 narrow screen the row becomes a column and the panels grow in height instead of width, so the
                 spines never crush to nothing. Reduced motion keeps the layout reflow (it is structure, not
                 decoration) but drops it to an instant swap with no travel.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        <Reveal>
+          <div id="flipbook" data-experiment="Page-turning book" className="mt-12 scroll-mt-32">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 py-12 sm:px-10">
+              <div className="mb-8 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Turn</span>
+                <p className="mx-auto mt-3 max-w-md text-lg font-medium text-white/85 sm:text-xl">
+                  A bound book you read with your hands. Drag a page around the spine and feel its
+                  weight, or step it with the arrow keys.
+                </p>
+              </div>
+              <div className="mx-auto max-w-sm">
+                <Flipbook pages={BOOK_PAGES} aria-label="A few things I build by" />
+              </div>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Page-turning book</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The bound book the surface family never had. FlipCard turns one card over, FanDeck
+                spreads a hand, CardStack recedes a deck, and the coverflow gallery rotates a row in
+                perspective &mdash; none of them has a spine and a running page turn. Here a
+                right-hand page swings around the binding on a true 3D rotation, revealing the next
+                page beneath, with a thickness of leaf edges stacked at the fore-edge for heft. The
+                whole turn rides one value: drag a page and the leaf follows your finger around the
+                spine, a travelling shadow deepening as it stands edge-on; let go past the halfway
+                mark and it falls the rest of the way, short of it it springs back &mdash; a throw,
+                not a click. Only one leaf is ever live and it carries no meaning: the still page
+                beneath is the real one, its links in the tab order, while the turning leaf is an
+                aria-hidden transient and each change is spoken once through a polite live region.
+                It is honest about what it holds &mdash; the eight working beliefs behind this whole
+                site, read from the same data the Principles page uses, so the page that turns up is
+                a belief, not a pitch. Reduced motion drops the 3D for an in-place cross-fade and
+                turns it by key or button instead.
               </p>
             </div>
           </div>
