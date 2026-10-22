@@ -34,6 +34,11 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'A radio group where each option is a card',
+    summary: 'Radio cards — a choose-one list of cards with headings and descriptions, a real radiogroup you arrow through on one tab stop, the lime outline springing to your choice.',
+    tag: 'Component',
+  },
+  {
     title: 'The same two things, built with care and without',
     summary: 'Taste gains a ninth and tenth demo — a destructive action and a save — each shown as the bare default and the considered version, one switch flipping all ten at once.',
     tag: 'Polish',
@@ -77,10 +82,5 @@ export const LATEST_LOG: LogHeadline[] = [
     title: 'A checkbox that keeps its third state',
     summary: 'The plain checkbox, built tri-state on a real native input — check some of a list and the parent reads the mixed dash; the mark draws in and the lime fill springs up.',
     tag: 'Component',
-  },
-  {
-    title: 'A contents rail on the long inner pages',
-    summary: 'Craft, the specimen and thanks gain a right-side rail and per-section deep links — navigable section by section, every part shareable.',
-    tag: 'Infra',
   },
 ]
