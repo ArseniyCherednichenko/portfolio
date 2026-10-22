@@ -1,4 +1,4 @@
-import { createRef, useEffect, useRef, useState } from 'react'
+import { createRef, useCallback, useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { Reveal } from '../components/Reveal'
@@ -122,6 +122,7 @@ import { AsyncButton } from '../components/AsyncButton'
 import { Checkbox } from '../components/Checkbox'
 import { StepForm, type WizardStep } from '../components/StepForm'
 import { RadioCards } from '../components/RadioCards'
+import { Progress } from '../components/Progress'
 import { SwipeToReveal, type SwipeAction } from '../components/SwipeToReveal'
 import { PullToRefresh } from '../components/PullToRefresh'
 import { MoodSlider } from '../components/MoodSlider'
@@ -1139,6 +1140,114 @@ function RadioCardsDemo() {
         Sending <span className="font-semibold text-[#DCF87C]">{chosen?.label}</span> &mdash; the choice lives only in
         this tab.
       </p>
+    </div>
+  )
+}
+
+// A Progress showcase driven by a believable task. "Start export" climbs a
+// determinate bar and ring together from 0 to 100 with a little uneven pacing
+// (real work does not advance at a constant rate), then flips to the
+// indeterminate state for a beat of "finalising" where the end is genuinely
+// unknown, and lands on done. A standing pair below shows the indeterminate
+// linear and circular forms on their own. One state feeds the bar, the ring,
+// and the counted readout at once.
+function ProgressDemo() {
+  const reduce = useReducedMotion()
+  type Phase = 'idle' | 'running' | 'finalising' | 'done'
+  const [phase, setPhase] = useState<Phase>('idle')
+  const [value, setValue] = useState(0)
+  const timers = useRef<number[]>([])
+
+  const clearTimers = useCallback(() => {
+    timers.current.forEach((t) => window.clearTimeout(t))
+    timers.current = []
+  }, [])
+  useEffect(() => () => clearTimers(), [clearTimers])
+
+  const start = useCallback(() => {
+    clearTimers()
+    setPhase('running')
+    setValue(0)
+    // Uneven steps toward 100 — some quick, some slow — so the climb reads as
+    // work rather than a metronome. Under reduced motion the Progress fill
+    // snaps per step, so the same steps still land honestly.
+    const steps = [8, 19, 27, 34, 52, 61, 73, 80, 92, 100]
+    let at = 0
+    steps.forEach((v, i) => {
+      at += 180 + (i % 3) * 160
+      timers.current.push(window.setTimeout(() => setValue(v), at))
+    })
+    // Reached 100 → the end of the measured part. Flip to indeterminate for a
+    // short "finalising", then settle on done.
+    timers.current.push(window.setTimeout(() => setPhase('finalising'), at + 350))
+    timers.current.push(window.setTimeout(() => setPhase('done'), at + 350 + 1100))
+  }, [clearTimers])
+
+  const reset = useCallback(() => {
+    clearTimers()
+    setPhase('idle')
+    setValue(0)
+  }, [clearTimers])
+
+  const indeterminate = phase === 'finalising'
+  const caption =
+    phase === 'idle'
+      ? 'Ready when you are.'
+      : phase === 'running'
+        ? 'Exporting your archive…'
+        : phase === 'finalising'
+          ? 'Finalising — almost there.'
+          : 'Export ready.'
+
+  return (
+    <div className="flex w-full max-w-md flex-col items-stretch gap-8">
+      <div className="flex items-center justify-center gap-8">
+        <Progress
+          variant="circular"
+          value={value}
+          indeterminate={indeterminate}
+          showValue
+          size={104}
+          thickness={8}
+          aria-label="Export progress"
+        />
+        <div className="flex-1">
+          <Progress
+            value={value}
+            indeterminate={indeterminate}
+            label="Export"
+            showValue
+            aria-label="Export progress"
+          />
+          <p className="mt-3 text-sm text-white/55" aria-live="polite">
+            {caption}
+          </p>
+        </div>
+      </div>
+
+      <div className="flex justify-center gap-3">
+        <MagneticButton
+          onClick={phase === 'done' || phase === 'idle' ? start : reset}
+          className="rounded-full bg-[#DCF87C] px-5 py-2.5 text-sm font-semibold text-black"
+        >
+          {phase === 'done' ? 'Run it again' : phase === 'idle' ? 'Start export' : 'Cancel'}
+        </MagneticButton>
+      </div>
+
+      <div className="rounded-2xl border border-white/10 bg-white/[0.02] p-5">
+        <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-white/45">
+          Unknown length
+        </p>
+        <div className="flex items-center gap-5">
+          <Progress variant="circular" indeterminate size={44} thickness={5} aria-label="Loading" />
+          <div className="flex-1">
+            <Progress indeterminate aria-label="Loading" />
+            <p className="mt-2 text-xs text-white/40">
+              {reduce ? 'A steady pulse while the end is unknown.' : 'A sweep while the end is unknown.'}
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }
@@ -8378,6 +8487,47 @@ export default function Playground() {
                 <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code> the outline
                 crossfades in place and the check is already drawn &mdash; identical to use. The choice here lives only in
                 this tab.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH PROGRESS */}
+        <Reveal>
+          <div id="progress" data-experiment="Progress" className="mt-12 scroll-mt-32">
+            <div className="flex flex-col items-center gap-8 rounded-3xl border border-white/10 bg-white/[0.02] px-6 py-14 sm:px-10">
+              <div className="max-w-md text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Keep them posted</span>
+                <p className="mx-auto mt-3 text-lg font-medium text-white/85 sm:text-xl">
+                  The bar and ring under every upload and export. Start it: the fill springs, the number counts, and when
+                  the end goes unknown it sweeps.
+                </p>
+              </div>
+              <ProgressDemo />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Progress</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The quiet primitive that sits under every upload, export, sync, and long save &mdash; and the one the
+                foundations here were missing. There was already the skeleton (space held while a screen loads) and the
+                spinner inside a button (one action resolving), but not the plain, reusable bar and ring that report{' '}
+                <em>how far along</em> a known piece of work is, plus the indeterminate pair for when the far end is
+                unknown. Two things usually go wrong with a hand-rolled one, and this fixes both. It does not lie to
+                assistive tech: a bare{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">&lt;div&gt;</code> with an animated
+                width says nothing, where the native contract is{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">role=&quot;progressbar&quot;</code>{' '}
+                with <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">aria-valuenow</code> announced,
+                or <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">aria-busy</code> when the value is
+                unknown &mdash; kept here on both the linear and circular forms. And the fill does not{' '}
+                <em>snap</em>: the bar springs to each value and the readout <em>counts</em> to the figure, so a jump
+                from twenty to eighty reads as motion with a direction rather than a cut. The indeterminate forms carry
+                the one bit they must &mdash; <em>still working, end unknown</em> &mdash; a sweep that travels the track
+                or an arc that orbits the ring. Under{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code> that
+                travelling sweep becomes a slow in-place pulse (no translation, no spin &mdash; the vestibular-safe way
+                to say &ldquo;busy&rdquo;), the fill snaps, and the readout lands at once. The export here is simulated;
+                nothing leaves the tab.
               </p>
             </div>
           </div>
