@@ -34,6 +34,11 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'The bar and ring under every upload',
+    summary: 'Progress — a determinate bar and ring whose fill springs and readout counts, plus an indeterminate sweep for when the end is unknown; a reduced-motion pulse stands in for the sweep.',
+    tag: 'Component',
+  },
+  {
     title: 'A radio group where each option is a card',
     summary: 'Radio cards — a choose-one list of cards with headings and descriptions, a real radiogroup you arrow through on one tab stop, the lime outline springing to your choice.',
     tag: 'Component',
@@ -76,11 +81,6 @@ export const LATEST_LOG: LogHeadline[] = [
   {
     title: 'A grid that draws every harmonic ratio at once',
     summary: 'A Lissajous table on one canvas — each cell the figure two sine waves trace, a lime pen riding every curve. Drag or let the phase drift, and watch each one open and close.',
-    tag: 'Component',
-  },
-  {
-    title: 'A checkbox that keeps its third state',
-    summary: 'The plain checkbox, built tri-state on a real native input — check some of a list and the parent reads the mixed dash; the mark draws in and the lime fill springs up.',
     tag: 'Component',
   },
 ]
