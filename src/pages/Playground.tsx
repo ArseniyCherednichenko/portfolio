@@ -121,6 +121,7 @@ import { InlineEdit } from '../components/InlineEdit'
 import { AsyncButton } from '../components/AsyncButton'
 import { Checkbox } from '../components/Checkbox'
 import { StepForm, type WizardStep } from '../components/StepForm'
+import { RadioCards } from '../components/RadioCards'
 import { SwipeToReveal, type SwipeAction } from '../components/SwipeToReveal'
 import { PullToRefresh } from '../components/PullToRefresh'
 import { MoodSlider } from '../components/MoodSlider'
@@ -1091,6 +1092,54 @@ function StepFormDemo() {
         </div>
       }
     />
+  )
+}
+
+// A RadioCards showcase in the shape the control is for: a "choose one" list
+// where each option carries a heading, a line of what it means, and sometimes a
+// badge — the plan / mode / cadence picker a product actually ships. One row is
+// disabled to show that state, and the chosen value echoes below so the single
+// selection reads. Nothing leaves the tab.
+function RadioCardsDemo() {
+  const OPTIONS = [
+    {
+      value: 'instant',
+      label: 'As it happens',
+      description: 'A note the moment something changes. Best when you want nothing to slip by.',
+    },
+    {
+      value: 'daily',
+      label: 'Once a day',
+      description: 'One quiet digest each evening, everything gathered into a single read.',
+      badge: 'Common',
+    },
+    {
+      value: 'weekly',
+      label: 'Weekly summary',
+      description: 'A Sunday round-up and nothing in between.',
+    },
+    {
+      value: 'off',
+      label: 'Paused',
+      description: 'Account and security notices only — turned on again whenever you like.',
+      disabled: true,
+    },
+  ]
+  const [value, setValue] = useState('daily')
+  const chosen = OPTIONS.find((o) => o.value === value)
+  return (
+    <div className="w-full max-w-md">
+      <RadioCards
+        options={OPTIONS}
+        value={value}
+        onChange={setValue}
+        label="How often should we reach you?"
+      />
+      <p className="mt-4 text-center text-sm text-white/45" aria-live="polite">
+        Sending <span className="font-semibold text-[#DCF87C]">{chosen?.label}</span> &mdash; the choice lives only in
+        this tab.
+      </p>
+    </div>
   )
 }
 
@@ -8287,6 +8336,48 @@ export default function Playground() {
                 the slide becomes a cross-fade in place, the height snaps, and the spinner and completion check hold still
                 &mdash; the flow is identical to use. The fields and the final submit are simulated; nothing leaves the
                 tab.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH RADIO CARDS */}
+        <Reveal>
+          <div id="radio-cards" data-experiment="Radio cards" className="mt-12 scroll-mt-32">
+            <div className="flex flex-col items-center gap-8 rounded-3xl border border-white/10 bg-white/[0.02] px-6 py-14 sm:px-10">
+              <div className="max-w-md text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Pick one</span>
+                <p className="mx-auto mt-3 text-lg font-medium text-white/85 sm:text-xl">
+                  The &ldquo;choose one&rdquo; list where each option is a card, not a word. Arrow through it with one
+                  tab stop; the lime outline springs to your choice.
+                </p>
+              </div>
+              <RadioCardsDemo />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Radio cards</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The family already had the <em>compact</em> way to pick one of a few &mdash; the segmented control, a row
+                of pill buttons where each option is a single word. This is the other, commoner shape: a stack of{' '}
+                <em>cards</em>, each option carrying a heading, a line of description, and sometimes a badge &mdash; the
+                &ldquo;choose a plan / pick a mode&rdquo; list. Teams almost always build that out of bare{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">&lt;div&gt;</code>s with an{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">onClick</code>, and the moment they do
+                they lose everything the native radio gives for free: one tab stop for the whole set, arrow keys that move{' '}
+                <em>and</em> select, Home and End, and the{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">aria-checked</code> radiogroup a screen
+                reader can announce. So this keeps the real WAI-ARIA contract &mdash; the container is{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">role=&quot;radiogroup&quot;</code>, each
+                card a <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">role=&quot;radio&quot;</code> with{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">aria-checked</code>, a roving tabindex
+                holds a single tab stop, and the arrows walk and select like native radios &mdash; and spends the motion
+                where it reads: one lime selection outline springs from the old card to the new one on a shared{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">layoutId</code>, and a check draws itself
+                into the chosen card. Controlled or uncontrolled, with an optional hidden input to carry the value into a
+                real form. Under{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code> the outline
+                crossfades in place and the check is already drawn &mdash; identical to use. The choice here lives only in
+                this tab.
               </p>
             </div>
           </div>
