@@ -140,6 +140,7 @@ import { Compass } from '../components/Compass'
 import { ProgressiveBlur } from '../components/ProgressiveBlur'
 import { DynamicIsland, type IslandActivity } from '../components/DynamicIsland'
 import { Sheet } from '../components/Sheet'
+import { Drawer } from '../components/Drawer'
 import { Tooltip } from '../components/Tooltip'
 import { Popover } from '../components/Popover'
 import { ContextMenu, type ContextMenuItem } from '../components/ContextMenu'
@@ -4158,6 +4159,8 @@ export default function Playground() {
   const [segView, setSegView] = useState('grid')
   const [island, setIsland] = useState<IslandActivity>('music')
   const [sheetOpen, setSheetOpen] = useState(false)
+  const [drawerOpen, setDrawerOpen] = useState(false)
+  const [drawerSide, setDrawerSide] = useState<'left' | 'right'>('right')
   const { openShortcuts } = useShortcuts()
 
   return (
@@ -9116,6 +9119,59 @@ export default function Playground() {
           </div>
         </Reveal>
 
+        {/* FULL-WIDTH DRAWER */}
+        <Reveal>
+          <div id="drawer" data-experiment="Drawer" className="mt-12 scroll-mt-32">
+            <div className="flex flex-col items-center gap-6 rounded-3xl border border-white/10 bg-white/[0.02] px-6 py-14 sm:px-10">
+              <div className="flex flex-wrap items-center justify-center gap-3">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setDrawerSide('left')
+                    setDrawerOpen(true)
+                  }}
+                  className="rounded-full border border-white/15 bg-white/[0.04] px-5 py-2.5 text-sm font-semibold text-white/85 transition-colors hover:bg-white/[0.08] focus-visible:ring-2 focus-visible:ring-[#DCF87C]/60"
+                >
+                  Open from the left
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setDrawerSide('right')
+                    setDrawerOpen(true)
+                  }}
+                  className="rounded-full bg-[#DCF87C] px-5 py-2.5 text-sm font-semibold text-black transition-transform active:scale-[0.97]"
+                >
+                  Open from the right
+                </button>
+              </div>
+              <p className="max-w-sm text-center text-xs leading-relaxed text-white/40">
+                Slide a panel in from either edge. Drag the header toward its edge to
+                dismiss it, flick it shut, tap the dimmed page, or press Escape. Keyboard
+                and reduced-motion users get the same panel with no slide.
+              </p>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Drawer</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The edge-anchored side panel every product reaches for — the settings
+                tray, the filter pane, the cart — rebuilt for the web as its own surface.
+                It sits between the two it is often confused with: the Modal is a centred
+                card with no edge and no travel, and the Sheet rises from the bottom and
+                is resizable, its detents the whole point. The Drawer is neither: a
+                fixed-width column pinned to the left or right edge, full height, one
+                open-or-closed state, sliding in along a single axis and pulled back out
+                the same way. Its position is one Framer Motion value the drag writes
+                directly, so the backdrop dims exactly in step with how far in it is, and
+                a flick throws it open or shut against the way it was barely moving.
+                Honest to a11y — role=dialog with aria-modal, a focus trap, Escape, focus
+                moved in on open and restored on close, and body-scroll lock. Reduced
+                motion drops the drag and the slide for an instant, backdrop-steady panel.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
         {/* FULL-WIDTH FLOWING MENU */}
         <Reveal>
           <div className="mt-12">
@@ -12165,6 +12221,56 @@ export default function Playground() {
           </p>
         </div>
       </Sheet>
+
+      <Drawer
+        open={drawerOpen}
+        onOpenChange={setDrawerOpen}
+        side={drawerSide}
+        title="Display preferences"
+        description={`Sliding in from the ${drawerSide}.`}
+      >
+        <div className="space-y-6">
+          <p className="text-sm leading-relaxed text-white/60">
+            This is a real drawer, not a screenshot. Drag the header toward its edge to
+            pull it out, flick it shut, tap the dimmed page, or press Escape. It is a
+            demonstration — nothing here is saved anywhere.
+          </p>
+          <ul className="space-y-2 text-sm text-white/55">
+            {[
+              ['Panel edge', 'Left or right — pick where it is pinned above.'],
+              ['Drag to dismiss', 'The header follows your finger toward the edge.'],
+              ['Flick', 'A quick shove throws it shut against a slow drift back.'],
+              ['Keyboard', 'Tab is trapped inside; Escape closes and returns focus.'],
+            ].map(([label, note]) => (
+              <li
+                key={label}
+                className="rounded-2xl border border-white/8 bg-white/[0.02] px-4 py-3"
+              >
+                <span className="block text-xs font-semibold uppercase tracking-wide text-[#DCF87C]">
+                  {label}
+                </span>
+                <span className="mt-1 block leading-relaxed">{note}</span>
+              </li>
+            ))}
+          </ul>
+          <div className="flex items-center gap-3 pt-1">
+            <button
+              type="button"
+              onClick={() => setDrawerSide(drawerSide === 'right' ? 'left' : 'right')}
+              className="rounded-full border border-white/15 bg-white/[0.04] px-4 py-2 text-xs font-semibold text-white/85 transition-colors hover:bg-white/[0.08] focus-visible:ring-2 focus-visible:ring-[#DCF87C]/60"
+            >
+              Switch edge
+            </button>
+            <button
+              type="button"
+              onClick={() => setDrawerOpen(false)}
+              className="rounded-full bg-[#DCF87C] px-4 py-2 text-xs font-semibold text-black transition-transform active:scale-[0.97]"
+            >
+              Done
+            </button>
+          </div>
+        </div>
+      </Drawer>
 
       {/* A scoped finder for the three dozen experiments below — search, jump,
           surprise, deep-link. Floating trigger, or press "/". */}
