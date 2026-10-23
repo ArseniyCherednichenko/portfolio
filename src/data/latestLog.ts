@@ -34,6 +34,11 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'A Magic 8-ball you shake for an answer',
+    summary: 'Magic 8-ball — ask a yes-or-no question and the die floats up out of the ink with one of the twenty classic replies, a fair random draw, nothing weighted. Pure SVG; reduced motion just swaps the reply.',
+    tag: 'Component',
+  },
+  {
     title: 'The tabbed panel from every settings screen',
     summary: 'Tabs — a real WAI-ARIA tablist wired to panels, one tab stop you arrow across; the lime indicator glides to your tab and the panel slides in from the way you moved. Underline or enclosed-pill.',
     tag: 'Component',
@@ -77,10 +82,5 @@ export const LATEST_LOG: LogHeadline[] = [
     title: 'The framework stops re-downloading every day',
     summary: 'React, the router and Framer Motion now sit in their own cached chunks, so a daily content deploy no longer re-hashes 295KB of code that never changed.',
     tag: 'Infra',
-  },
-  {
-    title: 'The oldest trick for drawing a straight line',
-    summary: 'The fourteenth mechanism — Watt’s 1784 linkage, three bars whose coupler midpoint rides the straight crossing of a figure-eight, within 1.9% of true, the roughest of the straight-line trio by design.',
-    tag: 'Component',
   },
 ]
