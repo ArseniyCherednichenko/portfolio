@@ -34,6 +34,11 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'A panel that slides in from the edge',
+    summary: 'Drawer — the settings/filter/cart side panel, openable from either edge; drag the header toward its rim to dismiss, flick it shut, or press Escape. Its position is one value the drag writes and the backdrop reads.',
+    tag: 'Component',
+  },
+  {
     title: 'A book you turn with your hands',
     summary: 'Flipbook — a right-hand page swings around the spine on a real 3D turn; drag it and the leaf follows your finger, release past halfway and it falls. It holds the eight beliefs the site is built by.',
     tag: 'Component',
@@ -76,11 +81,6 @@ export const LATEST_LOG: LogHeadline[] = [
   {
     title: 'A mechanism that cuts slow and returns fast',
     summary: 'The thirteenth mechanism — a Whitworth quick-return turning one steady crank into a ram that crawls out on the working stroke and snaps back, the ratio measured off the geometry.',
-    tag: 'Component',
-  },
-  {
-    title: 'A coupling that turns two misaligned shafts as one',
-    summary: 'The twelfth mechanism — an Oldham coupling passing rotation across an offset gap with zero phase error, its floating disc orbiting at twice the rate to swallow the offset.',
     tag: 'Component',
   },
 ]
