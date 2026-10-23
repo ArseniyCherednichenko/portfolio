@@ -34,6 +34,11 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'The tabbed panel from every settings screen',
+    summary: 'Tabs — a real WAI-ARIA tablist wired to panels, one tab stop you arrow across; the lime indicator glides to your tab and the panel slides in from the way you moved. Underline or enclosed-pill.',
+    tag: 'Component',
+  },
+  {
     title: 'A panel that slides in from the edge',
     summary: 'Drawer — the settings/filter/cart side panel, openable from either edge; drag the header toward its rim to dismiss, flick it shut, or press Escape. Its position is one value the drag writes and the backdrop reads.',
     tag: 'Component',
@@ -76,11 +81,6 @@ export const LATEST_LOG: LogHeadline[] = [
   {
     title: 'The oldest trick for drawing a straight line',
     summary: 'The fourteenth mechanism — Watt’s 1784 linkage, three bars whose coupler midpoint rides the straight crossing of a figure-eight, within 1.9% of true, the roughest of the straight-line trio by design.',
-    tag: 'Component',
-  },
-  {
-    title: 'A mechanism that cuts slow and returns fast',
-    summary: 'The thirteenth mechanism — a Whitworth quick-return turning one steady crank into a ram that crawls out on the working stroke and snaps back, the ratio measured off the geometry.',
     tag: 'Component',
   },
 ]
