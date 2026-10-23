@@ -192,6 +192,7 @@ import { MoonPhase } from '../components/MoonPhase'
 import { Sundial } from '../components/Sundial'
 import { Abacus } from '../components/Abacus'
 import { Dice } from '../components/Dice'
+import { MagicEightBall } from '../components/MagicEightBall'
 import { ReceiptPrinter } from '../components/ReceiptPrinter'
 import { Hourglass } from '../components/Hourglass'
 import { SlidePuzzle } from '../components/SlidePuzzle'
@@ -11294,6 +11295,36 @@ export default function Playground() {
                 two rotations compose in never changes which face shows, and the tumble only ever adds full turns.
                 Reduced motion drops the tumble and lands the die on its face at once; the die is a real button and the
                 rolled value is announced to a screen reader.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH MAGIC 8-BALL */}
+        <Reveal>
+          <div id="magic-8-ball" data-experiment="Magic 8-ball" className="mt-12 scroll-mt-32">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 py-12 sm:px-10">
+              <div className="text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Ask</span>
+                <p className="mx-auto mt-3 max-w-md text-lg font-medium text-white/85 sm:text-xl">
+                  Type a yes-or-no question, then shake. The die floats up with one of the twenty classic replies.
+                </p>
+              </div>
+              <MagicEightBall className="mt-10" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Magic 8-ball</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The fortune-telling ball, rebuilt as an object you shake. Press it, or type a question and hit enter,
+                and the ball rocks, the window darkens, and the triangular die floats up out of the murk with a reply.
+                A different kind of toy from the ones around it: the Dice is a throw that settles on a face and the
+                Abacus holds a number you set, but this one answers in words. It is honest about what it is &mdash; the
+                reply is a fair random draw across the real twenty (ten yes, five maybe, five no), nothing weighted and
+                nothing that actually reads your question; the input is flavour, and the copy says so. Pure inline SVG
+                for the glossy sphere, the white 8, and the deep-blue ink window, so it stays crisp at any size and in
+                both themes, with a muted per-tone glow on the die face. The ball is a real button with an aria-label,
+                the question field is labelled, and the reply is announced through a live region. Reduced motion drops
+                the shake and the rise and simply crossfades to the new reply.
               </p>
             </div>
           </div>
