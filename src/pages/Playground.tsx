@@ -122,6 +122,7 @@ import { AsyncButton } from '../components/AsyncButton'
 import { Checkbox } from '../components/Checkbox'
 import { StepForm, type WizardStep } from '../components/StepForm'
 import { RadioCards } from '../components/RadioCards'
+import { Tabs } from '../components/Tabs'
 import { Progress } from '../components/Progress'
 import { SwipeToReveal, type SwipeAction } from '../components/SwipeToReveal'
 import { PullToRefresh } from '../components/PullToRefresh'
@@ -1205,6 +1206,94 @@ function RadioCardsDemo() {
         Sending <span className="font-semibold text-[#DCF87C]">{chosen?.label}</span> &mdash; the choice lives only in
         this tab.
       </p>
+    </div>
+  )
+}
+
+// A Tabs showcase in its native habitat: a small settings-style pane whose body
+// swaps as you move across the strip. A SegmentedControl above flips the same
+// tablist between its underline and enclosed-pill looks, so both variants are on
+// screen at once. The panel copy is honest — it describes the control you are
+// driving — and nothing here changes anything real. Arrow across the tabs with a
+// single tab stop; the lime indicator glides (and, enclosed, morphs width) to
+// the active tab, and the panel slides in from the side you moved toward.
+function TabsDemo() {
+  const [variant, setVariant] = useState<'underline' | 'pill'>('underline')
+  const [active, setActive] = useState('motion')
+  const panelClass = 'rounded-2xl border border-white/10 bg-white/[0.02] p-5 text-sm leading-relaxed text-white/60'
+  const ITEMS = [
+    {
+      value: 'motion',
+      label: 'Motion',
+      content: (
+        <div className={panelClass}>
+          <h4 className="font-display text-base font-semibold text-white/90">One indicator, shared</h4>
+          <p className="mt-2">
+            Only the active tab mounts the lime marker, so a single{' '}
+            <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">layoutId</code> makes it glide from the
+            old tab to the new on a spring. In the enclosed look it also morphs its width to fit the next label, measured
+            from the live button so any length lines up.
+          </p>
+        </div>
+      ),
+    },
+    {
+      value: 'keyboard',
+      label: 'Keyboard',
+      content: (
+        <div className={panelClass}>
+          <h4 className="font-display text-base font-semibold text-white/90">A real tablist</h4>
+          <p className="mt-2">
+            One tab stop for the whole strip. Arrow left and right to walk the enabled tabs, Home and End jump to the
+            ends, and the active panel is reachable by Tab. A screen reader hears a{' '}
+            <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">role=&quot;tablist&quot;</code> with the
+            selected tab announced and wired to the panel it reveals.
+          </p>
+        </div>
+      ),
+    },
+    {
+      value: 'panels',
+      label: 'Panels',
+      content: (
+        <div className={panelClass}>
+          <h4 className="font-display text-base font-semibold text-white/90">Direction-aware</h4>
+          <p className="mt-2">
+            The panel enters from the side you moved toward and the old one leaves the other way, so switching has a
+            sense of travel rather than a cut. Only one panel is ever mounted, and the swap waits for the exit so the two
+            never overlap.
+          </p>
+        </div>
+      ),
+    },
+    {
+      value: 'calm',
+      label: 'Calm',
+      disabled: true,
+      content: <div className={panelClass}>Disabled — the strip arrows straight past it.</div>,
+    },
+  ]
+  return (
+    <div className="w-full max-w-md">
+      <div className="mb-6 flex justify-center">
+        <SegmentedControl
+          size="sm"
+          value={variant}
+          onChange={(v) => setVariant(v as 'underline' | 'pill')}
+          options={[
+            { value: 'underline', label: 'Underline' },
+            { value: 'pill', label: 'Enclosed' },
+          ]}
+          label="Indicator style"
+        />
+      </div>
+      <Tabs
+        items={ITEMS}
+        value={active}
+        onChange={setActive}
+        variant={variant}
+        aria-label="What the Tabs control does"
+      />
     </div>
   )
 }
@@ -8591,6 +8680,50 @@ export default function Playground() {
                 <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code> the outline
                 crossfades in place and the check is already drawn &mdash; identical to use. The choice here lives only in
                 this tab.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH TABS */}
+        <Reveal>
+          <div id="tabs" data-experiment="Tabs" className="mt-12 scroll-mt-32">
+            <div className="flex flex-col items-center gap-8 rounded-3xl border border-white/10 bg-white/[0.02] px-6 py-14 sm:px-10">
+              <div className="max-w-md text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Switch panes</span>
+                <p className="mx-auto mt-3 text-lg font-medium text-white/85 sm:text-xl">
+                  The tabbed panel from every settings screen, built honestly. Arrow across the strip with one tab stop;
+                  the indicator glides to your tab and the panel slides in.
+                </p>
+              </div>
+              <TabsDemo />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Tabs</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The family had pieces that <em>looked</em> like tabs &mdash; the segmented control (a compact
+                one-of-a-few picker), the gooey tabs (a liquid indicator effect), the pill nav (a scroll-spy jump
+                list) &mdash; but not the real thing a product reaches for: a <em>tablist wired to panels</em>, where
+                choosing a tab swaps the content beneath it. Teams build that from bare buttons and a{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">useState</code>, and the instant they
+                do they lose what the pattern owes a keyboard and a screen reader: a single tab stop for the whole strip,
+                arrow keys that move between tabs, Home and End to the ends, the{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">aria-selected</code> tablist a reader
+                announces, and the{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">aria-controls</code> wiring that ties
+                each tab to the panel it reveals. So this keeps the full WAI-ARIA Tabs contract &mdash;{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">role=&quot;tablist&quot;</code> /{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">&quot;tab&quot;</code> /{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">&quot;tabpanel&quot;</code>, a roving
+                tabindex so Tab lands on the active tab and then leaves the strip, arrows that walk (and, by default,
+                select) across the enabled tabs &mdash; and spends the motion where it reads: one lime indicator glides
+                from the old tab to the new on a shared{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">layoutId</code> (and, in the enclosed
+                variant, morphs its width to fit each label), and the panel beneath slides in from the side you moved
+                toward while the old one leaves the other way. Underline and enclosed-pill variants, automatic or manual
+                activation, controlled or uncontrolled. Under{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code> the
+                indicator crossfades in place and panels swap without travel &mdash; identical to use, just still.
               </p>
             </div>
           </div>
