@@ -193,6 +193,7 @@ import { Sundial } from '../components/Sundial'
 import { Abacus } from '../components/Abacus'
 import { Dice } from '../components/Dice'
 import { MagicEightBall } from '../components/MagicEightBall'
+import { FidgetSpinner } from '../components/FidgetSpinner'
 import { ReceiptPrinter } from '../components/ReceiptPrinter'
 import { Hourglass } from '../components/Hourglass'
 import { SlidePuzzle } from '../components/SlidePuzzle'
@@ -11325,6 +11326,40 @@ export default function Playground() {
                 both themes, with a muted per-tone glow on the die face. The ball is a real button with an aria-label,
                 the question field is labelled, and the reply is announced through a live region. Reduced motion drops
                 the shake and the rise and simply crossfades to the new reply.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH FIDGET SPINNER */}
+        <Reveal>
+          <div id="fidget-spinner" data-experiment="Fidget spinner" className="mt-12 scroll-mt-32">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 py-12 sm:px-10">
+              <div className="text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Spin</span>
+                <p className="mx-auto mt-3 max-w-md text-lg font-medium text-white/85 sm:text-xl">
+                  Grab a lobe and swing it, or press flick. Watch the rpm wind down as it coasts.
+                </p>
+              </div>
+              <FidgetSpinner className="mt-10" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Fidget spinner</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The desk spinner, rebuilt as an object with honest angular momentum. Grab a lobe and swing it and the
+                throw you give it is the throw it keeps &mdash; on release it carries your wrist's angular velocity and
+                winds down against friction, exactly as the toy does in a hand; or press flick for a strong random spin
+                with no pointer. A different kind of toy from the ones around it: the Turntable is a platter you nudge to
+                a steady speed and the Dice is a throw that settles on a face, but this one is about the spin-down &mdash;
+                the single flick and the long, readable coast back to rest. The decay is real, not scripted: angular
+                velocity integrates the rotation each frame and falls under two frictions at once &mdash; a viscous term
+                that dominates while it is fast and a small dry-friction term that finally parks it instead of crawling
+                forever &mdash; and catching it mid-spin kills the momentum and hands control back to your wrist. A live
+                readout counts the revolutions per minute down and tallies the total turns, so the physics is something
+                you can read. Pure inline SVG transformed by hand in the loop, so a fast spin costs no re-renders; the
+                spinner is a labelled button that flicks on Enter or Space and announces its rpm. Reduced motion drops
+                the coast entirely &mdash; a flick lands it at a new resting position at once and the readout shows a
+                dash, so it stays a thing you can turn by hand without any vestibular travel.
               </p>
             </div>
           </div>
