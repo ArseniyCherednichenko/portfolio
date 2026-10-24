@@ -195,6 +195,7 @@ import { Dice } from '../components/Dice'
 import { MagicEightBall } from '../components/MagicEightBall'
 import { CoinFlip } from '../components/CoinFlip'
 import { FidgetSpinner } from '../components/FidgetSpinner'
+import { Simon } from '../components/Simon'
 import { ReceiptPrinter } from '../components/ReceiptPrinter'
 import { Hourglass } from '../components/Hourglass'
 import { SlidePuzzle } from '../components/SlidePuzzle'
@@ -11392,6 +11393,41 @@ export default function Playground() {
                 spinner is a labelled button that flicks on Enter or Space and announces its rpm. Reduced motion drops
                 the coast entirely &mdash; a flick lands it at a new resting position at once and the readout shows a
                 dash, so it stays a thing you can turn by hand without any vestibular travel.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH SIMON */}
+        <Reveal>
+          <div id="simon" data-experiment="Simon" className="mt-12 scroll-mt-32">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 py-12 sm:px-10">
+              <div className="text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Recall</span>
+                <p className="mx-auto mt-3 max-w-md text-lg font-medium text-white/85 sm:text-xl">
+                  Press start. Watch the pads light, then play the sequence back. It grows by one each round.
+                </p>
+              </div>
+              <Simon className="mt-10" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Simon</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The colour-memory game, rebuilt as a real object you play &mdash; and the one toy in this family that is a
+                game of recall. A different kind of toy from its neighbours: the Dice, the coin and the Magic 8-ball each
+                resolve something when you press them, and the Turntable and Fidget spinner are quantities you set going and
+                watch decay, but none of them asks anything back. This one does: it plays a lengthening run of lit pads and
+                tones, and your job is to return it exactly, one step longer every round. It is honest the way the family
+                cares about &mdash; the sequence is a true random walk, one more pad drawn from Math.random() each round
+                with nothing scripted or seeded, and the score is the round you actually reached with the best the best you
+                actually played this visit, neither inflated. Four quarter-circle pads in pure CSS form one disc, each a
+                dark struck surface that glows its own hue when lit, with a central hub carrying the live status and round
+                count that doubles as the start control. Sound is optional WebAudio &mdash; one clean sine tone per pad,
+                climbing an arpeggio so a correct run resolves upward &mdash; created lazily on the first press and
+                togglable. Each pad is a real button with a colour label, disabled while Simon is showing the sequence so
+                you cannot press out of turn, and every phase and result is announced through a live region. Reduced motion
+                drops the pad-lift and the springy scale &mdash; a lit pad changes only its glow, never its size &mdash; so
+                the sequence stays perfectly readable with no vestibular travel.
               </p>
             </div>
           </div>
