@@ -193,6 +193,7 @@ import { Sundial } from '../components/Sundial'
 import { Abacus } from '../components/Abacus'
 import { Dice } from '../components/Dice'
 import { MagicEightBall } from '../components/MagicEightBall'
+import { CoinFlip } from '../components/CoinFlip'
 import { FidgetSpinner } from '../components/FidgetSpinner'
 import { ReceiptPrinter } from '../components/ReceiptPrinter'
 import { Hourglass } from '../components/Hourglass'
@@ -11296,6 +11297,37 @@ export default function Playground() {
                 two rotations compose in never changes which face shows, and the tumble only ever adds full turns.
                 Reduced motion drops the tumble and lands the die on its face at once; the die is a real button and the
                 rolled value is announced to a screen reader.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH COIN FLIP */}
+        <Reveal>
+          <div id="coin-flip" data-experiment="Coin flip" className="mt-12 scroll-mt-32">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 py-12 sm:px-10">
+              <div className="text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Call it</span>
+                <p className="mx-auto mt-3 max-w-md text-lg font-medium text-white/85 sm:text-xl">
+                  Press the coin. It springs up, tumbles, and lands heads or tails on an honest even draw.
+                </p>
+              </div>
+              <CoinFlip className="mt-10" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Coin flip</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                A coin you toss, and the one toy here that resolves a true binary. Press it and it springs off the table,
+                tumbles end over end through a few whole half-turns, and settles face-up on heads or tails &mdash; the
+                side it lands on is the honest call, one random draw at an even split, nothing weighted. A different kind
+                of object from its neighbours: the Dice is a one-in-six tumble, the Magic 8-ball answers in words, the
+                Fidget spinner is an rpm winding down, but this one comes to rest on one of exactly two faces. It keeps a
+                running tally as you go, and the quiet point of it is the split bar: the more you flip, the closer the
+                proportion drifts to 50/50 &mdash; the law of large numbers you can watch rather than be told. Two faces
+                in pure CSS 3D, a milled rim and an A/B monogram struck into each, so it stays crisp at any size and in
+                both themes; a forward-only flip about one axis keeps the landed face honest, and a keyframed arc lifts
+                it off the table and sets it back down as it spins. Reduced motion drops the toss and settles it face-up
+                at once; the coin is a real button and the landed side is announced to a screen reader.
               </p>
             </div>
           </div>
