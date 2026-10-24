@@ -34,6 +34,11 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'A game of Simon you play by memory',
+    summary: 'Simon — it lights a lengthening run of pads and tones and you return it, one step longer each round, on a true random draw; score and best are the rounds you really reached. Optional tones; reduced motion keeps every pad readable.',
+    tag: 'Component',
+  },
+  {
     title: 'A coin flip that drifts toward fifty-fifty',
     summary: 'Coin flip — press it and it springs up, tumbles, and lands heads or tails on an honest even draw; a running tally bar shows the split settling toward 50/50 the more you flip. Reduced motion lands it at once.',
     tag: 'Component',
@@ -77,10 +82,5 @@ export const LATEST_LOG: LogHeadline[] = [
     title: 'The same two things, built with care and without',
     summary: 'Taste gains a ninth and tenth demo — a destructive action and a save — each shown as the bare default and the considered version, one switch flipping all ten at once.',
     tag: 'Polish',
-  },
-  {
-    title: 'An onboarding flow that will not let you skip ahead',
-    summary: 'A multi-step form, done as a reusable shell — steps slide in from the way you travel, a half-filled step blocks the advance, focus follows into each one, and the card glides to its height.',
-    tag: 'Component',
   },
 ]
