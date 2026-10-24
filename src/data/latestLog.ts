@@ -34,6 +34,11 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'A fidget spinner that coasts on real momentum',
+    summary: 'Fidget spinner — grab a lobe and swing it and it keeps the throw you gave it, winding down against two frictions while a live rpm readout counts the coast. Reduced motion lands it at rest instead.',
+    tag: 'Component',
+  },
+  {
     title: 'A Magic 8-ball you shake for an answer',
     summary: 'Magic 8-ball — ask a yes-or-no question and the die floats up out of the ink with one of the twenty classic replies, a fair random draw, nothing weighted. Pure SVG; reduced motion just swaps the reply.',
     tag: 'Component',
@@ -77,10 +82,5 @@ export const LATEST_LOG: LogHeadline[] = [
     title: 'A radar scope that lights what the sweep finds',
     summary: 'A plan-position sonar — a bearing line rotates and strikes each contact to a phosphor glow that fades before the next lap. Click the face to drop your own.',
     tag: 'Component',
-  },
-  {
-    title: 'The framework stops re-downloading every day',
-    summary: 'React, the router and Framer Motion now sit in their own cached chunks, so a daily content deploy no longer re-hashes 295KB of code that never changed.',
-    tag: 'Infra',
   },
 ]
