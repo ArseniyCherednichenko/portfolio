@@ -34,6 +34,11 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'A coin flip that drifts toward fifty-fifty',
+    summary: 'Coin flip — press it and it springs up, tumbles, and lands heads or tails on an honest even draw; a running tally bar shows the split settling toward 50/50 the more you flip. Reduced motion lands it at once.',
+    tag: 'Component',
+  },
+  {
     title: 'A fidget spinner that coasts on real momentum',
     summary: 'Fidget spinner — grab a lobe and swing it and it keeps the throw you gave it, winding down against two frictions while a live rpm readout counts the coast. Reduced motion lands it at rest instead.',
     tag: 'Component',
@@ -76,11 +81,6 @@ export const LATEST_LOG: LogHeadline[] = [
   {
     title: 'An onboarding flow that will not let you skip ahead',
     summary: 'A multi-step form, done as a reusable shell — steps slide in from the way you travel, a half-filled step blocks the advance, focus follows into each one, and the card glides to its height.',
-    tag: 'Component',
-  },
-  {
-    title: 'A radar scope that lights what the sweep finds',
-    summary: 'A plan-position sonar — a bearing line rotates and strikes each contact to a phosphor glow that fades before the next lap. Click the face to drop your own.',
     tag: 'Component',
   },
 ]
