@@ -3,6 +3,7 @@ import { type ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 import { GradientText } from './GradientText'
 import { MagneticButton } from './MagneticButton'
+import { RollingLink } from './RollingLink'
 import { Popover } from './Popover'
 import { Signature } from './Signature'
 import { useContact } from './ContactDialog'
@@ -351,16 +352,18 @@ function CodeGlyph() {
   )
 }
 
-// A single footer link with a lime hover and a hairline that draws in from the
-// left — small, but it makes the map feel responsive under the cursor.
+// A single footer link. The label itself rolls over on hover and keyboard
+// focus (RollingLink), and a lime hairline draws in from the left alongside it
+// — the roll is the life, the hairline marks which row the cursor is on. The
+// whole map of the site is built from these, so the footer feels responsive
+// under the cursor on every page.
 function FooterLink({ to, label }: { to: string; label: string }) {
   return (
-    <Link
-      to={to}
-      className="group inline-flex items-center gap-2 text-sm text-white/55 transition-colors hover:text-white"
-    >
-      <span className="h-px w-0 bg-[#DCF87C] transition-all duration-300 group-hover:w-4" aria-hidden />
-      {label}
-    </Link>
+    <span className="group inline-flex items-center gap-2 text-sm text-white/55 transition-colors hover:text-white">
+      <span className="h-px w-0 shrink-0 bg-[#DCF87C] transition-all duration-300 group-hover:w-4" aria-hidden />
+      <RollingLink to={to} tone="white" className="text-current">
+        {label}
+      </RollingLink>
+    </span>
   )
 }
