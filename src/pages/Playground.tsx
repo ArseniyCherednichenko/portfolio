@@ -196,6 +196,7 @@ import { MagicEightBall } from '../components/MagicEightBall'
 import { CoinFlip } from '../components/CoinFlip'
 import { FidgetSpinner } from '../components/FidgetSpinner'
 import { Simon } from '../components/Simon'
+import { LightsOut } from '../components/LightsOut'
 import { ReceiptPrinter } from '../components/ReceiptPrinter'
 import { Hourglass } from '../components/Hourglass'
 import { SlidePuzzle } from '../components/SlidePuzzle'
@@ -11428,6 +11429,41 @@ export default function Playground() {
                 you cannot press out of turn, and every phase and result is announced through a live region. Reduced motion
                 drops the pad-lift and the springy scale &mdash; a lit pad changes only its glow, never its size &mdash; so
                 the sequence stays perfectly readable with no vestibular travel.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH LIGHTS OUT */}
+        <Reveal>
+          <div id="lights-out" data-experiment="Lights Out" className="mt-12 scroll-mt-32">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 py-12 sm:px-10">
+              <div className="text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Logic</span>
+                <p className="mx-auto mt-3 max-w-md text-lg font-medium text-white/85 sm:text-xl">
+                  Press a cell to flip it and its four neighbours. Turn the whole board off.
+                </p>
+              </div>
+              <LightsOut className="mt-10" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Lights Out</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The classic toggle puzzle, rebuilt as a real object you solve &mdash; and the one toy in this family that
+                is a game of logic. Simon is a game of recall and the slide puzzle a game of order; this is pure parity.
+                Pressing a cell flips it and its four orthogonal neighbours, so the move that turns one light off turns
+                its neighbours on &mdash; you cannot clear the board by chasing lights, you have to reason about the whole
+                grid at once. It is honest the two ways this family cares about. Every board is genuinely solvable: it is
+                never a random fill, which might have no solution at all, but starts fully dark and is scrambled only by
+                real presses, so by construction there is always a way back. And the &ldquo;fewest&rdquo; you are chasing
+                is not a guess or the scramble depth &mdash; it is the true minimum number of presses that clears this
+                exact board, computed by solving the puzzle as a linear system over GF(2): the press matrix is reduced, a
+                particular solution recovered, and its null space, dimension two for the 5&times;5, enumerated for the
+                lightest answer. So the par is provably optimal. Twenty-five cells in a CSS grid, each a dark struck
+                surface that glows lime when lit, with a roving-tabindex keyboard grid &mdash; arrows move, Enter presses,
+                Home and End jump &mdash; every cell carrying its position and state in a label and each result announced
+                through a live region. Reduced motion drops the pop and glow bloom; the cells just change colour, and the
+                puzzle plays identically.
               </p>
             </div>
           </div>
