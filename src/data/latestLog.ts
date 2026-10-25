@@ -34,6 +34,11 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'A Lights Out puzzle with a provable par',
+    summary: 'Lights Out — press a cell to flip it and its four neighbours and clear the 5x5 to dark; every board is scrambled from solved so it is always solvable, and the fewest shown is the true minimum, solved over GF(2).',
+    tag: 'Component',
+  },
+  {
     title: 'A game of Simon you play by memory',
     summary: 'Simon — it lights a lengthening run of pads and tones and you return it, one step longer each round, on a true random draw; score and best are the rounds you really reached. Optional tones; reduced motion keeps every pad readable.',
     tag: 'Component',
@@ -77,10 +82,5 @@ export const LATEST_LOG: LogHeadline[] = [
     title: 'A radio group where each option is a card',
     summary: 'Radio cards — a choose-one list of cards with headings and descriptions, a real radiogroup you arrow through on one tab stop, the lime outline springing to your choice.',
     tag: 'Component',
-  },
-  {
-    title: 'The same two things, built with care and without',
-    summary: 'Taste gains a ninth and tenth demo — a destructive action and a save — each shown as the bare default and the considered version, one switch flipping all ten at once.',
-    tag: 'Polish',
   },
 ]
