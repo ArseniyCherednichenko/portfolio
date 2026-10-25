@@ -34,6 +34,11 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'Links that roll over on hover and focus',
+    summary: 'RollingLink — a label whose letters turn over one after the next, built as two stacked copies of the word; aria-hidden with a plain label, rolls on keyboard focus too, and drops to a colour change under reduced motion. Now under every footer row.',
+    tag: 'Component',
+  },
+  {
     title: 'A Mastermind you crack by deduction',
     summary: 'Mastermind — guess a hidden four-colour code and read back honest black/white pegs (right-place, then right-colour by the true count); the code is a fair draw, made once and never changed. Fully keyboard-playable.',
     tag: 'Component',
@@ -76,11 +81,6 @@ export const LATEST_LOG: LogHeadline[] = [
   {
     title: 'A book you turn with your hands',
     summary: 'Flipbook — a right-hand page swings around the spine on a real 3D turn; drag it and the leaf follows your finger, release past halfway and it falls. It holds the eight beliefs the site is built by.',
-    tag: 'Component',
-  },
-  {
-    title: 'The bar and ring under every upload',
-    summary: 'Progress — a determinate bar and ring whose fill springs and readout counts, plus an indeterminate sweep for when the end is unknown; a reduced-motion pulse stands in for the sweep.',
     tag: 'Component',
   },
 ]
