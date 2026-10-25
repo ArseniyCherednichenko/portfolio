@@ -34,6 +34,11 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'A Mastermind you crack by deduction',
+    summary: 'Mastermind — guess a hidden four-colour code and read back honest black/white pegs (right-place, then right-colour by the true count); the code is a fair draw, made once and never changed. Fully keyboard-playable.',
+    tag: 'Component',
+  },
+  {
     title: 'A Lights Out puzzle with a provable par',
     summary: 'Lights Out — press a cell to flip it and its four neighbours and clear the 5x5 to dark; every board is scrambled from solved so it is always solvable, and the fewest shown is the true minimum, solved over GF(2).',
     tag: 'Component',
@@ -76,11 +81,6 @@ export const LATEST_LOG: LogHeadline[] = [
   {
     title: 'The bar and ring under every upload',
     summary: 'Progress — a determinate bar and ring whose fill springs and readout counts, plus an indeterminate sweep for when the end is unknown; a reduced-motion pulse stands in for the sweep.',
-    tag: 'Component',
-  },
-  {
-    title: 'A radio group where each option is a card',
-    summary: 'Radio cards — a choose-one list of cards with headings and descriptions, a real radiogroup you arrow through on one tab stop, the lime outline springing to your choice.',
     tag: 'Component',
   },
 ]
