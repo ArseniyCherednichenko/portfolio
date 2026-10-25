@@ -1,5 +1,5 @@
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
-import { useCallback, useEffect, useId, useMemo, useRef, useState } from 'react'
+import { useCallback, useId, useRef, useState } from 'react'
 
 // Mastermind — the code-breaking game, rebuilt as a real object you reason on.
 //
