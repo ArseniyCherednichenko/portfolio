@@ -197,6 +197,7 @@ import { CoinFlip } from '../components/CoinFlip'
 import { FidgetSpinner } from '../components/FidgetSpinner'
 import { Simon } from '../components/Simon'
 import { LightsOut } from '../components/LightsOut'
+import { Mastermind } from '../components/Mastermind'
 import { ReceiptPrinter } from '../components/ReceiptPrinter'
 import { Hourglass } from '../components/Hourglass'
 import { SlidePuzzle } from '../components/SlidePuzzle'
@@ -11464,6 +11465,43 @@ export default function Playground() {
                 Home and End jump &mdash; every cell carrying its position and state in a label and each result announced
                 through a live region. Reduced motion drops the pop and glow bloom; the cells just change colour, and the
                 puzzle plays identically.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH MASTERMIND */}
+        <Reveal>
+          <div id="mastermind" data-experiment="Mastermind" className="mt-12 scroll-mt-32">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 py-12 sm:px-10">
+              <div className="text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Deduce</span>
+                <p className="mx-auto mt-3 max-w-md text-lg font-medium text-white/85 sm:text-xl">
+                  Crack the hidden four-colour code. Each guess comes back scored, never explained.
+                </p>
+              </div>
+              <Mastermind className="mt-10" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Mastermind</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The code-breaking game, rebuilt as a real object you reason on &mdash; and the one toy in this family
+                that is a game of deduction. Simon is recall, Lights Out is parity, the slide puzzle is order; this is
+                inference. A hidden code of four coloured pegs sits behind the shield, and each guess comes back scored
+                &mdash; a dark peg for every colour that is right and in the right place, a pale peg for every colour
+                that is right but misplaced &mdash; but never told which answer belongs to which slot. You narrow the
+                code from the pattern of those replies, not from being shown anything. It is honest the two ways this
+                family cares about. The code is a fair Math.random() draw across the six colours, repeats allowed as in
+                the real game, made once at the start and never touched again &mdash; nothing is nudged to keep you
+                guessing, the board you read is the real one from the first move. And the score is provably correct, by
+                the exact two-pass count the game is defined by: exact hits first, then over only the remaining
+                positions the per-colour minimum of what the code still holds against what the guess still offers, so a
+                pale peg is a true &ldquo;right colour, wrong slot&rdquo; and never an approximation. Coloured discs in a
+                CSS grid, each carrying its own number so the game is legible to colour-blind players and maps one to
+                one onto the number keys; the active row is a real roving-tabindex group &mdash; arrows move, 1 to 6
+                place a colour, Backspace clears, Enter checks &mdash; every peg and feedback cluster is labelled, and
+                each result is spoken through a live region. Reduced motion drops the place-pop and the feedback stagger;
+                pegs appear in place, and the game plays identically.
               </p>
             </div>
           </div>
