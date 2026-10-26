@@ -6,6 +6,7 @@ import { usePreferences } from './Preferences'
 import { MobileMenu } from './MobileMenu'
 import { NavMenu } from './NavMenu'
 import { Tooltip } from './Tooltip'
+import { Kbd } from './Kbd'
 
 // Floating translucent nav. Work, About, and Playground are real page links.
 const PAGES: ReadonlyArray<readonly [string, string]> = [
@@ -72,7 +73,14 @@ export function Nav() {
               <circle cx="11" cy="11" r="7" />
               <path d="m20 20-3-3" />
             </svg>
-            <kbd className="hidden font-sans text-xs tracking-wide sm:inline">{mod} K</kbd>
+            <span className="hidden items-center gap-1 sm:inline-flex">
+              <Kbd size="sm" tone="muted" live={mod === '⌘' ? 'meta' : 'control'}>
+                {mod}
+              </Kbd>
+              <Kbd size="sm" tone="muted" live="k">
+                K
+              </Kbd>
+            </span>
           </button>
         </Tooltip>
         <Tooltip content="Preferences — tune the motion" placement="bottom">
