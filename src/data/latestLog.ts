@@ -34,6 +34,11 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'A tic-tac-toe you cannot beat, only draw',
+    summary: 'Tic-tac-toe — you are X against a perfect O that plays a full minimax search of the whole game tree; no openings book, no letting you win. A draw is the best anyone can force, verified in Node with zero losses over all play.',
+    tag: 'Component',
+  },
+  {
     title: 'A keycap that answers your real keyboard',
     summary: 'Kbd — the one keycap every shortcut on the site is now drawn with; push it with the pointer and it sinks, press the key it names and it depresses and lights lime. A legend, never a handler, so it never intercepts the shortcut.',
     tag: 'Component',
@@ -76,11 +81,6 @@ export const LATEST_LOG: LogHeadline[] = [
   {
     title: 'A Magic 8-ball you shake for an answer',
     summary: 'Magic 8-ball — ask a yes-or-no question and the die floats up out of the ink with one of the twenty classic replies, a fair random draw, nothing weighted. Pure SVG; reduced motion just swaps the reply.',
-    tag: 'Component',
-  },
-  {
-    title: 'The tabbed panel from every settings screen',
-    summary: 'Tabs — a real WAI-ARIA tablist wired to panels, one tab stop you arrow across; the lime indicator glides to your tab and the panel slides in from the way you moved. Underline or enclosed-pill.',
     tag: 'Component',
   },
 ]
