@@ -200,6 +200,7 @@ import { FidgetSpinner } from '../components/FidgetSpinner'
 import { Simon } from '../components/Simon'
 import { LightsOut } from '../components/LightsOut'
 import { Mastermind } from '../components/Mastermind'
+import { TicTacToe } from '../components/TicTacToe'
 import { ReceiptPrinter } from '../components/ReceiptPrinter'
 import { Hourglass } from '../components/Hourglass'
 import { SlidePuzzle } from '../components/SlidePuzzle'
@@ -11657,6 +11658,44 @@ export default function Playground() {
                 place a colour, Backspace clears, Enter checks &mdash; every peg and feedback cluster is labelled, and
                 each result is spoken through a live region. Reduced motion drops the place-pop and the feedback stagger;
                 pegs appear in place, and the game plays identically.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH TIC-TAC-TOE */}
+        <Reveal>
+          <div id="tic-tac-toe" data-experiment="Tic-tac-toe" className="mt-12 scroll-mt-32">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 py-12 sm:px-10">
+              <div className="text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Draw</span>
+                <p className="mx-auto mt-3 max-w-md text-lg font-medium text-white/85 sm:text-xl">
+                  Play a perfect opponent. The honest best you can do is a draw.
+                </p>
+              </div>
+              <TicTacToe className="mt-10" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Tic-tac-toe</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The oldest game of all, rebuilt as a real object against a perfect opponent &mdash; and the one toy in
+                this family that is a solved game played against perfect play. Simon is recall, Lights Out is parity,
+                Mastermind is deduction; this is the game you cannot win. You are X, it is O, and it never makes a
+                mistake, because it chooses every move by a full minimax search of the whole game tree rather than a
+                table of openings or a heuristic: a win is scored better the sooner it lands and a loss better the later
+                it is forced, so it takes the quickest win on offer and otherwise defends to the last square. That is the
+                whole of its intelligence &mdash; there is no fake difficulty, no rubber-banding and no letting you win.
+                Because tic-tac-toe is a draw under perfect play by both sides, the honest promise is the plain one: it
+                cannot be beaten, only drawn, and the scoreboard&rsquo;s &ldquo;It&rdquo; column staying at zero is a
+                theorem, not a boast &mdash; proven by searching every reply the opponent could make, and verified
+                exhaustively in Node with zero losses over all opponent play from both the first and the second move.
+                Built without canvas or image: the marks are inline SVG strokes that draw themselves in, your X the house
+                lime and its O a soft white, and the winning run is lit by a lime bar laid across its three cells. The
+                board is a real roving-tabindex grid &mdash; the arrows move, Enter or Space plays the focused square,
+                and R starts a new game &mdash; every square is labelled with its position and contents, each move and
+                outcome is spoken through a polite live region, and a toggle decides whether you or it opens. Under
+                reduced motion the stroke draw and the opponent&rsquo;s pause both drop; the marks appear in place and the
+                game plays identically.
               </p>
             </div>
           </div>
