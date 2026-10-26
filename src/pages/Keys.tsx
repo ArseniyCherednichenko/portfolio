@@ -6,17 +6,21 @@ import { Eyebrow } from '../components/Eyebrow'
 import { GradientText } from '../components/GradientText'
 import { SplitText } from '../components/SplitText'
 import { KeyboardMap } from '../components/KeyboardMap'
+import { Kbd } from '../components/Kbd'
 import { Seo } from '../components/Seo'
 import { GO_TARGETS } from '../components/Keyboard'
 
 const EASE = [0.16, 1, 0.3, 1] as const
 
-// A small keycap, matching the one in the shortcuts dialog, for the inline copy.
+// A small keycap for the inline copy. It is the shared Kbd primitive, so the
+// caps on the page that is *about* the keyboard light under the real one: a
+// string child doubles as the live key, so pressing g or K or ? anywhere
+// presses the cap that names it.
 function Key({ children }: { children: React.ReactNode }) {
   return (
-    <kbd className="inline-flex min-w-[1.5rem] items-center justify-center rounded-md border border-white/15 bg-white/[0.05] px-1.5 py-0.5 text-[11px] font-medium text-white/70 shadow-[0_1px_0_rgba(0,0,0,0.4)]">
+    <Kbd size="sm" live={typeof children === 'string' ? children : undefined}>
       {children}
-    </kbd>
+    </Kbd>
   )
 }
 
