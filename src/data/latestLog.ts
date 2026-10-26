@@ -34,6 +34,11 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'A panel that levels toward you as you scroll',
+    summary: 'ContainerScroll — a framed panel tilted back on the x-axis that rotates flat toward you as the section scrolls, scaling up and lighting its lime rim, all scrubbed from scroll and smoothed with a spring. Reduced motion shows it flat and still.',
+    tag: 'Motion',
+  },
+  {
     title: 'Links that roll over on hover and focus',
     summary: 'RollingLink — a label whose letters turn over one after the next, built as two stacked copies of the word; aria-hidden with a plain label, rolls on keyboard focus too, and drops to a colour change under reduced motion. Now under every footer row.',
     tag: 'Component',
@@ -76,11 +81,6 @@ export const LATEST_LOG: LogHeadline[] = [
   {
     title: 'A panel that slides in from the edge',
     summary: 'Drawer — the settings/filter/cart side panel, openable from either edge; drag the header toward its rim to dismiss, flick it shut, or press Escape. Its position is one value the drag writes and the backdrop reads.',
-    tag: 'Component',
-  },
-  {
-    title: 'A book you turn with your hands',
-    summary: 'Flipbook — a right-hand page swings around the spine on a real 3D turn; drag it and the leaf follows your finger, release past halfway and it falls. It holds the eight beliefs the site is built by.',
     tag: 'Component',
   },
 ]
