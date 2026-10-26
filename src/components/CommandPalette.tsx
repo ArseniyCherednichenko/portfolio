@@ -19,6 +19,7 @@ import { useContact } from './ContactDialog'
 import { usePreferences } from './Preferences'
 import { useShortcuts } from './Keyboard'
 import { useToast } from './Toast'
+import { Kbd } from './Kbd'
 
 // A site-wide command palette (Cmd/Ctrl+K). Fuzzy-search across pages,
 // projects, and quick actions, then jump with the keyboard. Accessible
@@ -433,9 +434,9 @@ function Palette({ open, onClose }: { open: boolean; onClose: () => void }) {
                 aria-controls="command-list"
                 className="w-full bg-transparent py-4 text-[15px] text-white placeholder:text-white/30 focus:outline-none"
               />
-              <kbd className="hidden rounded border border-white/15 px-1.5 py-0.5 text-[10px] font-medium text-white/40 sm:block">
+              <Kbd size="sm" tone="muted" live="Escape" className="hidden sm:inline-flex">
                 esc
-              </kbd>
+              </Kbd>
             </div>
 
             <div ref={listRef} id="command-list" role="listbox" className="max-h-[min(60vh,360px)] overflow-y-auto p-2">
@@ -493,12 +494,12 @@ function Palette({ open, onClose }: { open: boolean; onClose: () => void }) {
 
             <div className="flex items-center justify-between border-t border-white/10 px-4 py-2.5 text-[11px] text-white/30">
               <span className="flex items-center gap-1.5">
-                <Kbd>up</Kbd>
-                <Kbd>down</Kbd>
+                <Kbd size="sm" tone="muted" live="arrowup">up</Kbd>
+                <Kbd size="sm" tone="muted" live="arrowdown">down</Kbd>
                 navigate
               </span>
               <span className="flex items-center gap-1.5">
-                <Kbd>enter</Kbd>
+                <Kbd size="sm" tone="muted" live="enter">enter</Kbd>
                 select
               </span>
             </div>
@@ -526,14 +527,6 @@ function Highlight({ text, indices }: { text: string; indices: number[] }) {
   })
   if (cursor < text.length) parts.push(<span key="rest">{text.slice(cursor)}</span>)
   return <>{parts}</>
-}
-
-function Kbd({ children }: { children: ReactNode }) {
-  return (
-    <kbd className="rounded border border-white/15 bg-white/[0.03] px-1.5 py-0.5 font-medium text-white/40">
-      {children}
-    </kbd>
-  )
 }
 
 function SearchIcon() {
