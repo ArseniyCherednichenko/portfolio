@@ -52,6 +52,7 @@ import { CompareSlider } from '../components/CompareSlider'
 import { Folder } from '../components/Folder'
 import { ScrollStack } from '../components/ScrollStack'
 import { ScrollReveal } from '../components/ScrollReveal'
+import { ContainerScroll } from '../components/ContainerScroll'
 import { VariableProximity } from '../components/VariableProximity'
 import { SpotlightReveal } from '../components/SpotlightReveal'
 import { ASCIIText } from '../components/ASCIIText'
@@ -7672,6 +7673,67 @@ export default function Playground() {
                 A visual stage pins to the viewport while a column of steps scrolls past; the stage cross-fades to whichever
                 step crosses the mid-line. Active tracking is a rAF-throttled measure of the step rects, no per-step
                 listeners. Drives the Colophon anatomy section. Reduced-motion shows the stage composed and a plain list.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH CONTAINER SCROLL */}
+        <Reveal>
+          <div className="mt-12">
+            <ContainerScroll
+              header={
+                <div className="mx-auto max-w-2xl px-4 pb-10 text-center">
+                  <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Tilt</span>
+                  <p className="mt-3 font-display text-2xl font-medium leading-snug text-white/85 sm:text-3xl">
+                    Scroll, and the panel levels toward you.
+                  </p>
+                </div>
+              }
+            >
+              {/* An honest window into the site — the range it works across, not
+                  a single project. Factual labels, no invented metrics. */}
+              <div className="bg-[radial-gradient(130%_120%_at_12%_0%,rgba(220,248,124,0.14),transparent_55%)] p-7 sm:p-12">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.26em] text-[#DCF87C]">
+                  More than one project
+                </p>
+                <h4 className="mt-4 font-display text-3xl font-bold leading-[1.05] tracking-tight text-white sm:text-5xl">
+                  One builder,
+                  <br />
+                  across the stack.
+                </h4>
+                <div className="mt-8 flex flex-wrap gap-2.5">
+                  {['Frontend', 'Native iOS', 'Backend', 'Applied AI', 'Motion'].map((d) => (
+                    <span
+                      key={d}
+                      className="rounded-full border border-white/12 bg-white/[0.04] px-4 py-1.5 text-sm font-medium text-white/75"
+                    >
+                      {d}
+                    </span>
+                  ))}
+                </div>
+                <div className="mt-9 grid grid-cols-3 gap-3 sm:gap-6">
+                  {[
+                    { k: '5', v: 'disciplines' },
+                    { k: `${COMPONENT_COUNT}`, v: 'hand-built' },
+                    { k: '1', v: 'craft' },
+                  ].map((s) => (
+                    <div key={s.v} className="rounded-2xl border border-white/8 bg-white/[0.02] p-4 sm:p-5">
+                      <p className="font-display text-2xl font-bold text-[#DCF87C] sm:text-4xl">{s.k}</p>
+                      <p className="mt-1 text-xs text-white/50 sm:text-sm">{s.v}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </ContainerScroll>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Scroll-driven container tilt</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                A framed panel that starts tilted back on the x-axis and rotates flat toward you as the section scrolls,
+                scaling up and lighting its lime rim on the way, every value scrubbed from the section's own scroll
+                progress and smoothed with a light spring. The flatten finishes by mid-viewport and then holds, so it
+                never re-tilts on the way out, and the header above lifts in sympathy. Reduced-motion shows the frame
+                flat, lit, and still.
               </p>
             </div>
           </div>
