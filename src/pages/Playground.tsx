@@ -124,6 +124,7 @@ import { Checkbox } from '../components/Checkbox'
 import { StepForm, type WizardStep } from '../components/StepForm'
 import { RadioCards } from '../components/RadioCards'
 import { Tabs } from '../components/Tabs'
+import { Kbd } from '../components/Kbd'
 import { Progress } from '../components/Progress'
 import { SwipeToReveal, type SwipeAction } from '../components/SwipeToReveal'
 import { PullToRefresh } from '../components/PullToRefresh'
@@ -1224,6 +1225,60 @@ function RadioCardsDemo() {
 // driving — and nothing here changes anything real. Arrow across the tabs with a
 // single tab stop; the lime indicator glides (and, enclosed, morphs width) to
 // the active tab, and the panel slides in from the side you moved toward.
+// A live legend: the caps on screen answer the reader's own keyboard. Every
+// cap carries a `live` key, so pressing it anywhere on the page presses the
+// printed cap — the modifier the platform actually uses, the arrows, enter,
+// escape, the leader chord, the help key. Honest about what it is: a <kbd>
+// legend, never a handler, so nothing here intercepts the shortcuts it draws.
+function KbdDemo() {
+  // The platform modifier, shown and matched correctly on mac vs. the rest.
+  const [modGlyph, setModGlyph] = useState('Ctrl')
+  const [modKey, setModKey] = useState('control')
+  useEffect(() => {
+    const mac = typeof navigator !== 'undefined' && /Mac|iPhone|iPad/.test(navigator.platform)
+    if (mac) {
+      setModGlyph('⌘')
+      setModKey('meta')
+    }
+  }, [])
+
+  const rows: { label: string; caps: { legend: string; live: string }[]; join?: string }[] = [
+    { label: 'Open the command palette', caps: [{ legend: modGlyph, live: modKey }, { legend: 'K', live: 'k' }] },
+    { label: 'Find in the Playground', caps: [{ legend: '/', live: '/' }] },
+    { label: 'Leader, then a destination', caps: [{ legend: 'g', live: 'g' }, { legend: 'H', live: 'h' }], join: 'then' },
+    { label: 'Walk a list', caps: [{ legend: '↑', live: 'arrowup' }, { legend: '↓', live: 'arrowdown' }] },
+    { label: 'Choose', caps: [{ legend: '↵', live: 'enter' }] },
+    { label: 'Dismiss', caps: [{ legend: 'esc', live: 'escape' }] },
+    { label: 'Keyboard help, anywhere', caps: [{ legend: '?', live: '?' }] },
+  ]
+
+  return (
+    <div className="w-full max-w-md">
+      <ul className="divide-y divide-white/[0.06] rounded-2xl border border-white/10 bg-white/[0.02]">
+        {rows.map((r) => (
+          <li key={r.label} className="flex items-center justify-between gap-4 px-5 py-3.5">
+            <span className="text-sm text-white/60">{r.label}</span>
+            <span className="flex shrink-0 items-center gap-1.5">
+              {r.caps.map((c, i) => (
+                <span key={c.legend + i} className="flex items-center gap-1.5">
+                  {i > 0 && r.join && <span className="text-[11px] text-white/35">{r.join}</span>}
+                  <Kbd size="md" live={c.live}>
+                    {c.legend}
+                  </Kbd>
+                </span>
+              ))}
+            </span>
+          </li>
+        ))}
+      </ul>
+      <p className="mt-4 text-center text-xs text-white/35">
+        Press any of these on your keyboard — the cap it names lights lime. The caps answer the key, they never handle
+        it.
+      </p>
+    </div>
+  )
+}
+
 function TabsDemo() {
   const [variant, setVariant] = useState<'underline' | 'pill'>('underline')
   const [active, setActive] = useState('motion')
@@ -8792,6 +8847,44 @@ export default function Playground() {
                 activation, controlled or uncontrolled. Under{' '}
                 <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code> the
                 indicator crossfades in place and panels swap without travel &mdash; identical to use, just still.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH KEYCAP */}
+        <Reveal>
+          <div id="kbd" data-experiment="Keycap" className="mt-12 scroll-mt-32">
+            <div className="flex flex-col items-center gap-8 rounded-3xl border border-white/10 bg-white/[0.02] px-6 py-14 sm:px-10">
+              <div className="max-w-md text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Printed on the page</span>
+                <p className="mx-auto mt-3 text-lg font-medium text-white/85 sm:text-xl">
+                  The keycap every shortcut is drawn with. Push one with the pointer and it sinks; press the real key it
+                  names and it answers in lime.
+                </p>
+              </div>
+              <KbdDemo />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Keycap</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                A small thing, but the site named its shortcuts in four slightly different hand-rolled{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">&lt;kbd&gt;</code>s &mdash; the nav
+                hint, the command-palette footer, the keyboard page &mdash; so this is the one cap they now share. It
+                reads as a physical key: a lit top bevel over a dark bottom lip that collapses as the cap sinks on a
+                press. Two things press it. The pointer, through{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">pointerdown</code>, so a cap sinks
+                under a tap or a mouse. And, given a <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">live</code>{' '}
+                key, the keyboard under your hands: a passive{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">keydown</code> listener that mirrors
+                the matching key &mdash; so the legend and your own keyboard move together, and the modifier shown is the
+                one your platform actually uses. It is deliberately a{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">&lt;kbd&gt;</code> and nothing more:
+                not focusable, no handler, so it never steals a tab stop or intercepts the shortcut it depicts &mdash; it
+                only reports it. The listener is passive and cleared on blur and tab-away, so it never contends with the
+                site&rsquo;s real shortcut handling and a cap can&rsquo;t stick lit off-window. Under{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code> the
+                travel is dropped and only the colour answers.
               </p>
             </div>
           </div>
