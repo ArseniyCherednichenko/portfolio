@@ -9,6 +9,7 @@ import { CompareSlider } from '../components/CompareSlider'
 import { Permalink } from '../components/Permalink'
 import { SectionNav, type SectionLink } from '../components/SectionNav'
 import { Seo } from '../components/Seo'
+import { COMPONENT_COUNT } from '../data/stats'
 
 const EASE = [0.16, 1, 0.3, 1] as const
 const LIME = '#DCF87C'
@@ -431,7 +432,7 @@ export default function Craft() {
           </Reveal>
           <Reveal delay={0.1}>
             <p className="mt-7 text-lg leading-relaxed text-white/60">
-              The About page tells you how I work. This one shows it. Four beliefs I hold about
+              The About page tells you how I work. This one shows it. Five beliefs I hold about
               interface motion, each one a small thing you can play with rather than a claim you
               have to take on trust. Move the controls. The difference is meant to be felt, not read.
             </p>
@@ -498,7 +499,7 @@ export default function Craft() {
               These five ideas run under every animation on the site.
             </p>
             <p className="mt-4 max-w-xl leading-relaxed text-white/55">
-              The Playground is where they are put to work across eighty-odd hand-built components.
+              The Playground is where they are put to work across {COMPONENT_COUNT} hand-built components.
               The work is where they ship.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
