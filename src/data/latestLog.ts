@@ -34,6 +34,11 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'A peg solitaire that solves itself, honestly',
+    summary: 'Peg solitaire — the English cross board; jump every peg off but one, cleanest finish in the centre. The rules are strictly enforced, and Solve it replays a real 31-move line, verified move by move.',
+    tag: 'Component',
+  },
+  {
     title: 'A tic-tac-toe you cannot beat, only draw',
     summary: 'Tic-tac-toe — you are X against a perfect O that plays a full minimax search of the whole game tree; no openings book, no letting you win. A draw is the best anyone can force, verified in Node with zero losses over all play.',
     tag: 'Component',
@@ -76,11 +81,6 @@ export const LATEST_LOG: LogHeadline[] = [
   {
     title: 'A fidget spinner that coasts on real momentum',
     summary: 'Fidget spinner — grab a lobe and swing it and it keeps the throw you gave it, winding down against two frictions while a live rpm readout counts the coast. Reduced motion lands it at rest instead.',
-    tag: 'Component',
-  },
-  {
-    title: 'A Magic 8-ball you shake for an answer',
-    summary: 'Magic 8-ball — ask a yes-or-no question and the die floats up out of the ink with one of the twenty classic replies, a fair random draw, nothing weighted. Pure SVG; reduced motion just swaps the reply.',
     tag: 'Component',
   },
 ]
