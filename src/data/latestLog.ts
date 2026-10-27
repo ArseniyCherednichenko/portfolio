@@ -34,6 +34,11 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'A zen garden you rake and never finish',
+    summary: 'Zen garden — a karesansui you rake with the pointer; a seven-tooth rake carves parallel grooves that follow your hand and stay where you leave them, passing behind two stones. The calm toy with no score, only tending. Nothing moves on a clock, so reduced motion needs no case.',
+    tag: 'Component',
+  },
+  {
     title: 'An input whose words scatter into pixels',
     summary: 'Vanish input — the search box every app has, rebuilt by hand: it cycles its prompts while empty, and on submit the text rasterises and its pixels drift away rather than just clearing. A real labelled form; reduced motion clears it at once.',
     tag: 'Component',
@@ -76,11 +81,6 @@ export const LATEST_LOG: LogHeadline[] = [
   {
     title: 'A game of Simon you play by memory',
     summary: 'Simon — it lights a lengthening run of pads and tones and you return it, one step longer each round, on a true random draw; score and best are the rounds you really reached. Optional tones; reduced motion keeps every pad readable.',
-    tag: 'Component',
-  },
-  {
-    title: 'A coin flip that drifts toward fifty-fifty',
-    summary: 'Coin flip — press it and it springs up, tumbles, and lands heads or tails on an honest even draw; a running tally bar shows the split settling toward 50/50 the more you flip. Reduced motion lands it at once.',
     tag: 'Component',
   },
 ]
