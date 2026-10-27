@@ -203,6 +203,7 @@ import { LightsOut } from '../components/LightsOut'
 import { Mastermind } from '../components/Mastermind'
 import { TicTacToe } from '../components/TicTacToe'
 import { PegSolitaire } from '../components/PegSolitaire'
+import { ZenGarden } from '../components/ZenGarden'
 import { ReceiptPrinter } from '../components/ReceiptPrinter'
 import { Hourglass } from '../components/Hourglass'
 import { SlidePuzzle } from '../components/SlidePuzzle'
@@ -11786,6 +11787,45 @@ export default function Playground() {
                 its place and contents, and each move, the running count and the finish are spoken through a polite live
                 region. Under reduced motion the slide and the fades drop; pegs simply appear and vanish, and the solver
                 steps through without the travel.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH ZEN GARDEN */}
+        <Reveal>
+          <div id="zen-garden" data-experiment="Zen garden" className="mt-12 scroll-mt-32">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 py-12 sm:px-10">
+              <div className="text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Tend</span>
+                <p className="mx-auto mt-3 max-w-md text-lg font-medium text-white/85 sm:text-xl">
+                  Drag across the sand to rake it. There is nothing to win here, only to tend.
+                </p>
+              </div>
+              <ZenGarden className="mt-10" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Zen garden</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                A karesansui &mdash; a dry rock garden &mdash; rebuilt as a surface you rake, and the calm one in this
+                toys family. The Dice is a throw that settles, the Fidget spinner an rpm winding down, the Magic 8-ball a
+                reply that rises; each resolves when you press it. This one resolves nothing &mdash; no score, no win, no
+                settling, only the slow repetitive gesture of raking, which is the whole point of the real thing, so it
+                is the one toy here you cannot finish, only tend. Drag across the field and a seven-tooth rake carves a
+                band of parallel grooves that follows your hand, curving where you curve; let go and the furrows stay
+                where you left them. It opens already raked into the long straight lines a gardener leaves, with two
+                stones set in the sand. Honest about how it is drawn: two stacked canvases, the back one holding the sand
+                and every groove &mdash; the fresh pattern and whatever you carve &mdash; and the front one holding the
+                stones and their soft shadows and never changing, so a groove drawn beneath a stone really is drawn
+                beneath it and a furrow never runs across a rock. No image or texture file: the sand is a painted warm
+                gradient with a faint vignette, and the rake is maths &mdash; your travel gives a direction, the
+                perpendicular gives the seven offsets, and each tooth draws one groove as a shadowed trough with a thin
+                warm highlight on its lit wall, strokes building up so raking the same spot twice deepens it. Reduced
+                motion needs no special case because nothing here moves on a clock &mdash; the garden only ever changes
+                under your pointer. The canvas is decorative and hidden from assistive tech, so the field is described in
+                text and the two controls &mdash; rake the pattern back, or smooth the sand flat &mdash; are real
+                labelled buttons that announce through a live region, giving a keyboard or screen-reader visitor the same
+                two honest states the surface offers.
               </p>
             </div>
           </div>
