@@ -78,9 +78,4 @@ export const LATEST_LOG: LogHeadline[] = [
     summary: 'Lights Out — press a cell to flip it and its four neighbours and clear the 5x5 to dark; every board is scrambled from solved so it is always solvable, and the fewest shown is the true minimum, solved over GF(2).',
     tag: 'Component',
   },
-  {
-    title: 'A game of Simon you play by memory',
-    summary: 'Simon — it lights a lengthening run of pads and tones and you return it, one step longer each round, on a true random draw; score and best are the rounds you really reached. Optional tones; reduced motion keeps every pad readable.',
-    tag: 'Component',
-  },
 ]
