@@ -34,6 +34,11 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'An input whose words scatter into pixels',
+    summary: 'Vanish input — the search box every app has, rebuilt by hand: it cycles its prompts while empty, and on submit the text rasterises and its pixels drift away rather than just clearing. A real labelled form; reduced motion clears it at once.',
+    tag: 'Component',
+  },
+  {
     title: 'A peg solitaire that solves itself, honestly',
     summary: 'Peg solitaire — the English cross board; jump every peg off but one, cleanest finish in the centre. The rules are strictly enforced, and Solve it replays a real 31-move line, verified move by move.',
     tag: 'Component',
@@ -76,11 +81,6 @@ export const LATEST_LOG: LogHeadline[] = [
   {
     title: 'A coin flip that drifts toward fifty-fifty',
     summary: 'Coin flip — press it and it springs up, tumbles, and lands heads or tails on an honest even draw; a running tally bar shows the split settling toward 50/50 the more you flip. Reduced motion lands it at once.',
-    tag: 'Component',
-  },
-  {
-    title: 'A fidget spinner that coasts on real momentum',
-    summary: 'Fidget spinner — grab a lobe and swing it and it keeps the throw you gave it, winding down against two frictions while a live rpm readout counts the coast. Reduced motion lands it at rest instead.',
     tag: 'Component',
   },
 ]
