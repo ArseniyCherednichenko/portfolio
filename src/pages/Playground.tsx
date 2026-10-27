@@ -11,6 +11,7 @@ import { GradientText } from '../components/GradientText'
 import { GooeyText } from '../components/GooeyText'
 import { TextType } from '../components/TextType'
 import { TypingThread } from '../components/TypingThread'
+import { VanishInput } from '../components/VanishInput'
 import { RotatingWord } from '../components/RotatingWord'
 import { SpotlightCard } from '../components/SpotlightCard'
 import { TiltCard } from '../components/TiltCard'
@@ -4974,6 +4975,56 @@ export default function Playground() {
                 and the whole surface carries one honest label calling it a demo of the interaction, not
                 a transcript of anything real. Under reduced motion the machine never starts &mdash; the
                 exchange is simply shown in full, no dots, no streaming, no caret.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH VANISH INPUT — text that dissolves into pixels on submit */}
+        <Reveal>
+          <div id="vanish-input" data-experiment="Vanish input" className="mt-12 scroll-mt-32">
+            <div className="flex flex-col items-center gap-8 rounded-3xl border border-white/10 bg-white/[0.02] px-6 py-14 sm:px-10">
+              <div className="max-w-md text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">
+                  Dissolve
+                </span>
+                <p className="mx-auto mt-3 text-lg font-medium text-white/85 sm:text-xl">
+                  Type anything and press the arrow &mdash; the words come apart into pixels and
+                  scatter away rather than just clearing.
+                </p>
+              </div>
+              <VanishInput
+                label="Type anything to watch it dissolve"
+                placeholders={[
+                  'Type anything and watch it scatter',
+                  'A field that comes apart on submit',
+                  'Made by hand in Berlin',
+                  'Press the arrow or hit Enter',
+                  'Nothing you type leaves this tab',
+                ]}
+              />
+              <p className="max-w-sm text-center text-xs text-white/40">
+                A demo of the interaction only &mdash; nothing you enter is sent, stored, or read.
+              </p>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Vanish input</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The &ldquo;placeholders and vanish input&rdquo; micro-interaction, rebuilt by hand as a
+                product primitive rather than a toy &mdash; the search box, subscribe field, or prompt
+                bar every app has, with two pieces of craft a plain input never carries. While it is
+                empty it cycles through its prompts, each rising in as the last leaves upward, so the
+                box always suggests what it is for without ever pretending you typed anything. And the
+                signature: on submit the real text is drawn onto an overlay canvas in the input&rsquo;s
+                own font, broken into one small particle per lit pixel, and those particles jitter
+                outward and shrink away from a dissolve front that sweeps across the word &mdash; so the
+                entry does not merely clear, it comes apart. The live input text is hidden for that one
+                window so the pixels are the only copy left. It stays honest and reachable: a real form
+                with a labelled input and a real submit button, so Enter and the arrow both submit and a
+                screen reader hears a field, not an effect, while the canvas is decorative and hidden
+                from assistive tech. Under reduced motion the dissolve and the placeholder travel both
+                drop &mdash; the field clears at once and holds a single steady prompt &mdash; so it is
+                a calm, usable control with nothing moving.
               </p>
             </div>
           </div>
