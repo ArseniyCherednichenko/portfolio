@@ -34,6 +34,11 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'A notification pile you swipe to clear',
+    summary: 'Notification stack — the persistent counterpart to the Toast: notifications pile up and wait, collapse into a peeking deck, and a new one springs in and pushes the rest down. Swipe a card to dismiss, or press Backspace on a focused one. Reduced motion settles it in place.',
+    tag: 'Component',
+  },
+  {
     title: 'A reading beam that draws down the margin',
     summary: 'TracingBeam — the Craft page\'s five motion notes now read on a beam that fills down the margin as you scroll, a lit head riding the leading edge where your eye is. The margin-rule kin of the top bar and the page spine; reduced motion draws it full and still.',
     tag: 'Motion',
@@ -76,11 +81,6 @@ export const LATEST_LOG: LogHeadline[] = [
   {
     title: 'A Mastermind you crack by deduction',
     summary: 'Mastermind — guess a hidden four-colour code and read back honest black/white pegs (right-place, then right-colour by the true count); the code is a fair draw, made once and never changed. Fully keyboard-playable.',
-    tag: 'Component',
-  },
-  {
-    title: 'A Lights Out puzzle with a provable par',
-    summary: 'Lights Out — press a cell to flip it and its four neighbours and clear the 5x5 to dark; every board is scrambled from solved so it is always solvable, and the fewest shown is the true minimum, solved over GF(2).',
     tag: 'Component',
   },
 ]
