@@ -115,6 +115,7 @@ import { SevenSegment } from '../components/SevenSegment'
 import { Vfd } from '../components/Vfd'
 import { useBerlinTime } from '../hooks/useBerlinTime'
 import { CodeInput } from '../components/CodeInput'
+import { NotificationStack } from '../components/NotificationStack'
 import { PasswordStrength } from '../components/PasswordStrength'
 import { Skeleton, SkeletonSwap } from '../components/Skeleton'
 import { HoldConfirm } from '../components/HoldConfirm'
@@ -5861,6 +5862,36 @@ export default function Playground() {
                 sideways jump. The content is deliberate too — the panels name the five disciplines the work
                 spans, so what opens is the range, never a pitch. Reduced motion drops the morph for a plain
                 centred cross-fade; everything still opens, reads, and closes the same.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* NOTIFICATION STACK — a collapsible pile with swipe-to-dismiss */}
+        <Reveal>
+          <div id="notification-stack" data-experiment="Notification stack" className="mt-12 scroll-mt-32">
+            <div className="flex justify-center rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 py-12 sm:px-10">
+              <NotificationStack />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Notification stack</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The persistent counterpart to the <span className="text-white/65">Toast</span> this library already
+                has. A toast is ephemeral &mdash; it slides in, counts down, and dismisses itself. This is the opposite
+                surface: notifications that <span className="text-white/65">pile up and wait</span>, the lock-screen and
+                bell-icon pattern, and the unglamorous product craft of an inbox rather than a decoration. Three details
+                carry it. The <span className="text-white/65">collapse</span>: more than one stacks into a single deck,
+                the front card whole and the two behind peeking below like real paper, so a busy surface stays one card
+                tall until you open it. The <span className="text-white/65">swipe</span>: a card is a drag handle, and
+                throwing it past a threshold dismisses it while a clear-wash warms in to say what the gesture will do;
+                let go short and it springs home. And the <span className="text-white/65">arrival</span>: a new
+                notification springs in from above and pushes the rest down on a layout spring, so the stack visibly
+                makes room. Honest about its content &mdash; the entries are generic product samples, not a real feed.
+                Reachable without a pointer or a steady hand: a labelled region, every card focusable and dismissible
+                with <code className="text-white/55">Backspace</code> or <code className="text-white/55">Delete</code>
+                (the swipe is an enhancement, never the only way out), real buttons throughout, and every arrival,
+                dismissal and clear announced through a polite live region. Reduced motion drops the drag, the arrival
+                spring and the exit slide &mdash; cards appear and leave in place.
               </p>
             </div>
           </div>
