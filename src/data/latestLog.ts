@@ -34,6 +34,11 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'A presence row that spreads as you reach',
+    summary: 'Avatar stack — the who-is-here cluster collaborative products grow: faces overlap at rest, ease apart when you point or tab in, and the one under you lifts with a tooltip. Past a cap they collapse into a +N that opens the full roster; people join and leave on a layout spring. Reduced motion settles it in place.',
+    tag: 'Component',
+  },
+  {
     title: 'A notification pile you swipe to clear',
     summary: 'Notification stack — the persistent counterpart to the Toast: notifications pile up and wait, collapse into a peeking deck, and a new one springs in and pushes the rest down. Swipe a card to dismiss, or press Backspace on a focused one. Reduced motion settles it in place.',
     tag: 'Component',
@@ -76,11 +81,6 @@ export const LATEST_LOG: LogHeadline[] = [
   {
     title: 'Links that roll over on hover and focus',
     summary: 'RollingLink — a label whose letters turn over one after the next, built as two stacked copies of the word; aria-hidden with a plain label, rolls on keyboard focus too, and drops to a colour change under reduced motion. Now under every footer row.',
-    tag: 'Component',
-  },
-  {
-    title: 'A Mastermind you crack by deduction',
-    summary: 'Mastermind — guess a hidden four-colour code and read back honest black/white pegs (right-place, then right-colour by the true count); the code is a fair draw, made once and never changed. Fully keyboard-playable.',
     tag: 'Component',
   },
 ]
