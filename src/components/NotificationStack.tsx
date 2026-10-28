@@ -1,5 +1,5 @@
 import { AnimatePresence, motion, useReducedMotion, type PanInfo } from 'framer-motion'
-import { useCallback, useId, useRef, useState, type KeyboardEvent } from 'react'
+import { forwardRef, useCallback, useId, useRef, useState, type KeyboardEvent } from 'react'
 
 // The notification pile every phone lock screen and every app's bell-icon
 // dropdown has, rebuilt by hand — and deliberately the *persistent* counterpart
@@ -86,16 +86,13 @@ function DismissIcon() {
 
 // One notification, rendered as a draggable card. The drag writes its own x,
 // and past the threshold the card leaves to that side; a "clear" wash warms in
-// proportionally as it travels so the gesture reads before it commits.
-function Card({
-  notif,
-  onDismiss,
-  reduce,
-}: {
-  notif: Notif
-  onDismiss: (id: string) => void
-  reduce: boolean | null
-}) {
+// proportionally as it travels so the gesture reads before it commits. It
+// forwards its ref to the motion.div so AnimatePresence's popLayout can measure
+// it as it leaves.
+const Card = forwardRef<
+  HTMLDivElement,
+  { notif: Notif; onDismiss: (id: string) => void; reduce: boolean | null }
+>(function Card({ notif, onDismiss, reduce }, ref) {
   const [bg, setBg] = useState(0) // 0..1 — how far toward a dismiss the drag is
   const THRESHOLD = 96
 
@@ -118,6 +115,7 @@ function Card({
 
   return (
     <motion.div
+      ref={ref}
       layout={!reduce}
       initial={reduce ? { opacity: 0 } : { opacity: 0, y: -18, scale: 0.96 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -159,7 +157,7 @@ function Card({
       </button>
     </motion.div>
   )
-}
+})
 
 // The collapsed deck: the front card whole, the next two scaled back and
 // peeking below like a short pile of paper. The whole deck is one button that
