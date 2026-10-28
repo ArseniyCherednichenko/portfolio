@@ -34,6 +34,11 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'A reading beam that draws down the margin',
+    summary: 'TracingBeam — the Craft page\'s five motion notes now read on a beam that fills down the margin as you scroll, a lit head riding the leading edge where your eye is. The margin-rule kin of the top bar and the page spine; reduced motion draws it full and still.',
+    tag: 'Motion',
+  },
+  {
     title: 'A zen garden you rake and never finish',
     summary: 'Zen garden — a karesansui you rake with the pointer; a seven-tooth rake carves parallel grooves that follow your hand and stay where you leave them, passing behind two stones. The calm toy with no score, only tending. Nothing moves on a clock, so reduced motion needs no case.',
     tag: 'Component',
