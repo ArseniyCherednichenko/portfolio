@@ -116,6 +116,7 @@ import { Vfd } from '../components/Vfd'
 import { useBerlinTime } from '../hooks/useBerlinTime'
 import { CodeInput } from '../components/CodeInput'
 import { NotificationStack } from '../components/NotificationStack'
+import { AvatarStack } from '../components/AvatarStack'
 import { PasswordStrength } from '../components/PasswordStrength'
 import { Skeleton, SkeletonSwap } from '../components/Skeleton'
 import { HoldConfirm } from '../components/HoldConfirm'
@@ -5892,6 +5893,37 @@ export default function Playground() {
                 (the swipe is an enhancement, never the only way out), real buttons throughout, and every arrival,
                 dismissal and clear announced through a polite live region. Reduced motion drops the drag, the arrival
                 spring and the exit slide &mdash; cards appear and leave in place.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* AVATAR STACK — a collaborative presence row with overflow roster */}
+        <Reveal>
+          <div id="avatar-stack" data-experiment="Avatar stack" className="mt-12 scroll-mt-32">
+            <div className="flex justify-center rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 py-12 sm:px-10">
+              <AvatarStack />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Avatar stack</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The <span className="text-white/65">who-is-here</span> row every collaborative product
+                grew once more than one person could share a place &mdash; the cluster of faces in a Figma
+                file, a shared doc, a call. Another turn toward product craft, not a toy. Three details
+                carry it. The <span className="text-white/65">overlap</span>: faces stack with a ring in the
+                page colour punched between them, so a crowded room reads as a tidy cluster, and past a cap
+                the rest collapse into a <code className="text-white/55">+N</code> that is a real button. The{' '}
+                <span className="text-white/65">spread</span>: reach for the row with a pointer or tab into
+                it and the cluster eases apart just enough to separate the faces, the one under you lifting
+                with a tooltip &mdash; compact at rest, legible on reach. And the{' '}
+                <span className="text-white/65">traffic</span>: people join and leave a live session, so the
+                row does too, each face springing in and pushing the rest along as the count and overflow
+                recompute. Honest about its content &mdash; generated monogram faces, never photos, so no
+                real person is implied. Reachable without a pointer: a labelled group, every face a button
+                carrying its owner&rsquo;s name and presence, the tooltip on focus as on hover, the{' '}
+                <code className="text-white/55">+N</code> opening a roster that takes focus and closes on
+                Escape, and every join, departure and open announced politely. Reduced motion drops the
+                pulse, the spread, the lift and the join spring &mdash; faces appear and leave in place.
               </p>
             </div>
           </div>
