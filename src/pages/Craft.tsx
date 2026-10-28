@@ -8,6 +8,7 @@ import { Iridescence } from '../components/Iridescence'
 import { CompareSlider } from '../components/CompareSlider'
 import { Permalink } from '../components/Permalink'
 import { SectionNav, type SectionLink } from '../components/SectionNav'
+import { TracingBeam } from '../components/TracingBeam'
 import { Seo } from '../components/Seo'
 import { COMPONENT_COUNT } from '../data/stats'
 
@@ -439,8 +440,10 @@ export default function Craft() {
           </Reveal>
         </header>
 
-        {/* DEMOS */}
-        <div className="mt-16 space-y-8">
+        {/* DEMOS — threaded on a reading beam that draws down the margin as
+            the five notes scroll past, so the eye has a line to follow. */}
+        <TracingBeam className="mt-16">
+        <div className="space-y-8">
           <Demo
             id="easing"
             n="01"
@@ -491,6 +494,7 @@ export default function Craft() {
             <StructureSurfaceDemo />
           </Demo>
         </div>
+        </TracingBeam>
 
         {/* OUTRO */}
         <Reveal>
