@@ -34,6 +34,11 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'A field that records your keyboard shortcut',
+    summary: 'Shortcut recorder — the keybinding capture from a real settings panel: arm the well, hold your modifiers, strike a key, and the live chord freezes into keycaps. It swallows the keystroke while recording, so Cmd-S records instead of saving the page. Escape cancels; reduced motion drops the pulse and flash.',
+    tag: 'Component',
+  },
+  {
     title: 'A line of type that rides a travelling wave',
     summary: 'Wave type — a slow sine wave rolls through a line, each letter bobbing a beat behind the last so a crest and a band of light travel across the word. The ambient member of the type family: it never arrives, the motion is the point. Reduced motion lays it flat and still.',
     tag: 'Motion',
@@ -77,10 +82,5 @@ export const LATEST_LOG: LogHeadline[] = [
     title: 'A keycap that answers your real keyboard',
     summary: 'Kbd — the one keycap every shortcut on the site is now drawn with; push it with the pointer and it sinks, press the key it names and it depresses and lights lime. A legend, never a handler, so it never intercepts the shortcut.',
     tag: 'Component',
-  },
-  {
-    title: 'A panel that levels toward you as you scroll',
-    summary: 'ContainerScroll — a framed panel tilted back on the x-axis that rotates flat toward you as the section scrolls, scaling up and lighting its lime rim, all scrubbed from scroll and smoothed with a spring. Reduced motion shows it flat and still.',
-    tag: 'Motion',
   },
 ]
