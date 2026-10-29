@@ -34,6 +34,11 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'A line of type that rides a travelling wave',
+    summary: 'Wave type — a slow sine wave rolls through a line, each letter bobbing a beat behind the last so a crest and a band of light travel across the word. The ambient member of the type family: it never arrives, the motion is the point. Reduced motion lays it flat and still.',
+    tag: 'Motion',
+  },
+  {
     title: 'A presence row that spreads as you reach',
     summary: 'Avatar stack — the who-is-here cluster collaborative products grow: faces overlap at rest, ease apart when you point or tab in, and the one under you lifts with a tooltip. Past a cap they collapse into a +N that opens the full roster; people join and leave on a layout spring. Reduced motion settles it in place.',
     tag: 'Component',
@@ -77,10 +82,5 @@ export const LATEST_LOG: LogHeadline[] = [
     title: 'A panel that levels toward you as you scroll',
     summary: 'ContainerScroll — a framed panel tilted back on the x-axis that rotates flat toward you as the section scrolls, scaling up and lighting its lime rim, all scrubbed from scroll and smoothed with a spring. Reduced motion shows it flat and still.',
     tag: 'Motion',
-  },
-  {
-    title: 'Links that roll over on hover and focus',
-    summary: 'RollingLink — a label whose letters turn over one after the next, built as two stacked copies of the word; aria-hidden with a plain label, rolls on keyboard focus too, and drops to a colour change under reduced motion. Now under every footer row.',
-    tag: 'Component',
   },
 ]
