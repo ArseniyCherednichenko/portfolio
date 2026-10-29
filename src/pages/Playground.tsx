@@ -63,6 +63,7 @@ import { LinkPreview } from '../components/LinkPreview'
 import { FuzzyText } from '../components/FuzzyText'
 import { GlitchText } from '../components/GlitchText'
 import { WaveText } from '../components/WaveText'
+import { ShortcutRecorder } from '../components/ShortcutRecorder'
 import { StrokeText } from '../components/StrokeText'
 import { Lens } from '../components/Lens'
 import { Lamp } from '../components/Lamp'
@@ -8038,6 +8039,17 @@ export default function Playground() {
               <MagneticButton href="#" className="rounded-full bg-[#DCF87C] px-8 py-4 text-lg font-semibold text-black">
                 Pull me
               </MagneticButton>
+            </Experiment>
+          </Reveal>
+
+          <Reveal>
+            <Experiment
+              name="Shortcut recorder"
+              note="The keybinding-capture field from a real settings panel — focus the well, hold your modifiers, strike a key, and the live chord freezes into keycaps. It is a genuine control, not a picture of one: while recording it swallows the keystroke, so Cmd-S records the binding instead of saving the page, and commits the instant a non-modifier lands. Escape cancels and restores the old binding; Clear empties it; every committed chord is announced through a polite live region. The caps reuse the site's own Kbd primitive, so a captured shortcut reads exactly like every printed legend elsewhere. Reduced motion drops the pulse and the confirm-flash — the states read through colour and copy."
+            >
+              <div className="flex w-full justify-center">
+                <ShortcutRecorder defaultKeys={['⌘', '⇧', 'K']} label="Open command palette" />
+              </div>
             </Experiment>
           </Reveal>
 
