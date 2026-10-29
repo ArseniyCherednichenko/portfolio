@@ -62,6 +62,7 @@ import { CurvedLoop } from '../components/CurvedLoop'
 import { LinkPreview } from '../components/LinkPreview'
 import { FuzzyText } from '../components/FuzzyText'
 import { GlitchText } from '../components/GlitchText'
+import { WaveText } from '../components/WaveText'
 import { StrokeText } from '../components/StrokeText'
 import { Lens } from '../components/Lens'
 import { Lamp } from '../components/Lamp'
@@ -4371,6 +4372,22 @@ export default function Playground() {
       {/* 01 — TYPE & TEXT */}
       <Category {...CATEGORIES[0]}>
         <div className="grid gap-x-8 gap-y-12 sm:grid-cols-2">
+          <Reveal>
+            <Experiment
+              name="Wave type"
+              note="A slow sine wave rolls through the line — each letter bobs a beat behind the last, so a crest travels across the word like a light current, and a band of brightness rides along the crest. It is a continuous, ambient kind of text motion, distinct from the one-shot lifts and resolves elsewhere in this family: the split-text reveal settles into place and stops, the decrypt resolves out of noise, the gooey morph melts one word into the next; this one never arrives, the travelling wave itself is the point. Pure rAF writing transform and opacity straight to each letter, framerate-independent off the frame clock. Reduced motion lays the line flat and still."
+            >
+              <div className="text-center">
+                <WaveText
+                  text="in motion"
+                  className="font-display text-5xl font-bold tracking-tight text-[#DCF87C] sm:text-6xl"
+                  amplitude={10}
+                />
+                <p className="mt-4 text-sm text-white/45">A crest rolls left to right, on a loop</p>
+              </div>
+            </Experiment>
+          </Reveal>
+
           <Reveal>
             <Experiment name="Animated counter" note="Counts up with an ease curve the first time it enters the viewport.">
               <div className="text-center">
