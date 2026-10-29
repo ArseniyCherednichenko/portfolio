@@ -36,6 +36,10 @@ export interface Project {
   sections?: CaseStudySection[]
   /** Short, factual highlights shown as a list on the detail page. */
   highlights?: string[]
+  /** The disciplines (by id, from data/disciplines.ts) this project genuinely
+   * exercises — the honest thread between the Work and the Range. Only
+   * disciplines the project actually demonstrates; no aspirational tags. */
+  disciplines?: readonly string[]
 }
 
 export const PROJECTS: Project[] = [
@@ -88,6 +92,10 @@ export const PROJECTS: Project[] = [
       'Curriculum-aware for Abitur, IB, and GCSE',
       'Web plus native iOS on one shared backend',
     ],
+    // Guided is where four of the five disciplines meet on one product: the
+    // React web surface, the native SwiftUI app, the shared Supabase backend,
+    // and the applied-AI judgement at its centre.
+    disciplines: ['frontend', 'ios', 'backend', 'ai'],
   },
   {
     slug: 'portfolio',
@@ -157,6 +165,9 @@ export const PROJECTS: Project[] = [
       'Self-hosted Fraunces variable serif for display type',
       'Open source and updated continuously, in public',
     ],
+    // This site is the open workbench for the frontend and motion disciplines:
+    // the React surface and the hand-built animation system are the whole of it.
+    disciplines: ['frontend', 'motion'],
   },
   {
     slug: 'more-soon',
@@ -181,3 +192,10 @@ export function getProject(slug: string | undefined): Project | undefined {
 
 /** Real (non-placeholder) projects, in display order, for prev/next navigation. */
 export const CASE_STUDIES: Project[] = PROJECTS.filter((p) => !p.soon)
+
+/** The real projects that genuinely exercise a given discipline (by id), in
+ * display order. Powers the "Where it shows up" thread on the Range detail
+ * pages — the honest evidence that a discipline is more than a claim. */
+export function getProjectsForDiscipline(disciplineId: string): Project[] {
+  return CASE_STUDIES.filter((p) => p.disciplines?.includes(disciplineId))
+}
