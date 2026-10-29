@@ -8,7 +8,9 @@ import { Seo } from '../components/Seo'
 import { Breadcrumbs } from '../components/Breadcrumbs'
 import { useContact } from '../components/ContactDialog'
 import { DisciplineDemo } from '../components/DisciplineDemo'
+import { ProjectPoster } from '../components/ProjectPoster'
 import { DISCIPLINES, getDiscipline } from '../data/disciplines'
+import { getProjectsForDiscipline } from '../data/projects'
 
 const EASE = [0.16, 1, 0.3, 1] as const
 
@@ -62,6 +64,10 @@ export default function RangeDetail() {
   const related = d.related
     .map((rid) => DISCIPLINES.find((x) => x.id === rid))
     .filter((x): x is (typeof DISCIPLINES)[number] => Boolean(x))
+
+  // The real, shipped projects that exercise this discipline — the Range -> Work
+  // thread, and the honest evidence that a discipline is more than a claim.
+  const projects = getProjectsForDiscipline(d.id)
 
   return (
     <>
@@ -191,6 +197,79 @@ export default function RangeDetail() {
           </Reveal>
         </div>
       </section>
+
+      {/* WHERE IT SHOWS UP — the Range -> Work thread. A discipline is a claim
+          until you can point at a shipped thing that runs on it; these are the
+          real projects that do, each tinted with this discipline's own accent
+          and opening into its full case study. */}
+      {projects.length > 0 && (
+        <section className="mx-auto w-full max-w-4xl px-6 pb-8 pt-16">
+          <Reveal>
+            <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
+              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-white/40">
+                Where it shows up
+              </p>
+              <Link
+                to="/work"
+                className="text-xs font-semibold uppercase tracking-[0.2em] text-white/40 transition-colors hover:text-white/70"
+              >
+                All work <span aria-hidden>-&gt;</span>
+              </Link>
+            </div>
+          </Reveal>
+          <div className="mt-6 grid gap-4 sm:grid-cols-2">
+            {projects.map((p, i) => (
+              <Reveal key={p.slug} delay={i * 0.06}>
+                <Link
+                  to={`/work/${p.slug}`}
+                  className="group block h-full overflow-hidden rounded-3xl border border-white/10 bg-white/[0.02] transition-colors hover:bg-white/[0.04]"
+                  style={{ ['--accent' as string]: d.accent }}
+                >
+                  <div className="relative aspect-[16/9] w-full overflow-hidden">
+                    <ProjectPoster
+                      project={p}
+                      className="h-full w-full transition-transform duration-500 ease-out group-hover:scale-[1.04]"
+                      rounded="rounded-none"
+                    />
+                    {/* A thin accent wash on hover ties the poster to this
+                        discipline's colour without repainting the art. */}
+                    <span
+                      aria-hidden
+                      className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                      style={{
+                        background: `linear-gradient(to top, ${d.accent}22, transparent 60%)`,
+                      }}
+                    />
+                  </div>
+                  <div className="p-6">
+                    <div className="flex items-baseline justify-between gap-4">
+                      <h3 className="font-display text-xl font-bold tracking-tight text-white/90 group-hover:text-white">
+                        {p.title}
+                      </h3>
+                      {p.year && (
+                        <span className="shrink-0 text-xs tabular-nums text-white/35">{p.year}</span>
+                      )}
+                    </div>
+                    <p className="mt-2 text-sm leading-relaxed text-white/55">{p.blurb}</p>
+                    <span
+                      className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold transition-opacity group-hover:opacity-80"
+                      style={{ color: d.accent }}
+                    >
+                      Read the case study
+                      <span
+                        aria-hidden
+                        className="transition-transform duration-300 ease-out group-hover:translate-x-1"
+                      >
+                        -&gt;
+                      </span>
+                    </span>
+                  </div>
+                </Link>
+              </Reveal>
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* RELATED DISCIPLINES */}
       {related.length > 0 && (
