@@ -12,7 +12,9 @@ import { Lightbox } from '../components/Lightbox'
 import { Seo } from '../components/Seo'
 import { SectionNav, type SectionLink } from '../components/SectionNav'
 import { Breadcrumbs } from '../components/Breadcrumbs'
+import { DisciplineLinks } from '../components/DisciplineLinks'
 import { CASE_STUDIES, getProject } from '../data/projects'
+import { DISCIPLINES } from '../data/disciplines'
 
 const EASE = [0.16, 1, 0.3, 1] as const
 
@@ -54,6 +56,14 @@ export default function WorkDetail() {
   const next = CASE_STUDIES[(index + 1) % CASE_STUDIES.length]
   const showNext = next && next.slug !== project.slug
 
+  // The disciplines this project actually exercises, resolved to the live
+  // discipline records so each one can link through to its /range/:id page.
+  // This is the Work -> Range thread: the project is not an island, it is where
+  // the range shows up in a shipped thing.
+  const projectDisciplines = (project.disciplines ?? [])
+    .map((pid) => DISCIPLINES.find((d) => d.id === pid))
+    .filter((d): d is (typeof DISCIPLINES)[number] => Boolean(d))
+
   // The spec panel is built from whatever facts the project actually carries —
   // no empty rows, no invented ones.
   const specRows: { label: string; value: string }[] = [
@@ -68,6 +78,7 @@ export default function WorkDetail() {
   // Shown only when there are enough stops to be worth a rail (lg screens).
   const navSections: SectionLink[] = [
     { id: 'overview', label: 'Overview' },
+    ...(projectDisciplines.length ? [{ id: 'disciplines', label: 'Disciplines' }] : []),
     ...(project.contributions?.length ? [{ id: 'what-i-did', label: 'What I did' }] : []),
     ...(project.sections?.map((s) => ({ id: slugify(s.heading), label: s.heading })) ?? []),
   ]
@@ -186,6 +197,30 @@ export default function WorkDetail() {
           ))}
         </div>
       </Reveal>
+
+      {/* Disciplines at work — the Work -> Range thread. A project is one place
+          the range shows up; these pills name which disciplines this one draws
+          on and open each as its own page, so no single project reads as the
+          whole of what I do. */}
+      {projectDisciplines.length > 0 && (
+        <Reveal id="disciplines" className="mt-16 scroll-mt-28">
+          <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
+            <Eyebrow>Disciplines at work</Eyebrow>
+            <Link
+              to="/range"
+              className="text-xs font-semibold uppercase tracking-[0.2em] text-white/40 transition-colors hover:text-white/70"
+            >
+              The whole range <span aria-hidden>-&gt;</span>
+            </Link>
+          </div>
+          <p className="mt-5 max-w-xl text-base leading-relaxed text-white/55">
+            {projectDisciplines.length === 1
+              ? 'The discipline this project leans on — open it to see where else it shows up.'
+              : `The ${projectDisciplines.length} disciplines this project leans on. Open any one to see the craft behind it, and the other work it runs through.`}
+          </p>
+          <DisciplineLinks disciplines={projectDisciplines} className="mt-6" />
+        </Reveal>
+      )}
 
       {/* Highlights */}
       {project.highlights && project.highlights.length > 0 && (
