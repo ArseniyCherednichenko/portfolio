@@ -3,7 +3,7 @@ import { animate, motion, useMotionValue, useReducedMotion } from 'framer-motion
 import { Link } from 'react-router-dom'
 import { Reveal } from '../components/Reveal'
 import { Eyebrow } from '../components/Eyebrow'
-import { GradientText } from '../components/GradientText'
+import { WaveText } from '../components/WaveText'
 import { Iridescence } from '../components/Iridescence'
 import { CompareSlider } from '../components/CompareSlider'
 import { Permalink } from '../components/Permalink'
@@ -427,8 +427,17 @@ export default function Craft() {
             <Eyebrow>Notes on craft</Eyebrow>
           </Reveal>
           <Reveal delay={0.05}>
+            {/* The page title demonstrates its own subject: the word rests
+                flat and only rolls on a sine wave while the pointer is over it
+                (trigger="hover"), so the hero is calm until you touch it. */}
             <h1 className="mt-6 font-display text-5xl font-bold leading-[1.04] tracking-tight sm:text-7xl">
-              On <GradientText>motion.</GradientText>
+              On{' '}
+              <WaveText
+                text="motion."
+                trigger="hover"
+                amplitude={9}
+                className="text-[#DCF87C]"
+              />
             </h1>
           </Reveal>
           <Reveal delay={0.1}>
