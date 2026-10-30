@@ -34,6 +34,11 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'A stories bar that paces a sequence',
+    summary: 'Story progress — the segmented bar across the top of every story: the active segment fills off a real-elapsed-time loop, the ones behind snap full, and it ticks on when it brims. Hold to pause and read, tap the sides to step. The demo slides are the five disciplines, not one project. Reduced motion runs no clock; you advance by hand.',
+    tag: 'Component',
+  },
+  {
     title: 'A field that records your keyboard shortcut',
     summary: 'Shortcut recorder — the keybinding capture from a real settings panel: arm the well, hold your modifiers, strike a key, and the live chord freezes into keycaps. It swallows the keystroke while recording, so Cmd-S records instead of saving the page. Escape cancels; reduced motion drops the pulse and flash.',
     tag: 'Component',
@@ -76,11 +81,6 @@ export const LATEST_LOG: LogHeadline[] = [
   {
     title: 'A tic-tac-toe you cannot beat, only draw',
     summary: 'Tic-tac-toe — you are X against a perfect O that plays a full minimax search of the whole game tree; no openings book, no letting you win. A draw is the best anyone can force, verified in Node with zero losses over all play.',
-    tag: 'Component',
-  },
-  {
-    title: 'A keycap that answers your real keyboard',
-    summary: 'Kbd — the one keycap every shortcut on the site is now drawn with; push it with the pointer and it sinks, press the key it names and it depresses and lights lime. A legend, never a handler, so it never intercepts the shortcut.',
     tag: 'Component',
   },
 ]
