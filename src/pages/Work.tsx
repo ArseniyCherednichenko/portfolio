@@ -12,8 +12,10 @@ import { ProjectPoster } from '../components/ProjectPoster'
 import { PixelTransition } from '../components/PixelTransition'
 import { ProjectQuickLook } from '../components/ProjectQuickLook'
 import { HoverIndex, type HoverIndexItem } from '../components/HoverIndex'
+import { DisciplineLinks, type DisciplineLinkItem } from '../components/DisciplineLinks'
 import { Seo } from '../components/Seo'
 import { PROJECTS, CASE_STUDIES, type Project } from '../data/projects'
+import { getDiscipline } from '../data/disciplines'
 
 const EASE = [0.16, 1, 0.3, 1] as const
 
@@ -63,6 +65,13 @@ function WorkRow({
   }
 
   const caseUrl = `/work/${project.slug}`
+  // Resolve the project's honest discipline ids to the shape DisciplineLinks
+  // wants — so each ledger row fans out into the range (Work -> Range), the same
+  // thread the detail page draws, proving no project is a single-discipline act.
+  const disciplineItems: DisciplineLinkItem[] = (project.disciplines ?? [])
+    .map((id) => getDiscipline(id)?.discipline)
+    .filter((d): d is NonNullable<typeof d> => Boolean(d))
+    .map((d) => ({ id: d.id, tag: d.tag, accent: d.accent }))
   const menuItems: ContextMenuItem[] = [
     { kind: 'label', id: 'l', label: project.title },
     { id: 'quick', label: 'Quick look', shortcut: 'Q', onSelect: () => onQuickLook(project) },
@@ -132,6 +141,10 @@ function WorkRow({
               ))}
             </div>
           </div>
+
+          {disciplineItems.length > 0 && (
+            <DisciplineLinks disciplines={disciplineItems} stagger={false} className="mt-5" />
+          )}
 
           <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-3">
             <button
