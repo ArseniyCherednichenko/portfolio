@@ -12,6 +12,7 @@ import { MeshGradient } from '../components/MeshGradient'
 import { Squares } from '../components/Squares'
 import { Orb } from '../components/Orb'
 import { Meteors } from '../components/Meteors'
+import { Dither } from '../components/Dither'
 import { GradientText } from '../components/GradientText'
 import { MagneticButton } from '../components/MagneticButton'
 import { REEL, type ReelBackdrop, type ReelScene } from '../data/reel'
@@ -41,6 +42,8 @@ function Backdrop({ kind }: { kind: ReelBackdrop }) {
       return <Particles className="absolute inset-0" />
     case 'squares':
       return <Squares className="absolute inset-0" />
+    case 'dither':
+      return <Dither className="absolute inset-0" />
     case 'meteors':
       return (
         <div className="absolute inset-0">

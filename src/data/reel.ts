@@ -20,6 +20,7 @@ export type ReelBackdrop =
   | 'orb'
   | 'squares'
   | 'meteors'
+  | 'dither'
 
 export interface ReelScene {
   /** Stable id, used for the anchor and the progress rail. */
@@ -108,6 +109,14 @@ export const REEL: ReelScene[] = [
     statement: 'Small, steady work reads like a shower, not a flash.',
     note: 'One thing shipped most days, none of it loud on its own. Watch long enough and the cadence, not any single streak, is the thing.',
     made: 'Backdrop: Meteors',
+  },
+  {
+    id: 'texture',
+    backdrop: 'dither',
+    eyebrow: 'On restraint',
+    statement: 'A few tones, ordered well, stand in for thousands.',
+    note: 'Dithering builds a whole gradient from a handful of values and a disciplined grid of dots. The constraint is not a limit here — it is the technique.',
+    made: 'Backdrop: Dither',
   },
   {
     id: 'grid',
