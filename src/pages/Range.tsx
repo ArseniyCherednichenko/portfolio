@@ -10,10 +10,12 @@ import { SpotlightCard } from '../components/SpotlightCard'
 import { MagneticButton } from '../components/MagneticButton'
 import { AnimatedCounter } from '../components/AnimatedCounter'
 import { DisciplineWeb } from '../components/DisciplineWeb'
+import { ProjectLinks } from '../components/ProjectLinks'
 import { Aurora } from '../components/Aurora'
 import { useContact } from '../components/ContactDialog'
 import { Seo } from '../components/Seo'
 import { DISCIPLINES, DISCIPLINE_COUNT } from '../data/disciplines'
+import { getProjectsForDiscipline } from '../data/projects'
 
 const EASE = [0.16, 1, 0.3, 1] as const
 
@@ -22,6 +24,11 @@ const EASE = [0.16, 1, 0.3, 1] as const
 function DisciplineDetail({ index }: { index: number }) {
   const reduce = useReducedMotion()
   const d = DISCIPLINES[index]
+  // The real projects that genuinely exercise this discipline — the honest
+  // proof of the "more than one project" claim, surfaced inline in the explorer
+  // rather than only on the /range/:id detail pages. Tinted in the discipline's
+  // own accent so the evidence reads in that discipline's colour.
+  const seenIn = getProjectsForDiscipline(d.id)
   return (
     <AnimatePresence mode="wait">
       <motion.div
@@ -70,6 +77,20 @@ function DisciplineDetail({ index }: { index: number }) {
             ))}
           </div>
         </div>
+
+        {seenIn.length > 0 && (
+          <div className="mt-8">
+            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-white/40">
+              Seen in
+            </p>
+            <ProjectLinks
+              projects={seenIn.map((p) => ({ slug: p.slug, title: p.title, meta: p.year }))}
+              accent={d.accent}
+              stagger={false}
+              className="mt-3"
+            />
+          </div>
+        )}
 
         <div className="mt-auto flex flex-wrap items-center gap-x-6 gap-y-3 pt-8">
           <Link
