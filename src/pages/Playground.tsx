@@ -87,6 +87,7 @@ import { GridMotion } from '../components/GridMotion'
 import { Grain } from '../components/Grain'
 import { MeshGradient } from '../components/MeshGradient'
 import { Plasma } from '../components/Plasma'
+import { Dither } from '../components/Dither'
 import { BentoGrid, BentoCell } from '../components/BentoGrid'
 import { GlassSurface } from '../components/GlassSurface'
 import { Masonry, type MasonryItem } from '../components/Masonry'
@@ -6301,6 +6302,35 @@ export default function Playground() {
                 source that both distorts and brightens the field where it passes. Distinct from Iridescence's slow wash
                 and MeshGradient's blurred blobs — this is a computed interference pattern. Reduced motion paints one
                 still frame with no pointer.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH DITHER */}
+        <Reveal>
+          <div id="dither" data-experiment="Dither" className="mt-12 scroll-mt-32">
+            <div className="relative h-[340px] overflow-hidden rounded-3xl border border-white/10 bg-[#08080b]">
+              <Dither />
+              <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_45%,rgba(8,8,11,0.72)_100%)]" />
+              <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Dither field</span>
+                <p className="mt-3 max-w-md px-6 text-xl font-medium text-white/85 sm:text-2xl">
+                  Move across it — a bloom of denser dots gathers under your cursor.
+                </p>
+              </div>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Ordered-dither light field</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The demoscene's other classic, and the crisp opposite of the Plasma above it. The same kind of slow
+                travelling field, but rendered the way a 1-bit display or a risograph would: quantised to five tones and
+                ordered-dithered through an 8&times;8 Bayer threshold matrix, then upscaled with smoothing off so every
+                cell stays a hard block. A region landing between two tones becomes a fine stipple of both, and the eye
+                integrates it back into the in-between shade &mdash; so a whole gradient is built from a handful of
+                values and a disciplined grid of dots, kin to the digital-display family rather than to a shader. Cheap
+                like the Plasma: a coarse offscreen buffer, a small palette lookup, two sines and one table index per
+                pixel; the pointer lifts a bloom of denser dots where it passes. Reduced motion paints one still frame.
               </p>
             </div>
           </div>
