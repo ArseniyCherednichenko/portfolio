@@ -120,6 +120,7 @@ import { useBerlinTime } from '../hooks/useBerlinTime'
 import { CodeInput } from '../components/CodeInput'
 import { NotificationStack } from '../components/NotificationStack'
 import { AvatarStack } from '../components/AvatarStack'
+import { StoryProgress, type StorySlide } from '../components/StoryProgress'
 import { PasswordStrength } from '../components/PasswordStrength'
 import { Skeleton, SkeletonSwap } from '../components/Skeleton'
 import { HoldConfirm } from '../components/HoldConfirm'
@@ -617,6 +618,63 @@ const CATEGORIES: { id: string; num: string; label: string; title: string; blurb
 ]
 
 const NAV_LINKS: PillLink[] = CATEGORIES.map((c) => ({ id: c.id, label: c.label }))
+
+// Demo content for the StoryProgress piece. Deliberately the five disciplines
+// the work spans — frontend, native iOS, backend, applied AI, motion — so even
+// the demo of a sequencing control de-centres any single project and states the
+// range in honest, factual words. One slide per discipline, paced like a story.
+const STORY_SLIDES: StorySlide[] = [
+  {
+    id: 'frontend',
+    label: 'Frontend',
+    tag: 'Frontend',
+    tool: 'React · TypeScript',
+    line: 'The part people touch — interfaces built in React and TypeScript, with motion that earns its place.',
+  },
+  {
+    id: 'ios',
+    label: 'Native iOS',
+    tag: 'Native iOS',
+    tool: 'SwiftUI',
+    line: 'At home on the device. SwiftUI apps that behave like they belong, sharing one backend with the web.',
+  },
+  {
+    id: 'backend',
+    label: 'Backend & data',
+    tag: 'Backend & data',
+    tool: 'Supabase',
+    line: 'The part you never see — auth and the data model underneath, keeping web and native honest with each other.',
+  },
+  {
+    id: 'ai',
+    label: 'Applied AI',
+    tag: 'Applied AI',
+    tool: 'models, in product',
+    line: 'Building with models, not around them. With Guided that means asking the right question, not handing over the answer.',
+  },
+  {
+    id: 'motion',
+    label: 'Motion & design',
+    tag: 'Motion & design',
+    tool: 'hand-built',
+    line: 'Craft in the small moments — the type, the timing, the spacing. Never templated, always reduced-motion aware.',
+  },
+].map(({ id, label, tag, tool, line }) => ({
+  id,
+  label,
+  content: (
+    <div className="flex h-full flex-col justify-center">
+      <div className="flex items-center gap-2.5">
+        <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[#DCF87C]">{tag}</span>
+        <span aria-hidden className="text-white/15">·</span>
+        <span className="text-xs text-white/40">{tool}</span>
+      </div>
+      <p className="mt-4 max-w-md font-display text-2xl font-semibold leading-snug tracking-tight text-white/90 sm:text-3xl">
+        {line}
+      </p>
+    </div>
+  ),
+}))
 
 // The verbatim source of src/components/Reveal.tsx — the site's own scroll-into
 // -view workhorse — fed to the CodeBlock so the demo shows a real file from this
@@ -5943,6 +6001,34 @@ export default function Playground() {
                 <code className="text-white/55">+N</code> opening a roster that takes focus and closes on
                 Escape, and every join, departure and open announced politely. Reduced motion drops the
                 pulse, the spread, the lift and the join spring &mdash; faces appear and leave in place.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* STORY PROGRESS — a stories-style segmented auto-advancing bar */}
+        <Reveal>
+          <div id="story-progress" data-experiment="Story progress" className="mt-12 scroll-mt-32">
+            <div className="rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 py-10 sm:px-10">
+              <StoryProgress slides={STORY_SLIDES} duration={4500} className="mx-auto max-w-xl" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Story progress</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The segmented bar across the top of every <span className="text-white/65">story</span> &mdash;
+                Instagram, WhatsApp, a YouTube short. It is a different thing from the plain progress bar this
+                library already has: that one reports how far a single known task has got, this one{' '}
+                <span className="text-white/65">paces a sequence</span>, driving which slide is on show and
+                giving you the thread of where you are in it. The active segment fills off a real-elapsed-time
+                loop, so it keeps its true speed at any refresh rate and a pause freezes it exactly where it
+                stood rather than restarting. <span className="text-white/65">Hold</span> anywhere to pause and
+                read, let go to resume; tap the left third to step back, the right two-thirds to step on &mdash;
+                the gesture a billion thumbs already know. Reachable without one, too: a labelled group with real
+                Prev, Pause and Next buttons, the arrow keys and Space, and every slide announced through a
+                polite live region while the decorative bar stays hidden from assistive tech. The slides are
+                deliberate &mdash; the five disciplines the work spans, so even the demo states the range rather
+                than any one project. Reduced motion runs no clock and no autoplay: the active segment shows full
+                and you advance by hand.
               </p>
             </div>
           </div>
