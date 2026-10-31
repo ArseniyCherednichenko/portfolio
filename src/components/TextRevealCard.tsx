@@ -193,7 +193,7 @@ export function TextRevealCard({ surface, reveal, className }: TextRevealCardPro
         {/* Both layers occupy the same box so the two lines sit on the same
             baseline; the seam decides which side of each shows. */}
         <Layer>
-          <span className="font-display text-3xl font-bold text-transparent [-webkit-text-stroke:1px_rgba(255,255,255,0.28)] sm:text-5xl">
+          <span className="font-display text-2xl font-bold text-transparent [-webkit-text-stroke:1px_rgba(255,255,255,0.28)] sm:text-4xl">
             {surface}
           </span>
         </Layer>
@@ -201,7 +201,7 @@ export function TextRevealCard({ surface, reveal, className }: TextRevealCardPro
         <RevealLayer pct={pct}>
           <SparkField sparks={sparks} reduced={false} />
           <div className="relative flex h-full w-full items-center justify-center px-6 text-center">
-            <span className="font-display text-3xl font-bold text-[#DCF87C] [text-shadow:0_0_24px_rgba(220,248,124,0.35)] sm:text-5xl">
+            <span className="font-display text-2xl font-bold text-[#DCF87C] [text-shadow:0_0_24px_rgba(220,248,124,0.35)] sm:text-4xl">
               {reveal}
             </span>
           </div>
