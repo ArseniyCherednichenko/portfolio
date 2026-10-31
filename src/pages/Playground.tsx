@@ -210,6 +210,7 @@ import { Mastermind } from '../components/Mastermind'
 import { TicTacToe } from '../components/TicTacToe'
 import { PegSolitaire } from '../components/PegSolitaire'
 import { ZenGarden } from '../components/ZenGarden'
+import { Game2048 } from '../components/Game2048'
 import { ReceiptPrinter } from '../components/ReceiptPrinter'
 import { Hourglass } from '../components/Hourglass'
 import { SlidePuzzle } from '../components/SlidePuzzle'
@@ -12034,6 +12035,44 @@ export default function Playground() {
                 text and the two controls &mdash; rake the pattern back, or smooth the sand flat &mdash; are real
                 labelled buttons that announce through a live region, giving a keyboard or screen-reader visitor the same
                 two honest states the surface offers.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH 2048 */}
+        <Reveal>
+          <div id="game-2048" data-experiment="2048" className="mt-12 scroll-mt-32">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 py-12 sm:px-10">
+              <div className="text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Slide</span>
+                <p className="mx-auto mt-3 max-w-md text-lg font-medium text-white/85 sm:text-xl">
+                  Slide the whole board with the arrow keys, or swipe. Equal tiles merge into one.
+                </p>
+              </div>
+              <Game2048 className="mt-10" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">2048</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The sliding-tile game, rebuilt as a real object against the real rules &mdash; and the one toy in this
+                family whose subject is motion. Simon is recall, Mastermind deduction, tic-tac-toe perfect play, peg
+                solitaire a solved puzzle; this is the one you play by feel, swiping a whole board at a time and
+                watching it settle, so it doubles as a standing demo of the site&rsquo;s own animation craft rather
+                than a static board. Honest the way the family cares: the rules are the real ones, enforced by one
+                slide &mdash; tiles travel to the wall, equal neighbours merge once per move into their doubled sum, a
+                fresh 2 or 4 drops into a random empty cell after any move that actually changed the board, and the
+                game ends only when the board is full and no adjacent pair can still merge in any direction, the true
+                game-over test rather than just a full board. The score is the plain sum of every merge and the best is
+                the honest highest across games, kept per-browser so a good run survives a reload. The animation is the
+                signature: every tile carries a stable id, so each move slides it from its old cell to its new one
+                rather than repainting, a merged survivor pops its doubled value while the tile it absorbs slides under
+                it and leaves, and a new tile springs in; positions are percentages of a square board, so it is fluid
+                from a phone to a wide column with no fixed pixel grid. The board is a focusable grid driven by the
+                arrow keys or WASD, R starts a new game, a swipe past a threshold reads as a move, and the score, every
+                merge and the finish are spoken through a polite live region. Under reduced motion the slide, the pop
+                and the spring all drop &mdash; tiles cut straight to their new cells &mdash; and the game plays
+                identically.
               </p>
             </div>
           </div>
