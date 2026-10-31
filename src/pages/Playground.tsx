@@ -122,6 +122,7 @@ import { NotificationStack } from '../components/NotificationStack'
 import { AvatarStack } from '../components/AvatarStack'
 import { StoryProgress, type StorySlide } from '../components/StoryProgress'
 import { TextRevealCard } from '../components/TextRevealCard'
+import { FoldReveal } from '../components/FoldReveal'
 import { PasswordStrength } from '../components/PasswordStrength'
 import { Skeleton, SkeletonSwap } from '../components/Skeleton'
 import { HoldConfirm } from '../components/HoldConfirm'
@@ -6058,6 +6059,39 @@ export default function Playground() {
                 &mdash; the cover states there is more than one project, the reveal names the range behind it, so
                 even the flourish de-centres any single piece. Reduced motion drops the seam and the sparks
                 entirely: the two lines simply stack, both legible and still.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        <Reveal>
+          <div id="fold-reveal" data-experiment="Fold reveal" className="mt-12 scroll-mt-32">
+            <FoldReveal
+              teaser="One project of many"
+              title="A whole workbench"
+              body="Guided is one piece. The range runs wider — frontend, iOS, backend, applied AI, and the motion this site is made of."
+              className="w-full"
+            />
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Fold reveal</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The <span className="text-white/65">folded-letter gesture</span> &mdash; a trifold brochure, a
+                road map, a greeting card &mdash; rebuilt by hand. At rest the two side wings are creased back
+                behind the centre panel, which shows a muted teaser; reach for the card and the wings swing
+                flat into one continuous lit surface as the full statement fades up across the spread. It is a
+                different mechanism from the <span className="text-white/65">flip card</span> this library
+                already has: that one turns a single plane to its back, this one{' '}
+                <span className="text-white/65">unfolds three panels into one</span>. Two details sell the
+                paper. The wings never pass ninety degrees &mdash; they go from creased-straight-back to
+                coplanar &mdash; so the fold always reads as a sheet turning toward the light, never a mirrored
+                backface; and each wing carries a shading layer that darkens with its own fold angle, so a
+                creased wing sits in shadow and lands fully lit. Left alone it <span className="text-white/65">
+                breathes</span> a few percent ajar to hint it opens. Reachable without a pointer: a focusable
+                group that unfolds on focus, Enter or Space toggling it locked open for touch, and one plain
+                label stating the teaser and reveal in order for assistive tech. The copy is deliberate &mdash;
+                the teaser names one project, the reveal opens onto the whole range, so even the flourish
+                de-centres any single piece. Reduced motion drops the fold entirely: the surface shows flat and
+                lit, the reveal already there.
               </p>
             </div>
           </div>
