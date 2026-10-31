@@ -121,6 +121,7 @@ import { CodeInput } from '../components/CodeInput'
 import { NotificationStack } from '../components/NotificationStack'
 import { AvatarStack } from '../components/AvatarStack'
 import { StoryProgress, type StorySlide } from '../components/StoryProgress'
+import { TextRevealCard } from '../components/TextRevealCard'
 import { PasswordStrength } from '../components/PasswordStrength'
 import { Skeleton, SkeletonSwap } from '../components/Skeleton'
 import { HoldConfirm } from '../components/HoldConfirm'
@@ -6030,6 +6031,33 @@ export default function Playground() {
                 deliberate &mdash; the five disciplines the work spans, so even the demo states the range rather
                 than any one project. Reduced motion runs no clock and no autoplay: the active segment shows full
                 and you advance by hand.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        <Reveal>
+          <div id="text-reveal" data-experiment="Text reveal card" className="mt-12 scroll-mt-32">
+            <TextRevealCard
+              surface="More than one project"
+              reveal="Frontend · iOS · AI · motion"
+              className="w-full"
+            />
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Text reveal card</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                A surface line that <span className="text-white/65">wipes aside under the pointer</span> to
+                uncover a second line beneath it, bright over a field of drifting sparks. A vertical seam tracks
+                where the cursor sits across the card &mdash; everything left of it shows the reveal, everything
+                right stays the cover &mdash; so moving across drags the answer open like a squeegee. The seam is
+                spring-followed rather than pinned to the raw pointer, so it carries a little weight and overshoot;
+                left alone it <span className="text-white/65">breathes</span>, drifting a few percent in and back
+                to hint it wants to be moved through. Reachable without a pointer: the card is a focusable group,
+                and Tabbing to it eases the reveal open and holds it there. Both visible layers are hidden from
+                assistive tech, which hears one plain label stating both lines in full. The copy is deliberate
+                &mdash; the cover states there is more than one project, the reveal names the range behind it, so
+                even the flourish de-centres any single piece. Reduced motion drops the seam and the sparks
+                entirely: the two lines simply stack, both legible and still.
               </p>
             </div>
           </div>
