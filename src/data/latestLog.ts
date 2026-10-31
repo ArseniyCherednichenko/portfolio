@@ -34,6 +34,11 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'A card that unfolds like a folded letter',
+    summary: 'Fold reveal — the trifold gesture, rebuilt by hand: two wings creased back behind a teaser panel swing flat into one lit surface as the full line fades and lifts up, each wing catching the light as it lands. A different mechanism from the flip card — three panels into one, not one plane to its back. The teaser names one project, the reveal opens onto the whole range. Reduced motion shows it flat and lit.',
+    tag: 'Component',
+  },
+  {
     title: 'A 2048 you slide a whole board at a time',
     summary: '2048 — the sliding-tile game, rebuilt by hand: swipe or arrow a whole board, equal tiles merge into their doubled sum, a fresh 2 or 4 drops in. Every tile keeps a stable id so each move really slides, a merged tile pops and the one it absorbs slides under it and leaves. The score and best are honest; reduced motion cuts straight to the new cells.',
     tag: 'Component',
@@ -76,11 +81,6 @@ export const LATEST_LOG: LogHeadline[] = [
   {
     title: 'An input whose words scatter into pixels',
     summary: 'Vanish input — the search box every app has, rebuilt by hand: it cycles its prompts while empty, and on submit the text rasterises and its pixels drift away rather than just clearing. A real labelled form; reduced motion clears it at once.',
-    tag: 'Component',
-  },
-  {
-    title: 'A peg solitaire that solves itself, honestly',
-    summary: 'Peg solitaire — the English cross board; jump every peg off but one, cleanest finish in the centre. The rules are strictly enforced, and Solve it replays a real 31-move line, verified move by move.',
     tag: 'Component',
   },
 ]
