@@ -137,7 +137,7 @@ export function FoldReveal({ teaser, title, body, className }: FoldRevealProps) 
       {/* The folding stage. The three panels share a 3D space; the reveal copy
           rides above them on a flat layer so it stays crisp and readable. */}
       <div aria-hidden className="relative min-h-[240px] [transform-style:preserve-3d]">
-        <div className="absolute inset-0 flex">
+        <div className="absolute inset-0 flex [transform-style:preserve-3d]">
           <Wing open={open} side="left" />
           <CentrePanel open={open} teaser={teaser} />
           <Wing open={open} side="right" />
@@ -158,8 +158,10 @@ export function FoldReveal({ teaser, title, body, className }: FoldRevealProps) 
 // shading layer darkens with the fold so a creased wing sits in shadow.
 function Wing({ open, side }: { open: MotionValue<number>; side: 'left' | 'right' }) {
   // Left wing hinges on its right edge, right wing on its left. The sign of the
-  // rotation differs so both creases fold backward, away from the viewer.
-  const deg = side === 'left' ? 105 : -105
+  // rotation differs so both creases fold backward, away from the viewer. The
+  // angle stays under 90 degrees so a creased wing is always a foreshortened
+  // flap catching shadow, never flipped to its mirrored back.
+  const deg = side === 'left' ? 78 : -78
   const rotateY = useTransform(open, [0, 1], [deg, 0])
   const shade = useTransform(open, [0, 1], [0.78, 0])
   return (
