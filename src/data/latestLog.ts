@@ -34,6 +34,11 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'A 2048 you slide a whole board at a time',
+    summary: '2048 — the sliding-tile game, rebuilt by hand: swipe or arrow a whole board, equal tiles merge into their doubled sum, a fresh 2 or 4 drops in. Every tile keeps a stable id so each move really slides, a merged tile pops and the one it absorbs slides under it and leaves. The score and best are honest; reduced motion cuts straight to the new cells.',
+    tag: 'Component',
+  },
+  {
     title: 'A stories bar that paces a sequence',
     summary: 'Story progress — the segmented bar across the top of every story: the active segment fills off a real-elapsed-time loop, the ones behind snap full, and it ticks on when it brims. Hold to pause and read, tap the sides to step. The demo slides are the five disciplines, not one project. Reduced motion runs no clock; you advance by hand.',
     tag: 'Component',
@@ -76,11 +81,6 @@ export const LATEST_LOG: LogHeadline[] = [
   {
     title: 'A peg solitaire that solves itself, honestly',
     summary: 'Peg solitaire — the English cross board; jump every peg off but one, cleanest finish in the centre. The rules are strictly enforced, and Solve it replays a real 31-move line, verified move by move.',
-    tag: 'Component',
-  },
-  {
-    title: 'A tic-tac-toe you cannot beat, only draw',
-    summary: 'Tic-tac-toe — you are X against a perfect O that plays a full minimax search of the whole game tree; no openings book, no letting you win. A draw is the best anyone can force, verified in Node with zero losses over all play.',
     tag: 'Component',
   },
 ]
