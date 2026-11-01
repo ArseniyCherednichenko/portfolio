@@ -12,6 +12,7 @@ import { SplitFlap } from '../components/SplitFlap'
 import { Clock } from '../components/Clock'
 import { ScratchReveal } from '../components/ScratchReveal'
 import { PinCard } from '../components/PinCard'
+import { CallingCard } from '../components/CallingCard'
 import { Seo } from '../components/Seo'
 import { useBerlinTime } from '../hooks/useBerlinTime'
 
@@ -164,6 +165,34 @@ export default function Contact() {
             </SpotlightCard>
           </div>
         </Reveal>
+      </section>
+
+      {/* TAKE MY CARD — the physical business card the site never had, made
+          interactive and genuinely useful: it saves a real .vcf to the reader's
+          address book. Personal, not project-led. */}
+      <section className="mx-auto w-full max-w-4xl px-6 py-12">
+        <div className="grid items-center gap-y-10 lg:grid-cols-[1fr_auto] lg:gap-x-16">
+          <div>
+            <Reveal>
+              <Eyebrow>Take my card</Eyebrow>
+            </Reveal>
+            <Reveal delay={0.05}>
+              <h2 className="mt-5 font-display text-3xl font-bold leading-tight tracking-tight sm:text-4xl">
+                One tap, <GradientText>and I am in your contacts.</GradientText>
+              </h2>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <p className="mt-5 max-w-md text-base leading-relaxed text-white/55">
+                A proper calling card, not a form. Lean on it with the cursor, then save it — it
+                writes a standard contact file your phone or laptop reads straight into its address
+                book. Nothing is stored on my end.
+              </p>
+            </Reveal>
+          </div>
+          <Reveal delay={0.12} className="justify-self-center lg:justify-self-end">
+            <CallingCard />
+          </Reveal>
+        </div>
       </section>
 
       {/* WRITE A NOTE */}
