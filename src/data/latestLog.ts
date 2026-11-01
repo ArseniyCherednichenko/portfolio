@@ -34,6 +34,11 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'A poll you vote in and watch tally',
+    summary: 'Poll — the single-choice feedback widget the controls family never had: pick one option, commit, and the result bars grow in and count up to their share. A real radiogroup to choose (one tab stop, arrows that walk and select), reversible with Change vote. The question names the five disciplines, so even a poll de-centers any one project. Tallies are illustrative, the vote lives only in the tab; reduced motion snaps the bars.',
+    tag: 'Component',
+  },
+  {
     title: 'A calling card that saves to your contacts',
     summary: 'Calling card — the physical business card the site never had, made interactive: it leans and lights toward the cursor in real 3D, and its one real job is useful. Save it and it writes a spec-correct vCard (.vcf) your phone or laptop reads straight into its address book, built only from the honest facts — Berlin, the one role, the real channels, nothing stored on my end. Reachable from the Contact page, the Get-in-touch dialog, and the command palette. Flat and glare-free under reduced motion.',
     tag: 'Component',
@@ -77,10 +82,5 @@ export const LATEST_LOG: LogHeadline[] = [
     title: 'A notification pile you swipe to clear',
     summary: 'Notification stack — the persistent counterpart to the Toast: notifications pile up and wait, collapse into a peeking deck, and a new one springs in and pushes the rest down. Swipe a card to dismiss, or press Backspace on a focused one. Reduced motion settles it in place.',
     tag: 'Component',
-  },
-  {
-    title: 'A reading beam that draws down the margin',
-    summary: 'TracingBeam — the Craft page\'s five motion notes now read on a beam that fills down the margin as you scroll, a lit head riding the leading edge where your eye is. The margin-rule kin of the top bar and the page spine; reduced motion draws it full and still.',
-    tag: 'Motion',
   },
 ]
