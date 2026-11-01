@@ -34,6 +34,11 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'A card you point at to decrypt',
+    summary: 'Cipher card — a face filled edge to edge with randomising glyphs you cannot read, until a soft window of light follows your pointer and decrypts only the stream beneath it; move on and it scrambles back. Pointer-masked, not a timed resolve: the reveal is a place you point. The message above stays legible and names the range behind any one project. Reduced motion holds it as a dim watermark.',
+    tag: 'Component',
+  },
+  {
     title: 'A card that unfolds like a folded letter',
     summary: 'Fold reveal — the trifold gesture, rebuilt by hand: two wings creased back behind a teaser panel swing flat into one lit surface as the full line fades and lifts up, each wing catching the light as it lands. A different mechanism from the flip card — three panels into one, not one plane to its back. The teaser names one project, the reveal opens onto the whole range. Reduced motion shows it flat and lit.',
     tag: 'Component',
@@ -76,11 +81,6 @@ export const LATEST_LOG: LogHeadline[] = [
   {
     title: 'A zen garden you rake and never finish',
     summary: 'Zen garden — a karesansui you rake with the pointer; a seven-tooth rake carves parallel grooves that follow your hand and stay where you leave them, passing behind two stones. The calm toy with no score, only tending. Nothing moves on a clock, so reduced motion needs no case.',
-    tag: 'Component',
-  },
-  {
-    title: 'An input whose words scatter into pixels',
-    summary: 'Vanish input — the search box every app has, rebuilt by hand: it cycles its prompts while empty, and on submit the text rasterises and its pixels drift away rather than just clearing. A real labelled form; reduced motion clears it at once.',
     tag: 'Component',
   },
 ]
