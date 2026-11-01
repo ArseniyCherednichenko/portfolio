@@ -34,6 +34,11 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'A calling card that saves to your contacts',
+    summary: 'Calling card — the physical business card the site never had, made interactive: it leans and lights toward the cursor in real 3D, and its one real job is useful. Save it and it writes a spec-correct vCard (.vcf) your phone or laptop reads straight into its address book, built only from the honest facts — Berlin, the one role, the real channels, nothing stored on my end. Reachable from the Contact page, the Get-in-touch dialog, and the command palette. Flat and glare-free under reduced motion.',
+    tag: 'Component',
+  },
+  {
     title: 'A card you point at to decrypt',
     summary: 'Cipher card — a face filled edge to edge with randomising glyphs you cannot read, until a soft window of light follows your pointer and decrypts only the stream beneath it; move on and it scrambles back. Pointer-masked, not a timed resolve: the reveal is a place you point. The message above stays legible and names the range behind any one project. Reduced motion holds it as a dim watermark.',
     tag: 'Component',
@@ -77,10 +82,5 @@ export const LATEST_LOG: LogHeadline[] = [
     title: 'A reading beam that draws down the margin',
     summary: 'TracingBeam — the Craft page\'s five motion notes now read on a beam that fills down the margin as you scroll, a lit head riding the leading edge where your eye is. The margin-rule kin of the top bar and the page spine; reduced motion draws it full and still.',
     tag: 'Motion',
-  },
-  {
-    title: 'A zen garden you rake and never finish',
-    summary: 'Zen garden — a karesansui you rake with the pointer; a seven-tooth rake carves parallel grooves that follow your hand and stay where you leave them, passing behind two stones. The calm toy with no score, only tending. Nothing moves on a clock, so reduced motion needs no case.',
-    tag: 'Component',
   },
 ]
