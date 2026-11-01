@@ -123,6 +123,7 @@ import { AvatarStack } from '../components/AvatarStack'
 import { StoryProgress, type StorySlide } from '../components/StoryProgress'
 import { TextRevealCard } from '../components/TextRevealCard'
 import { FoldReveal } from '../components/FoldReveal'
+import { CipherCard } from '../components/CipherCard'
 import { PasswordStrength } from '../components/PasswordStrength'
 import { Skeleton, SkeletonSwap } from '../components/Skeleton'
 import { HoldConfirm } from '../components/HoldConfirm'
@@ -6092,6 +6093,41 @@ export default function Playground() {
                 the teaser names one project, the reveal opens onto the whole range, so even the flourish
                 de-centres any single piece. Reduced motion drops the fold entirely: the surface shows flat and
                 lit, the reveal already there.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        <Reveal>
+          <div id="cipher-card" data-experiment="Cipher card" className="mt-12 scroll-mt-32">
+            <CipherCard
+              sigil="Decrypt"
+              title="More than one project"
+              body="Guided is the headline, not the whole story. Point across to decrypt the rest: frontend, iOS, backend, applied AI, and the motion this site is built from."
+              className="w-full"
+            />
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Cipher card</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                A card with a secret written across it in{' '}
+                <span className="text-white/65">cipher</span> &mdash; a face filled edge to edge with randomising
+                glyphs you cannot read, until a soft round{' '}
+                <span className="text-white/65">window of light</span> follows your pointer and decrypts only the
+                stretch of stream beneath it. Move on and the characters behind you scramble back into noise. It
+                is a different mechanism from the two glyph pieces this library already has: the{' '}
+                <span className="text-white/65">decrypting text</span> resolves one line left to right and holds,
+                the <span className="text-white/65">letter-glitch field</span> flickers a whole grid at once, but
+                this one is <span className="text-white/65">pointer-masked</span> &mdash; the stream runs
+                everywhere all the time, and a radial mask keyed to the cursor is the only thing that lets any of
+                it through, so the reveal is a place you point rather than a moment you wait for. The window is a
+                spring-followed value, so it carries a little weight and lag as you flick across, and the lit
+                characters take the site&rsquo;s lime so the decrypted patch is the one warm thing in a cold
+                field. The real message never hides: it sits on a layer above the cipher, always legible, because
+                the secret is the paper, not the words &mdash; and the copy is deliberate, naming the range behind
+                any single project. Reachable without a pointer: focus the card and the window eases to its centre
+                and holds, lit. Honest to assistive tech, which hears the message once as one plain label, never
+                the scramble. Reduced motion stops the churn and drops the mask entirely: the field rests as a
+                dim static watermark with the message clear above it.
               </p>
             </div>
           </div>
