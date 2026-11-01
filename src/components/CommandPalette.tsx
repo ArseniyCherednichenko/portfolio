@@ -15,6 +15,7 @@ import { DISCIPLINES } from '../data/disciplines'
 import { ALL_CONTENT_ENTRIES } from '../data/contents'
 import { ALL_LIBRARY_ITEMS } from '../data/library'
 import { fuzzyMatch, toRanges } from '../lib/fuzzy'
+import { downloadVCard } from '../lib/vcard'
 import { useContact } from './ContactDialog'
 import { usePreferences } from './Preferences'
 import { useShortcuts } from './Keyboard'
@@ -233,6 +234,21 @@ function Palette({ open, onClose }: { open: boolean; onClose: () => void }) {
           setCopied(true)
           window.setTimeout(() => setCopied(false), 1400)
           toast('Email address copied', { tone: 'success' })
+        },
+      },
+      {
+        id: 'save-card',
+        label: 'Save contact card',
+        group: 'Actions',
+        hint: '.vcf',
+        keywords: 'vcard vcf contact card save download address book phone contacts add me details business card calling card',
+        run: () => {
+          const ok = downloadVCard()
+          toast(
+            ok ? 'Contact card saved to your downloads' : 'Could not save the card — email works too',
+            { tone: ok ? 'success' : 'error' },
+          )
+          onClose()
         },
       },
       {
