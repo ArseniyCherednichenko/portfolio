@@ -133,6 +133,7 @@ import { AsyncButton } from '../components/AsyncButton'
 import { Checkbox } from '../components/Checkbox'
 import { StepForm, type WizardStep } from '../components/StepForm'
 import { RadioCards } from '../components/RadioCards'
+import { Poll } from '../components/Poll'
 import { Tabs } from '../components/Tabs'
 import { Kbd } from '../components/Kbd'
 import { Progress } from '../components/Progress'
@@ -1286,6 +1287,30 @@ function RadioCardsDemo() {
         this tab.
       </p>
     </div>
+  )
+}
+
+// A Poll in its natural habitat: a question, a short list of options, and a
+// tallied result once you commit. The question is deliberate de-centring — it
+// asks which of the five disciplines the work spans pulls the reader in, so even
+// a feedback widget names the range rather than a single project. The baseline
+// tallies are illustrative sample data and the copy says so; the vote is added
+// only in this tab and nothing is sent, stored, or read.
+function PollDemo() {
+  const OPTIONS = [
+    { id: 'frontend', label: 'Frontend', votes: 312 },
+    { id: 'ios', label: 'Native iOS', votes: 184 },
+    { id: 'backend', label: 'Backend and data', votes: 143 },
+    { id: 'ai', label: 'Applied AI', votes: 268 },
+    { id: 'motion', label: 'Motion and design', votes: 331 },
+  ]
+  return (
+    <Poll
+      question="Which part of the craft pulls you in?"
+      options={OPTIONS}
+      aria-label="Which part of the craft pulls you in?"
+      note="The tallies are illustrative sample data, not a real survey. Your vote is added only in this tab and nothing is sent, stored, or read."
+    />
   )
 }
 
@@ -9164,6 +9189,42 @@ export default function Playground() {
                 <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code> the outline
                 crossfades in place and the check is already drawn &mdash; identical to use. The choice here lives only in
                 this tab.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH POLL */}
+        <Reveal>
+          <div id="poll" data-experiment="Poll" className="mt-12 scroll-mt-32">
+            <div className="flex flex-col items-center gap-8 rounded-3xl border border-white/10 bg-white/[0.02] px-6 py-14 sm:px-10">
+              <div className="max-w-md text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Cast one</span>
+                <p className="mx-auto mt-3 text-lg font-medium text-white/85 sm:text-xl">
+                  The feedback widget a release note or a survey reaches for. Pick one, commit, and the result bars grow
+                  in and count up to their share.
+                </p>
+              </div>
+              <PollDemo />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Poll</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The single-choice poll the controls family never had &mdash; the deliberate sibling of two pieces already
+                here. <em>Radio cards</em> is the pure &ldquo;pick one&rdquo; radiogroup and stops the moment you choose;{' '}
+                <em>Appreciate</em> is the running tally of a single gesture. This joins the two: a radiogroup that commits
+                to a vote and then reveals a tallied result. The choosing step keeps the real WAI-ARIA{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">role=&quot;radiogroup&quot;</code>{' '}
+                contract &mdash; one tab stop, a roving tabindex, arrows that walk <em>and</em> select, Home and End &mdash;
+                so it is operable by keyboard and announced by a reader like native radios, not a grid of clickable boxes.
+                The reveal is measured motion, not decoration: each bar&apos;s fill springs to its share and the
+                percentage counts up to meet it, staggered down the list, so a jump from nothing to a result reads as a
+                direction rather than a cut. It is reversible &mdash; &ldquo;Change vote&rdquo; returns to the choosing
+                step from the same baseline. The question here names the five disciplines the work spans, so even a
+                feedback widget de-centres any one project. The baseline tallies are illustrative sample data, your vote
+                is added only in this tab, and nothing is sent, stored, or read. Under{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code> the
+                stagger drops, the bars snap to their share, and the numbers land at once &mdash; identical to use.
               </p>
             </div>
           </div>
