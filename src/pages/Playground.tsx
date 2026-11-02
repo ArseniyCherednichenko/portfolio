@@ -240,6 +240,7 @@ import { Newton } from '../components/Newton'
 import { Frost } from '../components/Frost'
 import { ParticleLife } from '../components/ParticleLife'
 import { CodeBlock } from '../components/CodeBlock'
+import { Diff } from '../components/Diff'
 import { Waveform } from '../components/Waveform'
 import { LangtonsAnt } from '../components/LangtonsAnt'
 import { PendulumWave } from '../components/PendulumWave'
@@ -716,6 +717,48 @@ export function Reveal({
       {children}
     </motion.div>
   )
+}
+`
+
+// The demo for the Diff viewer: an honest before/after of a real change made
+// to this repository — the run that shipped the Diff lifted CodeBlock's inline
+// TSX tokenizer out into src/lib/tsx-highlight.ts so this very viewer could
+// share it. These two strings are a faithful excerpt of the head of
+// CodeBlock.tsx on either side of that commit: the type, the interface and the
+// hand-written scanner left the file, and one import line took their place, so
+// the diff you read is the diff that made the thing you are reading it in.
+const CODEBLOCK_BEFORE = `import { useEffect, useMemo, useRef, useState } from 'react'
+import { motion, useReducedMotion } from 'framer-motion'
+
+type TokenType = 'comment' | 'string' | 'keyword' | 'type' | 'plain'
+
+interface Token {
+  t: TokenType
+  v: string
+}
+
+// One left-to-right pass over the source — comments, strings, numbers,
+// keywords, calls, JSX tags, Capitalised types. A light highlighter, not a
+// parser, which is enough to make real TSX read clearly.
+function tokenize(src: string): Token[] {
+  const toks: Token[] = []
+  // ...a few dozen lines of hand-written scanning elided for the demo...
+  return toks
+}
+
+export function CodeBlock({ code, filename }: CodeBlockProps) {
+  const lines = useMemo(() => toLines(tokenize(code)), [code])
+  return <div className="code">{/* ...render the lines... */}</div>
+}
+`
+
+const CODEBLOCK_AFTER = `import { useEffect, useMemo, useRef, useState } from 'react'
+import { motion, useReducedMotion } from 'framer-motion'
+import { TONE, toLines, tokenize } from '../lib/tsx-highlight'
+
+export function CodeBlock({ code, filename }: CodeBlockProps) {
+  const lines = useMemo(() => toLines(tokenize(code)), [code])
+  return <div className="code">{/* ...render the lines... */}</div>
 }
 `
 
@@ -13234,6 +13277,49 @@ export default function Playground() {
                 The real text lives in the spans, so a screen reader reads the code and find-in-page still hits it; the
                 gutter numbers are unselectable so a drag-copy takes clean lines, and the copy button hands over the
                 exact source. On scroll in the lines settle up in a short stagger; reduced motion paints them at rest.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH DIFF — two versions of a real file, the one that shipped this very viewer */}
+        <Reveal>
+          <div id="diff" data-experiment="Diff" className="mt-12 scroll-mt-32">
+            <div className="grid items-center gap-8 lg:grid-cols-[0.85fr_1.15fr]">
+              <div className="px-1">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">What changed</span>
+                <p className="mt-3 max-w-md text-lg font-medium text-white/90 sm:text-xl">
+                  The Code block shows one version of a file. This shows two, and marks what moved between them.
+                </p>
+                <p className="mt-4 max-w-md text-sm leading-relaxed text-white/45">
+                  A real change from this repository: the run that shipped this viewer lifted the Code block&rsquo;s
+                  inline TSX tokenizer out into a shared library so this diff could colour its own code with it. The
+                  lines are matched by a hand-built longest-common-subsequence pass &mdash; the same algorithm{' '}
+                  <span className="font-mono text-white/70">git diff</span> runs on &mdash; so the unchanged lines are
+                  found, not guessed. Toggle Unified and Split; reduced motion paints it at rest.
+                </p>
+              </div>
+              <Diff
+                before={CODEBLOCK_BEFORE}
+                after={CODEBLOCK_AFTER}
+                filename="src/components/CodeBlock.tsx"
+              />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Diff &mdash; a before/after, matched line by line</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The deliberate counterpart to the Code block, and the piece that let its highlighter earn a home in a
+                shared lib. No diff library: the lines are matched by a classic longest-common-subsequence pass,
+                computed once and memoised, and both views are drawn from that single result. Unified stacks the change
+                in one column &mdash; removals, then additions, each with a coloured edge and a +/&minus; sign &mdash;
+                the way a terminal diff reads; Split sets the old file on the left and the new on the right, each changed
+                line aligned with its counterpart and the gaps held open by blank filler rows, the way a review tool
+                reads. Both carry two gutters, the old line number and the new, so a line that lives on one side only
+                shows a number on one side only. The accent lime carries additions and a warm rose the removals, with
+                the code keeping the Code block palette underneath the tint, and it is honest to assistive tech &mdash;
+                the signs are decorative, every changed line carries an sr-only &ldquo;Added&rdquo; or
+                &ldquo;Removed&rdquo;, filler rows are hidden, and a live region states the tally. On scroll in the rows
+                settle up and each changed line&rsquo;s edge wipes down; reduced motion paints the whole thing at rest.
               </p>
             </div>
           </div>
