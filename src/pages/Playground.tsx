@@ -448,6 +448,7 @@ import { Cyclic } from '../components/Cyclic'
 import { ElementaryCA } from '../components/ElementaryCA'
 import { Sandpile } from '../components/Sandpile'
 import { Moire } from '../components/Moire'
+import { Lorenz } from '../components/Lorenz'
 import { Sortable } from '../components/Sortable'
 import { KanbanBoard } from '../components/KanbanBoard'
 import { Carousel, type CarouselSlide } from '../components/Carousel'
@@ -8048,6 +8049,47 @@ export default function Playground() {
                 never wholly still, and hands control straight back the moment the pointer returns. Reduced motion drops
                 the drift and the easing &mdash; the pointer still moves the fringes directly, and at rest it holds a
                 composed, off-centre still.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH LORENZ — the three-dimensional butterfly, turning */}
+        <Reveal>
+          <div id="lorenz" data-experiment="Lorenz" className="mt-12 scroll-mt-32">
+            <div className="relative h-[460px] overflow-hidden rounded-3xl border border-white/10 bg-[#040404]">
+              <Lorenz className="h-full w-full" />
+              <div className="pointer-events-none absolute inset-x-0 top-8 z-10 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Lorenz</span>
+                <p className="mx-auto mt-3 max-w-md px-6 text-lg font-medium text-white/90 sm:text-xl">
+                  The butterfly, in three dimensions. It turns on its own &mdash; move the pointer to take the wheel.
+                </p>
+              </div>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Lorenz attractor</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The most famous picture in all of chaos, and the one its flat neighbours on this shelf cannot show you:
+                where the Clifford map folds a plane and the Julia set colours one, this orbit lives in three dimensions
+                and the whole point is the shape it traces there. It is the path of a single point obeying three coupled
+                rules Edward Lorenz distilled from atmospheric convection in 1963 &mdash; dx = &sigma;(y&minus;x),
+                dy = x(&rho;&minus;z)&minus;y, dz = xy&minus;&beta;z, with the classic &sigma;=10, &rho;=28,
+                &beta;=8/3. Nothing is random and nothing forces it; the system is settled entirely by where it starts.
+                Yet two points a hair apart fly exponentially apart &mdash; this is the equation that named the butterfly
+                effect &mdash; so the orbit never reaches a fixed point and never closes into a loop. It winds around one
+                lobe, flips to the other at a moment you cannot predict, winds there, flips back, forever, and the set of
+                every place it visits is the two-winged strange attractor you see. The state is carried forward by
+                classical <span className="font-semibold text-white/70">fourth-order Runge&ndash;Kutta</span>, which
+                tracks the true curve far more faithfully than a naive step and keeps the two wings crisp instead of
+                smeared; a few thousand integrated points sit in a ring buffer as a faint lime ghost of the whole
+                butterfly, with the few hundred newest ramped bright toward white, so a comet head always traces the live
+                orbit around the wings. Because it is genuinely three-dimensional it is rotated and orthographically
+                projected every frame: it turns on a slow idle yaw, and the pointer takes the wheel while it is over the
+                field &mdash; left and right spin it, up and down tilt it &mdash; easing back to the idle spin when you
+                leave, with depth read as brightness so the near wing glows over the far one. One canvas, one loop, a
+                frame-driven clock with no wall time, DPR-capped and finite-guarded. Reduced motion never starts the
+                loop: one long orbit is integrated once and the whole butterfly is drawn still, at a composed
+                three-quarter angle.
               </p>
             </div>
           </div>
