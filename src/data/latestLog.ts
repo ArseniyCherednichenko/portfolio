@@ -34,6 +34,11 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'A moiré field that beats under your pointer',
+    summary: 'Moiré — the quiet one in the pointer fields, where nothing moves on its own yet nothing is ever still. Two fine gratings laid over one another, and the coarse third pattern that lives in neither: lay one ruling over another that differs by a hair and the slow beat between them falls out, and nudging one a few degrees swings it across the whole field. Rings sets two circular gratings, one on the pointer, so ellipses and hyperbolae sweep like two stones in a pond; Lines rotates one ruling a few degrees to open a pivoting fan; a density slider rules both. Pure arithmetic once per pixel on a small buffer. Reduced motion drops the drift and tracks the pointer directly.',
+    tag: 'Component',
+  },
+  {
     title: 'A before/after diff, matched line by line',
     summary: 'Diff — the counterpart to the Code block: it shows two versions of a file and marks what moved, matched by a hand-built longest-common-subsequence pass (what git diff runs on), so unchanged lines are found, not guessed. Toggle unified or split; lime for additions, rose for removals, two gutters. Building it lifted the Code block\'s TSX highlighter into a shared lib — one highlighter, two readers — and the demo is that very commit. Reduced motion paints it at rest.',
     tag: 'Component',
@@ -77,10 +82,5 @@ export const LATEST_LOG: LogHeadline[] = [
     title: 'A line of type that rides a travelling wave',
     summary: 'Wave type — a slow sine wave rolls through a line, each letter bobbing a beat behind the last so a crest and a band of light travel across the word. The ambient member of the type family: it never arrives, the motion is the point. Reduced motion lays it flat and still.',
     tag: 'Motion',
-  },
-  {
-    title: 'A presence row that spreads as you reach',
-    summary: 'Avatar stack — the who-is-here cluster collaborative products grow: faces overlap at rest, ease apart when you point or tab in, and the one under you lifts with a tooltip. Past a cap they collapse into a +N that opens the full roster; people join and leave on a layout spring. Reduced motion settles it in place.',
-    tag: 'Component',
   },
 ]
