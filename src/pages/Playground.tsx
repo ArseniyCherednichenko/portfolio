@@ -447,6 +447,7 @@ import { StringPluck } from '../components/StringPluck'
 import { Cyclic } from '../components/Cyclic'
 import { ElementaryCA } from '../components/ElementaryCA'
 import { Sandpile } from '../components/Sandpile'
+import { Moire } from '../components/Moire'
 import { Sortable } from '../components/Sortable'
 import { KanbanBoard } from '../components/KanbanBoard'
 import { Carousel, type CarouselSlide } from '../components/Carousel'
@@ -8009,6 +8010,44 @@ export default function Playground() {
                 per cell painted to a grid-sized buffer and smoothed up, timing off the frame counter and the drip site
                 placed by a seeded PRNG, so it never touches the wall clock. Reduced motion drops one large heap on the
                 centre, stabilises it in full, and paints the deterministic four-colour fractal once.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH MOIRÉ — two gratings and the beat pattern that lives in neither */}
+        <Reveal>
+          <div id="moire" data-experiment="Moire" className="mt-12 scroll-mt-32">
+            <div className="relative h-[460px] overflow-hidden rounded-3xl border border-white/10 bg-[#040404]">
+              <Moire className="h-full w-full" />
+              <div className="pointer-events-none absolute inset-x-0 top-8 z-10 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Moiré</span>
+                <p className="mx-auto mt-3 max-w-md px-6 text-lg font-medium text-white/90 sm:text-xl">
+                  Two fine rulings, and a third pattern in neither of them. Move the pointer and the fringes sweep.
+                </p>
+              </div>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Moiré</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The quiet trick in this family: nothing here moves on its own, yet it is never still, because the whole
+                picture is a beat between two patterns that each barely change. Lay one regular ruling over another that
+                differs by a hair &mdash; in spacing, in angle, in centre &mdash; and a much coarser third pattern falls
+                out of the overlap, the slow envelope between two fast carriers; nudge one grating a few degrees and that
+                envelope swings across the entire field. There is no image and no texture, only arithmetic done once per
+                pixel on a small offscreen buffer the canvas smooths up: each grating is a soft cosine, and the two are
+                multiplied the way two real transparencies multiply their transmission &mdash; dark where either is dark,
+                bright only where both are clear &mdash; which is exactly what makes the beat visible, since multiplying
+                two cosines carries the difference term you read as the moiré. <span className="font-semibold text-white/70">Rings</span>{' '}
+                sets two circular gratings, one at the centre and one on the pointer, so families of ellipses and
+                hyperbolae sweep through like two stones dropped in a pond; <span className="font-semibold text-white/70">Lines</span>{' '}
+                sets two straight rulings and lets the pointer rotate the second by a few degrees, opening a broad fan of
+                fringes that pivots as you move. The density slider rules both finer or coarser. The field is redrawn
+                only when something changes, each draw coalesced into one frame, so there is no idling loop; when the
+                pointer is away and motion is allowed, a single slow drift breathes the second grating so the piece is
+                never wholly still, and hands control straight back the moment the pointer returns. Reduced motion drops
+                the drift and the easing &mdash; the pointer still moves the fringes directly, and at rest it holds a
+                composed, off-centre still.
               </p>
             </div>
           </div>
