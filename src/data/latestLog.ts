@@ -34,6 +34,11 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'A before/after diff, matched line by line',
+    summary: 'Diff — the counterpart to the Code block: it shows two versions of a file and marks what moved, matched by a hand-built longest-common-subsequence pass (what git diff runs on), so unchanged lines are found, not guessed. Toggle unified or split; lime for additions, rose for removals, two gutters. Building it lifted the Code block\'s TSX highlighter into a shared lib — one highlighter, two readers — and the demo is that very commit. Reduced motion paints it at rest.',
+    tag: 'Component',
+  },
+  {
     title: 'A poll you vote in and watch tally',
     summary: 'Poll — the single-choice feedback widget the controls family never had: pick one option, commit, and the result bars grow in and count up to their share. A real radiogroup to choose (one tab stop, arrows that walk and select), reversible with Change vote. The question names the five disciplines, so even a poll de-centers any one project. Tallies are illustrative, the vote lives only in the tab; reduced motion snaps the bars.',
     tag: 'Component',
@@ -76,11 +81,6 @@ export const LATEST_LOG: LogHeadline[] = [
   {
     title: 'A presence row that spreads as you reach',
     summary: 'Avatar stack — the who-is-here cluster collaborative products grow: faces overlap at rest, ease apart when you point or tab in, and the one under you lifts with a tooltip. Past a cap they collapse into a +N that opens the full roster; people join and leave on a layout spring. Reduced motion settles it in place.',
-    tag: 'Component',
-  },
-  {
-    title: 'A notification pile you swipe to clear',
-    summary: 'Notification stack — the persistent counterpart to the Toast: notifications pile up and wait, collapse into a peeking deck, and a new one springs in and pushes the rest down. Swipe a card to dismiss, or press Backspace on a focused one. Reduced motion settles it in place.',
     tag: 'Component',
   },
 ]
