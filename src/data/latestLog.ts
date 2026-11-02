@@ -34,6 +34,11 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'The Lorenz butterfly, turning in three dimensions',
+    summary: 'Lorenz — the most famous picture in chaos, and the one its flat neighbours could not show: where the Clifford map folds a plane and the Julia set colours one, this orbit lives in 3D and the point is the shape it traces there. One point obeying three rules Lorenz drew from convection in 1963 — the equation that named the butterfly effect — winds around one lobe, flips to the other at a moment you cannot predict, forever. Carried forward by fourth-order Runge–Kutta, a few thousand points held as a faint lime ghost of the whole butterfly with the newest ramped to white as a comet head. It turns on its own; the pointer takes the wheel to spin and tilt it, depth read as brightness so the near wing glows. Reduced motion draws the whole butterfly still, at a three-quarter angle.',
+    tag: 'Component',
+  },
+  {
     title: 'A moiré field that beats under your pointer',
     summary: 'Moiré — the quiet one in the pointer fields, where nothing moves on its own yet nothing is ever still. Two fine gratings laid over one another, and the coarse third pattern that lives in neither: lay one ruling over another that differs by a hair and the slow beat between them falls out, and nudging one a few degrees swings it across the whole field. Rings sets two circular gratings, one on the pointer, so ellipses and hyperbolae sweep like two stones in a pond; Lines rotates one ruling a few degrees to open a pivoting fan; a density slider rules both. Pure arithmetic once per pixel on a small buffer. Reduced motion drops the drift and tracks the pointer directly.',
     tag: 'Component',
@@ -77,10 +82,5 @@ export const LATEST_LOG: LogHeadline[] = [
     title: 'A field that records your keyboard shortcut',
     summary: 'Shortcut recorder — the keybinding capture from a real settings panel: arm the well, hold your modifiers, strike a key, and the live chord freezes into keycaps. It swallows the keystroke while recording, so Cmd-S records instead of saving the page. Escape cancels; reduced motion drops the pulse and flash.',
     tag: 'Component',
-  },
-  {
-    title: 'A line of type that rides a travelling wave',
-    summary: 'Wave type — a slow sine wave rolls through a line, each letter bobbing a beat behind the last so a crest and a band of light travel across the word. The ambient member of the type family: it never arrives, the motion is the point. Reduced motion lays it flat and still.',
-    tag: 'Motion',
   },
 ]
