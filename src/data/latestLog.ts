@@ -34,6 +34,11 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'A cord you grab anywhere and whip',
+    summary: 'Rope — the cloth\'s one-dimensional sibling, and the live answer to the Catenary a few cards down: that one draws the ideal hanging-chain curve as pure maths, while this is the physical cord that settles into exactly it on its own. A string of point masses carried by Verlet — each remembers only where it was last frame, velocity read as the gap — linked by distance constraints relaxed many passes a frame. A rope barely stretches, so the pass count runs high and the solve stays taut: pull the middle down and the slack is drawn evenly from both shoulders, not one link ballooning. Both ends are pinned; grab a node and it rides the pointer while the rest lashes and trails, and because the held node keeps its last position as its velocity, the throw you were making when you let go is carried into the swing. A slow breeze keeps it breathing; reduced motion hangs it still in its resting catenary.',
+    tag: 'Component',
+  },
+  {
     title: 'A triangle that drills a square hole',
     summary: 'Reuleaux rotor — the odd one out in the mechanism corner: not a linkage but a curve of constant width, the working heart of the Watts square-hole drill, a real 1914 bit still sold. Bulge each edge of an equilateral triangle into an arc centred on the opposite vertex and the shape is exactly as wide in every direction, the way a circle is — so a square of that width always holds it with all four sides kissed at once, and as it turns the three corners sweep into the square\'s corners and scrub out the whole area bar four hair-thin nicks. The price of constant width is that the centre cannot sit still; it wanders a tiny looping path, traced here as a faint lime loop the live centre rides. The square fit is measured, not faked — the rotated bounding box is centred, which is exactly the constant-width constraint. It turns on its own; the pointer takes the wheel. Reduced motion draws it still, the swept hole already complete.',
     tag: 'Component',
@@ -76,11 +81,6 @@ export const LATEST_LOG: LogHeadline[] = [
   {
     title: 'A 2048 you slide a whole board at a time',
     summary: '2048 — the sliding-tile game, rebuilt by hand: swipe or arrow a whole board, equal tiles merge into their doubled sum, a fresh 2 or 4 drops in. Every tile keeps a stable id so each move really slides, a merged tile pops and the one it absorbs slides under it and leaves. The score and best are honest; reduced motion cuts straight to the new cells.',
-    tag: 'Component',
-  },
-  {
-    title: 'A stories bar that paces a sequence',
-    summary: 'Story progress — the segmented bar across the top of every story: the active segment fills off a real-elapsed-time loop, the ones behind snap full, and it ticks on when it brims. Hold to pause and read, tap the sides to step. The demo slides are the five disciplines, not one project. Reduced motion runs no clock; you advance by hand.',
     tag: 'Component',
   },
 ]
