@@ -91,9 +91,9 @@ export function DLA({ className }: { className?: string }) {
     // Pointer, in grid cells. Inactive until the cursor enters the field.
     const pointer = { x: 0, y: 0, active: false }
 
-    // A tiny deterministic PRNG for the few places a repeatable wander is nicer
-    // than Math.random; the walk itself can use Math.random freely since it
-    // affects only which frames do work, never the frame cost or a cached seed.
+    // The random walk is the one place randomness belongs — a different coral
+    // every visit is the honest behaviour, so this is plain Math.random and
+    // nothing here is seeded.
     const rand = () => Math.random()
 
     function idx(x: number, y: number) {
@@ -237,9 +237,13 @@ export function DLA({ className }: { className?: string }) {
 
     // Grow a whole cluster in one synchronous pass, for the still frame under
     // reduced motion. Bounded hard so it can never spin.
+    // A full cluster drawn to ~three-quarters of the reach reads as complete
+    // frost without the last, slowest cells a random walk struggles to place;
+    // the guard keeps the one-time cost snappy even on a large canvas.
     function growStatic() {
-      let guard = 260000
-      while (clusterR < maxR - 1 && guard-- > 0) {
+      const target = maxR * 0.74
+      let guard = 120000
+      while (clusterR < target && guard-- > 0) {
         const stepsLeft = { v: MAX_WALK }
         walkOnce(stepsLeft)
       }
