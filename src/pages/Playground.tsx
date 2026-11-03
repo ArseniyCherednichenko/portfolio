@@ -228,6 +228,7 @@ import { BubbleWrap } from '../components/BubbleWrap'
 import { Ballpit } from '../components/Ballpit'
 import { Cloth } from '../components/Cloth'
 import { Rope } from '../components/Rope'
+import { DLA } from '../components/DLA'
 import { Kaleidoscope } from '../components/Kaleidoscope'
 import { Contour } from '../components/Contour'
 import { Halftone } from '../components/Halftone'
@@ -8092,6 +8093,44 @@ export default function Playground() {
                 frame-driven clock with no wall time, DPR-capped and finite-guarded. Reduced motion never starts the
                 loop: one long orbit is integrated once and the whole butterfly is drawn still, at a composed
                 three-quarter angle.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH DLA — frost growing on the window, the family's slowest bloom */}
+        <Reveal>
+          <div id="dla" data-experiment="DLA" className="mt-12 scroll-mt-32">
+            <div className="relative h-[460px] overflow-hidden rounded-3xl border border-white/10 bg-[#060606]">
+              <DLA className="h-full w-full" />
+              <div className="pointer-events-none absolute inset-x-0 top-8 z-10 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Frost</span>
+                <p className="mx-auto mt-3 max-w-md px-6 text-lg font-medium text-white/90 sm:text-xl">
+                  It grows on its own. Move the pointer and the frost reaches for it &mdash; press to plant a new one.
+                </p>
+              </div>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Diffusion-limited aggregation</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The way frost grows on a cold window, a mineral dendrite crystallises in rock, and soot clusters in the
+                air &mdash; and the chaos-and-emergence cousin of this family&rsquo;s{' '}
+                <span className="font-semibold text-white/70">Slime</span> mould. The recipe is almost nothing: plant one
+                frozen seed, then release particles far away that wander at random &mdash; a drunkard&rsquo;s walk, the
+                discrete face of diffusion. A walker drifts with no plan until it touches something already frozen, and
+                the instant it does it freezes too, exactly where it stuck. Repeat, and the cluster that assembles is not
+                a blob but a branching, self-similar coral &mdash; because the arms that stick out a little catch
+                wandering walkers first and so grow faster, starving the hollows behind them. The fractal is a pure
+                consequence of the rule; nothing about the shape is drawn by hand. Where the slime next door steers up a
+                scent gradient, a walker here has no sense at all &mdash; only the raw statistics of the random walk
+                decide where the frost reaches. Each cell is coloured the moment it freezes by its distance from the core,
+                a cool teal heart warming out to a bright lime rim with the live tips lifted toward white, and drawn once
+                and never re-cleared, so a frame costs only the handful of new cells. Walkers are released on a ring just
+                outside the cluster&rsquo;s reach and recycled if they stray too far, the standard trick that keeps the
+                walk cheap as the coral grows, with a fixed budget of freezes and steps a frame so a dense late tip never
+                stalls the loop. The pointer is a cold draft the frost drifts toward, and a press plants a fresh nucleus
+                that grows its own competing crystal. When the frost reaches the edge it holds a beat, melts, and reseeds.
+                One canvas, one loop, DPR-capped; reduced motion grows a whole cluster in one pass and holds it still.
               </p>
             </div>
           </div>
