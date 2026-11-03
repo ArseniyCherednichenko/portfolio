@@ -55,9 +55,9 @@ const DAMP = 0.992 // velocity retained per step — a touch of air drag
 const CONSTRAINT_PASSES = 28 // high: a rope resists stretch, so the solve runs taut
 const MAX_DPR = 2
 const TARGET_SPACING = 20 // px between nodes along the cord
-const SAG = 1.42 // rope length as a multiple of the anchor span → how deep it hangs
+const SAG = 1.25 // rope length as a multiple of the anchor span → how deep it hangs
 const ANCHOR_INSET = 0.12 // anchors sit this far in from each edge
-const ANCHOR_TOP = 0.22 // …and this far down from the top
+const ANCHOR_TOP = 0.18 // …and this far down from the top
 const GRAB_R = 46 // px: how near the pointer must come to take hold of the cord
 const FIXED_DT = 1 / 60
 
