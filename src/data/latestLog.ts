@@ -34,6 +34,11 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'Frost that grows on its own, reaching for your pointer',
+    summary: 'DLA — diffusion-limited aggregation, the way frost grows on a cold window and a dendrite crystallises in rock, and the emergence cousin of the Slime mould next door. Plant one frozen seed, then release particles far off that wander at random until they touch the cluster and freeze exactly where they stick. Repeat, and what assembles is not a blob but a branching, self-similar coral: the arms that reach out catch wandering walkers first and so grow faster, starving the hollows behind them — the fractal is pure consequence of the rule, nothing drawn by hand. Each cell is coloured as it freezes by its distance from the core, a cool teal heart out to bright lime tips, and drawn once so a frame costs only the new cells; walkers spawn on a ring and are recycled if they stray, keeping the walk cheap as it grows. The pointer is a cold draft the frost drifts toward; a press plants a competing nucleus. Reduced motion grows a whole cluster in one pass and holds it still.',
+    tag: 'Component',
+  },
+  {
     title: 'A cord you grab anywhere and whip',
     summary: 'Rope — the cloth\'s one-dimensional sibling, and the live answer to the Catenary a few cards down: that one draws the ideal hanging-chain curve as pure maths, while this is the physical cord that settles into exactly it on its own. A string of point masses carried by Verlet — each remembers only where it was last frame, velocity read as the gap — linked by distance constraints relaxed many passes a frame. A rope barely stretches, so the pass count runs high and the solve stays taut: pull the middle down and the slack is drawn evenly from both shoulders, not one link ballooning. Both ends are pinned; grab a node and it rides the pointer while the rest lashes and trails, and because the held node keeps its last position as its velocity, the throw you were making when you let go is carried into the swing. A slow breeze keeps it breathing; reduced motion hangs it still in its resting catenary.',
     tag: 'Component',
@@ -76,11 +81,6 @@ export const LATEST_LOG: LogHeadline[] = [
   {
     title: 'A card that unfolds like a folded letter',
     summary: 'Fold reveal — the trifold gesture, rebuilt by hand: two wings creased back behind a teaser panel swing flat into one lit surface as the full line fades and lifts up, each wing catching the light as it lands. A different mechanism from the flip card — three panels into one, not one plane to its back. The teaser names one project, the reveal opens onto the whole range. Reduced motion shows it flat and lit.',
-    tag: 'Component',
-  },
-  {
-    title: 'A 2048 you slide a whole board at a time',
-    summary: '2048 — the sliding-tile game, rebuilt by hand: swipe or arrow a whole board, equal tiles merge into their doubled sum, a fresh 2 or 4 drops in. Every tile keeps a stable id so each move really slides, a merged tile pops and the one it absorbs slides under it and leaves. The score and best are honest; reduced motion cuts straight to the new cells.',
     tag: 'Component',
   },
 ]
