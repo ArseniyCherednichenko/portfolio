@@ -90,6 +90,8 @@ export function Rope({
     let windOn = true // suppressed while settling into the resting catenary
     let nodes: Node[] = []
     let links: Link[] = []
+    let restLen = 0 // the per-link rest length, for clamping a grabbed node's reach
+    let grabIndex = -1 // which node the pointer holds, or -1
 
     // Pointer state, sampled in local canvas space. `near` is the nearest node
     // within reach when nothing is held yet — drawn as a faint grab cue.
@@ -102,6 +104,7 @@ export function Rope({
       const ropeLen = span * SAG
       const count = Math.max(16, Math.round(ropeLen / TARGET_SPACING))
       const rest = ropeLen / count
+      restLen = rest
       nodes = []
       links = []
       // Start the cord strung dead straight between the two pins; the solver
@@ -142,14 +145,27 @@ export function Rope({
           continue
         }
         if (n.grab) {
-          // Ride the pointer, but keep last position so the throw is carried
+          // Ride the pointer — but a real rope cannot stretch, so the target is
+          // first clamped into reach of BOTH anchors (the cord goes taut and
+          // stops following rather than pulling past its length and snapping
+          // back on release). Keep the last position so the throw is carried
           // into the swing the moment the node is let go.
-          const dx = pointer.x - n.x
-          const dy = pointer.y - n.y
+          const last = nodes.length - 1
+          const leftMax = grabIndex * restLen * 0.999
+          const rightMax = (last - grabIndex) * restLen * 0.999
+          const t = { x: pointer.x, y: pointer.y }
+          // Clamp against each anchor disk, twice, so the result lands in the
+          // lens where both reaches are satisfied.
+          for (let k = 0; k < 2; k++) {
+            clampToDisk(t, nodes[0].x, nodes[0].y, leftMax)
+            clampToDisk(t, nodes[last].x, nodes[last].y, rightMax)
+          }
+          const dx = t.x - n.x
+          const dy = t.y - n.y
           n.px = n.x
           n.py = n.y
-          n.x = pointer.x
-          n.y = pointer.y
+          n.x = t.x
+          n.y = t.y
           n.v = Math.sqrt(dx * dx + dy * dy)
           continue
         }
@@ -201,6 +217,18 @@ export function Rope({
       elapsed += dt
       integrate(dt)
       solve()
+    }
+
+    // Pull a point onto a disk if it falls outside it — the geometric limit
+    // that keeps a grabbed node within the cord's reach of an anchor.
+    function clampToDisk(p: { x: number; y: number }, cx: number, cy: number, r: number) {
+      const dx = p.x - cx
+      const dy = p.y - cy
+      const d = Math.sqrt(dx * dx + dy * dy)
+      if (d > r && d > 1e-6) {
+        p.x = cx + (dx / d) * r
+        p.y = cy + (dy / d) * r
+      }
     }
 
     // Nearest free node to the pointer, and the distance to it, for grabbing
@@ -345,6 +373,7 @@ export function Rope({
       const { index, dist } = nearest(p.x, p.y)
       if (index >= 0 && dist <= GRAB_R) {
         pointer.down = true
+        grabIndex = index
         nodes[index].grab = true
         canvas!.setPointerCapture?.(e.pointerId)
       }
@@ -359,6 +388,7 @@ export function Rope({
 
     function release() {
       pointer.down = false
+      grabIndex = -1
       for (const n of nodes) n.grab = false
     }
 
