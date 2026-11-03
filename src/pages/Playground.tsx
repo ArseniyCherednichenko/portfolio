@@ -227,6 +227,7 @@ import { EtchASketch } from '../components/EtchASketch'
 import { BubbleWrap } from '../components/BubbleWrap'
 import { Ballpit } from '../components/Ballpit'
 import { Cloth } from '../components/Cloth'
+import { Rope } from '../components/Rope'
 import { Kaleidoscope } from '../components/Kaleidoscope'
 import { Contour } from '../components/Contour'
 import { Halftone } from '../components/Halftone'
@@ -12904,6 +12905,36 @@ export default function Playground() {
                 scallops, a slow breeze keeps it breathing, and dragging the pointer through catches the weave and shoves it
                 open. Each cell is shaded by how much it compresses, so folds catch the light. One canvas, one loop, a fixed
                 physics step so the solve stays stable at any frame rate; reduced motion relaxes it into a still drape.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH ROPE — the cloth's one-dimensional sibling */}
+        <Reveal>
+          <div id="rope" data-experiment="Rope" className="mt-12 scroll-mt-32">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30">
+              <div className="pointer-events-none absolute inset-x-0 top-8 z-10 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Swing</span>
+                <p className="mx-auto mt-3 max-w-md px-6 text-lg font-medium text-white/85 sm:text-xl">
+                  Grab the cord anywhere and whip it. It swings out, lashes, and settles back into its hang.
+                </p>
+              </div>
+              <Rope className="h-[440px] w-full" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Rope</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The cloth&rsquo;s one-dimensional sibling, and the live answer to the Catenary a few cards down. That one
+                <em className="text-white/60"> draws</em> the ideal hanging-chain curve as pure maths; this is the physical
+                thing that happens to settle into it on its own. A string of point masses is integrated with Verlet &mdash;
+                each remembers only where it was last frame, and velocity is read as the gap &mdash; and linked by distance
+                constraints relaxed many passes a frame. A rope barely stretches, so the pass count runs high and the solve
+                stays taut: pull the middle down and the slack is drawn evenly from both shoulders rather than one link
+                ballooning. Both ends are pinned; grab a node and it rides the pointer while the rest lashes and trails, and
+                because the held node keeps its last position as its velocity, the throw you were making when you let go is
+                carried into the swing. A slow breeze keeps it breathing at rest. One canvas, one loop, a fixed physics step
+                so the solve holds at any frame rate; reduced motion hangs it still in its resting catenary.
               </p>
             </div>
           </div>
