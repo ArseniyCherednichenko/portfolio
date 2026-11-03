@@ -253,6 +253,7 @@ import { CamFollower } from '../components/CamFollower'
 import { Pantograph } from '../components/Pantograph'
 import { Oldham } from '../components/Oldham'
 import { Whitworth } from '../components/Whitworth'
+import { Reuleaux } from '../components/Reuleaux'
 import { SnowGlobe } from '../components/SnowGlobe'
 import { PinScreen } from '../components/PinScreen'
 import { Confetti, type ConfettiHandle } from '../components/Confetti'
@@ -11275,6 +11276,46 @@ export default function Playground() {
                 Under <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code> it
                 never free-runs &mdash; Step jumps dead centre to dead centre so the two strokes stay legible without the
                 sweep between.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* REULEAUX ROTOR — the constant-width curve that drills a square hole */}
+        <Reveal>
+          <div id="reuleaux" data-experiment="Reuleaux rotor" className="mt-12 scroll-mt-32">
+            <div className="relative h-[460px] overflow-hidden rounded-3xl border border-white/10 bg-[#040404]">
+              <Reuleaux className="h-full w-full" />
+              <div className="pointer-events-none absolute inset-x-0 top-8 z-10 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">A triangle that drills a square</span>
+                <p className="mx-auto mt-3 max-w-md px-6 text-lg font-medium text-white/90 sm:text-xl">
+                  It turns on its own &mdash; sweep the pointer to drive the turn and watch the corners scrub the square.
+                </p>
+              </div>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Reuleaux rotor</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                Not a linkage like its neighbours in this corner &mdash; a <em>curve of constant width</em>, and the
+                working heart of the Watts square-hole drill, a real bit Harry Watts patented in 1914 and still sold.
+                Take an equilateral triangle and bulge each straight edge into a circular arc centred on the opposite
+                vertex, radius equal to the side, and you get a shape that is exactly as wide in every direction, the way
+                a circle is: set two parallel callipers on it and turn it and the gap never changes. The consequence is
+                the mechanism. Because its horizontal span and its vertical span are forever both equal to the width{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">w</code>, a{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">w&times;w</code> square always holds
+                it with all four sides kissed at once &mdash; so as it turns, its three corners sweep right into the
+                square&rsquo;s four corners and scrub out the whole area bar four hair-thin rounded nicks: a square hole,
+                drilled by a triangle. The one price of constant width is that the centre cannot stay still &mdash; it
+                wanders a tiny looping path, four arcs of an ellipse about two percent of <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">w</code>{' '}
+                across, which is why the real drill floats its bit in a full-floating chuck. That wobble is traced here as
+                the faint lime loop, and the live centre rides it. Honest about the maths: the boundary is built once as
+                three 60&deg; arcs and only rotated each frame, and the square fit is not faked &mdash; the rotor&rsquo;s
+                rotated bounding box is measured and it is translated so that box is centred, which is exactly the
+                constant-width constraint of touching all four sides. One canvas, one loop, a frame-driven clock, the
+                pointer takes the wheel while it is over the field. Under{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code> the loop
+                never starts: the rotor is drawn still, the centre path and the swept hole already complete.
               </p>
             </div>
           </div>
