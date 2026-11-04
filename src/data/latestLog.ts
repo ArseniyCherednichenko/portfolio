@@ -34,6 +34,11 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: "Every page's first load got lighter",
+    summary: 'The command palette loads its big component catalogue on demand now, so the initial bundle fell from 522kB to 199kB on every route — the first paint finally as lean as the site has always claimed.',
+    tag: 'Infra',
+  },
+  {
     title: 'Frost that grows on its own, reaching for your pointer',
     summary: 'DLA — diffusion-limited aggregation, the way frost grows on a cold window and a dendrite crystallises in rock, and the emergence cousin of the Slime mould next door. Plant one frozen seed, then release particles far off that wander at random until they touch the cluster and freeze exactly where they stick. Repeat, and what assembles is not a blob but a branching, self-similar coral: the arms that reach out catch wandering walkers first and so grow faster, starving the hollows behind them — the fractal is pure consequence of the rule, nothing drawn by hand. Each cell is coloured as it freezes by its distance from the core, a cool teal heart out to bright lime tips, and drawn once so a frame costs only the new cells; walkers spawn on a ring and are recycled if they stray, keeping the walk cheap as it grows. The pointer is a cold draft the frost drifts toward; a press plants a competing nucleus. Reduced motion grows a whole cluster in one pass and holds it still.',
     tag: 'Component',
@@ -76,11 +81,6 @@ export const LATEST_LOG: LogHeadline[] = [
   {
     title: 'A card you point at to decrypt',
     summary: 'Cipher card — a face filled edge to edge with randomising glyphs you cannot read, until a soft window of light follows your pointer and decrypts only the stream beneath it; move on and it scrambles back. Pointer-masked, not a timed resolve: the reveal is a place you point. The message above stays legible and names the range behind any one project. Reduced motion holds it as a dim watermark.',
-    tag: 'Component',
-  },
-  {
-    title: 'A card that unfolds like a folded letter',
-    summary: 'Fold reveal — the trifold gesture, rebuilt by hand: two wings creased back behind a teaser panel swing flat into one lit surface as the full line fades and lifts up, each wing catching the light as it lands. A different mechanism from the flip card — three panels into one, not one plane to its back. The teaser names one project, the reveal opens onto the whole range. Reduced motion shows it flat and lit.',
     tag: 'Component',
   },
 ]
