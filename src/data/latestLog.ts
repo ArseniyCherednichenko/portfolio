@@ -34,6 +34,11 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'Fridge-magnet words you drag into a line',
+    summary: 'Magnetic poetry — the fridge-magnet word kit, rebuilt as a draggable board, and the one piece in the type cluster you rearrange rather than read. Its neighbours each hand you a finished string and animate it into being — the split-text lifts letters into place, the braille line raises pins, the label gun punches a strip — this hands you the words loose, a scatter of little ivory tiles on a brushed fridge door, and gets out of the way, so the line is yours to compose. Every tile is its own drag: the outer element carries the x and y so the motion library owns them, while an inner span carries a fixed random tilt, which keeps the drag and the rotation from cancelling out, since both want the same transform. Pick a tile up and it rises above the pile and lifts; let go and it stays exactly where it lands. Scatter re-lays the whole board from a fresh seeded layout and resets any drag in flight. The words are honest ones the site keeps returning to — Berlin, made by hand, slow, curious. Reduced motion drops the entrance stagger and the pick-up scale but keeps the tiles fully draggable.',
+    tag: 'Component',
+  },
+  {
     title: 'A label gun that embosses tape as you type',
     summary: 'Label maker — the Dymo embossing gun, and the tactile cousin of the braille line beside it in the display thread: where that raises round pins read by touch, this punches raised letters into a strip of coloured plastic tape. The honest tell is the emboss — a real Dymo letter comes out lighter than its tape, because the die stretches the pigment film as it raises the glyph, so every character is a light ink lit along its top edge and shadowed below, reading as pushed up out of the strip rather than printed onto it. The motion is the gun doing its work: only the letters that actually changed stamp in, a quick drop-and-punch rippling left to right across the new tail, so typing appends one fresh letter rather than re-punching the whole strip. Pure DOM and CSS, no canvas; the strip is one role=img carrying the text as its label, so a reader hears the word, not the tape, and four classic tape colours swap underneath. Reduced motion shows the finished label, every letter already raised.',
     tag: 'Component',
@@ -76,11 +81,6 @@ export const LATEST_LOG: LogHeadline[] = [
   {
     title: 'A poll you vote in and watch tally',
     summary: 'Poll — the single-choice feedback widget the controls family never had: pick one option, commit, and the result bars grow in and count up to their share. A real radiogroup to choose (one tab stop, arrows that walk and select), reversible with Change vote. The question names the five disciplines, so even a poll de-centers any one project. Tallies are illustrative, the vote lives only in the tab; reduced motion snaps the bars.',
-    tag: 'Component',
-  },
-  {
-    title: 'A calling card that saves to your contacts',
-    summary: 'Calling card — the physical business card the site never had, made interactive: it leans and lights toward the cursor in real 3D, and its one real job is useful. Save it and it writes a spec-correct vCard (.vcf) your phone or laptop reads straight into its address book, built only from the honest facts — Berlin, the one role, the real channels, nothing stored on my end. Reachable from the Contact page, the Get-in-touch dialog, and the command palette. Flat and glare-free under reduced motion.',
     tag: 'Component',
   },
 ]
