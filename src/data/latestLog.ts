@@ -34,6 +34,11 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'A label gun that embosses tape as you type',
+    summary: 'Label maker — the Dymo embossing gun, and the tactile cousin of the braille line beside it in the display thread: where that raises round pins read by touch, this punches raised letters into a strip of coloured plastic tape. The honest tell is the emboss — a real Dymo letter comes out lighter than its tape, because the die stretches the pigment film as it raises the glyph, so every character is a light ink lit along its top edge and shadowed below, reading as pushed up out of the strip rather than printed onto it. The motion is the gun doing its work: only the letters that actually changed stamp in, a quick drop-and-punch rippling left to right across the new tail, so typing appends one fresh letter rather than re-punching the whole strip. Pure DOM and CSS, no canvas; the strip is one role=img carrying the text as its label, so a reader hears the word, not the tape, and four classic tape colours swap underneath. Reduced motion shows the finished label, every letter already raised.',
+    tag: 'Component',
+  },
+  {
     title: "Every page's first load got lighter",
     summary: 'The command palette loads its big component catalogue on demand now, so the initial bundle fell from 522kB to 199kB on every route — the first paint finally as lean as the site has always claimed.',
     tag: 'Infra',
@@ -76,11 +81,6 @@ export const LATEST_LOG: LogHeadline[] = [
   {
     title: 'A calling card that saves to your contacts',
     summary: 'Calling card — the physical business card the site never had, made interactive: it leans and lights toward the cursor in real 3D, and its one real job is useful. Save it and it writes a spec-correct vCard (.vcf) your phone or laptop reads straight into its address book, built only from the honest facts — Berlin, the one role, the real channels, nothing stored on my end. Reachable from the Contact page, the Get-in-touch dialog, and the command palette. Flat and glare-free under reduced motion.',
-    tag: 'Component',
-  },
-  {
-    title: 'A card you point at to decrypt',
-    summary: 'Cipher card — a face filled edge to edge with randomising glyphs you cannot read, until a soft window of light follows your pointer and decrypts only the stream beneath it; move on and it scrambles back. Pointer-masked, not a timed resolve: the reveal is a place you point. The message above stays legible and names the range behind any one project. Reduced motion holds it as a dim watermark.',
     tag: 'Component',
   },
 ]
