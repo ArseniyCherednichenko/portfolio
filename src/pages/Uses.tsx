@@ -5,6 +5,7 @@ import { Eyebrow } from '../components/Eyebrow'
 import { SplitText } from '../components/SplitText'
 import { SpotlightCard } from '../components/SpotlightCard'
 import { ShinyText } from '../components/ShinyText'
+import { LabelMaker } from '../components/LabelMaker'
 import { DotGrid } from '../components/DotGrid'
 import { AnimatedCounter } from '../components/AnimatedCounter'
 import { Seo } from '../components/Seo'
@@ -156,6 +157,19 @@ export default function Uses() {
             <AnimatedCounter value={USES_REAL_COUNT} className="tabular-nums text-white/55" />
             real picks, honestly named
           </span>
+        </motion.div>
+
+        {/* A physical label stuck to the desk — the embossed-tape artifact the
+            Playground builds, used here for real: a small, slightly-skewed
+            Dymo strip that labels whose setup this is. Decorative, but it
+            carries its own text as a label, so it is not a mystery to a reader. */}
+        <motion.div
+          initial={reduce ? { opacity: 0 } : { opacity: 0, y: 14, rotate: -4 }}
+          animate={{ opacity: 1, y: 0, rotate: -2.5 }}
+          transition={{ duration: 0.7, delay: 0.45, ease: EASE }}
+          className="mt-9 inline-block origin-left"
+        >
+          <LabelMaker value="ARSENIY'S DESK" color="black" height={48} aria-label="Embossed label: Arseniy's desk" />
         </motion.div>
       </header>
 
