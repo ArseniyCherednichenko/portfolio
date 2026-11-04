@@ -114,6 +114,7 @@ import { StarRating } from '../components/StarRating'
 import { DotMatrix } from '../components/DotMatrix'
 import { FlipDot } from '../components/FlipDot'
 import { Braille } from '../components/Braille'
+import { LabelMaker, TAPES, type TapeColor } from '../components/LabelMaker'
 import { SevenSegment } from '../components/SevenSegment'
 import { Vfd } from '../components/Vfd'
 import { useBerlinTime } from '../hooks/useBerlinTime'
@@ -2924,6 +2925,80 @@ function BrailleDemo() {
   )
 }
 
+// A LabelMaker showcase: the embossing label gun, the tactile cousin of the
+// braille line next door — where that raises round pins read by touch, this
+// punches raised letters into coloured plastic tape. The press is the thing to
+// watch: type and the new letter stamps in; reprint remounts the strip so the
+// whole word punches in again left to right. A row of swatches changes the tape
+// colour, and the capped field feeds the strip's aria-label, so what is embossed
+// is what a reader hears.
+const LABEL_PRESETS = ['ARSENIY', 'BERLIN', 'MADE BY HAND', 'HELLO']
+const LABEL_COLORS: TapeColor[] = ['black', 'red', 'blue', 'green']
+
+function LabelMakerDemo() {
+  const [msg, setMsg] = useState('MADE BY HAND')
+  const [color, setColor] = useState<TapeColor>('black')
+  const [nonce, setNonce] = useState(0)
+  const shown = (msg.trim() ? msg : 'MADE BY HAND').slice(0, 20)
+  return (
+    <div className="flex w-full max-w-2xl flex-col items-center gap-8">
+      <div className="flex min-h-[132px] w-full items-center justify-center overflow-x-auto rounded-2xl border border-white/10 bg-white/[0.02] px-6 py-8">
+        <LabelMaker key={nonce} value={shown} color={color} height={76} />
+      </div>
+      <div className="flex w-full flex-col gap-4">
+        <label className="w-full">
+          <span className="mb-1.5 block text-xs font-semibold uppercase tracking-[0.24em] text-white/40">
+            Emboss your own label
+          </span>
+          <input
+            type="text"
+            value={msg}
+            maxLength={20}
+            onChange={(e) => setMsg(e.target.value)}
+            placeholder="Up to 20 characters"
+            className="w-full rounded-xl border border-white/12 bg-white/[0.03] px-4 py-2.5 text-sm text-white/85 outline-none transition-colors placeholder:text-white/30 focus:border-[#DCF87C]/50"
+          />
+        </label>
+        <div className="flex flex-wrap items-center gap-2">
+          {LABEL_PRESETS.map((w) => (
+            <button
+              key={w}
+              type="button"
+              onClick={() => setMsg(w)}
+              className="rounded-full border border-white/12 bg-white/[0.03] px-3 py-1.5 text-xs font-medium text-white/70 transition-colors hover:border-[#DCF87C]/50 hover:text-white"
+            >
+              {w}
+            </button>
+          ))}
+          <button
+            type="button"
+            onClick={() => setNonce((k) => k + 1)}
+            className="rounded-full border border-[#DCF87C]/30 bg-[#DCF87C]/10 px-3 py-1.5 text-xs font-medium text-[#DCF87C] transition-colors hover:bg-[#DCF87C]/20"
+          >
+            Reprint
+          </button>
+        </div>
+        <div className="flex flex-wrap items-center gap-2">
+          <span className="text-xs font-semibold uppercase tracking-[0.24em] text-white/40">Tape</span>
+          {LABEL_COLORS.map((c) => (
+            <button
+              key={c}
+              type="button"
+              onClick={() => setColor(c)}
+              aria-label={`${c} tape`}
+              aria-pressed={color === c}
+              className={`h-6 w-6 rounded-full border transition-transform hover:scale-110 ${
+                color === c ? 'border-[#DCF87C] ring-2 ring-[#DCF87C]/40' : 'border-white/20'
+              }`}
+              style={{ backgroundColor: TAPES[c].tape }}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}
+
 // A SevenSegment showcase: the readout ticks the live Berlin time by default —
 // a working clock, so the cross-fade of segments is felt second by second — and
 // a field lets a visitor push their own value onto the module. The point being
@@ -4994,6 +5069,42 @@ export default function Playground() {
                 is aria-hidden and the plain text rides in the wrapper&rsquo;s label, the one audience a
                 braille line and a screen reader share. Under reduced motion there is no rise &mdash; the
                 pins are simply shown already up or already down.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH LABEL MAKER */}
+        <Reveal>
+          <div id="label-maker" data-experiment="Label maker" className="mt-12 scroll-mt-32">
+            <div className="flex flex-col items-center gap-8 rounded-3xl border border-white/10 bg-white/[0.02] px-6 py-14 sm:px-10">
+              <div className="max-w-md text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Punched, not printed</span>
+                <p className="mx-auto mt-3 text-lg font-medium text-white/85 sm:text-xl">
+                  The Dymo label gun. A strip of coloured tape with raised letters punched into it one
+                  squeeze at a time, lighter than the tape because the die stretches the film. Emboss your
+                  own, and pick the tape.
+                </p>
+              </div>
+              <LabelMakerDemo />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Label maker</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The tactile cousin of the braille line a few cards up, and a kind of machine none of the
+                other displays here are. The dot-matrix sign switches lamps, the flip-dot board turns
+                discs, the seven-segment and VFD light fixed bars, the Nixie glows a wire cathode &mdash;
+                this punches raised letters into plastic tape. The honest tell is the emboss: a real Dymo
+                letter comes out lighter than its tape because the die stretches the pigment film as it
+                raises the glyph, so every character is a light ink lit along its top edge and shadowed
+                below, reading as pushed up out of the strip rather than printed onto it. The motion is the
+                gun doing its work &mdash; only the letters that actually changed stamp in, a quick
+                drop-and-punch rippling left to right across the new tail, so typing appends one fresh
+                letter rather than re-punching the whole strip. Pure DOM and CSS, no canvas and no font
+                faked as hardware beyond the mono face every label gun wears; the strip is one
+                role=&ldquo;img&rdquo; carrying the text as its label, so a reader hears the word, not the
+                tape. Under reduced motion nothing presses &mdash; the finished label is simply shown,
+                every letter already raised.
               </p>
             </div>
           </div>
