@@ -115,6 +115,7 @@ import { DotMatrix } from '../components/DotMatrix'
 import { FlipDot } from '../components/FlipDot'
 import { Braille } from '../components/Braille'
 import { LabelMaker, TAPES, type TapeColor } from '../components/LabelMaker'
+import { MagneticPoetry } from '../components/MagneticPoetry'
 import { SevenSegment } from '../components/SevenSegment'
 import { Vfd } from '../components/Vfd'
 import { useBerlinTime } from '../hooks/useBerlinTime'
@@ -5105,6 +5106,42 @@ export default function Playground() {
                 role=&ldquo;img&rdquo; carrying the text as its label, so a reader hears the word, not the
                 tape. Under reduced motion nothing presses &mdash; the finished label is simply shown,
                 every letter already raised.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH MAGNETIC POETRY */}
+        <Reveal>
+          <div id="magnetic-poetry" data-experiment="Magnetic poetry" className="mt-12 scroll-mt-32">
+            <div className="flex flex-col items-center gap-8 rounded-3xl border border-white/10 bg-white/[0.02] px-6 py-14 sm:px-10">
+              <div className="max-w-md text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Rearranged, not read</span>
+                <p className="mx-auto mt-3 text-lg font-medium text-white/85 sm:text-xl">
+                  The fridge-magnet word kit. A scatter of little ivory tiles you pick up and slide across
+                  the door to compose a line. Scatter them and start over.
+                </p>
+              </div>
+              <MagneticPoetry />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Magnetic poetry</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The one piece in this type cluster you rearrange rather than read. Its neighbours each hand
+                you a finished string and animate it into being &mdash; the split-text lifts letters into
+                place, the braille line raises pins, the label gun punches a strip &mdash; this hands you the
+                words loose and gets out of the way, so the composition is yours. Every tile is its own
+                draggable: the outer element carries the drag so the motion library owns its x and y, while
+                an inner span carries a fixed random tilt, which keeps the drag transform and the rotation
+                from cancelling each other out &mdash; a small but necessary trick, since both want to write
+                the same CSS property. Picking a tile up raises it above the pile and lifts it a touch;
+                letting go leaves it exactly where it lands. Scatter re-lays the whole board from a fresh
+                seeded layout &mdash; a deterministic mulberry32 PRNG, so a given scatter is stable across
+                renders rather than reshuffling on every repaint &mdash; and that remount also resets any
+                drag in flight. The words are honest ones the site keeps returning to, nothing claimed.
+                Under reduced motion there is no entrance stagger and no pick-up scale; the tiles are simply
+                shown and still fully draggable, since a drag is the visitor&rsquo;s own doing, not the
+                page&rsquo;s.
               </p>
             </div>
           </div>
