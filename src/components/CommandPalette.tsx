@@ -13,7 +13,13 @@ import { useNavigate } from 'react-router-dom'
 import { PROJECTS } from '../data/projects'
 import { DISCIPLINES } from '../data/disciplines'
 import { ALL_CONTENT_ENTRIES } from '../data/contents'
-import { ALL_LIBRARY_ITEMS } from '../data/library'
+// The component catalogue (data/library.ts) is a few hundred rows and the
+// single largest data file on the site. It is needed only once the palette is
+// open and someone starts typing, so it is loaded on demand (see the open
+// effect below) rather than statically imported — which would otherwise pull
+// the whole catalogue into the initial bundle that ships on *every* page. The
+// type is import-only here, so it is erased at build and carries no weight.
+import type { LibraryItem } from '../data/library'
 import { fuzzyMatch, toRanges } from '../lib/fuzzy'
 import { downloadVCard } from '../lib/vcard'
 import { useContact } from './ContactDialog'
@@ -127,6 +133,11 @@ function Palette({ open, onClose }: { open: boolean; onClose: () => void }) {
   const [active, setActive] = useState(0)
   const [copied, setCopied] = useState(false)
   const [recent, setRecent] = useState<string[]>([])
+  // The component catalogue, loaded on demand the first time the palette opens
+  // (see the effect below). Empty until then — pages, projects, disciplines,
+  // and actions all search instantly without it; components join the moment the
+  // small async chunk resolves, which is well before anyone finishes typing.
+  const [libraryItems, setLibraryItems] = useState<LibraryItem[]>([])
   const inputRef = useRef<HTMLInputElement>(null)
   const listRef = useRef<HTMLDivElement>(null)
 
@@ -308,7 +319,7 @@ function Palette({ open, onClose }: { open: boolean; onClose: () => void }) {
   // view with the entire catalogue of rows.
   const componentCommands = useMemo<Command[]>(
     () =>
-      ALL_LIBRARY_ITEMS.filter((item) => item.to).map((item) => ({
+      libraryItems.filter((item) => item.to).map((item) => ({
         id: `component-${item.name}`,
         label: item.name,
         group: 'Components',
@@ -316,7 +327,7 @@ function Palette({ open, onClose }: { open: boolean; onClose: () => void }) {
         keywords: `component ${item.tags.join(' ')} ${item.note}`,
         run: () => go(item.to as string),
       })),
-    [go],
+    [go, libraryItems],
   )
 
   // A rendered row: a command plus the label indices to highlight (empty when
@@ -372,6 +383,22 @@ function Palette({ open, onClose }: { open: boolean; onClose: () => void }) {
       return () => window.clearTimeout(id)
     }
   }, [open])
+
+  // Load the component catalogue the first time the palette opens, then keep it.
+  // This is what keeps data/library.ts — the site's largest data file — out of
+  // the initial bundle: it ships as its own chunk, fetched only here, only once,
+  // and only for the small fraction of visitors who ever open the palette. The
+  // fetch finishes long before anyone types, so component search feels instant.
+  useEffect(() => {
+    if (!open || libraryItems.length) return
+    let alive = true
+    void import('../data/library').then((m) => {
+      if (alive) setLibraryItems(m.ALL_LIBRARY_ITEMS)
+    })
+    return () => {
+      alive = false
+    }
+  }, [open, libraryItems.length])
 
   // Keep the active index in range as the filtered list shrinks/grows.
   useEffect(() => {
