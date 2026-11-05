@@ -116,6 +116,7 @@ import { FlipDot } from '../components/FlipDot'
 import { Braille } from '../components/Braille'
 import { LabelMaker, TAPES, type TapeColor } from '../components/LabelMaker'
 import { MagneticPoetry } from '../components/MagneticPoetry'
+import { Yoyo } from '../components/Yoyo'
 import { SevenSegment } from '../components/SevenSegment'
 import { Vfd } from '../components/Vfd'
 import { useBerlinTime } from '../hooks/useBerlinTime'
@@ -12325,6 +12326,46 @@ export default function Playground() {
                 spinner is a labelled button that flicks on Enter or Space and announces its rpm. Reduced motion drops
                 the coast entirely &mdash; a flick lands it at a new resting position at once and the readout shows a
                 dash, so it stays a thing you can turn by hand without any vestibular travel.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH YO-YO */}
+        <Reveal>
+          <div id="yoyo" data-experiment="Yo-yo" className="mt-12 scroll-mt-32">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 py-12 sm:px-10">
+              <div className="text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Height for spin</span>
+                <p className="mx-auto mt-3 max-w-md text-lg font-medium text-white/85 sm:text-xl">
+                  Throw it down and watch it spin up as it falls. Bring it back before it sleeps out &mdash;
+                  leave it too long and you will have to reel it in.
+                </p>
+              </div>
+              <Yoyo className="mt-10" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Yo-yo</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                A working yo-yo with honest rotational physics, and the momentum toy this family was missing
+                beside the Fidget spinner and the Turntable. A different kind of toy from both: where the
+                spinner is an rpm winding down in place and the Turntable a platter you nudge to a steady
+                speed, a yo-yo trades height for spin and back again. Thrown down, it falls slowly &mdash; most
+                of gravity&rsquo;s pull goes into spinning it up rather than dropping it, exactly the way a real
+                yo-yo creeps down its string &mdash; so it reaches the bottom turning fast; there, with the
+                string fully out, it <em>sleeps</em>, its centre still while the stored spin bleeds off to
+                friction. A tug lets the string grip the axle and the spin it has left is spent carrying it
+                home. The honest, teachable part is the sleep: sleep too long and the spin falls below what the
+                climb needs, the string can no longer grip, and the yo-yo dies at the bottom &mdash; you have to
+                reel it in by hand, exactly as a real one does. The whole state is a few numbers in a ref &mdash;
+                the string paid out, the centre&rsquo;s speed, the spin &mdash; integrated on a fixed substep off
+                the frame clock, so the slow fall, the fast sleep and the slept-out death all fall straight out
+                of the integration rather than being scripted, and the feel reads the same on any monitor. Pure
+                inline SVG transformed in the loop so a fast spin costs no re-renders, the spokes fading into a
+                blurred ring as it speeds up; a live region reads the phase and the rpm, and the single control
+                is a real labelled button. Under prefers-reduced-motion the loop never runs &mdash; the yo-yo is
+                shown asleep at the bottom with its spin blurred into a ring, and the control snaps between
+                thrown and reeled-in stills, so it stays fully operable with no vestibular travel.
               </p>
             </div>
           </div>
