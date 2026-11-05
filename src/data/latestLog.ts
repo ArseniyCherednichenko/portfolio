@@ -34,6 +34,11 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'An engraved plate turned out one rosette at a time',
+    summary: 'Guilloche — the engine-turned engraving of a watch dial or a banknote, kept honest to the rose-engine lathe that makes it, and the generative-geometry kin of the Spirograph and Harmonograph. The lattice is never any one line: a lathe cuts the same simple rosette over and over while slowly indexing the work, and it is the overlap of the turned copies that weaves the dense, forgery-proof mesh. The rosette is a polar radius modulated by one or two harmonics, r(t) = base + a1·sin(p1·t) + a2·sin(p2·t), and each pass is turned by the golden angle (~137.5 degrees) — the step a sunflower packs its seeds by — so the passes fill the dial evenly and never repeat. The opposite method to its neighbours: not a single travelling pen but many rotated rosettes whose crossings do the drawing, the way an engraver cross-hatches tone. Four plates, a cut-depth slider and a re-engrave, all keyboard-reachable. One canvas, laid pass by pass onto a persistent buffer, each strand composited lighter so crossings bloom to white; the finished plate then turns on its mount through a GPU transform with no per-frame restroke. Reduced motion lays the whole plate in one pass and holds it still.',
+    tag: 'Component',
+  },
+  {
     title: 'Sand that heaps and water that pools, side by side',
     summary: 'Falling sand — a falling-sand automaton, the granular toy the Pointer fields were missing, and the physical, order-dependent cousin of the abelian Sandpile a few cards down. It keeps the DLA\'s one-rule-per-cell honesty but drops the randomness: the grains simply fall. Two materials, told apart entirely by how they move. Sand falls straight down or, blocked, down a diagonal, so it can never stand in a column — it slumps into a heap at its angle of repose, the cone a real stream makes. Water falls the same but also spreads level when it cannot fall, so it seeks its surface and pools flat in a basin. Sand is denser, so a grain sinks through water and the water rises past it. Stone ledges give the material something to pile on, pour off, and pool against; a source drifts across the top trickling sand with pulses of water so the field pours on its own, the pointer paints a stream and a press pours water, and the bottom row drains so it never silts up. One canvas, one loop, DPR-capped. Reduced motion settles the scene in one bounded pass and holds it still.',
     tag: 'Component',
@@ -76,11 +81,6 @@ export const LATEST_LOG: LogHeadline[] = [
   {
     title: 'The Lorenz butterfly, turning in three dimensions',
     summary: 'Lorenz — the most famous picture in chaos, and the one its flat neighbours could not show: where the Clifford map folds a plane and the Julia set colours one, this orbit lives in 3D and the point is the shape it traces there. One point obeying three rules Lorenz drew from convection in 1963 — the equation that named the butterfly effect — winds around one lobe, flips to the other at a moment you cannot predict, forever. Carried forward by fourth-order Runge–Kutta, a few thousand points held as a faint lime ghost of the whole butterfly with the newest ramped to white as a comet head. It turns on its own; the pointer takes the wheel to spin and tilt it, depth read as brightness so the near wing glows. Reduced motion draws the whole butterfly still, at a three-quarter angle.',
-    tag: 'Component',
-  },
-  {
-    title: 'A moiré field that beats under your pointer',
-    summary: 'Moiré — the quiet one in the pointer fields, where nothing moves on its own yet nothing is ever still. Two fine gratings laid over one another, and the coarse third pattern that lives in neither: lay one ruling over another that differs by a hair and the slow beat between them falls out, and nudging one a few degrees swings it across the whole field. Rings sets two circular gratings, one on the pointer, so ellipses and hyperbolae sweep like two stones in a pond; Lines rotates one ruling a few degrees to open a pivoting fan; a density slider rules both. Pure arithmetic once per pixel on a small buffer. Reduced motion drops the drift and tracks the pointer directly.',
     tag: 'Component',
   },
 ]
