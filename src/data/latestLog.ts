@@ -34,6 +34,11 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'A yo-yo that sleeps at the bottom of its string',
+    summary: 'Yo-yo — a working yo-yo with honest rotational physics, and the momentum toy this family was missing beside the fidget spinner and the turntable. A different kind of toy from both: the spinner is an rpm winding down in place, the turntable a platter you nudge to a steady speed, and this trades height for spin and back again. Thrown down it falls slowly, because most of gravity\'s pull goes into spinning it up rather than dropping it, the way a real yo-yo creeps down its string, so it reaches the bottom turning fast; there, with the string fully out, it sleeps, its centre still while the stored spin bleeds off to friction. A tug lets the string grip the axle and the spin it has left is spent carrying it home. The honest, teachable part is the sleep — sleep too long and the spin falls below what the climb needs, the string can no longer grip, and the yo-yo dies at the bottom, so you have to reel it in by hand, exactly as a real one does. The whole state is a few numbers in a ref integrated on a fixed substep off the frame clock, so the slow fall, the fast sleep and the slept-out death all fall out of the maths rather than a script. Reduced motion shows it asleep at the bottom and the control snaps between thrown and reeled-in stills.',
+    tag: 'Component',
+  },
+  {
     title: 'Fridge-magnet words you drag into a line',
     summary: 'Magnetic poetry — the fridge-magnet word kit, rebuilt as a draggable board, and the one piece in the type cluster you rearrange rather than read. Its neighbours each hand you a finished string and animate it into being — the split-text lifts letters into place, the braille line raises pins, the label gun punches a strip — this hands you the words loose, a scatter of little ivory tiles on a brushed fridge door, and gets out of the way, so the line is yours to compose. Every tile is its own drag: the outer element carries the x and y so the motion library owns them, while an inner span carries a fixed random tilt, which keeps the drag and the rotation from cancelling out, since both want the same transform. Pick a tile up and it rises above the pile and lifts; let go and it stays exactly where it lands. Scatter re-lays the whole board from a fresh seeded layout and resets any drag in flight. The words are honest ones the site keeps returning to — Berlin, made by hand, slow, curious. Reduced motion drops the entrance stagger and the pick-up scale but keeps the tiles fully draggable.',
     tag: 'Component',
@@ -76,11 +81,6 @@ export const LATEST_LOG: LogHeadline[] = [
   {
     title: 'A before/after diff, matched line by line',
     summary: 'Diff — the counterpart to the Code block: it shows two versions of a file and marks what moved, matched by a hand-built longest-common-subsequence pass (what git diff runs on), so unchanged lines are found, not guessed. Toggle unified or split; lime for additions, rose for removals, two gutters. Building it lifted the Code block\'s TSX highlighter into a shared lib — one highlighter, two readers — and the demo is that very commit. Reduced motion paints it at rest.',
-    tag: 'Component',
-  },
-  {
-    title: 'A poll you vote in and watch tally',
-    summary: 'Poll — the single-choice feedback widget the controls family never had: pick one option, commit, and the result bars grow in and count up to their share. A real radiogroup to choose (one tab stop, arrows that walk and select), reversible with Change vote. The question names the five disciplines, so even a poll de-centers any one project. Tallies are illustrative, the vote lives only in the tab; reduced motion snaps the bars.',
     tag: 'Component',
   },
 ]
