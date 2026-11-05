@@ -180,6 +180,7 @@ import { Turntable } from '../components/Turntable'
 import { Harmonograph } from '../components/Harmonograph'
 import { Mobile } from '../components/Mobile'
 import { Spirograph } from '../components/Spirograph'
+import { Guilloche } from '../components/Guilloche'
 import { Oscilloscope } from '../components/Oscilloscope'
 import { Sonar } from '../components/Sonar'
 import { CrtScreen } from '../components/CrtScreen'
@@ -8045,6 +8046,43 @@ export default function Playground() {
                 the rest of the page shares. One canvas, one rAF loop, DPR-capped and resize-driven, a modest thread
                 count a frame against a smooth frame counter and no wall clock. Reduced motion settles one still rose at
                 the chosen symmetry and the pointer does not drive it.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH GUILLOCHE — one rosette turned by the golden angle, the engine-turned engraving of dials and notes */}
+        <Reveal>
+          <div id="guilloche" data-experiment="Guilloché" className="mt-12 scroll-mt-32">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 py-12 sm:px-10">
+              <div className="text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Engine-turn</span>
+                <p className="mx-auto mt-3 max-w-md text-lg font-medium text-white/85 sm:text-xl">
+                  One curve, laid down again and again at a turned angle, until the lattice fills.
+                </p>
+              </div>
+              <Guilloche className="mt-10" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Guilloché</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The engine-turned engraving you find on a watch dial, a fountain pen, or the border of a banknote, kept
+                honest to the machine that makes it. The signature lattice is never any one line: a rose-engine lathe
+                cuts the same simple rosette over and over while slowly indexing the work between passes, and it is the
+                overlap of the turned copies &mdash; not a single stroke &mdash; that weaves the dense, forgery-proof
+                mesh. The rosette is a polar radius modulated by one or two harmonics as the angle sweeps,
+                r(t) = base + a<sub>1</sub>&middot;sin(p<sub>1</sub>t) + a<sub>2</sub>&middot;sin(p<sub>2</sub>t), so the
+                frequencies p set how many lobes ring the figure and the amplitudes a how deep they cut. Each successive
+                pass is turned by the golden angle (&asymp;137.5&deg;), the very step a sunflower packs its seeds by, so
+                the passes fill the dial evenly and never repeat &mdash; a seam a real dividing plate is chosen to avoid.
+                Kin to the Spirograph and the Harmonograph &mdash; all three one closed rule sampled densely &mdash; but
+                the opposite method: not a single travelling pen but many rotated copies of one rosette whose crossings
+                do the drawing, the way an engraver builds tone by cross-hatching. Four honest plates, a cut-depth slider
+                and a re-engrave control, all real and keyboard-reachable. One canvas, laid pass by pass onto a single
+                persistent buffer, each strand a sub-path composited <span className="whitespace-nowrap">&lsquo;lighter&rsquo;</span>
+                so crossings bloom toward white, tinted teal to lime by winding order; the finished plate then turns on
+                its mount at a glacial pace through a GPU transform, with no per-frame restroke. Reduced motion lays the
+                whole plate down in one pass and holds it perfectly still.
               </p>
             </div>
           </div>
