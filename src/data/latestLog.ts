@@ -34,6 +34,11 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'Sand that heaps and water that pools, side by side',
+    summary: 'Falling sand — a falling-sand automaton, the granular toy the Pointer fields were missing, and the physical, order-dependent cousin of the abelian Sandpile a few cards down. It keeps the DLA\'s one-rule-per-cell honesty but drops the randomness: the grains simply fall. Two materials, told apart entirely by how they move. Sand falls straight down or, blocked, down a diagonal, so it can never stand in a column — it slumps into a heap at its angle of repose, the cone a real stream makes. Water falls the same but also spreads level when it cannot fall, so it seeks its surface and pools flat in a basin. Sand is denser, so a grain sinks through water and the water rises past it. Stone ledges give the material something to pile on, pour off, and pool against; a source drifts across the top trickling sand with pulses of water so the field pours on its own, the pointer paints a stream and a press pours water, and the bottom row drains so it never silts up. One canvas, one loop, DPR-capped. Reduced motion settles the scene in one bounded pass and holds it still.',
+    tag: 'Component',
+  },
+  {
     title: 'A yo-yo that sleeps at the bottom of its string',
     summary: 'Yo-yo — a working yo-yo with honest rotational physics, and the momentum toy this family was missing beside the fidget spinner and the turntable. A different kind of toy from both: the spinner is an rpm winding down in place, the turntable a platter you nudge to a steady speed, and this trades height for spin and back again. Thrown down it falls slowly, because most of gravity\'s pull goes into spinning it up rather than dropping it, the way a real yo-yo creeps down its string, so it reaches the bottom turning fast; there, with the string fully out, it sleeps, its centre still while the stored spin bleeds off to friction. A tug lets the string grip the axle and the spin it has left is spent carrying it home. The honest, teachable part is the sleep — sleep too long and the spin falls below what the climb needs, the string can no longer grip, and the yo-yo dies at the bottom, so you have to reel it in by hand, exactly as a real one does. The whole state is a few numbers in a ref integrated on a fixed substep off the frame clock, so the slow fall, the fast sleep and the slept-out death all fall out of the maths rather than a script. Reduced motion shows it asleep at the bottom and the control snaps between thrown and reeled-in stills.',
     tag: 'Component',
@@ -76,11 +81,6 @@ export const LATEST_LOG: LogHeadline[] = [
   {
     title: 'A moiré field that beats under your pointer',
     summary: 'Moiré — the quiet one in the pointer fields, where nothing moves on its own yet nothing is ever still. Two fine gratings laid over one another, and the coarse third pattern that lives in neither: lay one ruling over another that differs by a hair and the slow beat between them falls out, and nudging one a few degrees swings it across the whole field. Rings sets two circular gratings, one on the pointer, so ellipses and hyperbolae sweep like two stones in a pond; Lines rotates one ruling a few degrees to open a pivoting fan; a density slider rules both. Pure arithmetic once per pixel on a small buffer. Reduced motion drops the drift and tracks the pointer directly.',
-    tag: 'Component',
-  },
-  {
-    title: 'A before/after diff, matched line by line',
-    summary: 'Diff — the counterpart to the Code block: it shows two versions of a file and marks what moved, matched by a hand-built longest-common-subsequence pass (what git diff runs on), so unchanged lines are found, not guessed. Toggle unified or split; lime for additions, rose for removals, two gutters. Building it lifted the Code block\'s TSX highlighter into a shared lib — one highlighter, two readers — and the demo is that very commit. Reduced motion paints it at rest.',
     tag: 'Component',
   },
 ]
