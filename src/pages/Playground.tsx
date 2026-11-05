@@ -232,6 +232,7 @@ import { Ballpit } from '../components/Ballpit'
 import { Cloth } from '../components/Cloth'
 import { Rope } from '../components/Rope'
 import { DLA } from '../components/DLA'
+import { FallingSand } from '../components/FallingSand'
 import { Kaleidoscope } from '../components/Kaleidoscope'
 import { Contour } from '../components/Contour'
 import { Halftone } from '../components/Halftone'
@@ -8280,6 +8281,49 @@ export default function Playground() {
                 stalls the loop. The pointer is a cold draft the frost drifts toward, and a press plants a fresh nucleus
                 that grows its own competing crystal. When the frost reaches the edge it holds a beat, melts, and reseeds.
                 One canvas, one loop, DPR-capped; reduced motion grows a whole cluster in one pass and holds it still.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH FALLING SAND — the family's granular toy, grains that heap and pour */}
+        <Reveal>
+          <div id="falling-sand" data-experiment="Falling sand" className="mt-12 scroll-mt-32">
+            <div className="relative h-[460px] overflow-hidden rounded-3xl border border-white/10 bg-[#060606]">
+              <FallingSand className="h-full w-full" />
+              <div className="pointer-events-none absolute inset-x-0 top-8 z-10 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Grains</span>
+                <p className="mx-auto mt-3 max-w-md px-6 text-lg font-medium text-white/90 sm:text-xl">
+                  It pours on its own. Move the pointer to paint sand &mdash; press to pour water.
+                </p>
+              </div>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Falling sand</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The oldest, most tactile kind of grid simulation, and the physical, order-dependent cousin of the{' '}
+                <span className="font-semibold text-white/70">Sandpile</span> a few cards down &mdash; where that one is
+                the <em>abelian</em> sandpile, a piece of exact mathematics in which a cell topples only when it holds four
+                and the final heap is the same whatever order you add the grains, this is the opposite spirit: ordinary,
+                messy granular flow, the toy a browser has been able to run since the 1990s. It keeps the DLA&rsquo;s
+                one-rule-per-cell honesty but drops the randomness &mdash; the grains simply fall. Two materials, told
+                apart entirely by how they move: sand falls straight down while it can and, when it is blocked, tries the
+                two down-diagonals, so it can never stand in a column &mdash; it slumps sideways into a heap at its natural
+                angle of repose, the cone a real stream of sand makes. Water falls the same way but, when it cannot fall or
+                slide down, also spreads one step level into any gap, so it seeks its own surface and pools flat in a basin
+                rather than heaping. Sand is denser than water, so a grain landing on a water cell sinks through it &mdash;
+                the two swap, and the water bubbles up past the heap it displaces. Stone is fixed and moves for nothing; a
+                few stone ledges are set into the field so the material has something to pile on, pour off, and pool
+                against. It runs on its own: a source drifts across the top like a hand tipping a scoop, trickling mostly
+                sand with the odd pulse of water, so the ledges are always cascading before you touch it; the pointer is a
+                second source &mdash; move it to paint a stream of sand, press to pour water &mdash; and the very bottom row
+                is a drain, so grains that reach the floor fall away and the field never silts up. One Uint8Array holds each
+                cell&rsquo;s material and a second a fixed shade so a heap reads as countless grains, not a flat colour; the
+                update runs once a frame from the bottom row up so a dropping grain is never processed twice, with the
+                horizontal scan flipped each frame so a symmetric pile does not drift, and a per-frame moved flag stops a
+                grain sliding the whole row in one tick. Only the occupied cells are painted over a cleared background, so
+                an empty field costs almost nothing. One canvas, one loop, DPR-capped; reduced motion settles the scene in
+                one bounded pass and holds it still.
               </p>
             </div>
           </div>
