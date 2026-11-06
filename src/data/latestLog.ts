@@ -34,6 +34,11 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'An ink ripple that answers the press, in place',
+    summary: 'Ripple — the Material touch-feedback ink wave, rebuilt by hand as a reusable surface primitive and the deliberate counterpart to the click spark. That one throws decorative particles off any click, site-wide and above everything; this is bounded and surface-contained — an ink circle clipped to the pressed element\'s own rounded shape, so the press reads as the surface itself acknowledging the touch rather than confetti over the top. The wave\'s radius is sized to the farthest corner from the exact point you pressed, so it always sweeps the whole surface however off-centre the press, and several overlap cleanly when you press in a hurry. It takes no semantics of its own — a wrapper that lays a decorative, aria-hidden ink layer over whatever you give it, so the child stays the real button or list row and a screen reader hears exactly what it did before. Keyboard parity by design: Enter or Space on a focused control, the one case with no pointer to read, spawns the ripple from the centre, so the feedback is never a mouse-only reward. Reduced motion drops the wave; the control keeps its own hover and active states, fully usable with nothing expanding.',
+    tag: 'Component',
+  },
+  {
     title: 'A quotation that sets itself as you scroll',
     summary: 'PullQuote — the editorial pull-quote the type family was missing, and now the last word of the Principles manifesto. Its neighbours each move a single string — the split-text lifts letters, the scroll reveal brightens words, the decode resolves glyphs out of noise — while this composes a whole quotation unit: an oversized serif mark, the statement, an accent rule and a cite. All of it is tied to the blockquote\'s own scroll progress, so the quote sets itself top to bottom as the reader passes — the giant mark rises and warms to lime first, the statement then brightens word by word, the hairline draws across beneath it, and the cite fades up last. A real blockquote carrying the whole line as its label with a real cite, the moving words and the mark hidden from assistive tech, so a screen reader hears it once. Reduced motion pins the scroll value to its finished state, so one render path shows it lit, full and still.',
     tag: 'Component',
@@ -76,11 +81,6 @@ export const LATEST_LOG: LogHeadline[] = [
   {
     title: 'A cord you grab anywhere and whip',
     summary: 'Rope — the cloth\'s one-dimensional sibling, and the live answer to the Catenary a few cards down: that one draws the ideal hanging-chain curve as pure maths, while this is the physical cord that settles into exactly it on its own. A string of point masses carried by Verlet — each remembers only where it was last frame, velocity read as the gap — linked by distance constraints relaxed many passes a frame. A rope barely stretches, so the pass count runs high and the solve stays taut: pull the middle down and the slack is drawn evenly from both shoulders, not one link ballooning. Both ends are pinned; grab a node and it rides the pointer while the rest lashes and trails, and because the held node keeps its last position as its velocity, the throw you were making when you let go is carried into the swing. A slow breeze keeps it breathing; reduced motion hangs it still in its resting catenary.',
-    tag: 'Component',
-  },
-  {
-    title: 'A triangle that drills a square hole',
-    summary: 'Reuleaux rotor — the odd one out in the mechanism corner: not a linkage but a curve of constant width, the working heart of the Watts square-hole drill, a real 1914 bit still sold. Bulge each edge of an equilateral triangle into an arc centred on the opposite vertex and the shape is exactly as wide in every direction, the way a circle is — so a square of that width always holds it with all four sides kissed at once, and as it turns the three corners sweep into the square\'s corners and scrub out the whole area bar four hair-thin nicks. The price of constant width is that the centre cannot sit still; it wanders a tiny looping path, traced here as a faint lime loop the live centre rides. The square fit is measured, not faked — the rotated bounding box is centred, which is exactly the constant-width constraint. It turns on its own; the pointer takes the wheel. Reduced motion draws it still, the swept hole already complete.',
     tag: 'Component',
   },
 ]
