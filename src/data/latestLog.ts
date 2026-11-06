@@ -34,6 +34,11 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'A quotation that sets itself as you scroll',
+    summary: 'PullQuote — the editorial pull-quote the type family was missing, and now the last word of the Principles manifesto. Its neighbours each move a single string — the split-text lifts letters, the scroll reveal brightens words, the decode resolves glyphs out of noise — while this composes a whole quotation unit: an oversized serif mark, the statement, an accent rule and a cite. All of it is tied to the blockquote\'s own scroll progress, so the quote sets itself top to bottom as the reader passes — the giant mark rises and warms to lime first, the statement then brightens word by word, the hairline draws across beneath it, and the cite fades up last. A real blockquote carrying the whole line as its label with a real cite, the moving words and the mark hidden from assistive tech, so a screen reader hears it once. Reduced motion pins the scroll value to its finished state, so one render path shows it lit, full and still.',
+    tag: 'Component',
+  },
+  {
     title: 'An engraved plate turned out one rosette at a time',
     summary: 'Guilloche — the engine-turned engraving of a watch dial or a banknote, kept honest to the rose-engine lathe that makes it, and the generative-geometry kin of the Spirograph and Harmonograph. The lattice is never any one line: a lathe cuts the same simple rosette over and over while slowly indexing the work, and it is the overlap of the turned copies that weaves the dense, forgery-proof mesh. The rosette is a polar radius modulated by one or two harmonics, r(t) = base + a1·sin(p1·t) + a2·sin(p2·t), and each pass is turned by the golden angle (~137.5 degrees) — the step a sunflower packs its seeds by — so the passes fill the dial evenly and never repeat. The opposite method to its neighbours: not a single travelling pen but many rotated rosettes whose crossings do the drawing, the way an engraver cross-hatches tone. Four plates, a cut-depth slider and a re-engrave, all keyboard-reachable. One canvas, laid pass by pass onto a persistent buffer, each strand composited lighter so crossings bloom to white; the finished plate then turns on its mount through a GPU transform with no per-frame restroke. Reduced motion lays the whole plate in one pass and holds it still.',
     tag: 'Component',
@@ -76,11 +81,6 @@ export const LATEST_LOG: LogHeadline[] = [
   {
     title: 'A triangle that drills a square hole',
     summary: 'Reuleaux rotor — the odd one out in the mechanism corner: not a linkage but a curve of constant width, the working heart of the Watts square-hole drill, a real 1914 bit still sold. Bulge each edge of an equilateral triangle into an arc centred on the opposite vertex and the shape is exactly as wide in every direction, the way a circle is — so a square of that width always holds it with all four sides kissed at once, and as it turns the three corners sweep into the square\'s corners and scrub out the whole area bar four hair-thin nicks. The price of constant width is that the centre cannot sit still; it wanders a tiny looping path, traced here as a faint lime loop the live centre rides. The square fit is measured, not faked — the rotated bounding box is centred, which is exactly the constant-width constraint. It turns on its own; the pointer takes the wheel. Reduced motion draws it still, the swept hole already complete.',
-    tag: 'Component',
-  },
-  {
-    title: 'The Lorenz butterfly, turning in three dimensions',
-    summary: 'Lorenz — the most famous picture in chaos, and the one its flat neighbours could not show: where the Clifford map folds a plane and the Julia set colours one, this orbit lives in 3D and the point is the shape it traces there. One point obeying three rules Lorenz drew from convection in 1963 — the equation that named the butterfly effect — winds around one lobe, flips to the other at a moment you cannot predict, forever. Carried forward by fourth-order Runge–Kutta, a few thousand points held as a faint lime ghost of the whole butterfly with the newest ramped to white as a comet head. It turns on its own; the pointer takes the wheel to spin and tilt it, depth read as brightness so the near wing glows. Reduced motion draws the whole butterfly still, at a three-quarter angle.',
     tag: 'Component',
   },
 ]
