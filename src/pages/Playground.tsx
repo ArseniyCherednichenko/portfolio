@@ -285,6 +285,7 @@ import { Superformula } from '../components/Superformula'
 import { TimesTable } from '../components/TimesTable'
 import { StickerPeel } from '../components/StickerPeel'
 import { ParallaxCard, ParallaxLayer } from '../components/ParallaxCard'
+import { WobbleCard } from '../components/WobbleCard'
 import { FanDeck, type FanCard } from '../components/FanDeck'
 import { ExpandingPanels, type Panel } from '../components/ExpandingPanels'
 import { Flipbook } from '../components/Flipbook'
@@ -5946,6 +5947,75 @@ export default function Playground() {
                 planes and a pointer, staged by hand. Distinct from its neighbours: the tilt card rotates a plane, the
                 holographic card sweeps a foil, the pin card lifts on a single pin &mdash; this one holds a small world
                 and lets you look into it. Reduced motion collapses the tilt and the drift and rests the scene flat.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        <Reveal>
+          <div id="wobble-card" data-experiment="Wobble card" className="mt-12 scroll-mt-32">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 py-12 sm:px-10">
+              <div className="text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Squish</span>
+                <p className="mx-auto mt-3 max-w-md text-lg font-medium text-white/85 sm:text-xl">
+                  Lean on a card, then let go. It never tilts &mdash; it squishes toward you and springs home
+                  with a soft wobble.
+                </p>
+              </div>
+              <div className="mx-auto mt-10 grid w-full max-w-2xl gap-5 sm:grid-cols-2">
+                <WobbleCard className="h-full">
+                  <div className="flex h-full flex-col justify-between gap-8 p-7">
+                    <div className="flex items-start justify-between">
+                      <span className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">
+                        Across the stack
+                      </span>
+                      <span aria-hidden className="text-lg leading-none text-white/25">
+                        &#8599;
+                      </span>
+                    </div>
+                    <div>
+                      <h4 className="font-display text-3xl font-bold leading-none tracking-tight text-white">
+                        Five disciplines
+                      </h4>
+                      <p className="mt-2 max-w-[26ch] text-sm leading-relaxed text-white/55">
+                        Frontend, native iOS, backend, applied AI, and motion &mdash; one maker, real range.
+                      </p>
+                    </div>
+                  </div>
+                </WobbleCard>
+                <WobbleCard className="h-full" strength={24}>
+                  <div className="flex h-full flex-col justify-between gap-8 p-7">
+                    <div className="flex items-start justify-between">
+                      <span className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">
+                        Hand-built
+                      </span>
+                      <span aria-hidden className="text-lg leading-none text-white/25">
+                        &#8599;
+                      </span>
+                    </div>
+                    <div>
+                      <h4 className="font-display text-3xl font-bold leading-none tracking-tight text-white">
+                        No template
+                      </h4>
+                      <p className="mt-2 max-w-[26ch] text-sm leading-relaxed text-white/55">
+                        Every surface on this site is coded from scratch, reduced-motion aware, built to be felt.
+                      </p>
+                    </div>
+                  </div>
+                </WobbleCard>
+              </div>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Wobble card</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The playful cousin of the tilt and parallax cards. Both of those answer the cursor by rotating a
+                plane in 3D; this one never rotates and never leaves the flat. It leans &mdash; the whole body
+                translates a few pixels toward the pointer on an under-damped spring, while the content inside trails
+                a beat behind on a softer one. That gap between the body and its contents is the squish; the
+                under-damped body spring is the wobble, so letting go over-shoots home and settles like jelly rather
+                than snapping. Built for a feature tile or a call-to-action you want to feel springy under the hand;
+                the moving layers are decorative and the text is real content, so a reader hears a plain card. Reduced
+                motion never wires the pointer &mdash; the card rests flat and keeps its own hover border.
               </p>
             </div>
           </div>
