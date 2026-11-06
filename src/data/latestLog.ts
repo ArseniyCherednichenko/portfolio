@@ -34,6 +34,11 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'A card that leans and squishes toward your cursor',
+    summary: 'Wobble card — the playful cousin of the tilt and parallax cards, and their deliberate opposite. Both of those answer the pointer by rotating a plane in 3D; this one never rotates and never leaves the flat. It leans — the whole body translates a few pixels toward the cursor on an under-damped spring, while the content inside trails a beat behind on a softer one. That gap between the body and its contents is the squish; the under-damped spring is the wobble, so letting go over-shoots home and settles like jelly rather than snapping. Built for a feature tile or a call-to-action you want springy under the hand: a cursor-tracked lime sheen eases in on hover, the moving layers are decorative, and the text stays real content, so a reader hears a plain card. Reduced motion never wires the pointer — the card rests flat with zero travel and keeps its own hover border.',
+    tag: 'Component',
+  },
+  {
     title: 'An ink ripple that answers the press, in place',
     summary: 'Ripple — the Material touch-feedback ink wave, rebuilt by hand as a reusable surface primitive and the deliberate counterpart to the click spark. That one throws decorative particles off any click, site-wide and above everything; this is bounded and surface-contained — an ink circle clipped to the pressed element\'s own rounded shape, so the press reads as the surface itself acknowledging the touch rather than confetti over the top. The wave\'s radius is sized to the farthest corner from the exact point you pressed, so it always sweeps the whole surface however off-centre the press, and several overlap cleanly when you press in a hurry. It takes no semantics of its own — a wrapper that lays a decorative, aria-hidden ink layer over whatever you give it, so the child stays the real button or list row and a screen reader hears exactly what it did before. Keyboard parity by design: Enter or Space on a focused control, the one case with no pointer to read, spawns the ripple from the centre, so the feedback is never a mouse-only reward. Reduced motion drops the wave; the control keeps its own hover and active states, fully usable with nothing expanding.',
     tag: 'Component',
@@ -76,11 +81,6 @@ export const LATEST_LOG: LogHeadline[] = [
   {
     title: 'Frost that grows on its own, reaching for your pointer',
     summary: 'DLA — diffusion-limited aggregation, the way frost grows on a cold window and a dendrite crystallises in rock, and the emergence cousin of the Slime mould next door. Plant one frozen seed, then release particles far off that wander at random until they touch the cluster and freeze exactly where they stick. Repeat, and what assembles is not a blob but a branching, self-similar coral: the arms that reach out catch wandering walkers first and so grow faster, starving the hollows behind them — the fractal is pure consequence of the rule, nothing drawn by hand. Each cell is coloured as it freezes by its distance from the core, a cool teal heart out to bright lime tips, and drawn once so a frame costs only the new cells; walkers spawn on a ring and are recycled if they stray, keeping the walk cheap as it grows. The pointer is a cold draft the frost drifts toward; a press plants a competing nucleus. Reduced motion grows a whole cluster in one pass and holds it still.',
-    tag: 'Component',
-  },
-  {
-    title: 'A cord you grab anywhere and whip',
-    summary: 'Rope — the cloth\'s one-dimensional sibling, and the live answer to the Catenary a few cards down: that one draws the ideal hanging-chain curve as pure maths, while this is the physical cord that settles into exactly it on its own. A string of point masses carried by Verlet — each remembers only where it was last frame, velocity read as the gap — linked by distance constraints relaxed many passes a frame. A rope barely stretches, so the pass count runs high and the solve stays taut: pull the middle down and the slack is drawn evenly from both shoulders, not one link ballooning. Both ends are pinned; grab a node and it rides the pointer while the rest lashes and trails, and because the held node keeps its last position as its velocity, the throw you were making when you let go is carried into the swing. A slow breeze keeps it breathing; reduced motion hangs it still in its resting catenary.',
     tag: 'Component',
   },
 ]
