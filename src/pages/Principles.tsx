@@ -3,8 +3,8 @@ import { motion, useReducedMotion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { Reveal } from '../components/Reveal'
 import { Eyebrow } from '../components/Eyebrow'
-import { GradientText } from '../components/GradientText'
 import { SplitText } from '../components/SplitText'
+import { PullQuote } from '../components/PullQuote'
 import { ScrollReveal } from '../components/ScrollReveal'
 import { Permalink } from '../components/Permalink'
 import { Seo } from '../components/Seo'
@@ -194,14 +194,16 @@ export default function Principles() {
         </div>
       </div>
 
-      {/* CLOSE */}
-      <section className="mx-auto w-full max-w-4xl px-6 py-24 text-center">
-        <Reveal>
-          <p className="mx-auto max-w-2xl font-display text-2xl font-medium leading-snug text-white/80 sm:text-3xl">
-            <GradientText>Principles are cheap;</GradientText> the proof is in the
-            work they produce.
-          </p>
-        </Reveal>
+      {/* CLOSE — the manifesto's own last word, pulled out as an editorial
+          quote that sets itself under the scroll. His line, not a project. */}
+      <section className="mx-auto w-full max-w-4xl px-6 py-24">
+        <PullQuote
+          className="mx-auto max-w-3xl"
+          quote="Principles are cheap; the proof is in the work they produce."
+          highlight={['cheap', 'proof', 'work']}
+          cite="Arseniy Cherednichenko"
+          role="Berlin"
+        />
         <Reveal delay={0.08}>
           <div className="mt-10 flex flex-wrap justify-center gap-3">
             <Link
