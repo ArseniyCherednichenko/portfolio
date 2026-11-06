@@ -63,6 +63,7 @@ import { LinkPreview } from '../components/LinkPreview'
 import { FuzzyText } from '../components/FuzzyText'
 import { GlitchText } from '../components/GlitchText'
 import { WaveText } from '../components/WaveText'
+import { PullQuote } from '../components/PullQuote'
 import { ShortcutRecorder } from '../components/ShortcutRecorder'
 import { StrokeText } from '../components/StrokeText'
 import { Lens } from '../components/Lens'
@@ -5333,6 +5334,38 @@ export default function Playground() {
                 from assistive tech. Under reduced motion the dissolve and the placeholder travel both
                 drop &mdash; the field clears at once and holds a single steady prompt &mdash; so it is
                 a calm, usable control with nothing moving.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH PULL-QUOTE — an editorial quote that sets itself as you scroll */}
+        <Reveal>
+          <div id="pull-quote" data-experiment="Pull-quote" className="mt-12 scroll-mt-32">
+            <div className="rounded-3xl border border-white/10 bg-white/[0.02] px-6 py-16 sm:px-14">
+              <PullQuote
+                className="mx-auto max-w-2xl"
+                quote="Alive is not the same as loud. The best motion is the kind you feel before you notice it."
+                highlight={['alive', 'loud', 'feel', 'notice']}
+                cite="Arseniy Cherednichenko"
+                role="On motion"
+              />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Pull-quote</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The editorial pull-quote this family was missing. Its neighbours each move a single
+                string &mdash; SplitText lifts letters into place, the scroll reveal brightens words,
+                the decode resolves glyphs out of noise &mdash; while this one composes a whole
+                quotation unit (an oversized serif mark, the statement, an accent rule and a cite) and
+                ties the lot to the blockquote&rsquo;s own scroll progress, so the quote sets itself
+                top to bottom as you pass: the giant mark rises and warms to lime first, the statement
+                then brightens word by word, the hairline draws across beneath it, and the cite fades
+                up last. Honest to assistive tech &mdash; a real <code>&lt;blockquote&gt;</code>
+                carrying the full statement as its label with a real <code>&lt;cite&gt;</code>, every
+                moving word and the mark hidden &mdash; so a screen reader hears the line once. Under
+                reduced motion the scroll binding is replaced by a value pinned to its finished state,
+                so the same single render path shows it lit, full and still.
               </p>
             </div>
           </div>
