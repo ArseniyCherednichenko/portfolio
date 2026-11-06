@@ -64,6 +64,7 @@ import { FuzzyText } from '../components/FuzzyText'
 import { GlitchText } from '../components/GlitchText'
 import { WaveText } from '../components/WaveText'
 import { PullQuote } from '../components/PullQuote'
+import { Ripple } from '../components/Ripple'
 import { ShortcutRecorder } from '../components/ShortcutRecorder'
 import { StrokeText } from '../components/StrokeText'
 import { Lens } from '../components/Lens'
@@ -13816,6 +13817,87 @@ export default function Playground() {
                 the signs are decorative, every changed line carries an sr-only &ldquo;Added&rdquo; or
                 &ldquo;Removed&rdquo;, filler rows are hidden, and a live region states the tally. On scroll in the rows
                 settle up and each changed line&rsquo;s edge wipes down; reduced motion paints the whole thing at rest.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH RIPPLE — the Material ink wave, bounded to a surface */}
+        <Reveal>
+          <div id="ripple" data-experiment="Ripple" className="mt-12 scroll-mt-32">
+            <div className="rounded-3xl border border-white/10 bg-white/[0.02] px-6 py-12 sm:px-10">
+              <div className="mx-auto mb-10 max-w-md text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Press anywhere</span>
+                <p className="mt-3 text-lg font-medium text-white/85 sm:text-xl">
+                  Press a surface and the ink grows out of the point you touched, clipped to its own
+                  shape &mdash; the oldest, quietest piece of control feedback there is.
+                </p>
+              </div>
+
+              <div className="mx-auto grid max-w-3xl gap-6 md:grid-cols-[auto_1fr]">
+                {/* Buttons */}
+                <div className="flex flex-col items-center justify-center gap-4 rounded-2xl border border-white/8 bg-white/[0.015] p-7">
+                  <Ripple className="rounded-full">
+                    <button
+                      type="button"
+                      className="rounded-full bg-[#DCF87C] px-7 py-3 text-sm font-semibold text-black focus:outline-none focus-visible:ring-2 focus-visible:ring-[#DCF87C]/60 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+                    >
+                      Primary action
+                    </button>
+                  </Ripple>
+                  <Ripple className="rounded-full" color="rgba(255,255,255,0.14)">
+                    <button
+                      type="button"
+                      className="rounded-full border border-white/15 px-7 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/[0.04] focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
+                    >
+                      Quiet action
+                    </button>
+                  </Ripple>
+                  <span className="text-[0.7rem] uppercase tracking-[0.2em] text-white/30">Tab in, press Enter</span>
+                </div>
+
+                {/* List rows — a menu that answers the touch */}
+                <ul className="overflow-hidden rounded-2xl border border-white/8">
+                  {[
+                    ['Frontend', 'React, TypeScript, motion that earns its place'],
+                    ['Native iOS', 'SwiftUI that behaves like it belongs'],
+                    ['Backend', 'The quiet layer that keeps everything honest'],
+                    ['From Berlin', 'Where the work is made, most days'],
+                  ].map(([label, note], i) => (
+                    <li key={label} className={i > 0 ? 'border-t border-white/8' : ''}>
+                      <Ripple className="w-full rounded-none">
+                        <button
+                          type="button"
+                          className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left transition-colors hover:bg-white/[0.03] focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#DCF87C]/50"
+                        >
+                          <span>
+                            <span className="block text-sm font-semibold text-white/85">{label}</span>
+                            <span className="mt-0.5 block text-xs text-white/40">{note}</span>
+                          </span>
+                          <span aria-hidden className="text-[#DCF87C]/70">+</span>
+                        </button>
+                      </Ripple>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Ripple &mdash; the touch feedback, bounded to the surface</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The Material ink wave every app&rsquo;s buttons wear, rebuilt by hand as a reusable
+                wrapper and the deliberate counterpart to the click spark elsewhere on this page. That
+                one throws decorative particles off <em>any</em> click, site-wide and above everything;
+                this is clipped to the element&rsquo;s own rounded shape, so the press reads as the
+                surface itself acknowledging the touch rather than confetti over the top. The wave grows
+                from the exact point you pressed, with a radius sized to the farthest corner so it always
+                sweeps the whole surface however off-centre the press lands, and several can overlap when
+                you press in a hurry. It takes no semantics of its own &mdash; the child stays the real
+                button or list row and this only lays a decorative, aria-hidden ink layer over it &mdash;
+                and keyboard parity is deliberate: activating a focused control with Enter or Space, the
+                one case with no pointer to read, spawns the ripple from the centre, so the feedback is
+                never a mouse-only reward. Under reduced motion the wave drops entirely and the control
+                keeps its own hover and active states, fully usable with nothing expanding.
               </p>
             </div>
           </div>
