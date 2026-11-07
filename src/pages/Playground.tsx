@@ -472,6 +472,7 @@ import { FractalTree } from '../components/FractalTree'
 import { Slime } from '../components/Slime'
 import { Fluid } from '../components/Fluid'
 import { DoublePendulum } from '../components/DoublePendulum'
+import { MagneticPendulum } from '../components/MagneticPendulum'
 import { GO_TARGETS, useShortcuts } from '../components/Keyboard'
 import { Seo } from '../components/Seo'
 import { GITHUB_URL } from '../data/contact'
@@ -12509,6 +12510,43 @@ export default function Playground() {
                 Each weight leaves a short fading trail, so the fan blooms into the signature scribble of chaos. Press
                 anywhere and the whole family re-releases from rest, every arm aimed at the cursor. Reduced motion lays a
                 single settled pendulum out once with faint ghosts behind it and holds it still.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH MAGNETIC PENDULUM */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-[#040404]">
+              <div className="pointer-events-none absolute inset-x-0 top-8 z-10 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Capture</span>
+                <p className="mx-auto mt-3 max-w-md px-6 text-lg font-medium text-white/90 sm:text-xl">
+                  Three magnets, one bob. Press anywhere to drop it and see which one wins.
+                </p>
+              </div>
+              <MagneticPendulum className="h-[520px] w-full" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Magnetic pendulum</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The double pendulum's quieter cousin, and its opposite argument. That one is chaos that never lands — a
+                family of arms diverging forever onto nothing. This is chaos that always lands, and the whole drama is
+                which of the three magnets it lands on. A single bob hangs on an idealised pendulum over a triangle of
+                magnets, and two forces fight for it: the pendulum pulls it back toward the centre, a gentle restoring
+                spring, while each magnet tugs it closer with a pull that sharpens as it nears — an inverse-cube
+                attraction, softened by the height the bob swings above the magnet plane so it never blows up directly
+                overhead. A whisper of friction bleeds the energy off, and the bob spirals, loops, doubles back, and is
+                finally captured by one magnet and comes to rest. Which one is the textbook picture of a fractal basin of
+                attraction: start a hair's breadth from where you did and it can spiral into a different magnet entirely,
+                because the border where the three basins meet is infinitely filigreed, and near it the outcome is for
+                all practical purposes unknowable in advance. The physics is honest — the real equation of motion
+                (restoring pull, inverse-cube magnet attraction, linear friction) integrated with symplectic Euler on a
+                fixed 1/240 s substep, so it reads the same on any monitor, and the sequence of release points comes from
+                a fixed hash of the run index, never Math.random. The trail is tinted toward whichever magnet is winning
+                it, so the colour tells you where it is being pulled before the capture is decided. Press anywhere to drop
+                the bob there at rest and hunt for the hairline borders. Reduced motion integrates one run to its resting
+                place and lays the settled spiral down still.
               </p>
             </div>
           </div>
