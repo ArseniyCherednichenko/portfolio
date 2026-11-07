@@ -64,6 +64,7 @@ import { FuzzyText } from '../components/FuzzyText'
 import { GlitchText } from '../components/GlitchText'
 import { WaveText } from '../components/WaveText'
 import { PullQuote } from '../components/PullQuote'
+import { Letterpress } from '../components/Letterpress'
 import { Ripple } from '../components/Ripple'
 import { ShortcutRecorder } from '../components/ShortcutRecorder'
 import { StrokeText } from '../components/StrokeText'
@@ -1014,6 +1015,50 @@ function KnobDemo() {
 // simulated save (a short latency, local state), and the checkbox forces that
 // save to reject so the optimistic value visibly rolls back: the one behaviour
 // that separates a real inline edit from a styled input. Nothing leaves the tab.
+// A Letterpress showcase with a live relief toggle. The same word is pressed
+// into the surface or raised out of it; the raking light drifts on its own and
+// swings to follow the pointer, so the carving reads as real depth either way.
+function LetterpressDemo() {
+  const [mode, setMode] = useState<'deboss' | 'emboss'>('deboss')
+  const MODES: ReadonlyArray<{ id: 'deboss' | 'emboss'; label: string }> = [
+    { id: 'deboss', label: 'Deboss' },
+    { id: 'emboss', label: 'Emboss' },
+  ]
+  return (
+    <div className="flex w-full flex-col items-center gap-9">
+      <Letterpress
+        as="span"
+        text="Craft"
+        mode={mode}
+        className="select-none font-display text-7xl font-bold tracking-tight sm:text-8xl"
+      />
+      <div
+        role="radiogroup"
+        aria-label="Relief direction"
+        className="inline-flex rounded-full border border-white/12 bg-white/[0.03] p-1"
+      >
+        {MODES.map((m) => (
+          <button
+            key={m.id}
+            type="button"
+            role="radio"
+            aria-checked={mode === m.id}
+            onClick={() => setMode(m.id)}
+            className={`rounded-full px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] transition-colors ${
+              mode === m.id ? 'bg-[#DCF87C] text-black' : 'text-white/55 hover:text-white/80'
+            }`}
+          >
+            {m.label}
+          </button>
+        ))}
+      </div>
+      <p className="max-w-sm text-center text-xs text-white/40">
+        Move the pointer across the word &mdash; the light carried past the relief tracks your cursor.
+      </p>
+    </div>
+  )
+}
+
 function InlineEditDemo() {
   const [name, setName] = useState('Arseniy Cherednichenko')
   const [role, setRole] = useState('Co-founder, Guided')
@@ -5368,6 +5413,34 @@ export default function Playground() {
                 moving word and the mark hidden &mdash; so a screen reader hears the line once. Under
                 reduced motion the scroll binding is replaced by a value pinned to its finished state,
                 so the same single render path shows it lit, full and still.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH LETTERPRESS — type carved into the surface, lit by the pointer */}
+        <Reveal>
+          <div id="letterpress" data-experiment="Letterpress" className="mt-12 scroll-mt-32">
+            <div className="rounded-3xl border border-white/10 bg-white/[0.02] px-6 py-16 sm:px-14">
+              <LetterpressDemo />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Letterpress</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The one piece here that does not move the letters at all. Its neighbours each animate a
+                string &mdash; SplitText lifts the glyphs into place, ShinyText sweeps a band of light
+                through them, the decode resolves them out of noise &mdash; while this is a still effect
+                about depth: the word is set almost exactly the colour of the surface, so there is
+                nothing to read in the fill, and the whole of it is legible only from the lime caught on
+                one bevelled edge and the black thrown on the other. That pair of offset copies is the
+                relief; a unit light vector points from the word to the pointer and swings the lit and
+                dark edges around it, so pointing at the word is like carrying a lamp past an engraving.
+                Deboss presses the type into the surface and emboss raises it out &mdash; the same bevel
+                with the two copies swapped, dark on the lit side for a groove, bright on it for a ridge.
+                Honest and cheap: the real word is a normal selectable element a screen reader reads once,
+                the bevel is pure CSS text-shadow on two springs with nothing on a render path. Under
+                reduced motion the idle drift never starts and the pointer is never wired &mdash; the
+                light rests at the upper-left and the word holds one still, fully legible relief.
               </p>
             </div>
           </div>
