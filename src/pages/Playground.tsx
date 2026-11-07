@@ -287,6 +287,7 @@ import { TimesTable } from '../components/TimesTable'
 import { StickerPeel } from '../components/StickerPeel'
 import { ParallaxCard, ParallaxLayer } from '../components/ParallaxCard'
 import { WobbleCard } from '../components/WobbleCard'
+import { HoloCard } from '../components/HoloCard'
 import { FanDeck, type FanCard } from '../components/FanDeck'
 import { ExpandingPanels, type Panel } from '../components/ExpandingPanels'
 import { Flipbook } from '../components/Flipbook'
@@ -6089,6 +6090,82 @@ export default function Playground() {
                 than snapping. Built for a feature tile or a call-to-action you want to feel springy under the hand;
                 the moving layers are decorative and the text is real content, so a reader hears a plain card. Reduced
                 motion never wires the pointer &mdash; the card rests flat and keeps its own hover border.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* HOLOGRAPHIC FOIL CARD — the rainbow lives in the surface, not the motion */}
+        <Reveal>
+          <div id="holo-card" data-experiment="Holo card" className="mt-12 scroll-mt-32">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 py-12 sm:px-10">
+              <div className="mb-10 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Foil</span>
+                <p className="mx-auto mt-3 max-w-md text-lg font-medium text-white/85 sm:text-xl">
+                  Move across the card. It barely tilts &mdash; what answers you is the holographic foil
+                  stamped into the surface, throwing a different rainbow at every angle.
+                </p>
+              </div>
+              <div className="mx-auto grid w-full max-w-2xl gap-5 sm:grid-cols-2">
+                <HoloCard className="h-full">
+                  <div className="flex h-full flex-col justify-between gap-10 p-7">
+                    <div className="flex items-start justify-between">
+                      <span className="text-[10px] font-semibold uppercase tracking-[0.3em] text-white/70">
+                        Collectible
+                      </span>
+                      <span aria-hidden className="text-sm leading-none text-white/35">
+                        No. 361
+                      </span>
+                    </div>
+                    <div>
+                      <h4 className="font-display text-3xl font-bold leading-none tracking-tight text-white">
+                        Holo foil
+                      </h4>
+                      <p className="mt-2 max-w-[26ch] text-sm leading-relaxed text-white/60">
+                        A rainbow laminate and a field of glitter, both pure CSS, both chasing your pointer.
+                      </p>
+                    </div>
+                  </div>
+                </HoloCard>
+                <HoloCard className="h-full" intensity={0.7}>
+                  <div className="flex h-full flex-col justify-between gap-10 p-7">
+                    <div className="flex items-start justify-between">
+                      <span className="text-[10px] font-semibold uppercase tracking-[0.3em] text-white/70">
+                        Dialled back
+                      </span>
+                      <span aria-hidden className="text-sm leading-none text-white/35">
+                        0.7&times;
+                      </span>
+                    </div>
+                    <div>
+                      <h4 className="font-display text-3xl font-bold leading-none tracking-tight text-white">
+                        Subtle finish
+                      </h4>
+                      <p className="mt-2 max-w-[26ch] text-sm leading-relaxed text-white/60">
+                        The same foil at lower intensity &mdash; a whisper of sheen for a quieter surface.
+                      </p>
+                    </div>
+                  </div>
+                </HoloCard>
+              </div>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Holo card</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The holographic finish of a collectible card, rebuilt by hand &mdash; and the deliberate
+                opposite of the three cards above it. The tilt card rotates a plane toward you, the parallax
+                card stages a scene and tilts the lot, the wobble card leans and squishes; all three answer
+                the pointer by moving the card. This one barely moves &mdash; a few degrees of tilt is only
+                the vehicle. What answers you is the foil: a band of rainbow interference and a field of
+                glitter that live inside the surface and shift hue and position with the viewing angle, the
+                way a foil-stamped card throws a different rainbow at every tilt. Three stacked layers do it
+                &mdash; a smooth holo band blended with color-dodge, the same rainbow seen through a fine dot
+                mask so it breaks into thousands of sparkles travelling against the band, and a soft glare
+                riding the pointer &mdash; all pure CSS gradients on a handful of springs, nothing on a
+                canvas. Left alone the foil drifts in a slow ellipse so the rainbow is never dead before you
+                touch it. The content is real and untouched; every foil layer is decorative and hidden.
+                Reduced motion never wires the pointer or starts the drift &mdash; the card rests flat with
+                the foil parked at one fixed, fully visible angle, a still photograph of foil.
               </p>
             </div>
           </div>
