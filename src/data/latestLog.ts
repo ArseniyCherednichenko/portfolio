@@ -34,6 +34,11 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'Type carved into the surface, lit by your cursor',
+    summary: 'Letterpress — the one piece in the type family that does not move the letters at all, a still effect about depth rather than motion. Its neighbours each animate a string — the split-text lifts the glyphs into place, the shiny sweep runs a band of light through them, the decode resolves them out of noise — while this sets the word almost exactly the colour of the surface, so there is nothing to read in the fill. The whole of it is legible only from the lime caught on one bevelled edge and the black thrown on the other; that pair of offset shadow copies is the relief, and a light vector points from the word to the pointer and swings the lit and dark edges around it, so pointing at the word is like carrying a lamp past an engraving. Deboss presses the type into the surface and emboss raises it out — the same bevel with the two copies swapped, dark on the lit side for a groove, bright on it for a ridge. Left alone the light drifts in a slow circle so the relief is never dead. Honest and cheap: the real word is a normal selectable element a screen reader reads once, the bevel pure CSS text-shadow on two springs with nothing on a render path. Reduced motion never starts the drift or wires the pointer — the light rests at the upper-left and the word holds one still, fully legible relief.',
+    tag: 'Component',
+  },
+  {
     title: 'A card that leans and squishes toward your cursor',
     summary: 'Wobble card — the playful cousin of the tilt and parallax cards, and their deliberate opposite. Both of those answer the pointer by rotating a plane in 3D; this one never rotates and never leaves the flat. It leans — the whole body translates a few pixels toward the cursor on an under-damped spring, while the content inside trails a beat behind on a softer one. That gap between the body and its contents is the squish; the under-damped spring is the wobble, so letting go over-shoots home and settles like jelly rather than snapping. Built for a feature tile or a call-to-action you want springy under the hand: a cursor-tracked lime sheen eases in on hover, the moving layers are decorative, and the text stays real content, so a reader hears a plain card. Reduced motion never wires the pointer — the card rests flat with zero travel and keeps its own hover border.',
     tag: 'Component',
@@ -77,10 +82,5 @@ export const LATEST_LOG: LogHeadline[] = [
     title: "Every page's first load got lighter",
     summary: 'The command palette loads its big component catalogue on demand now, so the initial bundle fell from 522kB to 199kB on every route — the first paint finally as lean as the site has always claimed.',
     tag: 'Infra',
-  },
-  {
-    title: 'Frost that grows on its own, reaching for your pointer',
-    summary: 'DLA — diffusion-limited aggregation, the way frost grows on a cold window and a dendrite crystallises in rock, and the emergence cousin of the Slime mould next door. Plant one frozen seed, then release particles far off that wander at random until they touch the cluster and freeze exactly where they stick. Repeat, and what assembles is not a blob but a branching, self-similar coral: the arms that reach out catch wandering walkers first and so grow faster, starving the hollows behind them — the fractal is pure consequence of the rule, nothing drawn by hand. Each cell is coloured as it freezes by its distance from the core, a cool teal heart out to bright lime tips, and drawn once so a frame costs only the new cells; walkers spawn on a ring and are recycled if they stray, keeping the walk cheap as it grows. The pointer is a cold draft the frost drifts toward; a press plants a competing nucleus. Reduced motion grows a whole cluster in one pass and holds it still.',
-    tag: 'Component',
   },
 ]
