@@ -40,15 +40,26 @@ import {
 // drift never starts and the pointer is never wired — the light rests fixed at
 // the upper-left and the word holds one still, fully legible relief.
 
-const LIGHT = 'rgba(220,248,124,0.55)' // the lime catching the lit bevel
-const SHADOW = 'rgba(0,0,0,0.78)' // the shadow thrown on the dark bevel
-const DEPTH = 2.6 // px the bevel copies are offset — the apparent relief depth
+const LIGHT = 'rgba(220,248,124,0.85)' // the lime catching the lit bevel edge
+const SHADOW = 'rgba(0,0,0,0.95)' // the dark cast on the shadowed bevel
+const DEPTH = 2.2 // px the bevel copies are offset — the apparent relief depth
 const IDLE_SPEED = 0.35 // rad/s the resting light drifts around the word
+
+// The fill is painted OPAQUE and almost exactly the surface tone, which is what
+// makes this read as letterpress rather than coloured type: text-shadow renders
+// behind the glyph, so an opaque fill hides the overlapping bevel copies and
+// leaves each one showing only as a thin crescent on its offset edge. A near-
+// invisible fill would instead let the lime copy flood through the whole letter.
+// Deboss sits a hair darker than the surface (recessed), emboss a hair lighter
+// (proud); callers on a different surface pass `surface` to match it.
+const FILL_DEBOSS = '#0b0b0c'
+const FILL_EMBOSS = '#19191b'
 
 export function Letterpress({
   text,
   as = 'span',
   mode = 'deboss',
+  fill,
   className = '',
 }: {
   text: string
@@ -56,6 +67,9 @@ export function Letterpress({
   as?: ElementType
   /** 'deboss' presses the type into the surface; 'emboss' raises it out. */
   mode?: 'deboss' | 'emboss'
+  /** Opaque glyph fill — set to the host surface's own colour so the type reads
+   * as carved into it. Defaults suit the site's near-black card surface. */
+  fill?: string
   className?: string
 }) {
   const ref = useRef<HTMLElement>(null)
@@ -81,7 +95,9 @@ export function Letterpress({
   const darkX = mode === 'emboss' ? awX : towX
   const darkY = mode === 'emboss' ? awY : towY
 
-  const textShadow = useMotionTemplate`${liteX} ${liteY} 0.6px ${LIGHT}, ${darkX} ${darkY} 0.6px ${SHADOW}`
+  // The lit edge is a tight lime rim; the shadow is a slightly larger, softer
+  // cast that gives the groove or ridge its depth. Both offsets track the pointer.
+  const textShadow = useMotionTemplate`${liteX} ${liteY} 0.3px ${LIGHT}, ${darkX} ${darkY} 2.6px ${SHADOW}`
 
   // Idle drift: while nothing is pointing at the word, carry the light slowly
   // around it so the relief keeps breathing. Paused on hover, off under reduced
@@ -132,7 +148,7 @@ export function Letterpress({
       onPointerLeave={reduce ? undefined : onLeave}
       // The fill sits just off the surface tone so the glyph nearly vanishes and
       // the bevel does the reading — the essence of the letterpress look.
-      style={{ textShadow, color: mode === 'emboss' ? 'rgba(255,255,255,0.16)' : 'rgba(255,255,255,0.08)' }}
+      style={{ textShadow, color: fill ?? (mode === 'emboss' ? FILL_EMBOSS : FILL_DEBOSS) }}
       className={className}
     >
       {text}
