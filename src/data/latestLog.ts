@@ -34,6 +34,11 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'A card finished in holographic foil',
+    summary: 'Holo card — the holographic finish of a collectible trading card, and the deliberate opposite of the tilt, parallax and wobble cards beside it. All three of those answer the pointer by moving the card; this one barely moves. A few degrees of tilt is only the vehicle — what answers you is the foil: a band of rainbow interference and a field of glitter that live inside the surface and shift hue and position with the viewing angle, the way a foil-stamped card throws a different rainbow at every tilt. No other card in the family has anything living in its surface; here the surface is the effect. Three stacked layers do it — a smooth holo band blended with color-dodge, the same rainbow seen through a fine dot mask so it breaks into thousands of sparkles that travel the opposite way to the band (the counter-parallax the eye reads as depth), and a soft glare with a lime kiss of the accent riding the pointer. All pure CSS gradients on a handful of springs, nothing on a canvas; left alone the foil drifts in a slow ellipse so the rainbow is never dead. The children are the real, untouched content a screen reader reads once; every foil layer is decorative and hidden. An intensity prop scales the foil and the tilt for a louder or quieter surface. Reduced motion never starts the drift or wires the pointer — the card rests flat with the foil parked at one fixed, fully visible angle, a still photograph of foil.',
+    tag: 'Component',
+  },
+  {
     title: 'Type carved into the surface, lit by your cursor',
     summary: 'Letterpress — the one piece in the type family that does not move the letters at all, a still effect about depth rather than motion. Its neighbours each animate a string — the split-text lifts the glyphs into place, the shiny sweep runs a band of light through them, the decode resolves them out of noise — while this sets the word almost exactly the colour of the surface, so there is nothing to read in the fill. The whole of it is legible only from the lime caught on one bevelled edge and the black thrown on the other; that pair of offset shadow copies is the relief, and a light vector points from the word to the pointer and swings the lit and dark edges around it, so pointing at the word is like carrying a lamp past an engraving. Deboss presses the type into the surface and emboss raises it out — the same bevel with the two copies swapped, dark on the lit side for a groove, bright on it for a ridge. Left alone the light drifts in a slow circle so the relief is never dead. Honest and cheap: the real word is a normal selectable element a screen reader reads once, the bevel pure CSS text-shadow on two springs with nothing on a render path. Reduced motion never starts the drift or wires the pointer — the light rests at the upper-left and the word holds one still, fully legible relief.',
     tag: 'Component',
@@ -77,10 +82,5 @@ export const LATEST_LOG: LogHeadline[] = [
     title: 'A label gun that embosses tape as you type',
     summary: 'Label maker — the Dymo embossing gun, and the tactile cousin of the braille line beside it in the display thread: where that raises round pins read by touch, this punches raised letters into a strip of coloured plastic tape. The honest tell is the emboss — a real Dymo letter comes out lighter than its tape, because the die stretches the pigment film as it raises the glyph, so every character is a light ink lit along its top edge and shadowed below, reading as pushed up out of the strip rather than printed onto it. The motion is the gun doing its work: only the letters that actually changed stamp in, a quick drop-and-punch rippling left to right across the new tail, so typing appends one fresh letter rather than re-punching the whole strip. Pure DOM and CSS, no canvas; the strip is one role=img carrying the text as its label, so a reader hears the word, not the tape, and four classic tape colours swap underneath. Reduced motion shows the finished label, every letter already raised.',
     tag: 'Component',
-  },
-  {
-    title: "Every page's first load got lighter",
-    summary: 'The command palette loads its big component catalogue on demand now, so the initial bundle fell from 522kB to 199kB on every route — the first paint finally as lean as the site has always claimed.',
-    tag: 'Infra',
   },
 ]
