@@ -269,6 +269,7 @@ import { PinScreen } from '../components/PinScreen'
 import { Confetti, type ConfettiHandle } from '../components/Confetti'
 import { Chladni } from '../components/Chladni'
 import { Galton } from '../components/Galton'
+import { BuffonNeedle } from '../components/BuffonNeedle'
 import { RippleTank } from '../components/RippleTank'
 import { Life } from '../components/Life'
 import { Sandbox } from '../components/Sandbox'
@@ -12341,6 +12342,41 @@ export default function Playground() {
                 wherever you touch, so you can aim the beads and skew the pile, then release and watch the centre pull it
                 back. When a column fills, the board sweeps clean and starts the curve over. Reduced motion fills the bins
                 to the exact binomial silhouette and holds it.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH BUFFON'S NEEDLE — chance that computes a number, beside the one that builds a shape */}
+        <Reveal>
+          <div id="buffon-needle" data-experiment="Buffon's needle" className="mt-12 scroll-mt-32">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-[#040404]">
+              <div className="pointer-events-none absolute inset-x-0 top-8 z-10 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Estimate</span>
+                <p className="mx-auto mt-3 max-w-md px-6 text-lg font-medium text-white/90 sm:text-xl">
+                  Drop needles on a ruled floor. The fraction that cross a line is pi, found by chance.
+                </p>
+              </div>
+              <BuffonNeedle className="h-[520px] w-full" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Buffon's needle</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The Galton board above lets a shape fall out of chance — a whole bell curve, built from coin-flips. This
+                is its sharper cousin: it lets a single number fall out of chance, and that number is pi. Georges-Louis
+                Leclerc, Comte de Buffon, asked it in 1733: rule a floor with parallel lines exactly one needle-length
+                apart, drop needles on it at random, and what fraction come to rest crossing a line? The answer is
+                2L / (pi·t), so the crossings are quietly counting pi, and counting them back hands the constant to you
+                with no circle drawn anywhere. The maths here is exact and only the drawing is tuned: a needle of length
+                L whose centre lands a distance d from the nearest line, lying at angle theta, crosses exactly when
+                (L/2)·|sin theta| is at least d, and with the lines a needle-length apart it can straddle at most one, so
+                the estimate is just two times the needle count over the crossing count. Crossing needles land in the
+                accent and misses in cool grey, piling onto a floor that is never wiped, so a frame costs only the few
+                fresh matchsticks — and the estimate up top crawls toward 3.14159, noisy at first, earning each digit as
+                the law of large numbers does its slow work. No Math.random on the hot path: the drops are a seeded
+                pseudo-random stream, so the same experiment runs identically every load. Press the floor or tap Rain to
+                pour a burst and hurry the digits in; Reset reseeds a fresh run. Reduced motion drops one bounded batch
+                at once and holds the floor and the number still.
               </p>
             </div>
           </div>
