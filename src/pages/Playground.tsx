@@ -272,6 +272,7 @@ import { Chladni } from '../components/Chladni'
 import { Galton } from '../components/Galton'
 import { BuffonNeedle } from '../components/BuffonNeedle'
 import { RippleTank } from '../components/RippleTank'
+import { RainGlass } from '../components/RainGlass'
 import { Life } from '../components/Life'
 import { Sandbox } from '../components/Sandbox'
 import { Bezier } from '../components/Bezier'
@@ -7867,6 +7868,40 @@ export default function Playground() {
                 into lime caustics — painted to a grid-sized buffer and smoothed up to full width, so the hot loop
                 touches about ten thousand cells, not a million pixels. No wall clock and no per-frame randomness, so it
                 is stable across resizes; reduced motion steps a few drops to a frozen lattice and paints it once.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH RAIN ON GLASS — condensation over a blurred night city, cleared by sliding drops and the pointer */}
+        <Reveal>
+          <div id="rain-glass" data-experiment="Rain on glass" className="mt-12 scroll-mt-32">
+            <div className="relative h-[460px] overflow-hidden rounded-3xl border border-white/10 bg-[#04060c]">
+              <RainGlass className="absolute inset-0" />
+              <div className="pointer-events-none absolute inset-x-0 top-8 z-10 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Rain on glass</span>
+                <p className="mx-auto mt-3 max-w-md px-6 text-lg font-medium text-white/90 sm:text-xl">
+                  The city is behind the fog. Drag to clear a view, or wait for a drop to run.
+                </p>
+              </div>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Rain on glass</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The water the family had not shown: not the ripple tank's surface waves or the fluid sim's dye, but
+                condensation held by surface tension against a vertical pane, where the whole subject is the glass and the
+                backdrop — a blurred, out-of-focus night city — is deliberately never in focus. The only way to see it
+                sharply is to clear the mist. A greyscale fog mask holds where the pane is clear; it is faded a hair back
+                toward fogged every frame, so the glass is a living equilibrium that slowly re-mists after you wipe it and
+                a drop's streak heals over behind it, rather than a one-way erase. Tiny beads nucleate across the cold
+                pane and grow; when one grows past the point where gravity beats surface tension it breaks free and runs,
+                accelerating down, cutting a cleared trail and absorbing every smaller bead it rolls over — radii adding
+                in quadrature, so a fat drop is visibly the sum of what it swept up. Each frame composites three layers:
+                the fogged pane, the sharp city shown through the mask, and the beads drawn as little lenses with a
+                contact shadow and a specular catch, each clearing its own patch of fog beneath it. The pointer is a warm
+                palm: drag it to clear a wide swath and push the small beads aside. One canvas, offscreen buffers in
+                device pixels so the composite stays crisp, no wall clock. Under reduced motion nothing runs — a single
+                still frame of settled beads and a couple of healed trails, the city showing through them.
               </p>
             </div>
           </div>
