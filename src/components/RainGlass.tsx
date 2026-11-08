@@ -206,6 +206,7 @@ export function RainGlass({
 
     // Clear a soft disc of fog into the mask (opaque = cleared).
     function clearDisc(x: number, y: number, r: number, strength: number) {
+      if (r <= 0) return
       const g = mctx.createRadialGradient(x, y, 0, x, y, r)
       g.addColorStop(0, `rgba(255,255,255,${strength})`)
       g.addColorStop(0.7, `rgba(255,255,255,${strength * 0.7})`)
@@ -219,6 +220,7 @@ export function RainGlass({
     // Draw one bead as a little lens onto the main canvas.
     function drawBead(b: Bead) {
       const r = b.r
+      if (r <= 0) return
       // contact shadow, offset down-right
       ctx!.fillStyle = 'rgba(0,0,0,0.28)'
       ctx!.beginPath()
@@ -303,6 +305,7 @@ export function RainGlass({
       const run = RUN()
       const next: Bead[] = []
       for (const b of beads) {
+        if (b.r <= 0) continue // already absorbed by a running drop this frame
         if (!b.sliding) {
           // slow growth; a few beads tip over into running
           if (rng() < 0.03) b.r += R0() * (0.4 + rng() * 0.8)
@@ -420,7 +423,7 @@ export function RainGlass({
   }, [reduce, accent])
 
   return (
-    <div className={`relative overflow-hidden ${className}`}>
+    <div className={`relative h-full w-full overflow-hidden ${className}`}>
       <canvas
         ref={ref}
         aria-hidden

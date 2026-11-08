@@ -7877,7 +7877,7 @@ export default function Playground() {
         <Reveal>
           <div id="rain-glass" data-experiment="Rain on glass" className="mt-12 scroll-mt-32">
             <div className="relative h-[460px] overflow-hidden rounded-3xl border border-white/10 bg-[#04060c]">
-              <RainGlass className="absolute inset-0" />
+              <RainGlass />
               <div className="pointer-events-none absolute inset-x-0 top-8 z-10 text-center">
                 <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Rain on glass</span>
                 <p className="mx-auto mt-3 max-w-md px-6 text-lg font-medium text-white/90 sm:text-xl">
