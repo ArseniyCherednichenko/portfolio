@@ -2,7 +2,6 @@ import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import {
   useCallback,
   useEffect,
-  useLayoutEffect,
   useRef,
   useState,
   type KeyboardEvent as ReactKeyboardEvent,
@@ -107,8 +106,23 @@ export function MorphMenu({
 
   const wrapRef = useRef<HTMLDivElement>(null)
   const triggerRef = useRef<HTMLButtonElement>(null)
-  const panelRef = useRef<HTMLDivElement>(null)
   const itemRefs = useRef<(HTMLElement | null)[]>([])
+  const roRef = useRef<ResizeObserver | null>(null)
+
+  // A callback ref on each panel's content: it fires the moment that panel's
+  // node mounts (reliable where a ref threaded through AnimatePresence is not),
+  // so the card's height is driven to the new panel the instant it appears, and
+  // a ResizeObserver keeps it honest if the panel's own content later resizes.
+  const measurePanel = useCallback((node: HTMLDivElement | null) => {
+    if (!node) return
+    setHeight(node.offsetHeight)
+    roRef.current?.disconnect()
+    const ro = new ResizeObserver(() => setHeight(node.offsetHeight))
+    ro.observe(node)
+    roRef.current = ro
+  }, [])
+
+  useEffect(() => () => roRef.current?.disconnect(), [])
 
   const close = useCallback(() => {
     setOpen(false)
@@ -125,19 +139,6 @@ export function MorphMenu({
       setActiveIndex(0)
     }
   }, [open, rootPanelId])
-
-  // Measure the active panel and drive the card's height to it. A
-  // ResizeObserver keeps it honest if the panel's own content changes size.
-  useLayoutEffect(() => {
-    if (!open) return
-    const el = panelRef.current
-    if (!el) return
-    const apply = () => setHeight(el.offsetHeight)
-    apply()
-    const ro = new ResizeObserver(apply)
-    ro.observe(el)
-    return () => ro.disconnect()
-  }, [open, activeId])
 
   // Move roving focus onto the first row whenever the active panel changes.
   useEffect(() => {
@@ -299,7 +300,6 @@ export function MorphMenu({
               <AnimatePresence initial={false} custom={dir} mode="popLayout">
                 <motion.div
                   key={activeId}
-                  ref={panelRef}
                   custom={dir}
                   role="menu"
                   aria-label={title ?? (typeof trigger === 'string' ? trigger : 'Menu')}
@@ -309,8 +309,9 @@ export function MorphMenu({
                   animate={reduce ? { opacity: 1 } : { opacity: 1, x: 0 }}
                   exit={reduce ? { opacity: 0 } : { opacity: 0, x: dir * -26 }}
                   transition={reduce ? { duration: 0.1 } : { duration: 0.26, ease: EASE }}
-                  className="absolute inset-x-0 top-0 p-1.5"
+                  className="w-full"
                 >
+                  <div ref={measurePanel} className="p-1.5">
                   {title && (
                     <div className="flex items-center gap-1 px-1 pb-1.5 pt-1">
                       {!atRoot && (
@@ -396,6 +397,7 @@ export function MorphMenu({
                       )
                     })}
                   </ul>
+                  </div>
                 </motion.div>
               </AnimatePresence>
             </motion.div>
