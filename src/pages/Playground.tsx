@@ -164,6 +164,7 @@ import { Drawer } from '../components/Drawer'
 import { Tooltip } from '../components/Tooltip'
 import { Popover } from '../components/Popover'
 import { ContextMenu, type ContextMenuItem } from '../components/ContextMenu'
+import { MorphMenu, type MorphMenuPanel } from '../components/MorphMenu'
 import { useToast } from '../components/Toast'
 import { Stepper, type StepperStep } from '../components/Stepper'
 import { Dock, type DockItem } from '../components/Dock'
@@ -3980,6 +3981,61 @@ function ContextMenuDemo() {
       </ContextMenu>
     </div>
   )
+}
+
+// A MorphMenu demo — a settings menu deep enough to show the morph. The root is
+// short; "Appearance" and "Notifications" open taller sub-panels, so descending
+// and climbing back each spring the card's height while the panels cross-slide.
+// A live "current value" hint on the Appearance row updates as you pick a theme,
+// which also exercises the ResizeObserver path (the row text changes width, the
+// panel re-measures). The chosen values live in local state so the demo feels
+// real; nothing here leaves the page.
+function MorphMenuDemo() {
+  const [theme, setTheme] = useState<'System' | 'Dark' | 'Light'>('System')
+  const [density, setDensity] = useState<'Cosy' | 'Compact'>('Cosy')
+  const [digest, setDigest] = useState<'Off' | 'Daily' | 'Weekly'>('Daily')
+
+  const panels: MorphMenuPanel[] = [
+    {
+      id: 'root',
+      items: [
+        { id: 'appearance', label: 'Appearance', hint: theme, panel: 'appearance' },
+        { id: 'notifications', label: 'Notifications', hint: digest, panel: 'notifications' },
+        { id: 'library', label: 'Open the library', to: '/library' },
+        { id: 'repo', label: 'View the source', href: 'https://github.com/ArseniyCherednichenko/portfolio' },
+        { id: 'reset', label: 'Reset preferences', danger: true, onSelect: () => { setTheme('System'); setDensity('Cosy'); setDigest('Daily') } },
+      ],
+    },
+    {
+      id: 'appearance',
+      title: 'Appearance',
+      items: [
+        { id: 't-system', label: 'System', hint: theme === 'System' ? 'On' : undefined, onSelect: () => setTheme('System'), closeOnSelect: false },
+        { id: 't-dark', label: 'Dark', hint: theme === 'Dark' ? 'On' : undefined, onSelect: () => setTheme('Dark'), closeOnSelect: false },
+        { id: 't-light', label: 'Light', hint: theme === 'Light' ? 'On' : undefined, onSelect: () => setTheme('Light'), closeOnSelect: false },
+        { id: 'density', label: 'Density', hint: density, panel: 'density' },
+      ],
+    },
+    {
+      id: 'density',
+      title: 'Density',
+      items: [
+        { id: 'd-cosy', label: 'Cosy', hint: density === 'Cosy' ? 'On' : undefined, onSelect: () => setDensity('Cosy'), closeOnSelect: false },
+        { id: 'd-compact', label: 'Compact', hint: density === 'Compact' ? 'On' : undefined, onSelect: () => setDensity('Compact'), closeOnSelect: false },
+      ],
+    },
+    {
+      id: 'notifications',
+      title: 'Notifications',
+      items: [
+        { id: 'n-off', label: 'Off', hint: digest === 'Off' ? 'On' : undefined, onSelect: () => setDigest('Off'), closeOnSelect: false },
+        { id: 'n-daily', label: 'Daily digest', hint: digest === 'Daily' ? 'On' : undefined, onSelect: () => setDigest('Daily'), closeOnSelect: false },
+        { id: 'n-weekly', label: 'Weekly digest', hint: digest === 'Weekly' ? 'On' : undefined, onSelect: () => setDigest('Weekly'), closeOnSelect: false },
+      ],
+    },
+  ]
+
+  return <MorphMenu trigger="Preferences" panels={panels} width={272} />
 }
 
 // A masonry "wall" of honest tiles — the site's own making-by-hand ethos and a
@@ -14032,6 +14088,41 @@ export default function Playground() {
                 Enter to walk the steps, a progress rail of dots, and focus handed back to where you began. The whole
                 surface blocks page interaction while open, so the only way through is the card. Under reduced motion
                 the spotlight jumps rather than glides and the card simply fades.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH MORPH MENU */}
+        <Reveal>
+          <div id="morph-menu" data-experiment="Morph menu" className="mt-12 scroll-mt-32">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 py-14 sm:px-10">
+              <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Descend</span>
+              <p className="mt-3 max-w-md text-lg font-medium text-white/85 sm:text-xl">
+                A menu that changes shape. Step into a sub-panel and the card does not swap or stack — it springs its
+                height to the new panel while the two slide past each other, one object morphing rather than two screens
+                cutting.
+              </p>
+              <div className="mt-10 flex min-h-[320px] justify-center">
+                <MorphMenuDemo />
+              </div>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Morph menu</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The Overlays family's morphing menu, and the deliberate opposite of the Popover beside it: where the
+                popover anchors one fixed panel and the context menu opens one flat list, this holds a stack of panels
+                and makes moving between them the whole show. Pick a row that owns a sub-panel and the container springs
+                its height from the old panel's to the new one's while the outgoing panel slides off one way and the
+                incoming slides in from the other — the dynamic-island / &ldquo;Family drawer&rdquo; idea, content-driven
+                size made animate, applied to an ordinary settings menu. The height is measured off the DOM and watched
+                by a ResizeObserver, so a panel whose own content changes size (the live &ldquo;current value&rdquo; hint
+                on a row) still fits. It is a real menu underneath: aria-haspopup and aria-expanded on the trigger, a
+                labelled role=menu of menuitem rows, a single roving tabindex the arrows walk (Home and End to the ends),
+                ArrowRight or Enter to descend and ArrowLeft or Backspace to climb back, Enter or Space to fire, Escape or
+                an outside click to close with focus handed back to the trigger. Rows can be internal links, external
+                anchors, or callbacks, and one can be tinted for a destructive action. Under reduced motion the morph and
+                the slide drop for a clean cross-cut, every control intact.
               </p>
             </div>
           </div>
