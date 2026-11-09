@@ -476,6 +476,7 @@ import { Slime } from '../components/Slime'
 import { Fluid } from '../components/Fluid'
 import { DoublePendulum } from '../components/DoublePendulum'
 import { MagneticPendulum } from '../components/MagneticPendulum'
+import { EulerDisk } from '../components/EulerDisk'
 import { GO_TARGETS, useShortcuts } from '../components/Keyboard'
 import { Seo } from '../components/Seo'
 import { GITHUB_URL } from '../data/contact'
@@ -12674,6 +12675,46 @@ export default function Playground() {
                 it, so the colour tells you where it is being pulled before the capture is decided. Press anywhere to drop
                 the bob there at rest and hunt for the hairline borders. Reduced motion integrates one run to its resting
                 place and lays the settled spiral down still.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH EULER'S DISK */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-[#040404]">
+              <div className="pointer-events-none absolute inset-x-0 top-8 z-10 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Singularity</span>
+                <p className="mx-auto mt-3 max-w-md px-6 text-lg font-medium text-white/90 sm:text-xl">
+                  It spins slower as the roll races faster. Press anywhere to set a fresh coin going.
+                </p>
+              </div>
+              <EulerDisk className="h-[520px] w-full" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Euler's disk</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The two pendulums beside it are chaos — outcomes you cannot predict. This is the opposite kind of
+                strangeness: a coin settling on a table, utterly predictable, that still does something your intuition
+                refuses. Spin a coin on its edge and as it loses energy it leans flatter and flatter, yet the point where
+                its rim meets the table races around faster and faster, the hum rising to a whirr, until in one last blur
+                it slaps flat and stops dead. The spin winds down to nothing while the roll runs away toward infinity.
+                That is the real toy sold as "Euler's disk", and the maths behind the rush is genuinely delicate: the
+                disk is a circle tilted from the table by an angle, its centre riding at height R·sin(angle) and its
+                contact point the lowest point of the rim; as the lean bleeds toward zero the contact precesses at a rate
+                the physics sends to infinity, growing like one over the square root of the angle. So two clocks run at
+                once and in opposite directions — the lean decaying to flat, and the precession it drives climbing
+                without bound — and this piece integrates both honestly: the lean follows da/dt proportional to minus one
+                over the square root of the angle, a collapse that is slow while the coin stands and suddenly very fast as
+                it goes flat, and the bright contact bead advances at a rate proportional to one over that same square
+                root, so the instant the coin visibly flattens is the instant the bead blurs into a ring. It is drawn in
+                true perspective, not a faked ellipse: the outline is a real circle of rim points leaning in 3-D and
+                projected through one camera pitched down over the table, the coin has a milled metal edge and a brushed
+                face with a specular glint, and it throws a contact shadow that spreads as it lies down. A fixed timestep,
+                so it reads the same on any monitor, and a seeded release sequence, so the same coins spin the same way
+                every load and nothing on the hot path touches Math.random. Press anywhere to release a fresh spin.
+                Reduced motion lays one coin down mid-lean, still, with a faint hint of the ring, and holds it.
               </p>
             </div>
           </div>
