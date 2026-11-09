@@ -12,8 +12,8 @@ import { AnimatePresence, motion, useMotionValue, useSpring, useReducedMotion } 
 // click will do before the click. The label trails the ring at a lower spring
 // tension than the dot, so it settles a beat behind the pointer like a caption
 // catching up. It is the premium, Vercel/Linear-style touch that ties the whole
-// site's interactions together; empty `data-cursor` still marks a thing as
-// interactive (the ring grows) without a caption, exactly as before.
+// site's interactions together; a bare `data-cursor` (no value) still marks a
+// thing as interactive (the ring grows) without a caption, exactly as before.
 
 const RING = 30 // base ring diameter (px)
 const DOT = 6 // dot diameter (px)
@@ -66,11 +66,14 @@ export function Cursor() {
     const onOver = (e: MouseEvent) => {
       const el = e.target as Element | null
       setHovering(!!el?.closest?.(INTERACTIVE))
-      // Read the caption from the nearest declaring ancestor. A present-but-
-      // empty value marks interactivity without a word, so it collapses to null.
+      // Read the caption from the nearest declaring ancestor. A bare `data-cursor`
+      // (used widely as a plain interactivity marker) serializes to the string
+      // "true", and an empty value says nothing either — both mark the thing as
+      // interactive without a caption, so they collapse to null and only a real
+      // word paints a label.
       const labelled = el?.closest?.(LABELLED) as HTMLElement | null
       const raw = labelled?.getAttribute('data-cursor')?.trim()
-      setLabel(raw ? raw : null)
+      setLabel(raw && raw !== 'true' && raw !== 'false' ? raw : null)
     }
     const onDown = () => setPressed(true)
     const onUp = () => setPressed(false)
