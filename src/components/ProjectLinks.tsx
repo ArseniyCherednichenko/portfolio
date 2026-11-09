@@ -53,6 +53,7 @@ export function ProjectLinks({
         >
           <Link
             to={`/work/${p.slug}`}
+            data-cursor="Read"
             style={{ ['--accent' as string]: accent }}
             className="group inline-flex items-center gap-2.5 rounded-full border border-white/12 bg-white/[0.03] py-2 pl-3 pr-4 text-sm font-medium text-white/70 transition-all duration-300 hover:-translate-y-0.5 hover:border-[var(--accent)]/50 hover:bg-white/[0.06] hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]/60 focus-visible:ring-offset-2 focus-visible:ring-offset-black motion-reduce:transform-none motion-reduce:transition-colors"
           >

@@ -108,6 +108,7 @@ export function ProjectQuickLook({
                 href={p.href}
                 target="_blank"
                 rel="noreferrer"
+                data-cursor="Open"
                 className="text-sm font-semibold text-white/60 transition-colors hover:text-white"
               >
                 Visit live
@@ -118,6 +119,7 @@ export function ProjectQuickLook({
                 href={p.repo}
                 target="_blank"
                 rel="noreferrer"
+                data-cursor="Open"
                 className="text-sm font-semibold text-white/60 transition-colors hover:text-white"
               >
                 View source

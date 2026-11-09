@@ -87,6 +87,7 @@ function ProjectCard({
         type="button"
         onClick={() => onQuickLook(project)}
         aria-label={`Quick look at ${project.title}`}
+        data-cursor="Preview"
         className="relative block w-full overflow-hidden focus:outline-none focus-visible:ring-2 focus-visible:ring-[#DCF87C]/60 focus-visible:ring-inset"
       >
         <ProjectPoster
@@ -145,6 +146,7 @@ function ProjectCard({
           </button>
           <Link
             to={`/work/${project.slug}`}
+            data-cursor="Read"
             className="inline-flex items-center gap-2 text-sm font-semibold text-[#DCF87C] transition-opacity hover:opacity-80"
           >
             Case study
