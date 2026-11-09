@@ -291,6 +291,7 @@ import { StickerPeel } from '../components/StickerPeel'
 import { ParallaxCard, ParallaxLayer } from '../components/ParallaxCard'
 import { WobbleCard } from '../components/WobbleCard'
 import { HoloCard } from '../components/HoloCard'
+import { GlowCard } from '../components/GlowCard'
 import { FanDeck, type FanCard } from '../components/FanDeck'
 import { ExpandingPanels, type Panel } from '../components/ExpandingPanels'
 import { Flipbook } from '../components/Flipbook'
@@ -458,6 +459,13 @@ const FAN_CARDS: FanCard[] = [
   { tag: 'Type', title: 'An editorial voice', body: 'Fraunces and Inter, set by hand, so the page reads like a page.' },
   { tag: 'Range', title: 'Across the stack', body: 'Web, native, the data underneath, and AI woven into real products.' },
   { tag: 'Open', title: 'Built in the open', body: 'The site grows most days, one commit at a time, all of it on GitHub.' },
+]
+
+const GLOW_CARDS: ReadonlyArray<{ tag: string; title: string; body: string }> = [
+  { tag: 'Frontend', title: 'The surface', body: 'React and strict TypeScript, the layer people actually touch.' },
+  { tag: 'Native', title: 'On the phone', body: 'SwiftUI, learned the slow way, so an app feels at home there.' },
+  { tag: 'Backend', title: 'Underneath', body: 'The data layer that keeps web and native telling one story.' },
+  { tag: 'Motion', title: 'How it feels', body: 'Every animation here written by hand, and reduced-motion aware.' },
 ]
 import { StringPluck } from '../components/StringPluck'
 import { Cyclic } from '../components/Cyclic'
@@ -6226,6 +6234,59 @@ export default function Playground() {
                 touch it. The content is real and untouched; every foil layer is decorative and hidden.
                 Reduced motion never wires the pointer or starts the drift &mdash; the card rests flat with
                 the foil parked at one fixed, fully visible angle, a still photograph of foil.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        <Reveal>
+          <div id="glow-card" data-experiment="Glow card" className="mt-12 scroll-mt-32">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 py-12 sm:px-10">
+              <div className="mb-10 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Proximity</span>
+                <p className="mx-auto mt-3 max-w-md text-lg font-medium text-white/85 sm:text-xl">
+                  Sweep the cursor across the grid &mdash; without hovering any one card. The edge of
+                  each card facing the pointer lights, and the glow crosses the gutters as it passes.
+                </p>
+              </div>
+              <div className="mx-auto grid w-full max-w-2xl gap-5 sm:grid-cols-2">
+                {GLOW_CARDS.map((card) => (
+                  <GlowCard key={card.title} className="h-full">
+                    <div className="flex h-full flex-col justify-between gap-8 p-7">
+                      <span className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#DCF87C]/80">
+                        {card.tag}
+                      </span>
+                      <div>
+                        <h4 className="font-display text-2xl font-bold leading-none tracking-tight text-white">
+                          {card.title}
+                        </h4>
+                        <p className="mt-2 max-w-[28ch] text-sm leading-relaxed text-white/60">
+                          {card.body}
+                        </p>
+                      </div>
+                    </div>
+                  </GlowCard>
+                ))}
+              </div>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Glow card</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The glowing border of 21st.dev and Aceternity, rebuilt by hand &mdash; and the deliberate
+                cursor-driven counterpart to the two border effects elsewhere in this library. The border
+                beam runs a comet around the ring on a timer and never sees the pointer; the electric border
+                jitters the whole frame on a timer too. This ring is handed to the cursor: a conic gradient
+                whose bright wedge always points at the pointer, so only the stretch of border nearest it
+                glows, at an intensity that ramps up as the cursor nears and drops off with distance. The
+                reason it comes alive as a grid rather than one card is two small honesties. Every card
+                tracks the one global pointer, so it never needs to be hovered &mdash; move through the gaps
+                between the cards and the edges facing you all light at once, like a torch passing framed
+                glass. And the lift is proximity, not a hover flag, so the glow slides across the gutters
+                instead of snapping on and off per card. It stays entirely on the frame &mdash; a crisp
+                masked ring over a thicker blurred bloom, no wash across the surface, which is what keeps it
+                a distinct piece next to the spotlight card rather than a restyle of it. Pure CSS gradients
+                on a couple of springs; nothing on a canvas. Reduced motion never wires the pointer: each
+                card rests with a calm, even, faint ring all the way round, framed but still.
               </p>
             </div>
           </div>
