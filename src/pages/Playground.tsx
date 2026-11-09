@@ -1683,6 +1683,49 @@ function ProgressDemo() {
 // to match, the lime arc animating to the new fraction and the figure retelling
 // it in the well. One control feeding one readout — the input and the dial are
 // two separate hand-built components wired together.
+// A discovery surface for the site-wide contextual cursor. The custom cursor
+// (components/Cursor.tsx) already runs on every page; what this demo adds is a
+// cluster of targets that each declare a different `data-cursor` caption, so
+// sweeping the pointer across them makes the floating label morph — Preview,
+// Open, Copy, Drag — the way a good interface tells your hand what a click will
+// do before it happens. The caption word is printed on each tile too, so the
+// point still lands on touch and under reduced motion, where the custom cursor
+// (and its caption) stay off and the native pointer is left untouched.
+const CURSOR_TARGETS: { cursor: string; title: string; sub: string }[] = [
+  { cursor: 'Preview', title: 'A card', sub: 'opens a quick look' },
+  { cursor: 'Open', title: 'A link out', sub: 'leaves for the web' },
+  { cursor: 'Copy', title: 'A value', sub: 'lands on the clipboard' },
+  { cursor: 'Drag', title: 'A handle', sub: 'picks up and moves' },
+]
+function ContextualCursorDemo() {
+  return (
+    <div className="flex w-full flex-col items-center gap-5">
+      <p className="max-w-md text-center text-sm leading-relaxed text-white/45">
+        The cursor reads each tile&rsquo;s intent and says it back. Sweep across
+        them and watch the caption change.
+      </p>
+      <div className="grid w-full max-w-md grid-cols-2 gap-3">
+        {CURSOR_TARGETS.map((t) => (
+          <div
+            key={t.cursor}
+            data-cursor={t.cursor}
+            tabIndex={0}
+            role="button"
+            className="group flex flex-col gap-1 rounded-2xl border border-white/10 bg-white/[0.02] p-4 transition-colors hover:border-[#DCF87C]/40 hover:bg-white/[0.04] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#DCF87C]/60"
+          >
+            <span className="font-display text-base font-semibold text-white/85">{t.title}</span>
+            <span className="text-xs leading-snug text-white/40">{t.sub}</span>
+            <span className="mt-2 inline-flex w-fit items-center gap-1.5 rounded-full bg-[#DCF87C]/12 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-[#DCF87C]">
+              <span aria-hidden className="h-1 w-1 rounded-full bg-[#DCF87C]" />
+              {t.cursor}
+            </span>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
 function GaugeDemo() {
   const [level, setLevel] = useState(68)
   return (
@@ -9084,6 +9127,15 @@ export default function Playground() {
               <MagneticButton href="#" className="rounded-full bg-[#DCF87C] px-8 py-4 text-lg font-semibold text-black">
                 Pull me
               </MagneticButton>
+            </Experiment>
+          </Reveal>
+
+          <Reveal>
+            <Experiment
+              name="Contextual cursor"
+              note="The site's own custom cursor, up close. A tight lime dot and a trailing ring run on every page, springing after the pointer at two tensions; over anything interactive the ring swells and fills. What this surface shows is the next layer: any element can hand the cursor a word through a data-cursor attribute, and that word rides in as a small pill a beat behind the ring on its own softer spring — Preview, Open, Copy, Drag — so the pointer narrates what a click will do before you take it, the way Linear and Vercel caption their affordances. One global pointer listener reads the nearest declaring ancestor, so it costs nothing per element. Pointer-and-motion only by design: touch devices and reduced-motion visitors keep the native cursor with no caption, which is why each tile prints its own word too."
+            >
+              <ContextualCursorDemo />
             </Experiment>
           </Reveal>
 
