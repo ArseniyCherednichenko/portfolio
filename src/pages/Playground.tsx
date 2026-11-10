@@ -292,6 +292,7 @@ import { ParallaxCard, ParallaxLayer } from '../components/ParallaxCard'
 import { WobbleCard } from '../components/WobbleCard'
 import { HoloCard } from '../components/HoloCard'
 import { GlowCard } from '../components/GlowCard'
+import { FocusCards, FocusCard } from '../components/FocusCards'
 import { FanDeck, type FanCard } from '../components/FanDeck'
 import { ExpandingPanels, type Panel } from '../components/ExpandingPanels'
 import { Flipbook } from '../components/Flipbook'
@@ -466,6 +467,17 @@ const GLOW_CARDS: ReadonlyArray<{ tag: string; title: string; body: string }> = 
   { tag: 'Native', title: 'On the phone', body: 'SwiftUI, learned the slow way, so an app feels at home there.' },
   { tag: 'Backend', title: 'Underneath', body: 'The data layer that keeps web and native telling one story.' },
   { tag: 'Motion', title: 'How it feels', body: 'Every animation here written by hand, and reduced-motion aware.' },
+]
+// A spread of the range, used so the focus-cards demo says something true while
+// it demonstrates the interaction — six honest facets of the work, no one of
+// them the whole story. Touching any one dims the rest, which is the point.
+const FOCUS_CARDS: ReadonlyArray<{ tag: string; title: string; body: string }> = [
+  { tag: 'Frontend', title: 'Interfaces', body: 'React and strict TypeScript, with motion that earns its place.' },
+  { tag: 'Native iOS', title: 'On the device', body: 'SwiftUI apps that behave like they belong on the phone.' },
+  { tag: 'Backend', title: 'The data layer', body: 'Supabase and the model underneath, keeping every client honest.' },
+  { tag: 'Applied AI', title: 'With the models', body: 'AI woven into real products, asking the right question of them.' },
+  { tag: 'Motion', title: 'The small moments', body: 'Timing, typography, the spacing between things. Hand-built.' },
+  { tag: 'Open source', title: 'In the open', body: 'This site itself, grown a coherent improvement at a time.' },
 ]
 import { StringPluck } from '../components/StringPluck'
 import { Cyclic } from '../components/Cyclic'
@@ -6330,6 +6342,57 @@ export default function Playground() {
                 a distinct piece next to the spotlight card rather than a restyle of it. Pure CSS gradients
                 on a couple of springs; nothing on a canvas. Reduced motion never wires the pointer: each
                 card rests with a calm, even, faint ring all the way round, framed but still.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        <Reveal>
+          <div id="focus-cards" data-experiment="Focus cards" className="mt-12 scroll-mt-32">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 py-12 sm:px-10">
+              <div className="mb-10 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Subtraction</span>
+                <p className="mx-auto mt-3 max-w-md text-lg font-medium text-white/85 sm:text-xl">
+                  Hover any card &mdash; or tab into one. It holds sharp while the rest
+                  blur, dim, and settle back. Attention by taking away, not adding.
+                </p>
+              </div>
+              <FocusCards className="mx-auto grid w-full max-w-3xl gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                {FOCUS_CARDS.map((card) => (
+                  <FocusCard key={card.title} className="h-full">
+                    <a
+                      href="/range"
+                      data-cursor="Read"
+                      className="flex h-full flex-col justify-between gap-6 rounded-[inherit] p-6 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#DCF87C]/60"
+                    >
+                      <span className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#DCF87C]/80">
+                        {card.tag}
+                      </span>
+                      <div>
+                        <h4 className="font-display text-xl font-bold leading-none tracking-tight text-white">
+                          {card.title}
+                        </h4>
+                        <p className="mt-2 text-sm leading-relaxed text-white/60">{card.body}</p>
+                      </div>
+                    </a>
+                  </FocusCard>
+                ))}
+              </FocusCards>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Focus cards</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The quiet opposite of the two cards above it. The spotlight card lights the one under
+                the cursor; the glow card hands its border to the pointer &mdash; both make the touched
+                card do <em>more</em>. This one makes everything else do <em>less</em>: the card you are
+                on holds still and sharp while its neighbours blur a touch, dim, and settle back a hair,
+                so attention is directed by subtraction rather than addition, the way a good page dims
+                what you are not reading. It coordinates without indices &mdash; every card mints a stable
+                id and the grid holds only which one is active, so a card is dimmed exactly when some
+                sibling is focused and it is not &mdash; and it answers the keyboard, not just the mouse:
+                tabbing a link into a card raises it the same way a hover does. Pure CSS transitions on
+                blur, opacity, and scale; nothing on a canvas. Reduced motion keeps the meaning and drops
+                the movement: the active card gains a calm ring and the rest are left untouched.
               </p>
             </div>
           </div>
