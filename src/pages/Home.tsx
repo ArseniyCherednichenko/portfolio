@@ -1,5 +1,5 @@
 import { motion, useReducedMotion } from 'framer-motion'
-import { useState } from 'react'
+import { lazy, Suspense, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { GlassSurface } from '../components/GlassSurface'
 import { useBerlinTime } from '../hooks/useBerlinTime'
@@ -37,7 +37,46 @@ import { PROJECTS, SKILLS, type Project } from '../data/projects'
 import { SITE_STATS } from '../data/stats'
 import { LATEST_LOG } from '../data/latestLog'
 
+// The live range showcase is a hand-built interactive carrying its five
+// discipline demos, so it is code-split out of the eager landing chunk and only
+// fetched when the Range section nears the viewport — first paint stays lean no
+// matter how rich the demos get.
+const RangeShowcase = lazy(() => import('../components/RangeShowcase'))
+
 const EASE = [0.16, 1, 0.3, 1] as const
+
+// A calm placeholder that holds the showcase's height while its chunk streams
+// in, so the page never jumps as the demos arrive. Mirrors the real panel's
+// rounded, bordered frame rather than a bare spinner.
+function RangeShowcaseFallback() {
+  return (
+    <div
+      aria-hidden
+      className="h-[26rem] animate-pulse rounded-[2rem] border border-white/10 bg-white/[0.02]"
+    />
+  )
+}
+
+// Mounts its children only once scrolled near, so a heavy lazy chunk is deferred
+// until it is about to be seen. Framer's onViewportEnter fires once (once: true),
+// then the real component renders inside the Suspense boundary.
+function DeferredRangeShowcase() {
+  const [show, setShow] = useState(false)
+  return (
+    <motion.div
+      onViewportEnter={() => setShow(true)}
+      viewport={{ once: true, margin: '240px 0px' }}
+    >
+      {show ? (
+        <Suspense fallback={<RangeShowcaseFallback />}>
+          <RangeShowcase />
+        </Suspense>
+      ) : (
+        <RangeShowcaseFallback />
+      )}
+    </motion.div>
+  )
+}
 
 const SECTIONS = [
   { id: 'intro', label: 'Intro' },
@@ -418,6 +457,35 @@ export default function Home() {
           </Reveal>
         </div>
         <HorizontalScroll panels={RANGE} className="mt-12" />
+
+        {/* SHOW, DON'T TELL — the five disciplines as live demos, right here on
+            the landing page. The horizontal band above names the range; this
+            proves it, so a first-time visitor feels the breadth of the craft
+            without taking the word 'range' on faith and without any one project
+            carrying the whole story. */}
+        <div className="mx-auto mt-16 w-full max-w-4xl px-6">
+          <Reveal>
+            <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-2">
+              <p className="font-display text-xl font-semibold tracking-tight text-white/80 sm:text-2xl">
+                Or see it, live.
+              </p>
+              <span className="text-xs font-semibold uppercase tracking-[0.2em] text-white/35">
+                Pick a discipline
+              </span>
+            </div>
+          </Reveal>
+          <Reveal delay={0.08}>
+            <p className="mt-3 max-w-md text-base leading-relaxed text-white/50">
+              One honest, hand-built demonstration for each discipline. Switch between
+              them &mdash; every one is real interface, and respects reduced motion.
+            </p>
+          </Reveal>
+          <Reveal delay={0.12}>
+            <div className="mt-8">
+              <DeferredRangeShowcase />
+            </div>
+          </Reveal>
+        </div>
       </section>
 
       {/* PROCESS */}
