@@ -21,6 +21,7 @@ export type ReelBackdrop =
   | 'squares'
   | 'meteors'
   | 'dither'
+  | 'caustics'
 
 export interface ReelScene {
   /** Stable id, used for the anchor and the progress rail. */
@@ -43,7 +44,7 @@ export const REEL: ReelScene[] = [
     backdrop: 'aurora',
     eyebrow: 'The reel',
     statement: 'Every frame here is hand-built.',
-    note: 'No template, no drag-and-drop. Ten scenes, each one a component I wrote from scratch, running live.',
+    note: 'No template, no drag-and-drop. Eleven scenes, each one a component I wrote from scratch, running live.',
     made: 'Backdrop: Aurora',
   },
   {
@@ -117,6 +118,14 @@ export const REEL: ReelScene[] = [
     statement: 'A few tones, ordered well, stand in for thousands.',
     note: 'Dithering builds a whole gradient from a handful of values and a disciplined grid of dots. The constraint is not a limit here — it is the technique.',
     made: 'Backdrop: Dither',
+  },
+  {
+    id: 'focus',
+    backdrop: 'caustics',
+    eyebrow: 'On focus',
+    statement: 'Scattered light is dim; gathered light cuts.',
+    note: 'A hundred half-made things each glow at nothing. Bend them all toward one point and suddenly there is an edge bright enough to see by. Caustics are just light that agreed where to go.',
+    made: 'Backdrop: Caustics',
   },
   {
     id: 'grid',
