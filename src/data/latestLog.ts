@@ -34,6 +34,12 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'A grid that dims the cards you are not reading',
+    summary:
+      'Focus cards — the quiet opposite of the spotlight and glow cards beside it. Those make the card you touch do more; this makes everything else do less. Hover or tab into any card and it holds still and sharp while its neighbours blur a touch, dim, and settle back a hair, so the eye is led by what falls away rather than what lights up, the way a good page dims what you are not reading. In the spirit of Aceternity\'s focus cards, rebuilt by hand. It coordinates without fragile indices — a small context where every card mints a stable id and the grid holds only which one is active, so a card is dimmed exactly when some sibling is focused and it is not, however the children are composed. And it answers the keyboard, not just the mouse: focus landing on a link inside a card raises it the same way a hover does, and the clear only fires if the leaving card is still the active one, so a fast sweep between neighbours never blanks the grid. Pure CSS transitions on blur, opacity and scale; nothing on a canvas. Reduced motion keeps the meaning and drops the movement — the active card gains a calm, even ring and the rest are left untouched. It debuts as a grid of the range, so no one card is ever the whole story.',
+    tag: 'Component',
+  },
+  {
     title: 'The range shown live, not just named',
     summary:
       'The five discipline demos, once buried on deep pages, now switch live inside the range explorer and on the home page.',
@@ -77,11 +83,6 @@ export const LATEST_LOG: LogHeadline[] = [
   {
     title: 'A card finished in holographic foil',
     summary: 'Holo card — the holographic finish of a collectible trading card, and the deliberate opposite of the tilt, parallax and wobble cards beside it. All three of those answer the pointer by moving the card; this one barely moves. A few degrees of tilt is only the vehicle — what answers you is the foil: a band of rainbow interference and a field of glitter that live inside the surface and shift hue and position with the viewing angle, the way a foil-stamped card throws a different rainbow at every tilt. No other card in the family has anything living in its surface; here the surface is the effect. Three stacked layers do it — a smooth holo band blended with color-dodge, the same rainbow seen through a fine dot mask so it breaks into thousands of sparkles that travel the opposite way to the band (the counter-parallax the eye reads as depth), and a soft glare with a lime kiss of the accent riding the pointer. All pure CSS gradients on a handful of springs, nothing on a canvas; left alone the foil drifts in a slow ellipse so the rainbow is never dead. The children are the real, untouched content a screen reader reads once; every foil layer is decorative and hidden. An intensity prop scales the foil and the tilt for a louder or quieter surface. Reduced motion never starts the drift or wires the pointer — the card rests flat with the foil parked at one fixed, fully visible angle, a still photograph of foil.',
-    tag: 'Component',
-  },
-  {
-    title: 'Type carved into the surface, lit by your cursor',
-    summary: 'Letterpress — the one piece in the type family that does not move the letters at all, a still effect about depth rather than motion. Its neighbours each animate a string — the split-text lifts the glyphs into place, the shiny sweep runs a band of light through them, the decode resolves them out of noise — while this sets the word almost exactly the colour of the surface, so there is nothing to read in the fill. The whole of it is legible only from the lime caught on one bevelled edge and the black thrown on the other; that pair of offset shadow copies is the relief, and a light vector points from the word to the pointer and swings the lit and dark edges around it, so pointing at the word is like carrying a lamp past an engraving. Deboss presses the type into the surface and emboss raises it out — the same bevel with the two copies swapped, dark on the lit side for a groove, bright on it for a ridge. Left alone the light drifts in a slow circle so the relief is never dead. Honest and cheap: the real word is a normal selectable element a screen reader reads once, the bevel pure CSS text-shadow on two springs with nothing on a render path. Reduced motion never starts the drift or wires the pointer — the light rests at the upper-left and the word holds one still, fully legible relief.',
     tag: 'Component',
   },
 ]
