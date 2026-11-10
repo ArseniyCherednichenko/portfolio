@@ -10,6 +10,7 @@ import { SpotlightCard } from '../components/SpotlightCard'
 import { MagneticButton } from '../components/MagneticButton'
 import { AnimatedCounter } from '../components/AnimatedCounter'
 import { DisciplineWeb } from '../components/DisciplineWeb'
+import { DisciplineDemo } from '../components/DisciplineDemo'
 import { ProjectLinks } from '../components/ProjectLinks'
 import { Aurora } from '../components/Aurora'
 import { useContact } from '../components/ContactDialog'
@@ -45,6 +46,15 @@ function DisciplineDetail({ index }: { index: number }) {
         </h3>
         <p className="mt-3 text-lg text-white/70">{d.lede}</p>
         <p className="mt-6 max-w-xl text-base leading-relaxed text-white/55">{d.body}</p>
+
+        {/* SEE IT LIVE — the honest "show, don't tell". The same per-discipline
+            demonstration that used to live only on the deep /range/:id pages,
+            pulled up into the explorer so the range is proved in place rather
+            than described. Keyed to the active discipline, so it re-mounts and
+            re-plays as the selection changes; reduced motion is handled inside. */}
+        <div className="mt-8">
+          <DisciplineDemo id={d.id} accent={d.accent} />
+        </div>
 
         <div className="mt-8">
           <p className="text-xs font-semibold uppercase tracking-[0.24em] text-white/40">In practice</p>
