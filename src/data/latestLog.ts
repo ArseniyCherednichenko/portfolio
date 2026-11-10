@@ -37,7 +37,7 @@ export const LATEST_LOG: LogHeadline[] = [
     title: 'The light net on the floor of a sunlit pool',
     summary:
       'Caustics — the third demoscene field, and the one that focuses. The plasma beside it folds soft lime light and the dither quantises it to a hard stipple; sunlight bent through a rippling water surface does neither, it converges, pulling the light into thin, bright, branching filaments over dark water. A sharpened interference field gives you exactly that: each pixel\'s coordinates are domain-warped twice, each axis pushed by a sine read of the other so a plain grid drifts into organic cells, then two interfering wavefronts are multiplied into one value and that value is raised to a high power — so most of the panel falls to dark water and only the crests survive as a lit web that wanders and reknits. Same cheap recipe as its siblings keeps it honest: a deliberately coarse offscreen buffer upscaled soft, a 256-entry colour lookup so the inner loop never interpolates, device pixel ratio irrelevant to a buffer coarse on purpose, one animation-frame loop cleaned up on unmount. The pointer is a finger on the surface — drop it anywhere and a ring spreads out, bending the net where it passes. Reduced motion paints one still frame and runs no loop.',
-    tag: 'Motion',
+    tag: 'Component',
   },
   {
     title: 'A grid that dims the cards you are not reading',
