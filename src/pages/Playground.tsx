@@ -91,6 +91,7 @@ import { Grain } from '../components/Grain'
 import { MeshGradient } from '../components/MeshGradient'
 import { Plasma } from '../components/Plasma'
 import { Dither } from '../components/Dither'
+import { Caustics } from '../components/Caustics'
 import { BentoGrid, BentoCell } from '../components/BentoGrid'
 import { GlassSurface } from '../components/GlassSurface'
 import { Masonry, type MasonryItem } from '../components/Masonry'
@@ -7221,6 +7222,37 @@ export default function Playground() {
                 values and a disciplined grid of dots, kin to the digital-display family rather than to a shader. Cheap
                 like the Plasma: a coarse offscreen buffer, a small palette lookup, two sines and one table index per
                 pixel; the pointer lifts a bloom of denser dots where it passes. Reduced motion paints one still frame.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH CAUSTICS */}
+        <Reveal>
+          <div id="caustics" data-experiment="Caustics" className="mt-12 scroll-mt-32">
+            <div className="relative h-[340px] overflow-hidden rounded-3xl border border-white/10 bg-[#06090c]">
+              <Caustics />
+              <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_45%,rgba(6,9,12,0.72)_100%)]" />
+              <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Caustic field</span>
+                <p className="mt-3 max-w-md px-6 text-xl font-medium text-white/85 sm:text-2xl">
+                  Touch the surface — a ripple spreads and bends the light where your cursor moves.
+                </p>
+              </div>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Pool-light caustics</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The third demoscene field, and the one that focuses. The Plasma above folds soft lime light and the
+                Dither quantises it to a hard stipple; sunlight bent through a rippling water surface instead
+                <em> converges</em> into thin, bright, branching filaments over dark water &mdash; and a sharpened
+                interference field gives you exactly that. Each pixel's coordinates are domain-warped twice (each axis
+                pushed by a sine read of the other, so a plain grid turns into drifting organic cells), two interfering
+                wavefronts are multiplied into one scalar, and that scalar is raised to a high power so most of the
+                panel falls to dark water and only the crests survive as a lit web. Same cheap recipe as its siblings
+                &mdash; a coarse offscreen buffer upscaled with smoothing, a 256-entry colour lookup, DPR-irrelevant
+                &mdash; and the pointer drops a spreading ring that bends the net where it passes, like a finger touched
+                to the surface. Reduced motion paints one still frame.
               </p>
             </div>
           </div>
