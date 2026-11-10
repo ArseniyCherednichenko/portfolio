@@ -34,6 +34,12 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'The range shown live, not just named',
+    summary:
+      'The five discipline demos, once buried on deep pages, now switch live inside the range explorer and on the home page.',
+    tag: 'Page',
+  },
+  {
     title: 'A cursor that tells your hand what a click does',
     summary: "Contextual cursor — the site's own custom pointer grew a caption. A tight lime dot and a trailing ring already run on every page, springing after the cursor at two tensions, the ring swelling and filling over anything interactive; what is new is the word. Any element can hand the cursor a label through a data-cursor attribute, and that word rides in as a small lime pill a beat behind the ring on its own softer spring — Preview over a project card, Open on a link that leaves for the web, Read on a case study — so the pointer narrates what a click will do before you take it, the way Linear and Vercel caption their affordances. The dot yields to the word so the eye reads one mark, not two, and the pill trails just below-right of the point so it never hides under the hand. One global pointer listener reads the nearest declaring ancestor, so it costs nothing per element and can never drift out of sync. Pointer-and-motion only by design: touch devices and reduced-motion visitors keep the native cursor with no caption, untouched. A new Contextual cursor surface in the Playground's controls family shows it off, each tile declaring its own word.",
     tag: 'Motion',
@@ -76,11 +82,6 @@ export const LATEST_LOG: LogHeadline[] = [
   {
     title: 'Type carved into the surface, lit by your cursor',
     summary: 'Letterpress — the one piece in the type family that does not move the letters at all, a still effect about depth rather than motion. Its neighbours each animate a string — the split-text lifts the glyphs into place, the shiny sweep runs a band of light through them, the decode resolves them out of noise — while this sets the word almost exactly the colour of the surface, so there is nothing to read in the fill. The whole of it is legible only from the lime caught on one bevelled edge and the black thrown on the other; that pair of offset shadow copies is the relief, and a light vector points from the word to the pointer and swings the lit and dark edges around it, so pointing at the word is like carrying a lamp past an engraving. Deboss presses the type into the surface and emboss raises it out — the same bevel with the two copies swapped, dark on the lit side for a groove, bright on it for a ridge. Left alone the light drifts in a slow circle so the relief is never dead. Honest and cheap: the real word is a normal selectable element a screen reader reads once, the bevel pure CSS text-shadow on two springs with nothing on a render path. Reduced motion never starts the drift or wires the pointer — the light rests at the upper-left and the word holds one still, fully legible relief.',
-    tag: 'Component',
-  },
-  {
-    title: 'A card that leans and squishes toward your cursor',
-    summary: 'Wobble card — the playful cousin of the tilt and parallax cards, and their deliberate opposite. Both of those answer the pointer by rotating a plane in 3D; this one never rotates and never leaves the flat. It leans — the whole body translates a few pixels toward the cursor on an under-damped spring, while the content inside trails a beat behind on a softer one. That gap between the body and its contents is the squish; the under-damped spring is the wobble, so letting go over-shoots home and settles like jelly rather than snapping. Built for a feature tile or a call-to-action you want springy under the hand: a cursor-tracked lime sheen eases in on hover, the moving layers are decorative, and the text stays real content, so a reader hears a plain card. Reduced motion never wires the pointer — the card rests flat with zero travel and keeps its own hover border.',
     tag: 'Component',
   },
 ]
