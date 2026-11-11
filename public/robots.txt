@@ -1,0 +1,9 @@
+# This portfolio is built in the open and meant to be found.
+# Every page is public and safe to index — crawl freely.
+User-agent: *
+Allow: /
+
+# A full sitemap is emitted at build time when the deploy host is known
+# (see scripts/gen-sitemap.mjs). When present it lives at /sitemap.xml, and
+# the build appends an absolute Sitemap: line below it on hosts that set the
+# origin — so this baseline file stays correct even on a preview with no origin.
