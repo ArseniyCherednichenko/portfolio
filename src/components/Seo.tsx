@@ -1,8 +1,9 @@
 import { useEffect } from 'react'
 
 // Per-route document head. Every page shared one static <title> before this;
-// now each view sets an honest, distinct title + description and keeps the
-// Open Graph / Twitter tags in sync. Renders nothing.
+// now each view sets an honest, distinct title + description, keeps the Open
+// Graph / Twitter tags in sync, and points the canonical <link> at the clean
+// URL for the route. Renders nothing.
 
 const SITE_NAME = 'Arseniy Cherednichenko'
 const DEFAULT_TITLE = 'Arseniy Cherednichenko — Builder, co-founder of Guided'
@@ -26,6 +27,25 @@ function setMeta(attr: 'name' | 'property', key: string, content: string) {
   el.setAttribute('content', content)
 }
 
+// Point the canonical <link> at the clean URL for the current route — origin +
+// pathname, with the query string and hash dropped. This is the honest canonical
+// for a single-page app: a page like /studio can carry its whole state in the
+// query (?seed=…), and without this every seed variant looks to a crawler like a
+// separate page competing with the base route. The origin is read live from the
+// document, exactly as StructuredData resolves it, so it stays correct on
+// whatever host the site deploys to rather than hard-coding a domain the site
+// deliberately never pins. The social og:url keeps the full href so a shared
+// seed link still previews that exact poster.
+function setCanonical(href: string) {
+  let el = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]')
+  if (!el) {
+    el = document.createElement('link')
+    el.setAttribute('rel', 'canonical')
+    document.head.appendChild(el)
+  }
+  el.setAttribute('href', href)
+}
+
 function apply(title: string, description: string) {
   document.title = title
   setMeta('name', 'description', description)
@@ -34,6 +54,7 @@ function apply(title: string, description: string) {
   setMeta('property', 'og:url', window.location.href)
   setMeta('name', 'twitter:title', title)
   setMeta('name', 'twitter:description', description)
+  setCanonical(window.location.origin + window.location.pathname)
 }
 
 export function Seo({ title, description }: SeoProps) {
