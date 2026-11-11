@@ -92,6 +92,7 @@ import { MeshGradient } from '../components/MeshGradient'
 import { Plasma } from '../components/Plasma'
 import { Dither } from '../components/Dither'
 import { Caustics } from '../components/Caustics'
+import { Tunnel } from '../components/Tunnel'
 import { BentoGrid, BentoCell } from '../components/BentoGrid'
 import { GlassSurface } from '../components/GlassSurface'
 import { Masonry, type MasonryItem } from '../components/Masonry'
@@ -7253,6 +7254,38 @@ export default function Playground() {
                 &mdash; a coarse offscreen buffer upscaled with smoothing, a 256-entry colour lookup, DPR-irrelevant
                 &mdash; and the pointer drops a spreading ring that bends the net where it passes, like a finger touched
                 to the surface. Reduced motion paints one still frame.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH TUNNEL */}
+        <Reveal>
+          <div id="tunnel" data-experiment="Tunnel" className="mt-12 scroll-mt-32">
+            <div className="relative h-[340px] overflow-hidden rounded-3xl border border-white/10 bg-[#05070a]">
+              <Tunnel />
+              <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(5,7,10,0.72)_0%,transparent_45%)]" />
+              <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Tunnel</span>
+                <p className="mt-3 max-w-md px-6 text-xl font-medium text-white/85 sm:text-2xl">
+                  Lean into it — the pointer twists the walls toward you and pulls you faster down the bore.
+                </p>
+              </div>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Demoscene tunnel</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The one thing the three flat fields above never do: this one has <em>depth</em>. Where the Plasma,
+                Dither and Caustics each paint a surface you look at, a tunnel opens a hole in it and falls through
+                &mdash; the perspective trick every 1990s intro reached for, built the authentic way. A tunnel has only
+                two coordinates, how far down the bore a point sits and how far around the wall, and both are fixed
+                functions of a pixel's place relative to the centre &mdash; so depth (a constant over the radius, racing
+                to infinity at the vanishing point) and angle are each computed <em>once</em> into a lookup table and
+                read millions of times. A frame then costs no atan2 and no sqrt at all: it only scrolls an offset
+                through those tables, reads a woven wall of rings and staves and a depth fog that falls to a true black
+                hole at the centre, and maps the lit wall through the same 256-entry lookup. That is why a 486 could run
+                it. The pointer leans you in &mdash; move across it to twist the walls toward the cursor and rush the
+                fall &mdash; and reduced motion paints one still frame.
               </p>
             </div>
           </div>
