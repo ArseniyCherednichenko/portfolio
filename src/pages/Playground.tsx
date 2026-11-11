@@ -205,6 +205,7 @@ import { GenevaDrive } from '../components/GenevaDrive'
 import { Strandbeest } from '../components/Strandbeest'
 import { Escapement } from '../components/Escapement'
 import { ScotchYoke } from '../components/ScotchYoke'
+import { SliderCrank } from '../components/SliderCrank'
 import { Trammel } from '../components/Trammel'
 import { Chebyshev } from '../components/Chebyshev'
 import { Watt } from '../components/Watt'
@@ -11747,6 +11748,51 @@ export default function Playground() {
                 with a live region reading the crank angle and the yoke&rsquo;s displacement. Under{' '}
                 <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code> there is
                 no sweep &mdash; Step jumps a quarter turn to the next dead point &mdash; and every state stays legible.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH SLIDER-CRANK — the Scotch yoke's honest counterpart */}
+        <Reveal>
+          <div id="slider-crank" data-experiment="Slider-crank" className="mt-12 scroll-mt-32">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 py-12 sm:px-10">
+              <div className="mb-8 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Rotation into a lopsided stroke</span>
+                <p className="mx-auto mt-3 max-w-md text-lg font-medium text-white/85 sm:text-xl">
+                  Give the yoke a connecting rod and the perfect sine goes crooked &mdash; the piston dwells at the head
+                  and hurries through the crank end.
+                </p>
+              </div>
+              <SliderCrank className="mx-auto" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Slider-crank</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The piston engine&rsquo;s own mechanism, set here right beside the Scotch yoke because it is the machine
+                the yoke is always mistaken for &mdash; and the one honest difference between them is a single term. The
+                yoke has no rod, so its output is{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">r&middot;cos&thinsp;&theta;</code>{' '}
+                exactly. A slider-crank ties the crank pin to the piston with a rod of fixed length, so the piston sits at{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">
+                  r&middot;cos&thinsp;&theta; + &radic;(L&sup2; &minus; r&sup2;sin&sup2;&theta;)
+                </code>{' '}
+                &mdash; a cosine <em>plus</em> a square-root error term the yoke never carries. That term is never
+                positive, so the real piston always <em>lags</em> the ideal sine: it dwells a beat longer at top dead
+                centre than at the crank end, and runs quicker through one half of the turn than the other. That is why a
+                real engine&rsquo;s motion is lopsided, and it is drawn here as the gap between two swept curves &mdash;
+                the piston&rsquo;s true path in lime and the pure cosine a yoke would trace, dashed, behind it. The{' '}
+                <strong className="font-semibold text-white/70">rod ratio</strong>{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">n = L/r</code> is the one dial that
+                matters: a stubby rod throws a visibly skewed curve, a long one presses the path back toward the sine the
+                yoke draws exactly. The only stored state is the crank angle and the ratio; the pin, the rod, the piston
+                and both curves are all derived, so none can drift out of agreement. Drag the crank one to one, or set it
+                running. A real{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">role=slider</code> from the keyboard:
+                arrows nudge a degree, Shift ten, Space runs or stops, Home returns to zero and End jumps a quarter turn,
+                with a live region reading the crank angle, the displacement, and the lag. Under{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code> there is
+                no sweep &mdash; Step jumps a quarter turn &mdash; and every state stays legible.
               </p>
             </div>
           </div>
