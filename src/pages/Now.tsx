@@ -8,6 +8,7 @@ import { SpotlightCard } from '../components/SpotlightCard'
 import { ShinyText } from '../components/ShinyText'
 import { Ribbons } from '../components/Ribbons'
 import { DayArc } from '../components/DayArc'
+import { FocusRotator } from '../components/FocusRotator'
 import { Modal } from '../components/Modal'
 import { Seo } from '../components/Seo'
 import { useBerlinTime } from '../hooks/useBerlinTime'
@@ -168,6 +169,17 @@ export default function Now() {
           </motion.div>
         </div>
       </header>
+
+      {/* LIVING REEL — the page's pulse: one real focus at a time on a gentle
+          timer, so the snapshot opens feeling present rather than filed. It reads
+          the same NOW_ITEMS as the grid below (minus the "to fill in" prompt,
+          which is not a current focus), and gives each one equal room — Guided
+          included — so no single project is framed as the whole of the week. */}
+      <section className="mx-auto w-full max-w-4xl px-6 pt-4">
+        <Reveal>
+          <FocusRotator items={NOW_ITEMS.filter((item) => !item.placeholder)} />
+        </Reveal>
+      </section>
 
       {/* FOCUS GRID */}
       <section className="mx-auto grid w-full max-w-4xl gap-5 px-6 py-8 sm:grid-cols-2">
