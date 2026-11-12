@@ -296,6 +296,7 @@ import { WobbleCard } from '../components/WobbleCard'
 import { HoloCard } from '../components/HoloCard'
 import { GlowCard } from '../components/GlowCard'
 import { FocusCards, FocusCard } from '../components/FocusCards'
+import { SpotlightGrid, SpotlightGridCell } from '../components/SpotlightGrid'
 import { FanDeck, type FanCard } from '../components/FanDeck'
 import { ExpandingPanels, type Panel } from '../components/ExpandingPanels'
 import { Flipbook } from '../components/Flipbook'
@@ -481,6 +482,19 @@ const FOCUS_CARDS: ReadonlyArray<{ tag: string; title: string; body: string }> =
   { tag: 'Applied AI', title: 'With the models', body: 'AI woven into real products, asking the right question of them.' },
   { tag: 'Motion', title: 'The small moments', body: 'Timing, typography, the spacing between things. Hand-built.' },
   { tag: 'Open source', title: 'In the open', body: 'This site itself, grown a coherent improvement at a time.' },
+]
+
+// The cells for the shared-spotlight grid: the honest shape of what the site
+// holds, so the single light that crosses them lands on real ground, not on a
+// pitch. Deliberately a grid (never one card) so the continuity has somewhere
+// to travel.
+const SPOTLIGHT_GRID_CELLS: ReadonlyArray<{ title: string; body: string }> = [
+  { title: 'Hand-built', body: 'Every effect written here, nothing off a shelf.' },
+  { title: 'Motion-led', body: 'Animation that orients, never decorates for its own sake.' },
+  { title: 'Reduced-motion', body: 'A real calm path, a first-class state and not a fallback.' },
+  { title: 'Keyboard-reachable', body: 'The pointer tricks all answer focus as well as the mouse.' },
+  { title: 'Editorial', body: 'Fraunces on near-black, lime used sparingly so it still means something.' },
+  { title: 'Built in the open', body: 'Public on GitHub, grown a coherent improvement at a time.' },
 ]
 import { StringPluck } from '../components/StringPluck'
 import { Cyclic } from '../components/Cyclic'
@@ -6396,6 +6410,55 @@ export default function Playground() {
                 tabbing a link into a card raises it the same way a hover does. Pure CSS transitions on
                 blur, opacity, and scale; nothing on a canvas. Reduced motion keeps the meaning and drops
                 the movement: the active card gains a calm ring and the rest are left untouched.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        <Reveal>
+          <div id="spotlight-grid" data-experiment="Spotlight grid" className="mt-12 scroll-mt-32">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 py-12 sm:px-10">
+              <div className="mb-10 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">One light, many cards</span>
+                <p className="mx-auto mt-3 max-w-md text-lg font-medium text-white/85 sm:text-xl">
+                  Move across the whole grid &mdash; or over the gaps between cards. A single
+                  spotlight crosses the seams, lighting the facing edges together.
+                </p>
+              </div>
+              <SpotlightGrid className="mx-auto w-full max-w-3xl sm:grid-cols-2 lg:grid-cols-3" radius={300}>
+                {SPOTLIGHT_GRID_CELLS.map((cell) => (
+                  <SpotlightGridCell key={cell.title} className="h-full">
+                    <div className="flex h-full flex-col gap-2 p-6">
+                      <h4 className="font-display text-lg font-bold leading-none tracking-tight text-white">
+                        {cell.title}
+                      </h4>
+                      <p className="text-sm leading-relaxed text-white/55">{cell.body}</p>
+                    </div>
+                  </SpotlightGridCell>
+                ))}
+              </SpotlightGrid>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Spotlight grid</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The idea the surface family was missing. The spotlight card two sections back lights
+                the one card under the cursor; the glow card hands its own border to the pointer
+                &mdash; both are <em>local</em>, and the light stops at the card edge. This one shares
+                a <em>single</em> spotlight across the whole grid: the pointer position is written in
+                the grid&rsquo;s own coordinates and painted identically by every cell, so a soft lime
+                wash and a bright arc of border cross the gutters without a seam. Sweep the gaps
+                between cards and the two facing edges light together, the way a torch passes behind
+                framed glass &mdash; the continuity is the whole point, and the thing that makes it a
+                grid rather than six separate cards. It stays cheap: the cursor rides a pair of CSS
+                variables set on one{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">requestAnimationFrame</code>{' '}
+                per move, so moving across it never triggers a React render, and the border light rides
+                a 1px padding/content-box mask rather than washing the whole card. It answers the
+                keyboard too &mdash; focus landing inside a cell warms its frame the same way a hover
+                would. Under{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code>{' '}
+                the pointer is never wired and the shared field stays dark; each cell keeps a calm,
+                static border that lifts a touch on hover and focus.
               </p>
             </div>
           </div>
