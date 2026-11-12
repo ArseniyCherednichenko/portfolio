@@ -16,7 +16,7 @@
 import { COMPONENT_COUNT } from './stats'
 
 /** ISO date (YYYY-MM-DD) the entries below were last revised. */
-export const LAST_UPDATED = '2026-10-03'
+export const LAST_UPDATED = '2026-11-12'
 
 /** Where Arseniy is, for the little dateline under the title. */
 export const LOCATION = 'Berlin'
@@ -67,10 +67,10 @@ export const NOW_ITEMS: readonly NowItem[] = [
   {
     label: 'Sharpening',
     title: 'Motion design, in public',
-    body: `This site is my open workbench for interface animation, now ${COMPONENT_COUNT} hand-built components — pinned scroll, magnetic controls, cursor fields, self-drawing line art. A new one most days. If it lands here, I understand it.`,
+    body: `This site is my open workbench for interface animation, now ${COMPONENT_COUNT} hand-built components — pinned scroll and magnetic controls, cursor fields and self-drawing line art, and lately whole mechanisms and simulations built from the physics up. A new one most days. If it lands here, I understand it.`,
     detail: [
       'The playground is not a portfolio of finished things so much as a practice done in the open. Something new most days, built from scratch, no UI kit underneath — the rule is that it only ships here once I actually understand how it works.',
-      'It is the honest version of "sharpening": you can watch the range grow commit by commit rather than take my word for it.',
+      'It has grown past UI effects into the harder stuff: linkages that trace real curves, fields solved frame by frame, the odd piston engine. The point is the same either way — you can watch the range grow commit by commit rather than take my word for it.',
     ],
     to: '/playground',
     toLabel: 'Wander the playground',
