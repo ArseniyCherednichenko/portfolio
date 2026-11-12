@@ -34,6 +34,12 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'One spotlight that crosses the gaps between cards',
+    summary:
+      'Spotlight grid — a grid of cards that share a single cursor-tracked light, the continuous counterpart to the per-card spotlight and glow cards; sweep the gutters and both facing edges light together.',
+    tag: 'Component',
+  },
+  {
     title: 'A piston that lags the sine its twin draws clean',
     summary:
       "Slider-crank — the piston engine beside the Scotch yoke; its connecting rod bends the yoke's perfect sine lopsided.",
@@ -81,11 +87,6 @@ export const LATEST_LOG: LogHeadline[] = [
   {
     title: 'Rain on a window you wipe to see the city',
     summary: "Rain on glass — the water the pointer fields had not shown, and the third kind: not the ripple tank's surface waves or the fluid sim's stirred dye, but condensation held by surface tension against a vertical pane, where the whole subject is the glass. So the backdrop — a blurred, out-of-focus night city — is deliberately never in focus, and the only way to see it sharply is to clear the mist, by letting a running drop cut a streak through the fog or by dragging a palm across the cold glass. A greyscale fog mask holds where the pane is clear and is faded a hair back toward fogged every frame, so the glass slowly re-mists after you wipe it and a drop's trail heals over behind it — a living equilibrium, not a one-way erase. Tiny beads nucleate across the pane and grow; when one passes the point where gravity beats surface tension it breaks free and runs, accelerating down, cutting a cleared trail and absorbing every smaller bead it rolls over, radii adding in quadrature so a fat drop is visibly the sum of what it swept up. Each frame composites three layers: the fogged pane, the sharp city shown through the mask, and the beads drawn as little lenses with a contact shadow and a specular catch, each clearing its own patch of fog beneath it. One canvas over offscreen buffers in device pixels so it stays crisp, the canvas aria-hidden and the Wipe a real button; reduced motion draws one still frame of settled beads and healed trails, the city showing through.",
-    tag: 'Component',
-  },
-  {
-    title: 'A menu that changes shape between its panels',
-    summary: "Morph menu — the morphing menu the Overlays family was missing, and the deliberate opposite of the popover and the context menu beside it. Where the popover anchors one fixed panel and the context menu opens one flat list, this holds a stack of panels and makes moving between them the whole show. Pick a row that owns a sub-panel and the card does not swap abruptly or push a second menu on top of the first — it springs its height from the old panel's to the new one's while the outgoing panel slides off one way and the incoming slides in from the other, so a tall root easing down to a short sub (or climbing back up) reads as one object changing shape rather than two screens cutting. It is the dynamic-island / 'Family drawer' idea — content-driven size made to animate — brought down to an ordinary settings menu. The height is real, not guessed: each panel's own content is measured by a callback ref the instant that panel mounts, and a ResizeObserver keeps it honest when a row's live 'current value' hint changes width under it. A genuine menu underneath, not a flourish — aria-haspopup and aria-expanded on the trigger, a labelled role=menu of menuitem rows, a single roving tabindex the arrow keys walk, ArrowRight or Enter to descend and ArrowLeft or Backspace to climb back, Escape or an outside click to close with focus handed back to the trigger — and rows can be internal links, external anchors, or callbacks, one of them tintable for a destructive action. Reduced motion drops the morph and the slide for a clean cross-cut, every control intact.",
     tag: 'Component',
   },
 ]
