@@ -34,6 +34,12 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'One gear set, three ratios from which part you hold',
+    summary:
+      'Planetary gears — the gear train folded onto one axis; hold the ring, the sun or the carrier and the same wheels give a reduction, an overdrive or reverse.',
+    tag: 'Component',
+  },
+  {
     title: 'One spotlight that crosses the gaps between cards',
     summary:
       'Spotlight grid — a grid of cards that share a single cursor-tracked light, the continuous counterpart to the per-card spotlight and glow cards; sweep the gutters and both facing edges light together.',
@@ -85,8 +91,8 @@ export const LATEST_LOG: LogHeadline[] = [
     tag: 'Component',
   },
   {
-    title: 'Rain on a window you wipe to see the city',
-    summary: "Rain on glass — the water the pointer fields had not shown, and the third kind: not the ripple tank's surface waves or the fluid sim's stirred dye, but condensation held by surface tension against a vertical pane, where the whole subject is the glass. So the backdrop — a blurred, out-of-focus night city — is deliberately never in focus, and the only way to see it sharply is to clear the mist, by letting a running drop cut a streak through the fog or by dragging a palm across the cold glass. A greyscale fog mask holds where the pane is clear and is faded a hair back toward fogged every frame, so the glass slowly re-mists after you wipe it and a drop's trail heals over behind it — a living equilibrium, not a one-way erase. Tiny beads nucleate across the pane and grow; when one passes the point where gravity beats surface tension it breaks free and runs, accelerating down, cutting a cleared trail and absorbing every smaller bead it rolls over, radii adding in quadrature so a fat drop is visibly the sum of what it swept up. Each frame composites three layers: the fogged pane, the sharp city shown through the mask, and the beads drawn as little lenses with a contact shadow and a specular catch, each clearing its own patch of fog beneath it. One canvas over offscreen buffers in device pixels so it stays crisp, the canvas aria-hidden and the Wipe a real button; reduced motion draws one still frame of settled beads and healed trails, the city showing through.",
+    title: 'A spinning coin whose roll races as its spin dies',
+    summary: "Euler's disk — the physics toy where a spinning coin settling on a table does the thing your intuition refuses, and the opposite kind of strangeness to the two pendulums beside it: those are chaos you cannot predict, this is utterly predictable and defies you anyway. Spin a coin on its edge and as it loses energy it leans flatter and flatter, yet the point where its rim meets the table races around faster and faster, the hum rising to a whirr, until in one last blur it slaps flat and stops dead — the spin winding to nothing while the roll runs away toward infinity. Two clocks run at once in opposite directions, and both are integrated honestly: the disk is a circle tilted from the table by an angle, its centre riding at R·sin(angle) and its contact point the lowest point of the rim, and as the lean bleeds to zero the contact precesses at a rate the physics sends to infinity, growing like one over the square root of that angle — so the lean decays as minus one over the root of the angle, a collapse slow while the coin stands and suddenly very fast as it goes flat, and the instant it visibly flattens is the instant the bright contact bead blurs into a ring. Drawn in true perspective, not a faked ellipse: the outline is a real circle of rim points leaning in 3-D and projected through one camera pitched down over the table, the coin has a milled metal edge and a brushed face with a specular glint, and it throws a contact shadow that spreads as it lies down. A fixed timestep, so it reads the same on any monitor, and a seeded release sequence, so the same coins spin the same way every load with nothing on the hot path touching Math.random. Press anywhere to release a fresh spin; reduced motion lays one coin down mid-lean, still, with a faint hint of the ring, and holds it.",
     tag: 'Component',
   },
 ]
