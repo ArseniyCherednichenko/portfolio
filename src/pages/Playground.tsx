@@ -199,6 +199,7 @@ import { Penrose } from '../components/Penrose'
 import { Collatz } from '../components/Collatz'
 import { Tesseract } from '../components/Tesseract'
 import { Gears } from '../components/Gears'
+import { PlanetaryGears } from '../components/PlanetaryGears'
 import { FourBar } from '../components/FourBar'
 import { Peaucellier } from '../components/Peaucellier'
 import { GenevaDrive } from '../components/GenevaDrive'
@@ -11556,6 +11557,46 @@ export default function Playground() {
                 precomputed once and just evaluated per frame. Grab any wheel and the train follows; the release hands it
                 a fly-wheel glide that coasts to rest. One canvas, one loop that sleeps when nothing turns, DPR-capped.
                 Reduced motion paints it once at rest and keeps the drag working.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH PLANETARY GEARS */}
+        <Reveal>
+          <div id="planetary-gears" data-experiment="Planetary gears" className="mt-12 scroll-mt-32">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 py-12 sm:px-10">
+              <div className="mb-8 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">One set, three ratios</span>
+                <p className="mx-auto mt-3 max-w-md text-lg font-medium text-white/85 sm:text-xl">
+                  Change which member you hold still, and the same gears give a reduction, an overdrive, or reverse.
+                </p>
+              </div>
+              <PlanetaryGears className="mx-auto" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Planetary gears</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The gear train&rsquo;s honest counterpart. A train lays its wheels in a row and the end-to-end ratio is
+                just the product of the meshes along it; an epicyclic set folds that train onto a single axis &mdash; a
+                central <em>sun</em> gear, three <em>planet</em> gears carried on an arm, and an internal <em>ring</em>
+                gear enclosing them all, every member turning about one centre. The trick, and the reason it runs every
+                automatic gearbox, a cordless drill&rsquo;s reduction and the Antikythera mechanism, is that three
+                members share that axis and <em>which ratio you get depends on which one you hold still</em>: hold the
+                ring and drive the sun and the carrier crawls round, a {Math.round((60 / 18) * 100) / 100}&times;
+                reduction the same way; hold the sun and drive the carrier and the ring races ahead, an overdrive; hold
+                the carrier and the planets spin in place as idlers and the ring turns backwards &mdash; a reverse gear.
+                One mechanism, three ratios, no wheels added or removed. The same rigid-mechanism honesty as the gear
+                train: nothing is scripted. A single degree of freedom &mdash; the input member&rsquo;s angle &mdash;
+                fixes every other through Willis&rsquo;s train equation (&omega;<sub>ring</sub> &minus;
+                &omega;<sub>carrier</sub>) / (&omega;<sub>sun</sub> &minus; &omega;<sub>carrier</sub>) = &minus;Z
+                <sub>sun</sub>/Z<sub>ring</sub>, the rolling condition of the two meshes written once, so each member is
+                an affine function of the input and a planet genuinely rolls on the sun and the ring at the same time.
+                The teeth obey the two laws a real set must &mdash; the ring carries the sun&rsquo;s teeth plus twice a
+                planet&rsquo;s, and the sun and ring teeth together divide by the planet count &mdash; so three equally
+                spaced planets all mesh from one phase. Canvas sibling of the gear train, one loop that sleeps when
+                nothing turns. The Hold chips, Run and Reverse are real buttons; drag any member that is not the one
+                being held. Reduced motion paints it once at rest and keeps the drag working.
               </p>
             </div>
           </div>
