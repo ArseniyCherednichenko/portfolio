@@ -361,7 +361,7 @@ export function ThreeBody({
 
       // Dim the whole frame a hair toward ink: the feedback fade that leaves
       // each body a glowing comet tail without ever fully clearing the canvas.
-      ctx!.fillStyle = 'rgba(5,5,5,0.085)'
+      ctx!.fillStyle = 'rgba(5,5,5,0.05)'
       ctx!.fillRect(0, 0, w, h)
 
       // Advance the physics in small sub-steps for accuracy.
