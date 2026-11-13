@@ -34,6 +34,12 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'Three stars, and no formula can say where they go',
+    summary:
+      'Three-body problem — chaos in its oldest form; three stars under gravity, the butterfly effect before Lorenz named it, the dance leaning toward your hand.',
+    tag: 'Component',
+  },
+  {
     title: 'One gear set, three ratios from which part you hold',
     summary:
       'Planetary gears — the gear train folded onto one axis; hold the ring, the sun or the carrier and the same wheels give a reduction, an overdrive or reverse.',
@@ -83,16 +89,6 @@ export const LATEST_LOG: LogHeadline[] = [
   {
     title: 'A card whose border lights toward your cursor',
     summary: "Glow card — the glowing border of 21st.dev and Aceternity rebuilt by hand, and the cursor-driven counterpart to the two border effects beside it: the border beam runs a comet on a timer and the electric border jitters on a timer, both blind to the pointer, where this one is handed to it. A conic gradient whose bright wedge always points at the cursor lights only the stretch of border nearest it, ramping up as you near and fading with distance. It comes alive as a grid, not one card: each card tracks the single global pointer, so none needs hovering — sweep the gutters between them and every facing edge lights at once, like a torch passing framed glass — and the lift is proximity, not a hover flag, so the glow slides across the gaps instead of snapping per card. It stays on the frame, a crisp masked ring over a blurred bloom with no wash across the surface, which is what keeps it distinct from the spotlight card rather than a restyle of it. Reduced motion never wires the pointer: each card rests with a calm, even, faint ring, framed but still.",
-    tag: 'Component',
-  },
-  {
-    title: 'A spinning coin whose roll races as its spin dies',
-    summary: "Euler's disk — the physics toy where a spinning coin settling on a table does the thing your intuition refuses, and the opposite kind of strangeness to the two pendulums beside it: those are chaos you cannot predict, this is utterly predictable and defies you anyway. Spin a coin on its edge and as it loses energy it leans flatter and flatter, yet the point where its rim meets the table races around faster and faster, the hum rising to a whirr, until in one last blur it slaps flat and stops dead — the spin winding to nothing while the roll runs away toward infinity. Two clocks run at once in opposite directions, and both are integrated honestly: the disk is a circle tilted from the table by an angle, its centre riding at R·sin(angle) and its contact point the lowest point of the rim, and as the lean bleeds to zero the contact precesses at a rate the physics sends to infinity, growing like one over the square root of that angle — so the lean decays as minus one over the root of the angle, a collapse slow while the coin stands and suddenly very fast as it goes flat, and the instant it visibly flattens is the instant the bright contact bead blurs into a ring. Drawn in true perspective, not a faked ellipse: the outline is a real circle of rim points leaning in 3-D and projected through one camera pitched down over the table, the coin has a milled metal edge and a brushed face with a specular glint, and it throws a contact shadow that spreads as it lies down. A fixed timestep, so it reads the same on any monitor, and a seeded release sequence, so the same coins spin the same way every load with nothing on the hot path touching Math.random. Press anywhere to release a fresh spin; reduced motion lays one coin down mid-lean, still, with a faint hint of the ring, and holds it.",
-    tag: 'Component',
-  },
-  {
-    title: 'A spinning coin whose roll races as its spin dies',
-    summary: "Euler's disk — the physics toy where a spinning coin settling on a table does the thing your intuition refuses, and the opposite kind of strangeness to the two pendulums beside it: those are chaos you cannot predict, this is utterly predictable and defies you anyway. Spin a coin on its edge and as it loses energy it leans flatter and flatter, yet the point where its rim meets the table races around faster and faster, the hum rising to a whirr, until in one last blur it slaps flat and stops dead — the spin winding to nothing while the roll runs away toward infinity. Two clocks run at once in opposite directions, and both are integrated honestly: the disk is a circle tilted from the table by an angle, its centre riding at R·sin(angle) and its contact point the lowest point of the rim, and as the lean bleeds to zero the contact precesses at a rate the physics sends to infinity, growing like one over the square root of that angle — so the lean decays as minus one over the root of the angle, a collapse slow while the coin stands and suddenly very fast as it goes flat, and the instant it visibly flattens is the instant the bright contact bead blurs into a ring. Drawn in true perspective, not a faked ellipse: the outline is a real circle of rim points leaning in 3-D and projected through one camera pitched down over the table, the coin has a milled metal edge and a brushed face with a specular glint, and it throws a contact shadow that spreads as it lies down. A fixed timestep, so it reads the same on any monitor, and a seeded release sequence, so the same coins spin the same way every load with nothing on the hot path touching Math.random. Press anywhere to release a fresh spin; reduced motion lays one coin down mid-lean, still, with a faint hint of the ring, and holds it.",
     tag: 'Component',
   },
 ]
