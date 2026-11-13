@@ -13,6 +13,7 @@ import { TextType } from '../components/TextType'
 import { TypingThread } from '../components/TypingThread'
 import { VanishInput } from '../components/VanishInput'
 import { RotatingWord } from '../components/RotatingWord'
+import { ContainerTextFlip } from '../components/ContainerTextFlip'
 import { SpotlightCard } from '../components/SpotlightCard'
 import { TiltCard } from '../components/TiltCard'
 import { GlareHover } from '../components/GlareHover'
@@ -5584,6 +5585,42 @@ export default function Playground() {
                 the bevel is pure CSS text-shadow on two springs with nothing on a render path. Under
                 reduced motion the idle drift never starts and the pointer is never wired &mdash; the
                 light rests at the upper-left and the word holds one still, fully legible relief.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH CONTAINER TEXT FLIP — the pill springs to each word's width */}
+        <Reveal>
+          <div
+            id="container-text-flip"
+            data-experiment="Container text flip"
+            className="mt-12 scroll-mt-32"
+          >
+            <div className="flex min-h-[220px] items-center justify-center rounded-3xl border border-white/10 bg-white/[0.02] px-6 py-16 sm:px-14">
+              <p className="flex flex-wrap items-center justify-center gap-x-3 gap-y-3 text-center font-display text-3xl font-bold tracking-tight sm:text-4xl">
+                <span>Motion that is made to</span>
+                <ContainerTextFlip
+                  words={['respond', 'breathe', 'hold up', 'feel alive', 'read clearly']}
+                  textClassName="font-display text-3xl font-bold tracking-tight text-[#DCF87C] sm:text-4xl"
+                />
+              </p>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Container text flip</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The one word-swapper here where the frame moves, not the word. Its neighbours each
+                animate a string inside a fixed box &mdash; the rotating word slides a new line up into
+                place, the gooey text melts one word into the next, the split-flap clatters between
+                fixed-width strings &mdash; while this measures each word and springs the pill itself to
+                that exact width, the glyphs turning in on a staggered 3D flip, so the swap reads as the
+                container reshaping around the word rather than the word shuffling inside it. The width
+                is read off a hidden copy that mirrors the visible type, so it lands dead on for any
+                face or weight with nothing hard-coded, and it re-measures once Fraunces loads so it is
+                never sized to the fallback. The flipping letters are decoration a screen reader never
+                sees; a quiet live region speaks the settled word instead. Under reduced motion the flip
+                and the width spring both drop to a plain cross-fade and an instant resize &mdash; the
+                word still cycles, because here it carries meaning, it just stops turning.
               </p>
             </div>
           </div>
