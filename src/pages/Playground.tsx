@@ -12096,8 +12096,9 @@ export default function Playground() {
             <div className="mt-4 px-1">
               <h3 className="text-base font-semibold">Tusi couple</h3>
               <p className="mt-1 text-sm leading-relaxed text-white/45">
-                The ninth character in the rigid-mechanism corner, and the odd one out: where the Peaucellier and the
-                Chebyshev beside it make a straight line out of <em>bars</em> &mdash; a cell of pivots coaxed until one
+                The newest character in the rigid-mechanism corner, and the odd one out among its straight-line
+                makers: where the Peaucellier and the Chebyshev make a straight line out of <em>bars</em> &mdash; a cell
+                of pivots coaxed until one
                 joint can only travel in a line &mdash; this makes one out of a single rolling circle, with no hinge at
                 all. Roll a circle of radius <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">r</code>{' '}
                 around the inside of a ring of radius{' '}
