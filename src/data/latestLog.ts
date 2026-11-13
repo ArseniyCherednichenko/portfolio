@@ -34,6 +34,12 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'A straight line drawn by rolling, not hinging',
+    summary:
+      'Tusi couple — roll a wheel inside a ring twice its size and a rim point traces a dead-straight line, exactly; the odd one out beside the bar-linkage straight-line makers.',
+    tag: 'Component',
+  },
+  {
     title: 'A word whose frame springs to fit it',
     summary:
       'Container text flip — the word-swapper where the box moves, not the word; the pill measures each word and springs its own width to it while the letters turn in.',
@@ -86,10 +92,5 @@ export const LATEST_LOG: LogHeadline[] = [
     summary:
       'The five discipline demos, once buried on deep pages, now switch live inside the range explorer and on the home page.',
     tag: 'Page',
-  },
-  {
-    title: 'A cursor that tells your hand what a click does',
-    summary: "Contextual cursor — the site's own custom pointer grew a caption. A tight lime dot and a trailing ring already run on every page, springing after the cursor at two tensions, the ring swelling and filling over anything interactive; what is new is the word. Any element can hand the cursor a label through a data-cursor attribute, and that word rides in as a small lime pill a beat behind the ring on its own softer spring — Preview over a project card, Open on a link that leaves for the web, Read on a case study — so the pointer narrates what a click will do before you take it, the way Linear and Vercel caption their affordances. The dot yields to the word so the eye reads one mark, not two, and the pill trails just below-right of the point so it never hides under the hand. One global pointer listener reads the nearest declaring ancestor, so it costs nothing per element and can never drift out of sync. Pointer-and-motion only by design: touch devices and reduced-motion visitors keep the native cursor with no caption, untouched. A new Contextual cursor surface in the Playground's controls family shows it off, each tile declaring its own word.",
-    tag: 'Motion',
   },
 ]
