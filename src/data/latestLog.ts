@@ -34,6 +34,12 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'A word whose frame springs to fit it',
+    summary:
+      'Container text flip — the word-swapper where the box moves, not the word; the pill measures each word and springs its own width to it while the letters turn in.',
+    tag: 'Component',
+  },
+  {
     title: 'Three stars, and no formula can say where they go',
     summary:
       'Three-body problem — chaos in its oldest form; three stars under gravity, the butterfly effect before Lorenz named it, the dance leaning toward your hand.',
@@ -85,10 +91,5 @@ export const LATEST_LOG: LogHeadline[] = [
     title: 'A cursor that tells your hand what a click does',
     summary: "Contextual cursor — the site's own custom pointer grew a caption. A tight lime dot and a trailing ring already run on every page, springing after the cursor at two tensions, the ring swelling and filling over anything interactive; what is new is the word. Any element can hand the cursor a label through a data-cursor attribute, and that word rides in as a small lime pill a beat behind the ring on its own softer spring — Preview over a project card, Open on a link that leaves for the web, Read on a case study — so the pointer narrates what a click will do before you take it, the way Linear and Vercel caption their affordances. The dot yields to the word so the eye reads one mark, not two, and the pill trails just below-right of the point so it never hides under the hand. One global pointer listener reads the nearest declaring ancestor, so it costs nothing per element and can never drift out of sync. Pointer-and-motion only by design: touch devices and reduced-motion visitors keep the native cursor with no caption, untouched. A new Contextual cursor surface in the Playground's controls family shows it off, each tile declaring its own word.",
     tag: 'Motion',
-  },
-  {
-    title: 'A card whose border lights toward your cursor',
-    summary: "Glow card — the glowing border of 21st.dev and Aceternity rebuilt by hand, and the cursor-driven counterpart to the two border effects beside it: the border beam runs a comet on a timer and the electric border jitters on a timer, both blind to the pointer, where this one is handed to it. A conic gradient whose bright wedge always points at the cursor lights only the stretch of border nearest it, ramping up as you near and fading with distance. It comes alive as a grid, not one card: each card tracks the single global pointer, so none needs hovering — sweep the gutters between them and every facing edge lights at once, like a torch passing framed glass — and the lift is proximity, not a hover flag, so the glow slides across the gaps instead of snapping per card. It stays on the frame, a crisp masked ring over a blurred bloom with no wash across the surface, which is what keeps it distinct from the spotlight card rather than a restyle of it. Reduced motion never wires the pointer: each card rests with a calm, even, faint ring, framed but still.",
-    tag: 'Component',
   },
 ]
