@@ -503,6 +503,7 @@ import { ElementaryCA } from '../components/ElementaryCA'
 import { Sandpile } from '../components/Sandpile'
 import { Moire } from '../components/Moire'
 import { Lorenz } from '../components/Lorenz'
+import { ThreeBody } from '../components/ThreeBody'
 import { Sortable } from '../components/Sortable'
 import { KanbanBoard } from '../components/KanbanBoard'
 import { Carousel, type CarouselSlide } from '../components/Carousel'
@@ -8926,6 +8927,45 @@ export default function Playground() {
                 frame-driven clock with no wall time, DPR-capped and finite-guarded. Reduced motion never starts the
                 loop: one long orbit is integrated once and the whole butterfly is drawn still, at a composed
                 three-quarter angle.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH THREE-BODY — chaos in its oldest, most physical form */}
+        <Reveal>
+          <div id="three-body" data-experiment="Three-body" className="mt-12 scroll-mt-32">
+            <div className="relative h-[480px] overflow-hidden rounded-3xl border border-white/10 bg-[#050505]">
+              <ThreeBody className="h-full w-full" />
+              <div className="pointer-events-none absolute inset-x-0 top-8 z-10 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Three-body</span>
+                <p className="mx-auto mt-3 max-w-md px-6 text-lg font-medium text-white/90 sm:text-xl">
+                  Two stars orbit forever. Add a third and no formula can say where they go &mdash; move across it and the
+                  dance leans toward your hand.
+                </p>
+              </div>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Three-body problem &mdash; where chaos was born</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The chaos the Lorenz attractor beside it only distilled, here in its oldest and most physical form. Two
+                masses under gravity trace clean ellipses forever &mdash; Kepler solved that in closed form. Add a third
+                and the closed form vanishes: <span className="font-semibold text-white/70">Poincar&eacute; proved in
+                1890</span> that no formula can predict where these three go, and the only way to know is to integrate the
+                motion step by step and watch. Two starts a hair apart diverge into completely different histories &mdash;
+                the butterfly effect, decades before Lorenz gave it a name. The physics is honest and hand-rolled: three
+                point masses pulling on each other by Newton&rsquo;s inverse-square law, with a small softening so a near
+                pass stays finite, carried forward by <span className="font-semibold text-white/70">symplectic
+                velocity-Verlet</span> &mdash; the leapfrog integrator astronomers trust to conserve energy over long runs
+                &mdash; in many small sub-steps a frame. The barycentre is pinned to the centre and the net momentum zeroed,
+                so the three stay framed as a group even while one is thrown clear; and because the general outcome of
+                three-body gravity is exactly that &mdash; one star ejected while the other two pair into a tight binary
+                &mdash; the system quietly reseeds on an ejection, so it never freezes and never repeats. Each body drags a
+                glowing comet tail from a feedback fade, the three in lime, mint and warm white; the pointer drops a soft
+                gravitational well that leans the whole braid toward your hand. Reduced motion drops the loop and the chaos
+                and paints one thing still: the <span className="font-semibold text-white/70">figure-eight
+                choreography</span>, the exact periodic solution Chenciner and Montgomery proved in 2000, three equal
+                masses chasing one another forever around a single figure-eight &mdash; the one orbit that found order.
               </p>
             </div>
           </div>
