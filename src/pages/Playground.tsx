@@ -210,6 +210,7 @@ import { ScotchYoke } from '../components/ScotchYoke'
 import { SliderCrank } from '../components/SliderCrank'
 import { Trammel } from '../components/Trammel'
 import { Chebyshev } from '../components/Chebyshev'
+import { TusiCouple } from '../components/TusiCouple'
 import { Watt } from '../components/Watt'
 import { Brachistochrone } from '../components/Brachistochrone'
 import { Catenary } from '../components/Catenary'
@@ -12074,6 +12075,53 @@ export default function Playground() {
                 off true it strays. Under{' '}
                 <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code> there is
                 no sweep &mdash; Step jumps end to end &mdash; and every state stays legible.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH TUSI COUPLE — the straight line drawn by rolling, not hinging */}
+        <Reveal>
+          <div id="tusi-couple" data-experiment="Tusi couple" className="mt-12 scroll-mt-32">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 py-12 sm:px-10">
+              <div className="mb-8 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">A line without a hinge</span>
+                <p className="mx-auto mt-3 max-w-md text-lg font-medium text-white/85 sm:text-xl">
+                  Roll a wheel inside a ring twice its size, and a point on its rim draws a dead-straight line &mdash; all
+                  curve, no straight part, yet exactly straight.
+                </p>
+              </div>
+              <TusiCouple className="mx-auto" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Tusi couple</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The ninth character in the rigid-mechanism corner, and the odd one out: where the Peaucellier and the
+                Chebyshev beside it make a straight line out of <em>bars</em> &mdash; a cell of pivots coaxed until one
+                joint can only travel in a line &mdash; this makes one out of a single rolling circle, with no hinge at
+                all. Roll a circle of radius <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">r</code>{' '}
+                around the inside of a ring of radius{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">2r</code> and every point on its rim
+                traces a perfect diameter of the ring &mdash; not approximately, like the Chebyshev, but{' '}
+                <em>exactly</em>, to machine precision, because the curved rolling of a circle inside one twice its size
+                cancels into a line. Astronomers knew it as the Tusi couple, after Nasir al-Din al-Tusi, who built
+                straight-line motion out of circles in the thirteenth century, when circles were all the heavens were
+                allowed. The marvel doubles: the two <em>ends</em> of a rod drawn across the wheel run along two{' '}
+                <em>perpendicular</em> lines at once &mdash; the elliptical trammel's constraint, two points sliding in
+                square slots, met with no slots anywhere, the rod being a diameter of the wheel and the slots the lines
+                it is forced to draw. The one dial is the ratio{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">R / r</code>: it is{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">2</code> that makes the line; take the
+                wheel smaller and the straight stroke bows back into a cusped hypocycloid &mdash; a deltoid at three, an
+                astroid at four &mdash; so the line reads as the single degenerate curve that has run out of curvature.
+                The only stored values are the roll angle and the ratio; the wheel centre, the rim point, its partner and
+                the whole traced path are solved from those each frame, so nothing can drift. Drag to roll it, or set it
+                turning. A real{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">role=slider</code> from the keyboard:
+                left and right nudge the roll, Shift for a larger step, Space runs or stops, Home zeroes it and End jumps
+                a quarter turn, with a live region reading the angle and the shape the ratio draws. Under{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code> there is
+                no sweep &mdash; Step jumps a quarter turn &mdash; and every state stays legible.
               </p>
             </div>
           </div>
