@@ -291,6 +291,7 @@ import { Voronoi } from '../components/Voronoi'
 import { CirclePacking } from '../components/CirclePacking'
 import { Aggregate } from '../components/Aggregate'
 import { ChaosGame } from '../components/ChaosGame'
+import { DragonCurve } from '../components/DragonCurve'
 import { Superformula } from '../components/Superformula'
 import { TimesTable } from '../components/TimesTable'
 import { StickerPeel } from '../components/StickerPeel'
@@ -8621,6 +8622,41 @@ export default function Playground() {
                 white while the rare cells stay dark. The dust accumulates on its own persistent canvas over about a
                 second and a half while a bright point skitters the walk on an overlay above it. Reduced motion plots the
                 whole figure at once and holds it, with no skittering point.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* DRAGON CURVE — the Heighway dragon folding from a flat strip into the fractal */}
+        <Reveal>
+          <div id="dragon-curve" data-experiment="Dragon curve" className="mt-12 scroll-mt-32">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 py-12 sm:px-10">
+              <div className="text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Paper folding</span>
+                <p className="mx-auto mt-3 max-w-md text-lg font-medium text-white/85 sm:text-xl">
+                  Fold a strip of paper in half enough times, open every crease to a right angle, and this is the shape.
+                </p>
+              </div>
+              <DragonCurve className="mt-10" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Dragon curve</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The Heighway dragon, and the one fractal in this corner whose whole identity is the fold. Where the
+                Hilbert sweep is a fixed recursive tour that fills a square and the fractal tree is a recursion that
+                splits, this piece animates the crease itself: a single fold angle runs from flat — a plain straight
+                strip — up to a right angle, and the curve folds up in front of you and unfolds back down on command. The
+                turns are not random and not placed by hand; they are the regular paper-folding sequence, read straight
+                off the binary of each crease number. Number the creases one, two, three; strip the trailing zeros from
+                the index and the low bit left decides the turn — a left where it reads one, a right where it reads three.
+                That rule is self-similar, so the order-n dragon is only the first few terms of one infinite sequence and
+                every higher order extends the last rather than replacing it, which is why stepping the order feels like
+                unrolling more of a single object, not swapping figures. Everything is deterministic and off the wall
+                clock: for a given fold angle the turtle walks the same path every frame, the bounding box is re-fit each
+                frame so the strip zooms in on itself as it folds, and the stroke is laid in colour bands from a deep teal
+                tail to a lime head so the order of travel reads along the curve. One canvas, one rAF loop that runs only
+                while a fold is in flight and then stops, DPR-capped and resize-driven. Reduced motion paints the dragon
+                whole at full fold and the toggle snaps between the flat strip and the finished curve with nothing moving.
               </p>
             </div>
           </div>
