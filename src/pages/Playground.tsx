@@ -205,6 +205,7 @@ import { FourBar } from '../components/FourBar'
 import { Peaucellier } from '../components/Peaucellier'
 import { GenevaDrive } from '../components/GenevaDrive'
 import { Strandbeest } from '../components/Strandbeest'
+import { Klann } from '../components/Klann'
 import { Escapement } from '../components/Escapement'
 import { ScotchYoke } from '../components/ScotchYoke'
 import { SliderCrank } from '../components/SliderCrank'
@@ -11919,6 +11920,50 @@ export default function Playground() {
                 region reading the angle. Under{' '}
                 <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code> there is
                 no continuous walk &mdash; the pair holds mid-stride and steps on a station at a time on demand.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH KLANN — the Strandbeest's leaner walking counterpart */}
+        <Reveal>
+          <div id="klann" data-experiment="Klann linkage" className="mt-12 scroll-mt-32">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 py-12 sm:px-10">
+              <div className="mb-8 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">The other walker</span>
+                <p className="mx-auto mt-3 max-w-md text-lg font-medium text-white/85 sm:text-xl">
+                  The same walker&rsquo;s gait as the beest, from a leaner leg you can read joint by joint.
+                </p>
+              </div>
+              <Klann className="mx-auto" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Klann linkage</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The Strandbeest&rsquo;s honest counterpart, and the one other famous answer to the same question: carry a
+                foot through a walker&rsquo;s path from nothing but a turning crank. Where Theo Jansen tuned eleven{' '}
+                <em>holy numbers</em> over years into one dense, organic leg, Joe Klann reached the same gait with a lean
+                six-bar he patented in 2001 (<code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">US&nbsp;6,260,862</code>)
+                &mdash; a crank, two rockers bolted to the frame, a connecting rod, and the leg plate itself &mdash; a
+                linkage spare enough to read joint by joint. That legibility is the whole reason it earns a place beside
+                the beest rather than repeating it: two routes to one problem, one a recipe, one a diagram. The geometry
+                here is <em>not</em> invented &mdash; every link length is derived straight from the patent&rsquo;s own
+                Table 1, its fully-extended ground-stride pose, so each bar is the real published proportion and the crank
+                throw their canonical <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">0.268</code>{' '}
+                unit. From the crank pin, with the two frame pivots, <em>every</em> remaining joint is the same two-circle
+                intersection the four-bar uses &mdash; the elbow on the lower rocker, the knee at the far pin of the
+                ternary connecting rod, the hip on the upper rocker, the foot the apex of the rigid leg plate &mdash; each
+                branch chosen so the leg assembles the one way that walks. Solved forward over a turn the foot traces the
+                patent&rsquo;s gait exactly: a long near-flat stroke along the ground to drive the body forward, then a
+                high arc up and over to swing clear for the next step, drawn once from that very solver as the faint ghost
+                beneath the feet. Two legs share the crank <em>half a turn apart</em> so while one foot is flat and
+                driving the other is lifted and reaching, and the ground scrolls to stand in for the travel each stance
+                earns. The only stored state is the crank angle; the whole pose derives from it by real kinematics each
+                frame, not an easing curve dressed as a machine. Drag anywhere to turn the crank one to one, or set it
+                walking. A real <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">role=slider</code> from
+                the keyboard: arrows nudge the crank, Shift a bigger step, Space walks or stops, Home returns it to the
+                top. Under <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code>{' '}
+                there is no continuous walk &mdash; the pair holds mid-stride and steps on demand.
               </p>
             </div>
           </div>
