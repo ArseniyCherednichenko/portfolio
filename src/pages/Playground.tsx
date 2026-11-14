@@ -290,6 +290,7 @@ import { WaveCollapse } from '../components/WaveCollapse'
 import { Voronoi } from '../components/Voronoi'
 import { CirclePacking } from '../components/CirclePacking'
 import { Aggregate } from '../components/Aggregate'
+import { BarnsleyFern } from '../components/BarnsleyFern'
 import { ChaosGame } from '../components/ChaosGame'
 import { DragonCurve } from '../components/DragonCurve'
 import { Superformula } from '../components/Superformula'
@@ -8622,6 +8623,42 @@ export default function Playground() {
                 white while the rare cells stay dark. The dust accumulates on its own persistent canvas over about a
                 second and a half while a bright point skitters the walk on an overlay above it. Reduced motion plots the
                 whole figure at once and holds it, with no skittering point.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* BARNSLEY FERN — the chaos game played with affine maps, precipitating a living fern */}
+        <Reveal>
+          <div id="barnsley-fern" data-experiment="Barnsley fern" className="mt-12 scroll-mt-32">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 py-12 sm:px-10">
+              <div className="text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Emergence</span>
+                <p className="mx-auto mt-3 max-w-md text-lg font-medium text-white/85 sm:text-xl">
+                  Four tiny matrices, picked at random, and a fern no one drew grows out of the noise.
+                </p>
+              </div>
+              <BarnsleyFern className="mt-10" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Barnsley fern</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The chaos game's affine sibling, and the piece that shows the same "order out of pure chance" engine can
+                draw a living thing, not just an abstract lace. The gasket beside it jumps a fixed fraction of the way
+                toward a randomly chosen polygon corner; this plays the identical game but swaps the corner-jumps for four
+                tiny affine maps &mdash; each a rotate, scale, shear and shift packed into six numbers &mdash; and picks
+                among them with unequal odds. Start a point at the origin, over and over pick one of the four maps at
+                random, apply it, plot where you land. No map describes a leaf and nothing in the rule mentions a plant,
+                yet the landings pile onto a fern: a stalk, a spray of ever-smaller fronds, two side leaves, each a
+                shrunken copy of the whole. That four six-number matrices can encode a recognisable organism is the
+                astonishing part &mdash; it is the seed of fractal image compression, store the maps and not the pixels,
+                and the reason it earns a place next to the chaos game rather than repeating it. Every point is coloured
+                by which map drew it, so the engine is legible: the rare stem map in teal, the dominant frond map in lime,
+                the two side-leaf maps in mint and amber. The frond map is a rotate-and-shrink, and its rotation angle is
+                the one dial &mdash; widen it and every leaflet inherits a little more turn than the last, so the whole
+                frond coils into a spiral while staying a bounded fern, because each map contracts. The randomness is
+                seeded, so a given curl grows the same fern every load and the loop never touches the wall clock. Reduced
+                motion plots the fern whole and holds it, with no skittering point.
               </p>
             </div>
           </div>
