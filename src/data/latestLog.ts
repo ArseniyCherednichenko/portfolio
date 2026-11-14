@@ -34,6 +34,12 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'A fractal that folds from a flat strip',
+    summary:
+      'Dragon curve — the Heighway dragon, whose whole identity is the fold; run one crease angle from flat to a right angle and the strip folds up into the fractal and unfolds back.',
+    tag: 'Component',
+  },
+  {
     title: 'A straight line drawn by rolling, not hinging',
     summary:
       'Tusi couple — roll a wheel inside a ring twice its size and a rim point traces a dead-straight line, exactly; the odd one out beside the bar-linkage straight-line makers.',
@@ -86,11 +92,5 @@ export const LATEST_LOG: LogHeadline[] = [
     summary:
       'Focus cards — the quiet opposite of the spotlight and glow cards beside it. Those make the card you touch do more; this makes everything else do less. Hover or tab into any card and it holds still and sharp while its neighbours blur a touch, dim, and settle back a hair, so the eye is led by what falls away rather than what lights up, the way a good page dims what you are not reading. In the spirit of Aceternity\'s focus cards, rebuilt by hand. It coordinates without fragile indices — a small context where every card mints a stable id and the grid holds only which one is active, so a card is dimmed exactly when some sibling is focused and it is not, however the children are composed. And it answers the keyboard, not just the mouse: focus landing on a link inside a card raises it the same way a hover does, and the clear only fires if the leaving card is still the active one, so a fast sweep between neighbours never blanks the grid. Pure CSS transitions on blur, opacity and scale; nothing on a canvas. Reduced motion keeps the meaning and drops the movement — the active card gains a calm, even ring and the rest are left untouched. It debuts as a grid of the range, so no one card is ever the whole story.',
     tag: 'Component',
-  },
-  {
-    title: 'The range shown live, not just named',
-    summary:
-      'The five discipline demos, once buried on deep pages, now switch live inside the range explorer and on the home page.',
-    tag: 'Page',
   },
 ]
