@@ -34,6 +34,12 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'A living fern grown from four random matrices',
+    summary:
+      "Barnsley fern — the chaos game's affine sibling; play the same order-out-of-chance game with four tiny affine maps instead of polygon corners and a fern precipitates, coloured by which map drew each point.",
+    tag: 'Component',
+  },
+  {
     title: 'A fractal that folds from a flat strip',
     summary:
       'Dragon curve — the Heighway dragon, whose whole identity is the fold; run one crease angle from flat to a right angle and the strip folds up into the fractal and unfolds back.',
@@ -85,12 +91,6 @@ export const LATEST_LOG: LogHeadline[] = [
     title: 'The light net on the floor of a sunlit pool',
     summary:
       'Caustics — the third demoscene field, and the one that focuses. The plasma beside it folds soft lime light and the dither quantises it to a hard stipple; sunlight bent through a rippling water surface does neither, it converges, pulling the light into thin, bright, branching filaments over dark water. A sharpened interference field gives you exactly that: each pixel\'s coordinates are domain-warped twice, each axis pushed by a sine read of the other so a plain grid drifts into organic cells, then two interfering wavefronts are multiplied into one value and that value is raised to a high power — so most of the panel falls to dark water and only the crests survive as a lit web that wanders and reknits. Same cheap recipe as its siblings keeps it honest: a deliberately coarse offscreen buffer upscaled soft, a 256-entry colour lookup so the inner loop never interpolates, device pixel ratio irrelevant to a buffer coarse on purpose, one animation-frame loop cleaned up on unmount. The pointer is a finger on the surface — drop it anywhere and a ring spreads out, bending the net where it passes. Reduced motion paints one still frame and runs no loop.',
-    tag: 'Component',
-  },
-  {
-    title: 'A grid that dims the cards you are not reading',
-    summary:
-      'Focus cards — the quiet opposite of the spotlight and glow cards beside it. Those make the card you touch do more; this makes everything else do less. Hover or tab into any card and it holds still and sharp while its neighbours blur a touch, dim, and settle back a hair, so the eye is led by what falls away rather than what lights up, the way a good page dims what you are not reading. In the spirit of Aceternity\'s focus cards, rebuilt by hand. It coordinates without fragile indices — a small context where every card mints a stable id and the grid holds only which one is active, so a card is dimmed exactly when some sibling is focused and it is not, however the children are composed. And it answers the keyboard, not just the mouse: focus landing on a link inside a card raises it the same way a hover does, and the clear only fires if the leaving card is still the active one, so a fast sweep between neighbours never blanks the grid. Pure CSS transitions on blur, opacity and scale; nothing on a canvas. Reduced motion keeps the meaning and drops the movement — the active card gains a calm, even ring and the rest are left untouched. It debuts as a grid of the range, so no one card is ever the whole story.',
     tag: 'Component',
   },
 ]
