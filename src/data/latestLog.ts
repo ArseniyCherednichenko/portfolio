@@ -34,6 +34,12 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'The only five solids, drawn and proven',
+    summary:
+      "Platonic solids — the Tesseract's honest 3D companion; the five regular solids as draggable wireframes, their edges derived from the points and their face count read live from Euler's formula F = 2 − V + E.",
+    tag: 'Component',
+  },
+  {
     title: 'Rotation around a bend, and the cost of it',
     summary:
       "Universal joint — the Oldham's foil; a Hooke joint carries a turn between shafts that meet at an angle, but can't keep their speeds in step — the output races then lags, twice a turn, by more the steeper the bend.",
@@ -85,12 +91,6 @@ export const LATEST_LOG: LogHeadline[] = [
     title: 'One spotlight that crosses the gaps between cards',
     summary:
       'Spotlight grid — a grid of cards that share a single cursor-tracked light, the continuous counterpart to the per-card spotlight and glow cards; sweep the gutters and both facing edges light together.',
-    tag: 'Component',
-  },
-  {
-    title: 'A piston that lags the sine its twin draws clean',
-    summary:
-      "Slider-crank — the piston engine beside the Scotch yoke; its connecting rod bends the yoke's perfect sine lopsided.",
     tag: 'Component',
   },
 ]
