@@ -269,6 +269,7 @@ import { Domino } from '../components/Domino'
 import { Governor } from '../components/Governor'
 import { CamFollower } from '../components/CamFollower'
 import { Pantograph } from '../components/Pantograph'
+import { UniversalJoint } from '../components/UniversalJoint'
 import { Oldham } from '../components/Oldham'
 import { Whitworth } from '../components/Whitworth'
 import { Reuleaux } from '../components/Reuleaux'
@@ -12530,6 +12531,54 @@ export default function Playground() {
                 Under <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code> it
                 never free-runs &mdash; Step jumps dead centre to dead centre so the two strokes stay legible without the
                 sweep between.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH UNIVERSAL JOINT — the Oldham's honest foil, rotation around a bend */}
+        <Reveal>
+          <div id="universal-joint" data-experiment="Universal joint" className="mt-12 scroll-mt-32">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 py-12 sm:px-10">
+              <div className="mb-8 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Rotation around a bend</span>
+                <p className="mx-auto mt-3 max-w-md text-lg font-medium text-white/85 sm:text-xl">
+                  The Oldham joined two shafts that were parallel; this one joins two that meet at an angle &mdash; and
+                  cannot keep their speeds in step.
+                </p>
+              </div>
+              <UniversalJoint className="mx-auto" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Universal joint</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The fourteenth character in the rigid-mechanism corner, and the deliberate reply to the Oldham a couple
+                of places back. Both answer the same awkward question &mdash; how do you carry a turn between two shafts
+                that do not line up &mdash; but the Oldham&rsquo;s shafts were <em>parallel</em>, merely offset, and it
+                passed the turn through with no lead and no lag. A Hooke joint, patented in principle by Robert Hooke in
+                1676 and in every driveline since, joins two shafts that meet at an <em>angle</em>, and that is the one
+                case where honesty costs something: it is <em>not</em> a constant-velocity coupling. Drive the input at a
+                dead-steady rate and the output does not keep step &mdash; it runs ahead through part of each turn and
+                lags behind through the rest, twice a revolution, by more the steeper the bend. That ripple is not a bug
+                in this drawing; it is forced by the geometry, and it is exactly why a driveshaft runs <em>two</em> of
+                these out of phase so the second undoes the first, or a constant-velocity joint instead. None of the
+                motion is scripted. The cross between the forks is a rigid right angle: one arm is held perpendicular to
+                the input shaft and swung by the input angle, and the other must stay perpendicular to <em>both</em> that
+                arm and the output shaft, so it is the normalised cross product{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">a&#8322; &times; arm&#8321;</code> and
+                nothing else it could be. The output angle read off it is therefore the textbook Cardan relation{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">&theta;&#8322; = atan2(sin&nbsp;&theta;&#8321;, cos&nbsp;&beta;&middot;cos&nbsp;&theta;&#8321;)</code>,
+                and the instantaneous speed ratio{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">&omega;&#8322;/&omega;&#8321; = cos&nbsp;&beta; / (1 &minus; sin&sup2;&beta;&middot;cos&sup2;&theta;&#8321;)</code>{' '}
+                swings between <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">cos&nbsp;&beta;</code> and{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">1/cos&nbsp;&beta;</code> &mdash; both
+                plotted live beneath the two tilted rotation hoops, with the lead or lag the bend costs on the chip beside
+                it. Drag anywhere around the centre to turn the input, or set it spinning; a second slider opens the bend
+                from straight-through to a steep angle and the ripple grows under your hand. A real{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">role=slider</code> from the keyboard:
+                arrows nudge the input, Shift a bigger step, Space spins or stops, Home returns it to zero. Under{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code> it never
+                free-runs &mdash; Step turns the input a station at a time so the lead and lag stay legible.
               </p>
             </div>
           </div>
