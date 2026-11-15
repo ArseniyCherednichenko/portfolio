@@ -282,12 +282,12 @@ export function UniversalJoint({ className = '' }: { className?: string }) {
         >
           <defs>
             <linearGradient id="uj-in" x1="0" y1="0" x2="1" y2="0">
-              <stop offset="0" stopColor="rgba(255,255,255,0.06)" />
-              <stop offset="1" stopColor="rgba(255,255,255,0.22)" />
+              <stop offset="0" stopColor="rgba(255,255,255,0.22)" />
+              <stop offset="1" stopColor="rgba(255,255,255,0.46)" />
             </linearGradient>
-            <linearGradient id="uj-out" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0" stopColor="rgba(220,248,124,0.3)" />
-              <stop offset="1" stopColor="rgba(220,248,124,0.08)" />
+            <linearGradient id="uj-out" x1="1" y1="0" x2="0" y2="0">
+              <stop offset="0" stopColor="rgba(220,248,124,0.32)" />
+              <stop offset="1" stopColor="rgba(220,248,124,0.66)" />
             </linearGradient>
           </defs>
 
