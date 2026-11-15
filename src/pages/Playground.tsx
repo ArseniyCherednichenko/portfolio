@@ -199,6 +199,7 @@ import { Bifurcation } from '../components/Bifurcation'
 import { Penrose } from '../components/Penrose'
 import { Collatz } from '../components/Collatz'
 import { Tesseract } from '../components/Tesseract'
+import { Platonic } from '../components/Platonic'
 import { Gears } from '../components/Gears'
 import { PlanetaryGears } from '../components/PlanetaryGears'
 import { FourBar } from '../components/FourBar'
@@ -12774,6 +12775,51 @@ export default function Playground() {
                 shrunk by that first divide. The pointer leans the tumble and eases back to a slow idle when it leaves.
                 One canvas, one loop off the frame delta, DPR-capped. Reduced motion projects it once at a flattering
                 angle and holds it still.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH PLATONIC SOLIDS — the 3D companion to the Tesseract's 4D oddity */}
+        <Reveal>
+          <div id="platonic" data-experiment="Platonic solids" className="mt-12 scroll-mt-32">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 py-12 sm:px-10">
+              <div className="mb-8 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">The only five</span>
+                <p className="mx-auto mt-3 max-w-md text-lg font-medium text-white/85 sm:text-xl">
+                  The Tesseract above holds a shape out of a plane you cannot picture. These are the whole family from
+                  the one you can. Drag to tumble; pick a solid.
+                </p>
+              </div>
+              <Platonic className="mx-auto" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Platonic solids</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The honest 3D companion to the Tesseract a place above it, and the end of a thread: that one holds a
+                figure out of a fourth dimension you cannot see; this holds the complete set from the third. There are
+                exactly five convex solids whose faces are all the same regular polygon meeting the same way at every
+                corner &mdash; the tetrahedron, cube, octahedron, dodecahedron and icosahedron &mdash; and{' '}
+                <em>exactly five</em> is the point: Euclid closes the <em>Elements</em>, thirteen books on, by proving
+                there can be no sixth. Nothing here is hand-counted. Each solid is just its vertex coordinates (the
+                classic golden-ratio sets{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">(0,&nbsp;&plusmn;1,&nbsp;&plusmn;&phi;)</code>{' '}
+                and kin for the dodecahedron and icosahedron), and the <em>edges are derived, not typed in</em> &mdash;
+                an edge is any pair of vertices at the shortest distance the figure contains, so the tetrahedron&rsquo;s
+                six, the cube&rsquo;s twelve and the icosahedron&rsquo;s thirty all fall straight out of the points with
+                nothing to miscount. The face count under the picker is never stored either: it is read back live from{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">F = 2 &minus; V + E</code>, Euler&rsquo;s
+                formula, so the readout is a <em>computed fact about the object on screen</em> rather than a label beside
+                it. It is driven, not scripted &mdash; a real 3&times;3 rotation matrix holds the orientation, so a grab
+                turns the solid about the screen axes with no gimbal lock, and the release carries the throw&rsquo;s
+                angular velocity, bleeding off over a quiet idle drift. Each edge is drawn far-to-near, distant edges
+                thin and dim, near edges thick and warming toward white with a lime glow, so the wireframe reads as a
+                turning crystal. The canvas is decoration; the picker is a real{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">radiogroup</code> and a polite live
+                region speaks the current solid and its vertex, edge and face counts. Under{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code> it never
+                free-runs &mdash; the chosen solid is projected once at a flattering angle and held still, and a drag
+                still turns it directly, with no throw.
               </p>
             </div>
           </div>
