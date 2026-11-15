@@ -2,14 +2,16 @@ import { motion, useReducedMotion } from 'framer-motion'
 
 // "scroll" hint at the bottom of the hero so visitors know there's more below.
 // The arrow nudges downward on a loop to read as an invitation; under reduced
-// motion it simply holds still, the cue carried by the label alone.
-export function ScrollCue() {
+// motion it simply holds still, the cue carried by the label alone. An optional
+// `className` is appended, so a caller can hide it at a breakpoint where a
+// richer affordance (a status card, a rotating seal) already owns the edge.
+export function ScrollCue({ className = '' }: { className?: string }) {
   const reduce = useReducedMotion()
   return (
     <motion.a
       href="#about"
       aria-label="Scroll to content"
-      className="absolute bottom-8 left-6 flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-white/40 transition-colors hover:text-white/70"
+      className={`absolute bottom-8 left-6 flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-white/40 transition-colors hover:text-white/70 ${className}`}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ delay: 1, duration: 0.8 }}

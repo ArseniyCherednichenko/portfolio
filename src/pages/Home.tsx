@@ -339,7 +339,11 @@ export default function Home() {
             Playground
           </Link>
         </motion.div>
-        <ScrollCue />
+        {/* Below lg this is the only scroll affordance. At lg and up the glass
+            status card (bottom-left) and the rotating "scroll to explore" seal
+            (bottom-right) take over, so the plain cue is hidden there — it would
+            otherwise sit underneath the status card and read as a duplicate. */}
+        <ScrollCue className="lg:hidden" />
         {/* Live glass status — refracts the orbit behind it, lg-only. */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
