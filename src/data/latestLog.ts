@@ -34,6 +34,12 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'A hero line that never flickers blank',
+    summary:
+      'The rotating hero word now overlaps its swap so one is always shown, holds its width so nothing reflows, and foregrounds the range over any one product.',
+    tag: 'Polish',
+  },
+  {
     title: 'The only five solids, drawn and proven',
     summary:
       "Platonic solids — the Tesseract's honest 3D companion; the five regular solids as draggable wireframes, their edges derived from the points and their face count read live from Euler's formula F = 2 − V + E.",
@@ -85,12 +91,6 @@ export const LATEST_LOG: LogHeadline[] = [
     title: 'One gear set, three ratios from which part you hold',
     summary:
       'Planetary gears — the gear train folded onto one axis; hold the ring, the sun or the carrier and the same wheels give a reduction, an overdrive or reverse.',
-    tag: 'Component',
-  },
-  {
-    title: 'One spotlight that crosses the gaps between cards',
-    summary:
-      'Spotlight grid — a grid of cards that share a single cursor-tracked light, the continuous counterpart to the per-card spotlight and glow cards; sweep the gutters and both facing edges light together.',
     tag: 'Component',
   },
 ]
