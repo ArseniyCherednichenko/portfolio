@@ -312,7 +312,16 @@ export default function Home() {
           className="mt-7 flex flex-wrap items-center gap-2 text-2xl text-white/70 sm:text-3xl"
         >
           <span>I build</span>
-          <RotatingWord words={['beautiful products.', 'Socratic AI.', 'calm interfaces.', 'things with craft.']} />
+          <RotatingWord
+            words={[
+              'beautiful products.',
+              'calm interfaces.',
+              'native apps.',
+              'motion systems.',
+              'Socratic AI.',
+              'things with craft.',
+            ]}
+          />
         </motion.div>
         <motion.p
           initial={{ opacity: 0, y: 24 }}
