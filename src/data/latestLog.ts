@@ -34,6 +34,12 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'Rotation around a bend, and the cost of it',
+    summary:
+      "Universal joint — the Oldham's foil; a Hooke joint carries a turn between shafts that meet at an angle, but can't keep their speeds in step — the output races then lags, twice a turn, by more the steeper the bend.",
+    tag: 'Component',
+  },
+  {
     title: 'The other walking leg, lean enough to read',
     summary:
       "Klann linkage — the Strandbeest's counterpart; a six-bar built to the patent's own proportions that reaches the same walker's gait, a flat ground stroke then a high arc, from a leg you can read joint by joint.",
@@ -85,12 +91,6 @@ export const LATEST_LOG: LogHeadline[] = [
     title: 'A piston that lags the sine its twin draws clean',
     summary:
       "Slider-crank — the piston engine beside the Scotch yoke; its connecting rod bends the yoke's perfect sine lopsided.",
-    tag: 'Component',
-  },
-  {
-    title: 'An endless tunnel you fall through, not look at',
-    summary:
-      "Tunnel — the demoscene's depth classic, and the one thing the three flat fields beside it never do. The plasma folds soft lime light, the dither quantises it to a hard stipple, the caustics focus it into filaments; all three paint a surface you look at. This opens a hole in the surface and falls through it — perspective, not texture — the trick every 1990s intro reached for once it had a palette, and it is built the exact way those were. A tunnel has only two coordinates, how far down the bore a point sits and how far around the wall, and both are fixed functions of a pixel's place relative to the centre. So depth (a constant over the radius, so the value races toward infinity at the vanishing point and crawls at the rim — that one-over-r is the whole sense of distance) and angle are each computed once into a lookup table and read millions of times. A frame then costs no atan2 and no sqrt at all: it only scrolls an offset through those stored coordinates, reads a woven wall of rings crossed with staves and a depth fog that darkens everything toward the centre so the bore falls to a true black vanishing point rather than a bright hole, and maps the lit wall through the same 256-entry colour lookup its siblings use. That is why a 486 could run it, and why it is near free here. The pointer leans you into the tube — move across it and the walls twist toward the cursor while the fall rushes faster down the bore, easing back to a steady drop when it leaves. Coarse buffer upscaled soft so device pixel ratio is irrelevant, one animation-frame loop cancelled on unmount, the canvas decorative and hidden from assistive tech. Under prefers-reduced-motion there is no loop and no pointer — one still frame is painted and only redrawn on resize.",
     tag: 'Component',
   },
 ]
