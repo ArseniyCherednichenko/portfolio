@@ -198,6 +198,7 @@ import { HilbertCurve } from '../components/HilbertCurve'
 import { Bifurcation } from '../components/Bifurcation'
 import { Penrose } from '../components/Penrose'
 import { Collatz } from '../components/Collatz'
+import { Recaman } from '../components/Recaman'
 import { Tesseract } from '../components/Tesseract'
 import { Platonic } from '../components/Platonic'
 import { Gears } from '../components/Gears'
@@ -11656,6 +11657,40 @@ export default function Playground() {
                 and the hovered rhomb &mdash; no randomness, DPR-capped. Step the depth, or redraw.
                 Reduced motion paints the whole tiling at once and holds it, and the hover readout still
                 works.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH RECAMAN — the sibling of the Collatz coral just below: a
+            child's rule standing on an open problem, drawn as the number line it
+            walks. */}
+        <Reveal>
+          <div id="recaman" data-experiment="Recaman's sequence" className="mt-12 scroll-mt-32">
+            <Recaman />
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Recaman&rsquo;s sequence</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The sibling of the Collatz coral just below, and the other piece on this thread about a
+                rule a child could follow that nobody has been able to close. Start at 0. At step{' '}
+                <span className="font-mono text-white/60">n</span> try to jump <em>back</em> by n: if
+                that landing is positive and somewhere you have not already been, take it; otherwise
+                jump <em>forward</em> by n instead. That is the whole rule (Bernardo Recam&aacute;n
+                Santos, 1991). This is the canonical picture of it &mdash; the one Numberphile made
+                famous: every term sits on a single number line at its own value, and each step is a
+                semicircle whose diameter is the jump, so a step of size n spans n and rises or falls by
+                n/2. Consecutive arcs are flipped above and below the line so they never fold onto one
+                another, and because the walk keeps doubling back across ground it has already crossed,
+                the arcs nest and interleave into a figure that looks composed and is not &mdash;
+                nothing is placed by hand and there is no randomness, the same term count always draws
+                the same shape. The open question it carries is the hook: it is <em>conjectured</em>,
+                never proved, that every whole number eventually appears, and the walk is not even
+                injective &mdash; the forward rule can land on a value seen before, and{' '}
+                <span className="font-mono text-white/60">42</span> is the first it visits twice. Colour
+                reads either travel order or jump size, stepped only in lightness. Change the term
+                count or the colour, or redraw; hover an arc to read one step &mdash; which number it
+                joins to which, and whether the walk was forced to leap forward. Reduced motion paints
+                the whole walk at once and holds it, and the hover readout still works.
               </p>
             </div>
           </div>

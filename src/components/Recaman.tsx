@@ -22,8 +22,8 @@ import { useReducedMotion } from 'framer-motion'
 // been proved — that every whole number eventually appears somewhere in the
 // sequence. (It is not even injective: the forward rule can land on a value seen
 // before; 42 is the first number the walk visits twice.) So, like the Collatz
-// coral two pieces down this thread, it is a child's rule standing on a problem
-// no one has closed.
+// coral it sits just above in the Playground, it is a child's rule standing on a
+// problem no one has closed.
 //
 // Drawn on two stacked canvases the way the Collatz coral and the Hilbert curve
 // are: a base that accumulates arc by arc as an eased sweep reveals them in the
