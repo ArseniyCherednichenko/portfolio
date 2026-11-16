@@ -4764,14 +4764,21 @@ export default function Playground() {
         </Reveal>
         <Reveal delay={0.14}>
           <p className="mt-5 max-w-xl text-sm leading-relaxed text-white/45">
-            Want it art-directed instead of dissected?{' '}
+            A lot to take in?{' '}
+            <Link
+              to="/collections"
+              className="font-medium text-white/80 underline decoration-white/25 underline-offset-4 transition-colors hover:text-[#DCF87C] hover:decoration-[#DCF87C]"
+            >
+              Start with my collections
+            </Link>{' '}
+            for a shorter, curated way in &mdash; or want it art-directed instead of dissected?{' '}
             <Link
               to="/reel"
               className="font-medium text-white/80 underline decoration-white/25 underline-offset-4 transition-colors hover:text-[#DCF87C] hover:decoration-[#DCF87C]"
             >
               Watch the reel
-            </Link>{' '}
-            — the same pieces, full-screen, as a sequence.
+            </Link>
+            .
           </p>
         </Reveal>
       </div>
