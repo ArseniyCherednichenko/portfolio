@@ -179,7 +179,10 @@ export function Recaman({ className = '' }: { className?: string }) {
       const pad = Math.max(16, Math.min(w, h) * 0.08)
       const spanX = valMax - valMin || 1
       const spanY = yTop + yBot || 1
-      scale = Math.min((w - pad * 2) / spanX, (h - pad * 2) / spanY)
+      // Clamp to >= 0: at a degenerate size (w or h smaller than the padding, as
+      // can happen for a frame during mount or a collapsed resize) the fit would
+      // go negative, which would hand canvas arc() a negative radius and throw.
+      scale = Math.max(0, Math.min((w - pad * 2) / spanX, (h - pad * 2) / spanY))
       const drawnW = spanX * scale
       const drawnH = spanY * scale
       ox = (w - drawnW) / 2 - valMin * scale
@@ -195,7 +198,7 @@ export function Recaman({ className = '' }: { className?: string }) {
     // upper half (angles pi..2pi, where canvas sin is negative), below uses 0..pi.
     function strokeArc(ctx: CanvasRenderingContext2D, a: Arc) {
       const cx = xOf((a.from + a.to) / 2)
-      const r = (a.step / 2) * scale
+      const r = Math.max(0, (a.step / 2) * scale) // never hand arc() a negative radius
       ctx.beginPath()
       if (a.up) ctx.arc(cx, baselineY, r, Math.PI, 2 * Math.PI)
       else ctx.arc(cx, baselineY, r, 0, Math.PI)
