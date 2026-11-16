@@ -1,5 +1,5 @@
-import { useId, useMemo, useState } from 'react'
-import { motion, useReducedMotion } from 'framer-motion'
+import { useId, useMemo, useRef, useState } from 'react'
+import { motion, useInView, useReducedMotion } from 'framer-motion'
 
 // BumpChart — the chart family's order-over-time shape, and the one none of the
 // others can be. Every chart before it answers "how much" or "what share": the
@@ -78,6 +78,12 @@ export function BumpChart({
   const reduce = useReducedMotion() ?? false
   const uid = useId()
   const [active, setActive] = useState<number | null>(null)
+  const rootRef = useRef<HTMLDivElement>(null)
+  // Drive the whole reveal from one in-view trigger, so the lines draw when the
+  // chart arrives and — unlike a one-shot whileInView — the opacity stays
+  // reactive afterwards, letting a hover dim the rest and lift the active line.
+  const inView = useInView(rootRef, { once: true, amount: 0.3 })
+  const revealed = reduce || inView
 
   const n = series.length
   const t = periods.length
@@ -139,7 +145,7 @@ export function BumpChart({
   const strokeOpacity = (l: Line) => 0.9 - l.dim * 0.55
 
   return (
-    <div className={`relative w-full ${className}`}>
+    <div ref={rootRef} className={`relative w-full ${className}`}>
       <div className="relative w-full" style={{ aspectRatio: `${VBW} / ${VBH}` }}>
         <svg
           viewBox={`0 0 ${VBW} ${VBH}`}
@@ -189,19 +195,16 @@ export function BumpChart({
                 strokeWidth={isActive ? 3.4 : 2}
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                initial={reduce ? { pathLength: 1, opacity: strokeOpacity(l) } : { pathLength: 0, opacity: 0 }}
-                whileInView={
-                  reduce ? undefined : { pathLength: 1, opacity: dimmed ? 0.12 : isActive ? 1 : strokeOpacity(l) }
-                }
-                animate={
-                  reduce ? { opacity: dimmed ? 0.12 : isActive ? 1 : strokeOpacity(l) } : undefined
-                }
-                viewport={{ once: true, amount: 0.3 }}
-                transition={{
-                  pathLength: { duration: 1.1, delay: reduce ? 0 : 0.1 + l.index * 0.08, ease: [0.16, 1, 0.3, 1] },
-                  opacity: { duration: 0.25 },
+                initial={false}
+                animate={{
+                  pathLength: revealed ? 1 : 0,
+                  opacity: !revealed ? 0 : dimmed ? 0.12 : isActive ? 1 : strokeOpacity(l),
                 }}
-                style={{ opacity: dimmed ? 0.12 : isActive ? 1 : strokeOpacity(l) }}
+                transition={{
+                  pathLength: { duration: reduce ? 0 : 1.1, delay: reduce ? 0 : 0.1 + l.index * 0.08, ease: [0.16, 1, 0.3, 1] },
+                  opacity: { duration: reduce ? 0 : 0.25 },
+                }}
+                style={{ transition: 'stroke 0.15s ease, stroke-width 0.15s ease' }}
               />
             )
           })}
@@ -222,10 +225,9 @@ export function BumpChart({
                     fill={isActive ? '#EAFCA0' : '#0a0a0a'}
                     stroke="#DCF87C"
                     strokeWidth={1.6}
-                    initial={reduce ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0 }}
-                    whileInView={reduce ? undefined : { opacity: 1, scale: 1 }}
-                    viewport={{ once: true, amount: 0.3 }}
-                    transition={{ duration: 0.3, delay: reduce ? 0 : 0.3 + l.index * 0.08 + (i / Math.max(1, t)) * 0.9 }}
+                    initial={false}
+                    animate={{ opacity: revealed ? 1 : 0, scale: revealed ? 1 : 0 }}
+                    transition={{ duration: reduce ? 0 : 0.3, delay: reduce ? 0 : 0.3 + l.index * 0.08 + (i / Math.max(1, t)) * 0.9 }}
                     style={{ transition: 'r 0.15s ease, fill 0.15s ease' }}
                   />
                 ))}
