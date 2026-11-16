@@ -137,14 +137,9 @@ export default function Collections() {
             id={collection.id}
             className="scroll-mt-32 border-t border-white/10 py-16 first:border-t-0 sm:py-20"
           >
-            <div className="flex items-baseline gap-4">
-              <span className="font-display text-sm font-semibold tabular-nums text-white/25">
-                {collection.num}
-              </span>
-              <Reveal>
-                <Eyebrow id={collection.id}>{collection.title}</Eyebrow>
-              </Reveal>
-            </div>
+            <Reveal>
+              <Eyebrow id={collection.id}>{`Collection ${collection.num}`}</Eyebrow>
+            </Reveal>
             <Reveal delay={0.05}>
               <h2 className="mt-4 max-w-2xl font-display text-3xl font-bold leading-[1.1] tracking-tight sm:text-4xl">
                 {collection.title}
