@@ -542,6 +542,7 @@ import { Heatmap, type HeatmapRow } from '../components/Heatmap'
 import { Sankey, type SankeyNode, type SankeyLink } from '../components/Sankey'
 import { StreamGraph, type StreamSeries } from '../components/StreamGraph'
 import { Candlestick, type Candle } from '../components/Candlestick'
+import { BumpChart, type BumpSeries } from '../components/BumpChart'
 import { ScatterPlot, type ScatterPoint } from '../components/ScatterPlot'
 import { ParallelCoords, type PCDimension, type PCRecord } from '../components/ParallelCoords'
 import { Stat, type DeltaMode } from '../components/Stat'
@@ -2195,6 +2196,62 @@ function CandlestickDemo() {
         className="rounded-full border border-white/15 px-4 py-1.5 text-sm font-semibold text-white/80 transition-colors hover:border-[#DCF87C]/50 hover:bg-white/[0.04] hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#DCF87C]/60"
       >
         Redraw
+      </button>
+    </div>
+  )
+}
+
+// A BumpChart showcase. Illustrative, not a claimed standing: five neutrally
+// named contenders (NATO placeholders, unmistakably not real entrants) ranked
+// across six rounds, so it reads as a SHAPE of overtaking — who climbs, who
+// slides, who holds — rather than any measured league. A component demo like the
+// other charts', with a Reshuffle that re-rolls the whole race: a random opening
+// order nudged round to round by a couple of adjacent swaps, so the standings
+// drift and cross believably and each round stays a clean permutation.
+const BUMP_CONTENDERS = ['Alpha', 'Bravo', 'Charlie', 'Delta', 'Echo']
+const BUMP_PERIODS = ['R1', 'R2', 'R3', 'R4', 'R5', 'R6']
+
+function rollRanks(): BumpSeries[] {
+  const n = BUMP_CONTENDERS.length
+  const t = BUMP_PERIODS.length
+  // order[rankIndex] = contender index. Start from a shuffled opening order.
+  const order = Array.from({ length: n }, (_, i) => i)
+  for (let i = n - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[order[i], order[j]] = [order[j], order[i]]
+  }
+  const ranksByContender: number[][] = BUMP_CONTENDERS.map(() => [])
+  for (let p = 0; p < t; p++) {
+    if (p > 0) {
+      const swaps = 1 + Math.floor(Math.random() * 2)
+      for (let s = 0; s < swaps; s++) {
+        const i = Math.floor(Math.random() * (n - 1))
+        ;[order[i], order[i + 1]] = [order[i + 1], order[i]]
+      }
+    }
+    order.forEach((contender, rankIdx) => {
+      ranksByContender[contender][p] = rankIdx + 1
+    })
+  }
+  return BUMP_CONTENDERS.map((label, ci) => ({ label, ranks: ranksByContender[ci] }))
+}
+
+function BumpChartDemo() {
+  const [series, setSeries] = useState<BumpSeries[]>(() => rollRanks())
+  const [run, setRun] = useState(0)
+  function reshuffle() {
+    setSeries(rollRanks())
+    setRun((n) => n + 1)
+  }
+  return (
+    <div className="flex w-full flex-col items-center gap-6">
+      <BumpChart key={run} series={series} periods={BUMP_PERIODS} />
+      <button
+        type="button"
+        onClick={reshuffle}
+        className="rounded-full border border-white/15 px-4 py-1.5 text-sm font-semibold text-white/80 transition-colors hover:border-[#DCF87C]/50 hover:bg-white/[0.04] hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#DCF87C]/60"
+      >
+        Reshuffle
       </button>
     </div>
   )
@@ -9585,6 +9642,17 @@ export default function Playground() {
                 note="The chart the others cannot draw — not one number per mark but four: where a period opened, closed, and the high and low it touched between. A solid body closed up, a hollow one closed down, so the site's single lime tells direction by fill instead of a second colour. An illustrative walk, not a real price. Redraw to walk a fresh series, hover a candle to read all four prices."
               >
                 <CandlestickDemo />
+              </Experiment>
+            </Reveal>
+          </div>
+
+          <div className="sm:col-span-2">
+            <Reveal>
+              <Experiment
+                name="Bump chart"
+                note="The chart the others cannot draw — not how much or what share, but the ORDER, and how it changes. Every chart before it keeps the amounts; this throws them away and plots only the standings, a row per rank and a line per contender threading its place round by round. Its whole subject is the crossing: two lines that swap rows are two that traded places. The single lime tells standing by stepping brighter for a higher finish, so colour never has to name the lines — their end labels do. The race runs itself left-to-right on reveal. An illustrative ranking, not a measured league. Reshuffle to run a fresh race, hover a line to lift it and read how far it climbed."
+              >
+                <BumpChartDemo />
               </Experiment>
             </Reveal>
           </div>
