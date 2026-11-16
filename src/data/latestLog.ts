@@ -34,6 +34,12 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'A race read from the crossings, not the scores',
+    summary:
+      'Bump chart — keeps the order, not the amount; lines cross as contenders overtake, the one lime stepped by who finishes on top.',
+    tag: 'Component',
+  },
+  {
     title: 'A number line walked in semicircles',
     summary:
       "Recaman's sequence — the Collatz coral's sibling; jump back by n when you can and forward when you can't, drawn as nesting arcs, standing on the same kind of open question: does every number appear?",
@@ -85,12 +91,6 @@ export const LATEST_LOG: LogHeadline[] = [
     title: 'A word whose frame springs to fit it',
     summary:
       'Container text flip — the word-swapper where the box moves, not the word; the pill measures each word and springs its own width to it while the letters turn in.',
-    tag: 'Component',
-  },
-  {
-    title: 'Three stars, and no formula can say where they go',
-    summary:
-      'Three-body problem — chaos in its oldest form; three stars under gravity, the butterfly effect before Lorenz named it, the dance leaning toward your hand.',
     tag: 'Component',
   },
 ]
