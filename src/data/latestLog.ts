@@ -34,6 +34,12 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'A number line walked in semicircles',
+    summary:
+      "Recaman's sequence — the Collatz coral's sibling; jump back by n when you can and forward when you can't, drawn as nesting arcs, standing on the same kind of open question: does every number appear?",
+    tag: 'Component',
+  },
+  {
     title: 'A hero line that never flickers blank',
     summary:
       'The rotating hero word now overlaps its swap so one is always shown, holds its width so nothing reflows, and foregrounds the range over any one product.',
@@ -85,12 +91,6 @@ export const LATEST_LOG: LogHeadline[] = [
     title: 'Three stars, and no formula can say where they go',
     summary:
       'Three-body problem — chaos in its oldest form; three stars under gravity, the butterfly effect before Lorenz named it, the dance leaning toward your hand.',
-    tag: 'Component',
-  },
-  {
-    title: 'One gear set, three ratios from which part you hold',
-    summary:
-      'Planetary gears — the gear train folded onto one axis; hold the ring, the sun or the carrier and the same wheels give a reduction, an overdrive or reverse.',
     tag: 'Component',
   },
 ]
