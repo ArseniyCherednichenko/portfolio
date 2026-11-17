@@ -514,6 +514,7 @@ import { Moire } from '../components/Moire'
 import { Lorenz } from '../components/Lorenz'
 import { ThreeBody } from '../components/ThreeBody'
 import { Sortable } from '../components/Sortable'
+import { Joystick, type Vector2 } from '../components/Joystick'
 import { KanbanBoard } from '../components/KanbanBoard'
 import { Carousel, type CarouselSlide } from '../components/Carousel'
 import { HoverIndex, type HoverIndexItem } from '../components/HoverIndex'
@@ -3469,6 +3470,49 @@ function CodeInputDemo() {
         >
           Reset
         </button>
+      </div>
+    </div>
+  )
+}
+
+// A Joystick showcase: the stick drives a reticle around a bounded field, so
+// the abstract { x, y } it reports becomes something you can watch move. The
+// craft dot eases toward wherever the stick points (a light follow, not a hard
+// bind), and a live vector reads out underneath — proof the control emits a
+// whole two-axis value, not a single number. Nothing is claimed; it is a demo
+// of the control itself.
+function JoystickDemo() {
+  const [vec, setVec] = useState<Vector2>({ x: 0, y: 0 })
+  const reduce = useReducedMotion()
+  const FIELD = 220
+  // The reticle rides a bit inside the field so it never clips the border.
+  const reach = FIELD / 2 - 22
+  return (
+    <div className="flex flex-col items-center gap-8 lg:flex-row lg:items-center lg:justify-center lg:gap-14">
+      <Joystick size={176} onChange={setVec} label="Aim" />
+      <div className="flex flex-col items-center gap-3">
+        <div
+          className="relative overflow-hidden rounded-2xl border border-white/10 bg-black/30"
+          style={{ width: FIELD, height: FIELD }}
+          aria-hidden
+        >
+          {/* Crosshair guides for the field. */}
+          <div className="absolute left-1/2 top-0 h-full w-px -translate-x-1/2 bg-white/[0.06]" />
+          <div className="absolute top-1/2 left-0 h-px w-full -translate-y-1/2 bg-white/[0.06]" />
+          {/* The reticle the stick steers. y is up-positive, so it is negated
+              back into screen space here. */}
+          <motion.div
+            className="absolute left-1/2 top-1/2 h-6 w-6 -translate-x-1/2 -translate-y-1/2"
+            animate={{ x: vec.x * reach, y: -vec.y * reach }}
+            transition={reduce ? { duration: 0 } : { type: 'spring', stiffness: 260, damping: 26 }}
+          >
+            <div className="absolute inset-0 rounded-full border border-[#DCF87C]/70" />
+            <div className="absolute left-1/2 top-1/2 h-1.5 w-1.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#DCF87C]" />
+          </motion.div>
+        </div>
+        <span className="font-mono text-xs tabular-nums text-white/45">
+          magnitude {Math.round(Math.min(1, Math.hypot(vec.x, vec.y)) * 100)}%
+        </span>
       </div>
     </div>
   )
@@ -14693,6 +14737,37 @@ export default function Playground() {
                 all. The head turns slowly and the pointer is a lens that swells and warms nearby florets. One canvas,
                 one loop, pure math with no per-floret state and no randomness; reduced motion draws the grown head once
                 and holds it still.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH JOYSTICK */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 py-12 sm:px-10">
+              <div className="text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Aim</span>
+                <p className="mx-auto mt-3 max-w-md text-lg font-medium text-white/85 sm:text-xl">
+                  Push the stick and the reticle follows. Let go and it springs back to centre.
+                </p>
+              </div>
+              <div className="mt-10">
+                <JoystickDemo />
+              </div>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Joystick</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The first control here that reports a whole vector rather than a single value. Every other control in this
+                family resolves to one number — the dial's angle, the slider's position, the switch's bit; this one hands
+                back an {'{ x, y }'} in [-1, 1], with y positive upward the way a stick is read. Grab the nub and it tracks the
+                pointer inside a circular gate, clamped to the rim so it can never leave the well; release and it springs
+                home with the snap of a real thumbstick. The reach line and the brightening cap make the throw legible, and
+                the reticle beside it turns the abstract pair of numbers into something you can watch move. Honest to a11y:
+                it is a real focusable slider, the arrow keys walk the nub a step at a time, Home or Space re-centre it, and
+                the spoken value reads the live direction and throw — "up and right, 62%". Under reduced motion the spring
+                and the glow come off and the nub snaps exactly, a plain two-axis pad that still reads and responds.
               </p>
             </div>
           </div>
