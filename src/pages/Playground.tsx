@@ -106,6 +106,7 @@ import { Wheel } from '../components/Wheel'
 import { Knob } from '../components/Knob'
 import { Switch } from '../components/Switch'
 import { SegmentedControl } from '../components/SegmentedControl'
+import { TransferList, type TransferItem } from '../components/TransferList'
 import { Pagination } from '../components/Pagination'
 import { Breadcrumbs } from '../components/Breadcrumbs'
 import { DataTable, type Column } from '../components/DataTable'
@@ -3469,6 +3470,45 @@ function CodeInputDemo() {
           Reset
         </button>
       </div>
+    </div>
+  )
+}
+
+// A TransferList showcase: composing which columns a table would show. The
+// roster is a believable set of column names, not a claim about anything — the
+// point is the control, the two listboxes and the rows springing across. Two
+// columns ("Name", "Role") start on the shown side so the target pane is never
+// empty on arrival, and "Internal notes" is disabled to prove a locked row
+// stays put through batch and move-all.
+const TRANSFER_COLUMNS: TransferItem[] = [
+  { value: 'name', label: 'Name' },
+  { value: 'role', label: 'Role' },
+  { value: 'year', label: 'Year' },
+  { value: 'stack', label: 'Stack' },
+  { value: 'status', label: 'Status' },
+  { value: 'platform', label: 'Platform' },
+  { value: 'repo', label: 'Repository' },
+  { value: 'links', label: 'Links' },
+  { value: 'updated', label: 'Last updated' },
+  { value: 'notes', label: 'Internal notes', disabled: true },
+]
+
+function TransferListDemo() {
+  const [shown, setShown] = useState<string[]>(['name', 'role'])
+  return (
+    <div className="flex w-full max-w-2xl flex-col gap-4">
+      <TransferList
+        items={TRANSFER_COLUMNS}
+        target={shown}
+        onChange={setShown}
+        sourceLabel="Hidden"
+        targetLabel="Shown"
+      />
+      <p className="text-center text-xs text-white/40" aria-live="polite">
+        {shown.length === 0
+          ? 'No columns shown'
+          : `Showing ${shown.length} column${shown.length === 1 ? '' : 's'}`}
+      </p>
     </div>
   )
 }
@@ -10007,6 +10047,18 @@ export default function Playground() {
             </Experiment>
           </Reveal>
         </div>
+
+        {/* FULL-WIDTH TRANSFER LIST */}
+        <Reveal>
+          <div className="mt-12">
+            <Experiment
+              name="Transfer list"
+              note="The control the family was missing: every other picker here keeps one value or one number, this one composes a SET. Two real multi-select listboxes with a channel of arrows between them — pull columns from the roster into what's shown and back — the control a design system reaches for when someone has to take a handful of things out of a longer list and see both what they took and what they left. The signature is the travel: a moved row doesn't blink out of one pane and into the other, it springs across on a shared layout while the rows it left close the gap. Each pane filters; one row is locked to prove move-all leaves it behind. Two WAI-ARIA listboxes with a roving tabindex — arrows move the active row, Space checks it for a batch move, Enter sends it across on its own, Cmd/Ctrl-A checks all; every move is announced. Reduced motion cuts the spring."
+            >
+              <TransferListDemo />
+            </Experiment>
+          </div>
+        </Reveal>
 
         {/* FULL-WIDTH CALENDAR */}
         <Reveal>
