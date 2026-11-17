@@ -34,6 +34,12 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'A chart that keeps the shape, not the number',
+    summary:
+      "Ridgeline — the data-viz family's distribution shape; several densities stacked and overlapping the Unknown Pleasures way, each ridge opaque so it hides the crest behind it and the one lime stepped only by depth.",
+    tag: 'Component',
+  },
+  {
     title: 'A control that hands back a direction, not a number',
     summary:
       'Joystick — the controls family\'s first whole-vector control; grab the nub, it clamps to the rim and springs back to centre, reporting an x and y with the spoken throw and full keyboard travel.',
@@ -85,12 +91,6 @@ export const LATEST_LOG: LogHeadline[] = [
     title: 'A living fern grown from four random matrices',
     summary:
       "Barnsley fern — the chaos game's affine sibling; play the same order-out-of-chance game with four tiny affine maps instead of polygon corners and a fern precipitates, coloured by which map drew each point.",
-    tag: 'Component',
-  },
-  {
-    title: 'A fractal that folds from a flat strip',
-    summary:
-      'Dragon curve — the Heighway dragon, whose whole identity is the fold; run one crease angle from flat to a right angle and the strip folds up into the fractal and unfolds back.',
     tag: 'Component',
   },
 ]
