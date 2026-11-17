@@ -34,6 +34,12 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'A control that hands back a direction, not a number',
+    summary:
+      'Joystick — the controls family\'s first whole-vector control; grab the nub, it clamps to the rim and springs back to centre, reporting an x and y with the spoken throw and full keyboard travel.',
+    tag: 'Component',
+  },
+  {
     title: 'A set composed by moving rows between two lists',
     summary:
       'Transfer list — the picker that keeps a set, not a value; two multi-select listboxes with arrows between, each moved row springing from one pane to the other, fully keyboard-driven.',
@@ -85,12 +91,6 @@ export const LATEST_LOG: LogHeadline[] = [
     title: 'A fractal that folds from a flat strip',
     summary:
       'Dragon curve — the Heighway dragon, whose whole identity is the fold; run one crease angle from flat to a right angle and the strip folds up into the fractal and unfolds back.',
-    tag: 'Component',
-  },
-  {
-    title: 'A straight line drawn by rolling, not hinging',
-    summary:
-      'Tusi couple — roll a wheel inside a ring twice its size and a rim point traces a dead-straight line, exactly; the odd one out beside the bar-linkage straight-line makers.',
     tag: 'Component',
   },
 ]
