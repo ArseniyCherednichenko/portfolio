@@ -34,6 +34,12 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'A set composed by moving rows between two lists',
+    summary:
+      'Transfer list — the picker that keeps a set, not a value; two multi-select listboxes with arrows between, each moved row springing from one pane to the other, fully keyboard-driven.',
+    tag: 'Component',
+  },
+  {
     title: 'A race read from the crossings, not the scores',
     summary:
       'Bump chart — keeps the order, not the amount; lines cross as contenders overtake, the one lime stepped by who finishes on top.',
@@ -85,12 +91,6 @@ export const LATEST_LOG: LogHeadline[] = [
     title: 'A straight line drawn by rolling, not hinging',
     summary:
       'Tusi couple — roll a wheel inside a ring twice its size and a rim point traces a dead-straight line, exactly; the odd one out beside the bar-linkage straight-line makers.',
-    tag: 'Component',
-  },
-  {
-    title: 'A word whose frame springs to fit it',
-    summary:
-      'Container text flip — the word-swapper where the box moves, not the word; the pill measures each word and springs its own width to it while the letters turn in.',
     tag: 'Component',
   },
 ]
