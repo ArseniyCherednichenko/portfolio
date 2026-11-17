@@ -545,6 +545,7 @@ import { Sankey, type SankeyNode, type SankeyLink } from '../components/Sankey'
 import { StreamGraph, type StreamSeries } from '../components/StreamGraph'
 import { Candlestick, type Candle } from '../components/Candlestick'
 import { BumpChart, type BumpSeries } from '../components/BumpChart'
+import { Ridgeline, type RidgeRow } from '../components/Ridgeline'
 import { ScatterPlot, type ScatterPoint } from '../components/ScatterPlot'
 import { ParallelCoords, type PCDimension, type PCRecord } from '../components/ParallelCoords'
 import { Stat, type DeltaMode } from '../components/Stat'
@@ -2254,6 +2255,79 @@ function BumpChartDemo() {
         className="rounded-full border border-white/15 px-4 py-1.5 text-sm font-semibold text-white/80 transition-colors hover:border-[#DCF87C]/50 hover:bg-white/[0.04] hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#DCF87C]/60"
       >
         Reshuffle
+      </button>
+    </div>
+  )
+}
+
+// A Ridgeline showcase. Illustrative, not a recorded log: seven rows, one per
+// weekday, each a believable SHAPE of when a day fills up over 24 hours —
+// weekdays leaning bimodal (a morning rise and an evening one), the weekend a
+// single broad midday hump — so it reads as a comparison of profiles, not a
+// measurement of anyone's real hours. A component demo like the other charts',
+// with a Reshape that re-rolls every row's mixture of humps so the silhouettes
+// shift but stay plausible. Densities are a seeded sum of gaussians over the
+// hour axis, sampled at 64 points and compared on one shared scale.
+const RIDGE_DAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+const RIDGE_SAMPLES = 64
+
+function gaussian(x: number, mu: number, sigma: number) {
+  const z = (x - mu) / sigma
+  return Math.exp(-0.5 * z * z)
+}
+
+// One row's density over 0..24h as a sum of humps. Weekdays get a morning and an
+// evening peak with a little jitter; the weekend gets one broad midday hump.
+function rollDay(weekend: boolean): number[] {
+  const humps: { mu: number; sigma: number; w: number }[] = []
+  if (weekend) {
+    humps.push({ mu: 12 + (Math.random() * 4 - 2), sigma: 3 + Math.random() * 1.5, w: 1 })
+    if (Math.random() < 0.5) humps.push({ mu: 20 + (Math.random() * 2 - 1), sigma: 1.6, w: 0.45 })
+  } else {
+    humps.push({ mu: 9 + (Math.random() * 2 - 1), sigma: 1.6 + Math.random() * 0.8, w: 0.8 + Math.random() * 0.5 })
+    humps.push({ mu: 18.5 + (Math.random() * 2 - 1), sigma: 1.8 + Math.random() * 0.9, w: 0.9 + Math.random() * 0.6 })
+    if (Math.random() < 0.4) humps.push({ mu: 13 + (Math.random() * 2 - 1), sigma: 1.2, w: 0.35 })
+  }
+  const out: number[] = []
+  for (let i = 0; i < RIDGE_SAMPLES; i++) {
+    const hour = (i / (RIDGE_SAMPLES - 1)) * 24
+    let v = 0
+    for (const h of humps) v += h.w * gaussian(hour, h.mu, h.sigma)
+    out.push(v)
+  }
+  return out
+}
+
+function rollRidges(): RidgeRow[] {
+  return RIDGE_DAYS.map((label, i) => ({ label, density: rollDay(i >= 5) }))
+}
+
+function RidgelineDemo() {
+  const [rows, setRows] = useState<RidgeRow[]>(() => rollRidges())
+  const [run, setRun] = useState(0)
+  function reshape() {
+    setRows(rollRidges())
+    setRun((n) => n + 1)
+  }
+  const fmtHour = (f: number) => {
+    const h = Math.round(f * 24)
+    return `${h.toString().padStart(2, '0')}:00`
+  }
+  return (
+    <div className="flex w-full flex-col items-center gap-6">
+      <Ridgeline
+        key={run}
+        rows={rows}
+        formatX={fmtHour}
+        xAxisLabel="Hour of day"
+        ariaLabel="Ridgeline chart of seven weekdays, each an illustrative shape of when the day fills up across 24 hours, compared on one shared scale."
+      />
+      <button
+        type="button"
+        onClick={reshape}
+        className="rounded-full border border-white/15 px-4 py-1.5 text-sm font-semibold text-white/80 transition-colors hover:border-[#DCF87C]/50 hover:bg-white/[0.04] hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#DCF87C]/60"
+      >
+        Reshape
       </button>
     </div>
   )
@@ -9748,6 +9822,17 @@ export default function Playground() {
                 note="The chart the others cannot draw — not one number per mark but two, an x and a y, with no order imposed: the shape the cloud makes is whether the pair moves together. So it earns a reading none of the others need — a hand-computed least-squares trend line and its r-squared, how tightly the points hug that line from 0 to 1 — drawn left-to-right once the cloud has landed. An illustrative cloud, not a real measurement. Reshuffle to re-scatter around a fresh line, hover a point to read both values."
               >
                 <ScatterPlotDemo />
+              </Experiment>
+            </Reveal>
+          </div>
+
+          <div className="sm:col-span-2">
+            <Reveal>
+              <Experiment
+                name="Ridgeline"
+                note="The chart the others cannot draw — not one number per mark but a whole distribution per row, several of them stacked and deliberately OVERLAPPING so the eye compares profiles: where each one peaks, how wide it spreads, whether it runs to one hump or two. It is the Unknown Pleasures figure, and the overlap is the point — each ridge is filled with the page's own dark so it cleanly hides the crest behind it, and the single lime lives only in the crest line, stepped by depth so the front ridge reads brightest and nothing but position carries identity. An illustrative rhythm of seven weekdays, not a recorded log. Reshape to re-roll every silhouette, hover a ridge to lift it and read where its peak falls."
+              >
+                <RidgelineDemo />
               </Experiment>
             </Reveal>
           </div>
