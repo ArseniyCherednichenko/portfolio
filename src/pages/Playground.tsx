@@ -159,6 +159,7 @@ import { SlideRule } from '../components/SlideRule'
 import { Protractor } from '../components/Protractor'
 import { Micrometer } from '../components/Micrometer'
 import { Zoetrope } from '../components/Zoetrope'
+import { Thaumatrope } from '../components/Thaumatrope'
 import { Chronograph } from '../components/Chronograph'
 import { Compass } from '../components/Compass'
 import { ProgressiveBlur } from '../components/ProgressiveBlur'
@@ -14405,6 +14406,43 @@ export default function Playground() {
                 <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code>{' '}
                 there is no free coast &mdash; a drag tracks the finger and stops on release, and Spin and the
                 arrows step frame by frame.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH THAUMATROPE */}
+        <Reveal>
+          <div id="thaumatrope" data-experiment="Thaumatrope" className="mt-12 scroll-mt-32">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 py-12 sm:px-10">
+              <div className="text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Twirl it</span>
+                <p className="mx-auto mt-3 max-w-md text-lg font-medium text-white/85 sm:text-xl">
+                  A bird on one face of the disc, an empty cage on the other. Twirl it fast and the bird
+                  lands inside the cage &mdash; a picture that exists only while it spins.
+                </p>
+              </div>
+              <Thaumatrope className="mt-10" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Thaumatrope</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The moving-picture toy that came before the zoetrope, and its exact inverse. Where the
+                zoetrope <em>samples</em> one motion across many frames until a sequence reads as movement,
+                the thaumatrope <em>fuses</em> two frames into one still that neither face holds alone: a
+                disc drawn with a bird on one side and an empty cage on the other, strung to spin about its
+                horizontal diameter. Spin it slowly and the two pictures take turns; spin it fast enough and
+                persistence of vision holds the bird on the retina just long enough for the cage to arrive on
+                top of it, and the bird is <em>in</em> the cage. Built as two faces in pure CSS 3D, a
+                forward-only{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">rotateX</code>{' '}
+                accumulated in a ref so a quick re-twirl keeps spinning the same way, with a fusion layer that
+                surfaces only while the disc is fastest and fades as it settles back onto a single face
+                &mdash; the illusion made legible on a screen that can&rsquo;t strobe fast enough to earn it
+                honestly. Under{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code>{' '}
+                nothing spins: the fused bird-in-cage is shown outright, with a Flip control to read either
+                single face on its own.
               </p>
             </div>
           </div>
