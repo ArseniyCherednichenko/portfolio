@@ -546,6 +546,7 @@ import { StreamGraph, type StreamSeries } from '../components/StreamGraph'
 import { Candlestick, type Candle } from '../components/Candlestick'
 import { BumpChart, type BumpSeries } from '../components/BumpChart'
 import { Ridgeline, type RidgeRow } from '../components/Ridgeline'
+import { BoxPlot, type BoxGroup } from '../components/BoxPlot'
 import { ScatterPlot, type ScatterPoint } from '../components/ScatterPlot'
 import { ParallelCoords, type PCDimension, type PCRecord } from '../components/ParallelCoords'
 import { Stat, type DeltaMode } from '../components/Stat'
@@ -2328,6 +2329,74 @@ function RidgelineDemo() {
         className="rounded-full border border-white/15 px-4 py-1.5 text-sm font-semibold text-white/80 transition-colors hover:border-[#DCF87C]/50 hover:bg-white/[0.04] hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#DCF87C]/60"
       >
         Reshape
+      </button>
+    </div>
+  )
+}
+
+// A BoxPlot showcase. Illustrative, not a recorded benchmark: five groups, one
+// per animation easing, each a believable SPREAD of frame times in milliseconds
+// — a fast ease sitting low and tight, a heavy spring sitting higher and wider,
+// one group carrying a couple of dropped-frame outliers past its fence — so it
+// reads as a comparison of distributions, not a measurement of anything real. A
+// component demo like the other charts', with a Resample that re-rolls every
+// group's samples so the boxes shift but stay plausible. Samples are a seeded
+// draw from a per-group mean and spread, with the occasional planted spike.
+const BOX_EASINGS: { label: string; mu: number; sigma: number; spikeChance: number }[] = [
+  { label: 'Linear', mu: 8.5, sigma: 1.1, spikeChance: 0.1 },
+  { label: 'Ease-out', mu: 10, sigma: 1.6, spikeChance: 0.15 },
+  { label: 'Ease-in-out', mu: 11.5, sigma: 2, spikeChance: 0.2 },
+  { label: 'Spring', mu: 13.5, sigma: 3.1, spikeChance: 0.35 },
+  { label: 'Elastic', mu: 15, sigma: 3.6, spikeChance: 0.4 },
+]
+
+// A rough standard normal via the Box–Muller transform, so the per-group draws
+// are believably bell-shaped rather than flat.
+function randNormal(): number {
+  let u = 0
+  let v = 0
+  while (u === 0) u = Math.random()
+  while (v === 0) v = Math.random()
+  return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v)
+}
+
+function rollBoxes(): BoxGroup[] {
+  return BOX_EASINGS.map((g) => {
+    const values: number[] = []
+    for (let i = 0; i < 40; i++) {
+      let v = g.mu + randNormal() * g.sigma
+      // The odd dropped frame — a spike well past the body, so some groups show
+      // real outliers past their whisker fence.
+      if (Math.random() < g.spikeChance * 0.12) v += 10 + Math.random() * 12
+      values.push(Math.max(2, Math.round(v * 10) / 10))
+    }
+    return { label: g.label, values }
+  })
+}
+
+function BoxPlotDemo() {
+  const [groups, setGroups] = useState<BoxGroup[]>(() => rollBoxes())
+  const [run, setRun] = useState(0)
+  function resample() {
+    setGroups(rollBoxes())
+    setRun((n) => n + 1)
+  }
+  const fmtMs = (v: number) => `${v % 1 === 0 ? v : v.toFixed(1)}ms`
+  return (
+    <div className="flex w-full flex-col items-center gap-6">
+      <BoxPlot
+        key={run}
+        groups={groups}
+        formatX={fmtMs}
+        xAxisLabel="Frame time"
+        ariaLabel="Box plot comparing the illustrative frame-time spread of five animation easings on one shared axis — each box the middle half of its samples, the bright line its median, the rings its outliers."
+      />
+      <button
+        type="button"
+        onClick={resample}
+        className="rounded-full border border-white/15 px-4 py-1.5 text-sm font-semibold text-white/80 transition-colors hover:border-[#DCF87C]/50 hover:bg-white/[0.04] hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#DCF87C]/60"
+      >
+        Resample
       </button>
     </div>
   )
@@ -9833,6 +9902,17 @@ export default function Playground() {
                 note="The chart the others cannot draw — not one number per mark but a whole distribution per row, several of them stacked and deliberately OVERLAPPING so the eye compares profiles: where each one peaks, how wide it spreads, whether it runs to one hump or two. It is the Unknown Pleasures figure, and the overlap is the point — each ridge is filled with the page's own dark so it cleanly hides the crest behind it, and the single lime lives only in the crest line, stepped by depth so the front ridge reads brightest and nothing but position carries identity. An illustrative rhythm of seven weekdays, not a recorded log. Reshape to re-roll every silhouette, hover a ridge to lift it and read where its peak falls."
               >
                 <RidgelineDemo />
+              </Experiment>
+            </Reveal>
+          </div>
+
+          <div className="sm:col-span-2">
+            <Reveal>
+              <Experiment
+                name="Box plot"
+                note="The chart the others cannot draw — not the whole silhouette the ridgeline keeps, but its five-number SKELETON. It throws the shape away and keeps only what summarises it: the median, the box of the middle half from the first quartile to the third, the whiskers reaching to the furthest ordinary values, and the rings for the outliers that fall past the fence. The single lime does all of it — a faint wash in a lime box, the median the one bright thick stroke the chart is really about, the whiskers dimmer, the outliers hollow rings — so nothing but the row label names a group. It is Tukey's oldest honest way to compare spreads side by side without drawing every point. An illustrative frame-time spread of five easings, not a measured benchmark. Resample to re-roll every group, hover a box to read its median and quartile range."
+              >
+                <BoxPlotDemo />
               </Experiment>
             </Reveal>
           </div>
