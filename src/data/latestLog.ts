@@ -34,6 +34,12 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'A picture that exists only while it spins',
+    summary:
+      "Thaumatrope — the Zoetrope's inverse; a bird on one disc face and an empty cage on the other that fuse into one still neither face holds alone, the bird landing in the cage only while it spins fastest.",
+    tag: 'Component',
+  },
+  {
     title: 'A chart that keeps five numbers, not the shape',
     summary:
       "Box plot — the ridgeline's summary sibling; throws the silhouette away and draws Tukey's five-number skeleton, the box of the middle half with its one bright median and the outliers past the fence.",
@@ -85,12 +91,6 @@ export const LATEST_LOG: LogHeadline[] = [
     title: 'Rotation around a bend, and the cost of it',
     summary:
       "Universal joint — the Oldham's foil; a Hooke joint carries a turn between shafts that meet at an angle, but can't keep their speeds in step — the output races then lags, twice a turn, by more the steeper the bend.",
-    tag: 'Component',
-  },
-  {
-    title: 'The other walking leg, lean enough to read',
-    summary:
-      "Klann linkage — the Strandbeest's counterpart; a six-bar built to the patent's own proportions that reaches the same walker's gait, a flat ground stroke then a high arc, from a leg you can read joint by joint.",
     tag: 'Component',
   },
 ]
