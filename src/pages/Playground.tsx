@@ -230,6 +230,7 @@ import { FidgetSpinner } from '../components/FidgetSpinner'
 import { Simon } from '../components/Simon'
 import { LightsOut } from '../components/LightsOut'
 import { Mastermind } from '../components/Mastermind'
+import { Minesweeper } from '../components/Minesweeper'
 import { TicTacToe } from '../components/TicTacToe'
 import { PegSolitaire } from '../components/PegSolitaire'
 import { ZenGarden } from '../components/ZenGarden'
@@ -14117,6 +14118,46 @@ export default function Playground() {
                 place a colour, Backspace clears, Enter checks &mdash; every peg and feedback cluster is labelled, and
                 each result is spoken through a live region. Reduced motion drops the place-pop and the feedback stagger;
                 pegs appear in place, and the game plays identically.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH MINESWEEPER */}
+        <Reveal>
+          <div id="minesweeper" data-experiment="Minesweeper" className="mt-12 scroll-mt-32">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 py-12 sm:px-10">
+              <div className="text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Infer</span>
+                <p className="mx-auto mt-3 max-w-md text-lg font-medium text-white/85 sm:text-xl">
+                  Reveal a cell. Each number counts its mined neighbours. Read them against each other and clear the field.
+                </p>
+              </div>
+              <Minesweeper className="mt-10" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Minesweeper</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The field of hidden mines, rebuilt as a real object you reason on &mdash; and the one toy in this family
+                that is deduction from numbers under uncertainty, where Simon is recall, Lights Out is parity, Mastermind
+                is deduction from feedback and tic-tac-toe is perfect play. Every revealed square tells you how many of
+                its eight neighbours are mined, and the whole game is reading those counts against one another to decide
+                what must be safe, what must be a mine &mdash; and, honestly, where the field leaves you no choice but to
+                guess. It is the only game here where correct play can still lose, and it says so rather than pretending
+                otherwise. Honest the two ways this family cares about. The first click is always safe and opens a region:
+                mines are not laid until after that first reveal and never on the clicked cell or its eight neighbours, so
+                the opening move can never be a loss and never a lone 8 &mdash; the standard &ldquo;first click is an
+                opening&rdquo; rule, not a reshuffle under you. And every number is the exact count of mined neighbours,
+                computed once when the mines are placed and never nudged; the board is never rearranged to keep you
+                guessing, and the Deduce button plays only FORCED moves &mdash; cells the current numbers prove are safe
+                or prove are mined, never a guess &mdash; so it is a proof that the numbers are real constraints, not a
+                solver that cheats by reading the hidden board (its soundness checked over tens of thousands of positions
+                in Node). Built without canvas or image: a CSS grid of struck tiles, the numbers stepped along the single
+                house lime from a dim 1 to a near-white 8 so count reads as brightness and the palette stays one hue. A
+                roving-tabindex grid makes it a real keyboard widget &mdash; arrows move, Enter or Space reveals, F flags,
+                Home and End jump the row &mdash; every cell carrying its position and state in a label, a flag mode for
+                touch, and each reveal, flag and outcome announced through a live region. Reduced motion drops the opening
+                ripple and the reveal pop; the field is identical to play.
               </p>
             </div>
           </div>
