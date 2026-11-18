@@ -34,6 +34,12 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'A field cleared by reading the numbers',
+    summary:
+      'Minesweeper — the games family\'s deduction-from-numbers piece; the first click is always safe, every number is an exact neighbour count, and Deduce plays only the moves the field forces, never a guess.',
+    tag: 'Component',
+  },
+  {
     title: 'A picture that exists only while it spins',
     summary:
       "Thaumatrope — the Zoetrope's inverse; a bird on one disc face and an empty cage on the other that fuse into one still neither face holds alone, the bird landing in the cage only while it spins fastest.",
@@ -85,12 +91,6 @@ export const LATEST_LOG: LogHeadline[] = [
     title: 'The only five solids, drawn and proven',
     summary:
       "Platonic solids — the Tesseract's honest 3D companion; the five regular solids as draggable wireframes, their edges derived from the points and their face count read live from Euler's formula F = 2 − V + E.",
-    tag: 'Component',
-  },
-  {
-    title: 'Rotation around a bend, and the cost of it',
-    summary:
-      "Universal joint — the Oldham's foil; a Hooke joint carries a turn between shafts that meet at an angle, but can't keep their speeds in step — the output races then lags, twice a turn, by more the steeper the bend.",
     tag: 'Component',
   },
 ]
