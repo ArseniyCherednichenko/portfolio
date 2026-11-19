@@ -34,6 +34,12 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'A picture read out of the margin numbers',
+    summary:
+      "Nonogram — the Minesweeper's certainty-side complement; the clues are the run lengths of a hidden picture, every puzzle has one logical solution, and Deduce plays only the moves the numbers force, never a guess.",
+    tag: 'Component',
+  },
+  {
     title: 'A field cleared by reading the numbers',
     summary:
       'Minesweeper — the games family\'s deduction-from-numbers piece; the first click is always safe, every number is an exact neighbour count, and Deduce plays only the moves the field forces, never a guess.',
@@ -86,11 +92,5 @@ export const LATEST_LOG: LogHeadline[] = [
     summary:
       'The rotating hero word now overlaps its swap so one is always shown, holds its width so nothing reflows, and foregrounds the range over any one product.',
     tag: 'Polish',
-  },
-  {
-    title: 'The only five solids, drawn and proven',
-    summary:
-      "Platonic solids — the Tesseract's honest 3D companion; the five regular solids as draggable wireframes, their edges derived from the points and their face count read live from Euler's formula F = 2 − V + E.",
-    tag: 'Component',
   },
 ]
