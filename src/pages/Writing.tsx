@@ -6,7 +6,7 @@ import { Eyebrow } from '../components/Eyebrow'
 import { GradientText } from '../components/GradientText'
 import { PixelTrail } from '../components/PixelTrail'
 import { Seo } from '../components/Seo'
-import { NOTES, NOTE_TAGS, type Note, type NoteTag } from '../data/notes'
+import { NOTES, NOTE_TAGS, PUBLISHED_COUNT, readingMinutes, type Note, type NoteTag } from '../data/notes'
 
 const EASE = [0.16, 1, 0.3, 1] as const
 
@@ -57,12 +57,13 @@ function TagFilter({
   )
 }
 
-// A single note card. Every note is currently `planned`, so it links to its
-// honest draft page — an outline of intent, never a fabricated finished post.
-// No fake date, no invented body: the "Draft" marker and the detail page tell
-// the truth about where each piece stands.
+// A single note card. A planned note links to its honest draft page — an
+// outline of intent, never a fabricated finished post. A published one shows
+// its date and an honest reading time and links to the finished piece. The
+// marker and the detail page always tell the truth about where each piece stands.
 function NoteCard({ note }: { note: Note }) {
   const planned = note.status === 'planned'
+  const minutes = planned ? 0 : readingMinutes(note)
   return (
     <Link
       to={`/writing/${note.slug}`}
@@ -86,7 +87,15 @@ function NoteCard({ note }: { note: Note }) {
             Draft
           </span>
         ) : (
-          <span className="text-xs tabular-nums text-white/40">{note.date}</span>
+          <span className="inline-flex items-center gap-2 text-xs text-white/40">
+            <span className="tabular-nums">{note.date}</span>
+            {minutes > 0 && (
+              <>
+                <span aria-hidden className="text-white/20">·</span>
+                <span>{minutes} min</span>
+              </>
+            )}
+          </span>
         )}
       </div>
 
@@ -152,7 +161,7 @@ export default function Writing() {
           className="mt-8 max-w-xl text-lg leading-relaxed text-white/60"
         >
           I am starting to write about how I build — the craft, the decisions, the parts that do not fit in a case
-          study. These are the first pieces, honestly still in draft. Each one below is a topic I actually mean to
+          study. The first piece is up; the rest are honest drafts, each an outline of a topic I actually mean to
           write, not a placeholder pretending otherwise.
         </motion.p>
       </header>
@@ -197,9 +206,9 @@ export default function Writing() {
       <section className="mx-auto w-full max-w-4xl px-6 pb-4">
         <Reveal>
           <div className="rounded-2xl border border-white/10 bg-white/[0.015] p-6 text-sm leading-relaxed text-white/45 sm:p-8">
-            Everything here is marked a draft on purpose. I would rather show what is coming, honestly, than pad this
-            page with things I have not written. When a piece is ready it will lose the draft marker and get a date —
-            and this whole site is{' '}
+            The pieces still marked a draft are marked so on purpose. I would rather show what is coming, honestly,
+            than pad this page with things I have not written. When a piece is ready it loses the draft marker and
+            gets a date — as the first one now has — and this whole site is{' '}
             <Link to="/colophon" className="text-white/70 underline-offset-4 hover:text-[#DCF87C] hover:underline">
               built in the open
             </Link>
@@ -212,9 +221,19 @@ export default function Writing() {
       <section className="mx-auto w-full max-w-4xl px-6 py-24 text-center">
         <Reveal>
           <h2 className="font-display text-4xl font-bold tracking-tight sm:text-6xl">
-            While you wait,
-            <br />
-            see the work.
+            {PUBLISHED_COUNT > 0 ? (
+              <>
+                More is coming.
+                <br />
+                Meanwhile, the work.
+              </>
+            ) : (
+              <>
+                While you wait,
+                <br />
+                see the work.
+              </>
+            )}
           </h2>
         </Reveal>
         <Reveal delay={0.1}>
