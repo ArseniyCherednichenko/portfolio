@@ -231,6 +231,7 @@ import { Simon } from '../components/Simon'
 import { LightsOut } from '../components/LightsOut'
 import { Mastermind } from '../components/Mastermind'
 import { Minesweeper } from '../components/Minesweeper'
+import { Nonogram } from '../components/Nonogram'
 import { TicTacToe } from '../components/TicTacToe'
 import { PegSolitaire } from '../components/PegSolitaire'
 import { ZenGarden } from '../components/ZenGarden'
@@ -14158,6 +14159,46 @@ export default function Playground() {
                 Home and End jump the row &mdash; every cell carrying its position and state in a label, a flag mode for
                 touch, and each reveal, flag and outcome announced through a live region. Reduced motion drops the opening
                 ripple and the reveal pop; the field is identical to play.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH NONOGRAM */}
+        <Reveal>
+          <div id="nonogram" data-experiment="Nonogram" className="mt-12 scroll-mt-32">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 py-12 sm:px-10">
+              <div className="text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Picture</span>
+                <p className="mx-auto mt-3 max-w-md text-lg font-medium text-white/85 sm:text-xl">
+                  The numbers in the margins are the run lengths of a hidden picture. Read them against each other and draw it out.
+                </p>
+              </div>
+              <Nonogram className="mt-10" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Nonogram</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                A picture deduced from the numbers in its margins &mdash; and the complement to the Minesweeper beside it.
+                That one is deduction from numbers under uncertainty, where the field can leave you no choice but to guess
+                and correct play can still lose; this one is deduction from numbers with certainty: every clue is the
+                run-length summary of one row or column of a hidden image, a well-formed puzzle has exactly one solution,
+                and it is reachable by pure logic &mdash; a line at a time, intersecting every arrangement a clue still
+                allows against what you already know &mdash; without ever guessing. Honest the two ways this family cares
+                about. The clues are not authored by hand and trusted: each puzzle is a small hand-drawn picture bitmap,
+                and every number is computed from it, so the margins can never disagree with the answer &mdash; the
+                picture is the single source of truth, the numbers are derived. And the Deduce button plays only forced
+                moves, the same idiom the Minesweeper uses: for each line it enumerates every placement of the clue
+                consistent with the cells already known and fills or crosses only the cells that come out the same in all
+                of them, making no use of the hidden picture &mdash; it reads the numbers and your marks, the way you
+                would (every puzzle here verified in Node to close completely under that forced-only logic, so the solve
+                never needs a guess). Built without canvas or image: a CSS grid of struck tiles, filled cells the single
+                house lime, empties marked with a quiet cross, every fifth line edged a touch heavier as a guide, and each
+                row and column clue dimming as its line is satisfied. A roving-tabindex grid makes it a real keyboard
+                widget &mdash; arrows move, Enter or Space fills, X crosses, Home and End jump the row &mdash; every cell
+                carrying its coordinate and state in a label, a Fill/Cross mode for touch, and a pointer drag that paints
+                a streak for mouse and finger alike. Reduced motion drops the fill pop and the solved shimmer; the puzzle
+                is identical to solve.
               </p>
             </div>
           </div>
