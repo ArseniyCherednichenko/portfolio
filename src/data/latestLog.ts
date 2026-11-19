@@ -34,6 +34,12 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'A chart that keeps every point, not a summary',
+    summary:
+      "Beeswarm — the box plot's complement from the other side; each reading a dot nudged clear of its neighbours so the crowd draws the distribution, showing the two humps a single median would hide.",
+    tag: 'Component',
+  },
+  {
     title: 'A picture read out of the margin numbers',
     summary:
       "Nonogram — the Minesweeper's certainty-side complement; the clues are the run lengths of a hidden picture, every puzzle has one logical solution, and Deduce plays only the moves the numbers force, never a guess.",
@@ -86,11 +92,5 @@ export const LATEST_LOG: LogHeadline[] = [
     summary:
       "Recaman's sequence — the Collatz coral's sibling; jump back by n when you can and forward when you can't, drawn as nesting arcs, standing on the same kind of open question: does every number appear?",
     tag: 'Component',
-  },
-  {
-    title: 'A hero line that never flickers blank',
-    summary:
-      'The rotating hero word now overlaps its swap so one is always shown, holds its width so nothing reflows, and foregrounds the range over any one product.',
-    tag: 'Polish',
   },
 ]
