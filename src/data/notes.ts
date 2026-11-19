@@ -1,16 +1,33 @@
 // Writing — an honest, in-the-open notes section.
 //
-// This is a real, intentional part of the site, but the pieces themselves are
-// still being written. Every entry below is a genuine topic Arseniy plans to
-// write about, and each is marked `status: 'planned'` so it reads as an honest
-// promise, not a fabricated post. NOTHING here pretends to be finished, and no
-// note invents a claim, a client, or a result. As real pieces land, flip a
-// note to `status: 'published'`, give it a `date`, and (later) a detail route.
+// This is a real, intentional part of the site. Most pieces are still being
+// written: every such entry is a genuine topic Arseniy plans to write about,
+// marked `status: 'planned'` so it reads as an honest promise, not a fabricated
+// post. When a piece is actually written it flips to `status: 'published'`, gets
+// a real `date`, and carries a `body` — the finished prose, rendered on its
+// detail page. NOTHING here pretends to be finished, and no note invents a
+// claim, a client, or a result.
 //
 // Keep it honest: only topics he actually means to write, in his own voice,
-// when he writes them.
+// and a `body` only once the piece is genuinely written. The one published
+// piece so far — "Building this site in the open" — is deliberately about a
+// subject every reader can verify against the repo itself, so none of it rests
+// on a claim you have to take on faith.
+
+import { COMPONENT_COUNT } from './stats'
 
 export type NoteStatus = 'planned' | 'published'
+
+/**
+ * One block of a published note's body. Kept deliberately small: a paragraph,
+ * a sub-heading, or a pulled-out line. No raw HTML, no fabricated structure —
+ * just the shapes real prose actually needs, so the detail page can render a
+ * finished piece with proper rhythm instead of one undifferentiated wall.
+ */
+export type NoteBlock =
+  | { type: 'p'; text: string }
+  | { type: 'h'; text: string }
+  | { type: 'quote'; text: string }
 
 export interface Note {
   slug: string
@@ -29,6 +46,12 @@ export interface Note {
    * in draft, so a reader can see where it is headed.
    */
   plan?: string[]
+  /**
+   * The finished prose, present ONLY on a published piece. An ordered list of
+   * blocks the detail page renders in sequence. Honest by construction: write
+   * it only when the piece is actually written.
+   */
+  body?: NoteBlock[]
 }
 
 export type NoteTag = 'Craft' | 'Building in the open' | 'AI' | 'iOS'
@@ -56,11 +79,63 @@ export const NOTES: Note[] = [
     summary:
       'This portfolio is public and grows a little each day. What it is like to build something continuously, in full view, and what that changes about how you work.',
     tag: 'Building in the open',
-    status: 'planned',
+    status: 'published',
+    date: '2026-11-19',
     plan: [
       'What changes when the commit history is part of the work',
       'Moving in small, daily, coherent steps instead of big drops',
       'The discipline of never pushing something broken to main',
+    ],
+    body: [
+      {
+        type: 'p',
+        text: 'Most portfolios arrive finished. You see the polished result and none of the deciding, the discarding, the Tuesday where nothing worked. I wanted this one to be the opposite: public from the first commit, and visibly unfinished on purpose. The repository is open, the history is readable, and the site grows a little most days rather than landing fully formed. If you want to know how I work, you can read it line by line instead of taking my word for it.',
+      },
+      {
+        type: 'p',
+        text: 'That decision sounds small. It is not. Building in the open changes what the work is.',
+      },
+      { type: 'h', text: 'The commit history becomes part of the work' },
+      {
+        type: 'p',
+        text: 'When the history is private, a commit is a save point — a note to yourself, written in the shorthand of someone who already knows what they meant. When the history is public, each commit is a sentence a stranger might read. So I write them as sentences. A message says what changed and, more importantly, why, in plain words, because the why is the part that is gone by next week if it is not written down.',
+      },
+      {
+        type: 'p',
+        text: 'This is slower, and I think it is worth it. The site is a claim about caring over the small moments. A commit log full of "wip" and "fix" would quietly contradict that claim. The log is not a byproduct of the work here; it is one of the surfaces, held to the same standard as the pages.',
+      },
+      { type: 'quote', text: 'If the site claims I sweat the details, the commit log cannot be the one place I stop.' },
+      { type: 'h', text: 'Small steps, most days, instead of big drops' },
+      {
+        type: 'p',
+        text: `The whole thing is built one coherent, self-contained improvement at a time. Not a weekend of frantic work and then a month of silence — a little, most days. A single new component. One page made better. A real polish pass on something that was almost right. The ${COMPONENT_COUNT} hand-built pieces in here did not arrive in a batch; they accumulated, the way anything real does.`,
+      },
+      {
+        type: 'p',
+        text: 'The constraint is the gift. Forcing every change to be small and complete means I cannot hide a half-finished idea inside a giant diff and promise to come back to it. Each step has to stand on its own: typed, building, and genuinely better than the state before it. It is a harder way to work than it looks, and it keeps me honest about what "done" means.',
+      },
+      {
+        type: 'p',
+        text: 'It also compounds. A page I would never have sat down to build in one sitting gets there anyway, a commit at a time. Momentum turns out to be cheaper to keep than to restart.',
+      },
+      { type: 'h', text: 'The main branch is never broken' },
+      {
+        type: 'p',
+        text: 'There is one rule I do not bend: nothing lands on the main branch unless it type-checks and builds. The site is public and live, so a broken push is not a private embarrassment — it is the thing everyone sees. Strict TypeScript and a clean production build are the gate, every time, before anything ships.',
+      },
+      {
+        type: 'p',
+        text: 'That discipline is freeing rather than restricting. Because the trunk is always green, I can move quickly on top of it without fear. There is no dreaded integration day, no slow drift into a state nobody understands. The site you are reading is, at every moment, a version that actually works. The confidence to keep changing it comes directly from refusing to ever leave it broken.',
+      },
+      { type: 'h', text: 'Why bother' },
+      {
+        type: 'p',
+        text: 'Working this way is an argument about craft. Finished things hide their making, and the making is where the real decisions live. By keeping this site unfinished in public — green, honest, and moving — the process becomes as legible as the result. You are not looking at a snapshot of what I can do. You are watching it happen, and you can check the receipts.',
+      },
+      {
+        type: 'p',
+        text: 'This note is itself part of that. It is the first finished piece of writing on the site, shipped the same way as everything else: small, in the open, on a branch that still builds. There will be more. You can watch them arrive.',
+      },
     ],
   },
   {
@@ -119,6 +194,21 @@ export const NOTES: Note[] = [
 
 export const PUBLISHED_COUNT = NOTES.filter((n) => n.status === 'published').length
 export const NOTE_COUNT = NOTES.length
+
+/**
+ * An honest reading-time estimate for a published piece, in whole minutes
+ * (never below one). Counted from the real words in the body at ~200 wpm, so it
+ * tracks the actual prose and cannot drift into a made-up figure. A note with
+ * no body returns 0 — there is nothing to read yet.
+ */
+export function readingMinutes(note: Note): number {
+  if (!note.body || note.body.length === 0) return 0
+  const words = note.body.reduce(
+    (sum, block) => sum + block.text.trim().split(/\s+/).filter(Boolean).length,
+    0,
+  )
+  return Math.max(1, Math.round(words / 200))
+}
 
 /** Find a note by slug, for the deep-linkable detail page. */
 export function getNote(slug: string | undefined): Note | undefined {
