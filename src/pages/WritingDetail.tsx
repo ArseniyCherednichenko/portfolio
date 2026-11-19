@@ -5,9 +5,60 @@ import { Eyebrow } from '../components/Eyebrow'
 import { GradientText } from '../components/GradientText'
 import { Seo } from '../components/Seo'
 import { Breadcrumbs } from '../components/Breadcrumbs'
-import { getNote, nextNote, relatedNotes } from '../data/notes'
+import { getNote, nextNote, relatedNotes, readingMinutes, type NoteBlock } from '../data/notes'
 
 const EASE = [0.16, 1, 0.3, 1] as const
+
+// Renders one published piece's prose. Each block scroll-reveals on a gentle
+// stagger (reduced-motion shows it in place). Paragraphs carry the reading
+// column; a sub-heading breaks the rhythm; a pulled-out line gets a lime rule
+// and display type. No raw HTML is ever injected — the block union is the only
+// shape the body can take, so a note can never smuggle markup onto the page.
+function NoteBody({ blocks, reduce }: { blocks: NoteBlock[]; reduce: boolean | null }) {
+  return (
+    <div className="mt-14">
+      {blocks.map((block, i) => {
+        const reveal = {
+          initial: reduce ? false : { opacity: 0, y: 16 },
+          whileInView: { opacity: 1, y: 0 },
+          viewport: { once: true, margin: '-60px' },
+          transition: { duration: 0.55, ease: EASE },
+        } as const
+        if (block.type === 'h') {
+          return (
+            <motion.h2
+              key={i}
+              {...reveal}
+              className="mt-14 font-display text-2xl font-bold leading-tight tracking-tight text-white/90 sm:text-3xl"
+            >
+              {block.text}
+            </motion.h2>
+          )
+        }
+        if (block.type === 'quote') {
+          return (
+            <motion.blockquote
+              key={i}
+              {...reveal}
+              className="relative mt-10 border-l-2 border-[#DCF87C]/60 pl-6 font-display text-xl font-medium italic leading-snug text-white/80 sm:text-2xl"
+            >
+              {block.text}
+            </motion.blockquote>
+          )
+        }
+        return (
+          <motion.p
+            key={i}
+            {...reveal}
+            className="mt-6 text-lg leading-relaxed text-white/70 first:mt-0"
+          >
+            {block.text}
+          </motion.p>
+        )
+      })}
+    </div>
+  )
+}
 
 // A single "keep reading" card, reused for the next note and related notes.
 function NoteLink({ slug, title, tag, label }: { slug: string; title: string; tag: string; label: string }) {
@@ -54,6 +105,7 @@ export default function WritingDetail() {
   }
 
   const draft = note.status === 'planned'
+  const minutes = readingMinutes(note)
   const next = nextNote(note.slug)
   const related = relatedNotes(note).slice(0, 2)
 
@@ -79,7 +131,15 @@ export default function WritingDetail() {
               Draft
             </span>
           ) : (
-            note.date && <span className="text-xs tabular-nums text-white/45">{note.date}</span>
+            <>
+              {note.date && <span className="text-xs tabular-nums text-white/45">{note.date}</span>}
+              {minutes > 0 && (
+                <>
+                  <span aria-hidden className="text-white/20">·</span>
+                  <span className="text-xs text-white/45">{minutes} min read</span>
+                </>
+              )}
+            </>
           )}
         </motion.div>
 
@@ -146,17 +206,23 @@ export default function WritingDetail() {
         </Reveal>
       )}
 
-      {/* CTA — an honest way to hear when it lands. */}
-      <Reveal className="mt-12" delay={0.05}>
+      {/* PUBLISHED BODY — the finished prose, rendered from the block model. */}
+      {!draft && note.body && note.body.length > 0 && <NoteBody blocks={note.body} reduce={reduce} />}
+
+      {/* CTA — tuned to the note's state. A draft offers to send the finished
+          piece along; a published one points at the proof it talks about. */}
+      <Reveal className="mt-14" delay={0.05}>
         <div className="flex flex-col items-start gap-4 rounded-2xl border border-white/10 bg-white/[0.015] p-6 sm:flex-row sm:items-center sm:justify-between sm:p-8">
           <p className="max-w-md text-sm leading-relaxed text-white/55">
-            Want a heads-up when this one is finished? The best way is to say hello — I am happy to send it your way.
+            {draft
+              ? 'Want a heads-up when this one is finished? The best way is to say hello — I am happy to send it your way.'
+              : 'This whole site is built the way this piece describes — in the open, a small green commit at a time. The history is all there to read.'}
           </p>
           <Link
-            to="/contact"
+            to={draft ? '/contact' : '/colophon'}
             className="shrink-0 rounded-full bg-[#DCF87C] px-6 py-3 text-sm font-semibold text-black transition-colors hover:bg-[#e6ff9a]"
           >
-            Get in touch
+            {draft ? 'Get in touch' : 'How it is built'}
           </Link>
         </div>
       </Reveal>
