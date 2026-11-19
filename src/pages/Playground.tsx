@@ -550,6 +550,7 @@ import { Candlestick, type Candle } from '../components/Candlestick'
 import { BumpChart, type BumpSeries } from '../components/BumpChart'
 import { Ridgeline, type RidgeRow } from '../components/Ridgeline'
 import { BoxPlot, type BoxGroup } from '../components/BoxPlot'
+import { Beeswarm, type BeeswarmGroup } from '../components/Beeswarm'
 import { ScatterPlot, type ScatterPoint } from '../components/ScatterPlot'
 import { ParallelCoords, type PCDimension, type PCRecord } from '../components/ParallelCoords'
 import { Stat, type DeltaMode } from '../components/Stat'
@@ -2393,6 +2394,82 @@ function BoxPlotDemo() {
         formatX={fmtMs}
         xAxisLabel="Frame time"
         ariaLabel="Box plot comparing the illustrative frame-time spread of five animation easings on one shared axis — each box the middle half of its samples, the bright line its median, the rings its outliers."
+      />
+      <button
+        type="button"
+        onClick={resample}
+        className="rounded-full border border-white/15 px-4 py-1.5 text-sm font-semibold text-white/80 transition-colors hover:border-[#DCF87C]/50 hover:bg-white/[0.04] hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#DCF87C]/60"
+      >
+        Resample
+      </button>
+    </div>
+  )
+}
+
+// A Beeswarm showcase. Illustrative, not a recorded measurement: four groups of
+// tap-to-response readings in milliseconds, each a believable spread drawn as
+// every individual point — and one group deliberately BIMODAL (a cold path and a
+// warm path), the two humps a box plot or a single median would flatten into one
+// and a swarm shows at a glance. A component demo like the other charts', with a
+// Resample that re-rolls every group's samples so the clouds shift but stay
+// plausible. Uses the family's shared Box–Muller normal.
+const SWARM_GROUPS: {
+  label: string
+  // Each group is a mixture of one or more normal lobes, so a group can be
+  // single-humped or genuinely two-humped.
+  lobes: { mu: number; sigma: number; weight: number }[]
+  n: number
+}[] = [
+  { label: 'Instant', lobes: [{ mu: 40, sigma: 7, weight: 1 }], n: 26 },
+  { label: 'Debounced', lobes: [{ mu: 95, sigma: 14, weight: 1 }], n: 26 },
+  {
+    // The point of the chart: a cold cache and a warm cache, two clear humps.
+    label: 'Cold + warm',
+    lobes: [
+      { mu: 70, sigma: 10, weight: 0.5 },
+      { mu: 180, sigma: 16, weight: 0.5 },
+    ],
+    n: 30,
+  },
+  { label: 'Network', lobes: [{ mu: 210, sigma: 34, weight: 1 }], n: 24 },
+]
+
+function rollSwarm(): BeeswarmGroup[] {
+  return SWARM_GROUPS.map((g) => {
+    const values: number[] = []
+    for (let i = 0; i < g.n; i++) {
+      // Pick a lobe by weight, then draw a normal sample from it.
+      let r = Math.random()
+      let lobe = g.lobes[0]
+      for (const l of g.lobes) {
+        if (r < l.weight) {
+          lobe = l
+          break
+        }
+        r -= l.weight
+      }
+      const v = lobe.mu + randNormal() * lobe.sigma
+      values.push(Math.max(8, Math.round(v)))
+    }
+    return { label: g.label, values }
+  })
+}
+
+function BeeswarmDemo() {
+  const [groups, setGroups] = useState<BeeswarmGroup[]>(() => rollSwarm())
+  const [run, setRun] = useState(0)
+  function resample() {
+    setGroups(rollSwarm())
+    setRun((n) => n + 1)
+  }
+  return (
+    <div className="flex w-full flex-col items-center gap-6">
+      <Beeswarm
+        key={run}
+        groups={groups}
+        formatX={(v) => `${Math.round(v)}ms`}
+        xAxisLabel="Response time"
+        ariaLabel="Beeswarm plot comparing four illustrative groups of tap-to-response times on one shared axis — every reading a dot, nudged clear of its neighbours so each cloud shows its spread, with one group drawn as two humps a single median would hide."
       />
       <button
         type="button"
@@ -9916,6 +9993,17 @@ export default function Playground() {
                 note="The chart the others cannot draw — not the whole silhouette the ridgeline keeps, but its five-number SKELETON. It throws the shape away and keeps only what summarises it: the median, the box of the middle half from the first quartile to the third, the whiskers reaching to the furthest ordinary values, and the rings for the outliers that fall past the fence. The single lime does all of it — a faint wash in a lime box, the median the one bright thick stroke the chart is really about, the whiskers dimmer, the outliers hollow rings — so nothing but the row label names a group. It is Tukey's oldest honest way to compare spreads side by side without drawing every point. An illustrative frame-time spread of five easings, not a measured benchmark. Resample to re-roll every group, hover a box to read its median and quartile range."
               >
                 <BoxPlotDemo />
+              </Experiment>
+            </Reveal>
+          </div>
+
+          <div className="sm:col-span-2">
+            <Reveal>
+              <Experiment
+                name="Beeswarm"
+                note="The chart the others cannot draw — the one that keeps EVERY point. The box plot keeps five numbers and the ridgeline keeps the whole smoothed shape; this throws nothing away, drawing each sample as a dot and nudging it just far enough off the line that none overlap, so the cloud the dots settle into is the distribution itself. A plain strip plot would pile the crowd on one axis and hide it behind a blob; the swarm spreads that crowd sideways and the density draws itself — a fat band where readings bunch, a lone dot where one strays. Its whole reason to exist is the group drawn here as two humps: a cold path and a warm path a single median would flatten into one, shown apart at a glance. One shared axis, one lime, a dim median tick tying each row to the box beside it; the pack — nearest-to-the-line-without-touching — is computed here by hand. Illustrative response times, not a measurement. Resample to re-roll, hover a dot to read its value."
+              >
+                <BeeswarmDemo />
               </Experiment>
             </Reveal>
           </div>
