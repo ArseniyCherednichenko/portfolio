@@ -34,6 +34,12 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'The first finished piece of writing lands',
+    summary:
+      "'Building this site in the open' — the Writing section's first published essay, deliberately about a subject you can verify against this very repo: public history, small daily commits, a main branch that always builds.",
+    tag: 'Page',
+  },
+  {
     title: 'A chart that keeps every point, not a summary',
     summary:
       "Beeswarm — the box plot's complement from the other side; each reading a dot nudged clear of its neighbours so the crowd draws the distribution, showing the two humps a single median would hide.",
@@ -85,12 +91,6 @@ export const LATEST_LOG: LogHeadline[] = [
     title: 'A race read from the crossings, not the scores',
     summary:
       'Bump chart — keeps the order, not the amount; lines cross as contenders overtake, the one lime stepped by who finishes on top.',
-    tag: 'Component',
-  },
-  {
-    title: 'A number line walked in semicircles',
-    summary:
-      "Recaman's sequence — the Collatz coral's sibling; jump back by n when you can and forward when you can't, drawn as nesting arcs, standing on the same kind of open question: does every number appear?",
     tag: 'Component',
   },
 ]
