@@ -34,6 +34,12 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'A second finished essay goes up',
+    summary:
+      "'Motion that earns its place' — the Writing section's second published piece, on the site's own animation philosophy: the one question that decides whether a motion stays, and reduced-motion as a designed path, all checkable here.",
+    tag: 'Page',
+  },
+  {
     title: 'A cursor trail whose marks stay, then go',
     summary:
       "ImageTrail — the left-behind member of the pointer-field thread; it stamps a tile wherever the cursor passes and lets it shrink, spin and fade on its own clock, the counterpart to the pixel grid and the ribbons that keep moving with you.",
@@ -85,12 +91,6 @@ export const LATEST_LOG: LogHeadline[] = [
     title: 'A control that hands back a direction, not a number',
     summary:
       'Joystick — the controls family\'s first whole-vector control; grab the nub, it clamps to the rim and springs back to centre, reporting an x and y with the spoken throw and full keyboard travel.',
-    tag: 'Component',
-  },
-  {
-    title: 'A set composed by moving rows between two lists',
-    summary:
-      'Transfer list — the picker that keeps a set, not a value; two multi-select listboxes with arrows between, each moved row springing from one pane to the other, fully keyboard-driven.',
     tag: 'Component',
   },
 ]
