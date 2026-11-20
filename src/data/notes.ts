@@ -66,11 +66,65 @@ export const NOTES: Note[] = [
     summary:
       'When an animation helps someone understand where they are, and when it is just noise. How I decide, and why every motion here respects reduced-motion.',
     tag: 'Craft',
-    status: 'planned',
+    status: 'published',
+    date: '2026-11-20',
     plan: [
       'The one question I ask before adding any animation',
       'Where motion genuinely helps: orientation, continuity, feedback',
       'Treating reduced-motion as a first-class path, not a fallback',
+    ],
+    body: [
+      {
+        type: 'p',
+        text: 'This site has a lot of things that move. That is on purpose, and it is also the easiest thing in the world to get wrong. Motion is cheap to add and expensive to take back: a transition you ship is a transition someone has to sit through on every visit, whether or not it told them anything. So the hard part was never making things move. It was deciding what deserved to.',
+      },
+      {
+        type: 'p',
+        text: 'I have one question I ask before any animation stays. Not "does this look nice" — almost anything looks nice for the first three seconds. The question is narrower, and it is the whole discipline.',
+      },
+      {
+        type: 'quote',
+        text: 'Does this motion help someone understand where they are, or is it just me showing that I can animate?',
+      },
+      {
+        type: 'p',
+        text: 'If the honest answer is the second one, it comes out, however much work it was. That rule has killed plenty of effects I was proud of. It is the only reason a site with this much movement does not feel like a screensaver.',
+      },
+      { type: 'h', text: 'Where motion actually earns its keep' },
+      {
+        type: 'p',
+        text: 'There are a few places where an animation is not decoration — it is information, and the page is genuinely worse without it. The first is orientation. When you open a panel, a menu, or a detail view, a short transition tells you where it came from and where it will go back to. Cut that to an instant swap and the new thing just appears, and for a beat you have to work out what happened. The motion is doing a job: it keeps you from getting lost.',
+      },
+      {
+        type: 'p',
+        text: 'The second is continuity. When one element becomes another — a card that grows into the page it links to, a filter pill that slides to the option you picked — tweening between the two states says "this is the same thing, in a new place" far more clearly than a cut ever could. Your eye follows the object instead of re-finding it. That is why so many of the transitions here are shared-element moves rather than fades: the fade is prettier, but the move is more honest about what is going on.',
+      },
+      {
+        type: 'p',
+        text: 'The third is feedback. A button that gives slightly under a press, a control that springs to the value you set, a thing that confirms it heard you — that is motion standing in for the physical response a screen cannot give you. It is the difference between an interface that feels alive and one that feels like it might be broken.',
+      },
+      {
+        type: 'p',
+        text: 'Orientation, continuity, feedback. If a piece of motion is not doing one of those three, it is probably noise, and I treat it as noise until it proves otherwise.',
+      },
+      { type: 'h', text: 'Reduced motion is a path, not an apology' },
+      {
+        type: 'p',
+        text: 'Some people turn animation off at the operating-system level — because it makes them ill, because it distracts them, or simply because they prefer it. The browser hands that preference to the site as prefers-reduced-motion, and the lazy way to honour it is to bolt on a last-minute check that strips the movement and leaves a worse, half-considered version behind. I did not want a worse version for those readers. I wanted a different, equally finished one.',
+      },
+      {
+        type: 'p',
+        text: `So reduced motion is designed, not patched. Every animated component on this site reads that preference and has a deliberate still state: the thing that would have travelled is simply present, in its final place, composed rather than frozen. A list that would stagger in is just there. A trail that would chase the cursor lays down one calm arrangement instead of a dead panel. There are ${COMPONENT_COUNT} hand-built pieces in here, and the rule held for all of them, because it was part of building each one rather than a sweep at the end.`,
+      },
+      {
+        type: 'p',
+        text: 'You can check this the same way you can check everything else here: turn the preference on in your own settings and move around. Nothing should break, nothing should look unfinished. If it does, that is a bug, and I would rather hear about it than have you assume the stillness was the best I had.',
+      },
+      { type: 'h', text: 'The point' },
+      {
+        type: 'p',
+        text: 'Good motion is invisible. You do not notice it working; you only notice its absence, in the small disorientation of a screen that jumps instead of moves. The goal was never to make a site that shows off how much it can animate. It was to make one where every bit of movement is pulling its weight — and where the version with no movement at all is just as considered as the one with all of it.',
+      },
     ],
   },
   {
