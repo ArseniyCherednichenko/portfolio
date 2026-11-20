@@ -34,6 +34,12 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'A cursor trail whose marks stay, then go',
+    summary:
+      "ImageTrail — the left-behind member of the pointer-field thread; it stamps a tile wherever the cursor passes and lets it shrink, spin and fade on its own clock, the counterpart to the pixel grid and the ribbons that keep moving with you.",
+    tag: 'Component',
+  },
+  {
     title: 'The first finished piece of writing lands',
     summary:
       "'Building this site in the open' — the Writing section's first published essay, deliberately about a subject you can verify against this very repo: public history, small daily commits, a main branch that always builds.",
@@ -85,12 +91,6 @@ export const LATEST_LOG: LogHeadline[] = [
     title: 'A set composed by moving rows between two lists',
     summary:
       'Transfer list — the picker that keeps a set, not a value; two multi-select listboxes with arrows between, each moved row springing from one pane to the other, fully keyboard-driven.',
-    tag: 'Component',
-  },
-  {
-    title: 'A race read from the crossings, not the scores',
-    summary:
-      'Bump chart — keeps the order, not the amount; lines cross as contenders overtake, the one lime stepped by who finishes on top.',
     tag: 'Component',
   },
 ]
