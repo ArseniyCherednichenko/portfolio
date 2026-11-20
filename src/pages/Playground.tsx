@@ -214,6 +214,7 @@ import { Klann } from '../components/Klann'
 import { Escapement } from '../components/Escapement'
 import { ScotchYoke } from '../components/ScotchYoke'
 import { SliderCrank } from '../components/SliderCrank'
+import { RackPinion } from '../components/RackPinion'
 import { Trammel } from '../components/Trammel'
 import { Chebyshev } from '../components/Chebyshev'
 import { TusiCouple } from '../components/TusiCouple'
@@ -12586,6 +12587,52 @@ export default function Playground() {
                 with a live region reading the crank angle, the displacement, and the lag. Under{' '}
                 <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code> there is
                 no sweep &mdash; Step jumps a quarter turn &mdash; and every state stays legible.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH RACK AND PINION — the rotary-to-linear member of the trio */}
+        <Reveal>
+          <div id="rack-and-pinion" data-experiment="Rack and pinion" className="mt-12 scroll-mt-32">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 py-12 sm:px-10">
+              <div className="mb-8 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Rotation into a straight line</span>
+                <p className="mx-auto mt-3 max-w-md text-lg font-medium text-white/85 sm:text-xl">
+                  Turn the pinion and the toothed bar slides &mdash; its travel the pitch radius times the angle,
+                  exactly, no error term to carry.
+                </p>
+              </div>
+              <RackPinion className="mx-auto" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Rack and pinion</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The third member of the rotary-into-motion trio, and the plainest of the three. The Scotch yoke turns
+                rotation into a <em>perfect sine</em>; the slider-crank, into a <em>lopsided stroke</em> with its
+                square-root error term; the rack and pinion turns it into the simplest output there is &mdash; a{' '}
+                <em>straight line that advances in exact proportion to the turn</em>. A round pinion gear combs its teeth
+                into a straight toothed bar, the rack, and because a gear rolls on its pitch circle without slipping, a
+                point on that circle and the rack move together: the rack&rsquo;s travel is the pitch radius times the
+                angle turned,{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">s = R&middot;&theta;</code> &mdash;
+                exactly, with &theta; in radians and no error term at all. Spin the pinion one full turn and the rack
+                travels one pitch circumference,{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">2&pi;R</code>, no more. Every tooth you
+                see is placed from that one law: the pinion&rsquo;s teeth sit at even angles, the rack&rsquo;s at the
+                matching pitch along x, and the whole rack is offset by{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">R&middot;&theta;</code>, phased so a
+                gap &mdash; never a tooth &mdash; meets the pinion&rsquo;s bottom tooth at the pitch point, and the mesh
+                holds for every angle because both surfaces advance at the same speed there. The only stored state is the
+                turn angle; the pinion&rsquo;s rotation, the rack&rsquo;s position and the contact at the pitch point are
+                all read from it, so they cannot drift out of step. The teeth are drawn to a clean stylised profile
+                &mdash; the proportion is honest even where the flank is not a true involute. Drag the pinion to turn it,
+                or set it running. A real{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">role=slider</code> from the keyboard:
+                arrows nudge a degree, Shift ten, Space runs or stops, Home returns to zero, with a live region reading
+                the angle and the rack&rsquo;s travel in pitches. Under{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code> there is
+                no sweep &mdash; Step advances exactly one tooth &mdash; and every state stays legible.
               </p>
             </div>
           </div>
