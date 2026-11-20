@@ -83,6 +83,7 @@ import { BlobCursor } from '../components/BlobCursor'
 import { LetterGlitch } from '../components/LetterGlitch'
 import { MetaBalls } from '../components/MetaBalls'
 import { PixelTrail } from '../components/PixelTrail'
+import { ImageTrail } from '../components/ImageTrail'
 import { Ribbons } from '../components/Ribbons'
 import { Lightning } from '../components/Lightning'
 import { Starfield } from '../components/Starfield'
@@ -7920,6 +7921,34 @@ export default function Playground() {
                 behind, so every ribbon whips and settles like ink in water. Left alone they drift on their own paths.
                 Widest and brightest at the head, fading to nothing at the tail. Backs the Now page title.
                 Reduced-motion gets a calm static set of arcs.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH IMAGE TRAIL */}
+        <Reveal>
+          <div className="mt-12">
+            <div className="relative h-[340px] overflow-hidden rounded-3xl border border-white/10 bg-[#0a0a0a]">
+              <ImageTrail />
+              <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Trail field</span>
+                <p className="mt-3 max-w-md px-6 text-xl font-medium text-white/80 sm:text-2xl">
+                  Drag across, and the tiles you drop stay a beat, then go.
+                </p>
+              </div>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Pointer tile trail</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The left-behind counterpart to the pixel grid and the chasing ribbons. Where those keep moving with you,
+                this stamps a discrete tile wherever the cursor passes and then lets it go: each mark pops to full size,
+                then shrinks, turns a little, and fades on its own clock while newer tiles land ahead, so the trail is a
+                string of marks the pointer dropped rather than anything following it. The React Bits image-trail idea
+                with nothing to download &mdash; every tile wears one of a few procedural motifs (a rule, a ring, a
+                cross, a quartet of dots) picked in rotation, so a held cursor never repeats the same stamp. One canvas,
+                one rAF loop off the frame clock, the trail capped at a few dozen tiles. Reduced motion lays a single
+                calm arc of still tiles.
               </p>
             </div>
           </div>
