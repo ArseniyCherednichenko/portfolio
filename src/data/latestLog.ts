@@ -34,6 +34,12 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'A turn comes out as a straight line',
+    summary:
+      "Rack and pinion — the third of the rotary-into-motion trio beside the Scotch yoke and slider-crank; a pinion gear combs a toothed bar, whose travel is the pitch radius times the angle turned, s = R*theta, exactly, no error term.",
+    tag: 'Component',
+  },
+  {
     title: 'A second finished essay goes up',
     summary:
       "'Motion that earns its place' — the Writing section's second published piece, on the site's own animation philosophy: the one question that decides whether a motion stays, and reduced-motion as a designed path, all checkable here.",
@@ -85,12 +91,6 @@ export const LATEST_LOG: LogHeadline[] = [
     title: 'A chart that keeps the shape, not the number',
     summary:
       "Ridgeline — the data-viz family's distribution shape; several densities stacked and overlapping the Unknown Pleasures way, each ridge opaque so it hides the crest behind it and the one lime stepped only by depth.",
-    tag: 'Component',
-  },
-  {
-    title: 'A control that hands back a direction, not a number',
-    summary:
-      'Joystick — the controls family\'s first whole-vector control; grab the nub, it clamps to the rim and springs back to centre, reporting an x and y with the spoken throw and full keyboard travel.',
     tag: 'Component',
   },
 ]
