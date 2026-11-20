@@ -160,9 +160,9 @@ export default function Writing() {
           transition={{ duration: 0.7, delay: 0.15, ease: EASE }}
           className="mt-8 max-w-xl text-lg leading-relaxed text-white/60"
         >
-          I am starting to write about how I build — the craft, the decisions, the parts that do not fit in a case
-          study. The first piece is up; the rest are honest drafts, each an outline of a topic I actually mean to
-          write, not a placeholder pretending otherwise.
+          I am writing about how I build — the craft, the decisions, the parts that do not fit in a case study.
+          A few pieces are up; the rest are honest drafts, each an outline of a topic I actually mean to write, not
+          a placeholder pretending otherwise.
         </motion.p>
       </header>
 
@@ -208,7 +208,7 @@ export default function Writing() {
           <div className="rounded-2xl border border-white/10 bg-white/[0.015] p-6 text-sm leading-relaxed text-white/45 sm:p-8">
             The pieces still marked a draft are marked so on purpose. I would rather show what is coming, honestly,
             than pad this page with things I have not written. When a piece is ready it loses the draft marker and
-            gets a date — as the first one now has — and this whole site is{' '}
+            gets a date — as the published ones now have — and this whole site is{' '}
             <Link to="/colophon" className="text-white/70 underline-offset-4 hover:text-[#DCF87C] hover:underline">
               built in the open
             </Link>
