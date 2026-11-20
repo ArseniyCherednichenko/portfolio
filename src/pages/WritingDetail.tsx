@@ -216,7 +216,7 @@ export default function WritingDetail() {
           <p className="max-w-md text-sm leading-relaxed text-white/55">
             {draft
               ? 'Want a heads-up when this one is finished? The best way is to say hello — I am happy to send it your way.'
-              : 'This whole site is built the way this piece describes — in the open, a small green commit at a time. The history is all there to read.'}
+              : 'This whole site is built in the open — written and shipped a small green commit at a time, with the history all there to read. You can check every claim against it.'}
           </p>
           <Link
             to={draft ? '/contact' : '/colophon'}
