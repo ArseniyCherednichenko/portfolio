@@ -34,6 +34,12 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'The essays get a reading dial',
+    summary:
+      "The finished pieces now carry the TracingBeam margin rule and a new corner ReadingDial — a lime ring that closes as you read, reporting progress through the essay itself and carrying you back to the top. Published-only, reduced-motion aware.",
+    tag: 'Motion',
+  },
+  {
     title: 'A turn that only goes one way',
     summary:
       "Ratchet and pawl — the rigid-mechanism corner's one-way member, its mechanical diode; turn it forward and it counts up tooth by tooth, push it back and the steep face catches the pawl and it locks. One forward-only angle, nothing else stored.",
@@ -85,12 +91,6 @@ export const LATEST_LOG: LogHeadline[] = [
     title: 'A field cleared by reading the numbers',
     summary:
       'Minesweeper — the games family\'s deduction-from-numbers piece; the first click is always safe, every number is an exact neighbour count, and Deduce plays only the moves the field forces, never a guess.',
-    tag: 'Component',
-  },
-  {
-    title: 'A picture that exists only while it spins',
-    summary:
-      "Thaumatrope — the Zoetrope's inverse; a bird on one disc face and an empty cage on the other that fuse into one still neither face holds alone, the bird landing in the cage only while it spins fastest.",
     tag: 'Component',
   },
 ]
