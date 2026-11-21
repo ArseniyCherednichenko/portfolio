@@ -215,6 +215,7 @@ import { Escapement } from '../components/Escapement'
 import { ScotchYoke } from '../components/ScotchYoke'
 import { SliderCrank } from '../components/SliderCrank'
 import { RackPinion } from '../components/RackPinion'
+import { Ratchet } from '../components/Ratchet'
 import { Trammel } from '../components/Trammel'
 import { Chebyshev } from '../components/Chebyshev'
 import { TusiCouple } from '../components/TusiCouple'
@@ -12633,6 +12634,49 @@ export default function Playground() {
                 the angle and the rack&rsquo;s travel in pitches. Under{' '}
                 <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code> there is
                 no sweep &mdash; Step advances exactly one tooth &mdash; and every state stays legible.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH RATCHET AND PAWL — the corner's one-way member */}
+        <Reveal>
+          <div id="ratchet" data-experiment="Ratchet and pawl" className="mt-12 scroll-mt-32">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 py-12 sm:px-10">
+              <div className="mb-8 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Rotation with a direction</span>
+                <p className="mx-auto mt-3 max-w-md text-lg font-medium text-white/85 sm:text-xl">
+                  Turn it forward and it counts up, tooth by tooth. Try to turn it back and the pawl catches the steep
+                  face &mdash; it will not move.
+                </p>
+              </div>
+              <Ratchet className="mx-auto" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Ratchet and pawl</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The one member of the rigid-mechanism corner that enforces a <em>direction</em>. The Scotch yoke, the
+                slider-crank, the rack and pinion, the Geneva &mdash; every one of them runs either way you drive it. The
+                ratchet is the corner&rsquo;s{' '}
+                <strong className="font-semibold text-white/70">mechanical diode</strong>: forward is free, reverse is
+                impossible. It is the piece under every winch, socket wrench, hoist and zip tie &mdash; anywhere motion
+                is let to accumulate but never to give itself back. Each tooth is a long{' '}
+                <em>gentle slope</em> that ends in a <em>steep radial face</em>. Turn the wheel forward and a single
+                spring-loaded pawl rides up each slope and snaps down into the next notch &mdash; one click per tooth, the
+                count ticking up. Push it the other way and that steep face meets the pawl flat-on, with nowhere to lift
+                to, so the wheel simply locks. The honest part is that there is exactly{' '}
+                <strong className="font-semibold text-white/70">one stored value</strong>: a drive angle that never
+                decreases &mdash; that invariant <em>is</em> the mechanism. The wheel&rsquo;s rotation, the tooth count{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">floor(drive / pitch)</code>, the
+                pawl&rsquo;s rise and the lock on reverse are all read from it, so they can never drift out of step; and
+                because the drive can only grow, the count can only grow with it. The pawl&rsquo;s height is read straight
+                off the tooth profile at the contact point, so the arm rocks on the real surface rather than on a separate
+                timer. Drag the wheel clockwise to turn it, or set it running. A real{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">role=slider</code> from the keyboard:
+                Right or Up advances one tooth, Shift four, Left or Down attempts a reverse and is held, Space runs or
+                stops, Home returns to zero, with a live region reading the number of teeth advanced. Under{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code> there is
+                no sweep &mdash; Step clicks exactly one tooth &mdash; and every state stays legible.
               </p>
             </div>
           </div>
