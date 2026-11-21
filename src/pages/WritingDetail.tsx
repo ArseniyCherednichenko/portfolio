@@ -1,3 +1,4 @@
+import { useRef } from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
 import { Link, useParams } from 'react-router-dom'
 import { Reveal } from '../components/Reveal'
@@ -5,6 +6,8 @@ import { Eyebrow } from '../components/Eyebrow'
 import { GradientText } from '../components/GradientText'
 import { Seo } from '../components/Seo'
 import { Breadcrumbs } from '../components/Breadcrumbs'
+import { TracingBeam } from '../components/TracingBeam'
+import { ReadingDial } from '../components/ReadingDial'
 import { getNote, nextNote, relatedNotes, readingMinutes, type NoteBlock } from '../data/notes'
 
 const EASE = [0.16, 1, 0.3, 1] as const
@@ -16,7 +19,7 @@ const EASE = [0.16, 1, 0.3, 1] as const
 // shape the body can take, so a note can never smuggle markup onto the page.
 function NoteBody({ blocks, reduce }: { blocks: NoteBlock[]; reduce: boolean | null }) {
   return (
-    <div className="mt-14">
+    <div>
       {blocks.map((block, i) => {
         const reveal = {
           initial: reduce ? false : { opacity: 0, y: 16 },
@@ -84,6 +87,9 @@ export default function WritingDetail() {
   const { slug } = useParams()
   const reduce = useReducedMotion()
   const note = getNote(slug)
+  // The reading column the corner dial reports progress across — the article
+  // element itself, so the dial measures the piece rather than the whole page.
+  const articleRef = useRef<HTMLElement>(null)
 
   if (!note) {
     return (
@@ -110,7 +116,7 @@ export default function WritingDetail() {
   const related = relatedNotes(note).slice(0, 2)
 
   return (
-    <article className="mx-auto w-full max-w-3xl px-6 pb-28 pt-32">
+    <article ref={articleRef} className="mx-auto w-full max-w-3xl px-6 pb-28 pt-32">
       <Seo title={note.title} description={note.summary} />
 
       {/* Trail */}
@@ -206,8 +212,15 @@ export default function WritingDetail() {
         </Reveal>
       )}
 
-      {/* PUBLISHED BODY — the finished prose, rendered from the block model. */}
-      {!draft && note.body && note.body.length > 0 && <NoteBody blocks={note.body} reduce={reduce} />}
+      {/* PUBLISHED BODY — the finished prose, rendered from the block model and
+          run down the hallmark TracingBeam reading rule, so a long piece carries
+          the same margin beam the Craft notes do: a lime fill that draws down the
+          gutter as the column scrolls, the reader's eye tracking its lit head. */}
+      {!draft && note.body && note.body.length > 0 && (
+        <TracingBeam className="mt-14">
+          <NoteBody blocks={note.body} reduce={reduce} />
+        </TracingBeam>
+      )}
 
       {/* CTA — tuned to the note's state. A draft offers to send the finished
           piece along; a published one points at the proof it talks about. */}
@@ -248,6 +261,11 @@ export default function WritingDetail() {
           </Reveal>
         </section>
       )}
+
+      {/* Corner reading dial — only on a finished piece, where there is a column
+          long enough to track. It reports progress through this article and
+          doubles as the way back to the top of it. */}
+      {!draft && note.body && note.body.length > 0 && <ReadingDial targetRef={articleRef} />}
     </article>
   )
 }
