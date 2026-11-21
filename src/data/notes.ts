@@ -61,6 +61,70 @@ export const NOTE_TAGS: NoteTag[] = ['Craft', 'Building in the open', 'AI', 'iOS
 
 export const NOTES: Note[] = [
   {
+    slug: 'ship-then-refine',
+    title: 'Ship, then refine',
+    summary:
+      'Why I put rough things in front of people early, and how the slow, quiet work of refinement is where the craft actually lives.',
+    tag: 'Craft',
+    status: 'published',
+    date: '2026-11-21',
+    plan: [
+      'Why rough-but-real beats polished-but-late',
+      'The slow work of refinement, and why it is where craft lives',
+      'Telling which details are actually worth the sweat',
+    ],
+    body: [
+      {
+        type: 'p',
+        text: 'There is a version of me that wants to hold everything back until it is perfect. Ship nothing until the corners are rounded, the copy is final, the motion is just so. I have learned not to trust that version. The things I am proudest of did not quietly become good in private and then appear, finished. They went out rough, in front of people, and got good in the open afterwards.',
+      },
+      {
+        type: 'p',
+        text: 'The instinct to polish first feels like care. Mostly it is fear wearing care’s clothes. A thing you never ship cannot be judged — and a thing you never ship also cannot teach you anything, because the only honest feedback is what happens when a real person meets it while trying to do a real task. Everything before that moment is a guess about a guess.',
+      },
+      {
+        type: 'quote',
+        text: 'Rough and real beats polished and late, because only the real version can tell you what is worth polishing.',
+      },
+      { type: 'h', text: 'Rough, but real' },
+      {
+        type: 'p',
+        text: 'Rough does not mean broken. It means plain. I try to ship the smallest version that genuinely works end to end — the whole path a person actually walks, with nothing on it faked — even when it is unstyled and a little embarrassing. I sketch fast, and in code rather than on paper, because the things I most need to judge early are feel and timing, and those simply do not exist on a static mock. A picture of a screen tells you the layout. It tells you nothing about how a transition lands on a tired phone at the end of a long day.',
+      },
+      {
+        type: 'p',
+        text: 'The catch is that rough has a floor. A thing can look unfinished; it cannot be a lie. The one path has to really run, the empty states have to really say something, the thing has to survive being used in earnest and not just demoed down a happy track. Below that floor it is not a rough version of the product — it is a different, prettier product that happens to share its screenshots.',
+      },
+      { type: 'h', text: 'Refinement is the slow part, and it is the craft' },
+      {
+        type: 'p',
+        text: 'Then comes the part nobody watches: the slow return, again and again, to something that already works, making it a little better each pass. The timing of a transition. The weight of a heading against the line beneath it. The few pixels of space that stop two things from feeling cramped. None of these is a feature. Added up, they are the whole difference between an interface that feels considered and one that merely functions.',
+      },
+      {
+        type: 'p',
+        text: 'This is unglamorous, and it is most of the job. Getting something to work is a weekend; getting it to feel right is the long tail of small decisions after that, and the long tail is the reason a thing reads as though someone cared. Refinement is also where a product stops being a demo and becomes something I would put my name on. A demo proves an idea is possible. The polish proves I meant it.',
+      },
+      { type: 'h', text: 'Which details are worth the sweat' },
+      {
+        type: 'p',
+        text: 'Not every detail deserves the same attention, and pretending otherwise is just a slower way to ship nothing. Infinite polish is its own kind of avoidance — the busywork that feels like progress while the thing quietly fails to ship. So I try to spend the care where a person’s attention actually lands: the first screen, the control they touch most often, and the moment something goes wrong, which is exactly when a little grace matters most and is most often skipped.',
+      },
+      {
+        type: 'p',
+        text: 'The test I use is simple. Would a real person notice its absence? Nobody can name the weight of a heading, but a page with the wrong one feels cheap in a way they feel and cannot explain. Nobody praises a good loading state, but its absence reads as broken. Those are worth the hours. Meanwhile there are corners no one will ever reach, and those get to stay rough a while longer — honestly rough, on a list — rather than stealing the time the front door needs.',
+      },
+      { type: 'h', text: 'This site is the argument' },
+      {
+        type: 'p',
+        text: `You are reading the method, not just a description of it. This portfolio shipped rough: public from the first commit, visibly unfinished on purpose, and refined in the open ever since — a little most days. The ${COMPONENT_COUNT} hand-built pieces here did not arrive polished. Most went up plain and got better in later commits you can read, in order, against the history. The refinement is not hidden behind the result; it is the result, laid out a step at a time.`,
+      },
+      {
+        type: 'p',
+        text: 'Ship, then refine. Not because the rough version is good enough — it usually is not — but because the shipping is the thing that makes the refining possible, and honest. You cannot sweat the details of something that does not exist yet. So build the real, plain version, put it where it can be used, and then do the slow, quiet work in full view. That order is the whole discipline.',
+      },
+    ],
+  },
+  {
     slug: 'motion-that-earns-its-place',
     title: 'Motion that earns its place',
     summary:
@@ -216,19 +280,6 @@ export const NOTES: Note[] = [
       'Keeping a React web app and a SwiftUI app in step',
       'Where a shared Supabase schema helps, and where it leaks',
       'Catching drift between the two before anyone feels it',
-    ],
-  },
-  {
-    slug: 'ship-then-refine',
-    title: 'Ship, then refine',
-    summary:
-      'Why I put rough things in front of people early, and how the slow, quiet work of refinement is where the craft actually lives.',
-    tag: 'Craft',
-    status: 'planned',
-    plan: [
-      'Why rough-but-real beats polished-but-late',
-      'The slow work of refinement, and why it is where craft lives',
-      'Telling which details are actually worth the sweat',
     ],
   },
   {
