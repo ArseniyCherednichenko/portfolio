@@ -34,6 +34,12 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'A turn that only goes one way',
+    summary:
+      "Ratchet and pawl — the rigid-mechanism corner's one-way member, its mechanical diode; turn it forward and it counts up tooth by tooth, push it back and the steep face catches the pawl and it locks. One forward-only angle, nothing else stored.",
+    tag: 'Component',
+  },
+  {
     title: 'A third finished essay goes up',
     summary:
       "'Ship, then refine' — the Writing section's third published piece, on the process the whole site runs on: put the smallest real version in front of people, then do the slow refinement in the open, where you can read it commit by commit.",
@@ -85,12 +91,6 @@ export const LATEST_LOG: LogHeadline[] = [
     title: 'A picture that exists only while it spins',
     summary:
       "Thaumatrope — the Zoetrope's inverse; a bird on one disc face and an empty cage on the other that fuse into one still neither face holds alone, the bird landing in the cage only while it spins fastest.",
-    tag: 'Component',
-  },
-  {
-    title: 'A chart that keeps five numbers, not the shape',
-    summary:
-      "Box plot — the ridgeline's summary sibling; throws the silhouette away and draws Tukey's five-number skeleton, the box of the middle half with its one bright median and the outliers past the fence.",
     tag: 'Component',
   },
 ]
