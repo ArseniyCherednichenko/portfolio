@@ -34,6 +34,12 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'A third finished essay goes up',
+    summary:
+      "'Ship, then refine' — the Writing section's third published piece, on the process the whole site runs on: put the smallest real version in front of people, then do the slow refinement in the open, where you can read it commit by commit.",
+    tag: 'Page',
+  },
+  {
     title: 'A turn comes out as a straight line',
     summary:
       "Rack and pinion — the third of the rotary-into-motion trio beside the Scotch yoke and slider-crank; a pinion gear combs a toothed bar, whose travel is the pitch radius times the angle turned, s = R*theta, exactly, no error term.",
@@ -85,12 +91,6 @@ export const LATEST_LOG: LogHeadline[] = [
     title: 'A chart that keeps five numbers, not the shape',
     summary:
       "Box plot — the ridgeline's summary sibling; throws the silhouette away and draws Tukey's five-number skeleton, the box of the middle half with its one bright median and the outliers past the fence.",
-    tag: 'Component',
-  },
-  {
-    title: 'A chart that keeps the shape, not the number',
-    summary:
-      "Ridgeline — the data-viz family's distribution shape; several densities stacked and overlapping the Unknown Pleasures way, each ridge opaque so it hides the crest behind it and the one lime stepped only by depth.",
     tag: 'Component',
   },
 ]
