@@ -12,6 +12,7 @@ import { GooeyText } from '../components/GooeyText'
 import { TextType } from '../components/TextType'
 import { TypingThread } from '../components/TypingThread'
 import { VanishInput } from '../components/VanishInput'
+import { Mentions, type MentionOption } from '../components/Mentions'
 import { RotatingWord } from '../components/RotatingWord'
 import { ContainerTextFlip } from '../components/ContainerTextFlip'
 import { SpotlightCard } from '../components/SpotlightCard'
@@ -1166,6 +1167,68 @@ function InlineEditDemo() {
         />
         Simulate a failed save — commit an edit and watch the value roll back
       </label>
+    </div>
+  )
+}
+
+// The @-mention field, shown where its handles are honest: the pages of this
+// site. Type "@" and the popover offers real routes — @Playground, @About,
+// @Work — and every one you commit is collected below as a chip that actually
+// links there, so the demo doubles as a tiny composer whose mentions go
+// somewhere. Nothing you write leaves the tab.
+const MENTION_PAGES: MentionOption[] = [
+  { id: 'playground', label: 'Playground', hint: 'Live motion experiments', to: '/playground' },
+  { id: 'about', label: 'About', hint: 'Who I am', to: '/about' },
+  { id: 'work', label: 'Work', hint: 'Selected case studies', to: '/work' },
+  { id: 'range', label: 'Range', hint: 'Five disciplines', to: '/range' },
+  { id: 'writing', label: 'Writing', hint: 'Notes, in progress', to: '/writing' },
+  { id: 'library', label: 'Library', hint: 'Every hand-built component', to: '/library' },
+  { id: 'craft', label: 'Craft', hint: 'On motion, playable', to: '/craft' },
+  { id: 'now', label: 'Now', hint: 'What I am up to', to: '/now' },
+  { id: 'berlin', label: 'Berlin', hint: 'Where the work is made', to: '/berlin' },
+  { id: 'contact', label: 'Contact', hint: 'Say hello', to: '/contact' },
+]
+
+function MentionsDemo() {
+  // Committed handles, newest first, de-duplicated — each becomes a real link.
+  const [mentioned, setMentioned] = useState<MentionOption[]>([])
+  return (
+    <div className="flex w-full max-w-lg flex-col items-center gap-5">
+      <Mentions
+        options={MENTION_PAGES}
+        label="Write a note and type @ to mention a page of this site"
+        placeholder="Try typing: take a look at @play..."
+        onMention={(opt) =>
+          setMentioned((prev) => [opt, ...prev.filter((p) => p.id !== opt.id)].slice(0, 6))
+        }
+      />
+      <AnimatePresence initial={false} mode="popLayout">
+        {mentioned.length > 0 && (
+          <motion.div
+            key="chips"
+            initial={{ opacity: 0, y: 6 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 6 }}
+            transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            className="flex w-full flex-wrap items-center justify-center gap-2"
+          >
+            <span className="text-xs font-medium uppercase tracking-[0.2em] text-white/35">
+              Mentioned
+            </span>
+            {mentioned.map((m) => (
+              <motion.span key={m.id} layout>
+                <Link
+                  to={m.to ?? '/'}
+                  className="inline-flex items-center gap-1 rounded-full border border-[#DCF87C]/25 bg-[#DCF87C]/[0.06] px-2.5 py-1 text-xs font-medium text-[#DCF87C]/90 transition-colors hover:bg-[#DCF87C]/[0.12]"
+                >
+                  <span aria-hidden>@</span>
+                  {m.label}
+                </Link>
+              </motion.span>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   )
 }
@@ -5908,6 +5971,53 @@ export default function Playground() {
                 from assistive tech. Under reduced motion the dissolve and the placeholder travel both
                 drop &mdash; the field clears at once and holds a single steady prompt &mdash; so it is
                 a calm, usable control with nothing moving.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH MENTIONS — an @-mention popover anchored to the caret */}
+        <Reveal>
+          <div id="mentions" data-experiment="Mentions" className="mt-12 scroll-mt-32">
+            <div className="flex flex-col items-center gap-8 rounded-3xl border border-white/10 bg-white/[0.02] px-6 py-14 sm:px-10">
+              <div className="max-w-md text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">
+                  Compose
+                </span>
+                <p className="mx-auto mt-3 text-lg font-medium text-white/85 sm:text-xl">
+                  Start writing, type <span className="text-[#DCF87C]">@</span> anywhere, and a
+                  popover of handles rises at the caret &mdash; arrow to one and press Enter to drop
+                  it into the sentence.
+                </p>
+              </div>
+              <MentionsDemo />
+              <p className="max-w-sm text-center text-xs text-white/40">
+                The handles are real pages of this site, so each mention you commit links somewhere.
+                Nothing you type is sent, stored, or read.
+              </p>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Mentions</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The one inline-composition pattern this family was missing. Its neighbours each
+                resolve a <em>single</em> answer &mdash; the Select you open, the Combobox you type
+                into, the token field that holds several at once &mdash; while this one lives
+                <em> inside</em> prose: you are writing a sentence, you type an{' '}
+                <code>@</code>, and a popover of handles appears not pinned to the field but anchored
+                to the exact glyph under the caret, the way it does in a chat or an editor. Two
+                pieces of craft carry it. The trigger has no button: the field reads the word under
+                the caret and a mention is live only when an <code>@</code> sits at a word boundary
+                with an unbroken run of characters up to the caret, so an email address never fires
+                it and a space closes it. And the real work is finding the caret inside a{' '}
+                <code>&lt;textarea&gt;</code>, which exposes no caret rectangle at all &mdash; a
+                hidden mirror div copies the field&rsquo;s box and type metrics, takes the text up to
+                the caret plus a zero-width marker, and reads that marker&rsquo;s offset back as the
+                caret&rsquo;s pixel position, so the panel tracks the caret through wraps and
+                scrolls. It stays honest and reachable: a real labelled field you can type in with or
+                without ever opening the popover, WAI-ARIA combobox semantics pointing at the active
+                option, and a live region narrating the matches. Under reduced motion the
+                panel&rsquo;s rise, blur and gliding highlight all come off for a plain, instant,
+                equally usable field.
               </p>
             </div>
           </div>
