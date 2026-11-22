@@ -34,6 +34,12 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'A spring hands the swing back and forth',
+    summary:
+      'Coupled pendulums — two equal bobs joined by a light spring; lift one and the spring winds it down to a standstill while the other takes on the whole swing, then hands it back. Solved exactly from its two normal modes, a twin meter showing the energy conserved as it crosses.',
+    tag: 'Component',
+  },
+  {
     title: 'The essays get a reading dial',
     summary:
       "The finished pieces now carry the TracingBeam margin rule and a new corner ReadingDial — a lime ring that closes as you read, reporting progress through the essay itself and carrying you back to the top. Published-only, reduced-motion aware.",
@@ -85,12 +91,6 @@ export const LATEST_LOG: LogHeadline[] = [
     title: 'A picture read out of the margin numbers',
     summary:
       "Nonogram — the Minesweeper's certainty-side complement; the clues are the run lengths of a hidden picture, every puzzle has one logical solution, and Deduce plays only the moves the numbers force, never a guess.",
-    tag: 'Component',
-  },
-  {
-    title: 'A field cleared by reading the numbers',
-    summary:
-      'Minesweeper — the games family\'s deduction-from-numbers piece; the first click is always safe, every number is an exact neighbour count, and Deduce plays only the moves the field forces, never a guess.',
     tag: 'Component',
   },
 ]
