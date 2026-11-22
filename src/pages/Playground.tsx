@@ -192,6 +192,7 @@ import { Mobile } from '../components/Mobile'
 import { Spirograph } from '../components/Spirograph'
 import { Guilloche } from '../components/Guilloche'
 import { Oscilloscope } from '../components/Oscilloscope'
+import { Spectrum } from '../components/Spectrum'
 import { Sonar } from '../components/Sonar'
 import { CrtScreen } from '../components/CrtScreen'
 import { CurveStitch } from '../components/CurveStitch'
@@ -11960,6 +11961,43 @@ export default function Playground() {
                 oscillators: across walks the ratio, up sets the sweep speed and detune; it eases home to a slow trefoil
                 when you leave. One canvas, one loop off the frame delta, DPR-capped. Reduced motion draws one closed
                 figure as a steady line and holds it.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH SPECTRUM — a synthesized frequency analyser, caps falling under gravity */}
+        <Reveal>
+          <div id="spectrum" data-experiment="Spectrum" className="mt-12 scroll-mt-32">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/40 px-6 py-12 sm:px-10">
+              <div className="text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Frequency analyser</span>
+                <p className="mx-auto mt-3 max-w-md text-lg font-medium text-white/85 sm:text-xl">
+                  Bass on the left, treble on the right. Sweep across the bins to excite them.
+                </p>
+              </div>
+              <div className="mt-10 flex justify-center">
+                <Spectrum />
+              </div>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Spectrum</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The signal corner&rsquo;s third display, and the one that reads frequency rather than time &mdash; the
+                Oscilloscope traces a shape in the time domain and the Waveform scrubs along a clip, but this is the bar
+                graph an FFT throws up, bass bins on the left and treble on the right. The honest part is that there is no
+                audio: rather than measure a sound, each bin&rsquo;s magnitude is built from the shapes an analyser would
+                recover from music &mdash; a <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">1/f</code>{' '}
+                tilt so the bass sits heavier, three slow-drifting Gaussian formants that rise and fall like notes being
+                played, and a fixed seeded jitter so neighbouring bins never march in lockstep. Above each bar floats the
+                classic peak-hold cap: it snaps up to a new maximum the instant the bar reaches it, then sinks back under
+                a slow gravity, so a loud transient leaves a falling white trace behind it. The bars themselves attack
+                fast and release slow &mdash; the envelope that gives every hardware analyser its feel. Sweep the pointer
+                across the field and the bins under it are pushed upward, the energy decaying out to either side like a
+                hand moved near a contact mic. Space pauses the drift, the up and down arrows set the gain, Home resets.
+                One canvas, one loop off the frame delta so the motion keeps its real speed at any refresh rate,
+                DPR-capped and ResizeObserver-fitted. Reduced motion paints one representative still frame with the caps
+                at rest on the bars and runs no loop.
               </p>
             </div>
           </div>
