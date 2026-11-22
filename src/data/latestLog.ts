@@ -34,6 +34,12 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'An @-mention popover that finds the caret',
+    summary:
+      "Mentions — type '@' mid-sentence and a handle popover rises at the caret itself, not pinned to the field; a mirror div finds the caret inside the textarea so it tracks through wraps and scrolls. The handles are real pages of this site, so each mention links somewhere.",
+    tag: 'Component',
+  },
+  {
     title: 'A frequency analyser, bass left to treble right',
     summary:
       "Spectrum — the signal corner's frequency-domain display beside the Oscilloscope and Waveform; a bar graph with falling peak-hold caps, honestly synthesized from a 1/f tilt and drifting formants rather than measured. Sweep it to excite the bins.",
@@ -86,11 +92,5 @@ export const LATEST_LOG: LogHeadline[] = [
     summary:
       "'Building this site in the open' — the Writing section's first published essay, deliberately about a subject you can verify against this very repo: public history, small daily commits, a main branch that always builds.",
     tag: 'Page',
-  },
-  {
-    title: 'A chart that keeps every point, not a summary',
-    summary:
-      "Beeswarm — the box plot's complement from the other side; each reading a dot nudged clear of its neighbours so the crowd draws the distribution, showing the two humps a single median would hide.",
-    tag: 'Component',
   },
 ]
