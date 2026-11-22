@@ -34,6 +34,12 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'A frequency analyser, bass left to treble right',
+    summary:
+      "Spectrum — the signal corner's frequency-domain display beside the Oscilloscope and Waveform; a bar graph with falling peak-hold caps, honestly synthesized from a 1/f tilt and drifting formants rather than measured. Sweep it to excite the bins.",
+    tag: 'Component',
+  },
+  {
     title: 'A spring hands the swing back and forth',
     summary:
       'Coupled pendulums — two equal bobs joined by a light spring; lift one and the spring winds it down to a standstill while the other takes on the whole swing, then hands it back. Solved exactly from its two normal modes, a twin meter showing the energy conserved as it crosses.',
@@ -85,12 +91,6 @@ export const LATEST_LOG: LogHeadline[] = [
     title: 'A chart that keeps every point, not a summary',
     summary:
       "Beeswarm — the box plot's complement from the other side; each reading a dot nudged clear of its neighbours so the crowd draws the distribution, showing the two humps a single median would hide.",
-    tag: 'Component',
-  },
-  {
-    title: 'A picture read out of the margin numbers',
-    summary:
-      "Nonogram — the Minesweeper's certainty-side complement; the clues are the run lengths of a hidden picture, every puzzle has one logical solution, and Deduce plays only the moves the numbers force, never a guess.",
     tag: 'Component',
   },
 ]
