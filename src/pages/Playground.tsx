@@ -271,6 +271,7 @@ import { Diff } from '../components/Diff'
 import { Waveform } from '../components/Waveform'
 import { LangtonsAnt } from '../components/LangtonsAnt'
 import { PendulumWave } from '../components/PendulumWave'
+import { CoupledPendulums } from '../components/CoupledPendulums'
 import { Foucault } from '../components/Foucault'
 import { LissajousTable } from '../components/LissajousTable'
 import { Cradle } from '../components/Cradle'
@@ -8504,6 +8505,40 @@ export default function Playground() {
                 is a pure cosine of a frame-driven phase, no integration and no randomness; press anywhere and the phase
                 eases back to zero so the wave re-forms from a clean line under your hand. Reduced motion paints one
                 graceful wave, at rest.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH COUPLED PENDULUMS — energy sloshing across a spring-joined pair */}
+        <Reveal>
+          <div id="coupled-pendulums" data-experiment="Coupled pendulums" className="mt-12 scroll-mt-32">
+            <div className="relative h-[440px] overflow-hidden rounded-3xl border border-white/10 bg-[#060606]">
+              <CoupledPendulums />
+              <div className="pointer-events-none absolute inset-x-0 top-8 z-10 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Coupled pendulums</span>
+                <p className="mx-auto mt-3 max-w-md px-6 text-lg font-medium text-white/90 sm:text-xl">
+                  Lift one; watch the spring hand all the motion to the other, then take it back.
+                </p>
+              </div>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Coupled pendulums</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The Pendulum wave&rsquo;s coupled sibling, and the gentle opposite of the Double pendulum&rsquo;s chaos.
+                Two identical bobs of the same length hang side by side, joined near the top by a light spring. Lift the
+                left one and let go: it swings, the spring tugs the right into step, and over a slow beat the left winds
+                all the way down to a standstill while the right &mdash; which started at rest &mdash; takes on the whole
+                swing, then hands it back. The motion of one is the cause of the other&rsquo;s; the energy is lent, not
+                spent. It is exactly solvable because it is linear in the small-angle regime: any motion is a sum of two
+                normal modes &mdash; a symmetric one where the pair swings together and the spring never stretches, and a
+                faster antisymmetric one where they swing opposite and the spring works hardest &mdash; so{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">&theta;</code> on each side is two
+                cosines beating against each other, no stepper, no drift and no wall clock. The envelopes come out cos on
+                one side and sin on the other, so the energy reads cos&sup2; left and sin&sup2; right and always sums to
+                the whole &mdash; which is just what the twin meter under the bobs shows, conserved, only moved. Press or
+                Space to re-release from the clean start; the up and down arrows stiffen the spring so the hand-off
+                quickens. Reduced motion paints one still frame mid-handover, the spring stretched and the split labelled.
               </p>
             </div>
           </div>
