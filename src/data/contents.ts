@@ -60,6 +60,7 @@ export const CONTENTS: ContentSection[] = [
       { to: '/design', title: 'Design language', blurb: 'A living style guide — palette, type, and motion, each token copyable.', chord: 'd' },
       { to: '/specimen', title: 'Type specimen', blurb: 'The type up close — drive the variable Fraunces axes and set your own words.' },
       { to: '/library', title: 'The library', blurb: 'Every hand-built component, catalogued and searchable.', chord: 'y' },
+      { to: '/contents', title: 'Contents', blurb: 'This index — the whole site as an editorial table of contents, every page grouped and described in a line.' },
       { to: '/numbers', title: 'By the numbers', blurb: 'The whole site counted — components, pages, and the shape of the work.', chord: '0' },
       { to: '/colophon', title: 'Colophon', blurb: 'How this site is built, down to the fonts and the counts.', chord: 'l' },
       { to: '/thanks', title: 'With thanks', blurb: 'The open-source software, type, and galleries this site stands on and learns from.' },
