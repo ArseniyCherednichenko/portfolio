@@ -141,6 +141,7 @@ import { Skeleton, SkeletonSwap } from '../components/Skeleton'
 import { HoldConfirm } from '../components/HoldConfirm'
 import { Appreciate } from '../components/Appreciate'
 import { InlineEdit } from '../components/InlineEdit'
+import { FloatingField, emailValidator, type FloatingFieldHandle } from '../components/FloatingField'
 import { AsyncButton } from '../components/AsyncButton'
 import { Checkbox } from '../components/Checkbox'
 import { StepForm, type WizardStep } from '../components/StepForm'
@@ -1169,6 +1170,84 @@ function InlineEditDemo() {
         Simulate a failed save — commit an edit and watch the value roll back
       </label>
     </div>
+  )
+}
+
+// A FloatingField showcase: the plainest control in the family, shown as the
+// little contact form it is made for. Four fields that each carry a different
+// part of the pattern — a required name with a live counter, an email validated
+// on blur into a lime tick or a red correction, a password with a reveal toggle
+// and a length rule, and a growing message with a cap. Validation runs when you
+// leave a field and forgives live as you fix it. Entirely local: nothing you
+// type here is sent or stored, and the submit only validates every field at
+// once and reports, the way a real form's submit would gate on them.
+function FloatingFieldDemo() {
+  const [status, setStatus] = useState<'idle' | 'ok' | 'bad'>('idle')
+  const fields = useRef<Array<FloatingFieldHandle | null>>([])
+  const set = (i: number) => (h: FloatingFieldHandle | null) => {
+    fields.current[i] = h
+  }
+  return (
+    <form
+      className="flex w-full max-w-md flex-col gap-6"
+      onSubmit={(e) => {
+        e.preventDefault()
+        // Validate every field at once — each returns its own validity — and
+        // gate the "submit" on all of them, the way a real form does. && would
+        // short-circuit and leave later fields unchecked, so check them all,
+        // then reduce.
+        const results = fields.current.map((f) => (f ? f.check() : true))
+        setStatus(results.every(Boolean) ? 'ok' : 'bad')
+      }}
+    >
+      <FloatingField
+        ref={set(0)}
+        label="Full name"
+        required
+        maxLength={48}
+        autoComplete="name"
+        hint="As you would like to be addressed"
+        validate={(v) => (v.trim() === '' ? 'Please enter your name' : null)}
+      />
+      <FloatingField
+        ref={set(1)}
+        label="Email"
+        type="email"
+        required
+        autoComplete="email"
+        hint="Only used to reply — never shared"
+        validate={emailValidator}
+      />
+      <FloatingField
+        ref={set(2)}
+        label="Passphrase"
+        type="password"
+        hint="Eight characters or more"
+        validate={(v) => (v.length > 0 && v.length < 8 ? 'A little longer — eight or more' : null)}
+      />
+      <FloatingField
+        ref={set(3)}
+        label="Message"
+        multiline
+        maxLength={240}
+        hint="A line or two is plenty"
+      />
+      <div className="flex items-center gap-4">
+        <button
+          type="submit"
+          className="rounded-full bg-[#DCF87C] px-5 py-2 text-sm font-semibold text-black outline-none transition-transform hover:scale-[1.02] focus-visible:ring-2 focus-visible:ring-[#DCF87C]/50 active:scale-95"
+        >
+          Validate all
+        </button>
+        <span aria-live="polite" className="text-xs text-white/45">
+          {status === 'ok'
+            ? 'All good — a real form would send now.'
+            : status === 'bad'
+              ? 'Fix the fields marked in red.'
+              : 'A local demo. Nothing is sent.'}
+        </span>
+      </div>
+    </form>
   )
 }
 
@@ -10442,6 +10521,15 @@ export default function Playground() {
               note="The Select picks one thing and the Combobox filters to one; this is the field where the answer is several. Each committed value becomes a chip that lives in the box while the caret keeps writing the next one after it. Enter or comma commits; Backspace on an empty field reaches back and lifts the last chip; every value is trimmed and de-duplicated so the same tag never lands twice, and a cap closes the field when it's full. The same WAI-ARIA combobox contract as its siblings drives the suggestion panel — arrows, Home/End, Enter, Escape, and a live region that narrates each add and remove — with subsequence matching, so 'frmr' still finds Framer Motion. Chips spring in and, on removal, fold out while the rest slide left to close the gap. Reduced motion drops the spring, the slide, the blur, and the glide."
             >
               <TagInputDemo />
+            </Experiment>
+          </Reveal>
+
+          <Reveal>
+            <Experiment
+              name="Floating-label field"
+              note="The plainest control the family never had: a labelled line of text, the thing every sign-up and contact form is built from. A placeholder is not a label — it leaves the moment you type, so a half-filled form becomes anonymous boxes and a screen reader gets nothing stable to read. So the label floats: it rests inside the empty field like a placeholder, then lifts to a small caption on focus or fill, naming the field on screen and to assistive tech without spending a line when idle. Validation runs on blur — the moment you leave a field having had your say — turning the border and label red, shaking once, naming the fault assertively, then forgiving it live as you fix it rather than making you blur again. The password variant reveals, a capped field shows a counter that warms amber near the limit, and the submit calls each field's own check() and gates on all of them. A real label/input pair with aria-invalid and aria-describedby. Reduced motion keeps every behaviour and drops only the movement."
+            >
+              <FloatingFieldDemo />
             </Experiment>
           </Reveal>
 
