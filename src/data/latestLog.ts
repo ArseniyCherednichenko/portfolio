@@ -34,6 +34,12 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'The page count stops lying',
+    summary:
+      'A stale figure read 36 where the site serves 35 pages. Reset — and the index now lists itself, so every count agrees.',
+    tag: 'Polish',
+  },
+  {
     title: 'Four beads, four heights, one descent time',
     summary:
       'Tautochrone — the Brachistochrone turned up into a cup, the honest sibling beside it; release beads from different heights and they reach the bottom together, on the same frame. Solved exactly as simple harmonic motion in arc length, so the shared quarter-period is the maths, not a tuning.',
@@ -86,11 +92,5 @@ export const LATEST_LOG: LogHeadline[] = [
     summary:
       "'Motion that earns its place' — the Writing section's second published piece, on the site's own animation philosophy: the one question that decides whether a motion stays, and reduced-motion as a designed path, all checkable here.",
     tag: 'Page',
-  },
-  {
-    title: 'A cursor trail whose marks stay, then go',
-    summary:
-      "ImageTrail — the left-behind member of the pointer-field thread; it stamps a tile wherever the cursor passes and lets it shrink, spin and fade on its own clock, the counterpart to the pixel grid and the ribbons that keep moving with you.",
-    tag: 'Component',
   },
 ]
