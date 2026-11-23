@@ -14,8 +14,16 @@
  * page (LIBRARY in src/data/library.ts) — keep the two in step. */
 export const COMPONENT_COUNT = 399
 
-/** Distinct routed pages the site serves. */
-export const PAGE_COUNT = 36
+/** Distinct top-level routed pages the site serves — each with its own custom
+ * layout and deep-linkable. This is exactly the set the /contents index
+ * enumerates, so keep it equal to `ALL_CONTENT_ENTRIES.length` (CONTENTS in
+ * src/data/contents.ts) as pages are added: the Numbers radar partitions that
+ * same index by section, so the two must agree. Excludes the parameterized
+ * detail templates (work/:slug, writing/:slug, range/:id — one layout, many
+ * instances) and the 404 fallback, which are routes but not pages in their own
+ * right. Kept as a plain literal rather than derived, so the eager Home chunk
+ * that reads these figures never has to pull the whole CONTENTS table in. */
+export const PAGE_COUNT = 35
 
 export interface SiteStat {
   value: number
