@@ -223,6 +223,7 @@ import { Chebyshev } from '../components/Chebyshev'
 import { TusiCouple } from '../components/TusiCouple'
 import { Watt } from '../components/Watt'
 import { Brachistochrone } from '../components/Brachistochrone'
+import { Tautochrone } from '../components/Tautochrone'
 import { Catenary } from '../components/Catenary'
 import { Orrery } from '../components/Orrery'
 import { MoonPhase } from '../components/MoonPhase'
@@ -13896,6 +13897,52 @@ export default function Playground() {
                 <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code> there
                 is no travel &mdash; it freezes the instant the winner arrives, the cycloid already home while the others
                 still lag, the whole story in one still frame, with a Step to walk it forward.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH TAUTOCHRONE — the same cycloid, turned up: equal descent beside the Brachistochrone's fastest */}
+        <Reveal>
+          <div id="tautochrone" data-experiment="Tautochrone" className="mt-12 scroll-mt-32">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/40 px-6 py-12 sm:px-10">
+              <div className="mb-8 text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Equal descent</span>
+                <p className="mx-auto mt-3 max-w-md text-lg font-medium text-white/85 sm:text-xl">
+                  Four beads, four heights, one curve. Release them &mdash; they reach the bottom together.
+                </p>
+              </div>
+              <Tautochrone className="mx-auto" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Tautochrone</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The Brachistochrone just above asks which shape carries one bead down fastest; this asks the stranger
+                question and gives the stranger answer, on the very same cycloid &mdash; only turned up into a cup. Release
+                several beads on it from <em>different heights</em> at the same instant and they all reach the bottom
+                together: not nearly, not on average, but on the same frame. A bead near the rim has further to fall and a
+                longer road, and it makes up exactly the difference by moving faster the whole way down. Huygens found
+                this in 1659 and hung a pendulum clock on it, because a swing that keeps its time whatever its amplitude
+                is a clock that does not drift as it unwinds. The motion here is exact rather than integrated, so there is
+                no stepper and no drift to accumulate: measure arc length{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">s</code> from the lowest point and the
+                cycloid hands you <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">s = 4R&middot;sin(&theta;/2)</code>,
+                which makes the height above the bottom{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">h = s&sup2;/8R</code> &mdash; so the
+                restoring pull along the wire, <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">g&middot;s/4R</code>,
+                is linear in <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">s</code>. That is simple
+                harmonic motion in arc length, so every bead obeys{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">s(t) = s&#8320;&middot;cos(&omega;t)</code>{' '}
+                with the one shared <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">&omega; = &radic;(g/4R)</code>:
+                the amplitude <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">s&#8320;</code> sets how far
+                each starts out and drops clean out of the quarter-period to the bottom,{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">T = &pi;&middot;&radic;(R/g)</code>, the
+                same number for all four. The beads are placed by that closed form on every frame, so the convergence is
+                the mathematics and not a tuning. The four riders alternate sides so they rush the centre from both
+                directions and still meet there; a ring at the lowest point lights the instant they gather. Slow it down
+                to watch the catch-up; under{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code> it holds
+                the released frame and steps the shared clock toward the bottom.
               </p>
             </div>
           </div>
