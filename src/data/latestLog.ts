@@ -34,6 +34,12 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'A label that floats, a field that checks itself',
+    summary:
+      'FloatingField — the plain labelled text field the controls family never had. The label rests in the empty box and lifts to a caption on focus or fill; validation runs on blur, reddens and names the fault, then forgives it live. Password reveal, a warming counter, and a submit that gates on every field at once.',
+    tag: 'Component',
+  },
+  {
     title: 'The page count stops lying',
     summary:
       'A stale figure read 36 where the site serves 35 pages. Reset — and the index now lists itself, so every count agrees.',
@@ -86,11 +92,5 @@ export const LATEST_LOG: LogHeadline[] = [
     summary:
       "Rack and pinion — the third of the rotary-into-motion trio beside the Scotch yoke and slider-crank; a pinion gear combs a toothed bar, whose travel is the pitch radius times the angle turned, s = R*theta, exactly, no error term.",
     tag: 'Component',
-  },
-  {
-    title: 'A second finished essay goes up',
-    summary:
-      "'Motion that earns its place' — the Writing section's second published piece, on the site's own animation philosophy: the one question that decides whether a motion stays, and reduced-motion as a designed path, all checkable here.",
-    tag: 'Page',
   },
 ]
