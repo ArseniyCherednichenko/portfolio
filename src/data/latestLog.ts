@@ -34,6 +34,12 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'Four beads, four heights, one descent time',
+    summary:
+      'Tautochrone — the Brachistochrone turned up into a cup, the honest sibling beside it; release beads from different heights and they reach the bottom together, on the same frame. Solved exactly as simple harmonic motion in arc length, so the shared quarter-period is the maths, not a tuning.',
+    tag: 'Component',
+  },
+  {
     title: 'An @-mention popover that finds the caret',
     summary:
       "Mentions — type '@' mid-sentence and a handle popover rises at the caret itself, not pinned to the field; a mirror div finds the caret inside the textarea so it tracks through wraps and scrolls. The handles are real pages of this site, so each mention links somewhere.",
@@ -86,11 +92,5 @@ export const LATEST_LOG: LogHeadline[] = [
     summary:
       "ImageTrail — the left-behind member of the pointer-field thread; it stamps a tile wherever the cursor passes and lets it shrink, spin and fade on its own clock, the counterpart to the pixel grid and the ribbons that keep moving with you.",
     tag: 'Component',
-  },
-  {
-    title: 'The first finished piece of writing lands',
-    summary:
-      "'Building this site in the open' — the Writing section's first published essay, deliberately about a subject you can verify against this very repo: public history, small daily commits, a main branch that always builds.",
-    tag: 'Page',
   },
 ]
