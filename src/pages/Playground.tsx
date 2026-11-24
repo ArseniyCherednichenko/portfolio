@@ -143,6 +143,7 @@ import { HoldConfirm } from '../components/HoldConfirm'
 import { Appreciate } from '../components/Appreciate'
 import { InlineEdit } from '../components/InlineEdit'
 import { FloatingField, emailValidator, type FloatingFieldHandle } from '../components/FloatingField'
+import { CurrencyField } from '../components/CurrencyField'
 import { AsyncButton } from '../components/AsyncButton'
 import { Checkbox } from '../components/Checkbox'
 import { StepForm, type WizardStep } from '../components/StepForm'
@@ -1249,6 +1250,65 @@ function FloatingFieldDemo() {
         </span>
       </div>
     </form>
+  )
+}
+
+// A CurrencyField showcase: the money input the entry-field family never had,
+// shown as the little split it is made for — the same amount in three
+// currencies and locales, so the one thing that matters is visible at a glance.
+// Type into any field and watch the digits group under your caret rather than
+// throwing it to the end; the parsed number is echoed below each so the two
+// values in play (the grouped text you see, the clean number a form gets) are
+// never a mystery. The EUR field carries a cap to show the clamp. Everything is
+// local — nothing you type is sent or stored.
+function CurrencyFieldDemo() {
+  const [eur, setEur] = useState<number | null>(1299.5)
+  const [usd, setUsd] = useState<number | null>(1299.5)
+  const [gbp, setGbp] = useState<number | null>(1299.5)
+  const echo = (n: number | null) => (n == null ? 'null' : String(n))
+  return (
+    <div className="grid w-full max-w-xl gap-6 sm:grid-cols-3">
+      <div>
+        <CurrencyField
+          label="Price (EUR)"
+          currency="EUR"
+          locale="de-DE"
+          defaultValue={1299.5}
+          max={1000000}
+          hint="Grouped the German way: 1.299,50"
+          onValueChange={setEur}
+        />
+        <p className="mt-2 pl-1 text-xs tabular-nums text-white/35">
+          onValueChange → <span className="text-white/60">{echo(eur)}</span>
+        </p>
+      </div>
+      <div>
+        <CurrencyField
+          label="Price (USD)"
+          currency="USD"
+          locale="en-US"
+          defaultValue={1299.5}
+          hint="Symbol first, comma groups"
+          onValueChange={setUsd}
+        />
+        <p className="mt-2 pl-1 text-xs tabular-nums text-white/35">
+          onValueChange → <span className="text-white/60">{echo(usd)}</span>
+        </p>
+      </div>
+      <div>
+        <CurrencyField
+          label="Price (GBP)"
+          currency="GBP"
+          locale="en-GB"
+          defaultValue={1299.5}
+          hint="Up/Down arrows step by 1"
+          onValueChange={setGbp}
+        />
+        <p className="mt-2 pl-1 text-xs tabular-nums text-white/35">
+          onValueChange → <span className="text-white/60">{echo(gbp)}</span>
+        </p>
+      </div>
+    </div>
   )
 }
 
@@ -10550,6 +10610,15 @@ export default function Playground() {
               note="The plainest control the family never had: a labelled line of text, the thing every sign-up and contact form is built from. A placeholder is not a label — it leaves the moment you type, so a half-filled form becomes anonymous boxes and a screen reader gets nothing stable to read. So the label floats: it rests inside the empty field like a placeholder, then lifts to a small caption on focus or fill, naming the field on screen and to assistive tech without spending a line when idle. Validation runs on blur — the moment you leave a field having had your say — turning the border and label red, shaking once, naming the fault assertively, then forgiving it live as you fix it rather than making you blur again. The password variant reveals, a capped field shows a counter that warms amber near the limit, and the submit calls each field's own check() and gates on all of them. A real label/input pair with aria-invalid and aria-describedby. Reduced motion keeps every behaviour and drops only the movement."
             >
               <FloatingFieldDemo />
+            </Experiment>
+          </Reveal>
+
+          <Reveal>
+            <Experiment
+              name="Currency field"
+              note="The money input the entry-field family never had — its siblings each take a shape (the floating field a line of text, the code input a run of digits, the tag input a set of chips), but none handles the one value a product most often asks for: an amount of money. It reads trivially and is not, because of the one thing a lazy version gets wrong: the caret. A money field has to group its digits as you type (1,234,567, not a figure you count), and the instant it reinserts a separator a naive controlled input throws the cursor to the end — so fixing a wrong digit in the middle becomes impossible. This reformats on every keystroke and restores the caret to the same logical place, counting the value-bearing characters to the left of where you were and walking the regrouped string to just past that many, so the cursor stays under your edit while the separators rearrange around it. It keeps the two values honest and separate — it shows grouped text and reports a clean number through onValueChange, and they can never drift because the display is always a formatting of the parse. Grouping, both separators, the symbol and its side are read from the locale and currency (Intl), so a EUR field in a German locale reads 1.299,50 and a USD one $1,299.50 without a hand-kept table. Up and Down arrows step the amount (Shift for a larger step), a max clamps and flags, and the parsed figure is announced politely on blur. A real label/input pair with inputMode=decimal. Reduced motion keeps every behaviour and drops only the underline draw."
+            >
+              <CurrencyFieldDemo />
             </Experiment>
           </Reveal>
 
