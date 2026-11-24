@@ -116,6 +116,7 @@ import { Select, type SelectOption } from '../components/Select'
 import { Combobox, type ComboOption } from '../components/Combobox'
 import { TagInput } from '../components/TagInput'
 import { Calendar } from '../components/Calendar'
+import { TimeDial, type TimeValue } from '../components/TimeDial'
 import { ColorField } from '../components/ColorField'
 import { Dropzone } from '../components/Dropzone'
 import { NumberField } from '../components/NumberField'
@@ -3235,6 +3236,25 @@ function CalendarDemo() {
         ) : (
           'No date chosen yet.'
         )}
+      </p>
+    </div>
+  )
+}
+
+// A TimeDial showcase: the date picker's missing sibling. Picking a time updates
+// a live readout beneath it, so the value is felt, not just read. Starts at a
+// gentle mid-morning; the readout formats through Intl so it reads the way a
+// person would say it.
+const TIME_READOUT = new Intl.DateTimeFormat('en-GB', { hour: 'numeric', minute: '2-digit', hour12: true })
+function TimeDialDemo() {
+  const [time, setTime] = useState<TimeValue>({ hour: 9, minute: 40 })
+  const asDate = new Date()
+  asDate.setHours(time.hour, time.minute, 0, 0)
+  return (
+    <div className="flex w-full flex-col items-center gap-6">
+      <TimeDial value={time} onChange={setTime} />
+      <p className="text-center text-sm text-white/55">
+        Set for <span className="font-medium text-white/85">{TIME_READOUT.format(asDate)}</span>
       </p>
     </div>
   )
@@ -10652,6 +10672,36 @@ export default function Playground() {
                 pill glides from the old day to the new on a shared layoutId instead of blinking. Today wears a lime dot;
                 the chosen day, the pill. Reduced motion drops the slide and the glide for a plain, instant grid that is
                 exactly as usable.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH TIME PICKER */}
+        <Reveal>
+          <div id="time-dial" data-experiment="Time dial" className="mt-12 scroll-mt-32">
+            <div className="flex flex-col items-center gap-8 rounded-3xl border border-white/10 bg-white/[0.02] px-6 py-14 sm:px-10">
+              <div className="max-w-md text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Pick a time</span>
+                <p className="mx-auto mt-3 text-lg font-medium text-white/85 sm:text-xl">
+                  The date picker's missing sibling. Drag the hand to the hour, then the minute; or type straight into
+                  the readout.
+                </p>
+              </div>
+              <TimeDialDemo />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Time dial</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The controls family had a date picker but never a time picker, so here is the other half of the pair,
+                built the same honest way. The round face is a pointer convenience and is marked decorative; the real
+                control is the readout — two <span className="font-medium text-white/70">spinbutton</span> segments
+                carrying the full value contract, driven by the arrows (up and down change the field, left and right
+                switch between hour and minute), Home and End, and a typed digit or two, with an AM/PM toggle in
+                twelve-hour mode. Drag anywhere on the face and the hand springs to the nearest tick; set the hour and it
+                hands off to the minute the way the Material picker does. One source of truth — a single hour and minute
+                — feeds the hand, the ticks, the readout and the live announcement, so none of them can drift. Reduced
+                motion drops the spring for a hand that simply jumps, exactly as usable.
               </p>
             </div>
           </div>
