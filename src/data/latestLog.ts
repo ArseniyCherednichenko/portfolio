@@ -34,6 +34,12 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'A money field whose caret stays put',
+    summary:
+      'CurrencyField — the money input the entry-field family never had. The hard part a lazy version skips is the caret: group the digits as you type and a naive input throws the cursor to the end, so this restores it to the same logical place under your edit. Shows grouped text, reports a clean number; locale and symbol come from Intl.',
+    tag: 'Component',
+  },
+  {
     title: 'A clock face you drag to pick a time',
     summary:
       "TimeDial — the date picker's missing sibling: the controls family had a Calendar but never a time picker. Drag the hand to the hour, then the minute; the readout is two real spinbuttons you can also arrow through or type into, with an AM/PM toggle. One hour-and-minute feeds the hand, ticks and readout alike.",
@@ -86,11 +92,5 @@ export const LATEST_LOG: LogHeadline[] = [
     summary:
       "Ratchet and pawl — the rigid-mechanism corner's one-way member, its mechanical diode; turn it forward and it counts up tooth by tooth, push it back and the steep face catches the pawl and it locks. One forward-only angle, nothing else stored.",
     tag: 'Component',
-  },
-  {
-    title: 'A third finished essay goes up',
-    summary:
-      "'Ship, then refine' — the Writing section's third published piece, on the process the whole site runs on: put the smallest real version in front of people, then do the slow refinement in the open, where you can read it commit by commit.",
-    tag: 'Page',
   },
 ]
