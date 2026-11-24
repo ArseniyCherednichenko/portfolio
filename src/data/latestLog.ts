@@ -34,6 +34,12 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'A clock face you drag to pick a time',
+    summary:
+      "TimeDial — the date picker's missing sibling: the controls family had a Calendar but never a time picker. Drag the hand to the hour, then the minute; the readout is two real spinbuttons you can also arrow through or type into, with an AM/PM toggle. One hour-and-minute feeds the hand, ticks and readout alike.",
+    tag: 'Component',
+  },
+  {
     title: 'A label that floats, a field that checks itself',
     summary:
       'FloatingField — the plain labelled text field the controls family never had. The label rests in the empty box and lifts to a caption on focus or fill; validation runs on blur, reddens and names the fault, then forgives it live. Password reveal, a warming counter, and a submit that gates on every field at once.',
@@ -86,11 +92,5 @@ export const LATEST_LOG: LogHeadline[] = [
     summary:
       "'Ship, then refine' — the Writing section's third published piece, on the process the whole site runs on: put the smallest real version in front of people, then do the slow refinement in the open, where you can read it commit by commit.",
     tag: 'Page',
-  },
-  {
-    title: 'A turn comes out as a straight line',
-    summary:
-      "Rack and pinion — the third of the rotary-into-motion trio beside the Scotch yoke and slider-crank; a pinion gear combs a toothed bar, whose travel is the pitch radius times the angle turned, s = R*theta, exactly, no error term.",
-    tag: 'Component',
   },
 ]
