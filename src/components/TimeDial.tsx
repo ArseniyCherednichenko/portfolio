@@ -181,6 +181,15 @@ export function TimeDial({
     return current.minute * 6
   }, [mode, hour24, current.hour, current.minute])
 
+  // The hand is a line from the hub to the selected tick, plus a knob on the
+  // tip — both ends computed from the angle rather than rotating a group, so
+  // there is no SVG transform-origin to get wrong. Framer animates the x2/y2 and
+  // cx/cy attributes straight to the new tip on a spring; reduced motion jumps.
+  const handRad = (handAngle * Math.PI) / 180
+  const tipX = C + Math.sin(handRad) * R_HAND
+  const tipY = C - Math.cos(handRad) * R_HAND
+  const handTransition = reduce ? { duration: 0 } : { type: 'spring' as const, stiffness: 360, damping: 28 }
+
   const ticks = useMemo(() => {
     if (mode === 'minute') {
       // Label every 5 minutes; a short mark on the ones between.
@@ -366,23 +375,24 @@ export function TimeDial({
         onPointerCancel={onPointerUp}
       >
         <circle cx={C} cy={C} r={C - 4} fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.10)" />
-        {/* Hand */}
-        <motion.g
-          style={{ originX: `${C}px`, originY: `${C}px` }}
-          animate={{ rotate: handAngle }}
-          transition={reduce ? { duration: 0 } : { type: 'spring', stiffness: 360, damping: 28 }}
-        >
-          <line
-            x1={C}
-            y1={C}
-            x2={C}
-            y2={C - R_HAND}
-            stroke="#DCF87C"
-            strokeWidth={2.5}
-            strokeLinecap="round"
-          />
-          <circle cx={C} cy={C - R_HAND} r={16} fill="#DCF87C" />
-        </motion.g>
+        {/* Hand — line + knob, both ends animating to the new tip on a spring. */}
+        <motion.line
+          x1={C}
+          y1={C}
+          initial={false}
+          animate={{ x2: tipX, y2: tipY }}
+          transition={handTransition}
+          stroke="#DCF87C"
+          strokeWidth={2.5}
+          strokeLinecap="round"
+        />
+        <motion.circle
+          r={16}
+          initial={false}
+          animate={{ cx: tipX, cy: tipY }}
+          transition={handTransition}
+          fill="#DCF87C"
+        />
         <circle cx={C} cy={C} r={4} fill="#DCF87C" />
         {/* Ticks / numbers on top, so the active one shows through the knob. */}
         {ticks.map((t) =>
