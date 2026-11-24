@@ -34,6 +34,12 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'A phone field that groups as you type',
+    summary:
+      'PhoneField — the honest sibling to the money field: same caret trick, different value. Digits group the way the chosen country writes them and the cursor stays under your edit. It reports clean E.164 and makes only a soft length check, never claiming to validate every numbering plan. The country is an accessible listbox of dial codes.',
+    tag: 'Component',
+  },
+  {
     title: 'A money field whose caret stays put',
     summary:
       'CurrencyField — the money input the entry-field family never had. The hard part a lazy version skips is the caret: group the digits as you type and a naive input throws the cursor to the end, so this restores it to the same logical place under your edit. Shows grouped text, reports a clean number; locale and symbol come from Intl.',
@@ -86,11 +92,5 @@ export const LATEST_LOG: LogHeadline[] = [
     summary:
       "The finished pieces now carry the TracingBeam margin rule and a new corner ReadingDial — a lime ring that closes as you read, reporting progress through the essay itself and carrying you back to the top. Published-only, reduced-motion aware.",
     tag: 'Motion',
-  },
-  {
-    title: 'A turn that only goes one way',
-    summary:
-      "Ratchet and pawl — the rigid-mechanism corner's one-way member, its mechanical diode; turn it forward and it counts up tooth by tooth, push it back and the steep face catches the pawl and it locks. One forward-only angle, nothing else stored.",
-    tag: 'Component',
   },
 ]
