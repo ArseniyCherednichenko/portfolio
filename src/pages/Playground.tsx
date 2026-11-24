@@ -144,6 +144,7 @@ import { Appreciate } from '../components/Appreciate'
 import { InlineEdit } from '../components/InlineEdit'
 import { FloatingField, emailValidator, type FloatingFieldHandle } from '../components/FloatingField'
 import { CurrencyField } from '../components/CurrencyField'
+import { PhoneField, type PhoneValue } from '../components/PhoneField'
 import { AsyncButton } from '../components/AsyncButton'
 import { Checkbox } from '../components/Checkbox'
 import { StepForm, type WizardStep } from '../components/StepForm'
@@ -1306,6 +1307,38 @@ function CurrencyFieldDemo() {
         />
         <p className="mt-2 pl-1 text-xs tabular-nums text-white/35">
           onValueChange → <span className="text-white/60">{echo(gbp)}</span>
+        </p>
+      </div>
+    </div>
+  )
+}
+
+// A PhoneField showcase: the honest sibling to the money field beside it, shown
+// the way it is used — one field, defaulting to Germany (where the work is
+// made), with the country selector open to four more. Type and the digits group
+// the way the chosen country is commonly written, the caret staying under your
+// edit rather than jumping to the end; the E.164 value a backend actually wants
+// is echoed below, together with the soft length cue. Switch the country and the
+// digits already typed re-group under its format. Everything is local — nothing
+// you type is sent or stored.
+function PhoneFieldDemo() {
+  const [val, setVal] = useState<PhoneValue>({ e164: '', national: '', country: 'DE', complete: false })
+  return (
+    <div className="w-full max-w-sm">
+      <PhoneField
+        label="Phone number"
+        defaultCountry="DE"
+        hint="Pick a country, then type. The grouping follows how that country writes it."
+        onChange={setVal}
+      />
+      <div className="mt-4 space-y-1 rounded-xl border border-white/10 bg-white/[0.02] p-3.5 text-xs tabular-nums">
+        <p className="text-white/35">
+          E.164 → <span className="text-[#DCF87C]/80">{val.e164 || '—'}</span>
+        </p>
+        <p className="text-white/35">
+          country → <span className="text-white/60">{val.country}</span>
+          <span className="px-2 text-white/15">·</span>
+          complete → <span className="text-white/60">{String(val.complete)}</span>
         </p>
       </div>
     </div>
@@ -10619,6 +10652,15 @@ export default function Playground() {
               note="The money input the entry-field family never had — its siblings each take a shape (the floating field a line of text, the code input a run of digits, the tag input a set of chips), but none handles the one value a product most often asks for: an amount of money. It reads trivially and is not, because of the one thing a lazy version gets wrong: the caret. A money field has to group its digits as you type (1,234,567, not a figure you count), and the instant it reinserts a separator a naive controlled input throws the cursor to the end — so fixing a wrong digit in the middle becomes impossible. This reformats on every keystroke and restores the caret to the same logical place, counting the value-bearing characters to the left of where you were and walking the regrouped string to just past that many, so the cursor stays under your edit while the separators rearrange around it. It keeps the two values honest and separate — it shows grouped text and reports a clean number through onValueChange, and they can never drift because the display is always a formatting of the parse. Grouping, both separators, the symbol and its side are read from the locale and currency (Intl), so a EUR field in a German locale reads 1.299,50 and a USD one $1,299.50 without a hand-kept table. Up and Down arrows step the amount (Shift for a larger step), a max clamps and flags, and the parsed figure is announced politely on blur. A real label/input pair with inputMode=decimal. Reduced motion keeps every behaviour and drops only the underline draw."
             >
               <CurrencyFieldDemo />
+            </Experiment>
+          </Reveal>
+
+          <Reveal>
+            <Experiment
+              name="Phone field"
+              note="The international phone input the controls family never had, and the honest sibling to the money field beside it — same lesson, different value. A phone number is grouped for legibility ((030) 123-4567, not a run you count), and the instant the field reinserts a bracket or a dash a naive controlled input throws the cursor to the end, so fixing a wrong digit in the middle becomes impossible. This reformats on every keystroke and restores the caret to the same logical place — it counts the digits to the left of where you were and walks the regrouped string to just past that many — so the cursor stays under your edit while the separators rearrange. The second thing it gets right is honesty about what it knows: real numbering plans are a tangle, so rather than silently claim to validate every one, it formats using each country's common grouping and reports the digits exactly as typed in E.164 (a plus, the dial code, the national digits — the one shape every backend and SMS gateway wants). Its only check is a soft length one, surfaced as a quiet 'looks complete' cue, never a hard gate, because a field has no business rejecting a number it cannot be sure is wrong. What it shows is always a formatting of the digits it holds and what it reports is always those same digits, so the two can never drift. The country is a real control of its own: a button opening an accessible listbox (dial code shown, no flag emoji — the ISO letters carry it), arrow-key navigable, Escape to close, focus returned to the button on pick; switching country re-groups the digits already typed under the new format. A real label/input pair typed as a phone keypad on touch. Reduced motion keeps every behaviour and drops only the movement — the focus underline appears without drawing and the list opens without its spring."
+            >
+              <PhoneFieldDemo />
             </Experiment>
           </Reveal>
 
