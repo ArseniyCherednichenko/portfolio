@@ -117,6 +117,7 @@ import { Combobox, type ComboOption } from '../components/Combobox'
 import { TagInput } from '../components/TagInput'
 import { Calendar } from '../components/Calendar'
 import { TimeDial, type TimeValue } from '../components/TimeDial'
+import { DateRangePicker, type DateRange } from '../components/DateRangePicker'
 import { ColorField } from '../components/ColorField'
 import { Dropzone } from '../components/Dropzone'
 import { NumberField } from '../components/NumberField'
@@ -3349,6 +3350,38 @@ function TimeDialDemo() {
       <TimeDial value={time} onChange={setTime} />
       <p className="text-center text-sm text-white/55">
         Set for <span className="font-medium text-white/85">{TIME_READOUT.format(asDate)}</span>
+      </p>
+    </div>
+  )
+}
+
+// A DateRangePicker showcase: the Calendar's harder sibling. Pick a start, then
+// an end; a live readout beneath it states the stay in plain words and counts the
+// nights, so the span means something as it grows. Starts on a week-long default
+// so the continuous band and the two lime endpoints are visible at rest.
+const RANGE_READOUT = new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })
+function DateRangePickerDemo() {
+  const [range, setRange] = useState<DateRange | null>(() => {
+    const start = new Date()
+    const end = new Date()
+    end.setDate(end.getDate() + 5)
+    return { start, end }
+  })
+  const nights = range ? Math.round((range.end.getTime() - range.start.getTime()) / 86_400_000) : 0
+  return (
+    <div className="flex w-full flex-col items-center gap-6">
+      <DateRangePicker value={range} onChange={setRange} />
+      <p className="text-center text-sm text-white/55">
+        {range ? (
+          <>
+            <span className="font-medium text-white/85">{RANGE_READOUT.format(range.start)}</span>
+            {' to '}
+            <span className="font-medium text-white/85">{RANGE_READOUT.format(range.end)}</span>
+            <span className="text-white/40"> — {nights} {nights === 1 ? 'night' : 'nights'}</span>
+          </>
+        ) : (
+          'No range chosen yet.'
+        )}
       </p>
     </div>
   )
@@ -10952,6 +10985,38 @@ export default function Playground() {
                 hands off to the minute the way the Material picker does. One source of truth — a single hour and minute
                 — feeds the hand, the ticks, the readout and the live announcement, so none of them can drift. Reduced
                 motion drops the spring for a hand that simply jumps, exactly as usable.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH DATE RANGE PICKER */}
+        <Reveal>
+          <div id="date-range" data-experiment="Date range" className="mt-12 scroll-mt-32">
+            <div className="flex flex-col items-center gap-8 rounded-3xl border border-white/10 bg-white/[0.02] px-6 py-14 sm:px-10">
+              <div className="max-w-md text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Pick a stay</span>
+                <p className="mx-auto mt-3 text-lg font-medium text-white/85 sm:text-xl">
+                  The Calendar's harder sibling. Click a start, then an end; reach for the far day and watch the span fill
+                  night by night before you commit it.
+                </p>
+              </div>
+              <DateRangePickerDemo />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Date range</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                A range is not one selected cell but a span, and the span is the whole point — so the band that fills it
+                has to read as one continuous bar across a grid built from gapped cells, the detail every lazy version
+                gets wrong when it tints each day as an island and the eye never joins them. This is that control, built
+                on the same WAI-ARIA date-grid contract as the single-date picker beside it: a real grid with one roving
+                tabindex, the arrows driving a day, a week, a month or a year, and a month that flips when you cross its
+                edge so a range can run from one into the next without lifting your hands. The first commit sets the
+                start, the second the end — ordered for you, so it never matters which way you reach — and a third opens a
+                fresh range. The part that makes it feel alive: the instant a start is set, the span to wherever your
+                pointer or focus now rests previews live, growing as you move, with a night count under the grid that
+                means something as it climbs. Reduced motion drops the slide and the endpoint pops for a plain, instant
+                grid that is exactly as usable.
               </p>
             </div>
           </div>
