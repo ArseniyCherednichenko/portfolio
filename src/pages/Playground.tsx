@@ -1,4 +1,4 @@
-import { createRef, useCallback, useEffect, useRef, useState } from 'react'
+import { createRef, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { Reveal } from '../components/Reveal'
@@ -176,6 +176,7 @@ import { Tooltip } from '../components/Tooltip'
 import { Popover } from '../components/Popover'
 import { ContextMenu, type ContextMenuItem } from '../components/ContextMenu'
 import { MorphMenu, type MorphMenuPanel } from '../components/MorphMenu'
+import { SelectionToolbar, type SelectionAction } from '../components/SelectionToolbar'
 import { useToast } from '../components/Toast'
 import { Stepper, type StepperStep } from '../components/Stepper'
 import { Dock, type DockItem } from '../components/Dock'
@@ -4753,6 +4754,144 @@ function MorphMenuDemo() {
   ]
 
   return <MorphMenu trigger="Preferences" panels={panels} width={272} />
+}
+
+// A SelectionToolbar demo — a short reader about how I work, wired to real,
+// entirely-local actions. Copy puts the selection on the clipboard; Highlight
+// paints a persistent lime mark through the CSS Custom Highlight API (so the
+// mark never touches the DOM and a phrase can cross element boundaries a wrapped
+// <mark> could not); Quote pulls the selected line down into a short saved list.
+// Nothing typed or selected is sent anywhere. The Highlight action only appears
+// where the browser supports the API, so the bar is honest about what it offers.
+interface HighlightLike {
+  add(range: Range): void
+  clear(): void
+}
+interface HighlightRegistryLike {
+  set(name: string, highlight: HighlightLike): void
+  delete(name: string): void
+}
+const READER_HIGHLIGHT = 'ac-reader-mark'
+
+function SelectionToolbarDemo() {
+  const [quotes, setQuotes] = useState<string[]>([])
+  const [copied, setCopied] = useState(false)
+  const [marks, setMarks] = useState(0)
+  const [supportsHighlight, setSupportsHighlight] = useState(false)
+  const highlightRef = useRef<HighlightLike | null>(null)
+
+  // Register one named highlight for this demo and tear it down on unmount, so
+  // the marks live only while the panel is mounted.
+  useEffect(() => {
+    const css = (window as unknown as { CSS?: { highlights?: HighlightRegistryLike } }).CSS
+    const Ctor = (window as unknown as { Highlight?: new () => HighlightLike }).Highlight
+    if (!css?.highlights || typeof Ctor !== 'function') return
+    const h = new Ctor()
+    highlightRef.current = h
+    css.highlights.set(READER_HIGHLIGHT, h)
+    setSupportsHighlight(true)
+    return () => {
+      css.highlights?.delete(READER_HIGHLIGHT)
+      highlightRef.current = null
+    }
+  }, [])
+
+  const actions = useMemo<SelectionAction[]>(() => {
+    const list: SelectionAction[] = [
+      {
+        id: 'copy',
+        label: 'Copy',
+        run: ({ text }) => {
+          navigator.clipboard?.writeText(text).catch(() => {})
+          setCopied(true)
+          window.setTimeout(() => setCopied(false), 1400)
+        },
+      },
+    ]
+    if (supportsHighlight) {
+      list.push({
+        id: 'highlight',
+        label: 'Highlight',
+        run: ({ range }) => {
+          highlightRef.current?.add(range)
+          setMarks((n) => n + 1)
+        },
+      })
+    }
+    list.push({
+      id: 'quote',
+      label: 'Quote',
+      run: ({ text }) => setQuotes((q) => (q.includes(text) ? q : [text, ...q].slice(0, 4))),
+    })
+    return list
+  }, [supportsHighlight])
+
+  function clearMarks() {
+    highlightRef.current?.clear()
+    setMarks(0)
+  }
+
+  return (
+    <div className="w-full max-w-2xl">
+      <SelectionToolbar actions={actions} label="Reader actions" minLength={2}>
+        <article className="rounded-2xl border border-white/10 bg-white/[0.02] p-6 sm:p-8">
+          <p className="text-[0.7rem] font-semibold uppercase tracking-[0.25em] text-[#DCF87C]/80">
+            Select any of this
+          </p>
+          <div className="mt-4 space-y-4 text-[15px] leading-relaxed text-white/75">
+            <p>
+              I build interfaces for the web and for native, and I care most about the parts people
+              feel but never name: how a thing moves, how the type is set, and the small moments that
+              land before anyone thinks to look.
+            </p>
+            <p>
+              The work runs across the stack, from React and SwiftUI down to the backend that keeps
+              them honest, made from Berlin most days. This site is the open workbench for it: every
+              component here is written by hand, with no template underneath, and it grows a little in
+              public most days.
+            </p>
+          </div>
+        </article>
+      </SelectionToolbar>
+
+      <div className="mt-4 flex flex-wrap items-center justify-between gap-3 px-1 text-xs text-white/40">
+        <span aria-live="polite">
+          {copied
+            ? 'Copied to the clipboard.'
+            : supportsHighlight
+              ? 'Select a phrase to raise the bar — copy, highlight, or quote it.'
+              : 'Select a phrase to raise the bar — copy or quote it.'}
+        </span>
+        {supportsHighlight && marks > 0 && (
+          <button
+            type="button"
+            onClick={clearMarks}
+            className="rounded-full border border-white/12 px-2.5 py-1 font-semibold uppercase tracking-wide text-white/50 transition-colors hover:border-[#DCF87C]/50 hover:text-[#DCF87C] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#DCF87C]/50"
+          >
+            Clear {marks === 1 ? 'highlight' : 'highlights'}
+          </button>
+        )}
+      </div>
+
+      {quotes.length > 0 && (
+        <div className="mt-5 rounded-2xl border border-white/10 bg-white/[0.015] p-5">
+          <p className="text-[0.7rem] font-semibold uppercase tracking-[0.25em] text-white/35">
+            Pulled quotes
+          </p>
+          <ul className="mt-3 space-y-3">
+            {quotes.map((q, i) => (
+              <li
+                key={`${i}-${q.slice(0, 12)}`}
+                className="border-l-2 border-[#DCF87C]/50 pl-3 font-display text-sm italic leading-relaxed text-white/80"
+              >
+                &ldquo;{q}&rdquo;
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </div>
+  )
 }
 
 // A masonry "wall" of honest tiles — the site's own making-by-hand ethos and a
@@ -16298,6 +16437,49 @@ export default function Playground() {
                 one case with no pointer to read, spawns the ripple from the centre, so the feedback is
                 never a mouse-only reward. Under reduced motion the wave drops entirely and the control
                 keeps its own hover and active states, fully usable with nothing expanding.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH SELECTION TOOLBAR — the overlay with no trigger, raised by the text itself */}
+        <Reveal>
+          <div id="selection-toolbar" data-experiment="Selection toolbar" className="mt-12 scroll-mt-32">
+            <div className="rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 py-14 sm:px-10">
+              <div className="mx-auto mb-10 max-w-md text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Select the text</span>
+                <p className="mt-3 text-lg font-medium text-white/85 sm:text-xl">
+                  Highlight a phrase and a small bar rises over it. No button summons it &mdash; the
+                  selection itself does, the way a reader or an editor raises a format bar.
+                </p>
+              </div>
+              <div className="flex justify-center">
+                <SelectionToolbarDemo />
+              </div>
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Selection toolbar &mdash; the overlay the text raises itself</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                The Overlays family&rsquo;s missing member, and the third answer to one question: where does a
+                floating panel anchor? The Popover anchors to a <em>trigger element</em> and the context menu opens
+                at the <em>pointer</em>; this one has no trigger at all. It watches for a text selection inside its
+                content and floats a bar of actions above it, the way Medium, Notion, Linear and Google Docs raise a
+                format bar over whatever you just highlighted. It shares the family&rsquo;s proven geometry &mdash;
+                rendered through a <span className="font-mono text-white/70">portal</span> as{' '}
+                <span className="font-mono text-white/70">position: fixed</span> so no{' '}
+                <span className="font-mono text-white/70">overflow-hidden</span> ancestor clips it, measured from the
+                selection&rsquo;s own bounding rect, sitting above and flipping below when there is no room, then
+                clamping inside the viewport &mdash; and it re-measures the live Range on scroll and resize, so the
+                bar rides the words rather than drifting off them. The one detail a lazy version gets wrong is losing
+                the selection the instant you reach for the bar: a <span className="font-mono text-white/70">mousedown</span>{' '}
+                on a button moves focus and the browser drops the highlight before the click lands, so every button
+                cancels its own mousedown and the action always has a selection to act on. The actions are real and
+                entirely local &mdash; copy the phrase, mark it with a persistent lime highlight drawn through the CSS
+                Custom Highlight API (so the mark never touches the DOM and can cross element boundaries a wrapped
+                &lt;mark&gt; could not), or pull it down as a saved quote &mdash; and the Highlight action only shows
+                where the browser supports the API, so the bar never offers what it cannot do. Escape dismisses the bar
+                and lets go of the selection; a polite live region names each action. Under reduced motion the bar
+                appears without the pop or the travel. Nothing you select or type here is sent anywhere.
               </p>
             </div>
           </div>

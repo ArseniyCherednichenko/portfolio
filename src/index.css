@@ -417,6 +417,16 @@ body.cursor-none * {
   box-shadow: 0 0 0 1px rgba(220, 248, 124, 0.7), 0 0 20px rgba(220, 248, 124, 0.6);
 }
 
+/* The persistent reader's mark the SelectionToolbar demo paints via the CSS
+   Custom Highlight API. Highlights drawn this way never touch the DOM — they are
+   styled only through ::highlight(<name>), so the marked runs can cross element
+   boundaries (a word, a phrase spanning two tags) that a wrapping <mark> could
+   not. Lime wash, same accent as everything else, under the live text. */
+::highlight(ac-reader-mark) {
+  background-color: rgba(220, 248, 124, 0.26);
+  color: #ffffff;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
