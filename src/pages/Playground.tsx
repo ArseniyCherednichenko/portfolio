@@ -169,6 +169,7 @@ import { Zoetrope } from '../components/Zoetrope'
 import { Thaumatrope } from '../components/Thaumatrope'
 import { Chronograph } from '../components/Chronograph'
 import { Compass } from '../components/Compass'
+import { VuMeter } from '../components/VuMeter'
 import { ProgressiveBlur } from '../components/ProgressiveBlur'
 import { DynamicIsland, type IslandActivity } from '../components/DynamicIsland'
 import { Sheet } from '../components/Sheet'
@@ -15495,6 +15496,47 @@ export default function Playground() {
                 live region reading the heading and its point. Under{' '}
                 <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code>{' '}
                 the eased moves land straight on the value.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH VU METER */}
+        <Reveal>
+          <div id="vu-meter" data-experiment="VU meter" className="mt-12 scroll-mt-32">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 py-12 sm:px-10">
+              <div className="text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Ride the gain</span>
+                <p className="mx-auto mt-3 max-w-md text-lg font-medium text-white/85 sm:text-xl">
+                  A weighted needle leaning after a signal it can never quite catch. Push the fader past
+                  unity and watch it peg into the red.
+                </p>
+              </div>
+              <VuMeter className="mt-10" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">VU meter</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                An analog VU meter, rebuilt as a working instrument rather than a picture of one. The
+                authentic part is the ballistics: a real VU movement is a weighted needle on a
+                near-critically-damped spring, so it does not snap to the signal &mdash; it leans toward it,
+                lags every transient, and settles with the faintest overshoot. That lag <em>is</em> the
+                instrument, so the needle here runs a little second-order system &mdash; spring plus damping,
+                integrated off the frame clock, so it keeps its real speed at any refresh rate &mdash; chasing
+                a level this synthesises: a drifting base loudness with decaying transients riding on top, so
+                it reads like programme material rather than a mic or a random walk. The dB reading comes
+                straight back off the needle&rsquo;s position, so the number and the needle can never
+                disagree, and the peak lamp catches any excursion into the red and holds it. The one thing you
+                drive is the input gain, and the fader is a real{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">role=&quot;slider&quot;</code>:
+                drag it or focus it and ride it with the arrow keys, Page keys, Home and End &mdash; push it
+                past the unity mark and the level runs hot and the needle pegs. Honest about what it is &mdash;
+                there is no audio, the needle tracks a made-up signal and the scale is a relative VU scale, not
+                a measurement of anything. Under{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code>{' '}
+                the movement stops: no synthesised programme, no spring &mdash; the needle maps straight to the
+                gain you set against a steady reference tone, so it stays a live, operable meter, just a quiet
+                one.
               </p>
             </div>
           </div>
