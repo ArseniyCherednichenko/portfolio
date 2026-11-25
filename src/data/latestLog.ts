@@ -34,6 +34,12 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'A calendar you drag a whole stay across',
+    summary:
+      "DateRangePicker — the Calendar's harder sibling. A range is a span, not a cell, so the band that fills it bridges the grid's gaps to read as one continuous bar, not islands. Click a start, then an end (ordered for you); reach for the far day and the span previews live, growing night by night, with a count under the grid. Same date-grid keyboard contract as the single-date picker beside it.",
+    tag: 'Component',
+  },
+  {
     title: 'A toolbar the selected text raises itself',
     summary:
       'SelectionToolbar — the overlay with no trigger. Highlight a phrase and a small bar rises over it: the popover anchors to an element, the context menu to the pointer, this one to the selection itself. Copy, highlight (a persistent lime mark via the CSS Custom Highlight API), or pull a quote — every button cancels its own mousedown so the selection survives the press.',
@@ -85,12 +91,6 @@ export const LATEST_LOG: LogHeadline[] = [
     title: 'A frequency analyser, bass left to treble right',
     summary:
       "Spectrum — the signal corner's frequency-domain display beside the Oscilloscope and Waveform; a bar graph with falling peak-hold caps, honestly synthesized from a 1/f tilt and drifting formants rather than measured. Sweep it to excite the bins.",
-    tag: 'Component',
-  },
-  {
-    title: 'A spring hands the swing back and forth',
-    summary:
-      'Coupled pendulums — two equal bobs joined by a light spring; lift one and the spring winds it down to a standstill while the other takes on the whole swing, then hands it back. Solved exactly from its two normal modes, a twin meter showing the energy conserved as it crosses.',
     tag: 'Component',
   },
 ]
