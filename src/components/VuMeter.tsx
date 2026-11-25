@@ -41,6 +41,10 @@ const fracForDb = (db: number) => (db - DB_MIN) / span
 // The 0 VU mark — where the red overload zone begins.
 const FRAC_0 = fracForDb(0)
 
+// Format a dB reading the one way it is ever shown — signed, one decimal — so
+// the per-frame paint and the React-rendered fallback never disagree.
+const fmtDb = (db: number) => `${db >= 0 ? '+' : ''}${db.toFixed(1)}`
+
 const rad = (deg: number) => (deg * Math.PI) / 180
 const angleForFrac = (f: number) => A_MIN + f * (A_MAX - A_MIN)
 // A point on the scale arc at radius rr for fraction f (0 = left, 1 = right).
@@ -111,7 +115,7 @@ export function VuMeter({ className = '' }: { className?: string }) {
     // number and the needle are the same quantity.
     const db = DB_MIN + clamped * span
     if (readRef.current) {
-      readRef.current.textContent = `${db >= 0 ? '+' : ''}${db.toFixed(1)}`
+      readRef.current.textContent = fmtDb(db)
     }
     const over = clamped >= FRAC_0
     if (over) peakHold.current = now + 700
@@ -313,7 +317,7 @@ export function VuMeter({ className = '' }: { className?: string }) {
         {/* Digital readout + peak reset */}
         <div className="mt-3 flex items-center justify-between">
           <div className="rounded-md border border-[#DCF87C]/40 bg-[#DCF87C]/10 px-3 py-1 font-mono text-sm tabular-nums text-[#DCF87C]">
-            <span ref={readRef}>{(DB_MIN + pos.current * span).toFixed(1)}</span>
+            <span ref={readRef}>{fmtDb(DB_MIN + pos.current * span)}</span>
             <span className="ml-1 text-[10px] font-semibold uppercase tracking-wider text-[#DCF87C]/70">VU</span>
           </div>
           <button
