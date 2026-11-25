@@ -34,6 +34,12 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'A VU needle that leans after the signal',
+    summary:
+      'VuMeter — an analog VU meter with the one thing that makes it an instrument: ballistics. The needle runs a weighted second-order spring, so it lags each transient and settles with a hair of overshoot, chasing a level synthesised to read like programme material. Ride the gain fader past unity and it pegs into the red. Honest: no audio, a made-up signal, a relative scale.',
+    tag: 'Component',
+  },
+  {
     title: 'A calendar you drag a whole stay across',
     summary:
       "DateRangePicker — the Calendar's harder sibling. A range is a span, not a cell, so the band that fills it bridges the grid's gaps to read as one continuous bar, not islands. Click a start, then an end (ordered for you); reach for the far day and the span previews live, growing night by night, with a count under the grid. Same date-grid keyboard contract as the single-date picker beside it.",
@@ -85,12 +91,6 @@ export const LATEST_LOG: LogHeadline[] = [
     title: 'An @-mention popover that finds the caret',
     summary:
       "Mentions — type '@' mid-sentence and a handle popover rises at the caret itself, not pinned to the field; a mirror div finds the caret inside the textarea so it tracks through wraps and scrolls. The handles are real pages of this site, so each mention links somewhere.",
-    tag: 'Component',
-  },
-  {
-    title: 'A frequency analyser, bass left to treble right',
-    summary:
-      "Spectrum — the signal corner's frequency-domain display beside the Oscilloscope and Waveform; a bar graph with falling peak-hold caps, honestly synthesized from a 1/f tilt and drifting formants rather than measured. Sweep it to excite the bins.",
     tag: 'Component',
   },
 ]
