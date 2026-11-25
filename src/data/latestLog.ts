@@ -34,6 +34,12 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'A toolbar the selected text raises itself',
+    summary:
+      'SelectionToolbar — the overlay with no trigger. Highlight a phrase and a small bar rises over it: the popover anchors to an element, the context menu to the pointer, this one to the selection itself. Copy, highlight (a persistent lime mark via the CSS Custom Highlight API), or pull a quote — every button cancels its own mousedown so the selection survives the press.',
+    tag: 'Component',
+  },
+  {
     title: 'A phone field that groups as you type',
     summary:
       'PhoneField — the honest sibling to the money field: same caret trick, different value. Digits group the way the chosen country writes them and the cursor stays under your edit. It reports clean E.164 and makes only a soft length check, never claiming to validate every numbering plan. The country is an accessible listbox of dial codes.',
@@ -86,11 +92,5 @@ export const LATEST_LOG: LogHeadline[] = [
     summary:
       'Coupled pendulums — two equal bobs joined by a light spring; lift one and the spring winds it down to a standstill while the other takes on the whole swing, then hands it back. Solved exactly from its two normal modes, a twin meter showing the energy conserved as it crosses.',
     tag: 'Component',
-  },
-  {
-    title: 'The essays get a reading dial',
-    summary:
-      "The finished pieces now carry the TracingBeam margin rule and a new corner ReadingDial — a lime ring that closes as you read, reporting progress through the essay itself and carrying you back to the top. Published-only, reduced-motion aware.",
-    tag: 'Motion',
   },
 ]
