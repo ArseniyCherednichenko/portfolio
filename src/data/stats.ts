@@ -12,7 +12,7 @@
 /** Hand-built components in `src/components`. Nothing off the shelf. This is
  * the literal count of files there, catalogued one by one on the /library
  * page (LIBRARY in src/data/library.ts) — keep the two in step. */
-export const COMPONENT_COUNT = 403
+export const COMPONENT_COUNT = 404
 
 /** Distinct top-level routed pages the site serves — each with its own custom
  * layout and deep-linkable. This is exactly the set the /contents index
