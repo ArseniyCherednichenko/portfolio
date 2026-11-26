@@ -34,6 +34,12 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'A card field that reads its own brand',
+    summary:
+      'CardField — the piece every checkout ends on, completing the money/phone/card family. The number groups 4-4-4-4 (4-6-5 for Amex) with the caret held under your edit; the brand is named from its real prefix, no logo borrowed; and the Luhn checksum runs as an honest typo test, never a claim the card is valid. Nothing leaves the tab.',
+    tag: 'Component',
+  },
+  {
     title: 'Building with models, not around them',
     summary:
       'The fourth essay is up. Weave a model into the product along its grain instead of bolting a chatbot to the side: design the wrong path first, keep the model fenced by deterministic code, and be honest about which parts are a good guess.',
@@ -86,11 +92,5 @@ export const LATEST_LOG: LogHeadline[] = [
     summary:
       'A stale figure read 36 where the site serves 35 pages. Reset — and the index now lists itself, so every count agrees.',
     tag: 'Polish',
-  },
-  {
-    title: 'Four beads, four heights, one descent time',
-    summary:
-      'Tautochrone — the Brachistochrone turned up into a cup, the honest sibling beside it; release beads from different heights and they reach the bottom together, on the same frame. Solved exactly as simple harmonic motion in arc length, so the shared quarter-period is the maths, not a tuning.',
-    tag: 'Component',
   },
 ]
