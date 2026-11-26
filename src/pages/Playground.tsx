@@ -147,6 +147,7 @@ import { FloatingField, emailValidator, type FloatingFieldHandle } from '../comp
 import { CurrencyField } from '../components/CurrencyField'
 import { PhoneField, type PhoneValue } from '../components/PhoneField'
 import { CardField, type CardValue } from '../components/CardField'
+import { IbanField, type IbanValue } from '../components/IbanField'
 import { AsyncButton } from '../components/AsyncButton'
 import { Checkbox } from '../components/Checkbox'
 import { StepForm, type WizardStep } from '../components/StepForm'
@@ -1383,6 +1384,34 @@ function CardFieldDemo() {
           </span>
           <span className="px-2 text-white/15">·</span>
           cvc → <span className="text-white/60">{val.cvc ? '•'.repeat(val.cvc.length) : '—'}</span>
+        </p>
+        <p className="text-white/35">
+          complete → <span className="text-white/60">{String(val.complete)}</span>
+        </p>
+      </div>
+    </div>
+  )
+}
+
+// An IbanField showcase: the bank-transfer sibling to the card field above it,
+// defaulting to a German IBAN (where the work is made) and open to the rest of
+// SEPA. Type one and the field names the country from its first two letters,
+// groups it four characters at a time with the caret kept under your edit, and
+// runs the ISO 13616 mod-97 check — surfaced honestly as a typo test, never a
+// claim the account is real. The echoed value shows what a form would actually
+// get. Try a public test IBAN: German DE89 3704 0044 0532 0130 00, British
+// GB82 WEST 1234 5698 7654 32, or mistype one character to watch the check fail.
+// Everything is local — nothing you type is sent or stored.
+function IbanFieldDemo() {
+  const [val, setVal] = useState<IbanValue>({ raw: '', country: null, valid: false, complete: false })
+  return (
+    <div className="w-full max-w-sm">
+      <IbanField label="IBAN" defaultValue="DE" onChange={setVal} />
+      <div className="mt-4 space-y-1 rounded-xl border border-white/10 bg-white/[0.02] p-3.5 text-xs tabular-nums">
+        <p className="text-white/35">
+          country → <span className="text-white/60">{val.country ?? '—'}</span>
+          <span className="px-2 text-white/15">·</span>
+          mod-97 → <span className={val.valid ? 'text-[#DCF87C]/80' : 'text-white/60'}>{String(val.valid)}</span>
         </p>
         <p className="text-white/35">
           complete → <span className="text-white/60">{String(val.complete)}</span>
@@ -10887,6 +10916,15 @@ export default function Playground() {
               note="The payment-card field the checkout family never had, and the third sibling to the money field (an amount) and the phone field (a contact) beside it — the piece every checkout ends on. It is the same caret lesson those two taught, turned onto the one value a lazy version always mangles, plus two honest checks the others did not need. First the caret: a card number is grouped four at a time (4242 4242 4242 4242, not a run you count), and the instant the field reinserts a space a naive controlled input throws the cursor to the end, so fixing a digit in the middle is impossible — this reformats on every keystroke and restores the caret to the same logical place, counting the digits to the left of where you were and walking the regrouped string to just past that many, so the cursor stays under your edit while the spaces rearrange. The grouping follows the detected brand (most cards break 4-4-4-4, American Express 4-6-5), not one guess for every card. Second the brand, by its real prefix: a card's issuer is written into its leading digits (its IIN, the published scheme every terminal reads), so the field names the brand from the digits themselves — Visa starts 4, Mastercard 51-55 or 2221-2720, Amex 34 or 37, Discover 6011 / 65 / 644-649 — and the brand sets the length, the grouping and the security-code length (three digits, four for Amex). No issuer logo is drawn; the brand's name carries it, which borrows no mark. Third the Luhn check, framed for what it is: the last digit of a card number is a checksum, and running the Luhn algorithm fails a single mistyped or transposed digit — so the field runs it and surfaces the result as a typo test, never a claim the card exists or is good for anything, because a number can pass Luhn and be entirely made up. The cue says 'passes the check', never 'valid'. Nothing leaves the tab: no network, no storage, only formatting and arithmetic. Reduced motion keeps every behaviour and drops only the movement — the brand name cross-fades without sliding and the focus underline appears without drawing."
             >
               <CardFieldDemo />
+            </Experiment>
+          </Reveal>
+
+          <Reveal>
+            <Experiment
+              name="IBAN field"
+              note="The bank-transfer field the checkout family never had, and the European sibling to the card field above it — where a card ends an online checkout, an IBAN is how a SEPA transfer, a salary or a rent standing order is actually paid, so it is the same family's fourth piece. It is the same caret lesson the money, phone and card fields taught, turned onto a value with its own grouping, plus one honest check the card's Luhn has a cousin to. First the caret: an IBAN is written four characters at a time (DE89 3704 0044 0532 0130 00, not a run you count), and the instant the field reinserts a space a naive controlled input throws the cursor to the end, so fixing a character in the middle is impossible — this reformats on every keystroke and restores the caret to the same logical place, counting the letters and digits to the left of where you were and walking the regrouped string to just past that many, so the cursor stays under your edit while the spaces rearrange. Second the country, by its real code: an IBAN opens with a two-letter ISO 3166 country code, so the field names the country from those two letters, and from the country it knows the exact total length ISO 13616 assigns it — a German IBAN is 22 characters, a French 27, a Dutch 18 — which caps the input and tells the field when the number is the right size. No bank is named or guessed; the BBAN's inner structure differs by country and the field decodes only what the standard lets it be sure of. Third the mod-97 check, framed for what it is: the two digits after the country code are a checksum (ISO 7064 mod-97-10) — move the first four characters to the end, turn each letter into two digits, read the lot as one long number, and a correct IBAN leaves remainder 1 on division by 97 — and a single mistyped or transposed character fails it, so the field runs it and surfaces the result as a typo test, never a claim the account exists, because an IBAN can pass mod-97 and name no real account. The cue says 'passes the check digits', never 'valid'. Nothing leaves the tab: no network, no storage, only formatting and arithmetic. Reduced motion keeps every behaviour and drops only the movement — the country name cross-fades without sliding and the focus underline appears without drawing."
+            >
+              <IbanFieldDemo />
             </Experiment>
           </Reveal>
 
