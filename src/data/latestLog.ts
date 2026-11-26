@@ -34,6 +34,12 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'An IBAN field that checks its own digits',
+    summary:
+      'IbanField — the bank-transfer sibling that gives the checkout family its European corner. It groups four at a time with the caret held under your edit, names the country from its ISO code (and the length the standard assigns it), and runs the mod-97 check digits as an honest typo test, never a claim the account is real. Nothing leaves the tab.',
+    tag: 'Component',
+  },
+  {
     title: 'A card field that reads its own brand',
     summary:
       'CardField — the piece every checkout ends on, completing the money/phone/card family. The number groups 4-4-4-4 (4-6-5 for Amex) with the caret held under your edit; the brand is named from its real prefix, no logo borrowed; and the Luhn checksum runs as an honest typo test, never a claim the card is valid. Nothing leaves the tab.',
@@ -86,11 +92,5 @@ export const LATEST_LOG: LogHeadline[] = [
     summary:
       'FloatingField — the plain labelled text field the controls family never had. The label rests in the empty box and lifts to a caption on focus or fill; validation runs on blur, reddens and names the fault, then forgives it live. Password reveal, a warming counter, and a submit that gates on every field at once.',
     tag: 'Component',
-  },
-  {
-    title: 'The page count stops lying',
-    summary:
-      'A stale figure read 36 where the site serves 35 pages. Reset — and the index now lists itself, so every count agrees.',
-    tag: 'Polish',
   },
 ]
