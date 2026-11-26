@@ -34,6 +34,12 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'Building with models, not around them',
+    summary:
+      'The fourth essay is up. Weave a model into the product along its grain instead of bolting a chatbot to the side: design the wrong path first, keep the model fenced by deterministic code, and be honest about which parts are a good guess.',
+    tag: 'Page',
+  },
+  {
     title: 'A VU needle that leans after the signal',
     summary:
       'VuMeter — an analog VU meter with the one thing that makes it an instrument: ballistics. The needle runs a weighted second-order spring, so it lags each transient and settles with a hair of overshoot, chasing a level synthesised to read like programme material. Ride the gain fader past unity and it pegs into the red. Honest: no audio, a made-up signal, a relative scale.',
@@ -85,12 +91,6 @@ export const LATEST_LOG: LogHeadline[] = [
     title: 'Four beads, four heights, one descent time',
     summary:
       'Tautochrone — the Brachistochrone turned up into a cup, the honest sibling beside it; release beads from different heights and they reach the bottom together, on the same frame. Solved exactly as simple harmonic motion in arc length, so the shared quarter-period is the maths, not a tuning.',
-    tag: 'Component',
-  },
-  {
-    title: 'An @-mention popover that finds the caret',
-    summary:
-      "Mentions — type '@' mid-sentence and a handle popover rises at the caret itself, not pinned to the field; a mirror div finds the caret inside the textarea so it tracks through wraps and scrolls. The handles are real pages of this site, so each mention links somewhere.",
     tag: 'Component',
   },
 ]
