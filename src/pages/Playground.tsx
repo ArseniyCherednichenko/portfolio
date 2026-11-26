@@ -146,6 +146,7 @@ import { InlineEdit } from '../components/InlineEdit'
 import { FloatingField, emailValidator, type FloatingFieldHandle } from '../components/FloatingField'
 import { CurrencyField } from '../components/CurrencyField'
 import { PhoneField, type PhoneValue } from '../components/PhoneField'
+import { CardField, type CardValue } from '../components/CardField'
 import { AsyncButton } from '../components/AsyncButton'
 import { Checkbox } from '../components/Checkbox'
 import { StepForm, type WizardStep } from '../components/StepForm'
@@ -1341,6 +1342,49 @@ function PhoneFieldDemo() {
         <p className="text-white/35">
           country → <span className="text-white/60">{val.country}</span>
           <span className="px-2 text-white/15">·</span>
+          complete → <span className="text-white/60">{String(val.complete)}</span>
+        </p>
+      </div>
+    </div>
+  )
+}
+
+// A CardField showcase: the piece every checkout ends on, and the third
+// sibling to the money field (an amount) and the phone field (a contact). Type
+// a number and the field names the brand from its real leading digits, groups
+// the way that brand is written (4-4-4-4, or 4-6-5 for American Express) with
+// the caret staying under your edit, and runs the Luhn checksum — surfaced
+// honestly as a typo test, never a claim the card is real. The echoed value
+// shows what a form would actually get. Try a public test number: Visa
+// 4242 4242 4242 4242, Amex 3782 822463 10005, or mistype one digit to watch
+// the checksum fail. Everything is local — nothing you type is sent or stored.
+function CardFieldDemo() {
+  const [val, setVal] = useState<CardValue>({
+    number: '',
+    brand: null,
+    expiry: null,
+    cvc: '',
+    luhn: false,
+    complete: false,
+  })
+  return (
+    <div className="w-full max-w-sm">
+      <CardField label="Card number" onChange={setVal} />
+      <div className="mt-4 space-y-1 rounded-xl border border-white/10 bg-white/[0.02] p-3.5 text-xs tabular-nums">
+        <p className="text-white/35">
+          brand → <span className="text-white/60">{val.brand ?? '—'}</span>
+          <span className="px-2 text-white/15">·</span>
+          luhn → <span className={val.luhn ? 'text-[#DCF87C]/80' : 'text-white/60'}>{String(val.luhn)}</span>
+        </p>
+        <p className="text-white/35">
+          expiry →{' '}
+          <span className="text-white/60">
+            {val.expiry ? `${String(val.expiry.month).padStart(2, '0')}/${val.expiry.year}` : '—'}
+          </span>
+          <span className="px-2 text-white/15">·</span>
+          cvc → <span className="text-white/60">{val.cvc ? '•'.repeat(val.cvc.length) : '—'}</span>
+        </p>
+        <p className="text-white/35">
           complete → <span className="text-white/60">{String(val.complete)}</span>
         </p>
       </div>
@@ -10834,6 +10878,15 @@ export default function Playground() {
               note="The international phone input the controls family never had, and the honest sibling to the money field beside it — same lesson, different value. A phone number is grouped for legibility ((030) 123-4567, not a run you count), and the instant the field reinserts a bracket or a dash a naive controlled input throws the cursor to the end, so fixing a wrong digit in the middle becomes impossible. This reformats on every keystroke and restores the caret to the same logical place — it counts the digits to the left of where you were and walks the regrouped string to just past that many — so the cursor stays under your edit while the separators rearrange. The second thing it gets right is honesty about what it knows: real numbering plans are a tangle, so rather than silently claim to validate every one, it formats using each country's common grouping and reports the digits exactly as typed in E.164 (a plus, the dial code, the national digits — the one shape every backend and SMS gateway wants). Its only check is a soft length one, surfaced as a quiet 'looks complete' cue, never a hard gate, because a field has no business rejecting a number it cannot be sure is wrong. What it shows is always a formatting of the digits it holds and what it reports is always those same digits, so the two can never drift. The country is a real control of its own: a button opening an accessible listbox (dial code shown, no flag emoji — the ISO letters carry it), arrow-key navigable, Escape to close, focus returned to the button on pick; switching country re-groups the digits already typed under the new format. A real label/input pair typed as a phone keypad on touch. Reduced motion keeps every behaviour and drops only the movement — the focus underline appears without drawing and the list opens without its spring."
             >
               <PhoneFieldDemo />
+            </Experiment>
+          </Reveal>
+
+          <Reveal>
+            <Experiment
+              name="Card field"
+              note="The payment-card field the checkout family never had, and the third sibling to the money field (an amount) and the phone field (a contact) beside it — the piece every checkout ends on. It is the same caret lesson those two taught, turned onto the one value a lazy version always mangles, plus two honest checks the others did not need. First the caret: a card number is grouped four at a time (4242 4242 4242 4242, not a run you count), and the instant the field reinserts a space a naive controlled input throws the cursor to the end, so fixing a digit in the middle is impossible — this reformats on every keystroke and restores the caret to the same logical place, counting the digits to the left of where you were and walking the regrouped string to just past that many, so the cursor stays under your edit while the spaces rearrange. The grouping follows the detected brand (most cards break 4-4-4-4, American Express 4-6-5), not one guess for every card. Second the brand, by its real prefix: a card's issuer is written into its leading digits (its IIN, the published scheme every terminal reads), so the field names the brand from the digits themselves — Visa starts 4, Mastercard 51-55 or 2221-2720, Amex 34 or 37, Discover 6011 / 65 / 644-649 — and the brand sets the length, the grouping and the security-code length (three digits, four for Amex). No issuer logo is drawn; the brand's name carries it, which borrows no mark. Third the Luhn check, framed for what it is: the last digit of a card number is a checksum, and running the Luhn algorithm fails a single mistyped or transposed digit — so the field runs it and surfaces the result as a typo test, never a claim the card exists or is good for anything, because a number can pass Luhn and be entirely made up. The cue says 'passes the check', never 'valid'. Nothing leaves the tab: no network, no storage, only formatting and arithmetic. Reduced motion keeps every behaviour and drops only the movement — the brand name cross-fades without sliding and the focus underline appears without drawing."
+            >
+              <CardFieldDemo />
             </Experiment>
           </Reveal>
 
