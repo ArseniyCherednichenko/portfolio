@@ -61,6 +61,70 @@ export const NOTE_TAGS: NoteTag[] = ['Craft', 'Building in the open', 'AI', 'iOS
 
 export const NOTES: Note[] = [
   {
+    slug: 'building-with-models-not-around-them',
+    title: 'Building with models, not around them',
+    summary:
+      'Weaving AI into a real product so it feels like part of the thing, not a chatbot bolted on the side. Notes from actually doing it.',
+    tag: 'AI',
+    status: 'published',
+    date: '2026-11-26',
+    plan: [
+      'Making AI feel like part of the product, not bolted on',
+      'Designing for the moments when the model is wrong',
+      'The seam between deterministic code and a model',
+    ],
+    body: [
+      {
+        type: 'p',
+        text: 'The easy way to add AI to a product is to put a chatbot in the corner. A little bubble, a text box, a model behind it, and you can say the thing has AI now. I have built that version, and I have deleted it. It is a confession that you could not think of anything better to do with the model than hand the user a second, worse search bar and hope they know what to type into it.',
+      },
+      {
+        type: 'p',
+        text: 'The products that actually use a model well rarely look like they have a model at all. The intelligence is spread through the thing — in what it suggests, in what it quietly skips, in the shape of the next step it offers — not parked in a panel you have to go and talk to. The question I try to ask is not where do I put the AI, but what does this product do that is suddenly cheap now that a model exists, and was impossibly expensive before. The answers almost never look like a chat window.',
+      },
+      {
+        type: 'quote',
+        text: 'A model is not a feature you add. It is a new material you build with, and like any material it has a grain you either work along or fight.',
+      },
+      { type: 'h', text: 'Part of the thing, not bolted on' },
+      {
+        type: 'p',
+        text: 'Guided is the clearest case I have built. It is a tutor for students, and the one design decision the whole thing rests on is that it asks rather than answers. A model will cheerfully hand a fourteen-year-old the finished solution to their homework, and that is exactly the thing a tutor must not do, because the understanding happens in the struggle you just skipped. So the model is not bolted on as an answer machine; the entire product is shaped around pointing it the other way — toward the question a good teacher would ask next. The AI is not a feature of Guided. It is the grain the product is cut along.',
+      },
+      {
+        type: 'p',
+        text: 'That is the difference I mean. Bolted-on AI leaves the product exactly as it was and adds a door marked "ask the robot." Woven-in AI changes what the product is for. It is more work, because you cannot treat the model as a black box at the edge of the system — you have to decide what it is allowed to do, what it must never do, and what the product does in its place when it refuses. But it is the only version that feels like one thing instead of two things sharing a screen.',
+      },
+      { type: 'h', text: 'Design for when it is wrong' },
+      {
+        type: 'p',
+        text: 'A model is wrong sometimes. Not rarely, not in a way you can patch out — structurally, as a property of the thing. If your design only works when the model is right, you have not designed for a model at all; you have designed for an oracle and borrowed a model to play the part. The interesting work is almost entirely in the other case: the moment the output is confident and wrong, and a person is about to trust it.',
+      },
+      {
+        type: 'p',
+        text: 'So I design the wrong path first, before the happy one. What does the screen do when the answer is low-confidence? How does a person correct it without starting over? Where is the off-ramp back to something deterministic they can rely on? A model that can say "I am not sure" and hand control back is worth more than one that is right slightly more often and never flinches, because the first one is honest about its own shape and the second one will eventually betray someone quietly. The whole trick is to make the failure graceful and legible instead of invisible, so a person can catch it with you rather than discover it alone, later, when it has cost them something.',
+      },
+      { type: 'h', text: 'The seam between code and a model' },
+      {
+        type: 'p',
+        text: 'The part I find most underrated is the seam — the join between the deterministic code you can reason about completely and the probabilistic core you cannot. Good AI products are not mostly model. They are mostly ordinary, boring, dependable code, with the model doing the one narrow thing only a model can do, fenced in tightly on both sides. The code decides what to ask and when. The model answers in its own uncertain way. Then the code checks, constrains, and shapes that answer back into something the rest of the system can treat as solid.',
+      },
+      {
+        type: 'p',
+        text: 'This is unglamorous and it is where most of the reliability lives. Validate the shape of what came back before you trust it. Keep the state that must be correct — a student’s progress, a record, anything a person depends on — in plain code and a real database, never implied inside a prompt. Let the model suggest; let deterministic code commit. Draw that line deliberately, write it down, and defend it, because the failure mode of a careless seam is a product that works beautifully in the demo and surprises you in production, which is the one place surprises are expensive.',
+      },
+      { type: 'h', text: 'The honesty this site already keeps' },
+      {
+        type: 'p',
+        text: `There is a small, related honesty I hold myself to, and you can check it on this very site. Across the ${COMPONENT_COUNT} hand-built pieces here, several simulate a signal — a meter that leans after a level, an analyser that shows a spectrum — and every one of them says so on its own face: no audio, no microphone, a synthesised signal, a relative scale. None of them pretends to measure a world it never touched. That is the same discipline a model demands, turned down to a small component: be exactly as honest about what the thing is doing as you are proud of how it looks doing it.`,
+      },
+      {
+        type: 'p',
+        text: 'Build with the model, not around it. Not a panel you bolt to the side and point at, but a material you cut the product along — fenced by code you can trust, graceful in the moments it is wrong, and honest, always, about which parts are certain and which are a good guess. The model is the exciting part. The judgement about where to let it loose and where to hold it back is the actual job.',
+      },
+    ],
+  },
+  {
     slug: 'ship-then-refine',
     title: 'Ship, then refine',
     summary:
@@ -280,19 +344,6 @@ export const NOTES: Note[] = [
       'Keeping a React web app and a SwiftUI app in step',
       'Where a shared Supabase schema helps, and where it leaks',
       'Catching drift between the two before anyone feels it',
-    ],
-  },
-  {
-    slug: 'building-with-models-not-around-them',
-    title: 'Building with models, not around them',
-    summary:
-      'Weaving AI into a real product so it feels like part of the thing, not a chatbot bolted on the side. Notes from actually doing it.',
-    tag: 'AI',
-    status: 'planned',
-    plan: [
-      'Making AI feel like part of the product, not bolted on',
-      'Designing for the moments when the model is wrong',
-      'The seam between deterministic code and a model',
     ],
   },
 ]
