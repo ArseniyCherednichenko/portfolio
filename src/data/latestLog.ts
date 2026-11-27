@@ -34,6 +34,12 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'A barometer driven by a breathing capsule',
+    summary:
+      'Barometer — the weather set\'s third instrument, beside the VU needle and the Galilean spheres. The needle\'s angle is the deflection of a sealed capsule drawn breathing in the dial; the hPa, inHg and printed word all come off that angle. Mark the brass hand and the gap that opens as the pressure drifts is the trend. No live weather — a synthesised drift, an old dial\'s markings.',
+    tag: 'Component',
+  },
+  {
     title: 'One backend, two apps',
     summary:
       'The fifth essay. Holding a React web app and a native SwiftUI app to one shared backend, so the two never quietly drift.',
@@ -85,12 +91,6 @@ export const LATEST_LOG: LogHeadline[] = [
     title: 'A phone field that groups as you type',
     summary:
       'PhoneField — the honest sibling to the money field: same caret trick, different value. Digits group the way the chosen country writes them and the cursor stays under your edit. It reports clean E.164 and makes only a soft length check, never claiming to validate every numbering plan. The country is an accessible listbox of dial codes.',
-    tag: 'Component',
-  },
-  {
-    title: 'A money field whose caret stays put',
-    summary:
-      'CurrencyField — the money input the entry-field family never had. The hard part a lazy version skips is the caret: group the digits as you type and a naive input throws the cursor to the end, so this restores it to the same logical place under your edit. Shows grouped text, reports a clean number; locale and symbol come from Intl.',
     tag: 'Component',
   },
 ]
