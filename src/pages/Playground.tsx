@@ -173,6 +173,7 @@ import { Chronograph } from '../components/Chronograph'
 import { Compass } from '../components/Compass'
 import { VuMeter } from '../components/VuMeter'
 import { GalileanThermometer } from '../components/GalileanThermometer'
+import { Barometer } from '../components/Barometer'
 import { ProgressiveBlur } from '../components/ProgressiveBlur'
 import { DynamicIsland, type IslandActivity } from '../components/DynamicIsland'
 import { Sheet } from '../components/Sheet'
@@ -15667,6 +15668,48 @@ export default function Playground() {
                 <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code>{' '}
                 the spheres settle straight onto their stacks with no bob and no travel spring &mdash; still a live,
                 readable instrument, just a calm one.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH ANEROID BAROMETER */}
+        <Reveal>
+          <div id="barometer" data-experiment="Aneroid barometer" className="mt-12 scroll-mt-32">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 py-12 sm:px-10">
+              <div className="text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Read the air</span>
+                <p className="mx-auto mt-3 max-w-md text-lg font-medium text-white/85 sm:text-xl">
+                  Mark the brass hand, then watch the gap open as the pressure drifts &mdash; risen toward fair, or
+                  fallen toward rain.
+                </p>
+              </div>
+              <Barometer className="mt-10" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Aneroid barometer</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                An aneroid barometer, rebuilt as a working instrument rather than a picture of one, and the third
+                member of this corner&rsquo;s weather set &mdash; where the VU meter leans after a signal and the
+                Galilean thermometer reads the room by buoyancy, this one reads the air by the squeeze on a sealed
+                metal box. The mechanism is the real thing: an aneroid barometer has no liquid, only a thin
+                corrugated capsule pumped nearly empty, so the outside air presses it a little flatter when pressure
+                rises and lets it swell when pressure falls. That tiny breath is multiplied by a lever and a chain
+                into the sweep of a pointer, so the needle&rsquo;s angle <em>is</em> the capsule&rsquo;s deflection
+                &mdash; nothing else. The reading is derived from exactly that: the hectopascal and
+                inch-of-mercury numbers, and the printed word the needle sits over, all come straight back off the
+                pointer&rsquo;s angle, so the dial and the figures can never disagree. The one thing you drive is the
+                brass memory hand, the way you actually use a barometer: on a real{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">role=&quot;slider&quot;</code>,
+                drag it round the dial or ride it with the arrows, Home and End, to mark the current reading; come
+                back later and the gap between the live pointer and your mark is the trend. Tap the glass to free a
+                needle that has stuck, exactly as you would the real thing. Honest about what it is: there is no
+                weather here and no air on the capsule &mdash; the pointer tracks a slow synthesised drift, not a
+                measurement, and the printed words are the traditional markings off an old dial, not a forecast.
+                Under{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code>{' '}
+                the drift stops: the needle rests at standard sea-level pressure and the capsule holds still, so it
+                stays a live, readable instrument, just a calm one.
               </p>
             </div>
           </div>
