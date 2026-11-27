@@ -34,6 +34,12 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'A thermometer you read by which spheres float',
+    summary:
+      'GalileanThermometer — the needle instrument\'s quiet neighbour, read by buoyancy instead of a scale. Warm the liquid and it thins, so the densest spheres sink one by one; the temperature is the tag on the lowest one still afloat, derived from exactly that calibration so the reading and the spheres can never disagree. No heat, no fluid — just the honest rule.',
+    tag: 'Component',
+  },
+  {
     title: 'An IBAN field that checks its own digits',
     summary:
       'IbanField — the bank-transfer sibling that gives the checkout family its European corner. It groups four at a time with the caret held under your edit, names the country from its ISO code (and the length the standard assigns it), and runs the mod-97 check digits as an honest typo test, never a claim the account is real. Nothing leaves the tab.',
@@ -85,12 +91,6 @@ export const LATEST_LOG: LogHeadline[] = [
     title: 'A clock face you drag to pick a time',
     summary:
       "TimeDial — the date picker's missing sibling: the controls family had a Calendar but never a time picker. Drag the hand to the hour, then the minute; the readout is two real spinbuttons you can also arrow through or type into, with an AM/PM toggle. One hour-and-minute feeds the hand, ticks and readout alike.",
-    tag: 'Component',
-  },
-  {
-    title: 'A label that floats, a field that checks itself',
-    summary:
-      'FloatingField — the plain labelled text field the controls family never had. The label rests in the empty box and lifts to a caption on focus or fill; validation runs on blur, reddens and names the fault, then forgives it live. Password reveal, a warming counter, and a submit that gates on every field at once.',
     tag: 'Component',
   },
 ]
