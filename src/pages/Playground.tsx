@@ -172,6 +172,7 @@ import { Thaumatrope } from '../components/Thaumatrope'
 import { Chronograph } from '../components/Chronograph'
 import { Compass } from '../components/Compass'
 import { VuMeter } from '../components/VuMeter'
+import { GalileanThermometer } from '../components/GalileanThermometer'
 import { ProgressiveBlur } from '../components/ProgressiveBlur'
 import { DynamicIsland, type IslandActivity } from '../components/DynamicIsland'
 import { Sheet } from '../components/Sheet'
@@ -15628,6 +15629,44 @@ export default function Playground() {
                 the movement stops: no synthesised programme, no spring &mdash; the needle maps straight to the
                 gain you set against a steady reference tone, so it stays a live, operable meter, just a quiet
                 one.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* FULL-WIDTH GALILEAN THERMOMETER */}
+        <Reveal>
+          <div id="galilean-thermometer" data-experiment="Galilean thermometer" className="mt-12 scroll-mt-32">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/30 px-6 py-12 sm:px-10">
+              <div className="text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#DCF87C]">Warm the glass</span>
+                <p className="mx-auto mt-3 max-w-md text-lg font-medium text-white/85 sm:text-xl">
+                  Warm the liquid and the densest spheres give up and sink. The lowest one still afloat is the
+                  temperature.
+                </p>
+              </div>
+              <GalileanThermometer className="mt-10" />
+            </div>
+            <div className="mt-4 px-1">
+              <h3 className="text-base font-semibold">Galilean thermometer</h3>
+              <p className="mt-1 text-sm leading-relaxed text-white/45">
+                A Galilean thermometer, rebuilt as a working instrument rather than a picture of one. The physics
+                is the real thing: a sealed cylinder of clear liquid whose density <em>falls</em> as it warms, and
+                a handful of sealed glass spheres, each weighted by its tag to a slightly different fixed density.
+                A sphere rises while the liquid around it is denser than the sphere, and sinks the moment the
+                warming liquid thins below the sphere&rsquo;s own density &mdash; so each tag is simply the
+                temperature at which that sphere is neutrally buoyant, the one real calibration a Galilean
+                thermometer carries. You never read a number off a scale: the temperature is the tag on the{' '}
+                <em>lowest sphere still floating</em>, derived here from exactly that rule, so the reading and the
+                spheres can never disagree. The one thing you drive is the ambient temperature, on a real{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">role=&quot;slider&quot;</code>{' '}
+                &mdash; drag it or ride it with the arrow keys, Page keys, Home and End &mdash; and the densest
+                spheres sink one by one as it warms. Honest about what it is: there is no heat and no fluid, the
+                float/sink decision <em>is</em> that calibration (a sphere floats while its tag is warmer than the
+                ambient you set) and the gentle bob stands in for a liquid never quite at rest. Under{' '}
+                <code className="rounded bg-white/10 px-1 py-0.5 font-mono text-xs">prefers-reduced-motion</code>{' '}
+                the spheres settle straight onto their stacks with no bob and no travel spring &mdash; still a live,
+                readable instrument, just a calm one.
               </p>
             </div>
           </div>
