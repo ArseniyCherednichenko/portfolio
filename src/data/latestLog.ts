@@ -34,6 +34,12 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'One backend, two apps',
+    summary:
+      'The fifth essay. Holding a React web app and a native SwiftUI app to one shared backend, so the two never quietly drift.',
+    tag: 'Page',
+  },
+  {
     title: 'A thermometer you read by which spheres float',
     summary:
       'GalileanThermometer — the needle instrument\'s quiet neighbour, read by buoyancy instead of a scale. Warm the liquid and it thins, so the densest spheres sink one by one; the temperature is the tag on the lowest one still afloat, derived from exactly that calibration so the reading and the spheres can never disagree. No heat, no fluid — just the honest rule.',
@@ -85,12 +91,6 @@ export const LATEST_LOG: LogHeadline[] = [
     title: 'A money field whose caret stays put',
     summary:
       'CurrencyField — the money input the entry-field family never had. The hard part a lazy version skips is the caret: group the digits as you type and a naive input throws the cursor to the end, so this restores it to the same logical place under your edit. Shows grouped text, reports a clean number; locale and symbol come from Intl.',
-    tag: 'Component',
-  },
-  {
-    title: 'A clock face you drag to pick a time',
-    summary:
-      "TimeDial — the date picker's missing sibling: the controls family had a Calendar but never a time picker. Drag the hand to the hour, then the minute; the readout is two real spinbuttons you can also arrow through or type into, with an AM/PM toggle. One hour-and-minute feeds the hand, ticks and readout alike.",
     tag: 'Component',
   },
 ]
