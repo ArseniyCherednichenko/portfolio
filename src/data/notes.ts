@@ -339,11 +339,62 @@ export const NOTES: Note[] = [
     summary:
       'Keeping a React web app and a native SwiftUI app honest with each other on a single shared backend, without the two ever quietly drifting apart.',
     tag: 'iOS',
-    status: 'planned',
+    status: 'published',
+    date: '2026-11-27',
     plan: [
       'Keeping a React web app and a SwiftUI app in step',
       'Where a shared Supabase schema helps, and where it leaks',
       'Catching drift between the two before anyone feels it',
+    ],
+    body: [
+      {
+        type: 'p',
+        text: 'Guided runs on two front doors and one house. There is a React web app you open in a browser, and a native SwiftUI app you install on a phone, and underneath both of them is a single Supabase backend they share. From the outside that is invisible, which is exactly the point. A student on the web and a student on the phone are using the same product, not two products that happen to rhyme. Keeping it that way — genuinely one thing, seen through two different panes — is most of the work nobody sees.',
+      },
+      {
+        type: 'p',
+        text: 'The tempting shortcut is to build the web app, get it right, and then treat the iOS app as a port: a second rendering of the first, kept roughly in line by hand. It works for about a month. Then the two drift, because every change you make to one is a change you have to remember to make to the other, and memory is not an architecture. The honest version is harder and quieter: decide what the two clients are allowed to disagree about, and make everything else impossible to get out of sync in the first place.',
+      },
+      {
+        type: 'quote',
+        text: 'Two clients on one backend do not stay in step because you are careful. They stay in step because you made drifting the harder thing to do.',
+      },
+      { type: 'h', text: 'Two front doors, one house' },
+      {
+        type: 'p',
+        text: 'A web app and a native app are not the same material. React leans on the DOM, the browser, a URL for every state; SwiftUI leans on the device, the navigation stack, the gestures a phone already knows. Try to make them identical and you fight both frameworks at once, and lose to each. So I do not. The surface is allowed — expected — to feel native to where it runs: the iOS app should behave like an iOS app, with the sheets and the back-swipes and the keyboard a phone user reaches for without thinking, and the web app should behave like the web, linkable and resizable and open in a dozen tabs at once. Sameness is not the goal. Continuity is.',
+      },
+      {
+        type: 'p',
+        text: 'What has to match is not the pixels but the meaning. The same account, the same progress, the same rules about what the product will and will not do. A student who starts a session on the laptop at the kitchen table and finishes it on the phone on the bus should never feel a seam. That continuity is not something the two clients negotiate between themselves. It comes from below, from the one place they both trust, and the design job is to push every fact that must agree down into that shared floor and keep it from creeping back up into either client, where a private copy of it could quietly rot.',
+      },
+      { type: 'h', text: 'Where a shared schema helps, and where it leaks' },
+      {
+        type: 'p',
+        text: 'A shared backend earns its keep by being the single source of truth. The data model, the sign-in, the rules about who is allowed to see what — define them once, in Supabase, and both the web app and the iOS app read the same shape through the same door. When I add a field or tighten a permission, I am not making the change in two places and hoping they stay in agreement; I am making it in the one place both clients are already looking at. That is the part of one backend that genuinely holds the thing together, and it is worth a great deal.',
+      },
+      {
+        type: 'p',
+        text: 'But a shared schema is not a shared app, and pretending it is, is where the leaks begin. A database tells you the shape of the data; it does not tell you how a sheet should animate, when iOS should ask for a review, how the web should handle a deep link, or what the empty state says before a student has done anything at all. Those are client decisions, and they have to live in the client — not smuggled into the backend because it happened to be the one place both could reach. The seam I guard most carefully sits right here: the backend owns what is true, each client owns how it feels, and the moment feel starts leaking into the schema, or truth starts being re-decided inside a client, the two apps have begun to drift even though nothing visible has broken yet.',
+      },
+      { type: 'h', text: 'Catching drift before anyone feels it' },
+      {
+        type: 'p',
+        text: 'Drift is quiet. Nothing crashes. One client simply starts to believe something slightly different from the other — an old assumption about a field, a rule enforced on the web but forgotten on the phone — and it stays invisible right up until a real person falls into the gap between them. By then it is a bug that is miserable to chase, because the fault is not really in either app; it is in the space between them that no single screen owns.',
+      },
+      {
+        type: 'p',
+        text: 'So I try to keep that space narrow and legible. Shared truth has exactly one home, and anything derived from it is derived on the spot, not stored a second time where the two copies can disagree — the same discipline I hold the small pieces of this very site to, where a readout is computed from its state rather than kept beside it, so the figure and the thing it describes can never tell two different stories. Types do a lot of the watching: the shape each client expects is written down, not assumed, so a change to the backend has somewhere concrete to break loudly instead of leaking in silence. And the rule that has saved me the most grief is the plainest one — when a fact matters, let the backend decide it and let both clients ask, rather than each remembering an answer that was only true last week.',
+      },
+      { type: 'h', text: 'Why it is worth the trouble' },
+      {
+        type: 'p',
+        text: 'Building across web and native on one backend is more work than building either alone, and far more than building two apps that merely resemble each other. You carry two sets of framework instincts in your head at once, and you spend real effort on a seam that, done right, no one will ever notice. But that invisibility is the whole return. The product gets to be one thing with reach — able to meet a student wherever they are, on whatever is in their hand — instead of fracturing into two codebases that slowly tell different stories about the same account.',
+      },
+      {
+        type: 'p',
+        text: 'That is the range I care about most: not a list of technologies on a page, but the discipline of holding the web, the native app, and the data underneath in one head so the seams between them stay invisible. One backend, two apps, and a person who never has to know there were two.',
+      },
     ],
   },
 ]
