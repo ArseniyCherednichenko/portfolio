@@ -417,6 +417,31 @@ export function readingMinutes(note: Note): number {
   return Math.max(1, Math.round(words / 200))
 }
 
+/**
+ * The published pieces, newest first. Dates are ISO (`YYYY-MM-DD`), so a plain
+ * string compare sorts them correctly without parsing — the newest piece lands
+ * at the head, which is exactly the one the Writing landing features.
+ */
+export const PUBLISHED_NOTES: Note[] = NOTES.filter((n) => n.status === 'published')
+  .slice()
+  .sort((a, b) => (b.date ?? '').localeCompare(a.date ?? ''))
+
+/** The most recent published piece, if any — the featured essay on /writing. */
+export const LATEST_PUBLISHED: Note | undefined = PUBLISHED_NOTES[0]
+
+/**
+ * The honest total reading time across every published piece, in whole minutes.
+ * Summed from the real per-piece estimates (which count actual words), so it can
+ * never drift into a made-up figure — it always reflects the prose that is up.
+ */
+export const TOTAL_READING_MINUTES: number = PUBLISHED_NOTES.reduce(
+  (sum, n) => sum + readingMinutes(n),
+  0,
+)
+
+/** How many distinct topics the published writing actually spans so far. */
+export const TOPICS_COVERED: number = new Set(PUBLISHED_NOTES.map((n) => n.tag)).size
+
 /** Find a note by slug, for the deep-linkable detail page. */
 export function getNote(slug: string | undefined): Note | undefined {
   if (!slug) return undefined
