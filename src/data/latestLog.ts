@@ -34,6 +34,12 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'The writing leads with its latest piece',
+    summary:
+      'Writing reads like a journal now: the newest finished essay takes a featured spotlight above the index, and an honest stats strip counts the pieces, the total reading time, and the topics — every figure derived from the real prose, never set by hand.',
+    tag: 'Page',
+  },
+  {
     title: 'A barometer driven by a breathing capsule',
     summary:
       'Barometer — the weather set\'s third instrument, beside the VU needle and the Galilean spheres. The needle\'s angle is the deflection of a sealed capsule drawn breathing in the dial; the hPa, inHg and printed word all come off that angle. Mark the brass hand and the gap that opens as the pressure drifts is the trend. No live weather — a synthesised drift, an old dial\'s markings.',
@@ -85,12 +91,6 @@ export const LATEST_LOG: LogHeadline[] = [
     title: 'A toolbar the selected text raises itself',
     summary:
       'SelectionToolbar — the overlay with no trigger. Highlight a phrase and a small bar rises over it: the popover anchors to an element, the context menu to the pointer, this one to the selection itself. Copy, highlight (a persistent lime mark via the CSS Custom Highlight API), or pull a quote — every button cancels its own mousedown so the selection survives the press.',
-    tag: 'Component',
-  },
-  {
-    title: 'A phone field that groups as you type',
-    summary:
-      'PhoneField — the honest sibling to the money field: same caret trick, different value. Digits group the way the chosen country writes them and the cursor stays under your edit. It reports clean E.164 and makes only a soft length check, never claiming to validate every numbering plan. The country is an accessible listbox of dial codes.',
     tag: 'Component',
   },
 ]
