@@ -396,12 +396,16 @@ export function Terminal() {
           // and shows only the genuine focuses, skipping any placeholder prompts
           // so the terminal never states a claim the page itself does not make.
           const current = NOW_ITEMS.filter((i) => !i.placeholder)
+          // Pad every label to the widest one so the titles form a clean column,
+          // whatever the labels happen to be — no fixed width to overflow.
+          const labelWidth = Math.max(...current.map((i) => i.label.length))
           return (
             <div className="space-y-1">
               <Head>Right now</Head>
               {current.map((item) => (
                 <Row key={item.title}>
-                  <Accent>{item.label.padEnd(10)}</Accent>
+                  <Accent>{item.label.padEnd(labelWidth)}</Accent>
+                  <Muted>  </Muted>
                   <span className="text-white/75">{item.title}</span>
                 </Row>
               ))}
