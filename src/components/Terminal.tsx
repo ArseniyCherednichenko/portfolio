@@ -13,6 +13,8 @@ import { useBerlinTime } from '../hooks/useBerlinTime'
 import { PROJECTS } from '../data/projects'
 import { TOOLKIT } from '../data/toolkit'
 import { EMAIL, GITHUB_URL } from '../data/contact'
+import { COMPONENT_COUNT, PAGE_COUNT } from '../data/stats'
+import { LOCATION } from '../data/now'
 
 // An interactive, keyboard-driven terminal — a playful, alternate way to move
 // through the site that also doubles as a small showcase of interactive craft.
@@ -131,7 +133,7 @@ export function Terminal() {
   // Names shown by `help`, in a deliberate reading order (hidden aliases out).
   const HELP_ORDER = useMemo(
     () => [
-      'help', 'about', 'ls', 'open', 'work', 'guided', 'stack',
+      'help', 'about', 'neofetch', 'ls', 'open', 'work', 'guided', 'stack',
       'date', 'github', 'contact', 'history', 'theme', 'motion', 'clear',
     ],
     [],
@@ -387,6 +389,53 @@ export function Terminal() {
           </Row>
         ),
       },
+      neofetch: {
+        summary: 'the system card — me and this site, at a glance',
+        run: () => {
+          // A neofetch-style card. Every figure is read from the site's own
+          // single sources (stats, the now page, the contact data) so the card
+          // can never quietly disagree with the pages it summarises.
+          const fields: [string, ReactNode][] = [
+            ['host', <Accent>arseniy@portfolio</Accent>],
+            ['role', 'Builder and student — co-founder of Guided'],
+            ['location', <>{LOCATION} <Muted>· {time}</Muted></>],
+            ['stack', 'React · TypeScript · SwiftUI · applied AI'],
+            ['site', <>{COMPONENT_COUNT} hand-built components · {PAGE_COUNT} pages</>],
+            ['motion', 'Framer Motion, reduced-motion aware'],
+            ['shell', <Muted>a toy on a real site — no system access</Muted>],
+            ['source', <Accent>{GITHUB_URL.replace('https://', '')}</Accent>],
+          ]
+          const labelWidth = Math.max(...fields.map(([k]) => k.length))
+          return (
+            <div className="flex flex-col gap-4 sm:flex-row sm:gap-6">
+              <pre
+                aria-hidden="true"
+                className="shrink-0 select-none text-[#DCF87C] leading-tight"
+              >{`
+ ▄▀█ █▀▀
+ █▀█ █▄▄
+
+`}</pre>
+              <div className="min-w-0 space-y-0.5">
+                <Row>
+                  <Accent>arseniy</Accent>
+                  <Muted>@</Muted>
+                  <Accent>portfolio</Accent>
+                </Row>
+                <Row><Muted>{'─'.repeat(22)}</Muted></Row>
+                {fields.map(([k, v]) => (
+                  <Row key={k}>
+                    <Accent>{k.padEnd(labelWidth)}</Accent>
+                    <Muted>  </Muted>
+                    <span className="text-white/70">{v}</span>
+                  </Row>
+                ))}
+              </div>
+            </div>
+          )
+        },
+      },
+      sysinfo: { summary: 'same as neofetch', hidden: true, run: (a) => registry.neofetch.run(a) },
       sudo: {
         summary: 'try to run as root',
         hidden: true,
