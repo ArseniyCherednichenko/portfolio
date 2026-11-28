@@ -56,6 +56,40 @@ const PAGES: { slug: string; to: string; blurb: string }[] = [
 
 type Line = { id: number; kind: 'in' | 'out' | 'err'; node: ReactNode }
 
+// The longest string that every candidate starts with — used so Tab completes
+// as far as it unambiguously can (like a real shell), not only on a lone match.
+function commonPrefix(words: string[]): string {
+  if (!words.length) return ''
+  let prefix = words[0]
+  for (const w of words.slice(1)) {
+    let i = 0
+    while (i < prefix.length && i < w.length && prefix[i] === w[i]) i += 1
+    prefix = prefix.slice(0, i)
+    if (!prefix) break
+  }
+  return prefix
+}
+
+// Classic edit distance, capped small — powers the "did you mean?" hint on an
+// unknown command so a near-miss (e.g. `oepn`, `contct`) still points home.
+function editDistance(a: string, b: string): number {
+  const m = a.length
+  const n = b.length
+  if (!m) return n
+  if (!n) return m
+  let prev = Array.from({ length: n + 1 }, (_, i) => i)
+  let curr = new Array<number>(n + 1)
+  for (let i = 1; i <= m; i += 1) {
+    curr[0] = i
+    for (let j = 1; j <= n; j += 1) {
+      const cost = a[i - 1] === b[j - 1] ? 0 : 1
+      curr[j] = Math.min(prev[j] + 1, curr[j - 1] + 1, prev[j - 1] + cost)
+    }
+    ;[prev, curr] = [curr, prev]
+  }
+  return prev[n]
+}
+
 // A single output row. Dim leading glyph keeps list output scannable.
 function Row({ children }: { children: ReactNode }) {
   return <div className="whitespace-pre-wrap leading-relaxed text-white/70">{children}</div>
@@ -369,6 +403,13 @@ export function Terminal() {
     return registry
   }, [navigate, openContact, time, HELP_ORDER])
 
+  // Every name you can actually type — visible commands and their aliases
+  // alike — so Tab completes to any real command, not just the help-listed few.
+  const completable = useMemo(
+    () => Object.keys(commands).filter((n) => !commands[n].hidden),
+    [commands],
+  )
+
   const run = useCallback(
     (raw: string) => {
       const input = raw.trim()
@@ -377,15 +418,36 @@ export function Terminal() {
       history.current = [...history.current, input]
       setHistIndex(-1)
       const [name, ...args] = input.split(/\s+/)
-      const cmd = commands[name.toLowerCase()]
+      const key = name.toLowerCase()
+      const cmd = commands[key]
       if (!cmd) {
+        // Offer the nearest real command when the miss is close enough to be a
+        // typo — a small kindness that keeps the toy feeling like a shell.
+        const near = Object.keys(commands)
+          .filter((n) => !commands[n].hidden)
+          .map((n) => ({ n, d: editDistance(key, n) }))
+          .filter((c) => c.d <= 2 && c.d < key.length)
+          .sort((a, b) => a.d - b.d)[0]
         push(
           'err',
           <Row>
             <span className="text-white/70">{name}</span>
-            <Muted>: command not found. Type </Muted>
-            <Accent>help</Accent>
-            <Muted>.</Muted>
+            <Muted>: command not found.</Muted>
+            {near ? (
+              <>
+                <Muted> Did you mean </Muted>
+                <Accent>{near.n}</Accent>
+                <Muted>? Or type </Muted>
+                <Accent>help</Accent>
+                <Muted>.</Muted>
+              </>
+            ) : (
+              <>
+                <Muted> Type </Muted>
+                <Accent>help</Accent>
+                <Muted>.</Muted>
+              </>
+            )}
           </Row>,
         )
         return
@@ -457,9 +519,28 @@ export function Terminal() {
       e.preventDefault()
       const token = value.trim().toLowerCase()
       if (!token || token.includes(' ')) return
-      const names = Object.keys(commands).filter((n) => !commands[n].hidden)
-      const match = names.find((n) => n.startsWith(token))
-      if (match) setValue(match + ' ')
+      const matches = completable.filter((n) => n.startsWith(token))
+      if (!matches.length) return
+      if (matches.length === 1) {
+        setValue(matches[0] + ' ')
+        return
+      }
+      // Several candidates: complete to the longest shared prefix (so Tab still
+      // makes progress), and echo the options the way a shell does on a double-Tab.
+      const prefix = commonPrefix(matches)
+      if (prefix.length > token.length) setValue(prefix)
+      push('in', value.trim())
+      push(
+        'out',
+        <Row>
+          {matches.map((n, i) => (
+            <span key={n}>
+              {i > 0 ? '  ' : ''}
+              <Accent>{n}</Accent>
+            </span>
+          ))}
+        </Row>,
+      )
     }
   }
 
