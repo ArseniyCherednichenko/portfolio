@@ -34,6 +34,12 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'The voice is in the type',
+    summary:
+      'The sixth essay. A site\'s typography is its accent, not its outfit: Inter for text, a self-hosted variable Fraunces for display, and restraint as the whole trick.',
+    tag: 'Page',
+  },
+  {
     title: 'The writing leads with its latest piece',
     summary:
       'Writing reads like a journal now: the newest finished essay takes a featured spotlight above the index, and an honest stats strip counts the pieces, the total reading time, and the topics — every figure derived from the real prose, never set by hand.',
@@ -85,12 +91,6 @@ export const LATEST_LOG: LogHeadline[] = [
     title: 'A calendar you drag a whole stay across',
     summary:
       "DateRangePicker — the Calendar's harder sibling. A range is a span, not a cell, so the band that fills it bridges the grid's gaps to read as one continuous bar, not islands. Click a start, then an end (ordered for you); reach for the far day and the span previews live, growing night by night, with a count under the grid. Same date-grid keyboard contract as the single-date picker beside it.",
-    tag: 'Component',
-  },
-  {
-    title: 'A toolbar the selected text raises itself',
-    summary:
-      'SelectionToolbar — the overlay with no trigger. Highlight a phrase and a small bar rises over it: the popover anchors to an element, the context menu to the pointer, this one to the selection itself. Copy, highlight (a persistent lime mark via the CSS Custom Highlight API), or pull a quote — every button cancels its own mousedown so the selection survives the press.',
     tag: 'Component',
   },
 ]
