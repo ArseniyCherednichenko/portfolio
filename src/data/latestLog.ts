@@ -34,6 +34,12 @@ export interface LogHeadline {
 
 export const LATEST_LOG: LogHeadline[] = [
   {
+    title: 'The terminal grows up into a real shell',
+    summary:
+      "Tab now completes to the longest shared prefix and echoes the rest on a tie; an unknown command offers the nearest real one by edit distance. New verbs too — history, a now that reads the real focus data, and a neofetch card whose figures come straight from the site's own live counts.",
+    tag: 'Polish',
+  },
+  {
     title: 'The voice is in the type',
     summary:
       'The sixth essay. A site\'s typography is its accent, not its outfit: Inter for text, a self-hosted variable Fraunces for display, and restraint as the whole trick.',
@@ -85,12 +91,6 @@ export const LATEST_LOG: LogHeadline[] = [
     title: 'A VU needle that leans after the signal',
     summary:
       'VuMeter — an analog VU meter with the one thing that makes it an instrument: ballistics. The needle runs a weighted second-order spring, so it lags each transient and settles with a hair of overshoot, chasing a level synthesised to read like programme material. Ride the gain fader past unity and it pegs into the red. Honest: no audio, a made-up signal, a relative scale.',
-    tag: 'Component',
-  },
-  {
-    title: 'A calendar you drag a whole stay across',
-    summary:
-      "DateRangePicker — the Calendar's harder sibling. A range is a span, not a cell, so the band that fills it bridges the grid's gaps to read as one continuous bar, not islands. Click a start, then an end (ordered for you); reach for the far day and the span previews live, growing night by night, with a count under the grid. Same date-grid keyboard contract as the single-date picker beside it.",
     tag: 'Component',
   },
 ]
