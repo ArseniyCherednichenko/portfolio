@@ -130,7 +130,10 @@ export function Terminal() {
 
   // Names shown by `help`, in a deliberate reading order (hidden aliases out).
   const HELP_ORDER = useMemo(
-    () => ['help', 'about', 'ls', 'open', 'work', 'guided', 'stack', 'contact', 'motion', 'clear'],
+    () => [
+      'help', 'about', 'ls', 'open', 'work', 'guided', 'stack',
+      'date', 'github', 'contact', 'history', 'theme', 'motion', 'clear',
+    ],
     [],
   )
 
@@ -397,6 +400,26 @@ export function Terminal() {
         summary: 'leave the terminal',
         hidden: true,
         run: () => go('/', 'home'),
+      },
+      history: {
+        summary: 'the commands you have run',
+        run: () => {
+          const past = history.current
+          if (!past.length) return <Row><Muted>Nothing yet. Type a command or two.</Muted></Row>
+          // Newest last, numbered — the real `history` reading order. The gutter
+          // is right-aligned to the widest index so the commands line up.
+          const width = String(past.length).length
+          return (
+            <div className="space-y-0.5">
+              {past.map((cmd, i) => (
+                <Row key={i}>
+                  <Muted>{String(i + 1).padStart(width)}  </Muted>
+                  <span className="text-white/75">{cmd}</span>
+                </Row>
+              ))}
+            </div>
+          )
+        },
       },
       clear: { summary: 'clear the screen', run: () => 'CLEAR' as const },
     }
