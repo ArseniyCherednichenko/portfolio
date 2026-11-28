@@ -5,8 +5,20 @@ import { Reveal } from '../components/Reveal'
 import { Eyebrow } from '../components/Eyebrow'
 import { GradientText } from '../components/GradientText'
 import { PixelTrail } from '../components/PixelTrail'
+import { SpotlightCard } from '../components/SpotlightCard'
+import { AnimatedCounter } from '../components/AnimatedCounter'
 import { Seo } from '../components/Seo'
-import { NOTES, NOTE_TAGS, PUBLISHED_COUNT, readingMinutes, type Note, type NoteTag } from '../data/notes'
+import {
+  NOTES,
+  NOTE_TAGS,
+  PUBLISHED_COUNT,
+  LATEST_PUBLISHED,
+  TOTAL_READING_MINUTES,
+  TOPICS_COVERED,
+  readingMinutes,
+  type Note,
+  type NoteTag,
+} from '../data/notes'
 
 const EASE = [0.16, 1, 0.3, 1] as const
 
@@ -114,13 +126,113 @@ function NoteCard({ note }: { note: Note }) {
   )
 }
 
+// The latest published piece, given an editorial spotlight at the top of the
+// index — the way a journal leads with its newest essay. This foregrounds the
+// writing itself (his own voice) rather than any single project, and it only
+// ever features a genuinely finished piece, never a draft. The cursor spotlight
+// and the lime wash warm the whole card as a reader moves toward it.
+function FeaturedEssay({ note, reduce }: { note: Note; reduce: boolean | null }) {
+  const minutes = readingMinutes(note)
+  return (
+    <motion.div
+      initial={reduce ? false : { opacity: 0, y: 24 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.7, delay: 0.28, ease: EASE }}
+    >
+      <SpotlightCard className="hover:border-[#DCF87C]/40">
+        <Link
+          to={`/writing/${note.slug}`}
+          className="group/feat block rounded-3xl p-8 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#DCF87C]/60 focus-visible:ring-offset-2 focus-visible:ring-offset-black sm:p-10 lg:p-12"
+          aria-label={`Read the latest piece: ${note.title}`}
+        >
+          {/* Soft lime wash in the corner, a shade stronger than a normal card —
+              this is the lead. */}
+          <span
+            aria-hidden
+            className="pointer-events-none absolute -right-20 -top-20 h-56 w-56 rounded-full bg-[#DCF87C]/[0.08] blur-3xl"
+          />
+          <div className="relative flex flex-wrap items-center gap-3">
+            <span className="inline-flex items-center gap-2 rounded-full border border-[#DCF87C]/30 bg-[#DCF87C]/[0.06] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-[#DCF87C]/90">
+              <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-[#DCF87C]" />
+              Latest
+            </span>
+            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-white/45">{note.tag}</span>
+            <span aria-hidden className="text-white/20">·</span>
+            <span className="text-xs tabular-nums text-white/45">{note.date}</span>
+            {minutes > 0 && (
+              <>
+                <span aria-hidden className="text-white/20">·</span>
+                <span className="text-xs text-white/45">{minutes} min read</span>
+              </>
+            )}
+          </div>
+
+          <h2 className="relative mt-6 max-w-2xl font-display text-3xl font-bold leading-[1.08] tracking-tight text-white/95 transition-transform duration-500 ease-out group-hover/feat:translate-x-1 sm:text-5xl">
+            {note.title}
+          </h2>
+          <p className="relative mt-5 max-w-2xl text-lg leading-relaxed text-white/60 sm:text-xl">{note.summary}</p>
+
+          <span className="relative mt-8 inline-flex items-center gap-2 text-sm font-semibold text-[#DCF87C] transition-opacity group-hover/feat:opacity-80">
+            Read the piece
+            <span aria-hidden className="transition-transform duration-300 ease-out group-hover/feat:translate-x-1.5">
+              -&gt;
+            </span>
+          </span>
+        </Link>
+      </SpotlightCard>
+    </motion.div>
+  )
+}
+
+// Three honest figures about the writing, counted straight from the real prose:
+// how many pieces are up, the total reading time they add to, and how many
+// topics they span. Nothing invented — each number is derived in data/notes.ts
+// and moves only when a genuine piece is published.
+function StatsStrip({ reduce }: { reduce: boolean | null }) {
+  const stats: ReadonlyArray<{ value: number; suffix?: string; label: string }> = [
+    { value: PUBLISHED_COUNT, label: PUBLISHED_COUNT === 1 ? 'piece published' : 'pieces published' },
+    { value: TOTAL_READING_MINUTES, suffix: ' min', label: 'of reading, in all' },
+    { value: TOPICS_COVERED, label: TOPICS_COVERED === 1 ? 'topic so far' : 'topics so far' },
+  ]
+  return (
+    <motion.dl
+      initial={reduce ? false : { opacity: 0, y: 16 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, delay: 0.34, ease: EASE }}
+      className="grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] sm:grid-cols-3"
+    >
+      {stats.map((s) => (
+        <div key={s.label} className="bg-[#0A0A0A] px-6 py-6 sm:px-7">
+          <dt className="sr-only">{s.label}</dt>
+          <dd>
+            <AnimatedCounter
+              value={s.value}
+              suffix={s.suffix}
+              className="font-display text-4xl font-bold leading-none text-[#DCF87C] sm:text-5xl"
+            />
+            <span className="mt-2 block text-sm leading-snug text-white/50">{s.label}</span>
+          </dd>
+        </div>
+      ))}
+    </motion.dl>
+  )
+}
+
 export default function Writing() {
   const reduce = useReducedMotion()
   const [filter, setFilter] = useState<Filter>('All')
 
+  // On the unfiltered index the newest published piece gets a featured spotlight
+  // above the grid, so it is not also repeated as a card below. Choosing a
+  // specific topic drops the spotlight and shows every matching piece in the
+  // grid, so filtering never quietly hides a piece.
+  const featured = filter === 'All' ? LATEST_PUBLISHED : undefined
   const visible = useMemo(
-    () => (filter === 'All' ? NOTES : NOTES.filter((n) => n.tag === filter)),
-    [filter],
+    () =>
+      filter === 'All'
+        ? NOTES.filter((n) => n.slug !== featured?.slug)
+        : NOTES.filter((n) => n.tag === filter),
+    [filter, featured],
   )
 
   return (
@@ -166,13 +278,36 @@ export default function Writing() {
         </motion.p>
       </header>
 
+      {/* FEATURED — the newest finished piece leads, like a journal cover.
+          Present only when there is a published piece to lead with. */}
+      {featured && (
+        <section className="mx-auto w-full max-w-4xl px-6 pb-2">
+          <FeaturedEssay note={featured} reduce={reduce} />
+        </section>
+      )}
+
+      {/* STATS — honest, counted-from-the-prose figures, so the section reads as
+          a real body of work rather than an empty promise. Shown only once there
+          is something published to count. */}
+      {PUBLISHED_COUNT > 0 && (
+        <section className="mx-auto w-full max-w-4xl px-6 pt-6">
+          <StatsStrip reduce={reduce} />
+        </section>
+      )}
+
       {/* FILTER */}
-      <section className="mx-auto w-full max-w-4xl px-6">
+      <section className="mx-auto w-full max-w-4xl px-6 pt-10">
+        <div className="flex flex-wrap items-baseline justify-between gap-3">
+          <Eyebrow>{filter === 'All' ? (featured ? 'More writing' : 'Everything') : filter}</Eyebrow>
+          <span className="text-xs tabular-nums uppercase tracking-[0.2em] text-white/35">
+            {visible.length} {visible.length === 1 ? 'piece' : 'pieces'}
+          </span>
+        </div>
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.25, ease: EASE }}
-          className="flex items-center justify-start"
+          className="mt-4 flex items-center justify-start"
         >
           <TagFilter value={filter} onChange={setFilter} reduce={reduce} />
         </motion.div>
