@@ -61,6 +61,62 @@ export const NOTE_TAGS: NoteTag[] = ['Craft', 'Building in the open', 'AI', 'iOS
 
 export const NOTES: Note[] = [
   {
+    slug: 'the-voice-is-in-the-type',
+    title: 'The voice is in the type',
+    summary:
+      'A site’s typography is its accent, not its outfit. Two typefaces, held with restraint, carry more of the feeling than color or layout ever could — notes on the type behind this one.',
+    tag: 'Craft',
+    status: 'published',
+    date: '2026-11-28',
+    plan: [
+      'Type as the voice of an interface, not a finishing coat',
+      'Why two faces — a serif that announces, a sans that explains',
+      'Restraint, self-hosting, and how to check it on this site',
+    ],
+    body: [
+      {
+        type: 'p',
+        text: 'Type is usually the last thing anyone decides, and it is treated like a finishing coat — pick something clean, make the headings bigger, move on. I have come to think that is exactly backwards. Type is the first thing a reader actually hears. Before they have parsed a single word, the shapes of the letters have already set a tone: brisk or warm, serious or playful, considered or thrown together. Typography is not the outfit a site wears. It is the voice it speaks in.',
+      },
+      {
+        type: 'p',
+        text: 'This site speaks in two. Inter carries the body and the interface — the quiet, legible work of a sentence you are meant to read straight through without noticing the letters at all. Fraunces, a variable serif, carries the display type: the headlines, the big statements, the page and project titles. One face for talking, one for announcing. Almost everything the site feels like, it feels like because of the gap between those two.',
+      },
+      {
+        type: 'quote',
+        text: 'You notice a typeface the way you notice an accent, not the way you notice a logo — quietly, underneath the words, shaping how everything else is heard.',
+      },
+      { type: 'h', text: 'Why two, and not one' },
+      {
+        type: 'p',
+        text: 'The easy path is one sans-serif everywhere. It is safe, and it is why so many sites sound identical: competent, neutral, and instantly forgettable, like a room furnished entirely from one catalogue. A single well-made sans can hold a whole product together, but it tends to speak in one register, and a site that is only ever one register reads as templated even when every pixel was placed by hand. The second face is where a voice actually comes from.',
+      },
+      {
+        type: 'p',
+        text: 'So the display face here is a serif, and deliberately a warm, slightly characterful one. A serif set large does something a sans rarely does — it reads as editorial, as written rather than generated, as though a person chose these words and meant them. Fraunces in particular carries an optical-size axis, meaning the letterforms are drawn differently for a headline than for a caption, and this site lets that axis track the rendered size, so a title is not just body text made big but a genuine display cut with the flourishes that only make sense large. The contrast is the whole point: the serif announces, the sans explains, and the distance between them is most of the editorial feeling the site has.',
+      },
+      { type: 'h', text: 'Restraint is the whole trick' },
+      {
+        type: 'p',
+        text: 'Two faces is already a decision about restraint, and the restraint does not stop there. One display face, one text face, a small set of weights, and a single accent color used sparingly — that is the entire kit. The temptation is always more: another weight for this one heading, a condensed cut for that label, a second accent because the first felt lonely. Each addition feels like richness in the moment and reads as noise in aggregate. A type system earns its coherence by what it refuses, not by what it includes. Saying no to the fourth weight is the same craft as cutting the animation that could not say why it was there.',
+      },
+      { type: 'h', text: 'Self-hosted, on purpose' },
+      {
+        type: 'p',
+        text: 'The display face is not pulled from a font service on every visit. It is subset down to the characters the site actually uses, served from the site itself, and preloaded so the headlines paint in the right face from the first frame instead of flashing a fallback and reflowing a beat later. That is more work than a single link tag, and it buys two things worth having. Control, because the type is part of the build rather than a remote dependency that can change or quietly disappear. And honesty, because there is no third party watching who reads which page. The font is a file in the repository, like everything else here.',
+      },
+      { type: 'h', text: 'You can check this one too' },
+      {
+        type: 'p',
+        text: 'Like the rest of the site, none of this asks to be taken on faith. There is a type specimen page that lays both faces out — every size, set side by side — and names exactly what carries what. Put a headline next to a paragraph and you can see the division of labour for yourself: the serif doing the announcing, the sans doing the reading. I would rather you look than believe me.',
+      },
+      {
+        type: 'p',
+        text: 'Typography is quiet by design. Done well, nobody comes away saying the type was good; they come away feeling the thing was considered, and the type is a large, invisible part of why. The voice of an interface is not in its copy alone — it is in the shapes the copy is set in. Choose those shapes with care, hold them with restraint, and the whole thing starts to sound like someone, instead of like a template with the serial numbers filed off.',
+      },
+    ],
+  },
+  {
     slug: 'building-with-models-not-around-them',
     title: 'Building with models, not around them',
     summary:
