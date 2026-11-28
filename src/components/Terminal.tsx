@@ -14,7 +14,7 @@ import { PROJECTS } from '../data/projects'
 import { TOOLKIT } from '../data/toolkit'
 import { EMAIL, GITHUB_URL } from '../data/contact'
 import { COMPONENT_COUNT, PAGE_COUNT } from '../data/stats'
-import { LOCATION } from '../data/now'
+import { LOCATION, NOW_ITEMS } from '../data/now'
 
 // An interactive, keyboard-driven terminal — a playful, alternate way to move
 // through the site that also doubles as a small showcase of interactive craft.
@@ -133,7 +133,7 @@ export function Terminal() {
   // Names shown by `help`, in a deliberate reading order (hidden aliases out).
   const HELP_ORDER = useMemo(
     () => [
-      'help', 'about', 'neofetch', 'ls', 'open', 'work', 'guided', 'stack',
+      'help', 'about', 'neofetch', 'ls', 'open', 'work', 'now', 'guided', 'stack',
       'date', 'github', 'contact', 'history', 'theme', 'motion', 'clear',
     ],
     [],
@@ -388,6 +388,31 @@ export function Terminal() {
             <Accent>#DCF87C</Accent>. No theme switch to maintain, no half-tuned second skin.
           </Row>
         ),
+      },
+      now: {
+        summary: 'what I am focused on right now',
+        run: () => {
+          // Reads the real /now entries — the same source the Now page renders —
+          // and shows only the genuine focuses, skipping any placeholder prompts
+          // so the terminal never states a claim the page itself does not make.
+          const current = NOW_ITEMS.filter((i) => !i.placeholder)
+          return (
+            <div className="space-y-1">
+              <Head>Right now</Head>
+              {current.map((item) => (
+                <Row key={item.title}>
+                  <Accent>{item.label.padEnd(10)}</Accent>
+                  <span className="text-white/75">{item.title}</span>
+                </Row>
+              ))}
+              <Row>
+                <Muted>The fuller picture is at </Muted>
+                <Accent>open now</Accent>
+                <Muted>.</Muted>
+              </Row>
+            </div>
+          )
+        },
       },
       neofetch: {
         summary: 'the system card — me and this site, at a glance',
